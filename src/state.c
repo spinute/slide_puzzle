@@ -34,6 +34,23 @@ state_up_movable(State state)
 }
 
 void
+state_init(State state, value v_list[WIDTH*WIDTH], int depth)
+{
+	int cnt = 0;
+	state->depth = depth;
+	for (idx_t i = 0; i < WIDTH; ++i)
+		for (idx_t j = 0; j < WIDTH; ++j)
+		{
+			if (v_list[cnt] == VALUE_EMPTY)
+			{
+				state->i = i;
+				state->j = j;
+			}
+			v(state, i, j) = v_list[cnt++];
+		}
+}
+
+void
 state_copy(State src, State dst)
 {
     memcpy(src, dst, sizeof(*src));

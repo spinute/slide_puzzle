@@ -33,6 +33,7 @@ end
 desc 'test'
 task :test => TESTOBJ + OBJ_WOMAIN do |t|
 	sh "#{CC} #{t.prerequisites.join ' '} -o bin/#{t.name} #{OPT} #{CFLAGS} -Isrc -I#{UNITY} -I#{UNITY_FIXTURE}"
+	sh "bin/test"
 end
 
 desc 'dir setup'
