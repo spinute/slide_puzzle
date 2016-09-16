@@ -5,7 +5,7 @@ int
 main(void)
 {
     RUN_TEST_GROUP(state);
-	RUN_TEST_GROUP(stack);
+    RUN_TEST_GROUP(stack);
 
     puts("\nTest finished.");
     return 0;
