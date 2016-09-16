@@ -1,10 +1,11 @@
 #include "./test.h"
 #include "stdio.h"
 
-int main(void)
+int
+main(void)
 {
-	RUN_TEST_GROUP(state);
+    RUN_TEST_GROUP(state);
 
-	puts("\nTest finished.");
-	return 0;
+    puts("\nTest finished.");
+    return 0;
 }

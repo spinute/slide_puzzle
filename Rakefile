@@ -46,6 +46,7 @@ end
 desc 'clang-format'
 task :fmt do
 	sh "clang-format -i src/*.[ch]"
+	sh "clang-format -i src/test/*.[ch]"
 end
 
 desc 'cscope and ctags'
