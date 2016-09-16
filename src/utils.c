@@ -3,17 +3,19 @@
 #include <stdlib.h>
 
 void *
-palloc(size_t size) {
-	void *ptr = malloc(size);
-	if (!ptr)
-		elog("malloc failed");
+palloc(size_t size)
+{
+    void *ptr = malloc(size);
+    if (!ptr)
+        elog("malloc failed");
 
-	return ptr;
+    return ptr;
 }
 
 void
-pfree(void *ptr) {
-	if (!ptr)
-		elog("free: empty ptr");
-	free(ptr);
+pfree(void *ptr)
+{
+    if (!ptr)
+        elog("free: empty ptr");
+    free(ptr);
 }

@@ -1,7 +1,7 @@
 #pragma once
 
-#include <stdio.h>
 #include <stdarg.h>
+#include <stdio.h>
 
 #define elog(...) fprintf(stderr, __VA_ARGS__)
 
