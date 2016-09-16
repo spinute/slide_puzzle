@@ -26,7 +26,7 @@ typedef struct state_tag
     idx_t i, j; /* pos of empty */
 } * State;
 
-void state_init(State state, value v_list[WIDTH*WIDTH], int depth);
+void state_init(State state, value v_list[WIDTH * WIDTH], int depth);
 void state_copy(State src, State dst);
 void state_move(State state, Direction dir);
 void state_dump(State state);
