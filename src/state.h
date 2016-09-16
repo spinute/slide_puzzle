@@ -1,8 +1,13 @@
+#pragma once
+
+#include <stdbool.h>
+
+#define N_DIR 4
 typedef enum direction_tag {
-    Left,
-    Down,
-    Right,
-    Up,
+    Left = 0,
+    Down = 1,
+    Right = 2,
+    Up = 3,
 } Direction;
 
 /*
@@ -28,5 +33,7 @@ typedef struct state_tag
 
 void state_init(State state, value v_list[WIDTH * WIDTH], int depth);
 void state_copy(State src, State dst);
+bool state_movable(State state, Direction dir);
 void state_move(State state, Direction dir);
+bool state_pos_equal(State s1, State s2);
 void state_dump(State state);

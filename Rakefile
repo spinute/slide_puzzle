@@ -14,7 +14,7 @@ directory "bin"
 CLEAN.include('src/*.o')
 CLOBBER.include('bin/*')
 
-task :default => [:construct, :main, :test] do
+task :default => [:construct, :main] do
 end
 
 SRC = FileList["src/*.c"]
