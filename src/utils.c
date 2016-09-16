@@ -12,6 +12,16 @@ palloc(size_t size)
     return ptr;
 }
 
+void *
+repalloc(void *old_ptr, size_t new_size)
+{
+	void *ptr = realloc(old_ptr, new_size);
+	if (!ptr)
+		elog("realloc failed");
+
+	return ptr;
+}
+
 void
 pfree(void *ptr)
 {
