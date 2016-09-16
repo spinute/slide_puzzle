@@ -78,7 +78,7 @@ TEST(state, move_right)
 	TEST_ASSERT(s.pos[0][2] == 7);
 	TEST_ASSERT(s.pos[1][2] == 6);
 	TEST_ASSERT(s.pos[2][2] == 5);
-	TEST_ASSERT(s.i == 0);
+	TEST_ASSERT(s.i == 2);
 	TEST_ASSERT(s.j == 1);
 }
 TEST(state, move_down)
@@ -94,12 +94,13 @@ TEST(state, move_down)
 	TEST_ASSERT(s.pos[0][2] == 7);
 	TEST_ASSERT(s.pos[1][2] == VALUE_EMPTY);
 	TEST_ASSERT(s.pos[2][2] == 5);
-	TEST_ASSERT(s.i == 0);
-	TEST_ASSERT(s.j == 1);
+	TEST_ASSERT(s.i == 1);
+	TEST_ASSERT(s.j == 2);
 }
+#include <stdio.h>
 TEST(state, move_up)
 {
-	state_move(&s, Left);
+	state_move(&s, Up);
 	TEST_ASSERT(s.depth == 1);
 	TEST_ASSERT(s.pos[0][0] == 1);
 	TEST_ASSERT(s.pos[1][0] == VALUE_EMPTY);
@@ -110,8 +111,8 @@ TEST(state, move_up)
 	TEST_ASSERT(s.pos[0][2] == 7);
 	TEST_ASSERT(s.pos[1][2] == 6);
 	TEST_ASSERT(s.pos[2][2] == 5);
-	TEST_ASSERT(s.i == 0);
-	TEST_ASSERT(s.j == 1);
+	TEST_ASSERT(s.i == 1);
+	TEST_ASSERT(s.j == 0);
 }
 
 TEST_GROUP_RUNNER(state)

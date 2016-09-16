@@ -38,8 +38,8 @@ state_init(State state, value v_list[WIDTH*WIDTH], int depth)
 {
 	int cnt = 0;
 	state->depth = depth;
-	for (idx_t i = 0; i < WIDTH; ++i)
-		for (idx_t j = 0; j < WIDTH; ++j)
+	for (idx_t j = 0; j < WIDTH; ++j)
+		for (idx_t i = 0; i < WIDTH; ++i)
 		{
 			if (v_list[cnt] == VALUE_EMPTY)
 			{
@@ -75,18 +75,22 @@ state_move(State state, Direction dir)
     case Left:
         ev(state) = lv(state);
         lv(state) = VALUE_EMPTY;
+		state->i--;
         break;
     case Down:
         ev(state) = dv(state);
         dv(state) = VALUE_EMPTY;
+		state->j++;
         break;
     case Right:
         ev(state) = rv(state);
         rv(state) = VALUE_EMPTY;
+		state->i++;
         break;
     case Up:
         ev(state) = uv(state);
         uv(state) = VALUE_EMPTY;
+		state->j--;
         break;
     default:
         elog("unexpected direction");
@@ -105,4 +109,5 @@ state_dump(State state)
             elog("%u ", (unsigned int) v(state, i, j));
         elog("\n");
     }
+	puts("--------");
 }
