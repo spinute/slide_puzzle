@@ -59,16 +59,16 @@ state_up_movable(State state)
 bool
 state_movable(State state, Direction dir)
 {
-    return (dir != Left || state_left_movable(state))
-    && (dir != Down || state_down_movable(state))
-    && (dir != Right || state_right_movable(state))
-    && (dir != Up || state_up_movable(state));
+    return (dir != Left || state_left_movable(state)) &&
+           (dir != Down || state_down_movable(state)) &&
+           (dir != Right || state_right_movable(state)) &&
+           (dir != Up || state_up_movable(state));
 }
 
 void
 state_move(State state, Direction dir)
 {
-	assert(state_movable(state, dir));
+    assert(state_movable(state, dir));
 
     switch (dir)
     {
@@ -105,12 +105,12 @@ state_pos_equal(State s1, State s2)
 {
     for (idx_t i = 0; i < WIDTH; ++i)
         for (idx_t j = 0; j < WIDTH; ++j)
-			if (v(s1, i, j) != v(s2, i, j))
-				return false;
+            if (v(s1, i, j) != v(s2, i, j))
+                return false;
 
-	elog("%s: (goal?) depth->%d\n", __func__, s1->depth);
+    elog("%s: (goal?) depth->%d\n", __func__, s1->depth);
 
-	return true;
+    return true;
 }
 
 void
