@@ -1,9 +1,8 @@
-typedef enum direction_tag
-{
-	Left,
-	Down,
-	Right,
-	Up,
+typedef enum direction_tag {
+    Left,
+    Down,
+    Right,
+    Up,
 } Direction;
 
 /*
@@ -22,10 +21,10 @@ typedef unsigned char value;
 
 typedef struct state_tag
 {
-	int depth;
-	value pos[WIDTH][WIDTH];
-	idx_t i, j; /* pos of empty */
-} *State;
+    int   depth;
+    value pos[WIDTH][WIDTH];
+    idx_t i, j; /* pos of empty */
+} * State;
 
 void state_copy(State src, State dst);
 void state_move(State state, Direction dir);
