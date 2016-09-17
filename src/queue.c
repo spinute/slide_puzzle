@@ -29,13 +29,15 @@ set_pagesize(void)
     }
 
     n_states_par_page =
-        (sizeof(QPageData) - offsetof(QPageData, buf)) / sizeof(State);
+        (pagesize - sizeof(QPageData)) / sizeof(State);
+
+	elog("%s: pagesize=%ld, n_states/page=%ld\n", __func__, pagesize, n_states_par_page);
 }
 
 static QPage
 qpage_init(void)
 {
-    QPage qp = palloc(sizeof(*qp));
+    QPage qp = palloc(sizeof(*qp) + sizeof(State) * n_states_par_page);
     qp->in = qp->out = 0;
     qp->next         = NULL;
     return qp;
@@ -52,7 +54,7 @@ qpage_fini(QPage qp)
 static inline bool
 qpage_have_space(QPage qp)
 {
-    return (long) (qp->in + 1) == n_states_par_page;
+    return (long) (qp->in + 1) < n_states_par_page;
 }
 
 static inline void
@@ -85,10 +87,9 @@ queue_init(void)
     if (!pagesize)
         set_pagesize();
 
+    q->tail = q->head = qpage_init();
     q->head->in = q->head->out = 0;
     q->head->next              = NULL;
-    q->tail = q->head = qpage_init();
-    ;
 
     return q;
 }
