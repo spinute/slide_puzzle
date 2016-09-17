@@ -6,7 +6,6 @@
 static long pagesize = 0;
 static long n_states_par_page;
 
-
 /*
  * Queue Page implementation
  */
@@ -14,58 +13,59 @@ static long n_states_par_page;
 typedef struct queue_page *QPage;
 typedef struct queue_page
 {
-	size_t out, in;
-	QPage next;
-	State buf[];
+    size_t out, in;
+    QPage  next;
+    State  buf[];
 } QPageData;
 
 static void
 set_pagesize(void)
 {
-	pagesize = sysconf(_SC_PAGESIZE);
-	if (pagesize < 0)
-	{
-		elog("%s: sysconf(_SC_PAGESIZE) failed\n", __func__);
-		exit(EXIT_FAILURE);
-	}
+    pagesize = sysconf(_SC_PAGESIZE);
+    if (pagesize < 0)
+    {
+        elog("%s: sysconf(_SC_PAGESIZE) failed\n", __func__);
+        exit(EXIT_FAILURE);
+    }
 
-	n_states_par_page = (sizeof(QPageData) - offsetof(QPageData, buf)) / sizeof(State);
+    n_states_par_page =
+        (sizeof(QPageData) - offsetof(QPageData, buf)) / sizeof(State);
 }
 
 static QPage
 qpage_init(void)
 {
-	QPage qp = palloc(sizeof(*qp));
-	qp->in = qp->out = 0;
-	qp->next = NULL;
-	return qp;
+    QPage qp = palloc(sizeof(*qp));
+    qp->in = qp->out = 0;
+    qp->next         = NULL;
+    return qp;
 }
 
 static void
 qpage_fini(QPage qp)
 {
-	while (qp->out < qp->in)
-		state_fini(qp->buf[qp->out++]);
-	pfree(qp);
+    while (qp->out < qp->in)
+        state_fini(qp->buf[qp->out++]);
+    pfree(qp);
 }
 
 static inline bool
 qpage_have_space(QPage qp)
 {
-	return (long)(qp->in + 1) == n_states_par_page;
+    return (long) (qp->in + 1) == n_states_par_page;
 }
 
 static inline void
 qpage_put(QPage qp, State state)
 {
-	assert(qpage_have_space(qp));
-	qp->buf[qp->in++] = state;
+    assert(qpage_have_space(qp));
+    qp->buf[qp->in++] = state;
 }
 
 static inline State
 qpage_pop(QPage qp)
 {
-	return qp->out == qp->in ? NULL : qp->buf[qp->out++];
+    return qp->out == qp->in ? NULL : qp->buf[qp->out++];
 }
 
 /*
@@ -74,82 +74,83 @@ qpage_pop(QPage qp)
 
 struct queue_tag
 {
-	QPage head, tail;
+    QPage head, tail;
 };
-
 
 Queue
 queue_init(void)
 {
-	Queue q = palloc(sizeof(*q));
+    Queue q = palloc(sizeof(*q));
 
-	if (!pagesize)
-		set_pagesize();
+    if (!pagesize)
+        set_pagesize();
 
-	q->head->in = q->head->out = 0;
-	q->head->next = NULL;
-	q->tail = q->head = qpage_init();;
+    q->head->in = q->head->out = 0;
+    q->head->next              = NULL;
+    q->tail = q->head = qpage_init();
+    ;
 
-	return q;
+    return q;
 }
 
 void
 queue_fini(Queue q)
 {
-	QPage page = q->head;
+    QPage page = q->head;
 
-	while (page)
-	{
-		QPage next = page->next;
-		qpage_fini(page);
-		page = next;
-	}
+    while (page)
+    {
+        QPage next = page->next;
+        qpage_fini(page);
+        page = next;
+    }
 
-	pfree(q);
+    pfree(q);
 }
 
 void
 queue_put(Queue q, State state)
 {
-	if (!qpage_have_space(q->tail))
-	{
-		q->tail->next = qpage_init();
-		q->tail = q->tail->next;
-	}
+    if (!qpage_have_space(q->tail))
+    {
+        q->tail->next = qpage_init();
+        q->tail       = q->tail->next;
+    }
 
-	qpage_put(q->tail, state);
+    qpage_put(q->tail, state);
 }
 
 State
 queue_pop(Queue q)
 {
-	State state = qpage_pop(q->head);
+    State state = qpage_pop(q->head);
 
-	if (!state)
-	{
-		QPage next = q->head->next;
-		if (!next)
-			return NULL;
+    if (!state)
+    {
+        QPage next = q->head->next;
+        if (!next)
+            return NULL;
 
-		state = qpage_pop(next);
-		assert(state);
+        state = qpage_pop(next);
+        assert(state);
 
-		qpage_fini(q->head);
-		q->head = next;
-	}
+        qpage_fini(q->head);
+        q->head = next;
+    }
 
-	return state;
+    return state;
 }
 
 void
 queue_dump(Queue q)
 {
-	QPage page = q->head;
-	int cnt = 0;
+    QPage page = q->head;
+    int   cnt  = 0;
 
-	while (page)
-	{
-		elog("%s: page#%d in=%zu, out=%zu", __func__, cnt++, page->in, page->out);
-		page = page->next;
-	}
+    while (page)
+    {
+        elog("%s: page#%d in=%zu, out=%zu", __func__, cnt++, page->in,
+             page->out);
+        page = page->next;
+    }
 }

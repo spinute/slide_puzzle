@@ -49,41 +49,41 @@ solver_dfs(State init_state, State goal_state)
 void
 solver_stack_dfs(State init_state, State goal_state)
 {
-	State state;
-	Stack stack = stack_init(123);
-	bool solved = false;
-	stack_put(stack, state_copy(init_state));
+    State state;
+    Stack stack  = stack_init(123);
+    bool  solved = false;
+    stack_put(stack, state_copy(init_state));
 
-	while ((state = stack_pop(stack)))
-	{
-		if (state_pos_equal(state, goal_state))
-		{
-			solved = true;
-			break;
-		}
+    while ((state = stack_pop(stack)))
+    {
+        if (state_pos_equal(state, goal_state))
+        {
+            solved = true;
+            break;
+        }
 
-		for (int dir = 0; dir < N_DIR; ++dir)
-		{
-			if (state_movable(state, dir))
-			{
-				State next_state = state_copy(state);
-				state_move(next_state, dir);
-				stack_put(stack, next_state);
-			}
-		}
+        for (int dir = 0; dir < N_DIR; ++dir)
+        {
+            if (state_movable(state, dir))
+            {
+                State next_state = state_copy(state);
+                state_move(next_state, dir);
+                stack_put(stack, next_state);
+            }
+        }
 
-		state_fini(state);
-	}
+        state_fini(state);
+    }
 
-	if (solved)
-	{
-		state_dump(state);
-		elog("%s: solved\n", __func__);
-	}
-	else
-		elog("%s: not solved\n", __func__);
+    if (solved)
+    {
+        state_dump(state);
+        elog("%s: solved\n", __func__);
+    }
+    else
+        elog("%s: not solved\n", __func__);
 
-	stack_fini(stack);
+    stack_fini(stack);
 }
 
 void
