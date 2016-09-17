@@ -46,6 +46,8 @@ void
 stack_fini(Stack stack)
 {
     assert(stack);
+	while (stack->i != 0)
+		state_fini(stack->buf[--stack->i]);
     pfree(stack);
 }
 
@@ -59,7 +61,7 @@ stack_put(Stack stack, State state)
     {
         size_t new_capa = calc_larger_capa(stack->capa);
         assert(new_capa <= SIZE_MAX / sizeof(State));
-        stack->buf  = repalloc(stack->buf, new_capa);
+        stack->buf  = repalloc(stack->buf, sizeof(State) * new_capa);
         stack->capa = new_capa;
     }
 }
@@ -69,4 +71,10 @@ stack_pop(Stack stack)
 {
     /* shrinking is needed ? */
     return stack->i == 0 ? NULL : stack->buf[--stack->i];
+}
+
+void
+stack_dump(Stack stack)
+{
+	elog("%s: capa=%zu, i=%zu\n", __func__, stack->capa, stack->i);
 }
