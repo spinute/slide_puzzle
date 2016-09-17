@@ -5,6 +5,19 @@
 #include <stdbool.h>
 #include <string.h>
 
+typedef unsigned char idx_t;
+/*
+ *  [0,0] [1,0] [2,0]
+ *  [0,1] [1,1] [2,1]
+ *  [0,2] [1,2] [2,2]
+ */
+
+struct state_tag {
+    int   depth;
+    value pos[WIDTH][WIDTH];
+    idx_t i, j; /* pos of empty */
+};
+
 #define v(state, i, j) ((state)->pos[i][j])
 #define ev(state) (v(state, state->i, state->j))
 #define lv(state) (v(state, state->i - 1, state->j))
@@ -12,27 +25,74 @@
 #define rv(state) (v(state, state->i + 1, state->j))
 #define uv(state) (v(state, state->i, state->j - 1))
 
-void
-state_init(State state, value v_list[WIDTH * WIDTH], int depth)
+inline static State
+state_alloc(void)
 {
+	return palloc(sizeof(struct state_tag));
+}
+
+inline static void
+state_free(State state)
+{
+	pfree(state);
+}
+
+#ifndef NDEBUG
+static void
+validate_distinct_elem(value v_list[WIDTH * WIDTH])
+{
+	for(idx_t i = 0; i < WIDTH*WIDTH; ++i)
+		for(idx_t j = i+1; j < WIDTH*WIDTH; ++j)
+			assert(v_list[i] != v_list[j]);
+}
+#endif
+
+State
+state_init(value v_list[WIDTH * WIDTH], int depth)
+{
+	State state = state_alloc();
     int cnt      = 0;
+#ifndef NDEBUG
+	bool empty_found = false;
+
+	validate_distinct_elem(v_list);
+#endif
+
+	assert(depth >= 0);
+
     state->depth = depth;
     for (idx_t j = 0; j < WIDTH; ++j)
         for (idx_t i = 0; i < WIDTH; ++i)
         {
             if (v_list[cnt] == VALUE_EMPTY)
             {
+				assert(!empty_found);
                 state->i = i;
                 state->j = j;
+				empty_found = true;
             }
             v(state, i, j) = v_list[cnt++];
         }
+
+	assert(empty_found);
+
+	return state;
 }
 
 void
-state_copy(State src, State dst)
+state_fini(State state)
 {
-    memcpy(src, dst, sizeof(*src));
+	state_free(state);
+}
+
+State
+state_copy(State src)
+{
+	State dst = state_alloc();;
+
+    memcpy(dst, src, sizeof(*src));
+
+	return dst;
 }
 
 inline static bool
@@ -59,10 +119,10 @@ state_up_movable(State state)
 bool
 state_movable(State state, Direction dir)
 {
-    return (dir != Left || state_left_movable(state)) &&
-           (dir != Down || state_down_movable(state)) &&
-           (dir != Right || state_right_movable(state)) &&
-           (dir != Up || state_up_movable(state));
+    return (dir != LEFT || state_left_movable(state)) &&
+           (dir != DOWN || state_down_movable(state)) &&
+           (dir != RIGHT || state_right_movable(state)) &&
+           (dir != UP || state_up_movable(state));
 }
 
 void
@@ -72,22 +132,22 @@ state_move(State state, Direction dir)
 
     switch (dir)
     {
-    case Left:
+    case LEFT:
         ev(state) = lv(state);
         lv(state) = VALUE_EMPTY;
         state->i--;
         break;
-    case Down:
+    case DOWN:
         ev(state) = dv(state);
         dv(state) = VALUE_EMPTY;
         state->j++;
         break;
-    case Right:
+    case RIGHT:
         ev(state) = rv(state);
         rv(state) = VALUE_EMPTY;
         state->i++;
         break;
-    case Up:
+    case UP:
         ev(state) = uv(state);
         uv(state) = VALUE_EMPTY;
         state->j--;
@@ -108,19 +168,20 @@ state_pos_equal(State s1, State s2)
             if (v(s1, i, j) != v(s2, i, j))
                 return false;
 
-    elog("%s: (goal?) depth->%d\n", __func__, s1->depth);
-
     return true;
 }
 
 void
 state_dump(State state)
 {
-    for (idx_t i = 0; i < WIDTH; ++i)
+	elog("%s: depth=%d, (i,j)=(%u,%u)\n",
+			__func__, state->depth, state->i, state->j);
+
+    for (idx_t j = 0; j < WIDTH; ++j)
     {
-        for (idx_t j = 0; j < WIDTH; ++j)
+        for (idx_t i = 0; i < WIDTH; ++i)
             elog("%u ", (unsigned int) v(state, i, j));
         elog("\n");
     }
-    puts("--------");
+    elog("-----------\n");
 }

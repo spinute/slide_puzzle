@@ -6,34 +6,43 @@ static State goal;
 static bool
 solver_dfs_internal(State s)
 {
-    struct state_tag next_state;
+	State next_state;
 
     if (state_pos_equal(s, goal))
+	{
+		state_dump(s);
+		state_fini(s);
         return true;
+	}
 
     for (int dir = 0; dir < N_DIR; ++dir)
     {
         if (state_movable(s, dir))
         {
-            state_copy(s, &next_state);
-            state_move(&next_state, dir);
-            if (solver_dfs_internal(&next_state))
+            next_state = state_copy(s);
+            state_move(next_state, dir);
+            if (solver_dfs_internal(next_state))
+			{
+				state_fini(s);
                 return true;
+			}
         }
     }
 
+	state_fini(s);
     return false;
 }
 
 void
 solver_dfs(State init_state, State goal_state)
 {
+	State s = state_copy(init_state);
     goal = goal_state;
 
-    if (solver_dfs_internal(init_state))
-        elog("solved");
+    if (solver_dfs_internal(s))
+        elog("%s: solved", __func__);
     else
-        elog("not solved");
+        elog("%s: not solved", __func__);
 }
 
 void

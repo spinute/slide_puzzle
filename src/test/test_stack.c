@@ -7,7 +7,7 @@ Stack s;
 
 TEST_SETUP(stack)
 {
-    s = stack_init(1234);
+    s = stack_init(13);
 }
 
 TEST_TEAR_DOWN(stack)

@@ -6,6 +6,8 @@
 
 typedef struct stack_tag *Stack;
 
+/* note: just hold shallow copy of state */
+
 Stack stack_init(size_t init_capa_hint);
 void stack_fini(Stack stack);
 void stack_put(Stack stack, State state);
