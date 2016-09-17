@@ -11,6 +11,10 @@ typedef struct queue_tag *Queue;
  * and will be consumed slowly after the large extension
  */
 
+/* NOTE: Queue just holds references.
+ * One should not put two references of the same state into this Queue.
+ */
+
 Queue queue_init(void);
 void queue_fini(Queue q);
 void queue_put(Queue q, State state);
