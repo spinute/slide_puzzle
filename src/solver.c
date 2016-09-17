@@ -1,6 +1,6 @@
 #include "./solver.h"
-#include "./stack.h"
 #include "./queue.h"
+#include "./stack.h"
 #include "./utils.h"
 
 static State goal;
@@ -91,7 +91,7 @@ void
 solver_bfs(State init_state, State goal_state)
 {
     State state;
-    Queue q  = queue_init();
+    Queue q      = queue_init();
     bool  solved = false;
     queue_put(q, state_copy(init_state));
 
@@ -124,5 +124,5 @@ solver_bfs(State init_state, State goal_state)
     else
         elog("%s: not solved\n", __func__);
 
-	queue_fini(q);
+    queue_fini(q);
 }

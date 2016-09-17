@@ -28,10 +28,10 @@ set_pagesize(void)
         exit(EXIT_FAILURE);
     }
 
-    n_states_par_page =
-        (pagesize - sizeof(QPageData)) / sizeof(State);
+    n_states_par_page = (pagesize - sizeof(QPageData)) / sizeof(State);
 
-	elog("%s: pagesize=%ld, n_states/page=%ld\n", __func__, pagesize, n_states_par_page);
+    elog("%s: pagesize=%ld, n_states/page=%ld\n", __func__, pagesize,
+         n_states_par_page);
 }
 
 static QPage
