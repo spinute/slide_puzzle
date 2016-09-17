@@ -12,6 +12,8 @@ main(int argc, char *argv[])
 
     solver_dfs(s, g1);
     solver_stack_dfs(s, g2);
+    solver_bfs(s, g1);
+    solver_bfs(s, g2);
 
     state_fini(s);
     state_fini(g1);

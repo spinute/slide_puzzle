@@ -1,5 +1,6 @@
 #include "./solver.h"
 #include "./stack.h"
+#include "./queue.h"
 #include "./utils.h"
 
 static State goal;
@@ -89,6 +90,39 @@ solver_stack_dfs(State init_state, State goal_state)
 void
 solver_bfs(State init_state, State goal_state)
 {
-    (void) init_state;
-    (void) goal_state;
+    State state;
+    Queue q  = queue_init();
+    bool  solved = false;
+    queue_put(q, state_copy(init_state));
+
+    while ((state = queue_pop(q)))
+    {
+        if (state_pos_equal(state, goal_state))
+        {
+            solved = true;
+            break;
+        }
+
+        for (int dir = 0; dir < N_DIR; ++dir)
+        {
+            if (state_movable(state, dir))
+            {
+                State next_state = state_copy(state);
+                state_move(next_state, dir);
+                queue_put(q, next_state);
+            }
+        }
+
+        state_fini(state);
+    }
+
+    if (solved)
+    {
+        state_dump(state);
+        elog("%s: solved\n", __func__);
+    }
+    else
+        elog("%s: not solved\n", __func__);
+
+	queue_fini(q);
 }
