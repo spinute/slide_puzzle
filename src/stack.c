@@ -46,8 +46,8 @@ void
 stack_fini(Stack stack)
 {
     assert(stack);
-	while (stack->i != 0)
-		state_fini(stack->buf[--stack->i]);
+    while (stack->i != 0)
+        state_fini(stack->buf[--stack->i]);
     pfree(stack);
 }
 
@@ -76,5 +76,5 @@ stack_pop(Stack stack)
 void
 stack_dump(Stack stack)
 {
-	elog("%s: capa=%zu, i=%zu\n", __func__, stack->capa, stack->i);
+    elog("%s: capa=%zu, i=%zu\n", __func__, stack->capa, stack->i);
 }

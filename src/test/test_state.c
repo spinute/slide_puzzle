@@ -114,10 +114,10 @@ TEST(state, stroll)
 TEST(state, state_pos_equal_regard_different_depth_as_the_same_state)
 {
     value v_list[WIDTH * WIDTH] = {1, 2, 3, 4, VALUE_EMPTY, 8, 7, 6, 5};
-    State s1 = state_init(v_list, 0);
-    State s2 = state_init(v_list, 1323);
+    State s1                    = state_init(v_list, 0);
+    State s2                    = state_init(v_list, 1323);
 
-	TEST_ASSERT(state_pos_equal(s1, s2));
+    TEST_ASSERT(state_pos_equal(s1, s2));
 }
 
 TEST_GROUP_RUNNER(state)
@@ -134,5 +134,6 @@ TEST_GROUP_RUNNER(state)
     RUN_TEST_CASE(state, init_state_should_not_be_up_movalble_twice);
     RUN_TEST_CASE(state, go_to_the_same_state_in_different_ways);
     RUN_TEST_CASE(state, stroll)
-	RUN_TEST_CASE(state, state_pos_equal_regard_different_depth_as_the_same_state)
+    RUN_TEST_CASE(state,
+                  state_pos_equal_regard_different_depth_as_the_same_state)
 }
