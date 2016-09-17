@@ -12,7 +12,8 @@ typedef unsigned char idx_t;
  *  [0,2] [1,2] [2,2]
  */
 
-struct state_tag {
+struct state_tag
+{
     int   depth;
     value pos[WIDTH][WIDTH];
     idx_t i, j; /* pos of empty */
@@ -28,37 +29,37 @@ struct state_tag {
 inline static State
 state_alloc(void)
 {
-	return palloc(sizeof(struct state_tag));
+    return palloc(sizeof(struct state_tag));
 }
 
 inline static void
 state_free(State state)
 {
-	pfree(state);
+    pfree(state);
 }
 
 #ifndef NDEBUG
 static void
 validate_distinct_elem(value v_list[WIDTH * WIDTH])
 {
-	for(idx_t i = 0; i < WIDTH*WIDTH; ++i)
-		for(idx_t j = i+1; j < WIDTH*WIDTH; ++j)
-			assert(v_list[i] != v_list[j]);
+    for (idx_t i = 0; i < WIDTH * WIDTH; ++i)
+        for (idx_t j = i + 1; j < WIDTH * WIDTH; ++j)
+            assert(v_list[i] != v_list[j]);
 }
 #endif
 
 State
 state_init(value v_list[WIDTH * WIDTH], int depth)
 {
-	State state = state_alloc();
-    int cnt      = 0;
+    State state = state_alloc();
+    int   cnt   = 0;
 #ifndef NDEBUG
-	bool empty_found = false;
+    bool empty_found = false;
 
-	validate_distinct_elem(v_list);
+    validate_distinct_elem(v_list);
 #endif
 
-	assert(depth >= 0);
+    assert(depth >= 0);
 
     state->depth = depth;
     for (idx_t j = 0; j < WIDTH; ++j)
@@ -66,33 +67,34 @@ state_init(value v_list[WIDTH * WIDTH], int depth)
         {
             if (v_list[cnt] == VALUE_EMPTY)
             {
-				assert(!empty_found);
-                state->i = i;
-                state->j = j;
-				empty_found = true;
+                assert(!empty_found);
+                state->i    = i;
+                state->j    = j;
+                empty_found = true;
             }
             v(state, i, j) = v_list[cnt++];
         }
 
-	assert(empty_found);
+    assert(empty_found);
 
-	return state;
+    return state;
 }
 
 void
 state_fini(State state)
 {
-	state_free(state);
+    state_free(state);
 }
 
 State
 state_copy(State src)
 {
-	State dst = state_alloc();;
+    State dst = state_alloc();
+    ;
 
     memcpy(dst, src, sizeof(*src));
 
-	return dst;
+    return dst;
 }
 
 inline static bool
@@ -174,8 +176,8 @@ state_pos_equal(State s1, State s2)
 void
 state_dump(State state)
 {
-	elog("%s: depth=%d, (i,j)=(%u,%u)\n",
-			__func__, state->depth, state->i, state->j);
+    elog("%s: depth=%d, (i,j)=(%u,%u)\n", __func__, state->depth, state->i,
+         state->j);
 
     for (idx_t j = 0; j < WIDTH; ++j)
     {

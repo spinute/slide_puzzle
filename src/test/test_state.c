@@ -19,7 +19,7 @@ TEST_SETUP(state)
 
 TEST_TEAR_DOWN(state)
 {
-	state_fini(s);
+    state_fini(s);
 }
 
 TEST(state, initalization)
@@ -29,87 +29,86 @@ TEST(state, initalization)
 TEST(state, copied_state_should_be_the_same)
 {
     State t = state_copy(s);
-	TEST_ASSERT(state_pos_equal(s, t));
-	TEST_ASSERT(state_pos_equal(t, s));
-	state_fini(t);
+    TEST_ASSERT(state_pos_equal(s, t));
+    TEST_ASSERT(state_pos_equal(t, s));
+    state_fini(t);
 }
 TEST(state, init_state_should_be_left_movalble)
 {
-	TEST_ASSERT(state_movable(s, LEFT));
+    TEST_ASSERT(state_movable(s, LEFT));
 }
 TEST(state, init_state_should_be_down_movalble)
 {
-	TEST_ASSERT(state_movable(s, DOWN));
+    TEST_ASSERT(state_movable(s, DOWN));
 }
 TEST(state, init_state_should_be_right_movalble)
 {
-	TEST_ASSERT(state_movable(s, RIGHT));
+    TEST_ASSERT(state_movable(s, RIGHT));
 }
 TEST(state, init_state_should_be_up_movalble)
 {
-	TEST_ASSERT(state_movable(s, UP));
+    TEST_ASSERT(state_movable(s, UP));
 }
 TEST(state, init_state_should_not_be_left_movalble_twice)
 {
-	state_move(s, LEFT);
-	TEST_ASSERT_FALSE(state_movable(s, LEFT));
+    state_move(s, LEFT);
+    TEST_ASSERT_FALSE(state_movable(s, LEFT));
 }
 TEST(state, init_state_should_not_be_down_movalble_twice)
 {
-	state_move(s, DOWN);
-	TEST_ASSERT_FALSE(state_movable(s, DOWN));
+    state_move(s, DOWN);
+    TEST_ASSERT_FALSE(state_movable(s, DOWN));
 }
 TEST(state, init_state_should_not_be_right_movalble_twice)
 {
-	state_move(s, RIGHT);
-	TEST_ASSERT_FALSE(state_movable(s, RIGHT));
+    state_move(s, RIGHT);
+    TEST_ASSERT_FALSE(state_movable(s, RIGHT));
 }
 TEST(state, init_state_should_not_be_up_movalble_twice)
 {
-	state_move(s, UP);
-	TEST_ASSERT_FALSE(state_movable(s, UP));
+    state_move(s, UP);
+    TEST_ASSERT_FALSE(state_movable(s, UP));
 }
 TEST(state, go_to_the_same_state_in_different_ways)
 {
-	State s1 = state_copy(s),
-		  s2 = state_copy(s);
+    State s1 = state_copy(s), s2 = state_copy(s);
 
-	state_move(s1, LEFT);
-	state_move(s1, UP);
+    state_move(s1, LEFT);
+    state_move(s1, UP);
 
-	state_move(s2, UP);
-	state_move(s2, DOWN);
-	state_move(s2, UP);
-	state_move(s2, DOWN);
-	state_move(s2, LEFT);
-	state_move(s2, UP);
+    state_move(s2, UP);
+    state_move(s2, DOWN);
+    state_move(s2, UP);
+    state_move(s2, DOWN);
+    state_move(s2, LEFT);
+    state_move(s2, UP);
 
-	TEST_ASSERT(state_pos_equal(s1, s2));
+    TEST_ASSERT(state_pos_equal(s1, s2));
 
-	state_fini(s1);
-	state_fini(s2);
+    state_fini(s1);
+    state_fini(s2);
 }
 
 TEST(state, stroll)
 {
-	state_move(s, LEFT);
-	state_move(s, UP);
-	state_move(s, RIGHT);
-	state_move(s, RIGHT);
-	state_move(s, DOWN);
-	state_move(s, DOWN);
-	state_move(s, LEFT);
-	state_move(s, LEFT);
-	state_move(s, UP);
-	state_move(s, UP);
-	state_move(s, RIGHT);
-	state_move(s, RIGHT);
-	state_move(s, DOWN);
-	state_move(s, DOWN);
-	state_move(s, LEFT);
-	state_move(s, LEFT);
-	state_move(s, UP);
-	state_move(s, UP);
+    state_move(s, LEFT);
+    state_move(s, UP);
+    state_move(s, RIGHT);
+    state_move(s, RIGHT);
+    state_move(s, DOWN);
+    state_move(s, DOWN);
+    state_move(s, LEFT);
+    state_move(s, LEFT);
+    state_move(s, UP);
+    state_move(s, UP);
+    state_move(s, RIGHT);
+    state_move(s, RIGHT);
+    state_move(s, DOWN);
+    state_move(s, DOWN);
+    state_move(s, LEFT);
+    state_move(s, LEFT);
+    state_move(s, UP);
+    state_move(s, UP);
 }
 
 TEST_GROUP_RUNNER(state)
@@ -124,6 +123,6 @@ TEST_GROUP_RUNNER(state)
     RUN_TEST_CASE(state, init_state_should_not_be_down_movalble_twice);
     RUN_TEST_CASE(state, init_state_should_not_be_right_movalble_twice);
     RUN_TEST_CASE(state, init_state_should_not_be_up_movalble_twice);
-	RUN_TEST_CASE(state, go_to_the_same_state_in_different_ways);
-	RUN_TEST_CASE(state, stroll)
+    RUN_TEST_CASE(state, go_to_the_same_state_in_different_ways);
+    RUN_TEST_CASE(state, stroll)
 }
