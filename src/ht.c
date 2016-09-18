@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <string.h>
 
-/* XXX: good hash function for State should be surveyed */
+/* XXX: hash function for State should be surveyed */
 static size_t
 hashfunc(State key)
 {
@@ -48,7 +48,7 @@ struct ht_tag
 static bool
 ht_rehash_required(HT ht)
 {
-    return ht->n_bins >= ht->n_elems; /* TODO: local policy is also needed */
+    return ht->n_bins <= ht->n_elems; /* TODO: local policy is also needed */
 }
 
 static size_t
@@ -85,6 +85,7 @@ ht_rehash(HT ht)
 {
     HTEntry *new_bin;
     size_t   new_size = ht->n_bins << 1;
+
     assert(ht->n_bins<SIZE_MAX>> 1);
 
     new_bin = palloc(sizeof(*new_bin) * new_size);
@@ -169,6 +170,8 @@ ht_insert(HT ht, State key, ht_value **value)
             *value = &entry->value;
             return HT_FAILED_FOUND;
         }
+
+        entry = entry->next;
     }
 
     new_entry = ht_entry_init(key);
@@ -189,7 +192,10 @@ ht_delete(HT ht, State key)
     size_t  i     = hashfunc(key) & (ht->n_bins - 1);
     HTEntry entry = ht->bin[i], prev;
 
-    if (entry && state_pos_equal(key, entry->key))
+    if (!entry)
+        return HT_FAILED_NOT_FOUND;
+
+    if (state_pos_equal(key, entry->key))
     {
         ht->bin[i] = entry->next;
         ht_entry_fini(entry);
@@ -217,4 +223,10 @@ ht_delete(HT ht, State key)
     }
 
     return HT_FAILED_NOT_FOUND;
+}
+
+void
+ht_dump(HT ht)
+{
+    elog("%s: n_elems=%zu, n_bins=%zu\n", __func__, ht->n_elems, ht->n_bins);
 }

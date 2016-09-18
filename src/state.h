@@ -10,9 +10,9 @@ typedef enum direction_tag {
     UP    = 3,
 } Direction;
 
-typedef unsigned char value;
+typedef unsigned char state_panel;
 
-#define VALUE_EMPTY 0
+#define STATE_EMPTY 0
 #define WIDTH 3
 
 /*
@@ -24,7 +24,7 @@ typedef unsigned char value;
 
 typedef struct state_tag *State;
 
-State state_init(value v_list[WIDTH * WIDTH], int depth);
+State state_init(state_panel v_list[WIDTH * WIDTH], int depth);
 void state_fini(State state);
 State state_copy(State src);
 

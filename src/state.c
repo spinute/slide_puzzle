@@ -14,9 +14,9 @@ typedef unsigned char idx_t;
 
 struct state_tag
 {
-    int   depth;
-    value pos[WIDTH][WIDTH];
-    idx_t i, j; /* pos of empty */
+    int         depth;
+    state_panel pos[WIDTH][WIDTH];
+    idx_t       i, j; /* pos of empty */
 };
 
 #define v(state, i, j) ((state)->pos[i][j])
@@ -40,7 +40,7 @@ state_free(State state)
 
 #ifndef NDEBUG
 static void
-validate_distinct_elem(value v_list[WIDTH * WIDTH])
+validate_distinct_elem(state_panel v_list[WIDTH * WIDTH])
 {
     for (idx_t i = 0; i < WIDTH * WIDTH; ++i)
         for (idx_t j = i + 1; j < WIDTH * WIDTH; ++j)
@@ -49,7 +49,7 @@ validate_distinct_elem(value v_list[WIDTH * WIDTH])
 #endif
 
 State
-state_init(value v_list[WIDTH * WIDTH], int depth)
+state_init(state_panel v_list[WIDTH * WIDTH], int depth)
 {
     State state = state_alloc();
     int   cnt   = 0;
@@ -65,11 +65,11 @@ state_init(value v_list[WIDTH * WIDTH], int depth)
     for (idx_t j = 0; j < WIDTH; ++j)
         for (idx_t i = 0; i < WIDTH; ++i)
         {
-            if (v_list[cnt] == VALUE_EMPTY)
+            if (v_list[cnt] == STATE_EMPTY)
             {
                 assert(!empty_found);
-                state->i    = i;
-                state->j    = j;
+                state->i = i;
+                state->j = j;
 #ifndef NDEBUG
                 empty_found = true;
 #endif
@@ -138,22 +138,22 @@ state_move(State state, Direction dir)
     {
     case LEFT:
         ev(state) = lv(state);
-        lv(state) = VALUE_EMPTY;
+        lv(state) = STATE_EMPTY;
         state->i--;
         break;
     case DOWN:
         ev(state) = dv(state);
-        dv(state) = VALUE_EMPTY;
+        dv(state) = STATE_EMPTY;
         state->j++;
         break;
     case RIGHT:
         ev(state) = rv(state);
-        rv(state) = VALUE_EMPTY;
+        rv(state) = STATE_EMPTY;
         state->i++;
         break;
     case UP:
         ev(state) = uv(state);
-        uv(state) = VALUE_EMPTY;
+        uv(state) = STATE_EMPTY;
         state->j--;
         break;
     default:

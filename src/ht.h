@@ -20,3 +20,4 @@ typedef enum {
 HTStatus ht_insert(HT ht, State key, ht_value **value);
 HTStatus ht_search(HT ht, State key, ht_value *ret_value);
 HTStatus ht_delete(HT ht, State key);
+void ht_dump(HT ht);
