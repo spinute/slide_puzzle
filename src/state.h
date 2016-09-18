@@ -34,7 +34,8 @@ void state_move(State state, Direction dir);
 bool state_pos_equal(State s1, State s2);
 void state_dump(State state);
 
-// Heuristics below are found at https://heuristicswiki.wikispaces.com/N+-+Puzzle
+// Heuristics below are found at
+// https://heuristicswiki.wikispaces.com/N+-+Puzzle
 int heuristic_manhattan_distance(State from, State to);
 int heuristic_linear_conflict(State from, State to);
 int heuristic_pattern_database(State from, State to);
