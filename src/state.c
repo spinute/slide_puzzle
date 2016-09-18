@@ -70,7 +70,9 @@ state_init(value v_list[WIDTH * WIDTH], int depth)
                 assert(!empty_found);
                 state->i    = i;
                 state->j    = j;
+#ifndef NDEBUG
                 empty_found = true;
+#endif
             }
             v(state, i, j) = v_list[cnt++];
         }
