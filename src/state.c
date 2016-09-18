@@ -15,7 +15,7 @@ typedef unsigned char idx_t;
 struct state_tag
 {
     int         depth;
-    state_panel pos[WIDTH][WIDTH];
+    state_panel pos[STATE_WIDTH][STATE_WIDTH];
     idx_t       i, j; /* pos of empty */
 };
 
@@ -40,16 +40,16 @@ state_free(State state)
 
 #ifndef NDEBUG
 static void
-validate_distinct_elem(state_panel v_list[WIDTH * WIDTH])
+validate_distinct_elem(state_panel v_list[STATE_WIDTH * STATE_WIDTH])
 {
-    for (idx_t i = 0; i < WIDTH * WIDTH; ++i)
-        for (idx_t j = i + 1; j < WIDTH * WIDTH; ++j)
+    for (idx_t i = 0; i < STATE_WIDTH * STATE_WIDTH; ++i)
+        for (idx_t j = i + 1; j < STATE_WIDTH * STATE_WIDTH; ++j)
             assert(v_list[i] != v_list[j]);
 }
 #endif
 
 State
-state_init(state_panel v_list[WIDTH * WIDTH], int depth)
+state_init(state_panel v_list[STATE_WIDTH * STATE_WIDTH], int depth)
 {
     State state = state_alloc();
     int   cnt   = 0;
@@ -62,8 +62,8 @@ state_init(state_panel v_list[WIDTH * WIDTH], int depth)
     assert(depth >= 0);
 
     state->depth = depth;
-    for (idx_t j = 0; j < WIDTH; ++j)
-        for (idx_t i = 0; i < WIDTH; ++i)
+    for (idx_t j = 0; j < STATE_WIDTH; ++j)
+        for (idx_t i = 0; i < STATE_WIDTH; ++i)
         {
             if (v_list[cnt] == STATE_EMPTY)
             {
@@ -106,12 +106,12 @@ state_left_movable(State state)
 inline static bool
 state_down_movable(State state)
 {
-    return state->j != WIDTH - 1;
+    return state->j != STATE_WIDTH - 1;
 }
 inline static bool
 state_right_movable(State state)
 {
-    return state->i != WIDTH - 1;
+    return state->i != STATE_WIDTH - 1;
 }
 inline static bool
 state_up_movable(State state)
@@ -166,8 +166,8 @@ state_move(State state, Direction dir)
 bool
 state_pos_equal(State s1, State s2)
 {
-    for (idx_t i = 0; i < WIDTH; ++i)
-        for (idx_t j = 0; j < WIDTH; ++j)
+    for (idx_t i = 0; i < STATE_WIDTH; ++i)
+        for (idx_t j = 0; j < STATE_WIDTH; ++j)
             if (v(s1, i, j) != v(s2, i, j))
                 return false;
 
@@ -186,9 +186,9 @@ state_dump(State state)
     elog("%s: depth=%d, (i,j)=(%u,%u)\n", __func__, state->depth, state->i,
          state->j);
 
-    for (idx_t j = 0; j < WIDTH; ++j)
+    for (idx_t j = 0; j < STATE_WIDTH; ++j)
     {
-        for (idx_t i = 0; i < WIDTH; ++i)
+        for (idx_t i = 0; i < STATE_WIDTH; ++i)
             elog("%u ", (unsigned int) v(state, i, j));
         elog("\n");
     }
@@ -199,67 +199,71 @@ state_dump(State state)
  * Heuristic functions
  */
 
+static state_panel from_x[STATE_WIDTH * STATE_WIDTH],
+    from_y[STATE_WIDTH * STATE_WIDTH], to_x[STATE_WIDTH * STATE_WIDTH],
+    to_y[STATE_WIDTH * STATE_WIDTH];
+
+static int inline distance(int i, int j)
+{
+    return i > j ? i - j : j - i;
+}
+
+static void inline fill_from_to_xy(State from, State to)
+{
+    for (idx_t x = 0; x < STATE_WIDTH; ++x)
+        for (idx_t y = 0; y < STATE_WIDTH; ++y)
+        {
+            from_x[v(from, x, y)] = x;
+            from_y[v(from, x, y)] = y;
+            to_x[v(to, x, y)]     = x;
+            to_y[v(to, x, y)]     = y;
+        }
+}
+
 int
 heuristic_manhattan_distance(State from, State to)
 {
-    /* TODO: implement */
-    (void) from;
-    (void) to;
+    int h_value = 0;
+
+    fill_from_to_xy(from, to);
+
+    for (idx_t i = 0; i < STATE_WIDTH * STATE_WIDTH; ++i)
+    {
+        h_value += distance(from_x[i], to_x[i]);
+        h_value += distance(from_y[i], to_y[i]);
+    }
+
     return 0;
 }
-int
-heuristic_linear_conflict(State from, State to)
-{
-    /* TODO: implement */
-    (void) from;
-    (void) to;
-    return 0;
-}
-int
-heuristic_pattern_database(State from, State to)
-{
-    /* TODO: implement */
-    (void) from;
-    (void) to;
-    return 0;
-}
+
 int
 heuristic_misplaced_tiles(State from, State to)
 {
-    /* TODO: implement */
-    (void) from;
-    (void) to;
-    return 0;
+    int h_value = 0;
+
+    fill_from_to_xy(from, to);
+
+    for (idx_t i = 0; i < STATE_WIDTH * STATE_WIDTH; ++i)
+        if (from_x[i] != to_x[i] || from_y[i] != to_y[i])
+            h_value += 1;
+
+    return h_value;
 }
-int
-heuristic_nillson(State from, State to)
-{
-    /* TODO: implement */
-    (void) from;
-    (void) to;
-    return 0;
-}
-int
-heuristic_n_max_swap(State from, State to)
-{
-    /* TODO: implement */
-    (void) from;
-    (void) to;
-    return 0;
-}
-int
-heuristic_xy(State from, State to)
-{
-    /* TODO: implement */
-    (void) from;
-    (void) to;
-    return 0;
-}
+
 int
 heuristic_tiles_out_of_row_col(State from, State to)
 {
-    /* TODO: implement */
-    (void) from;
-    (void) to;
-    return 0;
+    int h_value = 0;
+
+    fill_from_to_xy(from, to);
+
+    for (idx_t i = 0; i < STATE_WIDTH * STATE_WIDTH; ++i)
+    {
+        if (from_x[i] != to_x[i])
+            h_value += 1;
+        if (from_y[i] != to_y[i])
+            h_value += 1;
+    }
+
+    return h_value;
 }
