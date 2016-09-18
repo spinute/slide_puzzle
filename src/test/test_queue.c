@@ -70,7 +70,7 @@ TEST(queue, poped_is_what_i_put_in_lifo_order)
 TEST(queue, put_many_items)
 {
     value v_list[WIDTH * WIDTH] = {1, 2, 3, 4, VALUE_EMPTY, 8, 7, 6, 5};
-    for (int i = 0; i < 10; ++i)
+    for (int i = 0; i < 3000; ++i)
     {
         State state = state_init(v_list, 123);
         queue_put(q, state);
