@@ -178,7 +178,7 @@ state_pos_equal(State s1, State s2)
 int
 state_get_depth(State state)
 {
-	return state->depth;
+    return state->depth;
 }
 
 void
