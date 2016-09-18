@@ -13,14 +13,14 @@ static State goal;
 void
 solver_dfs(State init_state, State goal_state)
 {
-    State state;
-    Stack stack  = stack_init(123);
-	HTStatus ht_status;
-	int *ht_place_holder;
-	HT closed = ht_init(123);
-    bool  solved = false;
+    State    state;
+    Stack    stack = stack_init(123);
+    HTStatus ht_status;
+    int *    ht_place_holder;
+    HT       closed = ht_init(123);
+    bool     solved = false;
 
-	ht_status = ht_insert(closed, init_state, &ht_place_holder);
+    ht_status = ht_insert(closed, init_state, &ht_place_holder);
     stack_put(stack, state_copy(init_state));
 
     while ((state = stack_pop(stack)))
@@ -38,12 +38,12 @@ solver_dfs(State init_state, State goal_state)
                 State next_state = state_copy(state);
                 state_move(next_state, dir);
 
-				ht_status = ht_insert(closed, next_state, &ht_place_holder);
-				if (ht_status == HT_SUCCESS)
-				{
-					State next_state_dup = state_copy(next_state);
-					stack_put(stack, next_state_dup);
-				}
+                ht_status = ht_insert(closed, next_state, &ht_place_holder);
+                if (ht_status == HT_SUCCESS)
+                {
+                    State next_state_dup = state_copy(next_state);
+                    stack_put(stack, next_state_dup);
+                }
             }
         }
 
@@ -64,14 +64,14 @@ solver_dfs(State init_state, State goal_state)
 void
 solver_bfs(State init_state, State goal_state)
 {
-    State state;
-    Queue q      = queue_init();
-	HTStatus ht_status;
-	int *ht_place_holder;
-	HT closed = ht_init(123);
-    bool  solved = false;
+    State    state;
+    Queue    q = queue_init();
+    HTStatus ht_status;
+    int *    ht_place_holder;
+    HT       closed = ht_init(123);
+    bool     solved = false;
 
-	ht_status = ht_insert(closed, init_state, &ht_place_holder);
+    ht_status = ht_insert(closed, init_state, &ht_place_holder);
     queue_put(q, state_copy(init_state));
 
     while ((state = queue_pop(q)))
@@ -89,12 +89,12 @@ solver_bfs(State init_state, State goal_state)
                 State next_state = state_copy(state);
                 state_move(next_state, dir);
 
-				ht_status = ht_insert(closed, next_state, &ht_place_holder);
-				if (ht_status == HT_SUCCESS)
-				{
-					State next_state_dup = state_copy(next_state);
-					queue_put(q, next_state_dup);
-				}
+                ht_status = ht_insert(closed, next_state, &ht_place_holder);
+                if (ht_status == HT_SUCCESS)
+                {
+                    State next_state_dup = state_copy(next_state);
+                    queue_put(q, next_state_dup);
+                }
             }
         }
 
