@@ -28,6 +28,8 @@ State state_init(state_panel v_list[WIDTH * WIDTH], int depth);
 void state_fini(State state);
 State state_copy(State src);
 
+int state_get_depth(State state);
+
 bool state_movable(State state, Direction dir);
 void state_move(State state, Direction dir);
 bool state_pos_equal(State s1, State s2);

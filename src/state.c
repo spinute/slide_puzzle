@@ -175,6 +175,12 @@ state_pos_equal(State s1, State s2)
     return true;
 }
 
+int
+state_get_depth(State state)
+{
+	return state->depth;
+}
+
 void
 state_dump(State state)
 {

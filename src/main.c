@@ -15,10 +15,17 @@ main(int argc, char *argv[])
 
     // solver_dfs(s, g1); // can't solve this problem soon by dfs
     solver_dfs(s, g2);
-    solver_bfs(s, g3);
+    solver_dfs(s, g3);
     solver_bfs(s, g1);
     solver_bfs(s, g2);
     solver_bfs(s, g3);
+
+    solver_dls(s, g1, 1);
+    solver_dls(s, g2, 1);
+    // solver_dls(s, g3, 17); // can't solve this problem soon by dls(3**16==40000000)
+    solver_iddfs(s, g1);
+    solver_iddfs(s, g2);
+    // solver_iddfs(s, g3, 17); // can't solve this problem soon by iddfs -> until depth=13 by around 1min
 
     state_fini(s);
     state_fini(g1);
