@@ -11,7 +11,8 @@ static State key;
 
 TEST_SETUP(hash)
 {
-    state_panel v_list[WIDTH * WIDTH] = {1, 2, 3, 4, STATE_EMPTY, 8, 7, 6, 5};
+    state_panel v_list[STATE_WIDTH * STATE_WIDTH]
+		= {1, 2, 3, 4, STATE_EMPTY, 8, 7, 6, 5};
 
     ht  = ht_init(3);
     key = state_init(v_list, 0);
@@ -99,7 +100,7 @@ TEST(hash, insert_the_different_keys)
     for (int i = 0; i < 1000; ++i)
     {
         State       fake_key;
-        state_panel fake_list[WIDTH * WIDTH] = {1, 2, 3, 4, STATE_EMPTY,
+        state_panel fake_list[STATE_WIDTH * STATE_WIDTH] = {1, 2, 3, 4, STATE_EMPTY,
                                                 8, 7, 6, 5};
 
         /* generate different state less than 10000 times */
