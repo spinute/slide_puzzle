@@ -43,8 +43,8 @@ pq_init(size_t init_capa_hint)
     pq->n_elems = 0;
     pq->capa    = calc_init_capa(init_capa_hint);
 
-    assert(pq->capa <= SIZE_MAX / sizeof(State));
-    pq->array = palloc(sizeof(PQEntry) * pq->capa);
+    assert(pq->capa <= SIZE_MAX / sizeof(PQEntryData));
+    pq->array = palloc(sizeof(PQEntryData) * pq->capa);
 
     return pq;
 }
@@ -87,7 +87,7 @@ static inline size_t
 pq_up(size_t i)
 {
     /* NOTE: By using 1-origin, it may be written more simply, i >> 1 */
-    return (i >> 1) - 1;
+    return (i - 1) >> 1;
 }
 
 static inline size_t
@@ -99,9 +99,10 @@ pq_left(size_t i)
 static void
 heapify_up(PQ pq)
 {
-    for (size_t i = pq->n_elems;;)
+    for (size_t i = pq->n_elems; i>0; )
     {
         size_t ui = pq_up(i);
+		assert(i > 0);
         if (pq->array[i].p >= pq->array[ui].p)
             break;
 
