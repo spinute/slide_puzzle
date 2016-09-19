@@ -1,12 +1,12 @@
 #pragma once
 
 #include "./state.h"
-#include <stdint.h>
+#include <stddef.h>
 
 typedef struct pq_tag *PQ;
 
 PQ pq_init(size_t init_capa_hint);
 void pq_fini(PQ pq);
 
-void pq_put(PQ pq, State state);
+void pq_put(PQ pq, State state, int prioriyty);
 State pq_pop(PQ pq);
