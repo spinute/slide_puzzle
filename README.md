@@ -16,5 +16,5 @@
 ## Heuristic
 * [x] Manhattan distance
 * [x] Misplaced tiles
-* [x] Manhattan distance
+* [x] Misplaced rows/cols
 * [ ] Pattern Database
