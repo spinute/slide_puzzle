@@ -6,12 +6,12 @@
 * Benchmark: (not implemented yet)
 
 ## Strategy(in [https://github.com/spinute/slide_puzzle/blob/master/src/solver.h](solver.h))
-* [x]DFS
-* [x]BFS
-* [x]DLS
-* [x]IDDFS
-* [ ]A\*
-* [ ]IDA\*
+* [x] DFS
+* [x] BFS
+* [x] DLS
+* [x] IDDFS
+* [ ] A\*
+* [ ] IDA\*
 
 ## Heuristic
 * [x] Manhattan distance
