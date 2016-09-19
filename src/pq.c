@@ -99,10 +99,10 @@ pq_left(size_t i)
 static void
 heapify_up(PQ pq)
 {
-    for (size_t i = pq->n_elems; i>0; )
+    for (size_t i = pq->n_elems; i > 0;)
     {
         size_t ui = pq_up(i);
-		assert(i > 0);
+        assert(i > 0);
         if (pq->array[i].p >= pq->array[ui].p)
             break;
 
