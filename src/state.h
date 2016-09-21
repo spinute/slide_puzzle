@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdbool.h>
+#include <stddef.h>
 
 #define N_DIR 4
 typedef enum direction_tag {
@@ -32,6 +33,7 @@ int state_get_depth(State state);
 bool state_movable(State state, Direction dir);
 void state_move(State state, Direction dir);
 bool state_pos_equal(State s1, State s2);
+size_t state_hash(State state);
 void state_dump(State state);
 
 /*

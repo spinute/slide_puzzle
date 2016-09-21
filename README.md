@@ -5,7 +5,7 @@
 * Test: `rake test` (Using <https://github.com/ThrowTheSwitch/Unity>)
 * Benchmark: (not implemented yet)
 
-## Strategy(in [https://github.com/spinute/slide_puzzle/blob/master/src/solver.h](solver.h))
+## Strategy
 * [x] DFS
 * [x] BFS
 * [x] DLS

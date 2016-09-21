@@ -6,11 +6,10 @@
 #include <string.h>
 
 /* XXX: hash function for State should be surveyed */
-static size_t
+inline static size_t
 hashfunc(State key)
 {
-    (void) key;
-    return 1;
+    return state_hash(key);
 }
 
 typedef struct ht_entry_tag *HTEntry;
@@ -99,7 +98,7 @@ ht_rehash(HT ht)
         {
             HTEntry next = entry->next;
 
-            size_t idx   = hashfunc(entry->key) & new_size;
+            size_t idx   = hashfunc(entry->key) & (new_size-1);
             entry->next  = new_bin[idx];
             new_bin[idx] = entry;
 
