@@ -10,7 +10,7 @@
 * [x] BFS
 * [x] DLS
 * [x] IDDFS
-* [ ] A\*
+* [x] A\*
 * [ ] IDA\*
 
 ## Heuristic
