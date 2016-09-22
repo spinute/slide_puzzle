@@ -19,7 +19,7 @@ solver_flastar(State init_state, State goal_state, Heuristic heuristic,
     PQ       pq = pq_init(123);
     HTStatus ht_status;
     int *    ht_value;
-	int f_value;
+    int      f_value;
     HT       closed = ht_init(123);
     bool     solved = false;
 
@@ -51,9 +51,10 @@ solver_flastar(State init_state, State goal_state, Heuristic heuristic,
                 state_move(next_state, dir);
 
                 ht_status = ht_insert(closed, next_state, &ht_value);
-				f_value = state_get_depth(next_state) + calc_h_value(heuristic, next_state, goal_state);
-				if (f_value > f_limit || (
-                   (ht_status == HT_FAILED_FOUND && *ht_value < f_value)))
+                f_value   = state_get_depth(next_state) +
+                          calc_h_value(heuristic, next_state, goal_state);
+                if (f_value > f_limit ||
+                    ((ht_status == HT_FAILED_FOUND && *ht_value < f_value)))
                     state_fini(next_state);
                 else
                 {
