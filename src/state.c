@@ -3,6 +3,7 @@
 
 #include <assert.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include <string.h>
 
 typedef unsigned char idx_t;
@@ -230,7 +231,7 @@ static void inline fill_from_to_xy(State from, State to)
         }
 }
 
-int
+static inline int
 heuristic_manhattan_distance(State from, State to)
 {
     int h_value = 0;
@@ -246,7 +247,7 @@ heuristic_manhattan_distance(State from, State to)
     return h_value;
 }
 
-int
+static inline int
 heuristic_misplaced_tiles(State from, State to)
 {
     int h_value = 0;
@@ -260,7 +261,7 @@ heuristic_misplaced_tiles(State from, State to)
     return h_value;
 }
 
-int
+static inline int
 heuristic_tiles_out_of_row_col(State from, State to)
 {
     int h_value = 0;
@@ -276,4 +277,20 @@ heuristic_tiles_out_of_row_col(State from, State to)
     }
 
     return h_value;
+}
+
+int
+calc_h_value(Heuristic heuristic, State from, State to)
+{
+	switch (heuristic){
+	case HeuristicManhattanDistance:
+		return heuristic_manhattan_distance(from, to);
+	case HeuristicTilesOutOfRowCol:
+		return heuristic_tiles_out_of_row_col(from, to);
+	case HeuristicMisplacedTiles:
+		return heuristic_misplaced_tiles(from, to);
+	default:
+		elog("%s: unexpected label\n", __func__);
+		exit(EXIT_FAILURE);
+	}
 }

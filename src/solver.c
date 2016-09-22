@@ -8,11 +8,12 @@
 static State goal;
 
 /*
- * A* Search
+ * IDA* / f-value limited A* Search
  */
-void
-solver_astar(State init_state, State goal_state)
+bool
+solver_flastar(State init_state, State goal_state, Heuristic heuristic, int f_limit)
 {
+(void) f_limit;
     State    state;
     PQ       pq = pq_init(123);
     HTStatus ht_status;
@@ -21,7 +22,7 @@ solver_astar(State init_state, State goal_state)
     bool     solved = false;
 
     pq_put(pq, state_copy(init_state),
-           heuristic_manhattan_distance(init_state, goal_state));
+           calc_h_value(heuristic, init_state, goal_state));
 
     while ((state = pq_pop(pq)))
     {
@@ -55,7 +56,77 @@ solver_astar(State init_state, State goal_state)
                 {
                     *ht_value = state_get_depth(next_state);
                     pq_put(pq, next_state,
-                           *ht_value + heuristic_manhattan_distance(
+                           *ht_value + calc_h_value(heuristic, next_state, goal_state));
+                }
+            }
+        }
+
+        state_fini(state);
+    }
+
+    if (solved)
+    {
+        state_dump(state);
+        elog("%s: solved\n", __func__);
+    }
+    else
+        elog("%s: not solved\n", __func__);
+
+    ht_fini(closed);
+    pq_fini(pq);
+
+	return solved;
+}
+
+/*
+ * A* Search
+ */
+void
+solver_astar(State init_state, State goal_state, Heuristic heuristic)
+{
+    State    state;
+    PQ       pq = pq_init(123);
+    HTStatus ht_status;
+    int *    ht_value;
+    HT       closed = ht_init(123);
+    bool     solved = false;
+
+    pq_put(pq, state_copy(init_state),
+           calc_h_value(heuristic, init_state, goal_state));
+
+    while ((state = pq_pop(pq)))
+    {
+        if (state_pos_equal(state, goal_state))
+        {
+            solved = true;
+            break;
+        }
+
+        ht_status = ht_insert(closed, state, &ht_value);
+        if (ht_status == HT_FAILED_FOUND && *ht_value < state_get_depth(state))
+        {
+            state_fini(state);
+            continue;
+        }
+        else
+            *ht_value = state_get_depth(state);
+
+        for (int dir = 0; dir < N_DIR; ++dir)
+        {
+            if (state_movable(state, dir))
+            {
+                State next_state = state_copy(state);
+                state_move(next_state, dir);
+
+                ht_status = ht_insert(closed, next_state, &ht_value);
+                if (ht_status == HT_FAILED_FOUND &&
+                    *ht_value < state_get_depth(next_state))
+                    state_fini(next_state);
+                else
+                {
+                    *ht_value = state_get_depth(next_state);
+                    pq_put(pq, next_state,
+                           *ht_value + calc_h_value(heuristic,
                                            next_state, goal_state));
                 }
             }

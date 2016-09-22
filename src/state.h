@@ -40,14 +40,11 @@ void state_dump(State state);
  * Heuristics below are found at
  * https://heuristicswiki.wikispaces.com/N+-+Puzzle
  */
-int heuristic_manhattan_distance(State from, State to);
-int heuristic_tiles_out_of_row_col(State from, State to);
-int heuristic_misplaced_tiles(State from, State to);
 
-/* Heuristics below are not implemented, for now
- * int heuristic_linear_conflict(State from, State to);
- * int heuristic_pattern_database(State from, State to);
- * int heuristic_nillson(State from, State to);
- * int heuristic_n_max_swap(State from, State to);
- * int heuristic_xy(State from, State to);
-*/
+typedef enum {
+	HeuristicManhattanDistance,
+	HeuristicTilesOutOfRowCol,
+	HeuristicMisplacedTiles,
+} Heuristic;
+
+int calc_h_value(Heuristic heuristic, State from, State to);

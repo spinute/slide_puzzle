@@ -34,10 +34,10 @@ main(int argc, char *argv[])
     // solver_iddfs(s, g3); // 2min
     solver_iddfs(s, g4);
 
-    solver_astar(s, g1);
-    solver_astar(s, g2);
-    solver_astar(s, g4);
-    solver_astar(s, g3);
+    solver_astar(s, g1, HeuristicManhattanDistance);
+    solver_astar(s, g2, HeuristicManhattanDistance);
+    solver_astar(s, g3, HeuristicManhattanDistance);
+    solver_astar(s, g4, HeuristicManhattanDistance);
 
     state_fini(s);
     state_fini(g1);
