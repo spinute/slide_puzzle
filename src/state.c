@@ -282,15 +282,16 @@ heuristic_tiles_out_of_row_col(State from, State to)
 int
 calc_h_value(Heuristic heuristic, State from, State to)
 {
-	switch (heuristic){
-	case HeuristicManhattanDistance:
-		return heuristic_manhattan_distance(from, to);
-	case HeuristicTilesOutOfRowCol:
-		return heuristic_tiles_out_of_row_col(from, to);
-	case HeuristicMisplacedTiles:
-		return heuristic_misplaced_tiles(from, to);
-	default:
-		elog("%s: unexpected label\n", __func__);
-		exit(EXIT_FAILURE);
-	}
+    switch (heuristic)
+    {
+    case HeuristicManhattanDistance:
+        return heuristic_manhattan_distance(from, to);
+    case HeuristicTilesOutOfRowCol:
+        return heuristic_tiles_out_of_row_col(from, to);
+    case HeuristicMisplacedTiles:
+        return heuristic_misplaced_tiles(from, to);
+    default:
+        elog("%s: unexpected label\n", __func__);
+        exit(EXIT_FAILURE);
+    }
 }

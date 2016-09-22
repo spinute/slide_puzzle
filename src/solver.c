@@ -11,9 +11,10 @@ static State goal;
  * IDA* / f-value limited A* Search
  */
 bool
-solver_flastar(State init_state, State goal_state, Heuristic heuristic, int f_limit)
+solver_flastar(State init_state, State goal_state, Heuristic heuristic,
+               int f_limit)
 {
-(void) f_limit;
+    (void) f_limit;
     State    state;
     PQ       pq = pq_init(123);
     HTStatus ht_status;
@@ -56,7 +57,8 @@ solver_flastar(State init_state, State goal_state, Heuristic heuristic, int f_li
                 {
                     *ht_value = state_get_depth(next_state);
                     pq_put(pq, next_state,
-                           *ht_value + calc_h_value(heuristic, next_state, goal_state));
+                           *ht_value +
+                               calc_h_value(heuristic, next_state, goal_state));
                 }
             }
         }
@@ -75,7 +77,7 @@ solver_flastar(State init_state, State goal_state, Heuristic heuristic, int f_li
     ht_fini(closed);
     pq_fini(pq);
 
-	return solved;
+    return solved;
 }
 
 /*
@@ -126,8 +128,8 @@ solver_astar(State init_state, State goal_state, Heuristic heuristic)
                 {
                     *ht_value = state_get_depth(next_state);
                     pq_put(pq, next_state,
-                           *ht_value + calc_h_value(heuristic,
-                                           next_state, goal_state));
+                           *ht_value +
+                               calc_h_value(heuristic, next_state, goal_state));
                 }
             }
         }

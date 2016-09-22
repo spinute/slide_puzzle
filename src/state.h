@@ -42,9 +42,9 @@ void state_dump(State state);
  */
 
 typedef enum {
-	HeuristicManhattanDistance,
-	HeuristicTilesOutOfRowCol,
-	HeuristicMisplacedTiles,
+    HeuristicManhattanDistance,
+    HeuristicTilesOutOfRowCol,
+    HeuristicMisplacedTiles,
 } Heuristic;
 
 int calc_h_value(Heuristic heuristic, State from, State to);
