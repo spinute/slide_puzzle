@@ -19,6 +19,7 @@ solver_flastar(State init_state, State goal_state, Heuristic heuristic,
     PQ       pq = pq_init(123);
     HTStatus ht_status;
     int *    ht_value;
+	int f_value;
     HT       closed = ht_init(123);
     bool     solved = false;
 
@@ -50,15 +51,14 @@ solver_flastar(State init_state, State goal_state, Heuristic heuristic,
                 state_move(next_state, dir);
 
                 ht_status = ht_insert(closed, next_state, &ht_value);
-                if (ht_status == HT_FAILED_FOUND &&
-                    *ht_value < state_get_depth(next_state))
+				f_value = state_get_depth(next_state) + calc_h_value(heuristic, next_state, goal_state);
+				if (f_value > f_limit || (
+                   (ht_status == HT_FAILED_FOUND && *ht_value < f_value)))
                     state_fini(next_state);
                 else
                 {
                     *ht_value = state_get_depth(next_state);
-                    pq_put(pq, next_state,
-                           *ht_value +
-                               calc_h_value(heuristic, next_state, goal_state));
+                    pq_put(pq, next_state, f_value);
                 }
             }
         }
@@ -78,6 +78,21 @@ solver_flastar(State init_state, State goal_state, Heuristic heuristic,
     pq_fini(pq);
 
     return solved;
+}
+
+void
+solver_idastar(State init_state, State goal_state, Heuristic heuristic)
+{
+    for (int f_limit = 1;; ++f_limit)
+    {
+        if (solver_flastar(init_state, goal_state, heuristic, f_limit))
+        {
+            elog("%s: solved\n", __func__);
+            break;
+        }
+        else
+            elog("%s: not solved at the f_limit=%d\n", __func__, f_limit);
+    }
 }
 
 /*

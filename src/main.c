@@ -38,6 +38,14 @@ main(int argc, char *argv[])
     solver_astar(s, g2, HeuristicManhattanDistance);
     solver_astar(s, g3, HeuristicManhattanDistance);
     solver_astar(s, g4, HeuristicManhattanDistance);
+    solver_flastar(s, g1, HeuristicManhattanDistance, 1);
+    solver_flastar(s, g2, HeuristicManhattanDistance, 1);
+    solver_flastar(s, g3, HeuristicManhattanDistance, 17);
+    solver_flastar(s, g4, HeuristicManhattanDistance, 2);
+    solver_idastar(s, g1, HeuristicManhattanDistance);
+    solver_idastar(s, g2, HeuristicManhattanDistance);
+    solver_idastar(s, g3, HeuristicManhattanDistance);
+    solver_idastar(s, g4, HeuristicManhattanDistance);
 
     state_fini(s);
     state_fini(g1);
