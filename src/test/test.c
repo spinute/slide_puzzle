@@ -8,6 +8,7 @@ main(void)
     RUN_TEST_GROUP(stack);
     RUN_TEST_GROUP(queue);
     RUN_TEST_GROUP(hash);
+    RUN_TEST_GROUP(heuristic);
     RUN_TEST_GROUP(pq);
 
     puts("\nTest finished.");

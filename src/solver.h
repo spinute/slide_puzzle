@@ -2,6 +2,8 @@
 
 #include "state.h"
 
+void solver_astar(State init_state, State goal_state);
+
 void solver_iddfs(State init_state, State goal_state);
 bool solver_dls(State init_state, State goal_state, int depth_limit);
 

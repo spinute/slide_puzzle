@@ -1,10 +1,78 @@
 #include "./solver.h"
 #include "./ht.h"
+#include "./pq.h"
 #include "./queue.h"
 #include "./stack.h"
 #include "./utils.h"
 
 static State goal;
+
+/*
+ * A* Search
+ */
+void
+solver_astar(State init_state, State goal_state)
+{
+    State    state;
+    PQ    pq = pq_init(123);
+    HTStatus ht_status;
+    int *    ht_value;
+    HT       closed = ht_init(123);
+    bool     solved = false;
+
+    pq_put(pq, state_copy(init_state), heuristic_manhattan_distance(init_state, goal_state));
+
+    while ((state = pq_pop(pq)))
+    {
+        if (state_pos_equal(state, goal_state))
+        {
+            solved = true;
+            break;
+        }
+
+		ht_status = ht_insert(closed, state, &ht_value);
+		if (ht_status == HT_FAILED_FOUND &&
+				*ht_value < state_get_depth(state))
+		{
+			state_fini(state);
+			continue;
+		}
+		else
+			*ht_value = state_get_depth(state);
+
+        for (int dir = 0; dir < N_DIR; ++dir)
+        {
+            if (state_movable(state, dir))
+            {
+                State next_state = state_copy(state);
+                state_move(next_state, dir);
+
+                ht_status = ht_insert(closed, next_state, &ht_value);
+				if (ht_status == HT_FAILED_FOUND &&
+						*ht_value < state_get_depth(next_state))
+					state_fini(next_state);
+				else
+				{
+					*ht_value = state_get_depth(next_state);
+                    pq_put(pq, next_state, *ht_value + heuristic_manhattan_distance(next_state, goal_state));
+				}
+            }
+        }
+
+        state_fini(state);
+    }
+
+    if (solved)
+    {
+        state_dump(state);
+        elog("%s: solved\n", __func__);
+    }
+    else
+        elog("%s: not solved\n", __func__);
+
+	ht_fini(closed);
+    pq_fini(pq);
+}
 
 /*
  * Iterative Deepring Depth First Search(IDDFS) & Depth Limited Search
@@ -47,10 +115,7 @@ solver_dls(State init_state, State goal_state, int depth_limit)
 
                 ht_status = ht_insert(closed, next_state, &ht_min_depth);
                 if (ht_status == HT_SUCCESS)
-                {
-                    State next_state_dup = state_copy(next_state);
-                    stack_put(stack, next_state_dup);
-                }
+                    stack_put(stack, next_state);
                 else
                 {
                     int next_state_depth = state_get_depth(next_state);
@@ -58,10 +123,11 @@ solver_dls(State init_state, State goal_state, int depth_limit)
 
                     if (next_state_depth)
                     {
-                        State next_state_dup = state_copy(next_state);
                         *ht_min_depth        = next_state_depth;
-                        stack_put(stack, next_state_dup);
+                        stack_put(stack, next_state);
                     }
+					else
+						state_fini(next_state);
                 }
             }
         }
@@ -77,6 +143,7 @@ solver_dls(State init_state, State goal_state, int depth_limit)
     else
         elog("%s: not solved\n", __func__);
 
+	ht_fini(closed);
     stack_fini(stack);
 
     return solved;
@@ -131,10 +198,9 @@ solver_dfs(State init_state, State goal_state)
 
                 ht_status = ht_insert(closed, next_state, &ht_place_holder);
                 if (ht_status == HT_SUCCESS)
-                {
-                    State next_state_dup = state_copy(next_state);
-                    stack_put(stack, next_state_dup);
-                }
+                    stack_put(stack, next_state);
+				else
+					state_fini(next_state);
             }
         }
 
@@ -149,6 +215,7 @@ solver_dfs(State init_state, State goal_state)
     else
         elog("%s: not solved\n", __func__);
 
+	ht_fini(closed);
     stack_fini(stack);
 }
 
@@ -182,10 +249,9 @@ solver_bfs(State init_state, State goal_state)
 
                 ht_status = ht_insert(closed, next_state, &ht_place_holder);
                 if (ht_status == HT_SUCCESS)
-                {
-                    State next_state_dup = state_copy(next_state);
-                    queue_put(q, next_state_dup);
-                }
+                    queue_put(q, next_state);
+				else
+					state_fini(next_state);
             }
         }
 
@@ -200,6 +266,7 @@ solver_bfs(State init_state, State goal_state)
     else
         elog("%s: not solved\n", __func__);
 
+	ht_fini(closed);
     queue_fini(q);
 }
 

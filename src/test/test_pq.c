@@ -59,15 +59,17 @@ TEST(pq, put_many)
 }
 TEST(pq, put_many_and_pop_the_half)
 {
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 10; i++)
         pq_put(q, s, 5 * 7 * 31 * i % 19);
 
-    for (int i = 0; i < 50; i++)
+    for (int i = 0; i < 5; i++)
     {
         State ret = pq_pop(q);
         TEST_ASSERT_NOT_NULL(ret);
         state_fini(ret);
     }
+    for (int i = 0; i < 1; i++)
+        pq_put(q, s, 5 * 7 * 31 * i % 19);
 }
 
 TEST_GROUP_RUNNER(pq)

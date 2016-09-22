@@ -139,22 +139,27 @@ heapify_down(PQ pq)
         {
             if (pq->array[i].p > pq->array[li].p)
                 pq_swap_entry(pq, i, li);
+			/* Reached the bottom */
             break;
         }
 
         /* NOTE: If ri == li, it may be good to go right
          * since the filling order is from left */
-        if (ri <= li)
+        if (pq->array[ri].p <= pq->array[li].p)
         {
-            if (pq->array[i].p > pq->array[ri].p)
-                pq_swap_entry(pq, i, ri);
-            i = ri;
+            if (pq->array[i].p <= pq->array[ri].p)
+				break;
+
+			pq_swap_entry(pq, i, ri);
+			i = ri;
         }
         else
         {
-            if (pq->array[i].p > pq->array[li].p)
-                pq_swap_entry(pq, i, li);
-            i = li;
+            if (pq->array[i].p <= pq->array[li].p)
+				break;
+
+			pq_swap_entry(pq, i, li);
+			i = li;
         }
     }
 }

@@ -237,13 +237,13 @@ heuristic_manhattan_distance(State from, State to)
 
     fill_from_to_xy(from, to);
 
-    for (idx_t i = 0; i < STATE_WIDTH * STATE_WIDTH; ++i)
+    for (idx_t i = 1; i < STATE_WIDTH * STATE_WIDTH; ++i)
     {
         h_value += distance(from_x[i], to_x[i]);
         h_value += distance(from_y[i], to_y[i]);
     }
 
-    return 0;
+    return h_value;
 }
 
 int
@@ -253,7 +253,7 @@ heuristic_misplaced_tiles(State from, State to)
 
     fill_from_to_xy(from, to);
 
-    for (idx_t i = 0; i < STATE_WIDTH * STATE_WIDTH; ++i)
+    for (idx_t i = 1; i < STATE_WIDTH * STATE_WIDTH; ++i)
         if (from_x[i] != to_x[i] || from_y[i] != to_y[i])
             h_value += 1;
 
@@ -267,7 +267,7 @@ heuristic_tiles_out_of_row_col(State from, State to)
 
     fill_from_to_xy(from, to);
 
-    for (idx_t i = 0; i < STATE_WIDTH * STATE_WIDTH; ++i)
+    for (idx_t i = 1; i < STATE_WIDTH * STATE_WIDTH; ++i)
     {
         if (from_x[i] != to_x[i])
             h_value += 1;
