@@ -14,7 +14,6 @@ bool
 solver_flastar(State init_state, State goal_state, Heuristic heuristic,
                int f_limit)
 {
-    (void) f_limit;
     State    state;
     PQ       pq = pq_init(123);
     HTStatus ht_status;

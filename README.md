@@ -11,7 +11,8 @@
 * [x] DLS
 * [x] IDDFS
 * [x] A\*
-* [ ] IDA\*
+* [x] FLA\*
+* [x] IDA\*
 
 ## Heuristic
 * [x] Manhattan distance
