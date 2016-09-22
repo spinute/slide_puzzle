@@ -177,11 +177,11 @@ state_pos_equal(State s1, State s2)
 size_t
 state_hash(State state)
 {
-	size_t hash_value = 0;
+    size_t hash_value = 0;
     for (idx_t i = 0; i < STATE_WIDTH; ++i)
         for (idx_t j = 0; j < STATE_WIDTH; ++j)
-			hash_value ^= (v(state, i, j) << ((i*3+ j) << 2));
-	return hash_value;
+            hash_value ^= (v(state, i, j) << ((i * 3 + j) << 2));
+    return hash_value;
 }
 
 int

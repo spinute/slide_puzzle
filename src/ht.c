@@ -98,7 +98,7 @@ ht_rehash(HT ht)
         {
             HTEntry next = entry->next;
 
-            size_t idx   = hashfunc(entry->key) & (new_size-1);
+            size_t idx   = hashfunc(entry->key) & (new_size - 1);
             entry->next  = new_bin[idx];
             new_bin[idx] = entry;
 

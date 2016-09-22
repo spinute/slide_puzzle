@@ -139,7 +139,7 @@ heapify_down(PQ pq)
         {
             if (pq->array[i].p > pq->array[li].p)
                 pq_swap_entry(pq, i, li);
-			/* Reached the bottom */
+            /* Reached the bottom */
             break;
         }
 
@@ -148,18 +148,18 @@ heapify_down(PQ pq)
         if (pq->array[ri].p <= pq->array[li].p)
         {
             if (pq->array[i].p <= pq->array[ri].p)
-				break;
+                break;
 
-			pq_swap_entry(pq, i, ri);
-			i = ri;
+            pq_swap_entry(pq, i, ri);
+            i = ri;
         }
         else
         {
             if (pq->array[i].p <= pq->array[li].p)
-				break;
+                break;
 
-			pq_swap_entry(pq, i, li);
-			i = li;
+            pq_swap_entry(pq, i, li);
+            i = li;
         }
     }
 }
