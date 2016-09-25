@@ -19,3 +19,8 @@
 * [x] Misplaced tiles
 * [x] Misplaced rows/cols
 * [ ] Pattern Database
+
+## TODO
+* Implement GPU search(At first, single thread DFS/IDA\* to evaluate max speedup)
+* Improve solver efficiency by following the work of Burns; 2012
+* Consider more sophisticated way of state space search on GPU
