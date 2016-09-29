@@ -3,5 +3,6 @@ bin
 *.o
 *.swp
 *~
+script/run.rb
 tags
 cscope.out
