@@ -15,7 +15,7 @@ typedef unsigned char state_panel;
 
 #define STATE_EMPTY 0
 #define STATE_WIDTH 3
-#define STATE_N STATE_WIDTH * STATE_WIDTH
+#define STATE_N STATE_WIDTH *STATE_WIDTH
 
 /*
  * v_list is corresponds to the state of the puzzle such as described below
@@ -47,7 +47,7 @@ typedef enum {
     HeuristicTilesOutOfRowCol,
     HeuristicMisplacedTiles,
 
-	HeuristicNotSet,
+    HeuristicNotSet,
 } Heuristic;
 
 int calc_h_value(Heuristic heuristic, State from, State to);

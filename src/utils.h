@@ -7,10 +7,12 @@
 #include <stdlib.h>
 
 #define elog(...) fprintf(stderr, __VA_ARGS__)
-#define exit_with_log(...) do { \
-	elog(__VA_ARGS__); \
-	exit(EXIT_FAILURE); \
-} while(0)
+#define exit_with_log(...)                                                     \
+    do                                                                         \
+    {                                                                          \
+        elog(__VA_ARGS__);                                                     \
+        exit(EXIT_FAILURE);                                                    \
+    } while (0)
 
 int pop_int_from_str(const char *str, char **end_ptr);
 

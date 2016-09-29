@@ -3,22 +3,22 @@
 #include "state.h"
 
 typedef enum {
-	SolverAStar,
+    SolverAStar,
 
-	SolverIDAStar,
-	SolverFLAStar,
+    SolverIDAStar,
+    SolverFLAStar,
 
-	SolverIDDFS,
-	SolverDlS,
+    SolverIDDFS,
+    SolverDlS,
 
-	SolverDFS,
-	SolverBFS,
+    SolverDFS,
+    SolverBFS,
 
-	SolverRecursiveDFSWithoutClosed,
-	SolverDFSWithoutClosed,
-	SolverBFSWithoutClosed,
+    SolverRecursiveDFSWithoutClosed,
+    SolverDFSWithoutClosed,
+    SolverBFSWithoutClosed,
 
-	SolverNotSet,
+    SolverNotSet,
 } Solver;
 
 void solver_idastar(State init_state, State goal_state, Heuristic heuristic);
