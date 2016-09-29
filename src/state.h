@@ -15,6 +15,7 @@ typedef unsigned char state_panel;
 
 #define STATE_EMPTY 0
 #define STATE_WIDTH 3
+#define STATE_N STATE_WIDTH * STATE_WIDTH
 
 /*
  * v_list is corresponds to the state of the puzzle such as described below
@@ -25,7 +26,7 @@ typedef unsigned char state_panel;
 
 typedef struct state_tag *State;
 
-State state_init(state_panel v_list[STATE_WIDTH * STATE_WIDTH], int depth);
+State state_init(state_panel v_list[STATE_N], int depth);
 void state_fini(State state);
 State state_copy(State src);
 
@@ -45,6 +46,8 @@ typedef enum {
     HeuristicManhattanDistance,
     HeuristicTilesOutOfRowCol,
     HeuristicMisplacedTiles,
+
+	HeuristicNotSet,
 } Heuristic;
 
 int calc_h_value(Heuristic heuristic, State from, State to);

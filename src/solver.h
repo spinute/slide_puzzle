@@ -2,8 +2,27 @@
 
 #include "state.h"
 
-void solver_idastar(State init_satte, State goal_state, Heuristic heuristic);
-bool solver_flastar(State init_satte, State goal_state, Heuristic heuristic,
+typedef enum {
+	SolverAStar,
+
+	SolverIDAStar,
+	SolverFLAStar,
+
+	SolverIDDFS,
+	SolverDlS,
+
+	SolverDFS,
+	SolverBFS,
+
+	SolverRecursiveDFSWithoutClosed,
+	SolverDFSWithoutClosed,
+	SolverBFSWithoutClosed,
+
+	SolverNotSet,
+} Solver;
+
+void solver_idastar(State init_state, State goal_state, Heuristic heuristic);
+bool solver_flastar(State init_state, State goal_state, Heuristic heuristic,
                     int f_limit);
 
 void solver_astar(State init_state, State goal_state, Heuristic heuristic);
