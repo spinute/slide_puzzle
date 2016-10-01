@@ -12,10 +12,10 @@
 
 typedef struct option_tag
 {
-    Solver    solver;
-    int       depth_limit;
-    int       f_limit;
-    char      ifname[BUFLEN];
+    Solver solver;
+    int    depth_limit;
+    int    f_limit;
+    char   ifname[BUFLEN];
 } * MainOption;
 
 static void
@@ -99,8 +99,8 @@ load_state_from_file(const char *fname, state_panel *s)
 int
 main(int argc, char *argv[])
 {
-    state_panel s_list[STATE_N];
-    State       s;
+    state_panel       s_list[STATE_N];
+    State             s;
     struct option_tag opt;
     int               ch;
 

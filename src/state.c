@@ -19,8 +19,8 @@ struct state_tag
     int         depth; /* XXX: needed? */
     state_panel pos[STATE_WIDTH][STATE_WIDTH];
     idx_t       i, j; /* pos of empty */
-	Direction parent;
-	int h_value;
+    Direction   parent;
+    int         h_value;
 };
 
 #define v(state, i, j) ((state)->pos[i][j])
@@ -57,18 +57,17 @@ heuristic_manhattan_distance(State from)
 
     for (idx_t i = 1; i < STATE_WIDTH * STATE_WIDTH; ++i)
     {
-        h_value += distance(from_x[i], i%STATE_WIDTH);
-        h_value += distance(from_y[i], i/STATE_WIDTH);
+        h_value += distance(from_x[i], i % STATE_WIDTH);
+        h_value += distance(from_y[i], i / STATE_WIDTH);
     }
 
     return h_value;
 }
 
-
 bool
 state_is_goal(State state)
 {
-	return state->h_value == 0;
+    return state->h_value == 0;
 }
 
 inline static State
@@ -91,8 +90,8 @@ state_init(state_panel v_list[STATE_WIDTH * STATE_WIDTH], int depth)
 
     assert(depth >= 0);
 
-    state->depth = depth;
-	state->parent = -1;
+    state->depth  = depth;
+    state->parent = -1;
 
     for (idx_t j = 0; j < STATE_WIDTH; ++j)
         for (idx_t i = 0; i < STATE_WIDTH; ++i)
@@ -105,7 +104,7 @@ state_init(state_panel v_list[STATE_WIDTH * STATE_WIDTH], int depth)
             v(state, i, j) = v_list[cnt++];
         }
 
-	state->h_value = heuristic_manhattan_distance(state);
+    state->h_value = heuristic_manhattan_distance(state);
 
     return state;
 }
@@ -159,26 +158,26 @@ state_movable(State state, Direction dir)
 static inline int
 calc_h_diff(idx_t who, idx_t from_x, idx_t from_y, Direction rdir)
 {
-	idx_t right_x = who % STATE_WIDTH;
-	idx_t right_y = who / STATE_WIDTH;
+    idx_t right_x = who % STATE_WIDTH;
+    idx_t right_y = who / STATE_WIDTH;
 
-	switch (rdir)
-	{
-	case LEFT:
-		return right_x > from_x ? -1 : 1;
-	case RIGHT:
-		return right_x < from_x ? -1 : 1;
-	case UP:
-		return right_y > from_y ? -1 : 1;
-	case DOWN:
-		return right_y < from_y ? -1 : 1;
-	}
+    switch (rdir)
+    {
+    case LEFT:
+        return right_x > from_x ? -1 : 1;
+    case RIGHT:
+        return right_x < from_x ? -1 : 1;
+    case UP:
+        return right_y > from_y ? -1 : 1;
+    case DOWN:
+        return right_y < from_y ? -1 : 1;
+    }
 }
 
 void
 state_move(State state, Direction dir)
 {
-	idx_t who;
+    idx_t who;
     assert(state_movable(state, dir));
 
     switch (dir)
@@ -204,8 +203,8 @@ state_move(State state, Direction dir)
         assert(false);
     }
 
-	state->h_value = state->h_value + calc_h_diff(who, state->i, state->j, dir);
-	state->parent = dir;
+    state->h_value = state->h_value + calc_h_diff(who, state->i, state->j, dir);
+    state->parent  = dir;
 }
 
 bool
@@ -222,7 +221,7 @@ state_pos_equal(State s1, State s2)
 size_t
 state_hash(State state)
 {
-	/* FIXME: for A* */
+    /* FIXME: for A* */
     size_t hash_value = 0;
     for (idx_t i = 0; i < STATE_WIDTH; ++i)
         for (idx_t j = 0; j < STATE_WIDTH; ++j)
@@ -250,7 +249,7 @@ state_dump(State state)
     for (idx_t j = 0; j < STATE_WIDTH; ++j)
     {
         for (idx_t i = 0; i < STATE_WIDTH; ++i)
-			elog("%u ", i == state->i && j == state->j ? 0 : v(state, i, j));
+            elog("%u ", i == state->i && j == state->j ? 0 : v(state, i, j));
         elog("\n");
     }
     elog("-----------\n");

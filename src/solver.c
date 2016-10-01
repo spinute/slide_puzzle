@@ -11,45 +11,43 @@
 bool
 solver_flastar(State state, int f_limit, int depth)
 {
-	if (state_is_goal(state))
-	{
-		elog("\n");
-		state_dump(state);
-		return true;
-	}
+    if (state_is_goal(state))
+    {
+        elog("\n");
+        state_dump(state);
+        return true;
+    }
 
-	for (int dir = 0; dir < N_DIR; ++dir)
-	{
-		if (state_movable(state, dir))
-		{
-			int rdir;
-			state_move(state, dir);
+    for (int dir = 0; dir < N_DIR; ++dir)
+    {
+        if (state_movable(state, dir))
+        {
+            int rdir;
+            state_move(state, dir);
 
-			if (depth + state_get_hvalue(state) <= f_limit &&
-				solver_flastar(state, f_limit, depth+1))
-			{
-				elog("%d ", dir);
-				return true;
-			}
+            if (depth + state_get_hvalue(state) <= f_limit &&
+                solver_flastar(state, f_limit, depth + 1))
+            {
+                elog("%d ", dir);
+                return true;
+            }
 
-			rdir = dir == LEFT ? RIGHT :
-				dir == RIGHT ? LEFT :
-				dir == UP ? DOWN :
-				UP;
-			state_move(state, rdir);
-		}
-	}
+            rdir = dir == LEFT ? RIGHT
+                               : dir == RIGHT ? LEFT : dir == UP ? DOWN : UP;
+            state_move(state, rdir);
+        }
+    }
 
-	return false;
+    return false;
 }
 
 void
 solver_idastar(State init_state)
 {
-	elog("%s: f_limit -> ", __func__);
+    elog("%s: f_limit -> ", __func__);
     for (int f_limit = 1;; ++f_limit)
     {
-		elog(".");
+        elog(".");
 
         if (solver_flastar(init_state, f_limit, 0))
         {
@@ -65,8 +63,8 @@ solver_idastar(State init_state)
 void
 solver_astar(State init_state)
 {
-	(void) init_state;
-	/*
+    (void) init_state;
+    /*
     State    state;
     PQ       pq = pq_init(123);
     HTStatus ht_status;
@@ -128,7 +126,7 @@ solver_astar(State init_state)
 
     ht_fini(closed);
     pq_fini(pq);
-	*/
+    */
 }
 
 /*

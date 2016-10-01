@@ -15,7 +15,7 @@ typedef unsigned char state_panel;
 
 #define STATE_EMPTY 0
 #define STATE_WIDTH 4
-#define STATE_N STATE_WIDTH * STATE_WIDTH
+#define STATE_N STATE_WIDTH *STATE_WIDTH
 
 /*
  * v_list is corresponds to the state of the puzzle such as described below
