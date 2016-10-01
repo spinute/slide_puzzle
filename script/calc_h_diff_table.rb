@@ -1,9 +1,10 @@
 #table[who, where, dir] = h_value_diff
 
-DIR = ["RIGHT", "LEFT", "DOWN", "UP"]
+DIR = ["LEFT", "DOWN", "RIGHT", "UP"]
 WIDTH = 4
 
-print "{"
+puts "/* usage: h_diff[who * from * dir] */"
+print "h_diff_table[N*N*N_DIR]{"
 0.upto 15 do |i|
 	0.upto 15 do |from|
 		0.upto 3 do |dir|
@@ -18,9 +19,9 @@ print "{"
 			elsif DIR[dir] == "LEFT"
 				print "#{right_x < from_x ? 1 : -1}, "
 			elsif DIR[dir] == "DOWN"
-				print "#{right_y < from_y ? 1 : -1 }, "
+				print "#{right_y > from_y ? 1 : -1 }, "
 			elsif DIR[dir] == "UP"
-				print "#{right_y > from_y ? 1 : -1}, "
+				print "#{right_y < from_y ? 1 : -1}, "
 			end
 		end
 	end
