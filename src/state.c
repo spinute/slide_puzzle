@@ -8,16 +8,19 @@
 
 typedef unsigned char idx_t;
 /*
- *  [0,0] [1,0] [2,0]
- *  [0,1] [1,1] [2,1]
- *  [0,2] [1,2] [2,2]
+ *  [0,0] [1,0] [2,0] [3,0]
+ *  [0,1] [1,1] [2,1] [3,1]
+ *  [0,2] [1,2] [2,2] [3,2]
+ *  [0,3] [1,3] [2,3] [3,3]
  */
 
 struct state_tag
 {
-    int         depth;
+    int         depth; /* XXX: needed? */
     state_panel pos[STATE_WIDTH][STATE_WIDTH];
     idx_t       i, j; /* pos of empty */
+	Direction parent;
+	int h_value;
 };
 
 #define v(state, i, j) ((state)->pos[i][j])
@@ -26,6 +29,47 @@ struct state_tag
 #define dv(state) (v(state, state->i, state->j + 1))
 #define rv(state) (v(state, state->i + 1, state->j))
 #define uv(state) (v(state, state->i, state->j - 1))
+
+static state_panel from_x[STATE_WIDTH * STATE_WIDTH],
+    from_y[STATE_WIDTH * STATE_WIDTH];
+
+static int inline distance(int i, int j)
+{
+    return i > j ? i - j : j - i;
+}
+
+static void inline fill_from_xy(State from)
+{
+    for (idx_t x = 0; x < STATE_WIDTH; ++x)
+        for (idx_t y = 0; y < STATE_WIDTH; ++y)
+        {
+            from_x[v(from, x, y)] = x;
+            from_y[v(from, x, y)] = y;
+        }
+}
+
+static inline int
+heuristic_manhattan_distance(State from)
+{
+    int h_value = 0;
+
+    fill_from_xy(from);
+
+    for (idx_t i = 1; i < STATE_WIDTH * STATE_WIDTH; ++i)
+    {
+        h_value += distance(from_x[i], i%STATE_WIDTH);
+        h_value += distance(from_y[i], i/STATE_WIDTH);
+    }
+
+    return h_value;
+}
+
+
+bool
+state_is_goal(State state)
+{
+	return state->h_value == 0;
+}
 
 inline static State
 state_alloc(void)
@@ -39,46 +83,29 @@ state_free(State state)
     pfree(state);
 }
 
-#ifndef NDEBUG
-static void
-validate_distinct_elem(state_panel v_list[STATE_WIDTH * STATE_WIDTH])
-{
-    for (idx_t i = 0; i < STATE_WIDTH * STATE_WIDTH; ++i)
-        for (idx_t j = i + 1; j < STATE_WIDTH * STATE_WIDTH; ++j)
-            assert(v_list[i] != v_list[j]);
-}
-#endif
-
 State
 state_init(state_panel v_list[STATE_WIDTH * STATE_WIDTH], int depth)
 {
     State state = state_alloc();
     int   cnt   = 0;
-#ifndef NDEBUG
-    bool empty_found = false;
-
-    validate_distinct_elem(v_list);
-#endif
 
     assert(depth >= 0);
 
     state->depth = depth;
+	state->parent = -1;
+
     for (idx_t j = 0; j < STATE_WIDTH; ++j)
         for (idx_t i = 0; i < STATE_WIDTH; ++i)
         {
             if (v_list[cnt] == STATE_EMPTY)
             {
-                assert(!empty_found);
                 state->i = i;
                 state->j = j;
-#ifndef NDEBUG
-                empty_found = true;
-#endif
             }
             v(state, i, j) = v_list[cnt++];
         }
 
-    assert(empty_found);
+	state->h_value = heuristic_manhattan_distance(state);
 
     return state;
 }
@@ -129,31 +156,47 @@ state_movable(State state, Direction dir)
            (dir != UP || state_up_movable(state));
 }
 
+static inline int
+calc_h_diff(idx_t who, idx_t from_x, idx_t from_y, Direction rdir)
+{
+	idx_t right_x = who % STATE_WIDTH;
+	idx_t right_y = who / STATE_WIDTH;
+
+	switch (rdir)
+	{
+	case LEFT:
+		return right_x > from_x ? -1 : 1;
+	case RIGHT:
+		return right_x < from_x ? -1 : 1;
+	case UP:
+		return right_y > from_y ? -1 : 1;
+	case DOWN:
+		return right_y < from_y ? -1 : 1;
+	}
+}
+
 void
 state_move(State state, Direction dir)
 {
+	idx_t who;
     assert(state_movable(state, dir));
 
     switch (dir)
     {
     case LEFT:
-        ev(state) = lv(state);
-        lv(state) = STATE_EMPTY;
+        who = ev(state) = lv(state);
         state->i--;
         break;
     case DOWN:
-        ev(state) = dv(state);
-        dv(state) = STATE_EMPTY;
+        who = ev(state) = dv(state);
         state->j++;
         break;
     case RIGHT:
-        ev(state) = rv(state);
-        rv(state) = STATE_EMPTY;
+        who = ev(state) = rv(state);
         state->i++;
         break;
     case UP:
-        ev(state) = uv(state);
-        uv(state) = STATE_EMPTY;
+        who = ev(state) = uv(state);
         state->j--;
         break;
     default:
@@ -161,7 +204,8 @@ state_move(State state, Direction dir)
         assert(false);
     }
 
-    state->depth++;
+	state->h_value = state->h_value + calc_h_diff(who, state->i, state->j, dir);
+	state->parent = dir;
 }
 
 bool
@@ -178,11 +222,17 @@ state_pos_equal(State s1, State s2)
 size_t
 state_hash(State state)
 {
+	/* FIXME: for A* */
     size_t hash_value = 0;
     for (idx_t i = 0; i < STATE_WIDTH; ++i)
         for (idx_t j = 0; j < STATE_WIDTH; ++j)
             hash_value ^= (v(state, i, j) << ((i * 3 + j) << 2));
     return hash_value;
+}
+int
+state_get_hvalue(State state)
+{
+    return state->h_value;
 }
 
 int
@@ -194,13 +244,13 @@ state_get_depth(State state)
 void
 state_dump(State state)
 {
-    elog("%s: depth=%d, (i,j)=(%u,%u)\n", __func__, state->depth, state->i,
+    elog("%s: h_value=%d, (i,j)=(%u,%u)\n", __func__, state->h_value, state->i,
          state->j);
 
     for (idx_t j = 0; j < STATE_WIDTH; ++j)
     {
         for (idx_t i = 0; i < STATE_WIDTH; ++i)
-            elog("%u ", (unsigned int) v(state, i, j));
+			elog("%u ", i == state->i && j == state->j ? 0 : v(state, i, j));
         elog("\n");
     }
     elog("-----------\n");
@@ -210,6 +260,7 @@ state_dump(State state)
  * Heuristic functions
  */
 
+/*
 static state_panel from_x[STATE_WIDTH * STATE_WIDTH],
     from_y[STATE_WIDTH * STATE_WIDTH], to_x[STATE_WIDTH * STATE_WIDTH],
     to_y[STATE_WIDTH * STATE_WIDTH];
@@ -295,3 +346,4 @@ calc_h_value(Heuristic heuristic, State from, State to)
         exit(EXIT_FAILURE);
     }
 }
+*/

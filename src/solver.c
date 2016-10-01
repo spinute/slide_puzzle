@@ -5,93 +5,57 @@
 #include "./stack.h"
 #include "./utils.h"
 
-static State goal;
-
 /*
  * IDA* / f-value limited A* Search
  */
 bool
-solver_flastar(State init_state, State goal_state, Heuristic heuristic,
-               int f_limit)
+solver_flastar(State state, int f_limit, int depth)
 {
-    State    state;
-    PQ       pq = pq_init(123);
-    HTStatus ht_status;
-    int *    ht_value;
-    int      f_value;
-    HT       closed = ht_init(123);
-    bool     solved = false;
+	if (state_is_goal(state))
+	{
+		elog("\n");
+		state_dump(state);
+		return true;
+	}
 
-    pq_put(pq, state_copy(init_state),
-           calc_h_value(heuristic, init_state, goal_state));
+	for (int dir = 0; dir < N_DIR; ++dir)
+	{
+		if (state_movable(state, dir))
+		{
+			int rdir;
+			state_move(state, dir);
 
-    while ((state = pq_pop(pq)))
-    {
-        if (state_pos_equal(state, goal_state))
-        {
-            solved = true;
-            break;
-        }
+			if (depth + state_get_hvalue(state) <= f_limit &&
+				solver_flastar(state, f_limit, depth+1))
+			{
+				elog("%d ", dir);
+				return true;
+			}
 
-        ht_status = ht_insert(closed, state, &ht_value);
-        if (ht_status == HT_FAILED_FOUND && *ht_value < state_get_depth(state))
-        {
-            state_fini(state);
-            continue;
-        }
-        else
-            *ht_value = state_get_depth(state);
+			rdir = dir == LEFT ? RIGHT :
+				dir == RIGHT ? LEFT :
+				dir == UP ? DOWN :
+				UP;
+			state_move(state, rdir);
+		}
+	}
 
-        for (int dir = 0; dir < N_DIR; ++dir)
-        {
-            if (state_movable(state, dir))
-            {
-                State next_state = state_copy(state);
-                state_move(next_state, dir);
-
-                ht_status = ht_insert(closed, next_state, &ht_value);
-                f_value   = state_get_depth(next_state) +
-                          calc_h_value(heuristic, next_state, goal_state);
-                if (f_value > f_limit ||
-                    ((ht_status == HT_FAILED_FOUND && *ht_value < f_value)))
-                    state_fini(next_state);
-                else
-                {
-                    *ht_value = state_get_depth(next_state);
-                    pq_put(pq, next_state, f_value);
-                }
-            }
-        }
-
-        state_fini(state);
-    }
-
-    if (solved)
-    {
-        state_dump(state);
-        elog("%s: solved\n", __func__);
-    }
-    else
-        elog("%s: not solved\n", __func__);
-
-    ht_fini(closed);
-    pq_fini(pq);
-
-    return solved;
+	return false;
 }
 
 void
-solver_idastar(State init_state, State goal_state, Heuristic heuristic)
+solver_idastar(State init_state)
 {
+	elog("%s: f_limit -> ", __func__);
     for (int f_limit = 1;; ++f_limit)
     {
-        if (solver_flastar(init_state, goal_state, heuristic, f_limit))
+		elog(".");
+
+        if (solver_flastar(init_state, f_limit, 0))
         {
-            elog("%s: solved\n", __func__);
+            elog("\n%s: solved\n", __func__);
             break;
         }
-        else
-            elog("%s: not solved at the f_limit=%d\n", __func__, f_limit);
     }
 }
 
@@ -99,8 +63,10 @@ solver_idastar(State init_state, State goal_state, Heuristic heuristic)
  * A* Search
  */
 void
-solver_astar(State init_state, State goal_state, Heuristic heuristic)
+solver_astar(State init_state)
 {
+	(void) init_state;
+	/*
     State    state;
     PQ       pq = pq_init(123);
     HTStatus ht_status;
@@ -162,12 +128,14 @@ solver_astar(State init_state, State goal_state, Heuristic heuristic)
 
     ht_fini(closed);
     pq_fini(pq);
+	*/
 }
 
 /*
  * Iterative Deepring Depth First Search(IDDFS) & Depth Limited Search
  */
 
+/*
 bool
 solver_dls(State init_state, State goal_state, int depth_limit)
 {
@@ -253,11 +221,13 @@ solver_iddfs(State init_state, State goal_state)
             elog("%s: not solved at the depth=%d\n", __func__, depth);
     }
 }
+*/
 
 /*
  * BFS/DFS
  */
 
+/*
 void
 solver_dfs(State init_state, State goal_state)
 {
@@ -359,11 +329,13 @@ solver_bfs(State init_state, State goal_state)
     ht_fini(closed);
     queue_fini(q);
 }
+*/
 
 /*
  * BFS/DFS without closed list
  */
 
+/*
 static bool
 solver_recursive_dfs_without_closed_internal(State s)
 {
@@ -485,3 +457,4 @@ solver_bfs_without_closed(State init_state, State goal_state)
 
     queue_fini(q);
 }
+*/

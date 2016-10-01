@@ -13,7 +13,6 @@
 typedef struct option_tag
 {
     Solver    solver;
-    Heuristic heuristic;
     int       depth_limit;
     int       f_limit;
     char      ifname[BUFLEN];
@@ -23,7 +22,6 @@ static void
 OptionInit(MainOption opt)
 {
     opt->solver      = SolverNotSet;
-    opt->heuristic   = HeuristicNotSet;
     opt->depth_limit = 0;
     opt->f_limit     = 0;
     opt->ifname[0]   = '\0';
@@ -33,12 +31,7 @@ static void
 OptionValidate(MainOption opt)
 {
     assert(opt->solver != SolverNotSet);
-    assert(opt->solver == SolverIDAStar || opt->solver == SolverAStar ||
-           opt->solver == SolverDFS);
-
-    assert((opt->heuristic != HeuristicNotSet) ==
-           (opt->solver == SolverAStar || opt->solver == SolverIDAStar ||
-            opt->solver == SolverFLAStar));
+    assert(opt->solver == SolverIDAStar || opt->solver == SolverAStar);
 
     assert(opt->depth_limit >= 0);
     if (opt->depth_limit > 0)
@@ -52,18 +45,15 @@ OptionValidate(MainOption opt)
 }
 
 static void
-solver_main(MainOption opt, State init_state, State goal_state)
+solver_main(MainOption opt, State init_state)
 {
     switch (opt->solver)
     {
     case SolverAStar:
-        solver_astar(init_state, goal_state, opt->heuristic);
+        solver_astar(init_state);
         break;
     case SolverIDAStar:
-        solver_idastar(init_state, goal_state, opt->heuristic);
-        break;
-    case SolverDFS:
-        solver_dfs(init_state, goal_state);
+        solver_idastar(init_state);
         break;
     default:
         exit_with_log("%s: unrecognized solver\n", __func__);
@@ -74,9 +64,8 @@ static void
 show_help(void)
 {
     elog("-h              : show help\n");
-    elog("-s <int>        : astar(%d), idastar(%d), dfs(%d)\n", SolverAStar,
-         SolverIDAStar, SolverDFS);
-    elog("-m <int>        : manhattan(%d)\n", HeuristicManhattanDistance);
+    elog("-s <int>        : astar(%d), idastar(%d)", SolverAStar,
+         SolverIDAStar);
     elog("-f <int>        : fvalue limit (LFA*)\n");
     elog("-d <int>        : depth\n");
     elog("-i <filename>   : input file\n");
@@ -110,8 +99,8 @@ load_state_from_file(const char *fname, state_panel *s)
 int
 main(int argc, char *argv[])
 {
-    state_panel s_list[STATE_N], g_list[STATE_N] = {1, 2, 3, 4, 5, 6, 7, 8, 0};
-    State       s, g;
+    state_panel s_list[STATE_N];
+    State       s;
     struct option_tag opt;
     int               ch;
 
@@ -123,9 +112,6 @@ main(int argc, char *argv[])
         {
         case 's':
             opt.solver = pop_int_from_str(optarg, NULL);
-            break;
-        case 'm':
-            opt.heuristic = pop_int_from_str(optarg, NULL);
             break;
         case 'f':
             opt.f_limit = pop_int_from_str(optarg, NULL);
@@ -151,12 +137,10 @@ main(int argc, char *argv[])
     load_state_from_file(opt.ifname, s_list);
 
     s = state_init(s_list, 0);
-    g = state_init(g_list, 0);
 
-    solver_main(&opt, s, g);
+    solver_main(&opt, s);
 
     state_fini(s);
-    state_fini(g);
 
     return 0;
 }
