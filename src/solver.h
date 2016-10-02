@@ -22,8 +22,6 @@ typedef enum {
 } Solver;
 
 void solver_idastar(State init_state);
-bool solver_flastar(State init_state, int f_limit, int depth);
-
 void solver_astar(State init_state);
 
 /* obsolete */

@@ -8,8 +8,8 @@
 /*
  * IDA* / f-value limited A* Search
  */
-bool
-solver_flastar(State state, int f_limit, int depth)
+static bool
+solver_flastar(State state, int f_limit, int depth, Direction parent)
 {
     if (state_is_goal(state))
     {
@@ -20,20 +20,19 @@ solver_flastar(State state, int f_limit, int depth)
 
     for (int dir = 0; dir < N_DIR; ++dir)
     {
-        if (state_movable(state, dir))
+		int rdir = dir == LEFT ? RIGHT
+                               : dir == RIGHT ? LEFT : dir == UP ? DOWN : UP;
+        if (parent != rdir && state_movable(state, dir))
         {
-            int rdir;
             state_move(state, dir);
 
             if (depth + state_get_hvalue(state) <= f_limit &&
-                solver_flastar(state, f_limit, depth + 1))
+                solver_flastar(state, f_limit, depth + 1, dir))
             {
                 elog("%d ", dir);
                 return true;
             }
 
-            rdir = dir == LEFT ? RIGHT
-                               : dir == RIGHT ? LEFT : dir == UP ? DOWN : UP;
             state_move(state, rdir);
         }
     }
@@ -49,7 +48,7 @@ solver_idastar(State init_state)
     {
         elog(".");
 
-        if (solver_flastar(init_state, f_limit, 0))
+        if (solver_flastar(init_state, f_limit, 0, -1))
         {
             elog("\n%s: solved\n", __func__);
             break;
@@ -63,8 +62,8 @@ solver_idastar(State init_state)
 void
 solver_astar(State init_state)
 {
-    (void) init_state;
-    /*
+	(void) init_state;
+	/*
     State    state;
     PQ       pq = pq_init(123);
     HTStatus ht_status;
@@ -72,12 +71,11 @@ solver_astar(State init_state)
     HT       closed = ht_init(123);
     bool     solved = false;
 
-    pq_put(pq, state_copy(init_state),
-           calc_h_value(heuristic, init_state, goal_state));
+    pq_put(pq, state_copy(init_state), state_get_hvalue(init_state), 0);
 
     while ((state = pq_pop(pq)))
     {
-        if (state_pos_equal(state, goal_state))
+        if (state_is_goal(state))
         {
             solved = true;
             break;
@@ -126,7 +124,7 @@ solver_astar(State init_state)
 
     ht_fini(closed);
     pq_fini(pq);
-    */
+	*/
 }
 
 /*
