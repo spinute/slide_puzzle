@@ -3,6 +3,7 @@
 #include "./pq.h"
 #include "./queue.h"
 #include "./stack.h"
+#include "./state.h"
 #include "./utils.h"
 
 /*
@@ -20,9 +21,7 @@ solver_flastar(State state, int f_limit, int depth, Direction parent)
 
     for (int dir = 0; dir < N_DIR; ++dir)
     {
-		int rdir = dir == LEFT ? RIGHT
-                               : dir == RIGHT ? LEFT : dir == UP ? DOWN : UP;
-        if (parent != rdir && state_movable(state, dir))
+        if (parent != dir_reverse(dir) && state_movable(state, dir))
         {
             state_move(state, dir);
 
@@ -33,7 +32,7 @@ solver_flastar(State state, int f_limit, int depth, Direction parent)
                 return true;
             }
 
-            state_move(state, rdir);
+            state_move(state, dir_reverse(dir));
         }
     }
 

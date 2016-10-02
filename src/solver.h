@@ -18,6 +18,8 @@ typedef enum {
     SolverDFSWithoutClosed,
     SolverBFSWithoutClosed,
 
+	SolverIDAMini, /* src/idas */
+
     SolverNotSet,
 } Solver;
 

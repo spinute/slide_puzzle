@@ -1,6 +1,7 @@
 #include "./solver.h"
 #include "./state.h"
 #include "./utils.h"
+#include "./idas.h"
 
 #include <assert.h>
 #include <stdbool.h>
@@ -31,7 +32,8 @@ static void
 OptionValidate(MainOption opt)
 {
     assert(opt->solver != SolverNotSet);
-    assert(opt->solver == SolverIDAStar || opt->solver == SolverAStar);
+    assert(opt->solver == SolverIDAStar || opt->solver == SolverAStar ||
+			opt->solver == SolverIDAMini);
 
     assert(opt->depth_limit >= 0);
     if (opt->depth_limit > 0)
@@ -64,8 +66,8 @@ static void
 show_help(void)
 {
     elog("-h              : show help\n");
-    elog("-s <int>        : astar(%d), idastar(%d)", SolverAStar,
-         SolverIDAStar);
+    elog("-s <int>        : astar(%d), idastar(%d), miniida*(%d)",
+			SolverAStar, SolverIDAStar, SolverIDAMini);
     elog("-f <int>        : fvalue limit (LFA*)\n");
     elog("-d <int>        : depth\n");
     elog("-i <filename>   : input file\n");
@@ -136,11 +138,14 @@ main(int argc, char *argv[])
 
     load_state_from_file(opt.ifname, s_list);
 
-    s = state_init(s_list, 0);
-
-    solver_main(&opt, s);
-
-    state_fini(s);
+	if (opt.solver == SolverIDAMini)
+		idas_main(s_list);
+	else
+	{
+		s = state_init(s_list, 0);
+		solver_main(&opt, s);
+		state_fini(s);
+	}
 
     return 0;
 }
