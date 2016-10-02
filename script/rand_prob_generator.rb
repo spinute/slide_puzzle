@@ -1,6 +1,11 @@
+# goal is assumed to be
+# 1 2 3 4
+# 5 6 7 8
+# 9 10 11 12
+# 13 14 15 0
+
 $N = 4
 $DIR = [:right, :left, :up, :down]
-
 
 def problem_dump(ar)
 	ar.each{|e| print "#{e} "}
@@ -30,14 +35,13 @@ def rand_dir
 	$DIR.sample
 end
 
-ar = (0..15).to_a
-pos = 0
+ar = (1..15).to_a << 0
+pos = 15
 
 if ARGV[0].nil?
 	raise "argnum is required"
 end
 st = ARGV[0].to_i
-puts "#{st} step random walk"
 
 st.times do
 	begin

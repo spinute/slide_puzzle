@@ -14,6 +14,11 @@ typedef unsigned char idx_t;
  *  [0,3] [1,3] [2,3] [3,3]
  */
 
+/*
+ * goal state is
+ * [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]
+ */
+
 struct state_tag
 {
     int         depth; /* XXX: needed? */
@@ -57,8 +62,8 @@ heuristic_manhattan_distance(State from)
 
     for (idx_t i = 1; i < STATE_WIDTH * STATE_WIDTH; ++i)
     {
-        h_value += distance(from_x[i], i % STATE_WIDTH);
-        h_value += distance(from_y[i], i / STATE_WIDTH);
+        h_value += distance(from_x[i], (i - 1) % STATE_WIDTH);
+        h_value += distance(from_y[i], (i - 1) / STATE_WIDTH);
     }
 
     return h_value;
@@ -105,6 +110,7 @@ state_init(state_panel v_list[STATE_WIDTH * STATE_WIDTH], int depth)
         }
 
     state->h_value = heuristic_manhattan_distance(state);
+    state_dump(state);
 
     return state;
 }
@@ -158,8 +164,8 @@ state_movable(State state, Direction dir)
 static inline int
 calc_h_diff(idx_t who, idx_t from_x, idx_t from_y, Direction rdir)
 {
-    idx_t right_x = who % STATE_WIDTH;
-    idx_t right_y = who / STATE_WIDTH;
+    idx_t right_x = (who - 1) % STATE_WIDTH;
+    idx_t right_y = (who - 1) / STATE_WIDTH;
 
     switch (rdir)
     {
