@@ -4,7 +4,6 @@ bin
 *.swp
 *~
 small_first_instances
-script/run.rb
 benchmarks/korf
 tags
 cscope.out
