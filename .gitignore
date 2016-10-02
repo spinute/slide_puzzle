@@ -5,5 +5,6 @@ bin
 *~
 small_first_instances
 benchmarks/korf
+benchmarks/sample
 tags
 cscope.out
