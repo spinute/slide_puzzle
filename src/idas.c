@@ -9,11 +9,96 @@ typedef unsigned char idx_t;
 #define N_DIR 4
 #define dir_reverse(dir) (3-(dir))
 typedef enum direction_tag {
+	DIR_NIL = -30,
+
     UP  = 0,
     RIGHT  = 1,
     LEFT = 2,
     DOWN    = 3,
 } Direction;
+
+/* stack for dir (expand recursion) */
+#include "utils.h"
+#include <assert.h>
+#include <stdint.h>
+
+static struct dir_stack_tag
+{
+    size_t capa, i;
+    Direction *buf;
+} stack;
+
+static inline size_t
+calc_init_capa(size_t hint)
+{
+    size_t capa;
+    assert(hint > 0);
+    for (capa = 1;; capa <<= 1)
+        if (capa >= hint)
+            break;
+    return capa;
+}
+
+static inline size_t
+calc_larger_capa(size_t old_size)
+{
+    return old_size << 1;
+}
+
+static inline void
+stack_init(size_t init_capa_hint)
+{
+    size_t capa  = calc_init_capa(init_capa_hint);
+
+    assert(capa <= SIZE_MAX / sizeof(Direction));
+
+    stack.buf  = palloc(sizeof(Direction) * capa);
+    stack.capa = capa;
+    stack.i    = 0;
+}
+
+static inline void
+stack_fini(void)
+{
+	pfree(stack.buf);
+}
+
+static inline void
+stack_put(Direction dir)
+{
+    assert(stack.i < SIZE_MAX);
+    stack.buf[stack.i++] = dir;
+
+    if (stack.i >= stack.capa)
+    {
+        size_t new_capa = calc_larger_capa(stack.capa);
+        assert(new_capa <= SIZE_MAX / sizeof(Direction));
+        stack.buf  = repalloc(stack.buf, sizeof(Direction) * new_capa);
+        stack.capa = new_capa;
+    }
+}
+
+static inline Direction
+stack_pop(void)
+{
+    return stack.i == 0 ? DIR_NIL : stack.buf[--stack.i];
+}
+
+static inline Direction
+stack_top(void)
+{
+    return stack.i == 0 ? DIR_NIL : stack.buf[stack.i-1];
+}
+
+static inline void
+stack_dump(void)
+{
+    elog("%s: capa=%zu, i=%zu\n", __func__, stack.capa, stack.i);
+}
+
+/*
+ * state implementation
+ */
 
 #define STATE_EMPTY 0
 #define STATE_WIDTH 4
@@ -29,6 +114,8 @@ typedef struct state_tag
     idx_t       i, j; /* pos of empty */
     int         h_value;
 } *State;
+
+/* TODO: state globalization is effective? */
 
 #define v(state, i, j) ((state)->pos[i][j])
 #define ev(state) (v(state, state->i, state->j))
@@ -160,7 +247,6 @@ state_move(State state, Direction dir)
 		exit(EXIT_FAILURE);
     }
 
-	/* calc_h_diff may be 2 times slow */
     state->h_value = state->h_value + h_diff(who, state->i, state->j, dir_reverse(dir));
 }
 
@@ -190,33 +276,42 @@ state_dump(State state)
  */
 
 static bool
-idas_internal(State state, int f_limit, int depth, Direction parent)
+idas_internal(State state, int f_limit)
 {
-    if (state_is_goal(state))
-    {
-        elog("\n");
-        state_dump(state);
-        return true;
-    }
+	Direction dir = 0;
 
-    for (int dir = 0; dir < N_DIR; ++dir)
-    {
-        if (parent != dir_reverse(dir) && state_movable(state, dir))
-        {
-            state_move(state, dir);
+	for (;;)
+	{
+		if (state_is_goal(state))
+		{
+			elog("\n");
+			state_dump(state);
+			stack_dump(); /* plan */
+			return true;
+		}
 
-            if (depth + state_get_hvalue(state) <= f_limit &&
-                idas_internal(state, f_limit, depth + 1, dir))
-            {
-                elog("%d ", dir);
-                return true;
-            }
+		if (stack_top() != dir_reverse(dir) && state_movable(state, dir))
+		{
+			state_move(state, dir);
 
-            state_move(state, dir_reverse(dir));
-        }
-    }
+			if (stack.i + state_get_hvalue(state) > (size_t) f_limit)
+				state_move(state, dir_reverse(dir));
+			else
+			{
+				stack_put(dir);
+				dir = 0;
+				continue;
+			}
+		}
 
-    return false;
+		while (++dir == N_DIR)
+		{
+			dir = stack_pop();
+			if (dir == DIR_NIL)
+				return false;
+			state_move(state, dir_reverse(dir));
+		}
+	}
 }
 
 void
@@ -224,15 +319,19 @@ idas_main(unsigned char input[])
 {
 	struct state_tag init_state;
 	state_init(&init_state, input);
+	stack_init(1000);
+
     elog("%s: f_limit -> ", __func__);
     for (int f_limit = 1;; ++f_limit)
     {
         elog(".");
 
-        if (idas_internal(&init_state, f_limit, 0, -1))
+        if (idas_internal(&init_state, f_limit))
         {
             elog("\n%s: solved\n", __func__);
             break;
         }
     }
+
+	stack_fini();
 }
