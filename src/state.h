@@ -4,13 +4,13 @@
 #include <stddef.h>
 
 #define N_DIR 4
-#define dir_reverse(dir) (3-(dir))
+#define dir_reverse(dir) (3 - (dir))
 typedef enum direction_tag {
-	/* best order for korf's 100 problems */
-    UP  = 0,
-    RIGHT  = 1,
-    LEFT = 2,
-    DOWN    = 3,
+    /* best order for korf's 100 problems */
+    UP    = 0,
+    RIGHT = 1,
+    LEFT  = 2,
+    DOWN  = 3,
 } Direction;
 
 typedef unsigned char state_panel;

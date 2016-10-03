@@ -61,8 +61,8 @@ solver_idastar(State init_state)
 void
 solver_astar(State init_state)
 {
-	(void) init_state;
-	/*
+    (void) init_state;
+    /*
     State    state;
     PQ       pq = pq_init(123);
     HTStatus ht_status;
@@ -123,7 +123,7 @@ solver_astar(State init_state)
 
     ht_fini(closed);
     pq_fini(pq);
-	*/
+    */
 }
 
 /*
