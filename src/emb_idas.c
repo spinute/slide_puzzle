@@ -319,6 +319,7 @@ idas_main(unsigned char input[])
 {
 	struct state_tag init_state;
 	state_init(&init_state, input);
+
 	stack_init(1000);
 
     elog("%s: f_limit -> ", __func__);

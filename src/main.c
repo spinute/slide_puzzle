@@ -1,7 +1,7 @@
 #include "./solver.h"
 #include "./state.h"
 #include "./utils.h"
-#include "./idas.h"
+#include "./emb_idas.h"
 
 #include <assert.h>
 #include <stdbool.h>
