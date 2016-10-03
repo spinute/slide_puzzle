@@ -32,7 +32,7 @@ TEST(pq, initialization)
 
 TEST(pq, put)
 {
-    pq_put(q, s, calc_h_value(HeuristicManhattanDistance, s, g));
+    pq_put(q, s, 12);
 }
 TEST(pq, empty_pop_should_be_null)
 {
@@ -46,7 +46,7 @@ TEST(pq, pop_is_put)
 {
     State poped;
 
-    pq_put(q, s, calc_h_value(HeuristicManhattanDistance, s, g));
+    pq_put(q, s, 567);
     poped = pq_pop(q);
     state_pos_equal(s, poped);
 

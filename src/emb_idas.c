@@ -165,7 +165,7 @@ state_is_goal(State state)
 }
 
 static void
-state_init(State state, unsigned char v_list[STATE_WIDTH * STATE_WIDTH])
+state_init(State state, const unsigned char v_list[STATE_WIDTH * STATE_WIDTH])
 {
     int cnt = 0;
 
@@ -215,7 +215,7 @@ state_movable(State state, Direction dir)
 
 #define h_diff(who, from_i, from_j, dir)                                       \
     (h_diff_table[((who) << 6) + ((from_j) << 4) + ((from_i) << 2) + (dir)])
-static int h_diff_table[STATE_N * STATE_N * N_DIR] = {
+const static int h_diff_table[STATE_N * STATE_N * N_DIR] = {
     1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,
     1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,
     -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1,

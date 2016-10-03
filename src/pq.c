@@ -7,9 +7,16 @@
 typedef struct pq_entry_tag
 {
     State state;
-    int   p;
+    int   f, g;
 } PQEntryData;
 typedef PQEntryData *PQEntry;
+
+/* tiebreaking is done comparing g value */
+static inline bool
+pq_entry_higher_priority(PQEntry e1, PQEntry e2)
+{
+    return e1->f < e2->f || (e1->f == e2->f && e1->g >= e2->g);
+}
 
 /*
  * NOTE:
@@ -103,7 +110,7 @@ heapify_up(PQ pq)
     {
         size_t ui = pq_up(i);
         assert(i > 0);
-        if (pq->array[i].p >= pq->array[ui].p)
+        if (!pq_entry_higher_priority(&pq->array[i], &pq->array[ui]))
             break;
 
         pq_swap_entry(pq, i, ui);
@@ -112,13 +119,14 @@ heapify_up(PQ pq)
 }
 
 void
-pq_put(PQ pq, State state, int priority)
+pq_put(PQ pq, State state, int f, int g)
 {
     if (pq_is_full(pq))
         pq_extend(pq);
 
     pq->array[pq->n_elems].state = state_copy(state);
-    pq->array[pq->n_elems].p     = priority;
+    pq->array[pq->n_elems].f     = f; /* this may be abundant */
+    pq->array[pq->n_elems].g     = g;
     heapify_up(pq);
     ++pq->n_elems;
 }
@@ -137,29 +145,29 @@ heapify_down(PQ pq)
         ri = li + 1;
         if (ri >= sentinel)
         {
-            if (pq->array[i].p > pq->array[li].p)
+            if (pq_entry_higher_priority(&pq->array[li], &pq->array[i]))
                 pq_swap_entry(pq, i, li);
             /* Reached the bottom */
             break;
         }
 
-        /* NOTE: If ri == li, it may be good to go right
-         * since the filling order is from left */
-        if (pq->array[ri].p <= pq->array[li].p)
+        /* NOTE: If p(ri) == p(li), it may be good to go right
+         * since the filling order is left-first */
+        if (pq_entry_higher_priority(&pq->array[li], &pq->array[ri]))
         {
-            if (pq->array[i].p <= pq->array[ri].p)
-                break;
-
-            pq_swap_entry(pq, i, ri);
-            i = ri;
-        }
-        else
-        {
-            if (pq->array[i].p <= pq->array[li].p)
+            if (!pq_entry_higher_priority(&pq->array[i], &pq->array[li]))
                 break;
 
             pq_swap_entry(pq, i, li);
             i = li;
+        }
+        else
+        {
+            if (!pq_entry_higher_priority(&pq->array[i], &pq->array[ri]))
+                break;
+
+            pq_swap_entry(pq, i, ri);
+            i = ri;
         }
     }
 }
@@ -192,7 +200,8 @@ pq_dump(PQ pq)
             elog("\n");
             cr_required = (cr_required << 1) + 1;
         }
-        elog("%d ", pq->array[i].p);
+        elog("%d,", pq->array[i].f);
+        elog("%d ", pq->array[i].g);
     }
     elog("\n");
 }
