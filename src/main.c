@@ -66,8 +66,8 @@ static void
 show_help(void)
 {
     elog("-h              : show help\n");
-    elog("-s <int>        : astar(%d), idastar(%d), miniida*(%d)", SolverAStar,
-         SolverIDAStar, SolverIDAMini);
+    elog("-s <int>        : astar(%d), idastar(%d), miniida*(%d)\n",
+         SolverAStar, SolverIDAStar, SolverIDAMini);
     elog("-f <int>        : fvalue limit (LFA*)\n");
     elog("-d <int>        : depth\n");
     elog("-i <filename>   : input file\n");
@@ -108,7 +108,7 @@ main(int argc, char *argv[])
 
     OptionInit(&opt);
 
-    while ((ch = getopt(argc, argv, "h:m:s:f:d:i:")) != -1)
+    while ((ch = getopt(argc, argv, "hm:s:f:d:i:")) != -1)
     {
         switch (ch)
         {
@@ -127,7 +127,7 @@ main(int argc, char *argv[])
 
         case 'h':
             show_help();
-            exit_with_log("");
+            exit_with_log(" ");
         default:
             show_help();
             exit_with_log("%s: unknown option %c specified.\n", __func__, ch);

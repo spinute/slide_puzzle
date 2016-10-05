@@ -1,8 +1,8 @@
 require 'rake/clean'
 require 'pathname'
 
-CC = "clang"
-OPT = "-O2 -Wall -Wextra -m64 -g"
+CC = "gcc"
+OPT = "-O2 -Wall -std=gnu99 -Wextra -m64 -g"
 CFLAGS = ENV['CFLAGS']
 
 TEST = "src/test"
