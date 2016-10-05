@@ -221,7 +221,7 @@ state_movable(State state, Direction dir)
 
 #define h_diff(who, from_i, from_j, dir)                                       \
     (h_diff_table[((who) << 6) + ((from_j) << 4) + ((from_i) << 2) + (dir)])
-const static int h_diff_table[STATE_N * STATE_N * N_DIR] = {
+static const int h_diff_table[STATE_N * STATE_N * N_DIR] = {
     1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,
     1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,
     -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1,
