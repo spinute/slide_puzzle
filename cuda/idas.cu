@@ -1,8 +1,9 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdarg.h>
 
-#define elog(...) fprintf(stderr, __VA_ARGS__)
+#define elog(...) printf(stderr, __VA_ARGS__)
 
 typedef unsigned char idx_t;
 
@@ -367,8 +368,8 @@ idas_internal(State state, int f_limit)
     }
 }
 
-void
-idas_main(unsigned char input[])
+__global__ void
+idas_kernel(unsigned char *input)
 {
     struct state_tag init_state;
     state_init(&init_state, input);
@@ -388,4 +389,64 @@ idas_main(unsigned char input[])
     }
 
     stack_fini();
+}
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdarg.h>
+
+#define MAX_LINE_LEN 100
+static void
+load_state_from_file(const char *fname, state_panel *s)
+{
+    FILE *fp;
+    char  str[MAX_LINE_LEN];
+    char *str_ptr = str, *end_ptr;
+
+    fp = fopen(fname, "r");
+    if (!fp)
+	{
+        printf("%s: %s cannot be opened\n", __func__, fname);
+		exit(EXIT_FAILURE);
+	}
+
+    if (!fgets(str, MAX_LINE_LEN, fp))
+	{
+        printf("%s: fgets failed\n", __func__);
+		exit(EXIT_FAILURE);
+	}
+
+    for (int i = 0; i < STATE_N; ++i)
+    {
+        s[i]    = pop_int_from_str(str_ptr, &end_ptr);
+        str_ptr = end_ptr;
+    }
+
+    fclose(fp);
+}
+#undef MAX_LINE_LEN
+
+int
+main(int argc, char *argv[])
+{
+    unsigned char       s_list[STATE_N];
+    unsigned char       *s_list_device;
+
+    OptionInit(&opt);
+
+	if (argc < 2)
+	{
+		show_help();
+		exit(EXIT_FAILURE);
+	}
+
+    load_state_from_file(argv[1], s_list);
+	cudaMalloc((** void) &s_list_device, sizeof(unsigned char) * STATE_N);
+	cudaMemcpy(s_list_device, s_list, sizeof(unsigned char) * STATE_N, cudaMemoryHostToDevice);
+
+	idas_kernel<<<1,1>>>(s_list_device);
+
+	cudaFree(s_list_device);
+
+    return 0;
 }
