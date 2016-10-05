@@ -38,12 +38,12 @@ struct state_tag
 static state_panel from_x[STATE_WIDTH * STATE_WIDTH],
     from_y[STATE_WIDTH * STATE_WIDTH];
 
-static int inline distance(int i, int j)
+static inline int distance(int i, int j)
 {
     return i > j ? i - j : j - i;
 }
 
-static void inline fill_from_xy(State from)
+static inline void fill_from_xy(State from)
 {
     for (idx_t x = 0; x < STATE_WIDTH; ++x)
         for (idx_t y = 0; y < STATE_WIDTH; ++y)
@@ -75,13 +75,13 @@ state_is_goal(State state)
     return state->h_value == 0;
 }
 
-inline static State
+static inline State
 state_alloc(void)
 {
     return palloc(sizeof(struct state_tag));
 }
 
-inline static void
+static inline void
 state_free(State state)
 {
     pfree(state);
@@ -131,22 +131,22 @@ state_copy(State src)
     return dst;
 }
 
-inline static bool
+static inline bool
 state_left_movable(State state)
 {
     return state->i != 0;
 }
-inline static bool
+static inline bool
 state_down_movable(State state)
 {
     return state->j != STATE_WIDTH - 1;
 }
-inline static bool
+static inline bool
 state_right_movable(State state)
 {
     return state->i != STATE_WIDTH - 1;
 }
-inline static bool
+static inline bool
 state_up_movable(State state)
 {
     return state->j != 0;

@@ -21,7 +21,7 @@ solver_flastar(State state, int f_limit, int depth, Direction parent)
 
     for (int dir = 0; dir < N_DIR; ++dir)
     {
-        if (parent != dir_reverse(dir) && state_movable(state, dir))
+        if (parent != (Direction) dir_reverse(dir) && state_movable(state, dir))
         {
             state_move(state, dir);
 
