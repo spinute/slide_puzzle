@@ -127,12 +127,14 @@ typedef struct state_tag
 static unsigned char from_x[STATE_WIDTH * STATE_WIDTH],
     from_y[STATE_WIDTH * STATE_WIDTH];
 
-static int inline distance(int i, int j)
+static inline int
+distance(int i, int j)
 {
     return i > j ? i - j : j - i;
 }
 
-static void inline fill_from_xy(State from)
+static inline void
+fill_from_xy(State from)
 {
     for (idx_t x = 0; x < STATE_WIDTH; ++x)
         for (idx_t y = 0; y < STATE_WIDTH; ++y)
@@ -167,7 +169,9 @@ state_is_goal(State state)
 static void
 state_init(State state, const unsigned char v_list[STATE_WIDTH * STATE_WIDTH])
 {
-    int cnt = 0;
+    int                 cnt           = 0;
+    const unsigned char uninitialized = 111;
+    state->i = state->j = uninitialized;
 
     for (idx_t j = 0; j < STATE_WIDTH; ++j)
         for (idx_t i = 0; i < STATE_WIDTH; ++i)
@@ -180,25 +184,27 @@ state_init(State state, const unsigned char v_list[STATE_WIDTH * STATE_WIDTH])
             v(state, i, j) = v_list[cnt++];
         }
 
+    assert(state->i != uninitialized && state->j != uninitialized);
+
     state->h_value = heuristic_manhattan_distance(state);
 }
 
-inline static bool
+static inline bool
 state_left_movable(State state)
 {
     return state->i != 0;
 }
-inline static bool
+static inline bool
 state_down_movable(State state)
 {
     return state->j != STATE_WIDTH - 1;
 }
-inline static bool
+static inline bool
 state_right_movable(State state)
 {
     return state->i != STATE_WIDTH - 1;
 }
-inline static bool
+static inline bool
 state_up_movable(State state)
 {
     return state->j != 0;
