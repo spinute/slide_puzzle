@@ -3,12 +3,12 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
-#define elog(...) printf(stderr, __VA_ARGS__)
+#define elog(...) printf(__VA_ARGS__)
 
 typedef unsigned char idx_t;
 
 #define N_DIR 4
-#define dir_reverse(dir) (3 - (dir))
+#define dir_reverse(dir) ((Direction) (3 - (dir)))
 typedef enum direction_tag {
     DIR_NIL = -30,
 
@@ -17,19 +17,19 @@ typedef enum direction_tag {
     LEFT  = 2,
     DOWN  = 3,
 } Direction;
+#define FIRST_DIR UP
 
 /* stack for dir (expand recursion) */
-#include "utils.h"
 #include <assert.h>
 #include <stdint.h>
 
-static struct dir_stack_tag
+__device__ static struct dir_stack_tag
 {
     size_t     capa, i;
-    Direction *buf;
+    Direction  buf[1000]; /* XXX: temporal implementation */
 } stack;
 
-static inline size_t
+__device__ static inline size_t
 calc_init_capa(size_t hint)
 {
     size_t capa;
@@ -40,31 +40,30 @@ calc_init_capa(size_t hint)
     return capa;
 }
 
-static inline size_t
+__device__ static inline size_t
 calc_larger_capa(size_t old_size)
 {
     return old_size << 1;
 }
 
-static inline void
+__device__ static inline void
 stack_init(size_t init_capa_hint)
 {
     size_t capa = calc_init_capa(init_capa_hint);
 
     assert(capa <= SIZE_MAX / sizeof(Direction));
 
-    stack.buf  = palloc(sizeof(Direction) * capa);
     stack.capa = capa;
     stack.i    = 0;
 }
 
-static inline void
+__device__ static inline void
 stack_fini(void)
 {
-    pfree(stack.buf);
+    //pfree(stack.buf);
 }
 
-static inline void
+__device__ static inline void
 stack_put(Direction dir)
 {
     assert(stack.i < SIZE_MAX);
@@ -72,26 +71,28 @@ stack_put(Direction dir)
 
     if (stack.i >= stack.capa)
     {
+		    printf("stack afureta\n");
+		    assert(false);
         size_t new_capa = calc_larger_capa(stack.capa);
         assert(new_capa <= SIZE_MAX / sizeof(Direction));
-        stack.buf  = repalloc(stack.buf, sizeof(Direction) * new_capa);
+        //stack.buf  = repalloc(stack.buf, sizeof(Direction) * new_capa);
         stack.capa = new_capa;
     }
 }
 
-static inline Direction
+__device__ static inline Direction
 stack_pop(void)
 {
     return stack.i == 0 ? DIR_NIL : stack.buf[--stack.i];
 }
 
-static inline Direction
+__device__ static inline Direction
 stack_top(void)
 {
-    return stack.i == 0 ? DIR_NIL : stack.buf[stack.i - 1];
+	return stack.i == 0 ? DIR_NIL : stack.buf[stack.i - 1];
 }
 
-static inline void
+__device__ static inline void
 stack_dump(void)
 {
     elog("%s: capa=%zu, i=%zu\n", __func__, stack.capa, stack.i);
@@ -125,15 +126,15 @@ typedef struct state_tag
 #define rv(state) (v(state, state->i + 1, state->j))
 #define uv(state) (v(state, state->i, state->j - 1))
 
-static unsigned char from_x[STATE_WIDTH * STATE_WIDTH],
+__device__ static unsigned char from_x[STATE_WIDTH * STATE_WIDTH],
     from_y[STATE_WIDTH * STATE_WIDTH];
 
-static int inline distance(int i, int j)
+__device__ static int inline distance(int i, int j)
 {
     return i > j ? i - j : j - i;
 }
 
-static void inline fill_from_xy(State from)
+__device__ static void inline fill_from_xy(State from)
 {
     for (idx_t x = 0; x < STATE_WIDTH; ++x)
         for (idx_t y = 0; y < STATE_WIDTH; ++y)
@@ -143,7 +144,7 @@ static void inline fill_from_xy(State from)
         }
 }
 
-static inline int
+__device__ static inline int
 heuristic_manhattan_distance(State from)
 {
     int h_value = 0;
@@ -159,13 +160,13 @@ heuristic_manhattan_distance(State from)
     return h_value;
 }
 
-static inline bool
+__device__ static inline bool
 state_is_goal(State state)
 {
     return state->h_value == 0;
 }
 
-static void
+__device__ static void
 state_init(State state, const unsigned char v_list[STATE_WIDTH * STATE_WIDTH])
 {
     int cnt = 0;
@@ -184,28 +185,28 @@ state_init(State state, const unsigned char v_list[STATE_WIDTH * STATE_WIDTH])
     state->h_value = heuristic_manhattan_distance(state);
 }
 
-inline static bool
+__device__ inline static bool
 state_left_movable(State state)
 {
     return state->i != 0;
 }
-inline static bool
+__device__ inline static bool
 state_down_movable(State state)
 {
     return state->j != STATE_WIDTH - 1;
 }
-inline static bool
+__device__ inline static bool
 state_right_movable(State state)
 {
     return state->i != STATE_WIDTH - 1;
 }
-inline static bool
+__device__ inline static bool
 state_up_movable(State state)
 {
     return state->j != 0;
 }
 
-static inline bool
+__device__ static inline bool
 state_movable(State state, Direction dir)
 {
     return (dir != LEFT || state_left_movable(state)) &&
@@ -216,7 +217,7 @@ state_movable(State state, Direction dir)
 
 #define h_diff(who, from_i, from_j, dir)                                       \
     (h_diff_table[((who) << 6) + ((from_j) << 4) + ((from_i) << 2) + (dir)])
-const static int h_diff_table[STATE_N * STATE_N * N_DIR] = {
+__constant__ const static int h_diff_table[STATE_N * STATE_N * N_DIR] = {
     1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,
     1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,
     -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1,
@@ -272,7 +273,7 @@ const static int h_diff_table[STATE_N * STATE_N * N_DIR] = {
     1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,
     -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1};
 
-static void
+__device__ static void
 state_move(State state, Direction dir)
 {
     idx_t who;
@@ -297,20 +298,20 @@ state_move(State state, Direction dir)
         break;
     default:
         elog("unexpected direction");
-        exit(EXIT_FAILURE);
+				assert(false);
     }
 
     state->h_value =
         state->h_value + h_diff(who, state->i, state->j, dir_reverse(dir));
 }
 
-static inline int
+__device__ static inline int
 state_get_hvalue(State state)
 {
     return state->h_value;
 }
 
-static void
+__device__ static void
 state_dump(State state)
 {
     elog("%s: h_value=%d, (i,j)=(%u,%u)\n", __func__, state->h_value, state->i,
@@ -329,10 +330,10 @@ state_dump(State state)
  * solver implementation
  */
 
-static bool
+__device__ static bool
 idas_internal(State state, int f_limit)
 {
-    Direction dir = 0;
+    int dir = 0;
 
     for (;;)
     {
@@ -344,15 +345,15 @@ idas_internal(State state, int f_limit)
             return true;
         }
 
-        if (stack_top() != dir_reverse(dir) && state_movable(state, dir))
+        if (stack_top() != dir_reverse(dir) && state_movable(state, (Direction)dir))
         {
-            state_move(state, dir);
+            state_move(state, (Direction) dir);
 
             if (stack.i + state_get_hvalue(state) > (size_t) f_limit)
                 state_move(state, dir_reverse(dir));
             else
             {
-                stack_put(dir);
+                stack_put((Direction)dir);
                 dir = 0;
                 continue;
             }
@@ -369,7 +370,7 @@ idas_internal(State state, int f_limit)
 }
 
 __global__ void
-idas_kernel(unsigned char *input)
+idas_kernel(unsigned char *input, int *plan)
 {
     struct state_tag init_state;
     state_init(&init_state, input);
@@ -393,11 +394,38 @@ idas_kernel(unsigned char *input)
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <stdarg.h>
+#include <errno.h>
+
+int
+pop_int_from_str(const char *str, char **end_ptr)
+{
+    long int rv;
+    errno = 0;
+    rv    = strtol(str, end_ptr, 0);
+
+    if (errno != 0)
+    {
+        elog("%s: %s cannot be converted into long\n", __func__, str);
+        exit(EXIT_FAILURE);
+    }
+    else if (end_ptr && str == *end_ptr)
+    {
+        elog("%s: reach end of string", __func__);
+        exit(EXIT_FAILURE);
+    }
+
+    if (rv > INT_MAX || rv < INT_MIN)
+    {
+        elog("%s: too big number, %ld\n", __func__, rv);
+        exit(EXIT_FAILURE);
+    }
+
+    return (int) rv;
+}
 
 #define MAX_LINE_LEN 100
 static void
-load_state_from_file(const char *fname, state_panel *s)
+load_state_from_file(const char *fname, unsigned char *s)
 {
     FILE *fp;
     char  str[MAX_LINE_LEN];
@@ -431,22 +459,28 @@ main(int argc, char *argv[])
 {
     unsigned char       s_list[STATE_N];
     unsigned char       *s_list_device;
-
-    OptionInit(&opt);
+	int plan[300];
+	int *plan_device;
 
 	if (argc < 2)
 	{
-		show_help();
+	  printf("usage: bin/cumain <ifname>\n");
 		exit(EXIT_FAILURE);
 	}
+	 elog("main begin\n");
 
     load_state_from_file(argv[1], s_list);
-	cudaMalloc((** void) &s_list_device, sizeof(unsigned char) * STATE_N);
-	cudaMemcpy(s_list_device, s_list, sizeof(unsigned char) * STATE_N, cudaMemoryHostToDevice);
+	cudaMalloc((void **) &s_list_device, sizeof(unsigned char) * STATE_N);
+	cudaMalloc((void **) &plan_device, sizeof(int) * 300);
+	cudaMemcpy(s_list_device, s_list, sizeof(unsigned char) * STATE_N, cudaMemcpyHostToDevice);
 
-	idas_kernel<<<1,1>>>(s_list_device);
+	idas_kernel<<<1,1>>>(s_list_device, plan_device);
+
+	cudaMemcpy(plan, plan_device, sizeof(int) * 300, cudaMemcpyDeviceToHost);
 
 	cudaFree(s_list_device);
+	cudaFree(plan_device);
+	 elog("main fini -> plan[0]=%d, plan[1]=%d\n", plan[0], plan[1]);
 
     return 0;
 }
