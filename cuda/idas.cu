@@ -470,16 +470,16 @@ main(int argc, char *argv[])
 	 elog("main begin\n");
 
     load_state_from_file(argv[1], s_list);
-	cudaMalloc((void **) &s_list_device, sizeof(unsigned char) * STATE_N);
-	cudaMalloc((void **) &plan_device, sizeof(int) * 300);
-	cudaMemcpy(s_list_device, s_list, sizeof(unsigned char) * STATE_N, cudaMemcpyHostToDevice);
+	CUDA_CHECK(cudaMalloc((void **) &s_list_device, sizeof(unsigned char) * STATE_N));
+	CUDA_CHECK(cudaMalloc((void **) &plan_device, sizeof(int) * 300));
+	CUDA_CHECK(cudaMemcpy(s_list_device, s_list, sizeof(unsigned char) * STATE_N, cudaMemcpyHostToDevice));
 
 	idas_kernel<<<1,1>>>(s_list_device, plan_device);
 
-	cudaMemcpy(plan, plan_device, sizeof(int) * 300, cudaMemcpyDeviceToHost);
+	CUDA_CHECK(cudaMemcpy(plan, plan_device, sizeof(int) * 300, cudaMemcpyDeviceToHost));
 
-	cudaFree(s_list_device);
-	cudaFree(plan_device);
+	CUDA_CHECK(cudaFree(s_list_device));
+	CUDA_CHECK(cudaFree(plan_device));
 	 elog("main fini -> plan[0]=%d, plan[1]=%d\n", plan[0], plan[1]);
 
     return 0;
