@@ -21,16 +21,16 @@ typedef enum direction_tag {
 
 /* stack implementation */
 
-__device__ static struct dir_stack_tag
+static struct dir_stack_tag
 {
 	size_t     i;
 	Direction  buf[PLAN_LEN_MAX];
 } stack;
 
-__device__ static inline void stack_put(Direction dir) { stack.buf[stack.i++] = dir; }
-__device__ static inline bool stack_is_empty(void) { return stack.i == 0; }
-__device__ static inline Direction stack_pop(void) { assert(stack.i != 0); return stack.buf[--stack.i]; }
-__device__ static inline Direction stack_top(void) { assert(stack.i != 0); return stack.buf[stack.i - 1]; }
+static inline void stack_put(Direction dir) { stack.buf[stack.i++] = dir; }
+static inline bool stack_is_empty(void) { return stack.i == 0; }
+static inline Direction stack_pop(void) { assert(stack.i != 0); return stack.buf[--stack.i]; }
+static inline Direction stack_top(void) { assert(stack.i != 0); return stack.buf[stack.i - 1]; }
 
 /* state implementation */
 
@@ -42,7 +42,7 @@ __device__ static inline Direction stack_top(void) { assert(stack.i != 0); retur
  * goal: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
  */
 
-__device__ static struct state_tag
+static struct state_tag
 {
 	unsigned char tile[STATE_WIDTH][STATE_WIDTH];
 	idx_t         i, j; /* pos of empty */
@@ -51,9 +51,9 @@ __device__ static struct state_tag
 
 #define STATE_TILE(i, j) (state.tile[i][j])
 
-__device__ static idx_t inline distance(idx_t i, idx_t j) { return i > j ? i - j : j - i; }
+static idx_t inline distance(idx_t i, idx_t j) { return i > j ? i - j : j - i; }
 
-__device__ static inline void
+static inline void
 state_init_hvalue(void)
 {
 	unsigned char from_x[STATE_WIDTH * STATE_WIDTH], from_y[STATE_WIDTH * STATE_WIDTH];
@@ -74,7 +74,7 @@ state_init_hvalue(void)
 	}
 }
 
-__device__ static void state_tile_fill(const unsigned char v_list[STATE_WIDTH*STATE_WIDTH])
+static void state_tile_fill(const unsigned char v_list[STATE_WIDTH*STATE_WIDTH])
 {
 	int cnt = 0;
 
@@ -90,14 +90,14 @@ __device__ static void state_tile_fill(const unsigned char v_list[STATE_WIDTH*ST
 		}
 }
 
-__device__ static inline bool state_is_goal(void) { return state.h_value == 0; }
+static inline bool state_is_goal(void) { return state.h_value == 0; }
 
-__device__ inline static bool state_left_movable(void) { return state.i != 0; }
-__device__ inline static bool state_down_movable(void) { return state.j != STATE_WIDTH - 1; }
-__device__ inline static bool state_right_movable(void) { return state.i != STATE_WIDTH - 1; }
-__device__ inline static bool state_up_movable(void) { return state.j != 0; }
+inline static bool state_left_movable(void) { return state.i != 0; }
+inline static bool state_down_movable(void) { return state.j != STATE_WIDTH - 1; }
+inline static bool state_right_movable(void) { return state.i != STATE_WIDTH - 1; }
+inline static bool state_up_movable(void) { return state.j != 0; }
 
-__device__ static inline bool
+static inline bool
 state_movable(Direction dir)
 {
 	return (dir == LEFT && state_left_movable()) ||
@@ -108,7 +108,7 @@ state_movable(Direction dir)
 
 #define h_diff(dir)                                       \
 	(h_diff_table[(STATE_TILE(state.i, state.j) << 6) + ((state.j) << 4) + ((state.i) << 2) + (dir)])
-__constant__ const static int h_diff_table[STATE_N * STATE_N * N_DIR] = {
+const static int h_diff_table[STATE_N * STATE_N * N_DIR] = {
 	1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,
 	1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,
 	-1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1,
@@ -164,7 +164,7 @@ __constant__ const static int h_diff_table[STATE_N * STATE_N * N_DIR] = {
 	1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,
 	-1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1};
 
-__device__ static void
+static void
 state_move(Direction dir)
 {
 	unsigned char i_diff = dir&1 - dir&2,
@@ -182,7 +182,7 @@ state_move(Direction dir)
  * solver implementation
  */
 
-__device__ static bool
+static bool
 idas_internal(int f_limit)
 {
 	unsigned char dir = 0;
@@ -218,8 +218,8 @@ idas_internal(int f_limit)
 	}
 }
 
-__global__ void
-idas_kernel(unsigned char *input, int *plan)
+void
+idas_kernel(unsigned char *input)
 {
 	state_tile_fill(input);
 	state_init_hvalue();
@@ -240,7 +240,6 @@ idas_kernel(unsigned char *input, int *plan)
 	exit(EXIT_FAILURE); \
 } while(0)
 
-
 static int
 pop_int_from_str(const char *str, char **end_ptr)
 {
@@ -251,9 +250,6 @@ pop_int_from_str(const char *str, char **end_ptr)
 		exit_failure("%s: %s cannot be converted into long\n", __func__, str);
 	else if (end_ptr && str == *end_ptr)
 		exit_failure("%s: reach end of string", __func__);
-
-	if (rv > INT_MAX || rv < INT_MIN)
-		exit_failure("%s: too big number, %ld\n", __func__, rv);
 
 	return (int) rv;
 }
@@ -289,13 +285,11 @@ load_state_from_file(const char *fname, unsigned char *s)
 		exit_failure("Error: %s:%d code:%d, reason: %s\n", __FILE__, __LINE__, e, cudaGetErrorString(e)); \
 } while(0)
 
-	int
+int
 main(int argc, char *argv[])
 {
 	unsigned char       s_list[STATE_N];
-	unsigned char       *s_list_device;
 	int plan[PLAN_LEN_MAX];
-	int *plan_device;
 
 	if (argc < 2)
 	{
@@ -304,18 +298,7 @@ main(int argc, char *argv[])
 	}
 
 	load_state_from_file(argv[1], s_list);
-	CUDA_CHECK(cudaMalloc((unsigned char **) &s_list_device, sizeof(unsigned char) * STATE_N));
-	CUDA_CHECK(cudaMalloc((void **) &plan_device, sizeof(int) * PLAN_LEN_MAX));
-	CUDA_CHECK(cudaMemcpy(s_list_device, s_list, sizeof(unsigned char) * STATE_N, cudaMemcpyHostToDevice));
-
-	idas_kernel<<<1,1>>>(s_list_device, plan_device);
-
-	CUDA_CHECK(cudaMemcpy(plan, plan_device, sizeof(int) * PLAN_LEN_MAX, cudaMemcpyDeviceToHost));
-
-	CUDA_CHECK(cudaFree(s_list_device));
-	CUDA_CHECK(cudaFree(plan_device));
-
-	CUDA_CHECK(cudaDeviceReset());
+	idas_kernel(s_list);
 
 	return 0;
 }
