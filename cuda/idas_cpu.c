@@ -105,6 +105,20 @@ state_movable(Direction dir)
 		(dir == DOWN && state_down_movable()) ||
 		(dir == UP && state_up_movable());
 }
+static void
+state_dump(void)
+{
+    printf("%s: h_value=%d, (i,j)=(%u,%u)\n", __func__, state.h_value, state.i,
+         state.j);
+
+    for (idx_t j = 0; j < STATE_WIDTH; ++j)
+    {
+        for (idx_t i = 0; i < STATE_WIDTH; ++i)
+            printf("%u ", i == state.i && j == state.j ? 0 : STATE_TILE(i, j));
+        printf("\n");
+    }
+    printf("-----------\n");
+}
 
 #define h_diff(dir)                                       \
 	(h_diff_table[(STATE_TILE(state.i, state.j) << 6) + ((state.j) << 4) + ((state.i) << 2) + (dir)])
@@ -167,8 +181,8 @@ const static int h_diff_table[STATE_N * STATE_N * N_DIR] = {
 static void
 state_move(Direction dir)
 {
-	unsigned char i_diff = dir&1 - dir&2,
-				  j_diff = dir&1 + dir&2 - 1;
+	int i_diff = (dir&1u) - ((dir&2u)>>1),
+		j_diff = (dir&1u) + ((dir&2u)>>1) - 1;
 
 	STATE_TILE(state.i, state.j) = STATE_TILE(state.i + i_diff, state.j + j_diff);
 
@@ -190,7 +204,10 @@ idas_internal(int f_limit)
 	for (;;)
 	{
 		if (state_is_goal())
+		{
+			state_dump();
 			return true;
+		}
 
 		if ((stack_is_empty() || stack_top() != dir_reverse(dir)) &&
 				state_movable((Direction)dir))
@@ -218,11 +235,13 @@ idas_internal(int f_limit)
 	}
 }
 
+
 void
 idas_kernel(unsigned char *input)
 {
 	state_tile_fill(input);
 	state_init_hvalue();
+	state_dump();
 
 	for (int f_limit = 1;; ++f_limit)
 		if (idas_internal(f_limit))
