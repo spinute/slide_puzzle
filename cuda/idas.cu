@@ -167,8 +167,8 @@ __constant__ const static int h_diff_table[STATE_N * STATE_N * N_DIR] = {
 __device__ static void
 state_move(Direction dir)
 {
-	unsigned char i_diff = (dir&1u) - ((dir&2u)>>1),
-				  j_diff = (dir&1u) + ((dir&2u)>>1) - 1;
+	int i_diff = (dir&1u) - ((dir&2u)>>1),
+			  j_diff = (dir&1u) + ((dir&2u)>>1) - 1;
 
 	STATE_TILE(state.i, state.j) = STATE_TILE(state.i + i_diff, state.j + j_diff);
 
