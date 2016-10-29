@@ -5,25 +5,24 @@
 
 typedef unsigned char idx_t;
 
-#define PLAN_LEN_MAX (1 << 9)
+#define PLAN_LEN_MAX (1 << 9 - 1)
 
 #define N_DIR 4
 #define dir_reverse(dir) ((Direction) (3 - (dir)))
-typedef enum direction_tag {
-	UP    = 0,
-	RIGHT = 1,
-	LEFT  = 2,
-	DOWN  = 3,
-} Direction;
+typedef unsigned char Direction
+#define UP 0
+#define RIGHT 1
+#define LEFT 2
+#define DOWN 3
 
 #include <assert.h>
 #include <stdint.h>
 
 /* stack implementation */
 
-__device__ static struct dir_stack_tag
+__device__ __shared__ static struct dir_stack_tag
 {
-	size_t     i;
+	unsigned char     i;
 	Direction  buf[PLAN_LEN_MAX];
 } stack;
 
@@ -42,7 +41,7 @@ __device__ static inline Direction stack_top(void) { assert(stack.i != 0); retur
  * goal: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
  */
 
-__device__ static struct state_tag
+__device__ __shared__ static struct state_tag
 {
 	unsigned char tile[STATE_WIDTH][STATE_WIDTH];
 	idx_t         i, j; /* pos of empty */
@@ -163,6 +162,14 @@ __constant__ const static int h_diff_table[STATE_N * STATE_N * N_DIR] = {
 	-1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1,
 	1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,
 	-1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1};
+
+__device__ static inline int calc_hdiff(unsigned char who, idx_t i, idx_t j, Direction dir)
+{
+	return dir == LEFT ? (who % STATE_WIDTH < i ? -1 : 1) :
+		dir == RIGHT ? (who % STATE_WIDTH > i ? -1 : 1) :
+		dir == UP ? (who / STATE_WIDTH < j ? -1 : 1) :
+		(who / STATE_WIDTH > j ? -1 : 1);
+}
 
 __device__ static void
 state_move(Direction dir)
