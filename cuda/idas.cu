@@ -1,35 +1,38 @@
-#include <stdarg.h>
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
-typedef unsigned char idx_t;
+#define STACK_SIZE_BYTES 64
+#define STACK_BUF_BYTES (STACK_SIZE_BYTES - sizeof(unsigned char))
+#define STACK_DIR_BITS 2
+#define STACK_DIR_MASK ((1 << STACK_DIR_BITS) - 1)
+#define PLAN_LEN_MAX ((1 << STACK_DIR_BITS) * STACK_BUF_BYTES)
 
-#define PLAN_LEN_MAX (1 << 9 - 1)
+#define dir_reverse(dir) (3 - (dir))
+typedef unsigned char Direction;
+#define DIR_N 4
+#define DIR_FIRST 0
+#define DIR_UP 0
+#define DIR_RIGHT 1
+#define DIR_LEFT 2
+#define DIR_DOWN 3
 
-#define N_DIR 4
-#define dir_reverse(dir) ((Direction)(3 - (dir)))
-typedef unsigned char Direction
-#define UP 0
-#define RIGHT 1
-#define LEFT 2
-#define DOWN 3
+/* stack implementation */
 
-#include <assert.h>
-#include <stdint.h>
-
-    /* stack implementation */
-
-    __device__ __shared__ static struct dir_stack_tag
+__device__ __shared__ static struct dir_stack_tag
 {
     unsigned char i;
-    Direction     buf[PLAN_LEN_MAX];
+	unsigned char buf[STACK_BUF_BYTES];
 } stack;
 
+#define stack_byte(i) (stack.buf[(i) >> STACK_DIR_BITS])
+#define stack_ofs(i) ((i & STACK_DIR_MASK) << 1)
+#define stack_get(i) ((stack_byte(i) & (STACK_DIR_MASK << stack_ofs(i))) >> stack_ofs(i))
 __device__ static inline void
 stack_put(Direction dir)
 {
-    stack.buf[stack.i++] = dir;
+	stack_byte(stack.i) &= ~(STACK_DIR_MASK << stack_ofs(stack.i));
+    stack_byte(stack.i) |= dir << stack_ofs(stack.i);
+	++stack.i;
 }
 __device__ static inline bool
 stack_is_empty(void)
@@ -39,14 +42,13 @@ stack_is_empty(void)
 __device__ static inline Direction
 stack_pop(void)
 {
-    assert(stack.i != 0);
-    return stack.buf[--stack.i];
+    --stack.i;
+	return stack_get(stack.i);
 }
 __device__ static inline Direction
-stack_top(void)
+stack_peak(void)
 {
-    assert(stack.i != 0);
-    return stack.buf[stack.i - 1];
+	return stack_get(stack.i - 1);
 }
 
 /* state implementation */
@@ -142,16 +144,16 @@ state_up_movable(void)
 __device__ static inline bool
 state_movable(Direction dir)
 {
-    return (dir == LEFT && state_left_movable()) ||
-           (dir == RIGHT && state_right_movable()) ||
-           (dir == DOWN && state_down_movable()) ||
-           (dir == UP && state_up_movable());
+    return (dir == DIR_LEFT && state_left_movable()) ||
+           (dir == DIR_RIGHT && state_right_movable()) ||
+           (dir == DIR_DOWN && state_down_movable()) ||
+           (dir == DIR_UP && state_up_movable());
 }
 
 #define h_diff(dir)                                                            \
     (h_diff_table[(STATE_TILE(state.i, state.j) << 6) + ((state.j) << 4) +     \
                   ((state.i) << 2) + (dir)])
-__constant__ const static int h_diff_table[STATE_N * STATE_N * N_DIR] = {
+__constant__ const static int h_diff_table[STATE_N * STATE_N * DIR_N] = {
     1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,
     1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,
     -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1,
@@ -210,13 +212,14 @@ __constant__ const static int h_diff_table[STATE_N * STATE_N * N_DIR] = {
 __device__ static inline int
 calc_hdiff(unsigned char who, idx_t i, idx_t j, Direction dir)
 {
-    return dir == LEFT
-               ? (who % STATE_WIDTH < i ? -1 : 1)
-               : dir == RIGHT ? (who % STATE_WIDTH > i ? -1 : 1)
-                              : dir == UP ? (who / STATE_WIDTH < j ? -1 : 1)
-                                          : (who / STATE_WIDTH > j ? -1 : 1);
+	/* TODO: optimize? */
+    return dir == DIR_LEFT ? (who % STATE_WIDTH < i ? -1 : 1)
+            : dir == DIR_RIGHT ? (who % STATE_WIDTH > i ? -1 : 1)
+            : dir == DIR_UP ? (who / STATE_WIDTH < j ? -1 : 1)
+            : (who / STATE_WIDTH > j ? -1 : 1);
 }
 
+static char assert_direction[DIR_UP==0&&DIR_RIGHT==1&&DIR_LEFT==2&&DIR_DOWN==3 ? 1 : -1];
 __device__ static void
 state_move(Direction dir)
 {
@@ -237,7 +240,7 @@ state_move(Direction dir)
  */
 
 __device__ static bool
-idas_internal(int f_limit)
+idas_internal(unsigned int f_limit)
 {
     unsigned char dir = 0;
 
@@ -246,27 +249,28 @@ idas_internal(int f_limit)
         if (state_is_goal())
             return true;
 
-        if ((stack_is_empty() || stack_top() != dir_reverse(dir)) &&
+        if ((stack_is_empty() || stack_peak() != dir_reverse(dir)) &&
             state_movable((Direction) dir))
         {
             state_move((Direction) dir);
 
-            if (stack.i + state.h_value > (size_t) f_limit)
+            if (stack.i + state.h_value > f_limit)
                 state_move(dir_reverse(dir));
             else
             {
                 stack_put((Direction) dir);
-                dir = 0;
+                dir = DIR_FIRST;
                 continue;
             }
         }
 
-        while (++dir == N_DIR)
+        while (++dir == DIR_N)
         {
             if (stack_is_empty())
                 return false;
 
-            dir = stack_pop();
+            stack_pop();
+
             state_move(dir_reverse(dir));
         }
     }
@@ -278,7 +282,7 @@ idas_kernel(unsigned char *input, int *plan)
     state_tile_fill(input);
     state_init_hvalue();
 
-    for (int f_limit = 1;; ++f_limit)
+    for (unsigned int f_limit = 1;; ++f_limit)
         if (idas_internal(f_limit))
             break;
 }

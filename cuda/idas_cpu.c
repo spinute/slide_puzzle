@@ -1,36 +1,40 @@
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 typedef unsigned char idx_t;
 
-#define PLAN_LEN_MAX (1 << 9)
-
 #define N_DIR 4
 #define dir_reverse(dir) ((Direction)(3 - (dir)))
-typedef enum direction_tag {
-    UP    = 0,
-    RIGHT = 1,
-    LEFT  = 2,
-    DOWN  = 3,
-} Direction;
-
-#include <assert.h>
-#include <stdint.h>
+typedef unsigned char Direction;
+#define DIR_UP 0
+#define DIR_RIGHT 1
+#define DIR_LEFT 2
+#define DIR_DOWN 3
 
 /* stack implementation */
+#define STACK_SIZE_BYTES 64
+#define STACK_BUF_BYTES (STACK_SIZE_BYTES - sizeof(unsigned char))
+#define STACK_DIR_BITS 2
+#define STACK_DIR_MASK ((1 << STACK_DIR_BITS) - 1)
+#define PLAN_LEN_MAX ((1 << STACK_DIR_BITS) * STACK_BUF_BYTES)
+
+#define stack_byte(i) (stack.buf[(i) >> STACK_DIR_BITS])
+#define stack_ofs(i) ((i & STACK_DIR_MASK) << 1)
+#define stack_get(i) ((stack_byte(i) & (STACK_DIR_MASK << stack_ofs(i))) >> stack_ofs(i))
 
 static struct dir_stack_tag
 {
-    size_t    i;
-    Direction buf[PLAN_LEN_MAX];
+    unsigned char i;
+	unsigned char buf[STACK_BUF_BYTES];
 } stack;
 
 static inline void
 stack_put(Direction dir)
 {
-    stack.buf[stack.i++] = dir;
+	stack_byte(stack.i) &= ~(STACK_DIR_MASK << stack_ofs(stack.i));
+    stack_byte(stack.i) |= dir << stack_ofs(stack.i);
+	++stack.i;
 }
 static inline bool
 stack_is_empty(void)
@@ -40,14 +44,13 @@ stack_is_empty(void)
 static inline Direction
 stack_pop(void)
 {
-    assert(stack.i != 0);
-    return stack.buf[--stack.i];
+    --stack.i;
+	return stack_get(stack.i);
 }
 static inline Direction
-stack_top(void)
+stack_peak(void)
 {
-    assert(stack.i != 0);
-    return stack.buf[stack.i - 1];
+	return stack_get(stack.i - 1);
 }
 
 /* state implementation */
@@ -145,10 +148,10 @@ state_up_movable(void)
 static inline bool
 state_movable(Direction dir)
 {
-    return (dir == LEFT && state_left_movable()) ||
-           (dir == RIGHT && state_right_movable()) ||
-           (dir == DOWN && state_down_movable()) ||
-           (dir == UP && state_up_movable());
+    return (dir == DIR_LEFT && state_left_movable()) ||
+           (dir == DIR_RIGHT && state_right_movable()) ||
+           (dir == DIR_DOWN && state_down_movable()) ||
+           (dir == DIR_UP && state_up_movable());
 }
 static void
 state_dump(void)
@@ -225,6 +228,7 @@ const static int h_diff_table[STATE_N * STATE_N * N_DIR] = {
     1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,
     -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1};
 
+static char assert_direction[DIR_UP==0&&DIR_RIGHT==1&&DIR_LEFT==2&&DIR_DOWN==3 ? 1 : -1];
 static void
 state_move(Direction dir)
 {
@@ -257,7 +261,7 @@ idas_internal(int f_limit)
             return true;
         }
 
-        if ((stack_is_empty() || stack_top() != dir_reverse(dir)) &&
+        if ((stack_is_empty() || stack_peak() != dir_reverse(dir)) &&
             state_movable((Direction) dir))
         {
             state_move((Direction) dir);
