@@ -2,11 +2,11 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-typedef unsigned char idx_t;
+typedef unsigned char uchar;
 
 #define N_DIR 4
+typedef uchar Direction;
 #define dir_reverse(dir) ((Direction)(3 - (dir)))
-typedef unsigned char Direction;
 #define DIR_UP 0
 #define DIR_RIGHT 1
 #define DIR_LEFT 2
@@ -14,27 +14,28 @@ typedef unsigned char Direction;
 
 /* stack implementation */
 #define STACK_SIZE_BYTES 64
-#define STACK_BUF_BYTES (STACK_SIZE_BYTES - sizeof(unsigned char))
+#define STACK_BUF_BYTES (STACK_SIZE_BYTES - sizeof(uchar))
 #define STACK_DIR_BITS 2
 #define STACK_DIR_MASK ((1 << STACK_DIR_BITS) - 1)
 #define PLAN_LEN_MAX ((1 << STACK_DIR_BITS) * STACK_BUF_BYTES)
 
 #define stack_byte(i) (stack.buf[(i) >> STACK_DIR_BITS])
 #define stack_ofs(i) ((i & STACK_DIR_MASK) << 1)
-#define stack_get(i) ((stack_byte(i) & (STACK_DIR_MASK << stack_ofs(i))) >> stack_ofs(i))
+#define stack_get(i)                                                           \
+    ((stack_byte(i) & (STACK_DIR_MASK << stack_ofs(i))) >> stack_ofs(i))
 
 static struct dir_stack_tag
 {
-    unsigned char i;
-	unsigned char buf[STACK_BUF_BYTES];
+    uchar i;
+    uchar buf[STACK_BUF_BYTES];
 } stack;
 
 static inline void
 stack_put(Direction dir)
 {
-	stack_byte(stack.i) &= ~(STACK_DIR_MASK << stack_ofs(stack.i));
+    stack_byte(stack.i) &= ~(STACK_DIR_MASK << stack_ofs(stack.i));
     stack_byte(stack.i) |= dir << stack_ofs(stack.i);
-	++stack.i;
+    ++stack.i;
 }
 static inline bool
 stack_is_empty(void)
@@ -45,12 +46,12 @@ static inline Direction
 stack_pop(void)
 {
     --stack.i;
-	return stack_get(stack.i);
+    return stack_get(stack.i);
 }
 static inline Direction
 stack_peak(void)
 {
-	return stack_get(stack.i - 1);
+    return stack_get(stack.i - 1);
 }
 
 /* state implementation */
@@ -58,6 +59,8 @@ stack_peak(void)
 #define STATE_EMPTY 0
 #define STATE_WIDTH 4
 #define STATE_N STATE_WIDTH *STATE_WIDTH
+#define STATE_TILE_BITS 4
+#define STATE_TILE_MASK ((1ull << STATE_TILE_BITS) - 1)
 
 /*
  * goal: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
@@ -65,14 +68,24 @@ stack_peak(void)
 
 static struct state_tag
 {
-    unsigned char tile[STATE_WIDTH][STATE_WIDTH];
-    idx_t         i, j;    /* pos of empty */
-    unsigned char h_value; /* ub of h_value is 6*16 */
+    unsigned long long tile;    /* packed representation label(4bit)*16pos */
+    uchar              i, j;    /* pos of empty */
+    uchar              h_value; /* ub of h_value is 6*16 */
 } state;
 
-#define STATE_TILE(i, j) (state.tile[i][j])
+#define state_pos(i, j) (((j) << 2) + (i))
+#define state_tile_ofs(i, j) (state_pos((i), (j)) << 2)
+#define state_tile_get(i, j)                                                   \
+    ((state.tile & (STATE_TILE_MASK << state_tile_ofs((i), (j)))) >>           \
+     state_tile_ofs((i), (j)))
+#define state_tile_set(i, j, val)                                              \
+    do                                                                         \
+    {                                                                          \
+        state.tile &= ~((STATE_TILE_MASK) << state_tile_ofs((i), (j)));        \
+        state.tile |= ((unsigned long long) val) << state_tile_ofs((i), (j));  \
+    } while (0)
 
-static idx_t inline distance(idx_t i, idx_t j)
+static uchar inline distance(uchar i, uchar j)
 {
     return i > j ? i - j : j - i;
 }
@@ -80,17 +93,16 @@ static idx_t inline distance(idx_t i, idx_t j)
 static inline void
 state_init_hvalue(void)
 {
-    unsigned char from_x[STATE_WIDTH * STATE_WIDTH],
-        from_y[STATE_WIDTH * STATE_WIDTH];
-    idx_t x, y, i;
+    uchar from_x[STATE_WIDTH * STATE_WIDTH], from_y[STATE_WIDTH * STATE_WIDTH];
+    uchar x, y, i;
 
     state.h_value = 0;
 
     for (x = 0; x < STATE_WIDTH; ++x)
         for (y = 0; y < STATE_WIDTH; ++y)
         {
-            from_x[STATE_TILE(x, y)] = x;
-            from_y[STATE_TILE(x, y)] = y;
+            from_x[state_tile_get(x, y)] = x;
+            from_y[state_tile_get(x, y)] = y;
         }
 
     for (i = 1; i < STATE_WIDTH * STATE_WIDTH; ++i)
@@ -101,10 +113,10 @@ state_init_hvalue(void)
 }
 
 static void
-state_tile_fill(const unsigned char v_list[STATE_WIDTH * STATE_WIDTH])
+state_tile_fill(const uchar v_list[STATE_WIDTH * STATE_WIDTH])
 {
     int   cnt = 0;
-    idx_t i, j;
+    uchar i, j;
 
     for (j = 0; j < STATE_WIDTH; ++j)
         for (i = 0; i < STATE_WIDTH; ++i)
@@ -114,7 +126,8 @@ state_tile_fill(const unsigned char v_list[STATE_WIDTH * STATE_WIDTH])
                 state.i = i;
                 state.j = j;
             }
-            STATE_TILE(i, j) = v_list[cnt++];
+            state_tile_set(i, j, v_list[cnt]);
+            ++cnt;
         }
 }
 
@@ -156,21 +169,23 @@ state_movable(Direction dir)
 static void
 state_dump(void)
 {
-    idx_t i, j;
+    uchar i, j;
     printf("%s: h_value=%d, (i,j)=(%u,%u)\n", __func__, state.h_value, state.i,
            state.j);
 
     for (j = 0; j < STATE_WIDTH; ++j)
     {
         for (i = 0; i < STATE_WIDTH; ++i)
-            printf("%u ", i == state.i && j == state.j ? 0 : STATE_TILE(i, j));
+            printf("%u ", i == state.i && j == state.j
+                              ? 0
+                              : (unsigned char) state_tile_get(i, j));
         printf("\n");
     }
     printf("-----------\n");
 }
 
 #define h_diff(dir)                                                            \
-    (h_diff_table[(STATE_TILE(state.i, state.j) << 6) + ((state.j) << 4) +     \
+    (h_diff_table[(state_tile_get(state.i, state.j) << 6) + ((state.j) << 4) + \
                   ((state.i) << 2) + (dir)])
 const static int h_diff_table[STATE_N * STATE_N * N_DIR] = {
     1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,
@@ -228,15 +243,16 @@ const static int h_diff_table[STATE_N * STATE_N * N_DIR] = {
     1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,
     -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1};
 
-static char assert_direction[DIR_UP==0&&DIR_RIGHT==1&&DIR_LEFT==2&&DIR_DOWN==3 ? 1 : -1];
+static char assert_direction
+    [DIR_UP == 0 && DIR_RIGHT == 1 && DIR_LEFT == 2 && DIR_DOWN == 3 ? 1 : -1];
 static void
 state_move(Direction dir)
 {
     int i_diff = (dir & 1u) - ((dir & 2u) >> 1),
         j_diff = (dir & 1u) + ((dir & 2u) >> 1) - 1;
 
-    STATE_TILE(state.i, state.j) =
-        STATE_TILE(state.i + i_diff, state.j + j_diff);
+    state_tile_set(state.i, state.j,
+                   state_tile_get(state.i + i_diff, state.j + j_diff));
 
     state.i += i_diff;
     state.j += j_diff;
@@ -251,7 +267,7 @@ state_move(Direction dir)
 static bool
 idas_internal(int f_limit)
 {
-    unsigned char dir = 0;
+    uchar dir = 0;
 
     for (;;)
     {
@@ -288,7 +304,7 @@ idas_internal(int f_limit)
 }
 
 void
-idas_kernel(unsigned char *input)
+idas_kernel(uchar *input)
 {
     int f_limit;
     state_tile_fill(input);
@@ -329,7 +345,7 @@ pop_int_from_str(const char *str, char **end_ptr)
 
 #define MAX_LINE_LEN 100
 static void
-load_state_from_file(const char *fname, unsigned char *s)
+load_state_from_file(const char *fname, uchar *s)
 {
     FILE *fp;
     char  str[MAX_LINE_LEN];
@@ -365,8 +381,8 @@ load_state_from_file(const char *fname, unsigned char *s)
 int
 main(int argc, char *argv[])
 {
-    unsigned char s_list[STATE_N];
-    int           plan[PLAN_LEN_MAX];
+    uchar s_list[STATE_N];
+    int   plan[PLAN_LEN_MAX];
 
     if (argc < 2)
     {

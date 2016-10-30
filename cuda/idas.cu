@@ -1,14 +1,16 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+typedef unsigned char uchar;
+
 #define STACK_SIZE_BYTES 64
-#define STACK_BUF_BYTES (STACK_SIZE_BYTES - sizeof(unsigned char))
+#define STACK_BUF_BYTES (STACK_SIZE_BYTES - sizeof(uchar))
 #define STACK_DIR_BITS 2
 #define STACK_DIR_MASK ((1 << STACK_DIR_BITS) - 1)
 #define PLAN_LEN_MAX ((1 << STACK_DIR_BITS) * STACK_BUF_BYTES)
 
 #define dir_reverse(dir) (3 - (dir))
-typedef unsigned char Direction;
+typedef uchar Direction;
 #define DIR_N 4
 #define DIR_FIRST 0
 #define DIR_UP 0
@@ -20,19 +22,20 @@ typedef unsigned char Direction;
 
 __device__ __shared__ static struct dir_stack_tag
 {
-    unsigned char i;
-	unsigned char buf[STACK_BUF_BYTES];
+    uchar i;
+    uchar buf[STACK_BUF_BYTES];
 } stack;
 
 #define stack_byte(i) (stack.buf[(i) >> STACK_DIR_BITS])
 #define stack_ofs(i) ((i & STACK_DIR_MASK) << 1)
-#define stack_get(i) ((stack_byte(i) & (STACK_DIR_MASK << stack_ofs(i))) >> stack_ofs(i))
+#define stack_get(i)                                                           \
+    ((stack_byte(i) & (STACK_DIR_MASK << stack_ofs(i))) >> stack_ofs(i))
 __device__ static inline void
 stack_put(Direction dir)
 {
-	stack_byte(stack.i) &= ~(STACK_DIR_MASK << stack_ofs(stack.i));
+    stack_byte(stack.i) &= ~(STACK_DIR_MASK << stack_ofs(stack.i));
     stack_byte(stack.i) |= dir << stack_ofs(stack.i);
-	++stack.i;
+    ++stack.i;
 }
 __device__ static inline bool
 stack_is_empty(void)
@@ -43,12 +46,12 @@ __device__ static inline Direction
 stack_pop(void)
 {
     --stack.i;
-	return stack_get(stack.i);
+    return stack_get(stack.i);
 }
 __device__ static inline Direction
 stack_peak(void)
 {
-	return stack_get(stack.i - 1);
+    return stack_get(stack.i - 1);
 }
 
 /* state implementation */
@@ -56,6 +59,8 @@ stack_peak(void)
 #define STATE_EMPTY 0
 #define STATE_WIDTH 4
 #define STATE_N STATE_WIDTH *STATE_WIDTH
+#define STATE_TILE_BITS 4
+#define STATE_TILE_MASK ((1ull << STATE_TILE_BITS) - 1)
 
 /*
  * goal: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
@@ -63,14 +68,24 @@ stack_peak(void)
 
 __device__ __shared__ static struct state_tag
 {
-    unsigned char tile[STATE_WIDTH][STATE_WIDTH];
-    idx_t         i, j;    /* pos of empty */
-    unsigned char h_value; /* ub of h_value is 6*16 */
+    unsigned long long tile;    /* packed representation label(4bit)*16pos */
+    uchar              i, j;    /* pos of empty */
+    uchar              h_value; /* ub of h_value is 6*16 */
 } state;
 
-#define STATE_TILE(i, j) (state.tile[i][j])
+#define state_pos(i, j) (((j) << 2) + (i))
+#define state_tile_ofs(i, j) (state_pos((i), (j)) << 2)
+#define state_tile_get(i, j)                                                   \
+    ((state.tile & (STATE_TILE_MASK << state_tile_ofs((i), (j)))) >>           \
+     state_tile_ofs((i), (j)))
+#define state_tile_set(i, j, val)                                              \
+    do                                                                         \
+    {                                                                          \
+        state.tile &= ~((STATE_TILE_MASK) << state_tile_ofs((i), (j)));        \
+        state.tile |= ((unsigned long long) val) << state_tile_ofs((i), (j));  \
+    } while (0)
 
-__device__ static idx_t inline distance(idx_t i, idx_t j)
+__device__ static uchar inline distance(uchar i, uchar j)
 {
     return i > j ? i - j : j - i;
 }
@@ -78,19 +93,18 @@ __device__ static idx_t inline distance(idx_t i, idx_t j)
 __device__ static inline void
 state_init_hvalue(void)
 {
-    unsigned char from_x[STATE_WIDTH * STATE_WIDTH],
-        from_y[STATE_WIDTH * STATE_WIDTH];
+    uchar from_x[STATE_WIDTH * STATE_WIDTH], from_y[STATE_WIDTH * STATE_WIDTH];
 
     state.h_value = 0;
 
-    for (idx_t x = 0; x < STATE_WIDTH; ++x)
-        for (idx_t y = 0; y < STATE_WIDTH; ++y)
+    for (uchar x = 0; x < STATE_WIDTH; ++x)
+        for (uchar y = 0; y < STATE_WIDTH; ++y)
         {
-            from_x[STATE_TILE(x, y)] = x;
-            from_y[STATE_TILE(x, y)] = y;
+            from_x[state_tile_get(x, y)] = x;
+            from_y[state_tile_get(x, y)] = y;
         }
 
-    for (idx_t i = 1; i < STATE_WIDTH * STATE_WIDTH; ++i)
+    for (uchar i = 1; i < STATE_WIDTH * STATE_WIDTH; ++i)
     {
         state.h_value += distance(from_x[i], i % STATE_WIDTH);
         state.h_value += distance(from_y[i], i / STATE_WIDTH);
@@ -98,19 +112,20 @@ state_init_hvalue(void)
 }
 
 __device__ static void
-state_tile_fill(const unsigned char v_list[STATE_WIDTH * STATE_WIDTH])
+state_tile_fill(const uchar v_list[STATE_WIDTH * STATE_WIDTH])
 {
     int cnt = 0;
 
-    for (idx_t j = 0; j < STATE_WIDTH; ++j)
-        for (idx_t i = 0; i < STATE_WIDTH; ++i)
+    for (uchar j = 0; j < STATE_WIDTH; ++j)
+        for (uchar i = 0; i < STATE_WIDTH; ++i)
         {
             if (v_list[cnt] == STATE_EMPTY)
             {
                 state.i = i;
                 state.j = j;
             }
-            STATE_TILE(i, j) = v_list[cnt++];
+            state_tile_set(i, j, v_list[cnt]);
+            ++cnt;
         }
 }
 
@@ -151,7 +166,7 @@ state_movable(Direction dir)
 }
 
 #define h_diff(dir)                                                            \
-    (h_diff_table[(STATE_TILE(state.i, state.j) << 6) + ((state.j) << 4) +     \
+    (h_diff_table[(state_tile_get(state.i, state.j) << 6) + ((state.j) << 4) +     \
                   ((state.i) << 2) + (dir)])
 __constant__ const static int h_diff_table[STATE_N * STATE_N * DIR_N] = {
     1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,
@@ -210,24 +225,27 @@ __constant__ const static int h_diff_table[STATE_N * STATE_N * DIR_N] = {
     -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1};
 
 __device__ static inline int
-calc_hdiff(unsigned char who, idx_t i, idx_t j, Direction dir)
+calc_hdiff(uchar who, uchar i, uchar j, Direction dir)
 {
-	/* TODO: optimize? */
-    return dir == DIR_LEFT ? (who % STATE_WIDTH < i ? -1 : 1)
-            : dir == DIR_RIGHT ? (who % STATE_WIDTH > i ? -1 : 1)
-            : dir == DIR_UP ? (who / STATE_WIDTH < j ? -1 : 1)
-            : (who / STATE_WIDTH > j ? -1 : 1);
+    /* TODO: optimize? */
+    return dir == DIR_LEFT
+               ? (who % STATE_WIDTH < i ? -1 : 1)
+               : dir == DIR_RIGHT
+                     ? (who % STATE_WIDTH > i ? -1 : 1)
+                     : dir == DIR_UP ? (who / STATE_WIDTH < j ? -1 : 1)
+                                     : (who / STATE_WIDTH > j ? -1 : 1);
 }
 
-static char assert_direction[DIR_UP==0&&DIR_RIGHT==1&&DIR_LEFT==2&&DIR_DOWN==3 ? 1 : -1];
+static char assert_direction
+    [DIR_UP == 0 && DIR_RIGHT == 1 && DIR_LEFT == 2 && DIR_DOWN == 3 ? 1 : -1];
 __device__ static void
 state_move(Direction dir)
 {
     int i_diff = (dir & 1u) - ((dir & 2u) >> 1),
         j_diff = (dir & 1u) + ((dir & 2u) >> 1) - 1;
 
-    STATE_TILE(state.i, state.j) =
-        STATE_TILE(state.i + i_diff, state.j + j_diff);
+    state_tile_set(state.i, state.j,
+        state_tile_get(state.i + i_diff, state.j + j_diff));
 
     state.i += i_diff;
     state.j += j_diff;
@@ -240,9 +258,9 @@ state_move(Direction dir)
  */
 
 __device__ static bool
-idas_internal(unsigned int f_limit)
+idas_internal(uchar f_limit)
 {
-    unsigned char dir = 0;
+    uchar dir = 0;
 
     for (;;)
     {
@@ -277,12 +295,12 @@ idas_internal(unsigned int f_limit)
 }
 
 __global__ void
-idas_kernel(unsigned char *input, int *plan)
+idas_kernel(uchar *input, int *plan)
 {
     state_tile_fill(input);
     state_init_hvalue();
 
-    for (unsigned int f_limit = 1;; ++f_limit)
+    for (uchar f_limit = 1;; ++f_limit)
         if (idas_internal(f_limit))
             break;
 }
@@ -319,7 +337,7 @@ pop_int_from_str(const char *str, char **end_ptr)
 
 #define MAX_LINE_LEN 100
 static void
-load_state_from_file(const char *fname, unsigned char *s)
+load_state_from_file(const char *fname, uchar *s)
 {
     FILE *fp;
     char  str[MAX_LINE_LEN];
@@ -354,10 +372,10 @@ load_state_from_file(const char *fname, unsigned char *s)
 int
 main(int argc, char *argv[])
 {
-    unsigned char  s_list[STATE_N];
-    unsigned char *s_list_device;
-    int            plan[PLAN_LEN_MAX];
-    int *          plan_device;
+    uchar  s_list[STATE_N];
+    uchar *s_list_device;
+    int    plan[PLAN_LEN_MAX];
+    int *  plan_device;
 
     if (argc < 2)
     {
@@ -366,11 +384,9 @@ main(int argc, char *argv[])
     }
 
     load_state_from_file(argv[1], s_list);
-    CUDA_CHECK(cudaMalloc((unsigned char **) &s_list_device,
-                          sizeof(unsigned char) * STATE_N));
+    CUDA_CHECK(cudaMalloc((uchar **) &s_list_device, sizeof(uchar) * STATE_N));
     CUDA_CHECK(cudaMalloc((void **) &plan_device, sizeof(int) * PLAN_LEN_MAX));
-    CUDA_CHECK(cudaMemcpy(s_list_device, s_list,
-                          sizeof(unsigned char) * STATE_N,
+    CUDA_CHECK(cudaMemcpy(s_list_device, s_list, sizeof(uchar) * STATE_N,
                           cudaMemcpyHostToDevice));
 
     idas_kernel<<<1, 1>>>(s_list_device, plan_device);
