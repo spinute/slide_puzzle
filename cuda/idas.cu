@@ -9,8 +9,8 @@ typedef unsigned char uchar;
 #define STACK_DIR_MASK ((1 << STACK_DIR_BITS) - 1)
 #define PLAN_LEN_MAX ((1 << STACK_DIR_BITS) * STACK_BUF_BYTES)
 
-#define dir_reverse(dir) (3 - (dir))
 typedef uchar Direction;
+#define dir_reverse(dir) ((Direction)(3 - (dir)))
 #define DIR_N 4
 #define DIR_FIRST 0
 #define DIR_UP 0
@@ -287,7 +287,7 @@ idas_internal(uchar f_limit)
             if (stack_is_empty())
                 return false;
 
-            stack_pop();
+            dir = stack_pop();
 
             state_move(dir_reverse(dir));
         }

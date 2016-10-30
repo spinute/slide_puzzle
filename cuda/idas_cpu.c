@@ -265,7 +265,7 @@ state_move(Direction dir)
  */
 
 static bool
-idas_internal(int f_limit)
+idas_internal(unsigned int f_limit)
 {
     uchar dir = 0;
 
@@ -282,7 +282,7 @@ idas_internal(int f_limit)
         {
             state_move((Direction) dir);
 
-            if (stack.i + state.h_value > (size_t) f_limit)
+            if (stack.i + state.h_value > f_limit)
                 state_move(dir_reverse(dir));
             else
             {
@@ -306,7 +306,7 @@ idas_internal(int f_limit)
 void
 idas_kernel(uchar *input)
 {
-    int f_limit;
+    unsigned int f_limit;
     state_tile_fill(input);
     state_init_hvalue();
     state_dump();
