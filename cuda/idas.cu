@@ -28,6 +28,7 @@ __device__ __shared__ static struct dir_stack_tag
 
 #define stack_byte(i) (stack.buf[(i) >> STACK_DIR_BITS])
 #define stack_ofs(i) ((i & STACK_DIR_MASK) << 1)
+// how about ((i << 1) & (STACK_DIR_MASK << 1))
 #define stack_get(i)                                                           \
     ((stack_byte(i) & (STACK_DIR_MASK << stack_ofs(i))) >> stack_ofs(i))
 __device__ static inline void
@@ -41,6 +42,7 @@ __device__ static inline bool
 stack_is_empty(void)
 {
     return stack.i == 0;
+	/* how about !stack.i */
 }
 __device__ static inline Direction
 stack_pop(void)
@@ -133,6 +135,7 @@ __device__ static inline bool
 state_is_goal(void)
 {
     return state.h_value == 0;
+	/* how about !state.h_value (ptx level) */
 }
 
 __device__ inline static bool
@@ -144,6 +147,7 @@ __device__ inline static bool
 state_down_movable(void)
 {
     return state.j != STATE_WIDTH - 1;
+	/* how about !(state.j - STATE_WIDTH + 1) */
 }
 __device__ inline static bool
 state_right_movable(void)
@@ -234,6 +238,13 @@ calc_hdiff(uchar who, uchar i, uchar j, Direction dir)
                      ? (who % STATE_WIDTH > i ? -1 : 1)
                      : dir == DIR_UP ? (who / STATE_WIDTH < j ? -1 : 1)
                                      : (who / STATE_WIDTH > j ? -1 : 1);
+
+	/* how about
+    return (dir == DIR_LEFT && (who & (STATE_WIDTH-1)) < i) ||
+	(dir == DIR_RIGHT && (who & (STATE_WIDTH-1)) > i) ||
+	(dir == DIR_UP && (who >> 2) < j) ||
+	(dir == DIR_DOWN && (who >> 2) > j) ? -1 : 1;
+	 */
 }
 
 static char assert_direction
@@ -244,11 +255,13 @@ state_move(Direction dir)
     int i_diff = (dir & 1u) - ((dir & 2u) >> 1),
         j_diff = (dir & 1u) + ((dir & 2u) >> 1) - 1;
 
-    state_tile_set(state.i, state.j,
-        state_tile_get(state.i + i_diff, state.j + j_diff));
-
     state.i += i_diff;
     state.j += j_diff;
+
+    state_tile_set(state.i - i_diff, state.j - j_diff,
+        state_tile_get(state.i, state.j));
+
+	/* how about storing state_tile_get(state.i, state.j) used above and inside h_diff */
 
     state.h_value += h_diff(dir_reverse(dir));
 }
