@@ -1,29 +1,22 @@
-#include <stdarg.h>
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
-typedef unsigned char idx_t;
-
-#define PLAN_LEN_MAX (1 << 9)
+typedef unsigned int uchar;
 
 #define N_DIR 4
+typedef uchar Direction;
 #define dir_reverse(dir) ((Direction)(3 - (dir)))
-typedef enum direction_tag {
-    UP    = 0,
-    RIGHT = 1,
-    LEFT  = 2,
-    DOWN  = 3,
-} Direction;
-
-#include <assert.h>
-#include <stdint.h>
+#define DIR_UP 0
+#define DIR_RIGHT 1
+#define DIR_LEFT 2
+#define DIR_DOWN 3
 
 /* stack implementation */
+#define PLAN_LEN_MAX 256
 
 static struct dir_stack_tag
 {
-    size_t    i;
+    int    i;
     Direction buf[PLAN_LEN_MAX];
 } stack;
 
@@ -40,13 +33,11 @@ stack_is_empty(void)
 static inline Direction
 stack_pop(void)
 {
-    assert(stack.i != 0);
     return stack.buf[--stack.i];
 }
 static inline Direction
 stack_top(void)
 {
-    assert(stack.i != 0);
     return stack.buf[stack.i - 1];
 }
 
@@ -62,24 +53,54 @@ stack_top(void)
 
 static struct state_tag
 {
-    unsigned char tile[STATE_WIDTH][STATE_WIDTH];
-    idx_t         i, j;    /* pos of empty */
-    unsigned char h_value; /* ub of h_value is 6*16 */
+    uchar tile[STATE_WIDTH][STATE_WIDTH];
+    uchar         i, j;    /* pos of empty */
+    uchar h_value; /* ub of h_value is 6*16 */
 } state;
 
 #define STATE_TILE(i, j) (state.tile[i][j])
 
-static idx_t inline distance(idx_t i, idx_t j)
+static uchar inline distance(uchar i, uchar j)
 {
     return i > j ? i - j : j - i;
+}
+
+#define H_DIFF(who, from_x, from_y, dir) h_diff_table[who][from_x][from_y][dir]
+static int h_diff_table[STATE_N][STATE_WIDTH][STATE_WIDTH][N_DIR];
+
+static void
+init_mdist(void)
+{
+    for (int who = 0; who < STATE_N; ++who)
+    {
+        int goal_x = who % STATE_WIDTH, goal_y = who / STATE_WIDTH;
+
+        for (int from_x = 0; from_x < STATE_WIDTH; ++from_x)
+            for (int from_y = 0; from_y < STATE_WIDTH; ++from_y)
+                for (uchar dir = 0; dir < N_DIR; ++dir)
+                {
+                    if (dir == DIR_RIGHT)
+                        H_DIFF(who, from_x, from_y, dir) =
+                            goal_x > from_x ? -1 : 1;
+                    if (dir == DIR_LEFT)
+                        H_DIFF(who, from_x, from_y, dir) =
+                            goal_x < from_x ? -1 : 1;
+                    if (dir == DIR_DOWN)
+                        H_DIFF(who, from_x, from_y, dir) =
+                            goal_y > from_y ? -1 : 1;
+                    if (dir == DIR_UP)
+                        H_DIFF(who, from_x, from_y, dir) =
+                            goal_y < from_y ? -1 : 1;
+                }
+    }
 }
 
 static inline void
 state_init_hvalue(void)
 {
-    unsigned char from_x[STATE_WIDTH * STATE_WIDTH],
+    uchar from_x[STATE_WIDTH * STATE_WIDTH],
         from_y[STATE_WIDTH * STATE_WIDTH];
-    idx_t x, y, i;
+    uchar x, y, i;
 
     state.h_value = 0;
 
@@ -98,10 +119,10 @@ state_init_hvalue(void)
 }
 
 static void
-state_tile_fill(const unsigned char v_list[STATE_WIDTH * STATE_WIDTH])
+state_tile_fill(const uchar v_list[STATE_WIDTH * STATE_WIDTH])
 {
     int   cnt = 0;
-    idx_t i, j;
+    uchar i, j;
 
     for (j = 0; j < STATE_WIDTH; ++j)
         for (i = 0; i < STATE_WIDTH; ++i)
@@ -145,15 +166,15 @@ state_up_movable(void)
 static inline bool
 state_movable(Direction dir)
 {
-    return (dir == LEFT && state_left_movable()) ||
-           (dir == RIGHT && state_right_movable()) ||
-           (dir == DOWN && state_down_movable()) ||
-           (dir == UP && state_up_movable());
+    return (dir == DIR_LEFT && state_left_movable()) ||
+           (dir == DIR_RIGHT && state_right_movable()) ||
+           (dir == DIR_DOWN && state_down_movable()) ||
+           (dir == DIR_UP && state_up_movable());
 }
 static void
 state_dump(void)
 {
-    idx_t i, j;
+    uchar i, j;
     printf("%s: h_value=%d, (i,j)=(%u,%u)\n", __func__, state.h_value, state.i,
            state.j);
 
@@ -166,78 +187,40 @@ state_dump(void)
     printf("-----------\n");
 }
 
-#define h_diff(dir)                                                            \
-    (h_diff_table[(STATE_TILE(state.i, state.j) << 6) + ((state.j) << 4) +     \
-                  ((state.i) << 2) + (dir)])
-const static int h_diff_table[STATE_N * STATE_N * N_DIR] = {
-    1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,
-    1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,
-    -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1,
-    1,  -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,
-    1,  1,  -1, 1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1,
-    1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, -1,
-    1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,  1,  1,
-    -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  -1, -1, 1,  1,  -1, -1, 1,  1,
-    -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,
-    1,  -1, 1,  -1, 1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,
-    -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1,  -1,
-    -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, -1, 1,  1,
-    -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, -1, 1,  1,  -1, -1, 1,
-    1,  -1, -1, 1,  1,  -1, 1,  1,  1,  1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,
-    -1, -1, 1,  1,  -1, -1, 1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,
-    1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,
-    -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,
-    -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  -1, 1,  1,  1,  1,
-    1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1,
-    1,  -1, 1,  -1, 1,  -1, 1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,
-    -1, 1,  -1, 1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1,
-    -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  -1, -1,
-    1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, -1, 1,  1,  -1,
-    -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,  -1, 1,  -1, 1,  -1, 1,  -1,
-    1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,
-    1,  1,  1,  1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,
-    1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  1,
-    1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  1,  -1,
-    1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  1,  1,  1,  1,  -1,
-    1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,
-    -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,
-    1,  -1, -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1,
-    1,  -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, -1, 1,
-    1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,  -1, 1,  -1,
-    1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,
-    1,  1,  -1, 1,  1,  -1, -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1,
-    1,  1,  -1, 1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1,
-    1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1,
-    1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,  1,
-    -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,
-    -1, -1, 1,  1,  -1, 1,  1,  1,  1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1,
-    -1, 1,  1,  -1, -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,
-    -1, -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,
-    1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  -1, 1,  -1,
-    1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  -1, 1,  -1, 1,  1,  1,
-    -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,
-    -1, -1, 1,  1,  -1, -1, 1,  -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  1,
-    1,  -1, 1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1,
-    1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  -1, 1,
-    -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  -1, 1,  1,  1,  -1,
-    1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,
-    -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1,
-    1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,
-    -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1};
+static char assert_direction
+    [DIR_UP == 0 && DIR_RIGHT == 1 && DIR_LEFT == 2 && DIR_DOWN == 3 ? 1 : -1];
+#define get_new_i(state, dir) (state.i + (dir & 1u) - ((dir & 2u) >> 1))
+#define get_new_j(state, dir) (state.j + (dir & 1u) + ((dir & 2u) >> 1) - 1)
 
-static void
+static inline bool
+state_move_with_limit(Direction dir, unsigned int f_limit)
+{
+    int new_i = get_new_i(state, dir), new_j = get_new_j(state, dir);
+    int who = STATE_TILE(new_i, new_j);
+    int new_h_value =
+        state.h_value + H_DIFF(who, new_i, new_j, dir_reverse(dir));
+
+    if (stack.i + 1 + new_h_value > f_limit)
+        return false;
+
+    state.h_value = new_h_value;
+    STATE_TILE(state.i, state.j) = who;
+    state.i = new_i;
+    state.j = new_j;
+
+    return true;
+}
+
+static inline void
 state_move(Direction dir)
 {
-    int i_diff = (dir & 1u) - ((dir & 2u) >> 1),
-        j_diff = (dir & 1u) + ((dir & 2u) >> 1) - 1;
+    int new_i = get_new_i(state, dir), new_j = get_new_j(state, dir);
+    int who = STATE_TILE(new_i, new_j);
 
-    STATE_TILE(state.i, state.j) =
-        STATE_TILE(state.i + i_diff, state.j + j_diff);
-
-    state.i += i_diff;
-    state.j += j_diff;
-
-    state.h_value += h_diff(dir_reverse(dir));
+    state.h_value += H_DIFF(who, new_i, new_j, dir_reverse(dir));
+    STATE_TILE(state.i, state.j) = who;
+    state.i = new_i;
+    state.j = new_j;
 }
 
 /*
@@ -247,7 +230,7 @@ state_move(Direction dir)
 static bool
 idas_internal(int f_limit)
 {
-    unsigned char dir = 0;
+    uchar dir = 0;
 
     for (;;)
     {
@@ -260,13 +243,9 @@ idas_internal(int f_limit)
         if ((stack_is_empty() || stack_top() != dir_reverse(dir)) &&
             state_movable((Direction) dir))
         {
-            state_move((Direction) dir);
-
-            if (stack.i + state.h_value > (size_t) f_limit)
-                state_move(dir_reverse(dir));
-            else
+            if (state_move_with_limit(dir, f_limit))
             {
-                stack_put((Direction) dir);
+                stack_put(dir);
                 dir = 0;
                 continue;
             }
@@ -284,14 +263,15 @@ idas_internal(int f_limit)
 }
 
 void
-idas_kernel(unsigned char *input)
+idas_kernel(uchar *input)
 {
     int f_limit;
     state_tile_fill(input);
     state_init_hvalue();
+    init_mdist();
     state_dump();
 
-    for (f_limit = 1;; ++f_limit)
+    for (f_limit = state.h_value;; ++f_limit)
         if (idas_internal(f_limit))
             break;
 }
@@ -299,7 +279,6 @@ idas_kernel(unsigned char *input)
 /* host implementation */
 
 #include <errno.h>
-#include <stdio.h>
 #include <stdlib.h>
 
 #define exit_failure(...)                                                      \
@@ -325,7 +304,7 @@ pop_int_from_str(const char *str, char **end_ptr)
 
 #define MAX_LINE_LEN 100
 static void
-load_state_from_file(const char *fname, unsigned char *s)
+load_state_from_file(const char *fname, uchar *s)
 {
     FILE *fp;
     char  str[MAX_LINE_LEN];
@@ -361,7 +340,7 @@ load_state_from_file(const char *fname, unsigned char *s)
 int
 main(int argc, char *argv[])
 {
-    unsigned char s_list[STATE_N];
+    uchar s_list[STATE_N];
     int           plan[PLAN_LEN_MAX];
 
     if (argc < 2)
