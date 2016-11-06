@@ -12,33 +12,33 @@ typedef uchar Direction;
 #define DIR_DOWN 3
 
 /* stack implementation */
-#define PLAN_LEN_MAX 256
+#define PLAN_LEN_MAX 128
 
 static struct dir_stack_tag
 {
     int    i;
-    Direction buf[PLAN_LEN_MAX];
+    unsigned char buf[PLAN_LEN_MAX];
 } stack;
 
 static inline void
 stack_put(Direction dir)
 {
-    stack.buf[stack.i++] = dir;
+    stack.buf[++stack.i] = dir;
 }
 static inline bool
 stack_is_empty(void)
 {
-    return stack.i == 0;
+    return !stack.i;
 }
 static inline Direction
 stack_pop(void)
 {
-    return stack.buf[--stack.i];
+    return stack.buf[stack.i--];
 }
 static inline Direction
 stack_top(void)
 {
-    return stack.buf[stack.i - 1];
+    return stack.buf[stack.i];
 }
 
 /* state implementation */
@@ -53,7 +53,7 @@ stack_top(void)
 
 static struct state_tag
 {
-    uchar tile[STATE_WIDTH][STATE_WIDTH];
+    unsigned char tile[STATE_WIDTH][STATE_WIDTH];
     uchar         i, j;    /* pos of empty */
     uchar h_value; /* ub of h_value is 6*16 */
 } state;
@@ -65,31 +65,31 @@ static uchar inline distance(uchar i, uchar j)
     return i > j ? i - j : j - i;
 }
 
-#define H_DIFF(who, from_x, from_y, dir) h_diff_table[who][from_x][from_y][dir]
+#define H_DIFF(opponent, from_x, from_y, dir) h_diff_table[opponent][from_x][from_y][dir]
 static int h_diff_table[STATE_N][STATE_WIDTH][STATE_WIDTH][N_DIR];
 
 static void
 init_mdist(void)
 {
-    for (int who = 0; who < STATE_N; ++who)
+    for (int opponent = 0; opponent < STATE_N; ++opponent)
     {
-        int goal_x = who % STATE_WIDTH, goal_y = who / STATE_WIDTH;
+        int goal_x = opponent % STATE_WIDTH, goal_y = opponent / STATE_WIDTH;
 
         for (int from_x = 0; from_x < STATE_WIDTH; ++from_x)
             for (int from_y = 0; from_y < STATE_WIDTH; ++from_y)
                 for (uchar dir = 0; dir < N_DIR; ++dir)
                 {
-                    if (dir == DIR_RIGHT)
-                        H_DIFF(who, from_x, from_y, dir) =
-                            goal_x > from_x ? -1 : 1;
                     if (dir == DIR_LEFT)
-                        H_DIFF(who, from_x, from_y, dir) =
+                        H_DIFF(opponent, from_x, from_y, dir) =
+                            goal_x > from_x ? -1 : 1;
+                    if (dir == DIR_RIGHT)
+                        H_DIFF(opponent, from_x, from_y, dir) =
                             goal_x < from_x ? -1 : 1;
-                    if (dir == DIR_DOWN)
-                        H_DIFF(who, from_x, from_y, dir) =
-                            goal_y > from_y ? -1 : 1;
                     if (dir == DIR_UP)
-                        H_DIFF(who, from_x, from_y, dir) =
+                        H_DIFF(opponent, from_x, from_y, dir) =
+                            goal_y > from_y ? -1 : 1;
+                    if (dir == DIR_DOWN)
+                        H_DIFF(opponent, from_x, from_y, dir) =
                             goal_y < from_y ? -1 : 1;
                 }
     }
@@ -139,28 +139,28 @@ state_tile_fill(const uchar v_list[STATE_WIDTH * STATE_WIDTH])
 static inline bool
 state_is_goal(void)
 {
-    return state.h_value == 0;
+    return !state.h_value;
 }
 
 inline static bool
 state_left_movable(void)
 {
-    return state.i != 0;
+    return state.i;
 }
 inline static bool
 state_down_movable(void)
 {
-    return state.j != STATE_WIDTH - 1;
+    return STATE_WIDTH - 1 - state.j;
 }
 inline static bool
 state_right_movable(void)
 {
-    return state.i != STATE_WIDTH - 1;
+    return STATE_WIDTH - 1 - state.i;
 }
 inline static bool
 state_up_movable(void)
 {
-    return state.j != 0;
+    return state.j;
 }
 
 static inline bool
@@ -196,15 +196,15 @@ static inline bool
 state_move_with_limit(Direction dir, unsigned int f_limit)
 {
     int new_i = get_new_i(state, dir), new_j = get_new_j(state, dir);
-    int who = STATE_TILE(new_i, new_j);
+    int opponent = STATE_TILE(new_i, new_j);
     int new_h_value =
-        state.h_value + H_DIFF(who, new_i, new_j, dir_reverse(dir));
+        state.h_value + H_DIFF(opponent, new_i, new_j, dir);
 
     if (stack.i + 1 + new_h_value > f_limit)
         return false;
 
     state.h_value = new_h_value;
-    STATE_TILE(state.i, state.j) = who;
+    STATE_TILE(state.i, state.j) = opponent;
     state.i = new_i;
     state.j = new_j;
 
@@ -215,10 +215,10 @@ static inline void
 state_move(Direction dir)
 {
     int new_i = get_new_i(state, dir), new_j = get_new_j(state, dir);
-    int who = STATE_TILE(new_i, new_j);
+    int opponent = STATE_TILE(new_i, new_j);
 
-    state.h_value += H_DIFF(who, new_i, new_j, dir_reverse(dir));
-    STATE_TILE(state.i, state.j) = who;
+    state.h_value += H_DIFF(opponent, new_i, new_j, dir);
+    STATE_TILE(state.i, state.j) = opponent;
     state.i = new_i;
     state.j = new_j;
 }
