@@ -311,7 +311,7 @@ idas_kernel(uchar *input)
     state_init_hvalue();
     state_dump();
 
-    for (f_limit = 1;; ++f_limit)
+    for (f_limit = state.h_value;; ++f_limit)
         if (idas_internal(f_limit))
             break;
 }

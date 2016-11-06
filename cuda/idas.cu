@@ -300,7 +300,7 @@ idas_kernel(uchar *input, int *plan)
     state_tile_fill(input);
     state_init_hvalue();
 
-    for (uchar f_limit = 1;; ++f_limit)
+    for (uchar f_limit = state.h_value;; ++f_limit)
         if (idas_internal(f_limit))
             break;
 }
