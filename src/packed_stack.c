@@ -13,27 +13,28 @@ typedef unsigned char Direction
 
 #define stack_byte(i) (stack.buf[(i) >> DIR_BITS])
 #define stack_ofs(i) ((i & DIR_MASK) << 1)
-#define stack_get(i) ((stack_byte(i) & (DIR_MASK << stack_ofs(i))) >> stack_ofs(i))
+#define stack_get(i)                                                           \
+    ((stack_byte(i) & (DIR_MASK << stack_ofs(i))) >> stack_ofs(i))
 
-static struct stack_tag
+    static struct stack_tag
 {
-	unsigned char i;
-	unsigned char buf[STACK_BUF_BYTES];
+    unsigned char i;
+    unsigned char buf[STACK_BUF_BYTES];
 } stack;
 
 void
 stack_put(Direction dir)
 {
-	stack_byte(i) &= ^(STACK_DIR_MASK << stack_ofs(stack.i));
+    stack_byte(i) &= ^(STACK_DIR_MASK << stack_ofs(stack.i));
     stack_byte(i) |= dir << stack_ofs(stack.i);
-	++stack.i;
+    ++stack.i;
 }
 
 Direction
 stack_pop(void)
 {
     --stack.i;
-	return stack_get(stack.i);
+    return stack_get(stack.i);
 }
 
 __device__ static inline bool
@@ -45,5 +46,5 @@ stack_is_empty(void)
 __device__ static inline Direction
 stack_peak(void)
 {
-	return stack_get(stack.i - 1)
+    return stack_get(stack.i - 1)
 }

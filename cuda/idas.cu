@@ -42,7 +42,7 @@ __device__ static inline bool
 stack_is_empty(void)
 {
     return stack.i == 0;
-	/* how about !stack.i */
+    /* how about !stack.i */
 }
 __device__ static inline Direction
 stack_pop(void)
@@ -135,7 +135,7 @@ __device__ static inline bool
 state_is_goal(void)
 {
     return state.h_value == 0;
-	/* how about !state.h_value (ptx level) */
+    /* how about !state.h_value (ptx level) */
 }
 
 __device__ inline static bool
@@ -147,7 +147,7 @@ __device__ inline static bool
 state_down_movable(void)
 {
     return state.j != STATE_WIDTH - 1;
-	/* how about !(state.j - STATE_WIDTH + 1) */
+    /* how about !(state.j - STATE_WIDTH + 1) */
 }
 __device__ inline static bool
 state_right_movable(void)
@@ -170,7 +170,7 @@ state_movable(Direction dir)
 }
 
 #define h_diff(dir)                                                            \
-    (h_diff_table[(state_tile_get(state.i, state.j) << 6) + ((state.j) << 4) +     \
+    (h_diff_table[(state_tile_get(state.i, state.j) << 6) + ((state.j) << 4) + \
                   ((state.i) << 2) + (dir)])
 __constant__ const static int h_diff_table[STATE_N * STATE_N * DIR_N] = {
     1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,
@@ -239,12 +239,12 @@ calc_hdiff(uchar who, uchar i, uchar j, Direction dir)
                      : dir == DIR_UP ? (who / STATE_WIDTH < j ? -1 : 1)
                                      : (who / STATE_WIDTH > j ? -1 : 1);
 
-	/* how about
+    /* how about
     return (dir == DIR_LEFT && (who & (STATE_WIDTH-1)) < i) ||
-	(dir == DIR_RIGHT && (who & (STATE_WIDTH-1)) > i) ||
-	(dir == DIR_UP && (who >> 2) < j) ||
-	(dir == DIR_DOWN && (who >> 2) > j) ? -1 : 1;
-	 */
+    (dir == DIR_RIGHT && (who & (STATE_WIDTH-1)) > i) ||
+    (dir == DIR_UP && (who >> 2) < j) ||
+    (dir == DIR_DOWN && (who >> 2) > j) ? -1 : 1;
+     */
 }
 
 static char assert_direction
@@ -259,9 +259,10 @@ state_move(Direction dir)
     state.j += j_diff;
 
     state_tile_set(state.i - i_diff, state.j - j_diff,
-        state_tile_get(state.i, state.j));
+                   state_tile_get(state.i, state.j));
 
-	/* how about storing state_tile_get(state.i, state.j) used above and inside h_diff */
+    /* how about storing state_tile_get(state.i, state.j) used above and inside
+     * h_diff */
 
     state.h_value += h_diff(dir_reverse(dir));
 }
