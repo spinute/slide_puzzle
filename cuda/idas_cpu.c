@@ -22,36 +22,36 @@ typedef uchar Direction;
 #define stack_byte(i) (stack.buf[(i) >> STACK_DIR_BITS])
 #define stack_ofs(i) ((i & STACK_DIR_MASK) << 1)
 #define stack_get(i)                                                           \
-    ((stack_byte(i) & (STACK_DIR_MASK << stack_ofs(i))) >> stack_ofs(i))
+	((stack_byte(i) & (STACK_DIR_MASK << stack_ofs(i))) >> stack_ofs(i))
 
 static struct dir_stack_tag
 {
-    uchar i;
-    uchar buf[STACK_BUF_BYTES];
+	uchar i;
+	uchar buf[STACK_BUF_BYTES];
 } stack;
 
-static inline void
+	static inline void
 stack_put(Direction dir)
 {
-    stack_byte(stack.i) &= ~(STACK_DIR_MASK << stack_ofs(stack.i));
-    stack_byte(stack.i) |= dir << stack_ofs(stack.i);
-    ++stack.i;
+	stack_byte(stack.i) &= ~(STACK_DIR_MASK << stack_ofs(stack.i));
+	stack_byte(stack.i) |= dir << stack_ofs(stack.i);
+	++stack.i;
 }
-static inline bool
+	static inline bool
 stack_is_empty(void)
 {
-    return stack.i == 0;
+	return stack.i == 0;
 }
-static inline Direction
+	static inline Direction
 stack_pop(void)
 {
-    --stack.i;
-    return stack_get(stack.i);
+	--stack.i;
+	return stack_get(stack.i);
 }
-static inline Direction
+	static inline Direction
 stack_peak(void)
 {
-    return stack_get(stack.i - 1);
+	return stack_get(stack.i - 1);
 }
 
 /* state implementation */
@@ -68,242 +68,242 @@ stack_peak(void)
 
 static struct state_tag
 {
-    unsigned long long tile;    /* packed representation label(4bit)*16pos */
-    uchar              i, j;    /* pos of empty */
-    uchar              h_value; /* ub of h_value is 6*16 */
+	unsigned long long tile;    /* packed representation label(4bit)*16pos */
+	uchar              i, j;    /* pos of empty */
+	uchar              h_value; /* ub of h_value is 6*16 */
 } state;
 
 #define state_pos(i, j) (((j) << 2) + (i))
 #define state_tile_ofs(i, j) (state_pos((i), (j)) << 2)
 #define state_tile_get(i, j)                                                   \
-    ((state.tile & (STATE_TILE_MASK << state_tile_ofs((i), (j)))) >>           \
-     state_tile_ofs((i), (j)))
+	((state.tile & (STATE_TILE_MASK << state_tile_ofs((i), (j)))) >>           \
+	 state_tile_ofs((i), (j)))
 #define state_tile_set(i, j, val)                                              \
-    do                                                                         \
-    {                                                                          \
-        state.tile &= ~((STATE_TILE_MASK) << state_tile_ofs((i), (j)));        \
-        state.tile |= ((unsigned long long) val) << state_tile_ofs((i), (j));  \
-    } while (0)
+	do                                                                         \
+{                                                                          \
+	state.tile &= ~((STATE_TILE_MASK) << state_tile_ofs((i), (j)));        \
+	state.tile |= ((unsigned long long) val) << state_tile_ofs((i), (j));  \
+} while (0)
 
 static uchar inline distance(uchar i, uchar j)
 {
-    return i > j ? i - j : j - i;
+	return i > j ? i - j : j - i;
 }
 
-static inline void
+	static inline void
 state_init_hvalue(void)
 {
-    uchar from_x[STATE_WIDTH * STATE_WIDTH], from_y[STATE_WIDTH * STATE_WIDTH];
-    uchar x, y, i;
+	uchar from_x[STATE_WIDTH * STATE_WIDTH], from_y[STATE_WIDTH * STATE_WIDTH];
+	uchar x, y, i;
 
-    state.h_value = 0;
+	state.h_value = 0;
 
-    for (x = 0; x < STATE_WIDTH; ++x)
-        for (y = 0; y < STATE_WIDTH; ++y)
-        {
-            from_x[state_tile_get(x, y)] = x;
-            from_y[state_tile_get(x, y)] = y;
-        }
+	for (x = 0; x < STATE_WIDTH; ++x)
+		for (y = 0; y < STATE_WIDTH; ++y)
+		{
+			from_x[state_tile_get(x, y)] = x;
+			from_y[state_tile_get(x, y)] = y;
+		}
 
-    for (i = 1; i < STATE_WIDTH * STATE_WIDTH; ++i)
-    {
-        state.h_value += distance(from_x[i], i % STATE_WIDTH);
-        state.h_value += distance(from_y[i], i / STATE_WIDTH);
-    }
+	for (i = 1; i < STATE_WIDTH * STATE_WIDTH; ++i)
+	{
+		state.h_value += distance(from_x[i], i % STATE_WIDTH);
+		state.h_value += distance(from_y[i], i / STATE_WIDTH);
+	}
 }
 
-static void
+	static void
 state_tile_fill(const uchar v_list[STATE_WIDTH * STATE_WIDTH])
 {
-    int   cnt = 0;
-    uchar i, j;
+	int   cnt = 0;
+	uchar i, j;
 
-    for (j = 0; j < STATE_WIDTH; ++j)
-        for (i = 0; i < STATE_WIDTH; ++i)
-        {
-            if (v_list[cnt] == STATE_EMPTY)
-            {
-                state.i = i;
-                state.j = j;
-            }
-            state_tile_set(i, j, v_list[cnt]);
-            ++cnt;
-        }
+	for (j = 0; j < STATE_WIDTH; ++j)
+		for (i = 0; i < STATE_WIDTH; ++i)
+		{
+			if (v_list[cnt] == STATE_EMPTY)
+			{
+				state.i = i;
+				state.j = j;
+			}
+			state_tile_set(i, j, v_list[cnt]);
+			++cnt;
+		}
 }
 
-static inline bool
+	static inline bool
 state_is_goal(void)
 {
-    return state.h_value == 0;
+	return state.h_value == 0;
 }
 
-inline static bool
+	inline static bool
 state_left_movable(void)
 {
-    return state.i != 0;
+	return state.i != 0;
 }
-inline static bool
+	inline static bool
 state_down_movable(void)
 {
-    return state.j != STATE_WIDTH - 1;
+	return state.j != STATE_WIDTH - 1;
 }
-inline static bool
+	inline static bool
 state_right_movable(void)
 {
-    return state.i != STATE_WIDTH - 1;
+	return state.i != STATE_WIDTH - 1;
 }
-inline static bool
+	inline static bool
 state_up_movable(void)
 {
-    return state.j != 0;
+	return state.j != 0;
 }
 
-static inline bool
+	static inline bool
 state_movable(Direction dir)
 {
-    return (dir == DIR_LEFT && state_left_movable()) ||
-           (dir == DIR_RIGHT && state_right_movable()) ||
-           (dir == DIR_DOWN && state_down_movable()) ||
-           (dir == DIR_UP && state_up_movable());
+	return (dir == DIR_LEFT && state_left_movable()) ||
+		(dir == DIR_RIGHT && state_right_movable()) ||
+		(dir == DIR_DOWN && state_down_movable()) ||
+		(dir == DIR_UP && state_up_movable());
 }
-static void
+	static void
 state_dump(void)
 {
-    uchar i, j;
-    printf("%s: h_value=%d, (i,j)=(%u,%u)\n", __func__, state.h_value, state.i,
-           state.j);
+	uchar i, j;
+	printf("%s: h_value=%d, (i,j)=(%u,%u)\n", __func__, state.h_value, state.i,
+			state.j);
 
-    for (j = 0; j < STATE_WIDTH; ++j)
-    {
-        for (i = 0; i < STATE_WIDTH; ++i)
-            printf("%u ", i == state.i && j == state.j
-                              ? 0
-                              : (unsigned char) state_tile_get(i, j));
-        printf("\n");
-    }
-    printf("-----------\n");
+	for (j = 0; j < STATE_WIDTH; ++j)
+	{
+		for (i = 0; i < STATE_WIDTH; ++i)
+			printf("%u ", i == state.i && j == state.j
+					? 0
+					: (unsigned char) state_tile_get(i, j));
+		printf("\n");
+	}
+	printf("-----------\n");
 }
 
 #define h_diff(dir)                                                            \
-    (h_diff_table[(state_tile_get(state.i, state.j) << 6) + ((state.j) << 4) + \
-                  ((state.i) << 2) + (dir)])
+	(h_diff_table[(state_tile_get(state.i, state.j) << 6) + ((state.j) << 4) + \
+	 ((state.i) << 2) + (dir)])
 const static int h_diff_table[STATE_N * STATE_N * N_DIR] = {
-    1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,
-    1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,
-    -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1,
-    1,  -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,
-    1,  1,  -1, 1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1,
-    1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, -1,
-    1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,  1,  1,
-    -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  -1, -1, 1,  1,  -1, -1, 1,  1,
-    -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,
-    1,  -1, 1,  -1, 1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,
-    -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1,  -1,
-    -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, -1, 1,  1,
-    -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, -1, 1,  1,  -1, -1, 1,
-    1,  -1, -1, 1,  1,  -1, 1,  1,  1,  1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,
-    -1, -1, 1,  1,  -1, -1, 1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,
-    1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,
-    -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,
-    -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  -1, 1,  1,  1,  1,
-    1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1,
-    1,  -1, 1,  -1, 1,  -1, 1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,
-    -1, 1,  -1, 1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1,
-    -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  -1, -1,
-    1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, -1, 1,  1,  -1,
-    -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,  -1, 1,  -1, 1,  -1, 1,  -1,
-    1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,
-    1,  1,  1,  1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,
-    1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  1,
-    1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  1,  -1,
-    1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  1,  1,  1,  1,  -1,
-    1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,
-    -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,
-    1,  -1, -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1,
-    1,  -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, -1, 1,
-    1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,  -1, 1,  -1,
-    1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,
-    1,  1,  -1, 1,  1,  -1, -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1,
-    1,  1,  -1, 1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1,
-    1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1,
-    1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,  1,
-    -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,
-    -1, -1, 1,  1,  -1, 1,  1,  1,  1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1,
-    -1, 1,  1,  -1, -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,
-    -1, -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,
-    1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  -1, 1,  -1,
-    1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  -1, 1,  -1, 1,  1,  1,
-    -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,
-    -1, -1, 1,  1,  -1, -1, 1,  -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  1,
-    1,  -1, 1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1,
-    1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  -1, 1,
-    -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  -1, 1,  1,  1,  -1,
-    1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,
-    -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1,
-    1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,
-    -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1};
+	1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,
+	1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,
+	-1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1,
+	1,  -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,
+	1,  1,  -1, 1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1,
+	1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, -1,
+	1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,  1,  1,
+	-1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  -1, -1, 1,  1,  -1, -1, 1,  1,
+	-1, 1,  1,  1,  -1, 1,  -1, 1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,
+	1,  -1, 1,  -1, 1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,
+	-1, 1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1,  -1,
+	-1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, -1, 1,  1,
+	-1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, -1, 1,  1,  -1, -1, 1,
+	1,  -1, -1, 1,  1,  -1, 1,  1,  1,  1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,
+	-1, -1, 1,  1,  -1, -1, 1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,
+	1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,
+	-1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,
+	-1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  -1, 1,  1,  1,  1,
+	1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1,
+	1,  -1, 1,  -1, 1,  -1, 1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,
+	-1, 1,  -1, 1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1,
+	-1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  -1, -1,
+	1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, -1, 1,  1,  -1,
+	-1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,  -1, 1,  -1, 1,  -1, 1,  -1,
+	1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,
+	1,  1,  1,  1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,
+	1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  1,
+	1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  1,  -1,
+	1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  1,  1,  1,  1,  -1,
+	1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,
+	-1, 1,  -1, 1,  -1, 1,  1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,
+	1,  -1, -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1,
+	1,  -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, -1, 1,
+	1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,  -1, 1,  -1,
+	1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,
+	1,  1,  -1, 1,  1,  -1, -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1,
+	1,  1,  -1, 1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1,
+	1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1,
+	1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,  1,
+	-1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,
+	-1, -1, 1,  1,  -1, 1,  1,  1,  1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1,
+	-1, 1,  1,  -1, -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,
+	-1, -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,
+	1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  -1, 1,  -1,
+	1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  -1, 1,  -1, 1,  1,  1,
+	-1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,
+	-1, -1, 1,  1,  -1, -1, 1,  -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  1,
+	1,  -1, 1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1,
+	1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  -1, 1,
+	-1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  -1, 1,  1,  1,  -1,
+	1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,
+	-1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1,
+	1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,
+	-1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1};
 
 static char assert_direction
-    [DIR_UP == 0 && DIR_RIGHT == 1 && DIR_LEFT == 2 && DIR_DOWN == 3 ? 1 : -1];
-static void
+[DIR_UP == 0 && DIR_RIGHT == 1 && DIR_LEFT == 2 && DIR_DOWN == 3 ? 1 : -1];
+	static void
 state_move(Direction dir)
 {
-    int i_diff = (dir & 1u) - ((dir & 2u) >> 1),
-        j_diff = (dir & 1u) + ((dir & 2u) >> 1) - 1;
+	int i_diff = (dir & 1u) - ((dir & 2u) >> 1),
+		j_diff = (dir & 1u) + ((dir & 2u) >> 1) - 1;
 
-    state_tile_set(state.i, state.j,
-                   state_tile_get(state.i + i_diff, state.j + j_diff));
+	state_tile_set(state.i, state.j,
+			state_tile_get(state.i + i_diff, state.j + j_diff));
 
-    state.i += i_diff;
-    state.j += j_diff;
+	state.i += i_diff;
+	state.j += j_diff;
 
-    state.h_value += h_diff(dir_reverse(dir));
+	state.h_value += h_diff(dir_reverse(dir));
 }
 
 /*
  * solver implementation
  */
 
-static bool
+	static bool
 idas_internal(unsigned int f_limit)
 {
-    uchar dir = 0;
+	uchar dir = 0;
 
-    for (;;)
-    {
-        if (state_is_goal())
-        {
-            state_dump();
-            return true;
-        }
+	for (;;)
+	{
+		if (state_is_goal())
+		{
+			state_dump();
+			return true;
+		}
 
-        if ((stack_is_empty() || stack_peak() != dir_reverse(dir)) &&
-            state_movable((Direction) dir))
-        {
-            state_move((Direction) dir);
+		if ((stack_is_empty() || stack_peak() != dir_reverse(dir)) &&
+				state_movable((Direction) dir))
+		{
+			state_move((Direction) dir);
 
-            if (stack.i + state.h_value > f_limit)
-                state_move(dir_reverse(dir));
-            else
-            {
-                stack_put((Direction) dir);
-                dir = 0;
-                continue;
-            }
-        }
+			if (stack.i + state.h_value > f_limit)
+				state_move(dir_reverse(dir));
+			else
+			{
+				stack_put((Direction) dir);
+				dir = 0;
+				continue;
+			}
+		}
 
-        while (++dir == N_DIR)
-        {
-            if (stack_is_empty())
-                return false;
+		while (++dir == N_DIR)
+		{
+			if (stack_is_empty())
+				return false;
 
-            dir = stack_pop();
-            state_move(dir_reverse(dir));
-        }
-    }
+			dir = stack_pop();
+			state_move(dir_reverse(dir));
+		}
+	}
 }
 
-void
+	void
 idas_kernel(uchar *input)
 {
     unsigned int f_limit;
@@ -311,7 +311,7 @@ idas_kernel(uchar *input)
     state_init_hvalue();
     state_dump();
 
-    for (f_limit = 1;; ++f_limit)
+    for (f_limit = state.h_value;; ++f_limit)
         if (idas_internal(f_limit))
             break;
 }
