@@ -216,8 +216,8 @@ state_dump(void)
 
 static char assert_direction
     [DIR_UP == 0 && DIR_RIGHT == 1 && DIR_LEFT == 2 && DIR_DOWN == 3 ? 1 : -1];
-#define get_new_i(state, dir) (state.i + (dir & 1u) - ((dir & 2u) >> 1))
-#define get_new_j(state, dir) (state.j + (dir & 1u) + ((dir & 2u) >> 1) - 1)
+#define get_new_i(state, dir) (state.i + (dir & 1u) - ((dir >> 1) & 1u))
+#define get_new_j(state, dir) (state.j + (dir & 1u) + ((dir >> 1) & 1u) - 1)
 
 static inline bool
 state_move_with_limit(Direction dir, unsigned int f_limit)
