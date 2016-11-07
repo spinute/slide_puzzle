@@ -1,7 +1,7 @@
 # for cuda
 # TODO: merge Rakefile used for src
 
-VPATH = cuda
+VPATH = src
 
 .PHONY: fmt TAGS
 
