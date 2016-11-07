@@ -28,7 +28,6 @@ __device__ __shared__ static struct dir_stack_tag
 
 #define stack_byte(i) (stack.buf[(i) >> STACK_DIR_BITS])
 #define stack_ofs(i) ((i & STACK_DIR_MASK) << 1)
-// how about ((i << 1) & (STACK_DIR_MASK << 1))
 #define stack_get(i)                                                           \
     ((stack_byte(i) & (STACK_DIR_MASK << stack_ofs(i))) >> stack_ofs(i))
 __device__ static inline void
@@ -64,27 +63,28 @@ stack_peak(void)
 #define STATE_TILE_BITS 4
 #define STATE_TILE_MASK ((1ull << STATE_TILE_BITS) - 1)
 
+#define POS_X(pos) ((pos) % STATE_WIDTH)
+#define POS_Y(pos) ((pos) / STATE_WIDTH)
+
 /*
  * goal: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
  */
 
 __device__ __shared__ static struct state_tag
 {
-    unsigned long long tile;    /* packed representation label(4bit)*16pos */
-    uchar              i, j;    /* pos of empty */
+    unsigned long long tile; /* packed representation label(4bit)*16pos */
+    uchar              empty;
     uchar              h_value; /* ub of h_value is 6*16 */
 } state;
 
-#define state_pos(i, j) (((j) << 2) + (i))
-#define state_tile_ofs(i, j) (state_pos((i), (j)) << 2)
-#define state_tile_get(i, j)                                                   \
-    ((state.tile & (STATE_TILE_MASK << state_tile_ofs((i), (j)))) >>           \
-     state_tile_ofs((i), (j)))
-#define state_tile_set(i, j, val)                                              \
+#define state_tile_ofs(i) (i << 2)
+#define state_tile_get(i)                                                      \
+    ((state.tile & (STATE_TILE_MASK << state_tile_ofs(i))) >> state_tile_ofs(i))
+#define state_tile_set(i, val)                                                 \
     do                                                                         \
     {                                                                          \
-        state.tile &= ~((STATE_TILE_MASK) << state_tile_ofs((i), (j)));        \
-        state.tile |= ((unsigned long long) val) << state_tile_ofs((i), (j));  \
+        state.tile &= ~((STATE_TILE_MASK) << state_tile_ofs(i));               \
+        state.tile |= ((unsigned long long) val) << state_tile_ofs(i);         \
     } while (0)
 
 __device__ static uchar inline distance(uchar i, uchar j)
@@ -92,179 +92,120 @@ __device__ static uchar inline distance(uchar i, uchar j)
     return i > j ? i - j : j - i;
 }
 
+#define H_DIFF(opponent, empty, empty_dir)                                     \
+    h_diff_table[opponent][empty][empty_dir]
+__device__ __shared__ static int h_diff_table[STATE_N][STATE_N][N_DIR];
+
+__device__ static void
+init_mdist(void)
+{
+    for (int opponent = 0; opponent < STATE_N; ++opponent)
+    {
+        int goal_x = POS_X(opponent), goal_y = POS_Y(opponent);
+
+        for (int i = 0; i < STATE_N; ++i)
+        {
+            int from_x = POS_X(i), from_y = POS_Y(i);
+            for (uchar dir = 0; dir < N_DIR; ++dir)
+            {
+                if (dir == DIR_LEFT)
+                    H_DIFF(opponent, i, dir) = goal_x > from_x ? -1 : 1;
+                if (dir == DIR_RIGHT)
+                    H_DIFF(opponent, i, dir) = goal_x < from_x ? -1 : 1;
+                if (dir == DIR_UP)
+                    H_DIFF(opponent, i, dir) = goal_y > from_y ? -1 : 1;
+                if (dir == DIR_DOWN)
+                    H_DIFF(opponent, i, dir) = goal_y < from_y ? -1 : 1;
+            }
+        }
+    }
+}
+
 __device__ static inline void
 state_init_hvalue(void)
 {
-    uchar from_x[STATE_WIDTH * STATE_WIDTH], from_y[STATE_WIDTH * STATE_WIDTH];
+    uchar from_x[STATE_N], from_y[STATE_N];
 
-    state.h_value = 0;
-
-    for (uchar x = 0; x < STATE_WIDTH; ++x)
-        for (uchar y = 0; y < STATE_WIDTH; ++y)
-        {
-            from_x[state_tile_get(x, y)] = x;
-            from_y[state_tile_get(x, y)] = y;
-        }
-
-    for (uchar i = 1; i < STATE_WIDTH * STATE_WIDTH; ++i)
+    for (int i = 0; i < STATE_N; ++i)
     {
-        state.h_value += distance(from_x[i], i % STATE_WIDTH);
-        state.h_value += distance(from_y[i], i / STATE_WIDTH);
+        from_x[state_tile_get(i)] = POS_X(i);
+        from_y[state_tile_get(i)] = POS_Y(i);
+    }
+    for (int i = 1; i < STATE_N; ++i)
+    {
+        state.h_value += distance(from_x[i], POS_X(i));
+        state.h_value += distance(from_y[i], POS_Y(i));
     }
 }
 
 __device__ static void
 state_tile_fill(const uchar v_list[STATE_WIDTH * STATE_WIDTH])
 {
-    int cnt = 0;
+    for (int i = 0; i < STATE_N; ++i)
+    {
+        if (v_list[i] == STATE_EMPTY)
+            state.empty = i;
+        state_tile_set(i, v_list[i]);
+    }
+}
 
-    for (uchar j = 0; j < STATE_WIDTH; ++j)
-        for (uchar i = 0; i < STATE_WIDTH; ++i)
+__device__ static char assert_direction2
+    [DIR_UP == 0 && DIR_RIGHT == 1 && DIR_LEFT == 2 && DIR_DOWN == 3 ? 1 : -1];
+__device__ static bool movable_table[STATE_N][N_DIR];
+
+__device__ static void
+init_movable_table(void)
+{
+    for (int i = 0; i < STATE_N; ++i)
+        for (unsigned int d = 0; d < N_DIR; ++d)
         {
-            if (v_list[cnt] == STATE_EMPTY)
-            {
-                state.i = i;
-                state.j = j;
-            }
-            state_tile_set(i, j, v_list[cnt]);
-            ++cnt;
+            if (d == DIR_RIGHT)
+                movable_table[i][d] = (POS_X(i) < STATE_WIDTH - 1);
+            else if (d == DIR_LEFT)
+                movable_table[i][d] = (POS_X(i) > 0);
+            else if (d == DIR_DOWN)
+                movable_table[i][d] = (POS_Y(i) < STATE_WIDTH - 1);
+            else if (d == DIR_UP)
+                movable_table[i][d] = (POS_Y(i) > 0);
         }
 }
-
-__device__ static inline bool
-state_is_goal(void)
-{
-    return state.h_value == 0;
-    /* how about !state.h_value (ptx level) */
-}
-
-__device__ inline static bool
-state_left_movable(void)
-{
-    return state.i != 0;
-}
-__device__ inline static bool
-state_down_movable(void)
-{
-    return state.j != STATE_WIDTH - 1;
-    /* how about !(state.j - STATE_WIDTH + 1) */
-}
-__device__ inline static bool
-state_right_movable(void)
-{
-    return state.i != STATE_WIDTH - 1;
-}
-__device__ inline static bool
-state_up_movable(void)
-{
-    return state.j != 0;
-}
-
 __device__ static inline bool
 state_movable(Direction dir)
 {
-    return (dir == DIR_LEFT && state_left_movable()) ||
-           (dir == DIR_RIGHT && state_right_movable()) ||
-           (dir == DIR_DOWN && state_down_movable()) ||
-           (dir == DIR_UP && state_up_movable());
+    return movable_table[state.empty][dir];
 }
 
-#define h_diff(dir)                                                            \
-    (h_diff_table[(state_tile_get(state.i, state.j) << 6) + ((state.j) << 4) + \
-                  ((state.i) << 2) + (dir)])
-__constant__ const static int h_diff_table[STATE_N * STATE_N * DIR_N] = {
-    1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,
-    1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,
-    -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1,
-    1,  -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,
-    1,  1,  -1, 1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1,
-    1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, -1,
-    1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,  1,  1,
-    -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  -1, -1, 1,  1,  -1, -1, 1,  1,
-    -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,
-    1,  -1, 1,  -1, 1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,
-    -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1,  -1,
-    -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, -1, 1,  1,
-    -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, -1, 1,  1,  -1, -1, 1,
-    1,  -1, -1, 1,  1,  -1, 1,  1,  1,  1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,
-    -1, -1, 1,  1,  -1, -1, 1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,
-    1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,
-    -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,
-    -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  -1, 1,  1,  1,  1,
-    1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1,
-    1,  -1, 1,  -1, 1,  -1, 1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,
-    -1, 1,  -1, 1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1,
-    -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  -1, -1,
-    1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, -1, 1,  1,  -1,
-    -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,  -1, 1,  -1, 1,  -1, 1,  -1,
-    1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,
-    1,  1,  1,  1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,
-    1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  1,
-    1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  1,  -1,
-    1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  1,  1,  1,  1,  -1,
-    1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,
-    -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,
-    1,  -1, -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1,
-    1,  -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, -1, 1,
-    1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,  -1, 1,  -1,
-    1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,
-    1,  1,  -1, 1,  1,  -1, -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1,
-    1,  1,  -1, 1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1,
-    1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1,
-    1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,  1,
-    -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,
-    -1, -1, 1,  1,  -1, 1,  1,  1,  1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1,
-    -1, 1,  1,  -1, -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,
-    -1, -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,
-    1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  -1, 1,  -1,
-    1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  -1, 1,  -1, 1,  1,  1,
-    -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,
-    -1, -1, 1,  1,  -1, -1, 1,  -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  1,
-    1,  -1, 1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1,
-    1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  -1, 1,
-    -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  -1, 1,  1,  1,  -1,
-    1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,
-    -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1,
-    1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,
-    -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1};
-
-__device__ static inline int
-calc_hdiff(uchar who, uchar i, uchar j, Direction dir)
-{
-    /* TODO: optimize? */
-    return dir == DIR_LEFT
-               ? (who % STATE_WIDTH < i ? -1 : 1)
-               : dir == DIR_RIGHT
-                     ? (who % STATE_WIDTH > i ? -1 : 1)
-                     : dir == DIR_UP ? (who / STATE_WIDTH < j ? -1 : 1)
-                                     : (who / STATE_WIDTH > j ? -1 : 1);
-
-    /* how about
-    return (dir == DIR_LEFT && (who & (STATE_WIDTH-1)) < i) ||
-    (dir == DIR_RIGHT && (who & (STATE_WIDTH-1)) > i) ||
-    (dir == DIR_UP && (who >> 2) < j) ||
-    (dir == DIR_DOWN && (who >> 2) > j) ? -1 : 1;
-     */
-}
-
-static char assert_direction
+__device__ static char assert_direction
     [DIR_UP == 0 && DIR_RIGHT == 1 && DIR_LEFT == 2 && DIR_DOWN == 3 ? 1 : -1];
-__device__ static void
+__device__ __shared__ static int pos_diff_table[N_DIR] = {-STATE_WIDTH, 1, -1,
+                                                          +STATE_WIDTH};
+
+__device__ static inline bool
+state_move_with_limit(Direction dir, unsigned int f_limit)
+{
+    int new_empty   = state.empty + pos_diff_table[dir];
+    int opponent    = state_tile_get(new_empty);
+    int new_h_value = state.h_value + H_DIFF(opponent, new_empty, dir);
+
+    if (stack.i + 1 + new_h_value > f_limit)
+        return false;
+
+    state.h_value = new_h_value;
+    state_tile_set(state.empty, opponent);
+    state.empty = new_empty;
+
+    return true;
+}
+
+__device__ static inline void
 state_move(Direction dir)
 {
-    int i_diff = (dir & 1u) - ((dir & 2u) >> 1),
-        j_diff = (dir & 1u) + ((dir & 2u) >> 1) - 1;
+    int new_empty = state.empty + pos_diff_table[dir];
+    int opponent  = state_tile_get(new_empty);
 
-    state.i += i_diff;
-    state.j += j_diff;
-
-    state_tile_set(state.i - i_diff, state.j - j_diff,
-                   state_tile_get(state.i, state.j));
-
-    /* how about storing state_tile_get(state.i, state.j) used above and inside
-     * h_diff */
-
-    state.h_value += h_diff(dir_reverse(dir));
+    state.h_value += H_DIFF(opponent, new_empty, dir);
+    state_tile_set(state.empty, opponent);
+    state.empty = new_empty;
 }
 
 /*
@@ -282,41 +223,42 @@ idas_internal(uchar f_limit)
             return true;
 
         if ((stack_is_empty() || stack_peak() != dir_reverse(dir)) &&
-            state_movable((Direction) dir))
+            state_movable(dir))
         {
-            state_move((Direction) dir);
-
-            if (stack.i + state.h_value > f_limit)
-                state_move(dir_reverse(dir));
-            else
+            if (state_move_with_limit(dir, f_limit))
             {
-                stack_put((Direction) dir);
-                dir = DIR_FIRST;
+                stack_put(dir);
+                dir = 0;
                 continue;
             }
         }
 
-        while (++dir == DIR_N)
+        while (++dir == N_DIR)
         {
             if (stack_is_empty())
                 return false;
 
             dir = stack_pop();
-
             state_move(dir_reverse(dir));
         }
     }
 }
 
 __global__ void
-idas_kernel(uchar *input, int *plan)
+idas_kernel(uchar *input, uchar *plan)
 {
+    init_mdist();
+    init_movable_table();
     state_tile_fill(input);
     state_init_hvalue();
 
     for (uchar f_limit = state.h_value;; ++f_limit)
-        if (idas_internal(f_limit))
+        if (idas_internal(f_limit, plan))
             break;
+
+    plan[0] = stack.i; /* len of plan */
+    for (uchar i    = 0; i < stack.i; ++i)
+        plan[i + 1] = stack.buf[i];
 }
 
 /* host implementation */
@@ -388,8 +330,8 @@ main(int argc, char *argv[])
 {
     uchar  s_list[STATE_N];
     uchar *s_list_device;
-    int    plan[PLAN_LEN_MAX];
-    int *  plan_device;
+    uchar  plan[PLAN_LEN_MAX];
+    uchar *plan_device;
 
     if (argc < 2)
     {
@@ -399,19 +341,24 @@ main(int argc, char *argv[])
 
     load_state_from_file(argv[1], s_list);
     CUDA_CHECK(cudaMalloc((uchar **) &s_list_device, sizeof(uchar) * STATE_N));
-    CUDA_CHECK(cudaMalloc((void **) &plan_device, sizeof(int) * PLAN_LEN_MAX));
+    CUDA_CHECK(
+        cudaMalloc((void **) &plan_device, sizeof(uchar) * PLAN_LEN_MAX));
     CUDA_CHECK(cudaMemcpy(s_list_device, s_list, sizeof(uchar) * STATE_N,
                           cudaMemcpyHostToDevice));
 
     idas_kernel<<<1, 1>>>(s_list_device, plan_device);
 
-    CUDA_CHECK(cudaMemcpy(plan, plan_device, sizeof(int) * PLAN_LEN_MAX,
+    CUDA_CHECK(cudaMemcpy(plan, plan_device, sizeof(uchar) * PLAN_LEN_MAX,
                           cudaMemcpyDeviceToHost));
 
     CUDA_CHECK(cudaFree(s_list_device));
     CUDA_CHECK(cudaFree(plan_device));
 
     CUDA_CHECK(cudaDeviceReset());
+
+    for (int i = 0; i < plan[0]; ++i)
+        printf("%u ", plan[i]);
+    putchar('\n');
 
     return 0;
 }
