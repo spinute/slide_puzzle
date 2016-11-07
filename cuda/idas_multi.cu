@@ -1,6 +1,9 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+#define N_CORE 48*32
+#define N_BLOCK 48
+
 typedef unsigned char uchar;
 
 #define STACK_SIZE_BYTES 64
@@ -253,18 +256,21 @@ idas_internal(uchar f_limit)
 __global__ void
 idas_kernel(uchar *input, uchar *plan)
 {
+    int tid = threadIdx.x + blockIdx.x * blockDim.x;
+    int t_ofs = tid * STATE_N;
+
     init_mdist();
     init_movable_table();
-    state_tile_fill(input);
+    state_tile_fill(input + t_ofs);
     state_init_hvalue();
 
     for (uchar f_limit = state.h_value;; ++f_limit)
         if (idas_internal(f_limit))
             break;
 
-    plan[0] = (int) stack.i; /* len of plan */
+    plan[0 + t_ofs] = (int) stack.i; /* len of plan */
     for (uchar i = 0; i < stack.i; ++i)
-        plan[i + 1] = stack_get(i);
+        plan[i + 1 + t_ofs] = stack_get(i);
 
     (void) assert_direction[0];
     (void) assert_direction2[0];
@@ -334,17 +340,15 @@ load_state_from_file(const char *fname, uchar *s)
                          __LINE__, e, cudaGetErrorString(e));                  \
     } while (0)
 
-#define N_CORE 48*32
-#define N_BLOCK 48
 int
 main(int argc, char *argv[])
 {
-    uchar  s_list[STATE_N];
+    uchar  s_list[STATE_N * N_CORE];
     uchar *s_list_device;
-    uchar  plan[PLAN_LEN_MAX];
+    uchar  plan[PLAN_LEN_MAX * N_CORE];
     uchar *plan_device;
-    int insize = sizeof(uchar) * STATE_N;
-    int outsize = sizeof(uchar) * PLAN_LEN_MAX;
+    int insize = sizeof(uchar) * STATE_N * N_CORE;
+    int outsize = sizeof(uchar) * PLAN_LEN_MAX * N_CORE;
 
     if (argc < 2)
     {
@@ -353,6 +357,9 @@ main(int argc, char *argv[])
     }
 
     load_state_from_file(argv[1], s_list);
+    for (int i = 0; i < N_CORE; ++i)
+        s_list[i] = s_list[i%STATE_N];
+
     CUDA_CHECK(cudaMalloc((void **) &s_list_device, insize));
     CUDA_CHECK(
         cudaMalloc((void **) &plan_device, outsize));

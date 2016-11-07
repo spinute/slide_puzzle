@@ -3,14 +3,17 @@
 
 VPATH = cuda
 
-.PHONY: cuda cumain cpumain device_prop fmt TAGS help
+.PHONY: fmt TAGS
 
 NVCC_FLAGS = -O2 -arch=sm_30
 CFLAGS = -O2 -std=c99
 
-cuda: cumain device_prop
+cuda: cumain device_prop cumulti
 
 cumain: idas.cu
+	nvcc -o $@ $(NVCC_FLAGS) $<
+
+cumulti: idas_multi.cu
 	nvcc -o $@ $(NVCC_FLAGS) $<
 
 cpumain: idas_cpu.c
