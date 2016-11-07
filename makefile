@@ -6,7 +6,7 @@ VPATH = cuda
 .PHONY: cuda cumain cpumain device_prop fmt TAGS help
 
 NVCC_FLAGS = -O2 -arch=sm_30
-CFLAGS = -O2
+CFLAGS = -O2 -std=c99
 
 cuda: cumain device_prop
 
