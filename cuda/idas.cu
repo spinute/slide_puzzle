@@ -94,7 +94,7 @@ __device__ static uchar inline distance(uchar i, uchar j)
 
 #define H_DIFF(opponent, empty, empty_dir)                                     \
     h_diff_table[opponent][empty][empty_dir]
-__device__ __shared__ static int h_diff_table[STATE_N][STATE_N][N_DIR];
+__device__ __shared__ static int h_diff_table[STATE_N][STATE_N][DIR_N];
 
 __device__ static void
 init_mdist(void)
@@ -106,7 +106,7 @@ init_mdist(void)
         for (int i = 0; i < STATE_N; ++i)
         {
             int from_x = POS_X(i), from_y = POS_Y(i);
-            for (uchar dir = 0; dir < N_DIR; ++dir)
+            for (uchar dir = 0; dir < DIR_N; ++dir)
             {
                 if (dir == DIR_LEFT)
                     H_DIFF(opponent, i, dir) = goal_x > from_x ? -1 : 1;
@@ -149,15 +149,21 @@ state_tile_fill(const uchar v_list[STATE_WIDTH * STATE_WIDTH])
     }
 }
 
+__device__ static inline bool
+state_is_goal(void)
+{
+	return state.h_value == 0;
+}
+
 __device__ static char assert_direction2
     [DIR_UP == 0 && DIR_RIGHT == 1 && DIR_LEFT == 2 && DIR_DOWN == 3 ? 1 : -1];
-__device__ static bool movable_table[STATE_N][N_DIR];
+__device__ static bool movable_table[STATE_N][DIR_N];
 
 __device__ static void
 init_movable_table(void)
 {
     for (int i = 0; i < STATE_N; ++i)
-        for (unsigned int d = 0; d < N_DIR; ++d)
+        for (unsigned int d = 0; d < DIR_N; ++d)
         {
             if (d == DIR_RIGHT)
                 movable_table[i][d] = (POS_X(i) < STATE_WIDTH - 1);
@@ -177,7 +183,7 @@ state_movable(Direction dir)
 
 __device__ static char assert_direction
     [DIR_UP == 0 && DIR_RIGHT == 1 && DIR_LEFT == 2 && DIR_DOWN == 3 ? 1 : -1];
-__device__ __shared__ static int pos_diff_table[N_DIR] = {-STATE_WIDTH, 1, -1,
+__device__ __constant__ const static int pos_diff_table[DIR_N] = {-STATE_WIDTH, 1, -1,
                                                           +STATE_WIDTH};
 
 __device__ static inline bool
@@ -233,7 +239,7 @@ idas_internal(uchar f_limit)
             }
         }
 
-        while (++dir == N_DIR)
+        while (++dir == DIR_N)
         {
             if (stack_is_empty())
                 return false;
@@ -253,7 +259,7 @@ idas_kernel(uchar *input, uchar *plan)
     state_init_hvalue();
 
     for (uchar f_limit = state.h_value;; ++f_limit)
-        if (idas_internal(f_limit, plan))
+        if (idas_internal(f_limit))
             break;
 
     plan[0] = stack.i; /* len of plan */
