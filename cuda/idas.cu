@@ -262,9 +262,12 @@ idas_kernel(uchar *input, uchar *plan)
         if (idas_internal(f_limit))
             break;
 
-    plan[0] = stack.i; /* len of plan */
-    for (uchar i    = 0; i < stack.i; ++i)
-        plan[i + 1] = stack.buf[i];
+    plan[0] = (int) stack.i; /* len of plan */
+    for (uchar i = 0; i < stack.i; ++i)
+        plan[i + 1] = stack_get(i);
+
+    (void) assert_direction[0];
+    (void) assert_direction2[0];
 }
 
 /* host implementation */
@@ -338,6 +341,8 @@ main(int argc, char *argv[])
     uchar *s_list_device;
     uchar  plan[PLAN_LEN_MAX];
     uchar *plan_device;
+    int insize = sizeof(uchar) * STATE_N;
+    int outsize = sizeof(uchar) * PLAN_LEN_MAX;
 
     if (argc < 2)
     {
@@ -346,15 +351,15 @@ main(int argc, char *argv[])
     }
 
     load_state_from_file(argv[1], s_list);
-    CUDA_CHECK(cudaMalloc((uchar **) &s_list_device, sizeof(uchar) * STATE_N));
+    CUDA_CHECK(cudaMalloc((void **) &s_list_device, insize));
     CUDA_CHECK(
-        cudaMalloc((void **) &plan_device, sizeof(uchar) * PLAN_LEN_MAX));
-    CUDA_CHECK(cudaMemcpy(s_list_device, s_list, sizeof(uchar) * STATE_N,
+        cudaMalloc((void **) &plan_device, outsize));
+    CUDA_CHECK(cudaMemcpy(s_list_device, s_list, insize,
                           cudaMemcpyHostToDevice));
 
     idas_kernel<<<1, 1>>>(s_list_device, plan_device);
 
-    CUDA_CHECK(cudaMemcpy(plan, plan_device, sizeof(uchar) * PLAN_LEN_MAX,
+    CUDA_CHECK(cudaMemcpy(plan, plan_device, outsize,
                           cudaMemcpyDeviceToHost));
 
     CUDA_CHECK(cudaFree(s_list_device));
@@ -362,8 +367,9 @@ main(int argc, char *argv[])
 
     CUDA_CHECK(cudaDeviceReset());
 
+    printf("len=%d: ", (int)plan[0]);
     for (int i = 0; i < plan[0]; ++i)
-        printf("%u ", plan[i]);
+        printf("%d ", (int) plan[i+1]);
     putchar('\n');
 
     return 0;
