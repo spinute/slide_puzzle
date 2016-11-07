@@ -356,5 +356,10 @@ main(int argc, char *argv[])
     load_state_from_file(argv[1], s_list);
     idas_kernel(s_list);
 
+	printf("len=%d: ", stack.i);
+	for (int i = 0; i < stack.i; ++i)
+		printf("%d ", (int) stack_get(i));
+	putchar('\n');
+
     return 0;
 }

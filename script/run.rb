@@ -6,6 +6,6 @@ require 'benchmark'
 	puts "prob%03d" % i
 	$stderr.print i%10==0 ? '*' : '.'
 	puts Benchmark.measure {
-		`./cpumain benchmarks/korf/prob#{"%03d" % i}`
+		`./cpumain benchmarks/all/prob#{"%03d" % i}`
 	}
 end
