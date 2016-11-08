@@ -97,37 +97,8 @@ __device__ static uchar inline distance(uchar i, uchar j)
 
 #define H_DIFF(opponent, empty, empty_dir)                                     \
 	h_diff_table_shared[opponent][empty][empty_dir]
-__device__ static signed char h_diff_table[STATE_N][STATE_N][DIR_N];
 __device__ __shared__ static signed char h_diff_table_shared[STATE_N][STATE_N][DIR_N];
 
-#define H_DIFF_HOST(opponent, empty, empty_dir)                                     \
-	h_diff_table_host[opponent][empty][empty_dir]
-static signed char h_diff_table_host[STATE_N][STATE_N][DIR_N];
-
-	__host__ static void
-init_mdist(void)
-{
-	for (int opponent = 0; opponent < STATE_N; ++opponent)
-	{
-		int goal_x = POS_X(opponent), goal_y = POS_Y(opponent);
-
-		for (int i = 0; i < STATE_N; ++i)
-		{
-			int from_x = POS_X(i), from_y = POS_Y(i);
-			for (uchar dir = 0; dir < DIR_N; ++dir)
-			{
-				if (dir == DIR_LEFT)
-					H_DIFF_HOST(opponent, i, dir) = goal_x > from_x ? -1 : 1;
-				if (dir == DIR_RIGHT)
-					H_DIFF_HOST(opponent, i, dir) = goal_x < from_x ? -1 : 1;
-				if (dir == DIR_UP)
-					H_DIFF_HOST(opponent, i, dir) = goal_y > from_y ? -1 : 1;
-				if (dir == DIR_DOWN)
-					H_DIFF_HOST(opponent, i, dir) = goal_y < from_y ? -1 : 1;
-			}
-		}
-	}
-}
 
 	__device__ static inline void
 state_init_hvalue(void)
@@ -165,26 +136,8 @@ state_is_goal(void)
 
 __device__ static char assert_direction2
 [DIR_UP == 0 && DIR_RIGHT == 1 && DIR_LEFT == 2 && DIR_DOWN == 3 ? 1 : -1];
-__device__ static bool movable_table[STATE_N][DIR_N];
 __device__ __shared__ static bool movable_table_shared[STATE_N][DIR_N];
-static bool movable_table_host[STATE_N][DIR_N];
 
-	__host__ static void
-init_movable_table(void)
-{
-	for (int i = 0; i < STATE_N; ++i)
-		for (unsigned int d = 0; d < DIR_N; ++d)
-		{
-			if (d == DIR_RIGHT)
-				movable_table_host[i][d] = (POS_X(i) < STATE_WIDTH - 1);
-			else if (d == DIR_LEFT)
-				movable_table_host[i][d] = (POS_X(i) > 0);
-			else if (d == DIR_DOWN)
-				movable_table_host[i][d] = (POS_Y(i) < STATE_WIDTH - 1);
-			else if (d == DIR_UP)
-				movable_table_host[i][d] = (POS_Y(i) > 0);
-		}
-}
 	__device__ static inline bool
 state_movable(Direction dir)
 {
@@ -263,7 +216,7 @@ idas_internal(uchar f_limit)
 #define NOT_SOLVED -1
 #define WARP_SIZE 32
 	__global__ void
-idas_kernel(uchar *input, char *plan, int f_limit)
+idas_kernel(uchar *input, char *plan, int f_limit, signed char *h_diff_table, bool *movable_table)
 {
 	int tid = threadIdx.x;
 	int core_id = tid + blockIdx.x * blockDim.x;
@@ -275,13 +228,13 @@ idas_kernel(uchar *input, char *plan, int f_limit)
 		int d1 = i % STATE_N;
 		int d2 = tid / DIR_N + i / STATE_N * WARP_SIZE / DIR_N;
 		int d3 = tid % DIR_N;
-		h_diff_table_shared[d1][d2][d3] = h_diff_table[d1][d2][d3];
+		h_diff_table_shared[d1][d2][d3] = h_diff_table[d1*STATE_N*DIR_N+d2*DIR_N+d3];
 	}
 	for (int i = 0; i < STATE_N*DIR_N/WARP_SIZE; ++i)
 	{
 		int d1 = tid / DIR_N + i * WARP_SIZE / DIR_N;
 		int d2 = tid % DIR_N;
-		movable_table_shared[d1][d2] = movable_table[d1][d2];
+		movable_table_shared[d1][d2] = movable_table[d1*DIR_N+d2];
 	}
 
 	__syncthreads();
@@ -385,6 +338,47 @@ calc_hvalue(uchar s_list[])
 	return h_value;
 }
 
+	__host__ static void
+init_mdist(signed char h_diff_table[STATE_N][STATE_N][DIR_N])
+{
+	for (int opponent = 0; opponent < STATE_N; ++opponent)
+	{
+		int goal_x = POS_X(opponent), goal_y = POS_Y(opponent);
+
+		for (int i = 0; i < STATE_N; ++i)
+		{
+			int from_x = POS_X(i), from_y = POS_Y(i);
+			for (uchar dir = 0; dir < DIR_N; ++dir)
+			{
+				if (dir == DIR_LEFT)
+					h_diff_table[opponent][i][dir] = goal_x > from_x ? -1 : 1;
+				if (dir == DIR_RIGHT)
+					h_diff_table[opponent][i][dir] = goal_x < from_x ? -1 : 1;
+				if (dir == DIR_UP)
+					h_diff_table[opponent][i][dir] = goal_y > from_y ? -1 : 1;
+				if (dir == DIR_DOWN)
+					h_diff_table[opponent][i][dir] = goal_y < from_y ? -1 : 1;
+			}
+		}
+	}
+}
+	__host__ static void
+init_movable_table(bool movable_table[STATE_N][DIR_N])
+{
+	for (int i = 0; i < STATE_N; ++i)
+		for (unsigned int d = 0; d < DIR_N; ++d)
+		{
+			if (d == DIR_RIGHT)
+				movable_table[i][d] = (POS_X(i) < STATE_WIDTH - 1);
+			else if (d == DIR_LEFT)
+				movable_table[i][d] = (POS_X(i) > 0);
+			else if (d == DIR_DOWN)
+				movable_table[i][d] = (POS_Y(i) < STATE_WIDTH - 1);
+			else if (d == DIR_UP)
+				movable_table[i][d] = (POS_Y(i) > 0);
+		}
+}
+
 	int
 main(int argc, char *argv[])
 {
@@ -395,6 +389,13 @@ main(int argc, char *argv[])
 	int insize = sizeof(uchar) * STATE_N * N_CORE;
 	int outsize = sizeof(char) * PLAN_LEN_MAX * N_CORE;
 	int root_h_value = 0;
+
+	bool movable_table[STATE_N][DIR_N];
+	bool *movable_table_device;
+	int movable_table_size = sizeof(bool) * STATE_N * DIR_N;
+	signed char h_diff_table[STATE_N][STATE_N][DIR_N];
+	signed char *h_diff_table_device;
+	int h_diff_table_size = sizeof(signed char) * STATE_N * STATE_N * DIR_N;
 
 	if (argc < 2)
 	{
@@ -409,26 +410,29 @@ main(int argc, char *argv[])
 	for (int i = 0; i < N_CORE; ++i)
 		s_list[i] = s_list[i%STATE_N];
 
+	init_mdist(h_diff_table);
+	init_movable_table(movable_table);
+
 	CUDA_CHECK(cudaMalloc((void **) &s_list_device, insize));
 	CUDA_CHECK(cudaMalloc((void **) &plan_device, outsize));
+	CUDA_CHECK(cudaMalloc((void **) &movable_table_device, movable_table_size));
+	CUDA_CHECK(cudaMalloc((void **) &h_diff_table_device, h_diff_table_size));
 	CUDA_CHECK(cudaMemcpy(s_list_device, s_list, insize,
 				cudaMemcpyHostToDevice));
+	CUDA_CHECK(cudaMemcpy(movable_table_device, movable_table,
+				movable_table_size, cudaMemcpyHostToDevice));
+	CUDA_CHECK(cudaMemcpy(h_diff_table_device, h_diff_table,
+				h_diff_table_size, cudaMemcpyHostToDevice));
 
-	init_mdist();
-	init_movable_table();
 	(void) assert_direction[0];
 	(void) assert_direction2[0];
-	CUDA_CHECK(cudaMemcpy(&movable_table, &movable_table_host,
-				sizeof(bool) * STATE_N * DIR_N, cudaMemcpyHostToDevice));
-	CUDA_CHECK(cudaMemcpy(&h_diff_table, &h_diff_table_host,
-				sizeof(int) * STATE_N * STATE_N * DIR_N, cudaMemcpyHostToDevice));
 
 	for (uchar f_limit = root_h_value;; ++f_limit)
 	{
 		CUDA_CHECK(cudaMemcpy(s_list_device, s_list, insize,
 					cudaMemcpyHostToDevice));
 
-		idas_kernel<<<N_BLOCK, N_CORE/N_BLOCK>>>(s_list_device, plan_device, f_limit);
+		idas_kernel<<<N_BLOCK, N_CORE/N_BLOCK>>>(s_list_device, plan_device, f_limit, h_diff_table_device, movable_table_device);
 
 		CUDA_CHECK(cudaMemcpy(plan, plan_device, outsize,
 					cudaMemcpyDeviceToHost));
