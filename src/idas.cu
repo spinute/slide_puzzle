@@ -157,7 +157,7 @@ state_is_goal(void)
 
 __device__ static char assert_direction2
     [DIR_UP == 0 && DIR_RIGHT == 1 && DIR_LEFT == 2 && DIR_DOWN == 3 ? 1 : -1];
-__device__ static bool movable_table[STATE_N][DIR_N];
+__device__ __shared__ static bool movable_table[STATE_N][DIR_N];
 
 __device__ static void
 init_movable_table(void)
