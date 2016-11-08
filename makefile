@@ -6,9 +6,11 @@ VPATH = src
 .PHONY: fmt TAGS
 
 NVCC_FLAGS = -O2 -arch=sm_30
-CFLAGS = -O2 -std=c99
+CFLAGS = -O2 -std=c99 -Wall -Wextra
 
-cuda: cumain device_prop cumulti
+all: cpu cuda
+cpu: cpumain
+cuda: cumain device_prop cumulti cucomm cusingle
 
 cumain: idas_parallel.cu
 	nvcc -o $@ $(NVCC_FLAGS) $<

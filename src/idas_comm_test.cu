@@ -96,8 +96,9 @@ __device__ static uchar inline distance(uchar i, uchar j)
 }
 
 #define H_DIFF(opponent, empty, empty_dir)                                     \
-	h_diff_table[opponent][empty][empty_dir]
-__device__ __shared__ static signed char h_diff_table[STATE_N][STATE_N][DIR_N];
+	h_diff_table_shared[opponent][empty][empty_dir]
+__device__ static signed char h_diff_table[STATE_N][STATE_N][DIR_N];
+__device__ __shared__ static signed char h_diff_table_shared[STATE_N][STATE_N][DIR_N];
 
 #define H_DIFF_HOST(opponent, empty, empty_dir)                                     \
 	h_diff_table_host[opponent][empty][empty_dir]
@@ -164,7 +165,8 @@ state_is_goal(void)
 
 __device__ static char assert_direction2
 [DIR_UP == 0 && DIR_RIGHT == 1 && DIR_LEFT == 2 && DIR_DOWN == 3 ? 1 : -1];
-__device__ __shared__ static bool movable_table[STATE_N][DIR_N];
+__device__ static bool movable_table[STATE_N][DIR_N];
+__device__ __shared__ static bool movable_table_shared[STATE_N][DIR_N];
 static bool movable_table_host[STATE_N][DIR_N];
 
 	__host__ static void
@@ -186,7 +188,7 @@ init_movable_table(void)
 	__device__ static inline bool
 state_movable(Direction dir)
 {
-	return movable_table[state.empty][dir];
+	return movable_table_shared[state.empty][dir];
 }
 
 __device__ static char assert_direction
@@ -259,12 +261,30 @@ idas_internal(uchar f_limit)
 }
 
 #define NOT_SOLVED -1
+#define WARP_SIZE 32
 	__global__ void
 idas_kernel(uchar *input, char *plan, int f_limit)
 {
-	int tid = threadIdx.x + blockIdx.x * blockDim.x;
-	int t_ofs = tid * PLAN_LEN_MAX;
+	int tid = threadIdx.x;
+	int core_id = tid + blockIdx.x * blockDim.x;
+	int t_ofs = core_id * PLAN_LEN_MAX;
 	bool solved;
+
+	for (int i = 0; i < STATE_N*STATE_N*DIR_N/WARP_SIZE; ++i)
+	{
+		int d1 = i % STATE_N;
+		int d2 = tid / DIR_N + i / STATE_N * WARP_SIZE / DIR_N;
+		int d3 = tid % DIR_N;
+		h_diff_table_shared[d1][d2][d3] = h_diff_table[d1][d2][d3];
+	}
+	for (int i = 0; i < STATE_N*DIR_N/WARP_SIZE; ++i)
+	{
+		int d1 = tid / DIR_N + i * WARP_SIZE / DIR_N;
+		int d2 = tid % DIR_N;
+		movable_table_shared[d1][d2] = movable_table[d1][d2];
+	}
+
+	__syncthreads();
 
 	state_tile_fill(input + t_ofs);
 	state_init_hvalue();
@@ -340,6 +360,12 @@ load_state_from_file(const char *fname, uchar *s)
 			__LINE__, e, cudaGetErrorString(e));                  \
 } while (0)
 
+__host__ static int
+host_distance(int i, int j)
+{
+	return i > j ? i - j : j - i;
+}
+
 	__host__ static int
 calc_hvalue(uchar s_list[])
 {
@@ -353,8 +379,8 @@ calc_hvalue(uchar s_list[])
 	}
 	for (int i = 1; i < STATE_N; ++i)
 	{
-		h_value += distance(from_x[i], POS_X(i));
-		h_value += distance(from_y[i], POS_Y(i));
+		h_value += host_distance(from_x[i], POS_X(i));
+		h_value += host_distance(from_y[i], POS_Y(i));
 	}
 	return h_value;
 }
@@ -384,8 +410,7 @@ main(int argc, char *argv[])
 		s_list[i] = s_list[i%STATE_N];
 
 	CUDA_CHECK(cudaMalloc((void **) &s_list_device, insize));
-	CUDA_CHECK(
-			cudaMalloc((void **) &plan_device, outsize));
+	CUDA_CHECK(cudaMalloc((void **) &plan_device, outsize));
 	CUDA_CHECK(cudaMemcpy(s_list_device, s_list, insize,
 				cudaMemcpyHostToDevice));
 
@@ -400,7 +425,11 @@ main(int argc, char *argv[])
 
 	for (uchar f_limit = root_h_value;; ++f_limit)
 	{
+		CUDA_CHECK(cudaMemcpy(s_list_device, s_list, insize,
+					cudaMemcpyHostToDevice));
+
 		idas_kernel<<<N_BLOCK, N_CORE/N_BLOCK>>>(s_list_device, plan_device, f_limit);
+
 		CUDA_CHECK(cudaMemcpy(plan, plan_device, outsize,
 					cudaMemcpyDeviceToHost));
 
