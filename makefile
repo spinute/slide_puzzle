@@ -10,10 +10,16 @@ CFLAGS = -O2 -std=c99
 
 cuda: cumain device_prop cumulti
 
-cumain: idas.cu
+cumain: idas_parallel.cu
+	nvcc -o $@ $(NVCC_FLAGS) $<
+
+cusingle: idas.cu
 	nvcc -o $@ $(NVCC_FLAGS) $<
 
 cumulti: idas_multi.cu
+	nvcc -o $@ $(NVCC_FLAGS) $<
+
+cucomm: idas_comm_test.cu
 	nvcc -o $@ $(NVCC_FLAGS) $<
 
 cpumain: idas_cpu.c
