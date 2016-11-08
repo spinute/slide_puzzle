@@ -19,7 +19,7 @@ typedef uchar Direction;
 #define PLAN_LEN_MAX ((1 << STACK_DIR_BITS) * STACK_BUF_BYTES)
 
 #define stack_byte(i) (stack.buf[(i) >> STACK_DIR_BITS])
-#define stack_ofs(i) ((i & STACK_DIR_MASK) << 1)
+#define stack_ofs(i) (((i) & STACK_DIR_MASK) << 1)
 #define stack_get(i)                                                           \
     ((stack_byte(i) & (STACK_DIR_MASK << stack_ofs(i))) >> stack_ofs(i))
 
@@ -197,7 +197,7 @@ static char assert_direction
 static int pos_diff_table[N_DIR] = {-STATE_WIDTH, 1, -1, +STATE_WIDTH};
 
 static inline bool
-state_move_with_limit(Direction dir, unsigned int f_limit)
+state_move_with_limit(Direction dir, int f_limit)
 {
     int new_empty   = state.empty + pos_diff_table[dir];
     int opponent    = state_tile_get(new_empty);
@@ -229,7 +229,7 @@ state_move(Direction dir)
  */
 
 static bool
-idas_internal(unsigned int f_limit)
+idas_internal(int f_limit)
 {
     uchar dir = 0;
 
@@ -266,7 +266,7 @@ idas_internal(unsigned int f_limit)
 void
 idas_kernel(uchar *input)
 {
-    unsigned int f_limit;
+    int f_limit;
     init_mdist();
     init_movable_table();
     state_tile_fill(input);
@@ -345,7 +345,6 @@ int
 main(int argc, char *argv[])
 {
     uchar s_list[STATE_N];
-    int   plan[PLAN_LEN_MAX];
 
     if (argc < 2)
     {
@@ -360,6 +359,8 @@ main(int argc, char *argv[])
 	for (int i = 0; i < stack.i; ++i)
 		printf("%d ", (int) stack_get(i));
 	putchar('\n');
+(void) assert_direction[0];
+(void) assert_direction2[0];
 
     return 0;
 }
