@@ -5,7 +5,7 @@ VPATH = src
 
 .PHONY: fmt TAGS
 
-NVCC_FLAGS = -O2 -arch=sm_30
+NVCC_FLAGS = -O2 -arch=sm_30 -g
 CFLAGS = -O2 -std=c99 -Wall -Wextra
 
 all: cpu cuda

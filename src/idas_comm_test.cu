@@ -223,19 +223,21 @@ idas_kernel(uchar *input, char *plan, int f_limit, signed char *h_diff_table, bo
 	int t_ofs = core_id * PLAN_LEN_MAX;
 	bool solved;
 
-	for (int i = 0; i < STATE_N*STATE_N*DIR_N/WARP_SIZE; ++i)
-	{
-		int d1 = i % STATE_N;
-		int d2 = tid / DIR_N + i / STATE_N * WARP_SIZE / DIR_N;
-		int d3 = tid % DIR_N;
-		h_diff_table_shared[d1][d2][d3] = h_diff_table[d1*STATE_N*DIR_N+d2*DIR_N+d3];
-	}
 	for (int i = 0; i < STATE_N*DIR_N/WARP_SIZE; ++i)
-	{
-		int d1 = tid / DIR_N + i * WARP_SIZE / DIR_N;
-		int d2 = tid % DIR_N;
-		movable_table_shared[d1][d2] = movable_table[d1*DIR_N+d2];
-	}
+		if (tid < 32)
+		{
+			int d1 = tid / DIR_N + i * WARP_SIZE / DIR_N;
+			int d2 = tid % DIR_N;
+			movable_table_shared[d1][d2] = movable_table[d1*DIR_N+d2];
+		}
+	for (int i = 0; i < STATE_N*STATE_N*DIR_N/WARP_SIZE; ++i)
+		if (tid < 32)
+		{
+			int d1 = i % STATE_N;
+			int d2 = tid / DIR_N + i / STATE_N * WARP_SIZE / DIR_N;
+			int d3 = tid % DIR_N;
+			h_diff_table_shared[d1][d2][d3] = h_diff_table[d1*STATE_N*DIR_N+d2*DIR_N+d3];
+		}
 
 	__syncthreads();
 
@@ -417,8 +419,6 @@ main(int argc, char *argv[])
 	CUDA_CHECK(cudaMalloc((void **) &plan_device, outsize));
 	CUDA_CHECK(cudaMalloc((void **) &movable_table_device, movable_table_size));
 	CUDA_CHECK(cudaMalloc((void **) &h_diff_table_device, h_diff_table_size));
-	CUDA_CHECK(cudaMemcpy(s_list_device, s_list, insize,
-				cudaMemcpyHostToDevice));
 	CUDA_CHECK(cudaMemcpy(movable_table_device, movable_table,
 				movable_table_size, cudaMemcpyHostToDevice));
 	CUDA_CHECK(cudaMemcpy(h_diff_table_device, h_diff_table,
@@ -429,6 +429,7 @@ main(int argc, char *argv[])
 
 	for (uchar f_limit = root_h_value;; ++f_limit)
 	{
+		printf("f=%d\n", (int)f_limit);
 		CUDA_CHECK(cudaMemcpy(s_list_device, s_list, insize,
 					cudaMemcpyHostToDevice));
 
@@ -451,6 +452,8 @@ solution_found:
 
     CUDA_CHECK(cudaFree(s_list_device));
     CUDA_CHECK(cudaFree(plan_device));
+    CUDA_CHECK(cudaFree(movable_table_device));
+    CUDA_CHECK(cudaFree(h_diff_table_device));
     CUDA_CHECK(cudaDeviceReset());
 
     return 0;
