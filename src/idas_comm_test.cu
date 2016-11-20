@@ -219,8 +219,8 @@ idas_internal(uchar f_limit)
 idas_kernel(uchar *input, char *plan, int f_limit, signed char *h_diff_table, bool *movable_table)
 {
 	int tid = threadIdx.x;
-	int core_id = tid + blockIdx.x * blockDim.x;
-	int t_ofs = core_id * PLAN_LEN_MAX;
+	int bid = blockIdx.x;
+	int id = tid + bid * blockDim.x;
 	bool solved;
 
 	for (int i = 0; i < STATE_N*DIR_N/WARP_SIZE; ++i)
@@ -241,14 +241,14 @@ idas_kernel(uchar *input, char *plan, int f_limit, signed char *h_diff_table, bo
 
 	__syncthreads();
 
-	state_tile_fill(input + t_ofs);
+	state_tile_fill(input + id*STATE_N);
 	state_init_hvalue();
 
 	solved = idas_internal(f_limit);
 
-	plan[t_ofs] = solved ? (int) stack[threadIdx.x].i : NOT_SOLVED; /* len of plan */
-	for (uchar i = 0; i < stack[threadIdx.x].i; ++i)
-		plan[i + 1 + t_ofs] = stack_get(i);
+	plan[id*PLAN_LEN_MAX] = solved ? (int) stack[tid].i : NOT_SOLVED; /* len of plan */
+	for (uchar i = 0; i < stack[tid].i; ++i)
+		plan[i + 1 + id*PLAN_LEN_MAX] = stack_get(i);
 }
 
 /* host implementation */
