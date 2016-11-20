@@ -215,7 +215,7 @@ idas_internal(uchar f_limit)
 
 #define NOT_SOLVED -1
 	__global__ void
-idas_kernel(uchar *input, char *plan, int f_limit, signed char *h_diff_table, bool *movable_table)
+idas_kernel(uchar *input, signed char *plan, int f_limit, signed char *h_diff_table, bool *movable_table)
 {
 	int tid = threadIdx.x;
 	int bid = blockIdx.x;
@@ -351,7 +351,7 @@ init_mdist(signed char h_diff_table[])
 }
 #undef h_d_t
 
-#define m_t(i, d) (movable_table[(i)][(d)])
+#define m_t(i, d) (movable_table[(i)*DIR_N+(d)])
 	__host__ static void
 init_movable_table(bool movable_table[])
 {
@@ -381,7 +381,7 @@ main(int argc, char *argv[])
 	signed char *d_plan;
 	int plan_size = sizeof(signed char) * PLAN_LEN_MAX * N_CORE;
 
-	int root_value = 0;
+	int root_h_value = 0;
 
 	bool movable_table[STATE_N*DIR_N];
 	bool *d_movable_table;
@@ -421,12 +421,12 @@ main(int argc, char *argv[])
 	for (uchar f_limit = root_h_value;; ++f_limit)
 	{
 		printf("f=%d\n", (int)f_limit);
-		CUDA_CHECK(cudaMemcpy(s_list_device, s_list, s_list_size,
+		CUDA_CHECK(cudaMemcpy(d_s_list, s_list, s_list_size,
 					cudaMemcpyHostToDevice));
 
-		idas_kernel<<<N_BLOCK, N_CORE/N_BLOCK>>>(s_list_device, plan_device, f_limit, h_diff_table_device, movable_table_device);
+		idas_kernel<<<N_BLOCK, N_CORE/N_BLOCK>>>(d_s_list, d_plan, f_limit, d_h_diff_table, d_movable_table);
 
-		CUDA_CHECK(cudaMemcpy(plan, plan_device, plan_size,
+		CUDA_CHECK(cudaMemcpy(plan, d_plan, plan_size,
 					cudaMemcpyDeviceToHost));
 
 		for (int i = 0; i < N_CORE; ++i)
@@ -441,10 +441,10 @@ main(int argc, char *argv[])
 	}
 solution_found:
 
-    CUDA_CHECK(cudaFree(s_list_device));
-    CUDA_CHECK(cudaFree(plan_device));
-    CUDA_CHECK(cudaFree(movable_table_device));
-    CUDA_CHECK(cudaFree(h_diff_table_device));
+    CUDA_CHECK(cudaFree(d_s_list));
+    CUDA_CHECK(cudaFree(d_plan));
+    CUDA_CHECK(cudaFree(d_movable_table));
+    CUDA_CHECK(cudaFree(d_h_diff_table));
     CUDA_CHECK(cudaDeviceReset());
 
     return 0;
