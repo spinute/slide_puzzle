@@ -439,11 +439,11 @@ main(int argc, char *argv[])
 					cudaMemcpyDeviceToHost));
 
 		for (int i = 0; i < N_CORE; ++i)
-			if (plan[i] != NOT_SOLVED)
+			if (plan[i*PLAN_LEN_MAX] != NOT_SOLVED)
 			{
-				printf("len=%d: ", (int)plan[0]);
-				for (int j = 0; j < plan[0]; ++j)
-					printf("%d ", (int) plan[j+1]);
+				printf("len=%d: ", (int)plan[i*PLAN_LEN_MAX]);
+				for (int j = 0; j < plan[i*PLAN_LEN_MAX]; ++j)
+					printf("%d ", (int) plan[i*PLAN_LEN_MAX+j+1]);
 				putchar('\n');
 				goto solution_found;
 			}
