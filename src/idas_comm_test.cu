@@ -62,7 +62,7 @@ stack_peak(void)
 
 #define STATE_EMPTY 0
 #define STATE_WIDTH 4
-#define STATE_N STATE_WIDTH *STATE_WIDTH
+#define STATE_N (STATE_WIDTH *STATE_WIDTH)
 #define STATE_TILE_BITS 4
 #define STATE_TILE_MASK ((1ull << STATE_TILE_BITS) - 1)
 
@@ -402,19 +402,8 @@ main(int argc, char *argv[])
 	load_state_from_file(argv[1], s_list);
 	root_h_value = calc_hvalue(s_list);
 
-	for(int i = 0; i < 16; i++)
-		printf("%d ", (int)s_list[i]);
-	puts("");
-
-#define STATE_N 16
 	for (int i = 16; i < 32*16; ++i)
-	{
-		printf("state_n=%d, i=%d, i mod state_n = %d\n", STATE_N, i, i%STATE_N);
 		s_list[i] = s_list[i%STATE_N];
-	}
-	for (int i = 0; i < 32*16; ++i)
-		printf("%d ", (int)s_list[i]);
-	puts("");
 
 	init_mdist(h_diff_table);
 	init_movable_table(movable_table);
