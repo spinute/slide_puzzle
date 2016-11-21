@@ -105,6 +105,7 @@ state_init_hvalue(void)
 {
 	uchar from_x[STATE_N], from_y[STATE_N];
 
+	state[threadIdx.x].h_value = 0;
 	for (int i = 0; i < STATE_N; ++i)
 	{
 		from_x[state_tile_get(i)] = POS_X(i);
@@ -234,11 +235,13 @@ idas_kernel(uchar *input, signed char *plan, int f_limit, signed char *h_diff_ta
 	state_tile_fill(input + id*STATE_N);
 	state_init_hvalue();
 
-	solved = idas_internal(f_limit);
-
-	plan[id*PLAN_LEN_MAX] = solved ? (signed char) stack[tid].i : NOT_SOLVED; /* len of plan */
-	for (uchar i = 0; i < stack[tid].i; ++i)
-		plan[i + 1 + id*PLAN_LEN_MAX] = stack_get(i);
+	if (idas_internal(f_limit))
+	{
+		plan[id*PLAN_LEN_MAX] = (signed char) stack[tid].i; /* len of plan */
+		for (uchar i = 0; i < stack[tid].i; ++i)
+			plan[i + 1 + id*PLAN_LEN_MAX] = stack_get(i);
+	}
+		plan[id*PLAN_LEN_MAX] = NOT_SOLVED;
 }
 
 /* host implementation */

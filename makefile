@@ -7,6 +7,7 @@ VPATH = src
 
 NVCC_FLAGS = -O2 -arch=sm_30 -g
 CFLAGS = -O2 -std=c99 -Wall -Wextra
+#DEBUGFLAGS = -G -Xcompiler -rdynamic -gencode arch=compute_30,code=sm_30
 
 all: cpu cuda
 cpu: cpumain
