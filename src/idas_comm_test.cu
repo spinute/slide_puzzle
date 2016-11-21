@@ -116,6 +116,7 @@ state_init_hvalue(void)
 		state[threadIdx.x].h_value += distance(from_x[i], POS_X(i));
 		state[threadIdx.x].h_value += distance(from_y[i], POS_Y(i));
 	}
+	state[threadIdx.x].h_value = 0;
 }
 
 	__device__ static void
@@ -221,7 +222,6 @@ idas_kernel(uchar *input, signed char *plan, int f_limit, signed char *h_diff_ta
 	int tid = threadIdx.x;
 	int bid = blockIdx.x;
 	int id = tid + bid * blockDim.x;
-	bool solved;
 
 	for (int dir = 0; dir < DIR_N; ++dir)
 		if (tid < STATE_N)
@@ -241,6 +241,7 @@ idas_kernel(uchar *input, signed char *plan, int f_limit, signed char *h_diff_ta
 		for (uchar i = 0; i < stack[tid].i; ++i)
 			plan[i + 1 + id*PLAN_LEN_MAX] = stack_get(i);
 	}
+	else
 		plan[id*PLAN_LEN_MAX] = NOT_SOLVED;
 }
 
@@ -431,6 +432,11 @@ main(int argc, char *argv[])
 
 		CUDA_CHECK(cudaMemcpy(plan, d_plan, plan_size,
 					cudaMemcpyDeviceToHost));
+
+		printf("len=%d: ", 0);
+		for (int j = 0; j < 2*PLAN_LEN_MAX; ++j)
+			printf("%d ", (int) plan[j+1]);
+		putchar('\n');
 
 		for (int i = 0; i < N_CORE; ++i)
 			if (plan[i*PLAN_LEN_MAX] != NOT_SOLVED)
