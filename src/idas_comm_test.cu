@@ -100,12 +100,11 @@ __device__ static uchar inline distance(uchar i, uchar j)
 __device__ __shared__ static signed char h_diff_table_shared[STATE_N][STATE_N][DIR_N];
 
 
-	__device__ static inline void
+	__device__ static void
 state_init_hvalue(void)
 {
 	uchar from_x[STATE_N], from_y[STATE_N];
 
-	state[threadIdx.x].h_value = 0;
 	for (int i = 0; i < STATE_N; ++i)
 	{
 		from_x[state_tile_get(i)] = POS_X(i);
@@ -116,7 +115,6 @@ state_init_hvalue(void)
 		state[threadIdx.x].h_value += distance(from_x[i], POS_X(i));
 		state[threadIdx.x].h_value += distance(from_y[i], POS_Y(i));
 	}
-	state[threadIdx.x].h_value = 0;
 }
 
 	__device__ static void
@@ -404,8 +402,19 @@ main(int argc, char *argv[])
 	load_state_from_file(argv[1], s_list);
 	root_h_value = calc_hvalue(s_list);
 
-	for (int i = 0; i < N_CORE*STATE_N; ++i)
+	for(int i = 0; i < 16; i++)
+		printf("%d ", (int)s_list[i]);
+	puts("");
+
+#define STATE_N 16
+	for (int i = 16; i < 32*16; ++i)
+	{
+		printf("state_n=%d, i=%d, i mod state_n = %d\n", STATE_N, i, i%STATE_N);
 		s_list[i] = s_list[i%STATE_N];
+	}
+	for (int i = 0; i < 32*16; ++i)
+		printf("%d ", (int)s_list[i]);
+	puts("");
 
 	init_mdist(h_diff_table);
 	init_movable_table(movable_table);
@@ -428,6 +437,7 @@ main(int argc, char *argv[])
 		CUDA_CHECK(cudaMemcpy(d_s_list, s_list, s_list_size,
 					cudaMemcpyHostToDevice));
 
+		printf("call idas_kernel(block=%d, thread=%d)\n", N_BLOCK, N_CORE/N_BLOCK);
 		idas_kernel<<<N_BLOCK, N_CORE/N_BLOCK>>>(d_s_list, d_plan, f_limit, d_h_diff_table, d_movable_table);
 
 		CUDA_CHECK(cudaMemcpy(plan, d_plan, plan_size,
