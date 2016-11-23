@@ -20,6 +20,7 @@ typedef uchar Direction;
 #define DIR_RIGHT 1
 #define DIR_LEFT 2
 #define DIR_DOWN 3
+static char dir_char[] = {'U', 'R', 'L', 'D'};
 
 /* stack implementation */
 
@@ -33,6 +34,13 @@ __device__ __shared__ static struct dir_stack_tag
 #define stack_ofs(i) ((i & STACK_DIR_MASK) << 1)
 #define stack_get(i)                                                           \
     ((stack_byte(i) & (STACK_DIR_MASK << stack_ofs(i))) >> stack_ofs(i))
+
+__device__ static inline void
+stack_init(void)
+{
+	stack[threadIdx.x].i = 0;
+}
+
 __device__ static inline void
 stack_put(Direction dir)
 {
@@ -104,6 +112,9 @@ __device__ __shared__ static signed char h_diff_table_shared[STATE_N][STATE_N][D
 state_init_hvalue(void)
 {
 	uchar from_x[STATE_N], from_y[STATE_N];
+	int tid = threadIdx.x;
+
+	state[tid].h_value = 0;
 
 	for (int i = 0; i < STATE_N; ++i)
 	{
@@ -112,8 +123,8 @@ state_init_hvalue(void)
 	}
 	for (int i = 1; i < STATE_N; ++i)
 	{
-		state[threadIdx.x].h_value += distance(from_x[i], POS_X(i));
-		state[threadIdx.x].h_value += distance(from_y[i], POS_Y(i));
+		state[tid].h_value += distance(from_x[i], POS_X(i));
+		state[tid].h_value += distance(from_y[i], POS_Y(i));
 	}
 }
 
@@ -230,6 +241,7 @@ idas_kernel(uchar *input, signed char *plan, int f_limit, signed char *h_diff_ta
 
 	__syncthreads();
 
+	stack_init();
 	state_tile_fill(input + id*STATE_N);
 	state_init_hvalue();
 
@@ -442,7 +454,7 @@ main(int argc, char *argv[])
 			{
 				printf("len=%d: ", (int)plan[i*PLAN_LEN_MAX]);
 				for (int j = 0; j < plan[i*PLAN_LEN_MAX]; ++j)
-					printf("%d ", (int) plan[i*PLAN_LEN_MAX+j+1]);
+					printf("%c ", dir_char[(int) plan[i*PLAN_LEN_MAX+j+1]]);
 				putchar('\n');
 				goto solution_found;
 			}
