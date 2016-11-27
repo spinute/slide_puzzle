@@ -1,6 +1,6 @@
 #include <stdbool.h>
 
-#define N_BLOCK 1 /*DEBUG*/
+#define N_BLOCK 48
 #define N_CORE N_BLOCK * 32
 #define WARP_SIZE 32
 
@@ -391,6 +391,8 @@ init_movable_table(bool movable_table[])
 }
 #undef m_t
 
+#include "./distributor.h"
+
 int
 main(int argc, char *argv[])
 {
@@ -421,8 +423,11 @@ main(int argc, char *argv[])
     load_state_from_file(argv[1], s_list);
     root_h_value = calc_hvalue(s_list);
 
-    for (int i    = 16; i < 32 * 16; ++i)
-        s_list[i] = s_list[i % STATE_N];
+	if (distributor_bfs(init_state, goal_state, s_list))
+	{
+		puts("solution is found by distributor");
+		return 0;
+	}
 
     init_mdist(h_diff_table);
     init_movable_table(movable_table);

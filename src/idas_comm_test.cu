@@ -1,6 +1,7 @@
 #include <stdbool.h>
 
-#define N_BLOCK 1 /*DEBUG*/
+/* evaluate performance */
+#define N_BLOCK 48
 #define N_CORE N_BLOCK * 32
 #define WARP_SIZE 32
 

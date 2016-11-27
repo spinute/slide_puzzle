@@ -325,6 +325,14 @@ state_dump(State state)
     elog("-----------\n");
 }
 
+void
+state_fill_slist(State state, unsigned char slist[])
+{
+	for (int i = 0; i < STATE_N; ++i)
+		slist[i] = state->pos[i%STATE_WIDTH][i/STATE_WIDTH];
+	slist[state->i + (state->j*STATE_WIDTH)] = 0;
+}
+
 /*
  * Heuristic functions
  */

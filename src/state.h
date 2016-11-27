@@ -41,6 +41,7 @@ bool state_pos_equal(State s1, State s2);
 Direction state_get_parent(State state);
 size_t state_hash(State state);
 void state_dump(State state);
+void state_fill_slist(State state, unsigned char slist[])
 
 /*
  * Heuristics below are found at
