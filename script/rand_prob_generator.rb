@@ -3,7 +3,7 @@
 # 4 5 6 7
 # 8 9 10 11
 # 12 13 14 15
-$N = 4
+$N = 5
 $DIR = [:right, :left, :up, :down]
 
 def problem_dump(ar)
@@ -34,7 +34,7 @@ def rand_dir
 	$DIR.sample
 end
 
-ar = (0..15).to_a
+ar = (0..($N**2 - 1)).to_a
 pos = 0
 
 if ARGV[0].nil?
