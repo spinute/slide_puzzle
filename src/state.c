@@ -328,9 +328,9 @@ state_dump(State state)
 void
 state_fill_slist(State state, unsigned char slist[])
 {
-	for (int i = 0; i < STATE_N; ++i)
-		slist[i] = state->pos[i%STATE_WIDTH][i/STATE_WIDTH];
-	slist[state->i + (state->j*STATE_WIDTH)] = 0;
+    for (int i   = 0; i < STATE_N; ++i)
+        slist[i] = state->pos[i % STATE_WIDTH][i / STATE_WIDTH];
+    slist[state->i + (state->j * STATE_WIDTH)] = 0;
 }
 
 /*

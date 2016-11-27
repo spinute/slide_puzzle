@@ -19,7 +19,7 @@ typedef uchar Direction;
 #define PLAN_LEN_MAX ((1 << STACK_DIR_BITS) * STACK_BUF_BYTES)
 
 #define stack_byte(i) (stack.buf[(i) >> STACK_DIR_BITS])
-#define stack_ofs(i) (((i) & STACK_DIR_MASK) << 1)
+#define stack_ofs(i) (((i) &STACK_DIR_MASK) << 1)
 #define stack_get(i)                                                           \
     ((stack_byte(i) & (STACK_DIR_MASK << stack_ofs(i))) >> stack_ofs(i))
 
@@ -355,12 +355,12 @@ main(int argc, char *argv[])
     load_state_from_file(argv[1], s_list);
     idas_kernel(s_list);
 
-	printf("len=%d: ", stack.i);
-	for (int i = 0; i < stack.i; ++i)
-		printf("%d ", (int) stack_get(i));
-	putchar('\n');
-(void) assert_direction[0];
-(void) assert_direction2[0];
+    printf("len=%d: ", stack.i);
+    for (int i = 0; i < stack.i; ++i)
+        printf("%d ", (int) stack_get(i));
+    putchar('\n');
+    (void) assert_direction[0];
+    (void) assert_direction2[0];
 
     return 0;
 }

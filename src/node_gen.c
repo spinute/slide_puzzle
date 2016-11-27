@@ -1,18 +1,18 @@
+#include "./ht.h"
 #include "./queue.h"
 #include "./state.h"
-#include "./ht.h"
 
 bool
 node_generator(State init_state, int gen_n, unsigned char s_list[])
 {
-	/* A* way generation */
+    /* A* way generation */
     State    state;
     PQ       pq = pq_init(1550);
     HTStatus ht_status;
     int *    ht_value;
     HT       closed = ht_init(123);
     bool     solved = false;
-	int cnt = 1;
+    int      cnt    = 1;
 
     pq_put(pq, state_copy(init_state), state_get_hvalue(init_state), 0);
 
@@ -23,7 +23,7 @@ node_generator(State init_state, int gen_n, unsigned char s_list[])
             solved = true;
             break;
         }
-		--cnt;
+        --cnt;
 
         ht_status = ht_insert(closed, state, &ht_value);
         if (ht_status == HT_FAILED_FOUND && *ht_value < state_get_depth(state))
@@ -51,9 +51,9 @@ node_generator(State init_state, int gen_n, unsigned char s_list[])
                     pq_put(pq, next_state,
                            *ht_value +
                                calc_h_value(heuristic, next_state, goal_state));
-					++cnt;
-					if (cnt == gen_n)
-						break;
+                    ++cnt;
+                    if (cnt == gen_n)
+                        break;
                 }
             }
         }
@@ -62,16 +62,16 @@ node_generator(State init_state, int gen_n, unsigned char s_list[])
     }
 
     if (solved)
-	{
+    {
         state_dump(state);
-		return true;
-	}
+        return true;
+    }
 
     while ((state = pq_pop(pq)))
-		state_to_slist;
+        state_to_slist;
 
     ht_fini(closed);
     pq_fini(pq);
 
-	return false;
+    return false;
 }
