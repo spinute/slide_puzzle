@@ -10,10 +10,10 @@ NVCC_FLAGS = -O2 -arch=sm_30 #-g $(DEBUGFLAGS)
 CFLAGS = -O2 -std=c99 -Wall -Wextra
 
 all: cpu cuda
-cpu: cpumain
+cpu: cpumain cpu25
 cuda: cumain device_prop cumulti cucomm cusingle
 
-cumain: idas_parallel.cu
+cumain: idas_parallel.cu distributor.c
 	nvcc -o $@ $(NVCC_FLAGS) $<
 
 cusingle: idas.cu
@@ -26,6 +26,9 @@ cucomm: idas_comm_test.cu
 	nvcc -o $@ $(NVCC_FLAGS) $<
 
 cpumain: idas_cpu.c
+	gcc -o $@ $(CFLAGS) $<
+
+cpu25: idas_cpu_25.c
 	gcc -o $@ $(CFLAGS) $<
 
 device_prop: device_props.cu
