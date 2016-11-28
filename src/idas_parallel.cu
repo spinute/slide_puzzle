@@ -12,8 +12,8 @@ typedef unsigned char uchar;
 #define STACK_DIR_MASK ((1 << STACK_DIR_BITS) - 1)
 #define PLAN_LEN_MAX ((1 << STACK_DIR_BITS) * STACK_BUF_BYTES)
 
-typedef uchar Direction;
-#define dir_reverse(dir) ((Direction)(3 - (dir)))
+typedef uchar DirDev;
+#define dir_reverse_dev(dir) ((DirDev)(3 - (dir)))
 #define DIR_N 4
 #define DIR_FIRST 0
 #define DIR_UP 0
@@ -42,7 +42,7 @@ stack_init(void)
 }
 
 __device__ static inline void
-stack_put(Direction dir)
+stack_put(DirDev dir)
 {
     stack_byte(stack[threadIdx.x].i) &=
         ~(STACK_DIR_MASK << stack_ofs(stack[threadIdx.x].i));
@@ -55,13 +55,13 @@ stack_is_empty(void)
     return stack[threadIdx.x].i == 0;
     /* how about !stack[threadIdx.x].i */
 }
-__device__ static inline Direction
+__device__ static inline DirDev
 stack_pop(void)
 {
     --stack[threadIdx.x].i;
     return stack_get(stack[threadIdx.x].i);
 }
-__device__ static inline Direction
+__device__ static inline DirDev
 stack_peak(void)
 {
     return stack_get(stack[threadIdx.x].i - 1);
@@ -71,7 +71,7 @@ stack_peak(void)
 
 #define STATE_EMPTY 0
 #define STATE_WIDTH 4
-#define STATE_N (STATE_WIDTH * STATE_WIDTH)
+#define STATE_N (STATE_WIDTH*STATE_WIDTH)
 #define STATE_TILE_BITS 4
 #define STATE_TILE_MASK ((1ull << STATE_TILE_BITS) - 1)
 
@@ -153,7 +153,7 @@ __device__ static char assert_direction2
 __device__ __shared__ static bool movable_table_shared[STATE_N][DIR_N];
 
 __device__ static inline bool
-state_movable(Direction dir)
+state_movable(DirDev dir)
 {
     return movable_table_shared[state[threadIdx.x].empty][dir];
 }
@@ -164,7 +164,7 @@ __device__ __constant__ const static int pos_diff_table[DIR_N] = {
     -STATE_WIDTH, 1, -1, +STATE_WIDTH};
 
 __device__ static inline bool
-state_move_with_limit(Direction dir, unsigned int f_limit)
+state_move_with_limit(DirDev dir, unsigned int f_limit)
 {
     int new_empty = state[threadIdx.x].empty + pos_diff_table[dir];
     int opponent  = state_tile_get(new_empty);
@@ -182,7 +182,7 @@ state_move_with_limit(Direction dir, unsigned int f_limit)
 }
 
 __device__ static inline void
-state_move(Direction dir)
+state_move(DirDev dir)
 {
     int new_empty = state[threadIdx.x].empty + pos_diff_table[dir];
     int opponent  = state_tile_get(new_empty);
@@ -206,7 +206,7 @@ idas_internal(uchar f_limit)
         if (state_is_goal())
             return true;
 
-        if ((stack_is_empty() || stack_peak() != dir_reverse(dir)) &&
+        if ((stack_is_empty() || stack_peak() != dir_reverse_dev(dir)) &&
             state_movable(dir))
         {
             if (state_move_with_limit(dir, f_limit))
@@ -223,7 +223,7 @@ idas_internal(uchar f_limit)
                 return false;
 
             dir = stack_pop();
-            state_move(dir_reverse(dir));
+            state_move(dir_reverse_dev(dir));
         }
     }
 }
@@ -392,6 +392,7 @@ init_movable_table(bool movable_table[])
 #undef m_t
 
 #include "./distributor.h"
+#include "./state.h"
 
 int
 main(int argc, char *argv[])
@@ -423,11 +424,21 @@ main(int argc, char *argv[])
     load_state_from_file(argv[1], s_list);
     root_h_value = calc_hvalue(s_list);
 
-	if (distributor_bfs(init_state, goal_state, s_list))
-	{
-		puts("solution is found by distributor");
-		return 0;
-	}
+    {
+	    uchar goal[STATE_N];
+	    State init_state = state_init(s_list, 0),
+		  goal_state;
+
+	    for (int i = 0; i < STATE_N; ++i)
+		goal[i] = i;
+	    goal_state = state_init(goal, 0);
+
+	    if (distributor_bfs(init_state, goal_state, s_list, N_CORE))
+	    {
+		    puts("solution is found by distributor");
+		    return 0;
+	    }
+    }
 
     init_mdist(h_diff_table);
     init_movable_table(movable_table);

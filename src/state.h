@@ -4,7 +4,7 @@
 #include <stddef.h>
 
 #define N_DIR 4
-#define dir_reverse(dir) (3 - (dir))
+#define dir_reverse(dir) ((Direction)(3 - (dir)))
 typedef enum direction_tag {
     /* best order for korf's 100 problems */
     UP    = 0,
@@ -17,7 +17,9 @@ typedef unsigned char state_panel;
 
 #define STATE_EMPTY 0
 #define STATE_WIDTH 4
-#define STATE_N STATE_WIDTH *STATE_WIDTH
+#ifndef STATE_N
+#define STATE_N (STATE_WIDTH *STATE_WIDTH)
+#endif
 
 /*
  * v_list is corresponds to the state of the puzzle such as described below
@@ -41,7 +43,7 @@ bool state_pos_equal(State s1, State s2);
 Direction state_get_parent(State state);
 size_t state_hash(State state);
 void state_dump(State state);
-void state_fill_slist(State state, unsigned char slist[])
+void state_fill_slist(State state, unsigned char slist[]);
 
     /*
      * Heuristics below are found at

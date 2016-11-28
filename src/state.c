@@ -47,8 +47,9 @@ distance(int i, int j)
 static inline void
 fill_from_xy(State from)
 {
-    for (idx_t x = 0; x < STATE_WIDTH; ++x)
-        for (idx_t y = 0; y < STATE_WIDTH; ++y)
+idx_t x, y;
+    for (x = 0; x < STATE_WIDTH; ++x)
+        for (y = 0; y < STATE_WIDTH; ++y)
         {
             from_x[v(from, x, y)] = x;
             from_y[v(from, x, y)] = y;
@@ -59,10 +60,11 @@ static inline int
 heuristic_manhattan_distance(State from)
 {
     int h_value = 0;
+idx_t i;
 
     fill_from_xy(from);
 
-    for (idx_t i = 1; i < STATE_WIDTH * STATE_WIDTH; ++i)
+    for (i = 1; i < STATE_WIDTH * STATE_WIDTH; ++i)
     {
         h_value += distance(from_x[i], i % STATE_WIDTH);
         h_value += distance(from_y[i], i / STATE_WIDTH);
@@ -94,14 +96,15 @@ state_init(state_panel v_list[STATE_WIDTH * STATE_WIDTH], int depth)
 {
     State state = state_alloc();
     int   cnt   = 0;
+idx_t i, j;
 
     assert(depth >= 0);
 
     state->depth  = depth;
     state->parent = -1;
 
-    for (idx_t j = 0; j < STATE_WIDTH; ++j)
-        for (idx_t i = 0; i < STATE_WIDTH; ++i)
+    for (j = 0; j < STATE_WIDTH; ++j)
+        for (i = 0; i < STATE_WIDTH; ++i)
         {
             if (v_list[cnt] == STATE_EMPTY)
             {
@@ -280,8 +283,9 @@ state_move(State state, Direction dir)
 bool
 state_pos_equal(State s1, State s2)
 {
-    for (idx_t i = 0; i < STATE_WIDTH; ++i)
-        for (idx_t j = 0; j < STATE_WIDTH; ++j)
+idx_t i, j;
+    for (i = 0; i < STATE_WIDTH; ++i)
+        for (j = 0; j < STATE_WIDTH; ++j)
             if (v(s1, i, j) != v(s2, i, j))
                 return false;
 
@@ -292,9 +296,10 @@ size_t
 state_hash(State state)
 {
     /* FIXME: for A* */
+idx_t i, j;
     size_t hash_value = 0;
-    for (idx_t i = 0; i < STATE_WIDTH; ++i)
-        for (idx_t j = 0; j < STATE_WIDTH; ++j)
+    for (i = 0; i < STATE_WIDTH; ++i)
+        for (j = 0; j < STATE_WIDTH; ++j)
             hash_value ^= (v(state, i, j) << ((i * 3 + j) << 2));
     return hash_value;
 }
@@ -313,12 +318,13 @@ state_get_depth(State state)
 void
 state_dump(State state)
 {
+idx_t i, j;
     elog("%s: h_value=%d, (i,j)=(%u,%u)\n", __func__, state->h_value, state->i,
          state->j);
 
-    for (idx_t j = 0; j < STATE_WIDTH; ++j)
+    for (j = 0; j < STATE_WIDTH; ++j)
     {
-        for (idx_t i = 0; i < STATE_WIDTH; ++i)
+        for (i = 0; i < STATE_WIDTH; ++i)
             elog("%u ", i == state->i && j == state->j ? 0 : v(state, i, j));
         elog("\n");
     }
@@ -328,7 +334,8 @@ state_dump(State state)
 void
 state_fill_slist(State state, unsigned char slist[])
 {
-    for (int i   = 0; i < STATE_N; ++i)
+int i;
+    for (i   = 0; i < STATE_N; ++i)
         slist[i] = state->pos[i % STATE_WIDTH][i / STATE_WIDTH];
     slist[state->i + (state->j * STATE_WIDTH)] = 0;
 }

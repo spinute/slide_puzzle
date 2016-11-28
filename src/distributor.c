@@ -10,7 +10,7 @@
 #define DIR_DOWN 3
 
 bool
-distributor_bfs(State init_state, State goal_state, uchar *s_list_ret,
+distributor_bfs(State init_state, State goal_state, unsigned char *s_list_ret,
                 int distr_n)
 {
     int      cnt = 0;
@@ -19,6 +19,7 @@ distributor_bfs(State init_state, State goal_state, uchar *s_list_ret,
     HTStatus ht_status;
     int *    ht_place_holder;
     HT       closed = ht_init(123);
+int dir, i;
     bool     solved = false;
 
     ht_status = ht_insert(closed, init_state, &ht_place_holder);
@@ -34,7 +35,7 @@ distributor_bfs(State init_state, State goal_state, uchar *s_list_ret,
             break;
         }
 
-        for (int dir = 0; dir < N_DIR; ++dir)
+        for (dir = 0; dir < N_DIR; ++dir)
         {
             if (state_movable(state, dir))
             {
@@ -48,7 +49,7 @@ distributor_bfs(State init_state, State goal_state, uchar *s_list_ret,
                     {
                         /* NOTE: put parent.
                          * FIXME: There are duplicated younger siblings */
-                        queue_put(state);
+                        queue_put(q, state);
 
                         state_fini(next_state);
                         break;
@@ -65,7 +66,7 @@ distributor_bfs(State init_state, State goal_state, uchar *s_list_ret,
     }
 
     if (!solved)
-        for (int i = 0; i < distr_n; ++i)
+        for (i = 0; i < distr_n; ++i)
             state_fill_slist(queue_pop(q), s_list_ret + STATE_N * i);
 
     ht_fini(closed);
