@@ -1,35 +1,38 @@
-def fmt(positions)
+def fmt(w, h, positions)
 return <<EOS
-4 4
+#{h} #{w}
 starting positions for each tile:
 #{positions.join "\n"}
 goal positions:
-0
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
+#{(0..(w*h-1)).to_a.join("\n")}
 EOS
 end
 
-def tiles2positions(tiles)
-	Array.new(16){|i| tiles.index i.to_s}
+def tiles2positions(w, h, tiles)
+	Array.new(w*h){|i| tiles.index i.to_s}
 end
 
-100.times do |i|
-	tiles = open("benchmarks/korf/prob%03d" % i).readline.strip.split(' ')
-	positions = tiles2positions tiles
-	content = fmt positions
-	File.write("benchmarks/burns/prob%03d" % i, content)
+def korf2burns
+	w = h = 4
+	100.times do |i|
+		tiles = open("benchmarks/korf/prob%03d" % i).readline.strip.split(' ')
+		positions = tiles2positions w, h, tiles
+		content = fmt w, h, positions
+		File.write("benchmarks/burns/prob%03d" % i, content)
+	end
 end
+
+def rand25burns
+	w = h = 5
+	50.step(500, 50) do |n|
+		10.times do |i|
+			fname = "#{n}_#{i}"
+			tiles = open("benchmarks/rand25/#{fname}").readline.strip.split(' ')
+			positions = tiles2positions w, h, tiles
+			content = fmt w, h, positions
+			File.write("benchmarks/burns_rand25/#{fname}", content)
+		end
+	end
+end
+
+rand25burns()
