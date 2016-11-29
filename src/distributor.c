@@ -36,10 +36,10 @@ distributor_bfs(State init_state, State goal_state, unsigned char *s_list_ret,
 
         for (int dir = 0; dir < N_DIR; ++dir)
         {
-            if (state_movable(state, dir))
+            if (state_movable(state, (Direction)dir))
             {
                 State next_state = state_copy(state);
-                state_move(next_state, dir);
+                state_move(next_state, (Direction)dir);
 
                 ht_status = ht_insert(closed, next_state, &ht_place_holder);
                 if (ht_status == HT_SUCCESS)

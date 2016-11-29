@@ -3,10 +3,10 @@
 
 VPATH = src
 
-.PHONY: fmt TAGS
+.PHONY: fmt TAGS 
 
 CUDA_PATH = /usr/local/cuda
-CUDA_INC = += -I$(CUDA_PATH)/include
+CUDA_INC += -I$(CUDA_PATH)/include
 DEBUGFLAGS = -G -Xcompiler -rdynamic -gencode arch=compute_30,code=sm_30 -g
 NVCC_FLAGS = -O2  -arch=sm_30 #$(DEBUGFLAGS)
 CFLAGS = -O2 -std=c99 -Wall -Wextra
@@ -15,13 +15,14 @@ all: cpu cuda
 cpu: cpumain cpu25
 cuda: cumain device_prop cumulti cucomm cusingle
 
-cumain: idas_parallel.o distributor.o queue.o ht.o state.o utils.o
-	gcc -L$(CUDA_PATH)/lib64 $^ -lcudart
+cumain: idas_parallel.o idas_parallel_host.o distributor.o queue.o ht.o state.o utils.o
+	nvcc -L$(CUDA_PATH)/lib64 $^ -lcudart
 
-.cu.o:
+idas_parallel.o: src/idas_parallel.cu
 	nvcc --device-c $(NVCC_FLAGS) $<
+
 .c.o:
-	gcc $(CFLAGS) -c $<
+	gcc $(CFLAGS) -c $< $(CUDA_INC)
 
 cusingle: idas.cu
 	nvcc -o $@ $(NVCC_FLAGS) $<
