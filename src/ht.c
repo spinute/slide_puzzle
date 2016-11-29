@@ -84,14 +84,13 @@ ht_rehash(HT ht)
 {
     HTEntry *new_bin;
     size_t   new_size = ht->n_bins << 1;
-int i;
 
     assert(ht->n_bins<SIZE_MAX>> 1);
 
     new_bin = palloc(sizeof(*new_bin) * new_size);
     memset(new_bin, 0, sizeof(*new_bin) * new_size);
 
-    for (i = 0; i < ht->n_bins; ++i)
+    for (size_t i = 0; i < ht->n_bins; ++i)
     {
         HTEntry entry = ht->bin[i];
 
@@ -115,8 +114,7 @@ int i;
 void
 ht_fini(HT ht)
 {
-int i;
-    for (i = 0; i < ht->n_bins; ++i)
+    for (size_t i = 0; i < ht->n_bins; ++i)
     {
         HTEntry entry = ht->bin[i];
         while (entry)
