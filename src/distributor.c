@@ -19,7 +19,6 @@ distributor_bfs(State init_state, State goal_state, unsigned char *s_list_ret,
     HTStatus ht_status;
     int *    ht_place_holder;
     HT       closed = ht_init(123);
-int dir, i;
     bool     solved = false;
 
     ht_status = ht_insert(closed, init_state, &ht_place_holder);
@@ -35,7 +34,7 @@ int dir, i;
             break;
         }
 
-        for (dir = 0; dir < N_DIR; ++dir)
+        for (int dir = 0; dir < N_DIR; ++dir)
         {
             if (state_movable(state, dir))
             {
@@ -66,7 +65,7 @@ int dir, i;
     }
 
     if (!solved)
-        for (i = 0; i < distr_n; ++i)
+        for (int i = 0; i < distr_n; ++i)
             state_fill_slist(queue_pop(q), s_list_ret + STATE_N * i);
 
     ht_fini(closed);
