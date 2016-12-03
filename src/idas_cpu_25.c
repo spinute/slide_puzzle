@@ -3,7 +3,7 @@
 
 typedef unsigned char uchar;
 
-#define N_DIR 4
+#define DIR_N 4
 typedef uchar Direction;
 #define dir_reverse(dir) ((Direction)(3 - (dir)))
 #define DIR_UP 0
@@ -11,29 +11,22 @@ typedef uchar Direction;
 #define DIR_LEFT 2
 #define DIR_DOWN 3
 
-/* stack implementation */
-#define STACK_SIZE_BYTES 64
-#define STACK_BUF_BYTES (STACK_SIZE_BYTES - sizeof(uchar))
-#define STACK_DIR_BITS 2
-#define STACK_DIR_MASK ((1 << STACK_DIR_BITS) - 1)
-#define PLAN_LEN_MAX ((1 << STACK_DIR_BITS) * STACK_BUF_BYTES)
+#define PLAN_LEN_MAX 255
 
-#define stack_byte(i) (stack.buf[(i) >> STACK_DIR_BITS])
-#define stack_ofs(i) (((i) &STACK_DIR_MASK) << 1)
-#define stack_get(i)                                                           \
-    ((stack_byte(i) & (STACK_DIR_MASK << stack_ofs(i))) >> stack_ofs(i))
+/* stack implementation */
+
+#define stack_get(i) (stack.buf[(i)])
 
 static struct dir_stack_tag
 {
     uchar i;
-    uchar buf[STACK_BUF_BYTES];
+    uchar buf[PLAN_LEN_MAX];
 } stack;
 
 static inline void
 stack_put(Direction dir)
 {
-    stack_byte(stack.i) &= ~(STACK_DIR_MASK << stack_ofs(stack.i));
-    stack_byte(stack.i) |= dir << stack_ofs(stack.i);
+	stack.buf[stack.i] = dir;
     ++stack.i;
 }
 static inline bool
@@ -52,15 +45,20 @@ stack_peak(void)
 {
     return stack_get(stack.i - 1);
 }
+static void
+stack_dump(void)
+{
+    printf("len=%d: ", stack.i);
+    for (int i = 0; i < stack.i; ++i)
+        printf("%d ", (int) stack_get(i));
+    putchar('\n');
+}
 
 /* state implementation */
 
 #define STATE_EMPTY 0
 #define STATE_WIDTH 5
-#define STATE_N STATE_WIDTH *STATE_WIDTH
-#define STATE_TILE_BITS 5
-#define STATE_TILE_MASK ((1ull << STATE_TILE_BITS) - 1)
-static char static_assert_tile_bits[STATE_N <= 1 << STATE_TILE_BITS ? 1 : -1];
+#define STATE_N (STATE_WIDTH*STATE_WIDTH)
 
 #define POS_X(pos) ((pos) % STATE_WIDTH)
 #define POS_Y(pos) ((pos) / STATE_WIDTH)
@@ -71,9 +69,9 @@ static char static_assert_tile_bits[STATE_N <= 1 << STATE_TILE_BITS ? 1 : -1];
 
 static struct state_tag
 {
-    unsigned char tile[STATE_N];
+	uchar tile[STATE_N];
     uchar         empty;
-    uchar         h_value; /* ub of h_value is 6*16 */
+    uchar         h_value; /* ub of h_value is 8*24 for manhattan dist */
 } state;
 
 #define state_tile_get(i) (state.tile[i])
@@ -87,7 +85,7 @@ distance(uchar i, uchar j)
 
 #define H_DIFF(opponent, empty, empty_dir)                                     \
     h_diff_table[opponent][empty][empty_dir]
-static int h_diff_table[STATE_N][STATE_N][N_DIR];
+static int h_diff_table[STATE_N][STATE_N][DIR_N];
 
 static void
 init_mdist(void)
@@ -99,7 +97,7 @@ init_mdist(void)
         for (int i = 0; i < STATE_N; ++i)
         {
             int from_x = POS_X(i), from_y = POS_Y(i);
-            for (uchar dir = 0; dir < N_DIR; ++dir)
+            for (uchar dir = 0; dir < DIR_N; ++dir)
             {
                 if (dir == DIR_LEFT)
                     H_DIFF(opponent, i, dir) = goal_x > from_x ? -1 : 1;
@@ -150,13 +148,13 @@ state_is_goal(void)
 
 static char assert_direction2
     [DIR_UP == 0 && DIR_RIGHT == 1 && DIR_LEFT == 2 && DIR_DOWN == 3 ? 1 : -1];
-static bool movable_table[STATE_N][N_DIR];
+static bool movable_table[STATE_N][DIR_N];
 
 static void
 init_movable_table(void)
 {
     for (int i = 0; i < STATE_N; ++i)
-        for (unsigned int d = 0; d < N_DIR; ++d)
+        for (unsigned int d = 0; d < DIR_N; ++d)
         {
             if (d == DIR_RIGHT)
                 movable_table[i][d] = (POS_X(i) < STATE_WIDTH - 1);
@@ -188,7 +186,7 @@ state_dump(void)
 
 static char assert_direction
     [DIR_UP == 0 && DIR_RIGHT == 1 && DIR_LEFT == 2 && DIR_DOWN == 3 ? 1 : -1];
-static int pos_diff_table[N_DIR] = {-STATE_WIDTH, 1, -1, +STATE_WIDTH};
+static int pos_diff_table[DIR_N] = {-STATE_WIDTH, 1, -1, +STATE_WIDTH};
 
 static inline bool
 state_move_with_limit(Direction dir, int f_limit)
@@ -223,21 +221,25 @@ state_move(Direction dir)
  */
 
 static bool
-idas_internal(int f_limit)
+idas_internal(int f_limit, int *ret_nodes_expanded)
 {
     uchar dir = 0;
+	int nodes_expanded = 0;
 
     for (;;)
     {
         if (state_is_goal())
         {
             state_dump();
+			*ret_nodes_expanded = nodes_expanded;
             return true;
         }
 
         if ((stack_is_empty() || stack_peak() != dir_reverse(dir)) &&
             state_movable(dir))
         {
+			++nodes_expanded;
+
             if (state_move_with_limit(dir, f_limit))
             {
                 stack_put(dir);
@@ -246,10 +248,13 @@ idas_internal(int f_limit)
             }
         }
 
-        while (++dir == N_DIR)
+        while (++dir == DIR_N)
         {
             if (stack_is_empty())
+			{
+				*ret_nodes_expanded = nodes_expanded;
                 return false;
+			}
 
             dir = stack_pop();
             state_move(dir_reverse(dir));
@@ -260,7 +265,10 @@ idas_internal(int f_limit)
 void
 idas_kernel(uchar *input)
 {
+	int nodes_expanded = 0,
+		nodes_expanded_first = 0;
     int f_limit;
+	bool found;
     init_mdist();
     init_movable_table();
     state_tile_fill(input);
@@ -268,9 +276,30 @@ idas_kernel(uchar *input)
 
     state_dump();
 
-    for (f_limit = state.h_value;; ++f_limit)
-        if (idas_internal(f_limit))
-            break;
+	{
+		f_limit = state.h_value;
+		nodes_expanded_first = 0;
+		found = idas_internal(f_limit, &nodes_expanded_first);
+		printf("f_limit=%3d, expanded nodes = %d\n", f_limit, nodes_expanded);
+	}
+	if (!found) {
+		++f_limit;
+		nodes_expanded = 0;
+		found = idas_internal(f_limit, &nodes_expanded);
+		printf("f_limit=%3d, expanded nodes = %d\n", f_limit, nodes_expanded);
+
+		f_limit += nodes_expanded==nodes_expanded_first ? 1 : 2;
+
+		for (;;f_limit+=2)
+		{
+			nodes_expanded = 0;
+			found = idas_internal(f_limit, &nodes_expanded);
+			printf("f_limit=%3d, expanded nodes = %d\n", f_limit, nodes_expanded);
+
+			if (found)
+				break;
+		}
+	}
 }
 
 /* host implementation */
@@ -326,14 +355,12 @@ load_state_from_file(const char *fname, uchar *s)
 }
 #undef MAX_LINE_LEN
 
-#define CUDA_CHECK(call)                                                       \
-    do                                                                         \
-    {                                                                          \
-        const cudaError_t e = call;                                            \
-        if (e != cudaSuccess)                                                  \
-            exit_failure("Error: %s:%d code:%d, reason: %s\n", __FILE__,       \
-                         __LINE__, e, cudaGetErrorString(e));                  \
-    } while (0)
+static void
+avoid_unused_static_assertions(void)
+{
+    (void) assert_direction[0];
+    (void) assert_direction2[0];
+}
 
 int
 main(int argc, char *argv[])
@@ -349,14 +376,9 @@ main(int argc, char *argv[])
     load_state_from_file(argv[1], s_list);
     idas_kernel(s_list);
 
-    printf("len=%d: ", stack.i);
-    for (int i = 0; i < stack.i; ++i)
-        printf("%d ", (int) stack_get(i));
-    putchar('\n');
+	stack_dump();
 
-    (void) assert_direction[0];
-    (void) assert_direction2[0];
-    (void) static_assert_tile_bits[0];
+	avoid_unused_static_assertions();
 
     return 0;
 }

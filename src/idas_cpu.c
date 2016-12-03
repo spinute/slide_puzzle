@@ -358,15 +358,6 @@ load_state_from_file(const char *fname, uchar *s)
 }
 #undef MAX_LINE_LEN
 
-#define CUDA_CHECK(call)                                                       \
-    do                                                                         \
-    {                                                                          \
-        const cudaError_t e = call;                                            \
-        if (e != cudaSuccess)                                                  \
-            exit_failure("Error: %s:%d code:%d, reason: %s\n", __FILE__,       \
-                         __LINE__, e, cudaGetErrorString(e));                  \
-    } while (0)
-
 static void
 avoid_unused_static_assertions(void)
 {
