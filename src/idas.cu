@@ -240,14 +240,36 @@ idas_internal(uchar f_limit)
 __global__ void
 idas_kernel(uchar *input, uchar *plan)
 {
+	int nodes_expanded = 0,
+		nodes_expanded_first = 0;
+    int f_limit;
+	bool found;
     init_mdist();
     init_movable_table();
     state_tile_fill(input);
     state_init_hvalue();
 
-    for (uchar f_limit = state.h_value;; ++f_limit)
-        if (idas_internal(f_limit))
-            break;
+	{
+		f_limit = state.h_value;
+		nodes_expanded_first = 0;
+		found = idas_internal(f_limit, &nodes_expanded);
+	}
+	if (!found) {
+		++f_limit;
+		nodes_expanded = 0;
+		found = idas_internal(f_limit, &nodes_expanded);
+
+		f_limit += nodes_expanded==nodes_expanded_first ? 1 : 2;
+
+		for (;;f_limit+=2)
+		{
+			nodes_expanded = 0;
+			found = idas_internal(f_limit, &nodes_expanded);
+
+			if (found)
+				break;
+		}
+	}
 
     plan[0] = (int) stack.i; /* len of plan */
     for (uchar i = 0; i < stack.i; ++i)

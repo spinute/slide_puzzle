@@ -224,21 +224,25 @@ state_move(Direction dir)
  */
 
 static bool
-idas_internal(int f_limit)
+idas_internal(int f_limit, int *ret_nodes_expanded)
 {
     uchar dir = 0;
+	int nodes_expanded = 0;
 
     for (;;)
     {
         if (state_is_goal())
         {
             state_dump();
+			*ret_nodes_expanded = nodes_expanded;
             return true;
         }
 
         if ((stack_is_empty() || stack_peak() != dir_reverse(dir)) &&
             state_movable(dir))
         {
+			++nodes_expanded;
+
             if (state_move_with_limit(dir, f_limit))
             {
                 stack_put(dir);
@@ -250,7 +254,10 @@ idas_internal(int f_limit)
         while (++dir == DIR_N)
         {
             if (stack_is_empty())
+			{
+				*ret_nodes_expanded = nodes_expanded;
                 return false;
+			}
 
             dir = stack_pop();
             state_move(dir_reverse(dir));
@@ -261,7 +268,10 @@ idas_internal(int f_limit)
 void
 idas_kernel(uchar *input)
 {
+	int nodes_expanded = 0,
+		nodes_expanded_first = 0;
     int f_limit;
+	bool found;
     init_mdist();
     init_movable_table();
     state_tile_fill(input);
@@ -269,9 +279,30 @@ idas_kernel(uchar *input)
 
     state_dump();
 
-    for (f_limit = state.h_value;; ++f_limit)
-        if (idas_internal(f_limit))
-            break;
+	{
+		f_limit = state.h_value;
+		nodes_expanded_first = 0;
+		found = idas_internal(f_limit, &nodes_expanded_first);
+		printf("f_limit=%3d, expanded nodes = %d\n", f_limit, nodes_expanded);
+	}
+	if (!found) {
+		++f_limit;
+		nodes_expanded = 0;
+		found = idas_internal(f_limit, &nodes_expanded);
+		printf("f_limit=%3d, expanded nodes = %d\n", f_limit, nodes_expanded);
+
+		f_limit += nodes_expanded==nodes_expanded_first ? 1 : 2;
+
+		for (;;f_limit+=2)
+		{
+			nodes_expanded = 0;
+			found = idas_internal(f_limit, &nodes_expanded);
+			printf("f_limit=%3d, expanded nodes = %d\n", f_limit, nodes_expanded);
+
+			if (found)
+				break;
+		}
+	}
 }
 
 /* host implementation */
