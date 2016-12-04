@@ -1,16 +1,12 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-#define N_CORE 48*32
-#define N_BLOCK 48
-
 typedef unsigned char uchar;
 
-#define STACK_SIZE_BYTES 64
-#define STACK_BUF_BYTES (STACK_SIZE_BYTES - sizeof(uchar))
-#define STACK_DIR_BITS 2
-#define STACK_DIR_MASK ((1 << STACK_DIR_BITS) - 1)
-#define PLAN_LEN_MAX ((1 << STACK_DIR_BITS) * STACK_BUF_BYTES)
+#define N_THREADS 32
+#define N_BLOCKS 48
+#define TOTAL_IDX (blockIdx.x * blockDim.x + threadIdx.x)
+#define PLAN_LEN_MAX 255
 
 typedef uchar Direction;
 #define dir_reverse(dir) ((Direction)(3 - (dir)))
@@ -26,48 +22,49 @@ typedef uchar Direction;
 __device__ __shared__ static struct dir_stack_tag
 {
     uchar i;
-    uchar buf[STACK_BUF_BYTES];
-} stack;
+    uchar buf[PLAN_LEN_MAX];
+} stack[N_THREADS];
 
-#define stack_byte(i) (stack.buf[(i) >> STACK_DIR_BITS])
-#define stack_ofs(i) ((i & STACK_DIR_MASK) << 1)
-#define stack_get(i)                                                           \
-    ((stack_byte(i) & (STACK_DIR_MASK << stack_ofs(i))) >> stack_ofs(i))
+#define STACK_I (stack[threadIdx.x].i)
+#define stack_get(i) (stack[threadIdx.x].buf[i])
+#define stack_set(i, val) (stack[threadIdx.x].buf[i] = (val))
+
+__device__ static inline void
+stack_init(void)
+{
+	STACK_I = 0;
+}
 __device__ static inline void
 stack_put(Direction dir)
 {
-    stack_byte(stack.i) &= ~(STACK_DIR_MASK << stack_ofs(stack.i));
-    stack_byte(stack.i) |= dir << stack_ofs(stack.i);
-    ++stack.i;
+	stack_set(STACK_I, dir);
+    ++STACK_I;
 }
 __device__ static inline bool
 stack_is_empty(void)
 {
-    return stack.i == 0;
-    /* how about !stack.i */
+    return STACK_I == 0;
 }
 __device__ static inline Direction
 stack_pop(void)
 {
-    --stack.i;
-    return stack_get(stack.i);
+    --STACK_I;
+    return stack_get(STACK_I);
 }
 __device__ static inline Direction
 stack_peak(void)
 {
-    return stack_get(stack.i - 1);
+    return stack_get(STACK_I - 1);
 }
 
 /* state implementation */
 
-#define STATE_EMPTY 0
 #define STATE_WIDTH 4
-#define STATE_N STATE_WIDTH *STATE_WIDTH
-#define STATE_TILE_BITS 4
-#define STATE_TILE_MASK ((1ull << STATE_TILE_BITS) - 1)
+#define STATE_N (STATE_WIDTH*STATE_WIDTH)
 
-#define POS_X(pos) ((pos) % STATE_WIDTH)
-#define POS_Y(pos) ((pos) / STATE_WIDTH)
+static char assert_state_width_is_four[STATE_WIDTH==4 ? 1 : -1];
+#define POS_X(pos) ((pos) & 3)
+#define POS_Y(pos) ((pos) >> 2)
 
 /*
  * goal: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
@@ -75,20 +72,14 @@ stack_peak(void)
 
 __device__ __shared__ static struct state_tag
 {
-    unsigned long long tile; /* packed representation label(4bit)*16pos */
+	uchar tile[STATE_N];
     uchar              empty;
     uchar              h_value; /* ub of h_value is 6*16 */
-} state;
+} state[N_THREADS];
 
-#define state_tile_ofs(i) (i << 2)
-#define state_tile_get(i)                                                      \
-    ((state.tile & (STATE_TILE_MASK << state_tile_ofs(i))) >> state_tile_ofs(i))
-#define state_tile_set(i, val)                                                 \
-    do                                                                         \
-    {                                                                          \
-        state.tile &= ~((STATE_TILE_MASK) << state_tile_ofs(i));               \
-        state.tile |= ((unsigned long long) val) << state_tile_ofs(i);         \
-    } while (0)
+#define STATE_TILE(i) (state[threadIdx.x].tile[(i)])
+#define STATE_EMPTY (state[threadIdx.x].empty)
+#define STATE_HVALUE (state[threadIdx.x].h_value)
 
 __device__ static uchar inline distance(uchar i, uchar j)
 {
@@ -131,13 +122,13 @@ state_init_hvalue(void)
 
     for (int i = 0; i < STATE_N; ++i)
     {
-        from_x[state_tile_get(i)] = POS_X(i);
-        from_y[state_tile_get(i)] = POS_Y(i);
+        from_x[STATE_TILE(i)] = POS_X(i);
+        from_y[STATE_TILE(i)] = POS_Y(i);
     }
     for (int i = 1; i < STATE_N; ++i)
     {
-        state.h_value += distance(from_x[i], POS_X(i));
-        state.h_value += distance(from_y[i], POS_Y(i));
+        state[threadIdx.x].h_value += distance(from_x[i], POS_X(i));
+        state[threadIdx.x].h_value += distance(from_y[i], POS_Y(i));
     }
 }
 
@@ -146,21 +137,21 @@ state_tile_fill(const uchar v_list[STATE_WIDTH * STATE_WIDTH])
 {
     for (int i = 0; i < STATE_N; ++i)
     {
-        if (v_list[i] == STATE_EMPTY)
-            state.empty = i;
-        state_tile_set(i, v_list[i]);
+        if (v_list[i] == 0)
+            STATE_EMPTY = i;
+        STATE_TILE(i) = v_list[i];
     }
 }
 
 __device__ static inline bool
 state_is_goal(void)
 {
-	return state.h_value == 0;
+	return state[threadIdx.x].h_value == 0;
 }
 
-__device__ static char assert_direction2
+static char assert_direction2
     [DIR_UP == 0 && DIR_RIGHT == 1 && DIR_LEFT == 2 && DIR_DOWN == 3 ? 1 : -1];
-__device__ static bool movable_table[STATE_N][DIR_N];
+__device__ __shared__ static bool movable_table[STATE_N][DIR_N];
 
 __device__ static void
 init_movable_table(void)
@@ -181,10 +172,10 @@ init_movable_table(void)
 __device__ static inline bool
 state_movable(Direction dir)
 {
-    return movable_table[state.empty][dir];
+    return movable_table[STATE_EMPTY][dir];
 }
 
-__device__ static char assert_direction
+static char assert_direction
     [DIR_UP == 0 && DIR_RIGHT == 1 && DIR_LEFT == 2 && DIR_DOWN == 3 ? 1 : -1];
 __device__ __constant__ const static int pos_diff_table[DIR_N] = {-STATE_WIDTH, 1, -1,
                                                           +STATE_WIDTH};
@@ -192,16 +183,16 @@ __device__ __constant__ const static int pos_diff_table[DIR_N] = {-STATE_WIDTH, 
 __device__ static inline bool
 state_move_with_limit(Direction dir, unsigned int f_limit)
 {
-    int new_empty   = state.empty + pos_diff_table[dir];
-    int opponent    = state_tile_get(new_empty);
-    int new_h_value = state.h_value + H_DIFF(opponent, new_empty, dir);
+    int new_empty   = STATE_EMPTY + pos_diff_table[dir];
+    int opponent    = STATE_TILE(new_empty);
+    int new_h_value = STATE_HVALUE + H_DIFF(opponent, new_empty, dir);
 
-    if (stack.i + 1 + new_h_value > f_limit)
+    if (STACK_I + 1 + new_h_value > f_limit)
         return false;
 
-    state.h_value = new_h_value;
-    state_tile_set(state.empty, opponent);
-    state.empty = new_empty;
+    STATE_HVALUE = new_h_value;
+	STATE_TILE(STATE_EMPTY) = opponent;
+    STATE_EMPTY = new_empty;
 
     return true;
 }
@@ -209,12 +200,12 @@ state_move_with_limit(Direction dir, unsigned int f_limit)
 __device__ static inline void
 state_move(Direction dir)
 {
-    int new_empty = state.empty + pos_diff_table[dir];
-    int opponent  = state_tile_get(new_empty);
+    int new_empty = STATE_EMPTY + pos_diff_table[dir];
+    int opponent  = STATE_TILE(new_empty);
 
-    state.h_value += H_DIFF(opponent, new_empty, dir);
-    state_tile_set(state.empty, opponent);
-    state.empty = new_empty;
+    STATE_HVALUE += H_DIFF(opponent, new_empty, dir);
+	STATE_TILE(STATE_EMPTY) = opponent;
+    STATE_EMPTY = new_empty;
 }
 
 /*
@@ -222,18 +213,24 @@ state_move(Direction dir)
  */
 
 __device__ static bool
-idas_internal(uchar f_limit)
+idas_internal(int f_limit, int *ret_nodes_expanded)
 {
     uchar dir = 0;
+	int nodes_expanded = 0;
 
     for (;;)
     {
         if (state_is_goal())
+        {
+			*ret_nodes_expanded = nodes_expanded;
             return true;
+        }
 
         if ((stack_is_empty() || stack_peak() != dir_reverse(dir)) &&
             state_movable(dir))
         {
+			++nodes_expanded;
+
             if (state_move_with_limit(dir, f_limit))
             {
                 stack_put(dir);
@@ -245,7 +242,10 @@ idas_internal(uchar f_limit)
         while (++dir == DIR_N)
         {
             if (stack_is_empty())
+			{
+				*ret_nodes_expanded = nodes_expanded;
                 return false;
+			}
 
             dir = stack_pop();
             state_move(dir_reverse(dir));
@@ -256,24 +256,44 @@ idas_internal(uchar f_limit)
 __global__ void
 idas_kernel(uchar *input, uchar *plan)
 {
-    int tid = threadIdx.x + blockIdx.x * blockDim.x;
-    int t_ofs = tid * STATE_N;
+	int nodes_expanded = 0,
+		nodes_expanded_first = 0;
+    int f_limit;
+	bool found;
+    int id  = threadIdx.x + blockIdx.x * blockDim.x;
 
     init_mdist();
     init_movable_table();
-    state_tile_fill(input + t_ofs);
+
+    stack_init();
+    state_tile_fill(input + id * STATE_N);
     state_init_hvalue();
 
-    for (uchar f_limit = state.h_value;; ++f_limit)
-        if (idas_internal(f_limit))
-            break;
+	{
+		f_limit = STATE_HVALUE;
+		nodes_expanded_first = 0;
+		found = idas_internal(f_limit, &nodes_expanded);
+	}
+	if (!found) {
+		++f_limit;
+		nodes_expanded = 0;
+		found = idas_internal(f_limit, &nodes_expanded);
 
-    plan[0 + t_ofs] = (int) stack.i; /* len of plan */
-    for (uchar i = 0; i < stack.i; ++i)
-        plan[i + 1 + t_ofs] = stack_get(i);
+		f_limit += nodes_expanded==nodes_expanded_first ? 1 : 2;
 
-    (void) assert_direction[0];
-    (void) assert_direction2[0];
+		for (;;f_limit+=2)
+		{
+			nodes_expanded = 0;
+			found = idas_internal(f_limit, &nodes_expanded);
+
+			if (found)
+				break;
+		}
+	}
+
+    plan[0] = (int) STACK_I; /* len of plan */
+    for (uchar i = 0; i < STACK_I; ++i)
+        plan[i + 1] = stack_get(i);
 }
 
 /* host implementation */
@@ -340,15 +360,23 @@ load_state_from_file(const char *fname, uchar *s)
                          __LINE__, e, cudaGetErrorString(e));                  \
     } while (0)
 
+static void
+avoid_unused_static_assertions(void)
+{
+    (void) assert_direction[0];
+    (void) assert_direction2[0];
+    (void) assert_state_width_is_four[0];
+}
+
 int
 main(int argc, char *argv[])
 {
-    uchar  s_list[STATE_N * N_CORE];
+    uchar  s_list[STATE_N];
     uchar *s_list_device;
-    uchar  plan[PLAN_LEN_MAX * N_CORE];
+    uchar  plan[PLAN_LEN_MAX];
     uchar *plan_device;
-    int insize = sizeof(uchar) * STATE_N * N_CORE;
-    int outsize = sizeof(uchar) * PLAN_LEN_MAX * N_CORE;
+    int insize = sizeof(uchar) * STATE_N;
+    int outsize = sizeof(uchar) * PLAN_LEN_MAX;
 
     if (argc < 2)
     {
@@ -357,16 +385,12 @@ main(int argc, char *argv[])
     }
 
     load_state_from_file(argv[1], s_list);
-    for (int i = 0; i < N_CORE; ++i)
-        s_list[i] = s_list[i%STATE_N];
-
     CUDA_CHECK(cudaMalloc((void **) &s_list_device, insize));
-    CUDA_CHECK(
-        cudaMalloc((void **) &plan_device, outsize));
+    CUDA_CHECK(cudaMalloc((void **) &plan_device, outsize));
     CUDA_CHECK(cudaMemcpy(s_list_device, s_list, insize,
                           cudaMemcpyHostToDevice));
 
-    idas_kernel<<<N_BLOCK, N_CORE/N_BLOCK>>>(s_list_device, plan_device);
+    idas_kernel<<<N_BLOCKS, N_THREADS>>>(s_list_device, plan_device);
 
     CUDA_CHECK(cudaMemcpy(plan, plan_device, outsize,
                           cudaMemcpyDeviceToHost));
@@ -380,6 +404,8 @@ main(int argc, char *argv[])
     for (int i = 0; i < plan[0]; ++i)
         printf("%d ", (int) plan[i+1]);
     putchar('\n');
+
+	avoid_unused_static_assertions();
 
     return 0;
 }

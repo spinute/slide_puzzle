@@ -82,7 +82,7 @@ __device__ __shared__ static struct state_tag
 
 #define STATE_TILE(i) (state[threadIdx.x].tile[(i)])
 #define STATE_EMPTY (state[threadIdx.x].empty)
-#define STATE_HVALUE (state[threadIdx.x].hvalue)
+#define STATE_HVALUE (state[threadIdx.x].h_value)
 
 __device__ static uchar inline distance(uchar i, uchar j)
 {
