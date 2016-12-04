@@ -247,12 +247,13 @@ idas_kernel(uchar *input, signed char *plan, search_stat *stat, int f_limit,
     {
 		stat[id].solved = true;
         stat[id].len = (int) STACK_I;
-		stat[id].nodes_expanded = nodes_expanded;
 		for (uchar i                        = 0; i < STACK_I; ++i)
             plan[i + 1 + id * PLAN_LEN_MAX] = stack_get(i);
     }
     else
 		stat[id].solved = false;
+
+	stat[id].nodes_expanded = nodes_expanded;
 }
 
 /* host library implementation */
@@ -1107,7 +1108,7 @@ distribute_astar(State init_state, State goal_state, unsigned char *s_list_ret,
 						*ht_value = state_get_depth(state);
 						pq_put(q, state, *ht_value + state_get_hvalue(state), *ht_value);
 						state_fini(next_state);
-						break;
+						goto DISTRIBUTION_DONE;
 					}
 
 					*ht_value = state_get_depth(next_state);
@@ -1119,6 +1120,8 @@ distribute_astar(State init_state, State goal_state, unsigned char *s_list_ret,
 
         state_fini(state);
     }
+
+DISTRIBUTION_DONE:
 
     if (!solved)
         for (int i = 0; i < distr_n; ++i)
