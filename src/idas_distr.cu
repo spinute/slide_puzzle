@@ -6,6 +6,9 @@
 #define N_CORE N_BLOCK * N_THREADS
 #define PLAN_LEN_MAX 255
 
+#define STATE_WIDTH 4
+#define STATE_N (STATE_WIDTH*STATE_WIDTH)
+
 typedef unsigned char uchar;
 typedef signed char Direction;
 #define dir_reverse(dir) ((Direction)(3 - (dir)))
@@ -39,7 +42,7 @@ typedef struct search_stat_tag
 typedef struct input_tag
 {
 	uchar tiles[STATE_N];
-	struct state_tag *state;
+	struct state_tag_cpu *state;
 	int init_depth;
 } Input;
 
@@ -74,9 +77,6 @@ stack_peak(void)
 }
 
 /* state implementation */
-
-#define STATE_WIDTH 4
-#define STATE_N (STATE_WIDTH*STATE_WIDTH)
 
 static char assert_state_width_is_four[STATE_WIDTH==4 ? 1 : -1];
 #define POS_X(pos) ((pos) & 3)
@@ -607,7 +607,7 @@ state_get_depth(State state)
 }
 
 void
-state_fill_input(State state, Input input[])
+state_fill_input(State state, Input input)
 {
     for (int i   = 0; i < STATE_N; ++i)
         input.tiles[i] = state->pos[i % STATE_WIDTH][i / STATE_WIDTH];
@@ -1372,11 +1372,12 @@ main(int argc, char *argv[])
 				Direction buf[PLAN_LEN_MAX];
 				State s = input[i].state;
 
-                printf("len=%d: ", stat[i].len + input[i].depth);
+                printf("len=%d: ", stat[i].len + input[i].init_depth);
 
-				for (int j = 0; j < s.depth; ++j, s=s.parent_state)
-					buf[s.depth-j-1] = s.parent_dir;
-				for (int j = 0; j < s.depth; ++j, s=s.parent_state)
+				int d = s->depth;
+				for (int j = 0; j < d; ++j, s=s->parent_state)
+					buf[s->depth - 1] = s->parent_dir;
+				for (int j = 0; j < d; ++j)
                     printf("%c ", dir_char[buf[j]]);
 
                 for (int j = 0; j < stat[i].len; ++j)
