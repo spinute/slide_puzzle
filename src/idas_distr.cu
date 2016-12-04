@@ -2,7 +2,7 @@
 
 #define WARP_SIZE 32
 #define N_THREADS 32
-#define N_BLOCK 48
+#define N_BLOCK (48 * 4)
 #define N_CORE N_BLOCK * N_THREADS
 #define PLAN_LEN_MAX 255
 
