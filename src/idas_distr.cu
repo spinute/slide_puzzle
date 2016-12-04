@@ -7,8 +7,8 @@
 #define PLAN_LEN_MAX 255
 
 typedef unsigned char uchar;
-typedef uchar DirDev;
-#define dir_reverse_dev(dir) ((DirDev)(3 - (dir)))
+typedef signed char Direction;
+#define dir_reverse(dir) ((Direction)(3 - (dir)))
 #define DIR_N 4
 #define DIR_FIRST 0
 #define DIR_UP 0
@@ -42,7 +42,7 @@ stack_init(void)
 }
 
 __device__ static inline void
-stack_put(DirDev dir)
+stack_put(Direction dir)
 {
 	stack_set(STACK_I, dir);
     ++STACK_I;
@@ -52,13 +52,13 @@ stack_is_empty(void)
 {
     return STACK_I == 0;
 }
-__device__ static inline DirDev
+__device__ static inline Direction
 stack_pop(void)
 {
     --STACK_I;
     return stack_get(STACK_I);
 }
-__device__ static inline DirDev
+__device__ static inline Direction
 stack_peak(void)
 {
     return stack_get(STACK_I - 1);
@@ -140,7 +140,7 @@ __device__ static char assert_direction2
 __device__ __shared__ static bool movable_table_shared[STATE_N][DIR_N];
 
 __device__ static inline bool
-state_movable(DirDev dir)
+state_movable(Direction dir)
 {
     return movable_table_shared[STATE_EMPTY][dir];
 }
@@ -151,7 +151,7 @@ __device__ __constant__ const static int pos_diff_table[DIR_N] = {
     -STATE_WIDTH, 1, -1, +STATE_WIDTH};
 
 __device__ static inline bool
-state_move_with_limit(DirDev dir, unsigned int f_limit)
+state_move_with_limit(Direction dir, unsigned int f_limit)
 {
     int new_empty = STATE_EMPTY + pos_diff_table[dir];
     int opponent  = STATE_TILE(new_empty);
@@ -169,7 +169,7 @@ state_move_with_limit(DirDev dir, unsigned int f_limit)
 }
 
 __device__ static inline void
-state_move(DirDev dir)
+state_move(Direction dir)
 {
     int new_empty = STATE_EMPTY + pos_diff_table[dir];
     int opponent  = STATE_TILE(new_empty);
@@ -197,7 +197,7 @@ idas_internal(int f_limit, int *ret_nodes_expanded)
             return true;
         }
 
-        if ((stack_is_empty() || stack_peak() != dir_reverse_dev(dir)) &&
+        if ((stack_is_empty() || stack_peak() != dir_reverse(dir)) &&
             state_movable(dir))
         {
 			++nodes_expanded;
@@ -219,7 +219,7 @@ idas_internal(int f_limit, int *ret_nodes_expanded)
 			}
 
             dir = stack_pop();
-            state_move(dir_reverse_dev(dir));
+            state_move(dir_reverse(dir));
         }
     }
 }
@@ -397,7 +397,7 @@ state_init(uchar v_list[STATE_WIDTH * STATE_WIDTH])
     for (idx_t j = 0; j < STATE_WIDTH; ++j)
         for (idx_t i = 0; i < STATE_WIDTH; ++i)
         {
-            if (v_list[cnt] == STATE_EMPTY)
+            if (v_list[cnt] == 0)
             {
                 state->i = i;
                 state->j = j;
@@ -451,10 +451,10 @@ state_up_movable(State state)
 bool
 state_movable(State state, Direction dir)
 {
-    return (dir != LEFT || state_left_movable(state)) &&
-           (dir != DOWN || state_down_movable(state)) &&
-           (dir != RIGHT || state_right_movable(state)) &&
-           (dir != UP || state_up_movable(state));
+    return (dir != DIR_LEFT || state_left_movable(state)) &&
+           (dir != DIR_DOWN || state_down_movable(state)) &&
+           (dir != DIR_RIGHT || state_right_movable(state)) &&
+           (dir != DIR_UP || state_up_movable(state));
 }
 
 /*
@@ -479,7 +479,7 @@ calc_h_diff(idx_t who, idx_t from_x, idx_t from_y, Direction rdir)
 */
 #define h_diff(who, from_i, from_j, dir)                                       \
     (h_diff_table[((who) << 6) + ((from_j) << 4) + ((from_i) << 2) + (dir)])
-static int h_diff_table[STATE_N * STATE_N * N_DIR] = {
+static int h_diff_table[STATE_N * STATE_N * DIR_N] = {
     1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,
     1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,
     -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1,
@@ -543,19 +543,19 @@ state_move(State state, Direction dir)
 
     switch (dir)
     {
-    case LEFT:
+    case DIR_LEFT:
         who = ev(state) = lv(state);
         state->i--;
         break;
-    case DOWN:
+    case DIR_DOWN:
         who = ev(state) = dv(state);
         state->j++;
         break;
-    case RIGHT:
+    case DIR_RIGHT:
         who = ev(state) = rv(state);
         state->i++;
         break;
-    case UP:
+    case DIR_UP:
         who = ev(state) = uv(state);
         state->j--;
         break;
@@ -631,6 +631,12 @@ state_fill_slist(State state, unsigned char slist[])
 #include <stddef.h>
 #include <string.h>
 
+typedef enum {
+    HT_SUCCESS = 0,
+    HT_FAILED_FOUND,
+    HT_FAILED_NOT_FOUND,
+} HTStatus;
+
 /* XXX: hash function for State should be surveyed */
 inline static size_t
 hashfunc(State key)
@@ -643,7 +649,7 @@ struct ht_entry_tag
 {
     HTEntry  next;
     State    key;
-    ht_value value;
+    int value;
 };
 
 static HTEntry
@@ -1170,7 +1176,7 @@ distributor(State init_state, State goal_state, unsigned char *s_list_ret,
         else
             *ht_value = state_get_depth(state);
 
-        for (int dir = 0; dir < N_DIR; ++dir)
+        for (int dir = 0; dir < DIR_N; ++dir)
         {
             if (state_movable(state, (Direction)dir))
             {
