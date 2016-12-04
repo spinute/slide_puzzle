@@ -256,8 +256,7 @@ idas_internal(int f_limit, int *ret_nodes_expanded)
 __global__ void
 idas_kernel(uchar *input, uchar *plan)
 {
-	int nodes_expanded = 0,
-		nodes_expanded_first = 0;
+	int nodes_expanded = 0;
     int f_limit;
 	bool found;
     int id  = threadIdx.x + blockIdx.x * blockDim.x;
@@ -269,26 +268,11 @@ idas_kernel(uchar *input, uchar *plan)
     state_tile_fill(input + id * STATE_N);
     state_init_hvalue();
 
+	for (;;f_limit+=2)
 	{
-		f_limit = STATE_HVALUE;
-		nodes_expanded_first = 0;
-		found = idas_internal(f_limit, &nodes_expanded);
-	}
-	if (!found) {
-		++f_limit;
 		nodes_expanded = 0;
-		found = idas_internal(f_limit, &nodes_expanded);
-
-		f_limit += nodes_expanded==nodes_expanded_first ? 1 : 2;
-
-		for (;;f_limit+=2)
-		{
-			nodes_expanded = 0;
-			found = idas_internal(f_limit, &nodes_expanded);
-
-			if (found)
-				break;
-		}
+		if (idas_internal(f_limit, &nodes_expanded))
+			break;
 	}
 
     plan[0] = (int) STACK_I; /* len of plan */
