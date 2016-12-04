@@ -30,7 +30,19 @@ __device__ __shared__ static struct dir_stack_tag
 #define stack_get(i) (stack[threadIdx.x].buf[i])
 #define stack_set(i, val) (stack[threadIdx.x].buf[i] = (val))
 
-typedef struct input_tag Input;
+typedef struct search_stat_tag
+{
+	bool solved;
+	int len;
+	int nodes_expanded;
+} search_stat;
+typedef struct input_tag
+{
+	uchar tiles[STATE_N];
+	struct state_tag *state;
+	int init_depth;
+} Input;
+
 __device__ static inline void
 stack_init(Input input)
 {
@@ -112,13 +124,13 @@ state_init_hvalue(void)
 }
 
 __device__ static void
-state_tile_fill(const uchar v_list[STATE_WIDTH * STATE_WIDTH])
+state_tile_fill(Input input)
 {
     for (int i = 0; i < STATE_N; ++i)
     {
-        if (v_list[i] == 0)
+        if (input.tiles[i] == 0)
             STATE_EMPTY = i;
-        STATE_TILE(i) = v_list[i];
+        STATE_TILE(i) = input.tiles[i];
     }
 }
 
@@ -217,19 +229,6 @@ idas_internal(int f_limit, int *ret_nodes_expanded)
     }
 }
 
-typedef struct search_stat_tag
-{
-	bool solved;
-	int len;
-	int nodes_expanded;
-} search_stat;
-struct input_tag
-{
-	uchar tiles[STATE_N];
-	struct state_tag *state;
-	int init_depth;
-};
-
 __global__ void
 idas_kernel(Input *input, signed char *plan, search_stat *stat, int f_limit,
             signed char *h_diff_table, bool *movable_table)
@@ -249,8 +248,8 @@ idas_kernel(Input *input, signed char *plan, search_stat *stat, int f_limit,
 
     __syncthreads();
 
-    stack_init(input);
-    state_tile_fill(input + id);
+    stack_init(input[id]);
+    state_tile_fill(input[id]);
     state_init_hvalue();
 
     if (idas_internal(f_limit, &nodes_expanded))
@@ -1141,7 +1140,7 @@ DISTRIBUTION_DONE:
     if (!solved)
         for (int i = 0; i < distr_n; ++i)
 		{
-			Input in = input + i;
+			Input in = input[i];
 			State state = pq_pop(q);
             state_fill_input(pq_pop(q), in);
 			in.state = state;
@@ -1324,8 +1323,8 @@ main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 
-    load_state_from_file(argv[1], input);
-    root_h_value = calc_hvalue(input);
+    load_state_from_file(argv[1], input[0].tiles);
+    root_h_value = calc_hvalue(input[0].tiles);
 
     {
 	    uchar goal[STATE_N];
