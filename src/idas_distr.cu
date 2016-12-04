@@ -1326,7 +1326,6 @@ main(int argc, char *argv[])
     root_h_value = calc_hvalue(input[0].tiles);
 
     {
-	    uchar goal[STATE_N];
 	    State init_state = state_init(input[0].tiles);
 
 	    if (distribute_astar(init_state, input, N_CORE))
@@ -1363,6 +1362,9 @@ main(int argc, char *argv[])
 
         for (int i = 0; i < N_CORE; ++i)
 			if (stat[i].solved) {
+                printf("gpu path len=%d: ", stat[i].len);
+
+				/*
 				Direction buf[PLAN_LEN_MAX];
 				State s = input[i].state;
 
@@ -1373,6 +1375,7 @@ main(int argc, char *argv[])
 					buf[s->depth - 1] = s->parent_dir;
 				for (int j = 0; j < d; ++j)
                     printf("%c ", dir_char[buf[j]]);
+				*/
 
                 for (int j = 0; j < stat[i].len; ++j)
                     printf("%c ", dir_char[(int) plan[i * PLAN_LEN_MAX + j]]);
