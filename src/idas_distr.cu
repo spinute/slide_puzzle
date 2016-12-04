@@ -37,7 +37,7 @@ typedef struct search_stat_tag
 {
 	bool solved;
 	int len;
-	int nodes_expanded;
+	long long nodes_expanded;
 } search_stat;
 typedef struct input_tag
 {
@@ -190,10 +190,10 @@ state_move(Direction dir)
  */
 
 __device__ static bool
-idas_internal(int f_limit, int *ret_nodes_expanded, Input input)
+idas_internal(int f_limit, long long *ret_nodes_expanded, Input input)
 {
     uchar dir = 0;
-	int nodes_expanded = 0;
+	long long nodes_expanded = 0;
 
     for (;;)
     {
@@ -235,7 +235,7 @@ __global__ void
 idas_kernel(Input *input, signed char *plan, search_stat *stat, int f_limit,
             signed char *h_diff_table, bool *movable_table)
 {
-	int nodes_expanded = 0;
+	long long nodes_expanded = 0;
     int tid = threadIdx.x;
     int bid = blockIdx.x;
     int id  = tid + bid * blockDim.x;

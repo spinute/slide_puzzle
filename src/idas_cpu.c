@@ -224,10 +224,10 @@ state_move(Direction dir)
  */
 
 static bool
-idas_internal(int f_limit, int *ret_nodes_expanded)
+idas_internal(int f_limit, long long *ret_nodes_expanded)
 {
     uchar dir = 0;
-	int nodes_expanded = 0;
+	long long nodes_expanded = 0;
 
     for (;;)
     {
@@ -268,7 +268,7 @@ idas_internal(int f_limit, int *ret_nodes_expanded)
 void
 idas_kernel(uchar *input)
 {
-	int nodes_expanded = 0,
+	long long nodes_expanded = 0,
 		nodes_expanded_first = 0;
     int f_limit;
 	bool found;
