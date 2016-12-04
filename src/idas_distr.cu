@@ -44,6 +44,7 @@ typedef struct input_tag
 	uchar tiles[STATE_N];
 	struct state_tag_cpu *state;
 	int init_depth;
+	Direction parent_dir; /* TODO: input should include parent dir info */
 } Input;
 
 __device__ static inline void
@@ -189,7 +190,7 @@ state_move(Direction dir)
  */
 
 __device__ static bool
-idas_internal(int f_limit, int *ret_nodes_expanded)
+idas_internal(int f_limit, int *ret_nodes_expanded, Input input)
 {
     uchar dir = 0;
 	int nodes_expanded = 0;
@@ -202,7 +203,8 @@ idas_internal(int f_limit, int *ret_nodes_expanded)
             return true;
         }
 
-        if ((stack_is_empty() || stack_peak() != dir_reverse(dir)) &&
+        if (((stack_is_empty() && dir_reverse(dir) != input.parent_dir)
+			|| stack_peak() != dir_reverse(dir)) &&
             state_movable(dir))
         {
 			++nodes_expanded;
@@ -252,12 +254,12 @@ idas_kernel(Input *input, signed char *plan, search_stat *stat, int f_limit,
     state_tile_fill(input[id]);
     state_init_hvalue();
 
-    if (idas_internal(f_limit, &nodes_expanded))
+    if (idas_internal(f_limit, &nodes_expanded, input[id]))
     {
 		stat[id].solved = true;
         stat[id].len = (int) STACK_I;
-		for (uchar i                        = 0; i < STACK_I; ++i)
-            plan[i + 1 + id * PLAN_LEN_MAX] = stack_get(i);
+		for (uchar i = 0; i < STACK_I; ++i)
+            plan[i + id * PLAN_LEN_MAX] = stack_get(i);
     }
     else
 		stat[id].solved = false;
@@ -607,13 +609,11 @@ state_get_depth(State state)
 }
 
 void
-state_fill_input(State state, Input input)
+state_fill_input(State state, uchar *tiles)
 {
     for (int i   = 0; i < STATE_N; ++i)
-        input.tiles[i] = state->pos[i % STATE_WIDTH][i / STATE_WIDTH];
-    input.tiles[state->i + (state->j * STATE_WIDTH)] = 0;
-
-	input.init_depth = state_get_depth(state);
+        tiles[i] = state->pos[i % STATE_WIDTH][i / STATE_WIDTH];
+    tiles[state->i + (state->j * STATE_WIDTH)] = 0;
 }
 
 #include <stdint.h>
@@ -1065,12 +1065,11 @@ pq_dump(PQ pq)
 }
 
 bool
-distribute_astar(State init_state, State goal_state, Input input[],
-                int distr_n)
+distribute_astar(State init_state, Input input[], int distr_n)
 {
     int      cnt = 0;
     State    state;
-    PQ    q = pq_init(10000);
+    PQ    q = pq_init(distr_n + 10);
     HTStatus ht_status;
     int *    ht_value;
     HT       closed = ht_init(10000);
@@ -1107,7 +1106,7 @@ distribute_astar(State init_state, State goal_state, Input input[],
                 State next_state = state_copy(state);
                 state_move(next_state, (Direction)dir);
 				next_state->parent_state = state;
-				state->depth++;
+				next_state->depth++;
 
                 ht_status = ht_insert(closed, next_state, &ht_value);
                 if (ht_status == HT_FAILED_FOUND &&
@@ -1140,10 +1139,11 @@ DISTRIBUTION_DONE:
     if (!solved)
         for (int i = 0; i < distr_n; ++i)
 		{
-			Input in = input[i];
 			State state = pq_pop(q);
-            state_fill_input(pq_pop(q), in);
-			in.state = state;
+            state_fill_input(state, input[i].tiles);
+
+			input[i].init_depth = state_get_depth(state);
+			input[i].state = state;
 		}
 
     ht_fini(closed);
@@ -1299,7 +1299,6 @@ main(int argc, char *argv[])
 	Input input[N_CORE];
     Input *d_input;
     int    input_size = sizeof(Input) * N_CORE;
-
     signed char  plan[PLAN_LEN_MAX * N_CORE];
     signed char *d_plan;
     int          plan_size = sizeof(signed char) * PLAN_LEN_MAX * N_CORE;
@@ -1307,15 +1306,15 @@ main(int argc, char *argv[])
     search_stat *d_stat;
     int          stat_size = sizeof(search_stat) * N_CORE;
 
-    int root_h_value = 0;
 
     bool  movable_table[STATE_N * DIR_N];
     bool *d_movable_table;
     int   movable_table_size = sizeof(bool) * STATE_N * DIR_N;
-
     signed char  h_diff_table[STATE_N * STATE_N * DIR_N];
     signed char *d_h_diff_table;
     int h_diff_table_size = sizeof(signed char) * STATE_N * STATE_N * DIR_N;
+
+    int root_h_value = 0;
 
     if (argc < 2)
     {
@@ -1328,14 +1327,9 @@ main(int argc, char *argv[])
 
     {
 	    uchar goal[STATE_N];
-	    State init_state = state_init(input[0].tiles),
-			  goal_state;
+	    State init_state = state_init(input[0].tiles);
 
-	    for (int i = 0; i < STATE_N; ++i)
-		goal[i] = i;
-	    goal_state = state_init(goal);
-
-	    if (distribute_astar(init_state, goal_state, input, N_CORE))
+	    if (distribute_astar(init_state, input, N_CORE))
 	    {
 		    puts("solution is found by distributor");
 		    return 0;
