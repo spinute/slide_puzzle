@@ -15,8 +15,8 @@ all: cpu cuda
 cpu: cpumain cpu25
 cuda: cumain device_prop cumulti cucomm cusingle
 
-cumain: idas_parallel.o idas_parallel_host.o distributor.o queue.o ht.o state.o utils.o
-	nvcc -L$(CUDA_PATH)/lib64 $^ -lcudart
+cumain: idas_distr.cu
+	nvcc -o $@ $(NVCC_FLAGS) $<
 
 idas_parallel.o: src/idas_parallel.cu
 	nvcc --device-c $(NVCC_FLAGS) $<

@@ -6,6 +6,7 @@ require 'benchmark'
 	puts "prob%03d" % i
 	$stderr.print i%10==0 ? '*' : '.'
 	puts Benchmark.measure {
-		puts `./cpumain benchmarks/all/prob#{"%03d" % i}`
+		#puts `bin/cpumain benchmarks/all/prob#{"%03d" % i}`
+		puts `bin/15md_solver idastar < benchmarks/burns/prob#{"%03d" % i}`
 	}
 end
