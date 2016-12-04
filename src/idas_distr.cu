@@ -16,29 +16,26 @@ typedef signed char Direction;
 #define DIR_LEFT 2
 #define DIR_DOWN 3
 
-typedef struct search_stat_tag
-{
-	bool solved;
-	int len;
-	int nodes_expanded;
-} search_stat;
-
 /* stack implementation */
 
 __device__ __shared__ static struct dir_stack_tag
 {
     uchar i;
+	uchar init_depth;
     uchar buf[PLAN_LEN_MAX];
 } stack[N_THREADS];
 
 #define STACK_I (stack[threadIdx.x].i)
+#define STACK_INIT_DEPTH (stack[threadIdx.x].init_depth)
 #define stack_get(i) (stack[threadIdx.x].buf[i])
 #define stack_set(i, val) (stack[threadIdx.x].buf[i] = (val))
 
+typedef struct input_tag Input;
 __device__ static inline void
-stack_init(void)
+stack_init(Input input)
 {
     STACK_I = 0;
+    STACK_INIT_DEPTH = input.init_depth;
 }
 
 __device__ static inline void
@@ -154,7 +151,7 @@ state_move_with_limit(Direction dir, unsigned int f_limit)
     int new_h_value =
         STATE_HVALUE + H_DIFF(opponent, new_empty, dir);
 
-    if (STACK_I + 1 + new_h_value > f_limit)
+    if (STACK_I + STACK_INIT_DEPTH + 1 + new_h_value > f_limit)
         return false;
 
     STATE_HVALUE = new_h_value;
@@ -220,8 +217,21 @@ idas_internal(int f_limit, int *ret_nodes_expanded)
     }
 }
 
+typedef struct search_stat_tag
+{
+	bool solved;
+	int len;
+	int nodes_expanded;
+} search_stat;
+struct input_tag
+{
+	uchar tiles[STATE_N];
+	struct state_tag *state;
+	int init_depth;
+};
+
 __global__ void
-idas_kernel(uchar *input, signed char *plan, search_stat *stat, int f_limit,
+idas_kernel(Input *input, signed char *plan, search_stat *stat, int f_limit,
             signed char *h_diff_table, bool *movable_table)
 {
 	int nodes_expanded = 0;
@@ -239,8 +249,8 @@ idas_kernel(uchar *input, signed char *plan, search_stat *stat, int f_limit,
 
     __syncthreads();
 
-    stack_init();
-    state_tile_fill(input + id * STATE_N);
+    stack_init(input);
+    state_tile_fill(input + id);
     state_init_hvalue();
 
     if (idas_internal(f_limit, &nodes_expanded))
@@ -318,7 +328,8 @@ typedef struct state_tag_cpu
     int         depth; /* XXX: needed? */
     uchar pos[STATE_WIDTH][STATE_WIDTH];
     idx_t       i, j; /* pos of empty */
-    Direction   parent;
+    Direction   parent_dir;
+	struct state_tag_cpu *parent_state;
     int         h_value;
 } *State;
 
@@ -385,7 +396,7 @@ state_init(uchar v_list[STATE_WIDTH * STATE_WIDTH])
     int   cnt   = 0;
 
     state->depth  = 0;
-    state->parent = (Direction)-1;
+    state->parent_dir = (Direction)-1;
 
     for (idx_t j = 0; j < STATE_WIDTH; ++j)
         for (idx_t i = 0; i < STATE_WIDTH; ++i)
@@ -560,7 +571,7 @@ state_move(State state, Direction dir)
         state->h_value + h_diff(who, state->i, state->j, dir_reverse(dir));
     // state->h_value = state->h_value + calc_h_diff(who, state->i, state->j,
     // dir);
-    state->parent = dir;
+    state->parent_dir = dir;
 }
 
 bool
@@ -597,11 +608,13 @@ state_get_depth(State state)
 }
 
 void
-state_fill_slist(State state, unsigned char slist[])
+state_fill_input(State state, Input input[])
 {
     for (int i   = 0; i < STATE_N; ++i)
-        slist[i] = state->pos[i % STATE_WIDTH][i / STATE_WIDTH];
-    slist[state->i + (state->j * STATE_WIDTH)] = 0;
+        input.tiles[i] = state->pos[i % STATE_WIDTH][i / STATE_WIDTH];
+    input.tiles[state->i + (state->j * STATE_WIDTH)] = 0;
+
+	input.init_depth = state_get_depth(state);
 }
 
 #include <stdint.h>
@@ -1053,7 +1066,7 @@ pq_dump(PQ pq)
 }
 
 bool
-distribute_astar(State init_state, State goal_state, unsigned char *s_list_ret,
+distribute_astar(State init_state, State goal_state, Input input[],
                 int distr_n)
 {
     int      cnt = 0;
@@ -1089,10 +1102,12 @@ distribute_astar(State init_state, State goal_state, unsigned char *s_list_ret,
 
         for (int dir = 0; dir < DIR_N; ++dir)
         {
-            if (state_movable(state, (Direction)dir))
+            if (state->parent_dir != dir_reverse(dir) &&
+					state_movable(state, (Direction)dir))
             {
                 State next_state = state_copy(state);
                 state_move(next_state, (Direction)dir);
+				next_state->parent_state = state;
 				state->depth++;
 
                 ht_status = ht_insert(closed, next_state, &ht_value);
@@ -1125,7 +1140,12 @@ DISTRIBUTION_DONE:
 
     if (!solved)
         for (int i = 0; i < distr_n; ++i)
-            state_fill_slist(pq_pop(q), s_list_ret + STATE_N * i);
+		{
+			Input in = input + i;
+			State state = pq_pop(q);
+            state_fill_input(pq_pop(q), in);
+			in.state = state;
+		}
 
     ht_fini(closed);
     pq_fini(q);
@@ -1277,9 +1297,9 @@ static char dir_char[] = {'U', 'R', 'L', 'D'};
 int
 main(int argc, char *argv[])
 {
-    uchar  s_list[STATE_N * N_CORE];
-    uchar *d_s_list;
-    int    s_list_size = sizeof(uchar) * STATE_N * N_CORE;
+	Input input[N_CORE];
+    Input *d_input;
+    int    input_size = sizeof(Input) * N_CORE;
 
     signed char  plan[PLAN_LEN_MAX * N_CORE];
     signed char *d_plan;
@@ -1304,19 +1324,19 @@ main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 
-    load_state_from_file(argv[1], s_list);
-    root_h_value = calc_hvalue(s_list);
+    load_state_from_file(argv[1], input);
+    root_h_value = calc_hvalue(input);
 
     {
 	    uchar goal[STATE_N];
-	    State init_state = state_init(s_list),
+	    State init_state = state_init(input),
 		  goal_state;
 
 	    for (int i = 0; i < STATE_N; ++i)
 		goal[i] = i;
 	    goal_state = state_init(goal);
 
-	    if (distribute_astar(init_state, goal_state, s_list, N_CORE))
+	    if (distribute_astar(init_state, goal_state, input, N_CORE))
 	    {
 		    puts("solution is found by distributor");
 		    return 0;
@@ -1326,7 +1346,7 @@ main(int argc, char *argv[])
     init_mdist(h_diff_table);
     init_movable_table(movable_table);
 
-    CUDA_CHECK(cudaMalloc((void **) &d_s_list, s_list_size));
+    CUDA_CHECK(cudaMalloc((void **) &d_input, input_size));
     CUDA_CHECK(cudaMalloc((void **) &d_plan, plan_size));
     CUDA_CHECK(cudaMalloc((void **) &d_stat, stat_size));
     CUDA_CHECK(cudaMalloc((void **) &d_movable_table, movable_table_size));
@@ -1340,18 +1360,26 @@ main(int argc, char *argv[])
     {
         printf("f=%d\n", (int) f_limit);
         CUDA_CHECK(
-            cudaMemcpy(d_s_list, s_list, s_list_size, cudaMemcpyHostToDevice));
+            cudaMemcpy(d_input, input, input_size, cudaMemcpyHostToDevice));
 
-        printf("call idas_kernel(block=%d, thread=%d)\n", N_BLOCK,
-               N_CORE / N_BLOCK);
-        idas_kernel<<<N_BLOCK, N_CORE/N_BLOCK>>>(d_s_list, d_plan, d_stat, f_limit, d_h_diff_table, d_movable_table);
+        printf("call idas_kernel(block=%d, thread=%d)\n", N_BLOCK, N_THREADS);
+        idas_kernel<<<N_BLOCK, N_THREADS>>>(d_input, d_plan, d_stat, f_limit, d_h_diff_table, d_movable_table);
 
         CUDA_CHECK(cudaMemcpy(plan, d_plan, plan_size, cudaMemcpyDeviceToHost));
         CUDA_CHECK(cudaMemcpy(stat, d_stat, stat_size, cudaMemcpyDeviceToHost));
 
         for (int i = 0; i < N_CORE; ++i)
 			if (stat[i].solved) {
-                printf("len=%d: ", stat[i].len);
+				Direction buf[PLAN_LEN_MAX];
+				State s = input[i].state;
+
+                printf("len=%d: ", stat[i].len + input[i].depth);
+
+				for (int j = 0; j < s.depth; ++j, s=s.parent_state)
+					buf[s.depth-j-1] = s.parent_dir;
+				for (int j = 0; j < s.depth; ++j, s=s.parent_state)
+                    printf("%c ", dir_char[buf[j]]);
+
                 for (int j = 0; j < stat[i].len; ++j)
                     printf("%c ", dir_char[(int) plan[i * PLAN_LEN_MAX + j]]);
                 putchar('\n');
@@ -1365,7 +1393,7 @@ main(int argc, char *argv[])
     }
 solution_found:
 
-    CUDA_CHECK(cudaFree(d_s_list));
+    CUDA_CHECK(cudaFree(d_input));
     CUDA_CHECK(cudaFree(d_plan));
     CUDA_CHECK(cudaFree(d_stat));
     CUDA_CHECK(cudaFree(d_movable_table));
