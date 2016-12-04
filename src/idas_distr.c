@@ -61,7 +61,6 @@ stack_peak(void)
 
 /* state implementation */
 
-#define STATE_EMPTY 0
 #define STATE_WIDTH 4
 #define STATE_N (STATE_WIDTH*STATE_WIDTH)
 
@@ -82,8 +81,8 @@ __device__ __shared__ static struct state_tag
 
 
 #define STATE_TILE(i) (state[threadIdx.x].tile[(i)])
-#define STATE_EMPTY(i) (state[threadIdx.x].empty)
-#define STATE_HVALUE(i) (state[threadIdx.x].hvalue)
+#define STATE_EMPTY (state[threadIdx.x].empty)
+#define STATE_HVALUE (state[threadIdx.x].hvalue)
 
 __device__ static uchar inline distance(uchar i, uchar j)
 {
@@ -105,8 +104,8 @@ state_init_hvalue(void)
 
     for (int i = 0; i < STATE_N; ++i)
     {
-        from_x[state_tile_get(i)] = POS_X(i);
-        from_y[state_tile_get(i)] = POS_Y(i);
+        from_x[STATE_TILE(i)] = POS_X(i);
+        from_y[STATE_TILE(i)] = POS_Y(i);
     }
     for (int i = 1; i < STATE_N; ++i)
     {
@@ -120,7 +119,7 @@ state_tile_fill(const uchar v_list[STATE_WIDTH * STATE_WIDTH])
 {
     for (int i = 0; i < STATE_N; ++i)
     {
-        if (v_list[i] == STATE_EMPTY)
+        if (v_list[i] == 0)
             state[threadIdx.x].empty = i;
         state_tile_set(i, v_list[i]);
     }
@@ -151,7 +150,7 @@ __device__ static inline bool
 state_move_with_limit(DirDev dir, unsigned int f_limit)
 {
     int new_empty = state[threadIdx.x].empty + pos_diff_table[dir];
-    int opponent  = state_tile_get(new_empty);
+    int opponent  = STATE_TILE(new_empty);
     int new_h_value =
         state[threadIdx.x].h_value + H_DIFF(opponent, new_empty, dir);
 
@@ -169,7 +168,7 @@ __device__ static inline void
 state_move(DirDev dir)
 {
     int new_empty = state[threadIdx.x].empty + pos_diff_table[dir];
-    int opponent  = state_tile_get(new_empty);
+    int opponent  = STATE_TILE(new_empty);
 
     state[threadIdx.x].h_value += H_DIFF(opponent, new_empty, dir);
     state_tile_set(state[threadIdx.x].empty, opponent);
