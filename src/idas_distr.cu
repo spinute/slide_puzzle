@@ -88,11 +88,7 @@ __device__ __shared__ static struct state_tag
 #define STATE_TILE(i) (state[threadIdx.x].tile[(i)])
 #define STATE_EMPTY (state[threadIdx.x].empty)
 #define STATE_HVALUE (state[threadIdx.x].h_value)
-
-__device__ static uchar inline distance(uchar i, uchar j)
-{
-    return i > j ? i - j : j - i;
-}
+#define distance(i, j) ((i) > (j) ? (i) - (j) : (j) - (i))
 
 #define H_DIFF(opponent, empty, empty_dir)                                     \
     h_diff_table_shared[opponent][empty][empty_dir]
@@ -267,7 +263,7 @@ idas_kernel(uchar *input, signed char *plan, search_stat *stat, int f_limit,
 #include <stdlib.h>
 #include <stdio.h>
 
-#define elog(...) printf(stderr, __VA_ARGS__)
+#define elog(...) fprintf(stderr, __VA_ARGS__)
 
 void *
 palloc(size_t size)
@@ -334,12 +330,6 @@ typedef struct state_tag_cpu
 
 static uchar from_x[STATE_WIDTH * STATE_WIDTH],
     from_y[STATE_WIDTH * STATE_WIDTH];
-
-static inline int
-distance(unsigned int i, unsigned int j)
-{
-    return i > j ? i - j : j - i;
-}
 
 static inline void
 fill_from_xy(State from)
