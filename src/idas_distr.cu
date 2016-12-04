@@ -1113,14 +1113,14 @@ distribute_astar(State init_state, State goal_state, unsigned char *s_list_ret,
 						/* NOTE: put parent.
 						 * FIXME: There are duplicated younger siblings */
 						*ht_value = state_get_depth(state);
-						pq_put(q, state, *ht_value + state_get_hvalue(state));
+						pq_put(q, state, *ht_value + state_get_hvalue(state), *ht_value);
 						state_fini(next_state);
 						break;
 					}
 
 					*ht_value = state_get_depth(next_state);
 					pq_put(q, next_state,
-							*ht_value + state_get_hvalue(next_state));
+							*ht_value + state_get_hvalue(next_state), *ht_value);
                 }
             }
         }
@@ -1313,12 +1313,12 @@ main(int argc, char *argv[])
 
     {
 	    uchar goal[STATE_N];
-	    State init_state = state_init(s_list, 0),
+	    State init_state = state_init(s_list),
 		  goal_state;
 
 	    for (int i = 0; i < STATE_N; ++i)
 		goal[i] = i;
-	    goal_state = state_init(goal, 0);
+	    goal_state = state_init(goal);
 
 	    if (distribute_astar(init_state, goal_state, s_list, N_CORE))
 	    {
