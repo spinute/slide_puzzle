@@ -692,7 +692,7 @@ ht_init(size_t init_size_hint)
     ht->n_elems = 0;
 
     assert(sizeof(*ht->bin) <= SIZE_MAX / n_bins);
-    ht->bin = palloc(sizeof(*ht->bin) * n_bins);
+    ht->bin = (HTEntry *)palloc(sizeof(*ht->bin) * n_bins);
     memset(ht->bin, 0, sizeof(*ht->bin) * n_bins);
 
     return ht;
@@ -1065,13 +1065,14 @@ distribute_astar(State init_state, State goal_state, unsigned char *s_list_ret,
 {
     int      cnt = 0;
     State    state;
-    PQ    q = pq_init();
+    PQ    q = pq_init(10000);
     HTStatus ht_status;
     int *    ht_value;
     HT       closed = ht_init(10000);
     bool     solved = false;
 
-    ht_status = ht_insert(closed, init_state, &ht_place_holder);
+    ht_status = ht_insert(closed, init_state, &ht_value);
+	*ht_value = 0;
     pq_put(q, state_copy(init_state), state_get_hvalue(init_state), 0);
     ++cnt;
 
@@ -1267,6 +1268,14 @@ init_movable_table(bool movable_table[])
 }
 #undef m_t
 
+static void
+avoid_unused_static_assertions(void)
+{
+    (void) assert_direction[0];
+    (void) assert_direction2[0];
+    (void) assert_state_width_is_four[0];
+}
+
 static char dir_char[] = {'U', 'R', 'L', 'D'};
 
 int
@@ -1366,6 +1375,8 @@ solution_found:
     CUDA_CHECK(cudaFree(d_movable_table));
     CUDA_CHECK(cudaFree(d_h_diff_table));
     CUDA_CHECK(cudaDeviceReset());
+
+	avoid_unused_static_assertions();
 
     return 0;
 }
