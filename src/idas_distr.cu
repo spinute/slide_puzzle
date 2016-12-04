@@ -265,8 +265,9 @@ idas_kernel(uchar *input, signed char *plan, search_stat *stat, int f_limit,
 #include <limits.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include <stdio.h>
 
-#define elog(...) fprintf(stderr, __VA_ARGS__)
+#define elog(...) printf(stderr, __VA_ARGS__)
 
 void *
 palloc(size_t size)
@@ -335,7 +336,7 @@ static uchar from_x[STATE_WIDTH * STATE_WIDTH],
     from_y[STATE_WIDTH * STATE_WIDTH];
 
 static inline int
-distance(int i, int j)
+distance(unsigned int i, unsigned int j)
 {
     return i > j ? i - j : j - i;
 }
@@ -351,6 +352,7 @@ fill_from_xy(State from)
         }
 }
 
+static char assert_state_width_is_four2[STATE_WIDTH==4 ? 1 : -1];
 static inline int
 heuristic_manhattan_distance(State from)
 {
@@ -358,10 +360,10 @@ heuristic_manhattan_distance(State from)
 
     fill_from_xy(from);
 
-    for (idx_t i = 1; i < STATE_WIDTH * STATE_WIDTH; ++i)
+    for (idx_t i = 1; i < STATE_N; ++i)
     {
-        h_value += distance(from_x[i], i % STATE_WIDTH);
-        h_value += distance(from_y[i], i / STATE_WIDTH);
+        h_value += distance(from_x[i], i & 3);
+        h_value += distance(from_y[i], i >> 2);
     }
 
     return h_value;
@@ -1274,6 +1276,7 @@ avoid_unused_static_assertions(void)
     (void) assert_direction[0];
     (void) assert_direction2[0];
     (void) assert_state_width_is_four[0];
+    (void) assert_state_width_is_four2[0];
 }
 
 static char dir_char[] = {'U', 'R', 'L', 'D'};
