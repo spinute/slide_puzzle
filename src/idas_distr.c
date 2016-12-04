@@ -1,8 +1,10 @@
 #include <stdbool.h>
 
 #define WARP_SIZE 32
+#define N_THREADS 32
 #define N_BLOCK 48
-#define N_CORE N_BLOCK * 32
+#define N_CORE N_BLOCK * N_THREADS
+#define PLAN_LEN_MAX 255
 
 typedef unsigned char uchar;
 typedef uchar DirDev;
@@ -16,69 +18,56 @@ typedef uchar DirDev;
 
 #define NOT_SOLVED -1
 
-#include <stdbool.h>
-
-void idas_parallel_main(uchar *input, signed char *plan, int f_limit, signed char *h_diff_table, bool *movable_table);
 /* stack implementation */
 
 __device__ __shared__ static struct dir_stack_tag
 {
     uchar i;
-    uchar buf[STACK_BUF_BYTES];
-} stack[WARP_SIZE]; /*XXX:block size*/
+    uchar buf[PLAN_LEN_MAX];
+} stack[N_THREADS];
 
-#define STACK_SIZE_BYTES 64
-#define STACK_BUF_BYTES (STACK_SIZE_BYTES - sizeof(uchar))
-#define STACK_DIR_BITS 2
-#define STACK_DIR_MASK ((1 << STACK_DIR_BITS) - 1)
-#define PLAN_LEN_MAX ((1 << STACK_DIR_BITS) * STACK_BUF_BYTES)
-
-#define stack_byte(i) (stack[threadIdx.x].buf[(i) >> STACK_DIR_BITS])
-#define stack_ofs(i) ((i & STACK_DIR_MASK) << 1)
-#define stack_get(i)                                                           \
-    ((stack_byte(i) & (STACK_DIR_MASK << stack_ofs(i))) >> stack_ofs(i))
+#define STACK_I (stack[threadIdx.x].i)
+#define stack_get(i) (stack[threadIdx.x].buf[i])
+#define stack_set(i, val) (stack[threadIdx.x].buf[i] = (val))
 
 __device__ static inline void
 stack_init(void)
 {
-    stack[threadIdx.x].i = 0;
+    STACK_I = 0;
 }
 
 __device__ static inline void
 stack_put(DirDev dir)
 {
-    stack_byte(stack[threadIdx.x].i) &=
-        ~(STACK_DIR_MASK << stack_ofs(stack[threadIdx.x].i));
-    stack_byte(stack[threadIdx.x].i) |= dir << stack_ofs(stack[threadIdx.x].i);
-    ++stack[threadIdx.x].i;
+	stack_set(STACK_I, dir);
+    ++STACK_I;
 }
 __device__ static inline bool
 stack_is_empty(void)
 {
-    return stack[threadIdx.x].i == 0;
-    /* how about !stack[threadIdx.x].i */
+    return STACK_I == 0;
 }
 __device__ static inline DirDev
 stack_pop(void)
 {
-    --stack[threadIdx.x].i;
-    return stack_get(stack[threadIdx.x].i);
+    --STACK_I;
+    return stack_get(STACK_I);
 }
 __device__ static inline DirDev
 stack_peak(void)
 {
-    return stack_get(stack[threadIdx.x].i - 1);
+    return stack_get(STACK_I - 1);
 }
 
 /* state implementation */
 
+#define STATE_EMPTY 0
 #define STATE_WIDTH 4
 #define STATE_N (STATE_WIDTH*STATE_WIDTH)
-#define STATE_EMPTY 0
-#define STATE_TILE_BITS 4
-#define STATE_TILE_MASK ((1ull << STATE_TILE_BITS) - 1)
-#define POS_X(pos) ((pos) % STATE_WIDTH)
-#define POS_Y(pos) ((pos) / STATE_WIDTH)
+
+static char assert_state_width_is_four[STATE_WIDTH==4 ? 1 : -1];
+#define POS_X(pos) ((pos) & 3)
+#define POS_Y(pos) ((pos) >> 2)
 
 /*
  * goal: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
@@ -86,22 +75,15 @@ stack_peak(void)
 
 __device__ __shared__ static struct state_tag
 {
-    unsigned long long tile; /* packed representation label(4bit)*16pos */
+	uchar tile[STATE_N];
     uchar              empty;
     uchar              h_value; /* ub of h_value is 6*16 */
-} state[WARP_SIZE];
+} state[N_THREADS];
 
-#define state_tile_ofs(i) (i << 2)
-#define state_tile_get(i)                                                      \
-    ((state[threadIdx.x].tile & (STATE_TILE_MASK << state_tile_ofs(i))) >>     \
-     state_tile_ofs(i))
-#define state_tile_set(i, val)                                                 \
-    do                                                                         \
-    {                                                                          \
-        state[threadIdx.x].tile &= ~((STATE_TILE_MASK) << state_tile_ofs(i));  \
-        state[threadIdx.x].tile |= ((unsigned long long) val)                  \
-                                   << state_tile_ofs(i);                       \
-    } while (0)
+
+#define STATE_TILE(i) (state[threadIdx.x].tile[(i)])
+#define STATE_EMPTY(i) (state[threadIdx.x].empty)
+#define STATE_HVALUE(i) (state[threadIdx.x].hvalue)
 
 __device__ static uchar inline distance(uchar i, uchar j)
 {
@@ -173,7 +155,7 @@ state_move_with_limit(DirDev dir, unsigned int f_limit)
     int new_h_value =
         state[threadIdx.x].h_value + H_DIFF(opponent, new_empty, dir);
 
-    if (stack[threadIdx.x].i + 1 + new_h_value > f_limit)
+    if (STACK_I + 1 + new_h_value > f_limit)
         return false;
 
     state[threadIdx.x].h_value = new_h_value;
@@ -254,8 +236,8 @@ idas_kernel(uchar *input, signed char *plan, int f_limit,
 
     if (idas_internal(f_limit))
     {
-        plan[id * PLAN_LEN_MAX] = (signed char) stack[tid].i; /* len of plan */
-        for (uchar i                        = 0; i < stack[tid].i; ++i)
+        plan[id * PLAN_LEN_MAX] = (signed char) STACK_I; /* len of plan */
+        for (uchar i                        = 0; i < STACK_I; ++i)
             plan[i + 1 + id * PLAN_LEN_MAX] = stack_get(i);
     }
     else
