@@ -406,7 +406,6 @@ state_init(uchar v_list[STATE_WIDTH * STATE_WIDTH])
         }
 
     state->h_value = heuristic_manhattan_distance(state);
-    state_dump(state);
 
     return state;
 }
@@ -605,21 +604,6 @@ state_get_depth(State state)
 }
 
 void
-state_dump(State state)
-{
-    elog("%s: h_value=%d, (i,j)=(%u,%u)\n", __func__, state->h_value, state->i,
-         state->j);
-
-    for (idx_t j = 0; j < STATE_WIDTH; ++j)
-    {
-        for (idx_t i = 0; i < STATE_WIDTH; ++i)
-            elog("%u ", i == state->i && j == state->j ? 0 : v(state, i, j));
-        elog("\n");
-    }
-    elog("-----------\n");
-}
-
-void
 state_fill_slist(State state, unsigned char slist[])
 {
     for (int i   = 0; i < STATE_N; ++i)
@@ -630,6 +614,9 @@ state_fill_slist(State state, unsigned char slist[])
 #include <stdint.h>
 #include <stddef.h>
 #include <string.h>
+#ifndef SIZE_MAX
+    #define SIZE_MAX ((size_t)-1)
+#endif
 
 typedef enum {
     HT_SUCCESS = 0,
@@ -655,7 +642,7 @@ struct ht_entry_tag
 static HTEntry
 ht_entry_init(State key)
 {
-    HTEntry entry = palloc(sizeof(*entry));
+    HTEntry entry = (HTEntry)palloc(sizeof(*entry));
 
     entry->key  = state_copy(key);
     entry->next = NULL;
@@ -699,7 +686,7 @@ HT
 ht_init(size_t init_size_hint)
 {
     size_t n_bins = calc_n_bins(init_size_hint);
-    HT     ht     = palloc(sizeof(*ht));
+    HT     ht     = (HT)palloc(sizeof(*ht));
 
     ht->n_bins  = n_bins;
     ht->n_elems = 0;
@@ -719,7 +706,7 @@ ht_rehash(HT ht)
 
     assert(ht->n_bins<SIZE_MAX>> 1);
 
-    new_bin = palloc(sizeof(*new_bin) * new_size);
+    new_bin = (HTEntry *)palloc(sizeof(*new_bin) * new_size);
     memset(new_bin, 0, sizeof(*new_bin) * new_size);
 
     for (size_t i = 0; i < ht->n_bins; ++i)
@@ -763,7 +750,7 @@ ht_fini(HT ht)
 }
 
 HTStatus
-ht_search(HT ht, State key, ht_value *ret_value)
+ht_search(HT ht, State key, int *ret_value)
 {
     size_t  i     = hashfunc(key) & (ht->n_bins - 1);
     HTEntry entry = ht->bin[i];
@@ -783,7 +770,7 @@ ht_search(HT ht, State key, ht_value *ret_value)
 }
 
 HTStatus
-ht_insert(HT ht, State key, ht_value **value)
+ht_insert(HT ht, State key, int **value)
 {
     size_t  i;
     HTEntry entry, new_entry;
@@ -863,79 +850,9 @@ ht_dump(HT ht)
 }
 
 
-#include <stdlib.h>
-#include <unistd.h>
-static long pagesize = 0;
-static long n_states_par_page;
-
-/*
- * Queue Page implementation
- */
-
-typedef struct queue_page *QPage;
-typedef struct queue_page
-{
-    size_t out, in;
-    QPage  next;
-    State  buf[];
-} QPageData;
-
-static void
-set_pagesize(void)
-{
-    pagesize = sysconf(_SC_PAGESIZE);
-    if (pagesize < 0)
-    {
-        elog("%s: sysconf(_SC_PAGESIZE) failed\n", __func__);
-        exit(EXIT_FAILURE);
-    }
-
-    n_states_par_page = (pagesize - sizeof(QPageData)) / sizeof(State);
-
-    elog("%s: pagesize=%ld, n_states/page=%ld\n", __func__, pagesize,
-         n_states_par_page);
-}
-
-static QPage
-qpage_init(void)
-{
-    QPage qp = (QPage)palloc(sizeof(*qp) + sizeof(State) * n_states_par_page);
-    qp->in = qp->out = 0;
-    qp->next         = NULL;
-    return qp;
-}
-
-static void
-qpage_fini(QPage qp)
-{
-    while (qp->out < qp->in)
-        state_fini(qp->buf[qp->out++]);
-    pfree(qp);
-}
-
-static inline bool
-qpage_have_space(QPage qp)
-{
-    return (long) (qp->in + 1) < n_states_par_page;
-}
-
-static inline void
-qpage_put(QPage qp, State state)
-{
-    assert(qpage_have_space(qp));
-    qp->buf[qp->in++] = state;
-}
-
-static inline State
-qpage_pop(QPage qp)
-{
-    return qp->out == qp->in ? NULL : qp->buf[qp->out++];
-}
-
 /*
  * Priority Queue implementation
  */
-
 
 #include <assert.h>
 #include <stdint.h>
@@ -981,13 +898,13 @@ calc_init_capa(size_t capa_hint)
 PQ
 pq_init(size_t init_capa_hint)
 {
-    PQ pq = palloc(sizeof(*pq));
+    PQ pq = (PQ)palloc(sizeof(*pq));
 
     pq->n_elems = 0;
     pq->capa    = calc_init_capa(init_capa_hint);
 
     assert(pq->capa <= SIZE_MAX / sizeof(PQEntryData));
-    pq->array = palloc(sizeof(PQEntryData) * pq->capa);
+    pq->array = (PQEntryData *)palloc(sizeof(PQEntryData) * pq->capa);
 
     return pq;
 }
@@ -1015,7 +932,7 @@ pq_extend(PQ pq)
     pq->capa = (pq->capa << 1) + 1;
     assert(pq->capa <= SIZE_MAX / sizeof(PQEntryData));
 
-    pq->array = repalloc(pq->array, sizeof(PQEntryData) * pq->capa);
+    pq->array = (PQEntryData *)repalloc(pq->array, sizeof(PQEntryData) * pq->capa);
 }
 
 static inline void
@@ -1143,7 +1060,7 @@ pq_dump(PQ pq)
 }
 
 bool
-distributor(State init_state, State goal_state, unsigned char *s_list_ret,
+distribute_astar(State init_state, State goal_state, unsigned char *s_list_ret,
                 int distr_n)
 {
     int      cnt = 0;
@@ -1195,16 +1112,14 @@ distributor(State init_state, State goal_state, unsigned char *s_list_ret,
 						/* NOTE: put parent.
 						 * FIXME: There are duplicated younger siblings */
 						*ht_value = state_get_depth(state);
-						pq_put(q, state,
-								*ht_value +
-								calc_h_value(heuristic, state, goal_state));
+						pq_put(q, state, *ht_value + state_get_hvalue(state));
 						state_fini(next_state);
 						break;
 					}
 
 					*ht_value = state_get_depth(next_state);
 					pq_put(q, next_state,
-							*ht_value + calc_h_value(heuristic, next_state, goal_state));
+							*ht_value + state_get_hvalue(next_state));
                 }
             }
         }
@@ -1396,7 +1311,7 @@ main(int argc, char *argv[])
 		goal[i] = i;
 	    goal_state = state_init(goal, 0);
 
-	    if (distributor_bfs(init_state, goal_state, s_list, N_CORE))
+	    if (distribute_astar(init_state, goal_state, s_list, N_CORE))
 	    {
 		    puts("solution is found by distributor");
 		    return 0;
