@@ -1328,8 +1328,8 @@ main(int argc, char *argv[])
 
     {
 	    uchar goal[STATE_N];
-	    State init_state = state_init(input),
-		  goal_state;
+	    State init_state = state_init(input[0].tiles),
+			  goal_state;
 
 	    for (int i = 0; i < STATE_N; ++i)
 		goal[i] = i;
