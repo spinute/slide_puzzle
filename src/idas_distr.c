@@ -180,18 +180,24 @@ state_move(DirDev dir)
  */
 
 __device__ static bool
-idas_internal(uchar f_limit)
+idas_internal(int f_limit, int *ret_nodes_expanded)
 {
     uchar dir = 0;
+	int nodes_expanded = 0;
 
     for (;;)
     {
         if (state_is_goal())
+        {
+			*ret_nodes_expanded = nodes_expanded;
             return true;
+        }
 
         if ((stack_is_empty() || stack_peak() != dir_reverse_dev(dir)) &&
             state_movable(dir))
         {
+			++nodes_expanded;
+
             if (state_move_with_limit(dir, f_limit))
             {
                 stack_put(dir);
@@ -203,7 +209,10 @@ idas_internal(uchar f_limit)
         while (++dir == DIR_N)
         {
             if (stack_is_empty())
+			{
+				*ret_nodes_expanded = nodes_expanded;
                 return false;
+			}
 
             dir = stack_pop();
             state_move(dir_reverse_dev(dir));
