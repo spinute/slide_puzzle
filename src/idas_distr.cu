@@ -125,7 +125,7 @@ state_tile_fill(const uchar v_list[STATE_WIDTH * STATE_WIDTH])
     {
         if (v_list[i] == 0)
             STATE_EMPTY = i;
-        state_tile_set(i, v_list[i]);
+        STATE_TILE(i) = v_list[i];
     }
 }
 
@@ -162,7 +162,7 @@ state_move_with_limit(DirDev dir, unsigned int f_limit)
         return false;
 
     STATE_HVALUE = new_h_value;
-    state_tile_set(STATE_EMPTY, opponent);
+	STATE_TILE(STATE_EMPTY) = opponent;
     STATE_EMPTY = new_empty;
 
     return true;
@@ -175,7 +175,7 @@ state_move(DirDev dir)
     int opponent  = STATE_TILE(new_empty);
 
     STATE_HVALUE += H_DIFF(opponent, new_empty, dir);
-    state_tile_set(STATE_EMPTY, opponent);
+	STATE_TILE(STATE_EMPTY) = opponent;
     STATE_EMPTY = new_empty;
 }
 
@@ -266,6 +266,8 @@ idas_kernel(uchar *input, signed char *plan, search_stat *stat, int f_limit,
 #include <stddef.h>
 #include <stdlib.h>
 
+#define elog(...) fprintf(stderr, __VA_ARGS__)
+
 void *
 palloc(size_t size)
 {
@@ -313,14 +315,14 @@ typedef unsigned char idx_t;
  * [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
  */
 
-struct state_tag
+typedef struct state_tag_cpu
 {
     int         depth; /* XXX: needed? */
-    state_panel pos[STATE_WIDTH][STATE_WIDTH];
+    uchar pos[STATE_WIDTH][STATE_WIDTH];
     idx_t       i, j; /* pos of empty */
     Direction   parent;
     int         h_value;
-};
+} *State;
 
 #define v(state, i, j) ((state)->pos[i][j])
 #define ev(state) (v(state, state->i, state->j))
@@ -329,7 +331,7 @@ struct state_tag
 #define rv(state) (v(state, state->i + 1, state->j))
 #define uv(state) (v(state, state->i, state->j - 1))
 
-static state_panel from_x[STATE_WIDTH * STATE_WIDTH],
+static uchar from_x[STATE_WIDTH * STATE_WIDTH],
     from_y[STATE_WIDTH * STATE_WIDTH];
 
 static inline int
@@ -374,7 +376,7 @@ state_is_goal(State state)
 static inline State
 state_alloc(void)
 {
-    return (State)palloc(sizeof(struct state_tag));
+    return (State)palloc(sizeof(struct state_tag_cpu));
 }
 
 static inline void
@@ -384,7 +386,7 @@ state_free(State state)
 }
 
 State
-state_init(state_panel v_list[STATE_WIDTH * STATE_WIDTH])
+state_init(uchar v_list[STATE_WIDTH * STATE_WIDTH])
 {
     State state = state_alloc();
     int   cnt   = 0;
@@ -661,12 +663,12 @@ ht_entry_fini(HTEntry entry)
     pfree(entry);
 }
 
-struct ht_tag
+typedef struct ht_tag
 {
     size_t   n_bins;
     size_t   n_elems;
     HTEntry *bin;
-};
+} *HT;
 
 static bool
 ht_rehash_required(HT ht)
@@ -925,89 +927,213 @@ qpage_pop(QPage qp)
 }
 
 /*
- * Queue implementation
+ * Priority Queue implementation
  */
 
-struct queue_tag
+
+#include <assert.h>
+#include <stdint.h>
+
+typedef struct pq_entry_tag
 {
-    QPage head, tail;
-};
+    State state;
+    int   f, g;
+} PQEntryData;
+typedef PQEntryData *PQEntry;
 
-Queue
-queue_init(void)
+/* tiebreaking is done comparing g value */
+static inline bool
+pq_entry_higher_priority(PQEntry e1, PQEntry e2)
 {
-    Queue q = (Queue)palloc(sizeof(*q));
+    return e1->f < e2->f || (e1->f == e2->f && e1->g >= e2->g);
+}
 
-    if (!pagesize)
-        set_pagesize();
+/*
+ * NOTE:
+ * This priority queue is implemented doubly reallocated array.
+ * It will only extend and will not shrink, for now.
+ * It may be improved by using array of layers of iteratively widened array
+ */
+typedef struct pq_tag
+{
+    size_t       n_elems;
+    size_t       capa;
+    PQEntryData *array;
+} *PQ;
 
-    q->tail = q->head = qpage_init();
-    q->head->in = q->head->out = 0;
-    q->head->next              = NULL;
+static inline size_t
+calc_init_capa(size_t capa_hint)
+{
+    size_t capa = 1;
+    assert(capa_hint > 0);
 
-    return q;
+    while (capa < capa_hint)
+        capa <<= 1;
+    return capa - 1;
+}
+
+PQ
+pq_init(size_t init_capa_hint)
+{
+    PQ pq = palloc(sizeof(*pq));
+
+    pq->n_elems = 0;
+    pq->capa    = calc_init_capa(init_capa_hint);
+
+    assert(pq->capa <= SIZE_MAX / sizeof(PQEntryData));
+    pq->array = palloc(sizeof(PQEntryData) * pq->capa);
+
+    return pq;
 }
 
 void
-queue_fini(Queue q)
+pq_fini(PQ pq)
 {
-    QPage page = q->head;
+    for (size_t i = 0; i < pq->n_elems; ++i)
+        state_fini(pq->array[i].state);
 
-    while (page)
+    pfree(pq->array);
+    pfree(pq);
+}
+
+static inline bool
+pq_is_full(PQ pq)
+{
+    assert(pq->n_elems <= pq->capa);
+    return pq->n_elems == pq->capa;
+}
+
+static inline void
+pq_extend(PQ pq)
+{
+    pq->capa = (pq->capa << 1) + 1;
+    assert(pq->capa <= SIZE_MAX / sizeof(PQEntryData));
+
+    pq->array = repalloc(pq->array, sizeof(PQEntryData) * pq->capa);
+}
+
+static inline void
+pq_swap_entry(PQ pq, size_t i, size_t j)
+{
+    PQEntryData tmp = pq->array[i];
+    pq->array[i]    = pq->array[j];
+    pq->array[j]    = tmp;
+}
+
+static inline size_t
+pq_up(size_t i)
+{
+    /* NOTE: By using 1-origin, it may be written more simply, i >> 1 */
+    return (i - 1) >> 1;
+}
+
+static inline size_t
+pq_left(size_t i)
+{
+    return (i << 1) + 1;
+}
+
+static void
+heapify_up(PQ pq)
+{
+    for (size_t i = pq->n_elems; i > 0;)
     {
-        QPage next = page->next;
-        qpage_fini(page);
-        page = next;
-    }
+        size_t ui = pq_up(i);
+        assert(i > 0);
+        if (!pq_entry_higher_priority(&pq->array[i], &pq->array[ui]))
+            break;
 
-    pfree(q);
+        pq_swap_entry(pq, i, ui);
+        i = ui;
+    }
 }
 
 void
-queue_put(Queue q, State state)
+pq_put(PQ pq, State state, int f, int g)
 {
-    if (!qpage_have_space(q->tail))
-    {
-        q->tail->next = qpage_init();
-        q->tail       = q->tail->next;
-    }
+    if (pq_is_full(pq))
+        pq_extend(pq);
 
-    qpage_put(q->tail, state);
+    pq->array[pq->n_elems].state = state_copy(state);
+    pq->array[pq->n_elems].f     = f; /* this may be abundant */
+    pq->array[pq->n_elems].g     = g;
+    heapify_up(pq);
+    ++pq->n_elems;
+}
+
+static void
+heapify_down(PQ pq)
+{
+    size_t sentinel = pq->n_elems;
+
+    for (size_t i = 0;;)
+    {
+        size_t ri, li = pq_left(i);
+        if (li >= sentinel)
+            break;
+
+        ri = li + 1;
+        if (ri >= sentinel)
+        {
+            if (pq_entry_higher_priority(&pq->array[li], &pq->array[i]))
+                pq_swap_entry(pq, i, li);
+            /* Reached the bottom */
+            break;
+        }
+
+        /* NOTE: If p(ri) == p(li), it may be good to go right
+         * since the filling order is left-first */
+        if (pq_entry_higher_priority(&pq->array[li], &pq->array[ri]))
+        {
+            if (!pq_entry_higher_priority(&pq->array[i], &pq->array[li]))
+                break;
+
+            pq_swap_entry(pq, i, li);
+            i = li;
+        }
+        else
+        {
+            if (!pq_entry_higher_priority(&pq->array[i], &pq->array[ri]))
+                break;
+
+            pq_swap_entry(pq, i, ri);
+            i = ri;
+        }
+    }
 }
 
 State
-queue_pop(Queue q)
+pq_pop(PQ pq)
 {
-    State state = qpage_pop(q->head);
+    State ret_state;
 
-    if (!state)
-    {
-        QPage next = q->head->next;
-        if (!next)
-            return NULL;
+    if (pq->n_elems == 0)
+        return NULL;
 
-        state = qpage_pop(next);
-        assert(state);
+    ret_state = pq->array[0].state;
 
-        qpage_fini(q->head);
-        q->head = next;
-    }
+    --pq->n_elems;
+    pq->array[0] = pq->array[pq->n_elems];
+    heapify_down(pq);
 
-    return state;
+    return ret_state;
 }
 
 void
-queue_dump(Queue q)
+pq_dump(PQ pq)
 {
-    QPage page = q->head;
-    int   cnt  = 0;
-
-    while (page)
+    elog("%s: n_elems=%zu, capa=%zu\n", __func__, pq->n_elems, pq->capa);
+    for (size_t i = 0, cr_required = 1; i < pq->n_elems; i++)
     {
-        elog("%s: page#%d in=%zu, out=%zu", __func__, cnt++, page->in,
-             page->out);
-        page = page->next;
+        if (i == cr_required)
+        {
+            elog("\n");
+            cr_required = (cr_required << 1) + 1;
+        }
+        elog("%d,", pq->array[i].f);
+        elog("%d ", pq->array[i].g);
     }
+    elog("\n");
 }
 
 bool
