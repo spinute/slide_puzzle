@@ -1,9 +1,8 @@
 #include <stdbool.h>
 
-#define WARP_SIZE 32
-#define N_THREADS 32
-#define N_BLOCK (48 * 4)
-#define N_CORE N_BLOCK * N_THREADS
+#define BLOCK_DIM 32
+#define N_BLOCKS (48 * 4)
+#define N_WORKERS N_BLOCKS * BLOCK_DIM
 #define PLAN_LEN_MAX 255
 
 #define STATE_WIDTH 4
@@ -26,12 +25,9 @@ __device__ __shared__ static struct dir_stack_tag
     uchar i;
 	uchar init_depth;
     uchar buf[PLAN_LEN_MAX];
-} stack[N_THREADS];
+} stack[BLOCK_DIM];
 
-#define STACK_I (stack[threadIdx.x].i)
-#define STACK_INIT_DEPTH (stack[threadIdx.x].init_depth)
-#define stack_get(i) (stack[threadIdx.x].buf[i])
-#define stack_set(i, val) (stack[threadIdx.x].buf[i] = (val))
+#define STACK (stack[threadIdx.x])
 
 typedef struct search_stat_tag
 {
@@ -44,37 +40,37 @@ typedef struct input_tag
 	uchar tiles[STATE_N];
 	struct state_tag_cpu *state;
 	int init_depth;
-	Direction parent_dir; /* TODO: input should include parent dir info */
+	Direction parent_dir;
 } Input;
 
 __device__ static inline void
 stack_init(Input input)
 {
-    STACK_I = 0;
-    STACK_INIT_DEPTH = input.init_depth;
+    STACK.i = 0;
+    STACK.init_depth = input.init_depth;
 }
 
 __device__ static inline void
 stack_put(Direction dir)
 {
-	stack_set(STACK_I, dir);
-    ++STACK_I;
+	STACK.buf[STACK.i] = dir;
+    ++STACK.i;
 }
 __device__ static inline bool
 stack_is_empty(void)
 {
-    return STACK_I == 0;
+    return STACK.i == 0;
 }
 __device__ static inline Direction
 stack_pop(void)
 {
-    --STACK_I;
-    return stack_get(STACK_I);
+    --STACK.i;
+    return STACK.buf[STACK.i];
 }
 __device__ static inline Direction
 stack_peak(void)
 {
-    return stack_get(STACK_I - 1);
+    return STACK.buf[STACK.i - 1];
 }
 
 /* state implementation */
@@ -92,8 +88,7 @@ __device__ __shared__ static struct state_tag
 	uchar tile[STATE_N];
     uchar              empty;
     uchar              h_value; /* ub of h_value is 6*16 */
-} state[N_THREADS];
-
+} state[BLOCK_DIM];
 
 #define STATE_TILE(i) (state[threadIdx.x].tile[(i)])
 #define STATE_EMPTY (state[threadIdx.x].empty)
@@ -164,7 +159,7 @@ state_move_with_limit(Direction dir, unsigned int f_limit)
     int new_h_value =
         STATE_HVALUE + H_DIFF(opponent, new_empty, dir);
 
-    if (STACK_I + STACK_INIT_DEPTH + 1 + new_h_value > f_limit)
+    if (STACK.i + STACK.init_depth + 1 + new_h_value > f_limit)
         return false;
 
     STATE_HVALUE = new_h_value;
@@ -257,9 +252,9 @@ idas_kernel(Input *input, signed char *plan, search_stat *stat, int f_limit,
     if (idas_internal(f_limit, &nodes_expanded, input[id]))
     {
 		stat[id].solved = true;
-        stat[id].len = (int) STACK_I;
-		for (uchar i = 0; i < STACK_I; ++i)
-            plan[i + id * PLAN_LEN_MAX] = stack_get(i);
+        stat[id].len = (int) STACK.i;
+		for (uchar i = 0; i < STACK.i; ++i)
+            plan[i + id * PLAN_LEN_MAX] = STACK.buf[i];
     }
     else
 		stat[id].solved = false;
@@ -606,14 +601,6 @@ int
 state_get_depth(State state)
 {
     return state->depth;
-}
-
-void
-state_fill_input(State state, uchar *tiles)
-{
-    for (int i   = 0; i < STATE_N; ++i)
-        tiles[i] = state->pos[i % STATE_WIDTH][i / STATE_WIDTH];
-    tiles[state->i + (state->j * STATE_WIDTH)] = 0;
 }
 
 #include <stdint.h>
@@ -1137,13 +1124,17 @@ distribute_astar(State init_state, Input input[], int distr_n)
 DISTRIBUTION_DONE:
 
     if (!solved)
-        for (int i = 0; i < distr_n; ++i)
+        for (int id = 0; id < distr_n; ++id)
 		{
 			State state = pq_pop(q);
-            state_fill_input(state, input[i].tiles);
 
-			input[i].init_depth = state_get_depth(state);
-			input[i].state = state;
+			for (int i   = 0; i < STATE_N; ++i)
+				input[id].tiles[i] = state->pos[i % STATE_WIDTH][i / STATE_WIDTH];
+			input[id].tiles[state->i + (state->j * STATE_WIDTH)] = 0;
+
+			input[id].init_depth = state_get_depth(state);
+			input[id].state = state;
+			input[id].parent_dir = state->parent_dir;
 		}
 
     ht_fini(closed);
@@ -1296,15 +1287,15 @@ static char dir_char[] = {'U', 'R', 'L', 'D'};
 int
 main(int argc, char *argv[])
 {
-	Input input[N_CORE];
+	Input input[N_WORKERS];
     Input *d_input;
-    int    input_size = sizeof(Input) * N_CORE;
-    signed char  plan[PLAN_LEN_MAX * N_CORE];
+    int    input_size = sizeof(Input) * N_WORKERS;
+    signed char  plan[PLAN_LEN_MAX * N_WORKERS];
     signed char *d_plan;
-    int          plan_size = sizeof(signed char) * PLAN_LEN_MAX * N_CORE;
-    search_stat  stat[N_CORE];
+    int          plan_size = sizeof(signed char) * PLAN_LEN_MAX * N_WORKERS;
+    search_stat  stat[N_WORKERS];
     search_stat *d_stat;
-    int          stat_size = sizeof(search_stat) * N_CORE;
+    int          stat_size = sizeof(search_stat) * N_WORKERS;
 
 
     bool  movable_table[STATE_N * DIR_N];
@@ -1328,7 +1319,7 @@ main(int argc, char *argv[])
     {
 	    State init_state = state_init(input[0].tiles);
 
-	    if (distribute_astar(init_state, input, N_CORE))
+	    if (distribute_astar(init_state, input, N_WORKERS))
 	    {
 		    puts("solution is found by distributor");
 		    return 0;
@@ -1354,37 +1345,36 @@ main(int argc, char *argv[])
         CUDA_CHECK(
             cudaMemcpy(d_input, input, input_size, cudaMemcpyHostToDevice));
 
-        printf("call idas_kernel(block=%d, thread=%d)\n", N_BLOCK, N_THREADS);
-        idas_kernel<<<N_BLOCK, N_THREADS>>>(d_input, d_plan, d_stat, f_limit, d_h_diff_table, d_movable_table);
+        printf("call idas_kernel(block=%d, thread=%d)\n", N_BLOCKS, BLOCK_DIM);
+        idas_kernel<<<N_BLOCKS, BLOCK_DIM>>>(d_input, d_plan, d_stat, f_limit, d_h_diff_table, d_movable_table);
 
         CUDA_CHECK(cudaMemcpy(plan, d_plan, plan_size, cudaMemcpyDeviceToHost));
         CUDA_CHECK(cudaMemcpy(stat, d_stat, stat_size, cudaMemcpyDeviceToHost));
 
-        for (int i = 0; i < N_CORE; ++i)
+        for (int i = 0; i < N_WORKERS; ++i)
 			if (stat[i].solved) {
-                printf("gpu path len=%d: ", stat[i].len);
-
-				/*
 				Direction buf[PLAN_LEN_MAX];
 				State s = input[i].state;
 
                 printf("len=%d: ", stat[i].len + input[i].init_depth);
 
+				/* CPU side output */
 				int d = s->depth;
 				for (int j = 0; j < d; ++j, s=s->parent_state)
 					buf[s->depth - 1] = s->parent_dir;
 				for (int j = 0; j < d; ++j)
                     printf("%c ", dir_char[buf[j]]);
-				*/
 
+				/* GPU side output */
                 for (int j = 0; j < stat[i].len; ++j)
                     printf("%c ", dir_char[(int) plan[i * PLAN_LEN_MAX + j]]);
                 putchar('\n');
+
                 goto solution_found;
             }
 
 		printf("stat nodes_expanded\n");
-        for (int i = 0; i < N_CORE; ++i)
+        for (int i = 0; i < N_WORKERS; ++i)
 			printf("%d, ", stat[i].nodes_expanded);
 		putchar('\n');
     }
