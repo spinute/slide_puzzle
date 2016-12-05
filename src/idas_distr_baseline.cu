@@ -1375,7 +1375,7 @@ main(int argc, char *argv[])
 
 		printf("stat nodes_expanded\n");
         for (int i = 0; i < N_WORKERS; ++i)
-			printf("%d, ", stat[i].nodes_expanded);
+			printf("%lld, ", stat[i].nodes_expanded);
 		putchar('\n');
     }
 solution_found:

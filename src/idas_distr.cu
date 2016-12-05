@@ -1356,15 +1356,17 @@ main(int argc, char *argv[])
 				Direction buf[PLAN_LEN_MAX];
 				State s = input[i].state;
 
+				/* cpu site output
                 printf("len=%d: ", stat[i].len + input[i].init_depth);
 
-				/* CPU side output */
 				int d = s->depth;
 				for (int j = 0; j < d; ++j, s=s->parent_state)
 					buf[s->depth - 1] = s->parent_dir;
 				for (int j = 0; j < d; ++j)
                     printf("%c ", dir_char[buf[j]]);
+				*/
 
+                printf("len=%d: ", stat[i].len);
 				/* GPU side output */
                 for (int j = 0; j < stat[i].len; ++j)
                     printf("%c ", dir_char[(int) plan[i * PLAN_LEN_MAX + j]]);
@@ -1375,7 +1377,7 @@ main(int argc, char *argv[])
 
 		printf("stat nodes_expanded\n");
         for (int i = 0; i < N_WORKERS; ++i)
-			printf("%d, ", stat[i].nodes_expanded);
+			printf("%lld, ", stat[i].nodes_expanded);
 		putchar('\n');
     }
 solution_found:
