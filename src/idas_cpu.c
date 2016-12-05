@@ -283,13 +283,13 @@ idas_kernel(uchar *input)
 		f_limit = state.h_value;
 		nodes_expanded_first = 0;
 		found = idas_internal(f_limit, &nodes_expanded_first);
-		printf("f_limit=%3d, expanded nodes = %d\n", f_limit, nodes_expanded);
+		printf("f_limit=%3d, expanded nodes = %lld\n", f_limit, nodes_expanded);
 	}
 	if (!found) {
 		++f_limit;
 		nodes_expanded = 0;
 		found = idas_internal(f_limit, &nodes_expanded);
-		printf("f_limit=%3d, expanded nodes = %d\n", f_limit, nodes_expanded);
+		printf("f_limit=%3d, expanded nodes = %lld\n", f_limit, nodes_expanded);
 
 		f_limit += nodes_expanded==nodes_expanded_first ? 1 : 2;
 
@@ -297,7 +297,7 @@ idas_kernel(uchar *input)
 		{
 			nodes_expanded = 0;
 			found = idas_internal(f_limit, &nodes_expanded);
-			printf("f_limit=%3d, expanded nodes = %d\n", f_limit, nodes_expanded);
+			printf("f_limit=%3d, expanded nodes = %lld\n", f_limit, nodes_expanded);
 
 			if (found)
 				break;
