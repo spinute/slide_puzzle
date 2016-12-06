@@ -236,12 +236,14 @@ idas_kernel(Input *input, signed char *plan, search_stat *stat, int f_limit,
     int id  = tid + bid * blockDim.x;
 
     for (int dir = 0; dir < DIR_N; ++dir)
-        if (tid < STATE_N)
-            movable_table_shared[tid][dir] = movable_table[tid * DIR_N + dir];
+		for (int i = tid; i < STATE_N; i+=blockDim.x)
+			if (i < STATE_N)
+				movable_table_shared[i][dir] = movable_table[i * DIR_N + dir];
     for (int i = 0; i < STATE_N * DIR_N; ++i)
-        if (tid < STATE_N)
-            h_diff_table_shared[tid][i / DIR_N][i % DIR_N] =
-                h_diff_table[tid * STATE_N * DIR_N + i];
+		for (int j = tid; j < STATE_N; j+=blockDim.x)
+			if (j < STATE_N)
+				h_diff_table_shared[j][i / DIR_N][i % DIR_N] =
+					h_diff_table[j * STATE_N * DIR_N + i];
 
     __syncthreads();
 
@@ -299,7 +301,6 @@ pfree(void *ptr)
         elog("empty ptr\n");
     free(ptr);
 }
-
 
 #include <assert.h>
 #include <stdbool.h>
@@ -1127,6 +1128,7 @@ DISTRIBUTION_DONE:
         for (int id = 0; id < distr_n; ++id)
 		{
 			State state = pq_pop(q);
+			assert(state);
 
 			for (int i   = 0; i < STATE_N; ++i)
 				input[id].tiles[i] = state->pos[i % STATE_WIDTH][i / STATE_WIDTH];
