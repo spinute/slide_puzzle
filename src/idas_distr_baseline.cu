@@ -1341,8 +1341,8 @@ main(int argc, char *argv[])
     CUDA_CHECK(cudaMemcpy(d_h_diff_table, h_diff_table, h_diff_table_size,
                           cudaMemcpyHostToDevice));
 
-CUDA_CHECK(cudaMemset(d_plan, 0, plan_size));
-CUDA_CHECK(cudaMemset(d_stat, 0, stat_size));
+    CUDA_CHECK(cudaMemset(d_plan, 0, plan_size));
+    CUDA_CHECK(cudaMemset(d_stat, 0, stat_size));
 
     for (uchar f_limit = root_h_value;; f_limit+=2)
     {
@@ -1364,13 +1364,8 @@ CUDA_CHECK(cudaMemset(d_stat, 0, stat_size));
 		printf("core id = %d\n", i);
                 printf("cpu len=%d: ", input[i].init_depth);
 
-				/* CPU side output */
-				int d = s->depth;
-				for (int j = 0; j < d; ++j, s=s->parent_state)
-					buf[s->depth - 1] = s->parent_dir;
-				for (int j = 0; j < d; ++j)
-                    printf("%c ", dir_char[buf[j]]);
-                putchar('\n');
+		/* CPU side output */
+		// Not implemented, for now. It is easy to search path from init state to this root.
 
 				/* GPU side output */
                 printf("gpu len=%d: ", stat[i].len);
