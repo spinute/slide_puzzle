@@ -1,7 +1,7 @@
 #include <stdbool.h>
 
 #define BLOCK_DIM 32
-#define N_BLOCKS (1)
+#define N_BLOCKS (48 * 4)
 #define N_WORKERS N_BLOCKS * BLOCK_DIM
 #define PLAN_LEN_MAX 255
 
@@ -23,7 +23,7 @@ typedef signed char Direction;
 __device__ __shared__ static struct dir_stack_tag
 {
     uchar i;
-	uchar init_depth;
+    int init_depth;
     uchar buf[PLAN_LEN_MAX];
 } stack[BLOCK_DIM];
 
@@ -1358,9 +1358,6 @@ main(int argc, char *argv[])
 
         for (int i = 0; i < N_WORKERS; ++i)
 			if (stat[i].solved) {
-				Direction buf[PLAN_LEN_MAX];
-				State s = input[i].state;
-
 		printf("core id = %d\n", i);
                 printf("cpu len=%d: ", input[i].init_depth);
 
