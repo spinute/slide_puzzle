@@ -1,7 +1,7 @@
 #include <stdbool.h>
 
 #define BLOCK_DIM 32
-#define N_BLOCKS (48 * 4)
+#define N_BLOCKS (1)
 #define N_WORKERS N_BLOCKS * BLOCK_DIM
 #define PLAN_LEN_MAX 255
 
@@ -1341,6 +1341,9 @@ main(int argc, char *argv[])
     CUDA_CHECK(cudaMemcpy(d_h_diff_table, h_diff_table, h_diff_table_size,
                           cudaMemcpyHostToDevice));
 
+CUDA_CHECK(cudaMemset(d_plan, 0, plan_size));
+CUDA_CHECK(cudaMemset(d_stat, 0, stat_size));
+
     for (uchar f_limit = root_h_value;; f_limit+=2)
     {
         printf("f=%d\n", (int) f_limit);
@@ -1358,7 +1361,8 @@ main(int argc, char *argv[])
 				Direction buf[PLAN_LEN_MAX];
 				State s = input[i].state;
 
-                printf("len=%d: ", stat[i].len + input[i].init_depth);
+		printf("core id = %d\n", i);
+                printf("cpu len=%d: ", input[i].init_depth);
 
 				/* CPU side output */
 				int d = s->depth;
@@ -1366,8 +1370,10 @@ main(int argc, char *argv[])
 					buf[s->depth - 1] = s->parent_dir;
 				for (int j = 0; j < d; ++j)
                     printf("%c ", dir_char[buf[j]]);
+                putchar('\n');
 
 				/* GPU side output */
+                printf("gpu len=%d: ", stat[i].len);
                 for (int j = 0; j < stat[i].len; ++j)
                     printf("%c ", dir_char[(int) plan[i * PLAN_LEN_MAX + j]]);
                 putchar('\n');
