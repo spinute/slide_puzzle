@@ -1,7 +1,7 @@
 #include <stdbool.h>
 
-#define BLOCK_DIM 1
-#define N_BLOCKS 1
+#define BLOCK_DIM 32
+#define N_BLOCKS (48 * 4)
 #define N_WORKERS N_BLOCKS * BLOCK_DIM
 #define PLAN_LEN_MAX 255
 
@@ -23,7 +23,7 @@ typedef signed char Direction;
 __device__ __shared__ static struct dir_stack_tag
 {
     uchar i;
-	uchar init_depth;
+    int init_depth;
     uchar buf[PLAN_LEN_MAX];
 } stack[BLOCK_DIM];
 
@@ -301,7 +301,6 @@ pfree(void *ptr)
         elog("empty ptr\n");
     free(ptr);
 }
-
 
 #include <assert.h>
 #include <stdbool.h>
@@ -1129,6 +1128,7 @@ DISTRIBUTION_DONE:
         for (int id = 0; id < distr_n; ++id)
 		{
 			State state = pq_pop(q);
+			assert(state);
 
 			for (int i   = 0; i < STATE_N; ++i)
 				input[id].tiles[i] = state->pos[i % STATE_WIDTH][i / STATE_WIDTH];
@@ -1341,6 +1341,9 @@ main(int argc, char *argv[])
     CUDA_CHECK(cudaMemcpy(d_h_diff_table, h_diff_table, h_diff_table_size,
                           cudaMemcpyHostToDevice));
 
+    CUDA_CHECK(cudaMemset(d_plan, 0, plan_size));
+    CUDA_CHECK(cudaMemset(d_stat, 0, stat_size));
+
     for (uchar f_limit = root_h_value;; f_limit+=2)
     {
         printf("f=%d\n", (int) f_limit);
@@ -1355,19 +1358,14 @@ main(int argc, char *argv[])
 
         for (int i = 0; i < N_WORKERS; ++i)
 			if (stat[i].solved) {
-				Direction buf[PLAN_LEN_MAX];
-				State s = input[i].state;
+		printf("core id = %d\n", i);
+                printf("cpu len=%d: ", input[i].init_depth);
 
-                printf("core_id=%d, cpu len=%d: ", i, input[i].init_depth);
+		/* CPU side output */
+		// Not implemented, for now. It is easy to search path from init state to this root.
 
-				int d = s->depth;
-				for (int j = 0; j < d; ++j, s=s->parent_state)
-					buf[s->depth - 1] = s->parent_dir;
-				for (int j = 0; j < d; ++j)
-                    printf("%c ", dir_char[buf[j]]);
-
-                printf("len=%d: ", stat[i].len);
 				/* GPU side output */
+                printf("gpu len=%d: ", stat[i].len);
                 for (int j = 0; j < stat[i].len; ++j)
                     printf("%c ", dir_char[(int) plan[i * PLAN_LEN_MAX + j]]);
                 putchar('\n');
