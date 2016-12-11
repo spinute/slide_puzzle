@@ -236,12 +236,14 @@ idas_kernel(Input *input, signed char *plan, search_stat *stat, int f_limit,
     int id  = tid + bid * blockDim.x;
 
     for (int dir = 0; dir < DIR_N; ++dir)
-        if (tid < STATE_N)
-            movable_table_shared[tid][dir] = movable_table[tid * DIR_N + dir];
+		for (int i = tid; i < STATE_N; i+=blockDim.x)
+			if (i < STATE_N)
+				movable_table_shared[i][dir] = movable_table[i * DIR_N + dir];
     for (int i = 0; i < STATE_N * DIR_N; ++i)
-        if (tid < STATE_N)
-            h_diff_table_shared[tid][i / DIR_N][i % DIR_N] =
-                h_diff_table[tid * STATE_N * DIR_N + i];
+		for (int j = tid; j < STATE_N; j+=blockDim.x)
+			if (j < STATE_N)
+				h_diff_table_shared[j][i / DIR_N][i % DIR_N] =
+					h_diff_table[j * STATE_N * DIR_N + i];
 
     __syncthreads();
 
@@ -1356,15 +1358,13 @@ main(int argc, char *argv[])
 				Direction buf[PLAN_LEN_MAX];
 				State s = input[i].state;
 
-				/* cpu site output
-                printf("len=%d: ", stat[i].len + input[i].init_depth);
+                printf("core_id=%d, cpu len=%d: ", i, input[i].init_depth);
 
 				int d = s->depth;
 				for (int j = 0; j < d; ++j, s=s->parent_state)
 					buf[s->depth - 1] = s->parent_dir;
 				for (int j = 0; j < d; ++j)
                     printf("%c ", dir_char[buf[j]]);
-				*/
 
                 printf("len=%d: ", stat[i].len);
 				/* GPU side output */
