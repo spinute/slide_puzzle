@@ -2,6 +2,7 @@
 
 #define BLOCK_DIM 32
 #define N_BLOCKS (48 * 2)
+//bug?? #define N_BLOCKS (48 * 4)
 #define N_WORKERS (N_BLOCKS * BLOCK_DIM)
 #define PLAN_LEN_MAX 255
 
@@ -328,7 +329,6 @@ typedef struct state_tag_cpu
     uchar                 pos[STATE_WIDTH][STATE_WIDTH];
     idx_t                 i, j; /* pos of empty */
     Direction             parent_dir;
-    struct state_tag_cpu *parent_state;
     int                   h_value;
 } * State;
 
@@ -392,9 +392,9 @@ State
 state_init(uchar v_list[STATE_WIDTH * STATE_WIDTH], int init_depth)
 {
     State state = state_alloc();
-    int   cnt   = init_depth;
+    int   cnt   = 0;
 
-    state->depth      = 0;
+    state->depth      = init_depth;
     state->parent_dir = (Direction) -1;
 
     for (idx_t j = 0; j < STATE_WIDTH; ++j)
@@ -1098,7 +1098,6 @@ distribute_astar(State init_state, Input input[], int input_ends[], int distr_n,
             {
                 State next_state = state_copy(state);
                 state_move(next_state, (Direction) dir);
-                next_state->parent_state = state;
                 next_state->depth++;
 
                 ht_status = ht_insert(closed, next_state, &ht_value);
@@ -1155,6 +1154,7 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
     int      cnt = 0;
     int *    ht_value;
     State    state = state_init(input[i].tiles, input[i].init_depth);
+    state->parent_dir = input[i].parent_dir;
     PQ       pq    = pq_init(32);
     HTStatus ht_status;
     pq_put(pq, state, state_get_hvalue(state), 0);
@@ -1170,19 +1170,17 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
                    state_get_depth(state));
             ++cnt;
             break;
-        }
+	}
 
-        /*
-                ht_status = ht_insert(closed, state, &ht_value);
-                if (ht_status == HT_FAILED_FOUND && *ht_value <
-           state_get_depth(state))
-                {
-                    state_fini(state);
-                    continue;
-                }
-                else
-                    *ht_value = state_get_depth(state);
-        */
+	ht_status = ht_insert(closed, state, &ht_value);
+	if (ht_status == HT_FAILED_FOUND && *ht_value <
+			state_get_depth(state))
+	{
+		state_fini(state);
+		continue;
+	}
+	else
+		*ht_value = state_get_depth(state);
 
         for (int dir = 0; dir < DIR_N; ++dir)
         {
@@ -1191,16 +1189,13 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
             {
                 State next_state = state_copy(state);
                 state_move(next_state, (Direction) dir);
-                next_state->parent_state = state;
                 next_state->depth++;
 
                 ht_status = ht_insert(closed, next_state, &ht_value);
-                /*
-                                if (ht_status == HT_FAILED_FOUND &&
-                                    *ht_value < state_get_depth(next_state))
-                                    state_fini(next_state);
-                                else
-                */
+		if (ht_status == HT_FAILED_FOUND &&
+				*ht_value < state_get_depth(next_state))
+			state_fini(next_state);
+		else
                 {
                     ++cnt;
                     *ht_value = state_get_depth(next_state);

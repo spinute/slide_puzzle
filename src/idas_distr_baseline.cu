@@ -1,7 +1,7 @@
 #include <stdbool.h>
 
 #define BLOCK_DIM 32
-#define N_BLOCKS (48 * 4)
+#define N_BLOCKS (48 * 2)
 #define N_WORKERS N_BLOCKS * BLOCK_DIM
 #define PLAN_LEN_MAX 255
 
