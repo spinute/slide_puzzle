@@ -1420,7 +1420,7 @@ main(int argc, char *argv[])
     {
         State init_state = state_init(input[0].tiles, 0);
 
-        if (distribute_astar(init_state, input, input_ends, N_WORKERS * 4,
+        if (distribute_astar(init_state, input, input_ends, N_WORKERS * 1,
                              &cnt_inputs))
         {
             puts("solution is found by distributor");
@@ -1460,7 +1460,6 @@ main(int argc, char *argv[])
                                              d_movable_table);
         CUDA_CHECK(cudaPeekAtLastError());
 
-        printf("plan_size=%d\n", plan_size);
         CUDA_CHECK(cudaMemcpy(plan, d_plan, plan_size, cudaMemcpyDeviceToHost));
         CUDA_CHECK(cudaMemcpy(stat, d_stat, stat_size, cudaMemcpyDeviceToHost));
 
@@ -1492,8 +1491,8 @@ main(int argc, char *argv[])
         for (int i = 0; i < cnt_inputs; ++i)
         {
             int policy =
-                stat[i].nodes_expanded / (sum_of_expansion / N_WORKERS) + 1;
-            if (policy > 1)
+                stat[i].nodes_expanded / (sum_of_expansion / N_WORKERS + 1) + 1;
+            if (policy > 1 && stat[i].nodes_expanded > 20)
             {
                 printf("i=%d(%lld) will be devided\n", i,
                        stat[i].nodes_expanded);
@@ -1511,7 +1510,7 @@ main(int argc, char *argv[])
         cnt_inputs += increased;
         printf("input count: %lld\n", cnt_inputs);
 
-		/* TODO: consider expected cost. For now, just equally spliting */
+	/* TODO: consider expected cost. For now, just equally spliting */
         for (int id               = 0; id < N_WORKERS; ++id)
             input_ends[id]        = (cnt_inputs / N_WORKERS) * (id + 1) - 1;
         input_ends[N_WORKERS - 1] = cnt_inputs;
