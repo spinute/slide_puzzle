@@ -1485,18 +1485,14 @@ main(int argc, char *argv[])
         long long int sum_of_expansion = 0;
         for (int i = 0; i < cnt_inputs; ++i)
             sum_of_expansion += stat[i].nodes_expanded;
-        elog("sum of expanded nodes: %lld\n", sum_of_expansion);
+        elog("STAT: sum of expanded nodes: %lld\n", sum_of_expansion);
 
         long long int increased = 0;
 		long long int avarage_expected_load = sum_of_expansion / N_WORKERS;
-        elog("avarage expanded nodes: %lld\n", avarage_expected_load);
+        elog("STAT: avarage expanded nodes: %lld\n", avarage_expected_load);
 
-		elog("stat: nodes over avarege\n");
-        for (int i = 0; i < cnt_inputs; ++i)
-            if (stat[i].nodes_expanded > avarage_expected_load)
-				elog("i=%d:n=%lld ", stat[i].nodes_expanded);
-		elog("\n");
 
+		int ok = 0, ave1 = 0, ave2 = 0, ave3 = 0, ave_more = 0;
         for (int i = 0; i < cnt_inputs; ++i)
         {
             int policy =
@@ -1508,7 +1504,20 @@ main(int argc, char *argv[])
                 increased += input_devide(input, stat, i, policy,
                                           cnt_inputs + increased);
             }
+
+			if (stat[i].nodes_expanded < avarage_expected_load)
+				ok++;
+			else if (stat[i].nodes_expanded < 2*avarage_expected_load)
+				ave1++;
+			else if (stat[i].nodes_expanded < 3*avarage_expected_load)
+				ave2++;
+			else if (stat[i].nodes_expanded < 4*avarage_expected_load)
+				ave3++;
+			else
+				ave_more++;
         }
+		elog("STAT: n<ave=%d, ave<n<2ave=%d, 2ave<n<3ave=%d, 3ave<n<4ave=%d, more=%d\n",
+				ok, ave1, ave2, ave3, ave_more);
 
         if (cnt_inputs + increased > n_inputs)
         {
