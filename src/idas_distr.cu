@@ -275,7 +275,11 @@ idas_kernel(Input *input, int *input_ends, signed char *plan, search_stat *stat,
 #include <stdio.h>
 #include <stdlib.h>
 
-#define elog(...) ;//fprintf(stderr, __VA_ARGS__)
+#ifndef UNABLE_LOG
+#define elog(...) fprintf(stderr, __VA_ARGS__)
+#else
+#define elog(...) ;
+#endif
 
 void *
 palloc(size_t size)
@@ -1485,39 +1489,45 @@ main(int argc, char *argv[])
         long long int sum_of_expansion = 0;
         for (int i = 0; i < cnt_inputs; ++i)
             sum_of_expansion += stat[i].nodes_expanded;
-        elog("STAT: sum of expanded nodes: %lld\n", sum_of_expansion);
 
         long long int increased = 0;
-		long long int avarage_expected_load = sum_of_expansion / N_WORKERS;
+	long long int avarage_expected_load = sum_of_expansion / N_WORKERS;
+
+
+	int stat_cnt[10] = {0, 0, 0, 0, 0, 0, 0};
+	for (int i = 0; i < cnt_inputs; ++i)
+	{
+		if (stat[i].nodes_expanded < avarage_expected_load)
+			stat_cnt[0]++;
+		else if (stat[i].nodes_expanded < 2*avarage_expected_load)
+			stat_cnt[1]++;
+		else if (stat[i].nodes_expanded < 4*avarage_expected_load)
+			stat_cnt[2]++;
+		else if (stat[i].nodes_expanded < 8*avarage_expected_load)
+			stat_cnt[3]++;
+		else if (stat[i].nodes_expanded < 16*avarage_expected_load)
+			stat_cnt[4]++;
+		else if (stat[i].nodes_expanded < 32*avarage_expected_load)
+			stat_cnt[5]++;
+		else
+			stat_cnt[6]++;
+
+		int policy =
+			stat[i].nodes_expanded / (avarage_expected_load + 1) + 1;
+
+		if (policy > 1 && stat[i].nodes_expanded > 20)
+		{
+			elog("i=%d(%lld) will be devided\n", i,
+					stat[i].nodes_expanded);
+			increased += input_devide(input, stat, i, policy,
+					cnt_inputs + increased);
+		}
+	}
+        elog("STAT: sum of expanded nodes: %lld\n", sum_of_expansion);
         elog("STAT: avarage expanded nodes: %lld\n", avarage_expected_load);
-
-
-		int ok = 0, ave1 = 0, ave2 = 0, ave3 = 0, ave_more = 0;
-        for (int i = 0; i < cnt_inputs; ++i)
-        {
-            int policy =
-                stat[i].nodes_expanded / (avarage_expected_load + 1) + 1;
-            if (policy > 1 && stat[i].nodes_expanded > 20)
-            {
-                elog("i=%d(%lld) will be devided\n", i,
-                       stat[i].nodes_expanded);
-                increased += input_devide(input, stat, i, policy,
-                                          cnt_inputs + increased);
-            }
-
-			if (stat[i].nodes_expanded < avarage_expected_load)
-				ok++;
-			else if (stat[i].nodes_expanded < 2*avarage_expected_load)
-				ave1++;
-			else if (stat[i].nodes_expanded < 3*avarage_expected_load)
-				ave2++;
-			else if (stat[i].nodes_expanded < 4*avarage_expected_load)
-				ave3++;
-			else
-				ave_more++;
-        }
-		elog("STAT: n<ave=%d, ave<n<2ave=%d, 2ave<n<3ave=%d, 3ave<n<4ave=%d, more=%d\n",
-				ok, ave1, ave2, ave3, ave_more);
+	elog("STAT: av=%d, 2av=%d, 4av=%d, 8av=%d, 16av=%d, 32av=%d, more=%d\n",
+	stat_cnt[0], stat_cnt[1], stat_cnt[2], stat_cnt[3], stat_cnt[4],
+	stat_cnt[5], stat_cnt[6]);
 
         if (cnt_inputs + increased > N_INPUTS)
         {
