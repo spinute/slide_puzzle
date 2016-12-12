@@ -38,7 +38,6 @@ typedef struct search_stat_tag
 typedef struct input_tag
 {
     uchar tiles[STATE_N];
-    // struct state_tag_cpu *state;
     int       init_depth;
     Direction parent_dir;
 } Input;
@@ -1217,6 +1216,8 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
             break;
     }
 
+	int estimation_after_devision = stat[i] / cnt;
+
     for (int id = 0; id < cnt; ++id)
     {
         int   ofs   = id == 0 ? i : tail - 1 + id;
@@ -1229,6 +1230,8 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
 
         input[ofs].init_depth = state_get_depth(state);
         input[ofs].parent_dir = state->parent_dir;
+
+		stat[ofs].nodes_expanded = estimation_after_devision;
     }
 
     printf("i=%d: devided node into %d nodes(expected=%d)\n", i, cnt, devide_n);
@@ -1379,25 +1382,27 @@ avoid_unused_static_assertions(void)
 
 static char dir_char[] = {'U', 'R', 'L', 'D'};
 
-/* TODO: It should be dynamically expanded if needed */
-#define N_INPUTS (N_WORKERS * 8)
-
 int
 main(int argc, char *argv[])
 {
+	int n_inputs = N_WORKERS * 8; /* TODO: should be dynamically extended */
     int          cnt_inputs;
-    Input        input[N_INPUTS];
+
+    int          input_size = sizeof(Input) * n_inputs;
+    Input        *input = palloc(input_size);
     Input *      d_input;
-    int          input_size = sizeof(Input) * N_INPUTS;
+
+    int          input_ends_size = sizeof(int) * N_WORKERS;
     int          input_ends[N_WORKERS];
     int *        d_input_ends;
-    int          input_ends_size = sizeof(int) * N_WORKERS;
-    signed char  plan[PLAN_LEN_MAX * N_INPUTS];
+
+    int          plan_size = sizeof(signed char) * PLAN_LEN_MAX * n_inputs;
+    signed char  *plan = palloc(plan_size);
     signed char *d_plan;
-    int          plan_size = sizeof(signed char) * PLAN_LEN_MAX * N_INPUTS;
-    search_stat  stat[N_INPUTS];
+
+    int          stat_size = sizeof(search_stat) * n_inputs;
+    search_stat *stat = palloc(stat_size);
     search_stat *d_stat;
-    int          stat_size = sizeof(search_stat) * N_INPUTS;
 
     bool         movable_table[STATE_N * DIR_N];
     bool *       d_movable_table;
@@ -1448,13 +1453,13 @@ main(int argc, char *argv[])
 
     for (uchar f_limit = root_h_value;; f_limit += 2)
     {
-        printf("f=%d\n", (int) f_limit);
+		elog("f=%d\n", (int) f_limit);
         CUDA_CHECK(
             cudaMemcpy(d_input, input, input_size, cudaMemcpyHostToDevice));
         CUDA_CHECK(cudaMemcpy(d_input_ends, input_ends, input_ends_size,
                               cudaMemcpyHostToDevice));
 
-        printf("call idas_kernel(block=%d, thread=%d)\n", N_BLOCKS, BLOCK_DIM);
+        elog("call idas_kernel(block=%d, thread=%d)\n", N_BLOCKS, BLOCK_DIM);
         idas_kernel<<<N_BLOCKS, BLOCK_DIM>>>(d_input, d_input_ends, d_plan,
                                              d_stat, f_limit, d_h_diff_table,
                                              d_movable_table);
@@ -1466,8 +1471,8 @@ main(int argc, char *argv[])
         for (int i = 0; i < cnt_inputs; ++i)
             if (stat[i].solved)
             {
-                printf("core id = %d\n", i);
-                printf("cpu len=%d: ", input[i].init_depth);
+                elog("core id = %d\n", i);
+                elog("cpu len=%d: ", input[i].init_depth);
 
                 /* CPU side output */
                 // FIXME: Not implemented, for now. It is easy to search path
@@ -1485,37 +1490,55 @@ main(int argc, char *argv[])
         long long int sum_of_expansion = 0;
         for (int i = 0; i < cnt_inputs; ++i)
             sum_of_expansion += stat[i].nodes_expanded;
-        printf("sum of expanded nodes: %lld\n", sum_of_expansion);
+        elog("sum of expanded nodes: %lld\n", sum_of_expansion);
 
         long long int increased = 0;
+		long long int avarage_expected_load = sum_of_expansion / N_WORKERS;
+        elog("avarage expanded nodes: %lld\n", avarage_expected_load);
+
+		elog("stat: nodes over avarege\n");
+        for (int i = 0; i < cnt_inputs; ++i)
+            if (stat[i].nodes_expanded > avarage_expected_load)
+				elog("i=%d:n=%lld ", stat[i].nodes_expanded);
+		elog("\n");
+
         for (int i = 0; i < cnt_inputs; ++i)
         {
             int policy =
-                stat[i].nodes_expanded / (sum_of_expansion / N_WORKERS + 1) + 1;
+                stat[i].nodes_expanded / (avarage_expected_load + 1) + 1;
             if (policy > 1 && stat[i].nodes_expanded > 20)
             {
-                printf("i=%d(%lld) will be devided\n", i,
+                elog("i=%d(%lld) will be devided\n", i,
                        stat[i].nodes_expanded);
                 increased += input_devide(input, stat, i, policy,
                                           cnt_inputs + increased);
             }
         }
 
-        if (cnt_inputs + increased > N_INPUTS)
+        if (cnt_inputs + increased > n_inputs)
         {
-            puts("ERROR: too much devision occured");
-            abort();
+			elog("cnt_inputs too large");
+			abort();
         }
 
         cnt_inputs += increased;
-        printf("input count: %lld\n", cnt_inputs);
+        elog("input count: %lld\n", cnt_inputs);
 
-	/* TODO: consider expected cost. For now, just equally spliting */
-        for (int id               = 0; id < N_WORKERS; ++id)
-            input_ends[id]        = (cnt_inputs / N_WORKERS) * (id + 1) - 1;
-        input_ends[N_WORKERS - 1] = cnt_inputs;
+        /* NOTE: optionally sort here by expected cost or g/h-value */
 
-        /* optionally sort here by expected cost */
+		int id = 0;
+		for (int i = 0, load = 0; i < cnt_inputs; ++i)
+		{
+			load += stat[i].nodes_expanded;
+			if (load >= avarage_expected_load)
+			{
+				load = 0;
+				input_ends[id++] = i;
+			}
+		}
+
+		while (id < N_WORKERS)
+			input_ends[id++] = cnt_inputs;
     }
 solution_found:
 
