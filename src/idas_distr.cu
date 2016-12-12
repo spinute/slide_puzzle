@@ -1211,7 +1211,7 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
             break;
     }
 
-	int estimation_after_devision = stat[i] / cnt;
+	int estimation_after_devision = stat[i].nodes_expanded / cnt;
 
     for (int id = 0; id < cnt; ++id)
     {
@@ -1384,7 +1384,7 @@ main(int argc, char *argv[])
     int          cnt_inputs;
 
     int          input_size = sizeof(Input) * n_inputs;
-    Input        *input = palloc(input_size);
+    Input        *input = (Input *)palloc(input_size);
     Input *      d_input;
 
     int          input_ends_size = sizeof(int) * N_WORKERS;
@@ -1392,11 +1392,11 @@ main(int argc, char *argv[])
     int *        d_input_ends;
 
     int          plan_size = sizeof(signed char) * PLAN_LEN_MAX * n_inputs;
-    signed char  *plan = palloc(plan_size);
+    signed char  *plan = (signed char *)palloc(plan_size);
     signed char *d_plan;
 
     int          stat_size = sizeof(search_stat) * n_inputs;
-    search_stat *stat = palloc(stat_size);
+    search_stat *stat = (search_stat *)palloc(stat_size);
     search_stat *d_stat;
 
     bool         movable_table[STATE_N * DIR_N];
@@ -1553,6 +1553,10 @@ solution_found:
     CUDA_CHECK(cudaFree(d_movable_table));
     CUDA_CHECK(cudaFree(d_h_diff_table));
     CUDA_CHECK(cudaDeviceReset());
+
+	pfree(input);
+	pfree(plan);
+	pfree(stat);
 
     avoid_unused_static_assertions();
 
