@@ -3,6 +3,7 @@
 #define BLOCK_DIM 32
 #define N_BLOCKS (48 * 2)
 // bug?? #define N_BLOCKS (48 * 4)
+#define N_INIT_DISTRIBUTION (N_WORKERS * 4)
 #define N_WORKERS (N_BLOCKS * BLOCK_DIM)
 #define PLAN_LEN_MAX 255
 
@@ -1231,8 +1232,6 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
         stat[ofs].nodes_expanded = estimation_after_devision;
     }
 
-    elog("i=%d: devided node into %d nodes(expected=%d)\n", i, cnt, devide_n);
-
     pq_fini(pq);
 
     return cnt == 0 ? 0 : cnt - 1;
@@ -1422,7 +1421,7 @@ main(int argc, char *argv[])
     {
         State init_state = state_init(input[0].tiles, 0);
 
-        if (distribute_astar(init_state, input, input_ends, N_WORKERS * 1,
+        if (distribute_astar(init_state, input, input_ends, N_INIT_DISTRIBUTION,
                              &cnt_inputs))
         {
             puts("solution is found by distributor");
@@ -1513,11 +1512,8 @@ main(int argc, char *argv[])
                 stat[i].nodes_expanded / (avarage_expected_load + 1) + 1;
 
             if (policy > 1 && stat[i].nodes_expanded > 20)
-            {
-                elog("i=%d(%lld) will be devided\n", i, stat[i].nodes_expanded);
                 increased += input_devide(input, stat, i, policy,
                                           cnt_inputs + increased);
-            }
         }
         elog("STAT: sum of expanded nodes: %lld\n", sum_of_expansion);
         elog("STAT: avarage expanded nodes: %lld\n", avarage_expected_load);
