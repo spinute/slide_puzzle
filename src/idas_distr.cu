@@ -275,7 +275,7 @@ idas_kernel(Input *input, int *input_ends, signed char *plan, search_stat *stat,
 #include <stdio.h>
 #include <stdlib.h>
 
-#define elog(...) fprintf(stderr, __VA_ARGS__)
+#define elog(...) ;//fprintf(stderr, __VA_ARGS__)
 
 void *
 palloc(size_t size)
@@ -1211,10 +1211,10 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
             break;
     }
 
-	int estimation_after_devision = stat[i].nodes_expanded / cnt;
 
     for (int id = 0; id < cnt; ++id)
     {
+	int estimation_after_devision = stat[i].nodes_expanded / cnt;
         int   ofs   = id == 0 ? i : tail - 1 + id;
         State state = pq_pop(pq);
         assert(state);
@@ -1229,11 +1229,11 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
 		stat[ofs].nodes_expanded = estimation_after_devision;
     }
 
-    printf("i=%d: devided node into %d nodes(expected=%d)\n", i, cnt, devide_n);
+    elog("i=%d: devided node into %d nodes(expected=%d)\n", i, cnt, devide_n);
 
     pq_fini(pq);
 
-    return cnt - 1;
+    return cnt==0 ? 0 : cnt - 1;
 }
 
 /* main */
@@ -1467,7 +1467,7 @@ main(int argc, char *argv[])
             if (stat[i].solved)
             {
                 elog("core id = %d\n", i);
-                elog("cpu len=%d: ", input[i].init_depth);
+                printf("cpu len=%d: \n", input[i].init_depth);
 
                 /* CPU side output */
                 // FIXME: Not implemented, for now. It is easy to search path
