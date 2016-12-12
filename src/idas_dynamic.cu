@@ -2,7 +2,7 @@
 
 #define BLOCK_DIM 32
 #define N_BLOCKS (48 * 2)
-//bug?? #define N_BLOCKS (48 * 4)
+// bug?? #define N_BLOCKS (48 * 4)
 #define N_WORKERS (N_BLOCKS * BLOCK_DIM)
 #define PLAN_LEN_MAX 255
 
@@ -38,7 +38,7 @@ typedef struct search_stat_tag
 } search_stat;
 typedef struct input_tag
 {
-    uchar tiles[STATE_N];
+    uchar     tiles[STATE_N];
     int       init_depth;
     Direction parent_dir;
 } Input;
@@ -329,11 +329,11 @@ typedef unsigned char idx_t;
 
 typedef struct state_tag_cpu
 {
-    int                   depth; /* XXX: needed? */
-    uchar                 pos[STATE_WIDTH][STATE_WIDTH];
-    idx_t                 i, j; /* pos of empty */
-    Direction             parent_dir;
-    int                   h_value;
+    int       depth; /* XXX: needed? */
+    uchar     pos[STATE_WIDTH][STATE_WIDTH];
+    idx_t     i, j; /* pos of empty */
+    Direction parent_dir;
+    int       h_value;
 } * State;
 
 #define v(state, i, j) ((state)->pos[i][j])
@@ -1155,11 +1155,11 @@ distribute_astar(State init_state, Input input[], int input_ends[], int distr_n,
 static int
 input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
 {
-    int      cnt = 0;
-    int *    ht_value;
-    State    state = state_init(input[i].tiles, input[i].init_depth);
+    int   cnt = 0;
+    int * ht_value;
+    State state       = state_init(input[i].tiles, input[i].init_depth);
     state->parent_dir = input[i].parent_dir;
-    PQ       pq    = pq_init(32);
+    PQ       pq       = pq_init(32);
     HTStatus ht_status;
     pq_put(pq, state, state_get_hvalue(state), 0);
     ++cnt;
@@ -1174,17 +1174,16 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
                    state_get_depth(state));
             ++cnt;
             break;
-	}
+        }
 
-	ht_status = ht_insert(closed, state, &ht_value);
-	if (ht_status == HT_FAILED_FOUND && *ht_value <
-			state_get_depth(state))
-	{
-		state_fini(state);
-		continue;
-	}
-	else
-		*ht_value = state_get_depth(state);
+        ht_status = ht_insert(closed, state, &ht_value);
+        if (ht_status == HT_FAILED_FOUND && *ht_value < state_get_depth(state))
+        {
+            state_fini(state);
+            continue;
+        }
+        else
+            *ht_value = state_get_depth(state);
 
         for (int dir = 0; dir < DIR_N; ++dir)
         {
@@ -1196,10 +1195,10 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
                 next_state->depth++;
 
                 ht_status = ht_insert(closed, next_state, &ht_value);
-		if (ht_status == HT_FAILED_FOUND &&
-				*ht_value < state_get_depth(next_state))
-			state_fini(next_state);
-		else
+                if (ht_status == HT_FAILED_FOUND &&
+                    *ht_value < state_get_depth(next_state))
+                    state_fini(next_state);
+                else
                 {
                     ++cnt;
                     *ht_value = state_get_depth(next_state);
@@ -1215,12 +1214,11 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
             break;
     }
 
-
     for (int id = 0; id < cnt; ++id)
     {
-	int estimation_after_devision = stat[i].nodes_expanded / cnt;
-        int   ofs   = id == 0 ? i : tail - 1 + id;
-        State state = pq_pop(pq);
+        int   estimation_after_devision = stat[i].nodes_expanded / cnt;
+        int   ofs                       = id == 0 ? i : tail - 1 + id;
+        State state                     = pq_pop(pq);
         assert(state);
 
         for (int j              = 0; j < STATE_N; ++j)
@@ -1230,14 +1228,14 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
         input[ofs].init_depth = state_get_depth(state);
         input[ofs].parent_dir = state->parent_dir;
 
-		stat[ofs].nodes_expanded = estimation_after_devision;
+        stat[ofs].nodes_expanded = estimation_after_devision;
     }
 
     elog("i=%d: devided node into %d nodes(expected=%d)\n", i, cnt, devide_n);
 
     pq_fini(pq);
 
-    return cnt==0 ? 0 : cnt - 1;
+    return cnt == 0 ? 0 : cnt - 1;
 }
 
 /* main */
@@ -1385,22 +1383,22 @@ static char dir_char[] = {'U', 'R', 'L', 'D'};
 int
 main(int argc, char *argv[])
 {
-    int          cnt_inputs;
+    int cnt_inputs;
 
-    int          input_size = sizeof(Input) * N_INPUTS;
-    Input        input[N_INPUTS];
-    Input *      d_input;
+    int    input_size = sizeof(Input) * N_INPUTS;
+    Input  input[N_INPUTS];
+    Input *d_input;
 
-    int          input_ends_size = sizeof(int) * N_WORKERS;
-    int          input_ends[N_WORKERS];
-    int *        d_input_ends;
+    int  input_ends_size = sizeof(int) * N_WORKERS;
+    int  input_ends[N_WORKERS];
+    int *d_input_ends;
 
     int          plan_size = sizeof(signed char) * PLAN_LEN_MAX * N_INPUTS;
-    signed char  plan[PLAN_LEN_MAX*N_INPUTS];
+    signed char  plan[PLAN_LEN_MAX * N_INPUTS];
     signed char *d_plan;
 
     int          stat_size = sizeof(search_stat) * N_INPUTS;
-    search_stat stat[N_INPUTS];
+    search_stat  stat[N_INPUTS];
     search_stat *d_stat;
 
     bool         movable_table[STATE_N * DIR_N];
@@ -1452,7 +1450,7 @@ main(int argc, char *argv[])
 
     for (uchar f_limit = root_h_value;; f_limit += 2)
     {
-		elog("f=%d\n", (int) f_limit);
+        elog("f=%d\n", (int) f_limit);
         CUDA_CHECK(
             cudaMemcpy(d_input, input, input_size, cudaMemcpyHostToDevice));
         CUDA_CHECK(cudaMemcpy(d_input_ends, input_ends, input_ends_size,
@@ -1490,49 +1488,47 @@ main(int argc, char *argv[])
         for (int i = 0; i < cnt_inputs; ++i)
             sum_of_expansion += stat[i].nodes_expanded;
 
-        long long int increased = 0;
-	long long int avarage_expected_load = sum_of_expansion / N_WORKERS;
+        long long int increased             = 0;
+        long long int avarage_expected_load = sum_of_expansion / N_WORKERS;
 
+        int stat_cnt[10] = {0, 0, 0, 0, 0, 0, 0};
+        for (int i = 0; i < cnt_inputs; ++i)
+        {
+            if (stat[i].nodes_expanded < avarage_expected_load)
+                stat_cnt[0]++;
+            else if (stat[i].nodes_expanded < 2 * avarage_expected_load)
+                stat_cnt[1]++;
+            else if (stat[i].nodes_expanded < 4 * avarage_expected_load)
+                stat_cnt[2]++;
+            else if (stat[i].nodes_expanded < 8 * avarage_expected_load)
+                stat_cnt[3]++;
+            else if (stat[i].nodes_expanded < 16 * avarage_expected_load)
+                stat_cnt[4]++;
+            else if (stat[i].nodes_expanded < 32 * avarage_expected_load)
+                stat_cnt[5]++;
+            else
+                stat_cnt[6]++;
 
-	int stat_cnt[10] = {0, 0, 0, 0, 0, 0, 0};
-	for (int i = 0; i < cnt_inputs; ++i)
-	{
-		if (stat[i].nodes_expanded < avarage_expected_load)
-			stat_cnt[0]++;
-		else if (stat[i].nodes_expanded < 2*avarage_expected_load)
-			stat_cnt[1]++;
-		else if (stat[i].nodes_expanded < 4*avarage_expected_load)
-			stat_cnt[2]++;
-		else if (stat[i].nodes_expanded < 8*avarage_expected_load)
-			stat_cnt[3]++;
-		else if (stat[i].nodes_expanded < 16*avarage_expected_load)
-			stat_cnt[4]++;
-		else if (stat[i].nodes_expanded < 32*avarage_expected_load)
-			stat_cnt[5]++;
-		else
-			stat_cnt[6]++;
+            int policy =
+                stat[i].nodes_expanded / (avarage_expected_load + 1) + 1;
 
-		int policy =
-			stat[i].nodes_expanded / (avarage_expected_load + 1) + 1;
-
-		if (policy > 1 && stat[i].nodes_expanded > 20)
-		{
-			elog("i=%d(%lld) will be devided\n", i,
-					stat[i].nodes_expanded);
-			increased += input_devide(input, stat, i, policy,
-					cnt_inputs + increased);
-		}
-	}
+            if (policy > 1 && stat[i].nodes_expanded > 20)
+            {
+                elog("i=%d(%lld) will be devided\n", i, stat[i].nodes_expanded);
+                increased += input_devide(input, stat, i, policy,
+                                          cnt_inputs + increased);
+            }
+        }
         elog("STAT: sum of expanded nodes: %lld\n", sum_of_expansion);
         elog("STAT: avarage expanded nodes: %lld\n", avarage_expected_load);
-	elog("STAT: av=%d, 2av=%d, 4av=%d, 8av=%d, 16av=%d, 32av=%d, more=%d\n",
-	stat_cnt[0], stat_cnt[1], stat_cnt[2], stat_cnt[3], stat_cnt[4],
-	stat_cnt[5], stat_cnt[6]);
+        elog("STAT: av=%d, 2av=%d, 4av=%d, 8av=%d, 16av=%d, 32av=%d, more=%d\n",
+             stat_cnt[0], stat_cnt[1], stat_cnt[2], stat_cnt[3], stat_cnt[4],
+             stat_cnt[5], stat_cnt[6]);
 
         if (cnt_inputs + increased > N_INPUTS)
         {
-			elog("cnt_inputs too large");
-			abort();
+            elog("cnt_inputs too large");
+            abort();
         }
 
         cnt_inputs += increased;
@@ -1540,19 +1536,19 @@ main(int argc, char *argv[])
 
         /* NOTE: optionally sort here by expected cost or g/h-value */
 
-		int id = 0;
-		for (int i = 0, load = 0; i < cnt_inputs; ++i)
-		{
-			load += stat[i].nodes_expanded;
-			if (load >= avarage_expected_load)
-			{
-				load = 0;
-				input_ends[id++] = i;
-			}
-		}
+        int id = 0;
+        for (int i = 0, load = 0; i < cnt_inputs; ++i)
+        {
+            load += stat[i].nodes_expanded;
+            if (load >= avarage_expected_load)
+            {
+                load             = 0;
+                input_ends[id++] = i;
+            }
+        }
 
-		while (id < N_WORKERS)
-			input_ends[id++] = cnt_inputs;
+        while (id < N_WORKERS)
+            input_ends[id++] = cnt_inputs;
     }
 solution_found:
 

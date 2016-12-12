@@ -32,12 +32,12 @@ __device__ __shared__ static struct dir_stack_tag
 __device__ static inline void
 stack_init(void)
 {
-	STACK_I = 0;
+    STACK_I = 0;
 }
 __device__ static inline void
 stack_put(Direction dir)
 {
-	stack_set(STACK_I, dir);
+    stack_set(STACK_I, dir);
     ++STACK_I;
 }
 __device__ static inline bool
@@ -60,10 +60,10 @@ stack_peak(void)
 /* state implementation */
 
 #define STATE_WIDTH 4
-#define STATE_N (STATE_WIDTH*STATE_WIDTH)
+#define STATE_N (STATE_WIDTH * STATE_WIDTH)
 
-static char assert_state_width_is_four[STATE_WIDTH==4 ? 1 : -1];
-#define POS_X(pos) ((pos) & 3)
+static char assert_state_width_is_four[STATE_WIDTH == 4 ? 1 : -1];
+#define POS_X(pos) ((pos) &3)
 #define POS_Y(pos) ((pos) >> 2)
 
 /*
@@ -72,9 +72,9 @@ static char assert_state_width_is_four[STATE_WIDTH==4 ? 1 : -1];
 
 __device__ __shared__ static struct state_tag
 {
-	uchar tile[STATE_N];
-    uchar              empty;
-    uchar              h_value; /* ub of h_value is 6*16 */
+    uchar tile[STATE_N];
+    uchar empty;
+    uchar h_value; /* ub of h_value is 6*16 */
 } state[N_THREADS];
 
 #define STATE_TILE(i) (state[threadIdx.x].tile[(i)])
@@ -139,14 +139,14 @@ state_tile_fill(const uchar v_list[STATE_WIDTH * STATE_WIDTH])
     {
         if (v_list[i] == 0)
             STATE_EMPTY = i;
-        STATE_TILE(i) = v_list[i];
+        STATE_TILE(i)   = v_list[i];
     }
 }
 
 __device__ static inline bool
 state_is_goal(void)
 {
-	return state[threadIdx.x].h_value == 0;
+    return state[threadIdx.x].h_value == 0;
 }
 
 static char assert_direction2
@@ -177,8 +177,8 @@ state_movable(Direction dir)
 
 static char assert_direction
     [DIR_UP == 0 && DIR_RIGHT == 1 && DIR_LEFT == 2 && DIR_DOWN == 3 ? 1 : -1];
-__device__ __constant__ const static int pos_diff_table[DIR_N] = {-STATE_WIDTH, 1, -1,
-                                                          +STATE_WIDTH};
+__device__ __constant__ const static int pos_diff_table[DIR_N] = {
+    -STATE_WIDTH, 1, -1, +STATE_WIDTH};
 
 __device__ static inline bool
 state_move_with_limit(Direction dir, unsigned int f_limit)
@@ -190,9 +190,9 @@ state_move_with_limit(Direction dir, unsigned int f_limit)
     if (STACK_I + 1 + new_h_value > f_limit)
         return false;
 
-    STATE_HVALUE = new_h_value;
-	STATE_TILE(STATE_EMPTY) = opponent;
-    STATE_EMPTY = new_empty;
+    STATE_HVALUE            = new_h_value;
+    STATE_TILE(STATE_EMPTY) = opponent;
+    STATE_EMPTY             = new_empty;
 
     return true;
 }
@@ -204,8 +204,8 @@ state_move(Direction dir)
     int opponent  = STATE_TILE(new_empty);
 
     STATE_HVALUE += H_DIFF(opponent, new_empty, dir);
-	STATE_TILE(STATE_EMPTY) = opponent;
-    STATE_EMPTY = new_empty;
+    STATE_TILE(STATE_EMPTY) = opponent;
+    STATE_EMPTY             = new_empty;
 }
 
 /*
@@ -215,21 +215,21 @@ state_move(Direction dir)
 __device__ static bool
 idas_internal(int f_limit, long long *ret_nodes_expanded)
 {
-    uchar dir = 0;
-	long long nodes_expanded = 0;
+    uchar     dir            = 0;
+    long long nodes_expanded = 0;
 
     for (;;)
     {
         if (state_is_goal())
         {
-			*ret_nodes_expanded = nodes_expanded;
+            *ret_nodes_expanded = nodes_expanded;
             return true;
         }
 
         if ((stack_is_empty() || stack_peak() != dir_reverse(dir)) &&
             state_movable(dir))
         {
-			++nodes_expanded;
+            ++nodes_expanded;
 
             if (state_move_with_limit(dir, f_limit))
             {
@@ -242,10 +242,10 @@ idas_internal(int f_limit, long long *ret_nodes_expanded)
         while (++dir == DIR_N)
         {
             if (stack_is_empty())
-			{
-				*ret_nodes_expanded = nodes_expanded;
+            {
+                *ret_nodes_expanded = nodes_expanded;
                 return false;
-			}
+            }
 
             dir = stack_pop();
             state_move(dir_reverse(dir));
@@ -256,9 +256,9 @@ idas_internal(int f_limit, long long *ret_nodes_expanded)
 __global__ void
 idas_kernel(uchar *input, uchar *plan)
 {
-	long long nodes_expanded = 0;
-    int f_limit;
-    int id  = threadIdx.x + blockIdx.x * blockDim.x;
+    long long nodes_expanded = 0;
+    int       f_limit;
+    int       id = threadIdx.x + blockIdx.x * blockDim.x;
 
     init_mdist();
     init_movable_table();
@@ -267,15 +267,15 @@ idas_kernel(uchar *input, uchar *plan)
     state_tile_fill(input + id * STATE_N);
     state_init_hvalue();
 
-	for (;;f_limit+=2)
-	{
-		nodes_expanded = 0;
-		if (idas_internal(f_limit, &nodes_expanded))
-			break;
-	}
+    for (;; f_limit += 2)
+    {
+        nodes_expanded = 0;
+        if (idas_internal(f_limit, &nodes_expanded))
+            break;
+    }
 
     plan[0] = (int) STACK_I; /* len of plan */
-    for (uchar i = 0; i < STACK_I; ++i)
+    for (uchar i    = 0; i < STACK_I; ++i)
         plan[i + 1] = stack_get(i);
 }
 
@@ -358,8 +358,8 @@ main(int argc, char *argv[])
     uchar *s_list_device;
     uchar  plan[PLAN_LEN_MAX];
     uchar *plan_device;
-    int insize = sizeof(uchar) * STATE_N;
-    int outsize = sizeof(uchar) * PLAN_LEN_MAX;
+    int    insize  = sizeof(uchar) * STATE_N;
+    int    outsize = sizeof(uchar) * PLAN_LEN_MAX;
 
     if (argc < 2)
     {
@@ -370,25 +370,24 @@ main(int argc, char *argv[])
     load_state_from_file(argv[1], s_list);
     CUDA_CHECK(cudaMalloc((void **) &s_list_device, insize));
     CUDA_CHECK(cudaMalloc((void **) &plan_device, outsize));
-    CUDA_CHECK(cudaMemcpy(s_list_device, s_list, insize,
-                          cudaMemcpyHostToDevice));
+    CUDA_CHECK(
+        cudaMemcpy(s_list_device, s_list, insize, cudaMemcpyHostToDevice));
 
     idas_kernel<<<N_BLOCKS, N_THREADS>>>(s_list_device, plan_device);
 
-    CUDA_CHECK(cudaMemcpy(plan, plan_device, outsize,
-                          cudaMemcpyDeviceToHost));
+    CUDA_CHECK(cudaMemcpy(plan, plan_device, outsize, cudaMemcpyDeviceToHost));
 
     CUDA_CHECK(cudaFree(s_list_device));
     CUDA_CHECK(cudaFree(plan_device));
 
     CUDA_CHECK(cudaDeviceReset());
 
-    printf("len=%d: ", (int)plan[0]);
+    printf("len=%d: ", (int) plan[0]);
     for (int i = 0; i < plan[0]; ++i)
-        printf("%d ", (int) plan[i+1]);
+        printf("%d ", (int) plan[i + 1]);
     putchar('\n');
 
-	avoid_unused_static_assertions();
+    avoid_unused_static_assertions();
 
     return 0;
 }
