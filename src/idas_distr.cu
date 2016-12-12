@@ -2,6 +2,7 @@
 
 #define BLOCK_DIM 32
 #define N_BLOCKS (48 * 2)
+//bug?? #define N_BLOCKS (48 * 4)
 #define N_WORKERS (N_BLOCKS * BLOCK_DIM)
 #define PLAN_LEN_MAX 255
 
@@ -1170,19 +1171,17 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
                    state_get_depth(state));
             ++cnt;
             break;
-        }
+	}
 
-        /*
-                ht_status = ht_insert(closed, state, &ht_value);
-                if (ht_status == HT_FAILED_FOUND && *ht_value <
-           state_get_depth(state))
-                {
-                    state_fini(state);
-                    continue;
-                }
-                else
-                    *ht_value = state_get_depth(state);
-        */
+	ht_status = ht_insert(closed, state, &ht_value);
+	if (ht_status == HT_FAILED_FOUND && *ht_value <
+			state_get_depth(state))
+	{
+		state_fini(state);
+		continue;
+	}
+	else
+		*ht_value = state_get_depth(state);
 
         for (int dir = 0; dir < DIR_N; ++dir)
         {
@@ -1194,12 +1193,10 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
                 next_state->depth++;
 
                 ht_status = ht_insert(closed, next_state, &ht_value);
-                /*
-                                if (ht_status == HT_FAILED_FOUND &&
-                                    *ht_value < state_get_depth(next_state))
-                                    state_fini(next_state);
-                                else
-                */
+		if (ht_status == HT_FAILED_FOUND &&
+				*ht_value < state_get_depth(next_state))
+			state_fini(next_state);
+		else
                 {
                     ++cnt;
                     *ht_value = state_get_depth(next_state);
@@ -1490,7 +1487,7 @@ main(int argc, char *argv[])
         {
             int policy =
                 stat[i].nodes_expanded / (sum_of_expansion / N_WORKERS + 1) + 1;
-            if (policy > 1 && stat[i].nodes_expanded > 2000)
+            if (policy > 1 && stat[i].nodes_expanded > 20)
             {
                 printf("i=%d(%lld) will be devided\n", i,
                        stat[i].nodes_expanded);
