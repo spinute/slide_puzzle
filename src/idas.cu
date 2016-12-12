@@ -258,7 +258,6 @@ idas_kernel(uchar *input, uchar *plan)
 {
 	long long nodes_expanded = 0;
     int f_limit;
-	bool found;
     int id  = threadIdx.x + blockIdx.x * blockDim.x;
 
     init_mdist();
