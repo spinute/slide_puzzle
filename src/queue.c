@@ -37,7 +37,7 @@ set_pagesize(void)
 static QPage
 qpage_init(void)
 {
-    QPage qp = (QPage)palloc(sizeof(*qp) + sizeof(State) * n_states_par_page);
+    QPage qp = (QPage) palloc(sizeof(*qp) + sizeof(State) * n_states_par_page);
     qp->in = qp->out = 0;
     qp->next         = NULL;
     return qp;
@@ -82,7 +82,7 @@ struct queue_tag
 Queue
 queue_init(void)
 {
-    Queue q = (Queue)palloc(sizeof(*q));
+    Queue q = (Queue) palloc(sizeof(*q));
 
     if (!pagesize)
         set_pagesize();

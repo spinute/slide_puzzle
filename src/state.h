@@ -18,7 +18,7 @@ typedef unsigned char state_panel;
 #define STATE_EMPTY 0
 #define STATE_WIDTH 4
 #ifndef STATE_N
-#define STATE_N (STATE_WIDTH *STATE_WIDTH)
+#define STATE_N (STATE_WIDTH * STATE_WIDTH)
 #endif
 
 /*
@@ -45,20 +45,20 @@ size_t state_hash(State state);
 void state_dump(State state);
 void state_fill_slist(State state, unsigned char slist[]);
 
-    /*
-     * Heuristics below are found at
-     * https://heuristicswiki.wikispaces.com/N+-+Puzzle
-     */
+/*
+ * Heuristics below are found at
+ * https://heuristicswiki.wikispaces.com/N+-+Puzzle
+ */
 
-    /* obsolete */
-    /*
-    typedef enum {
-        HeuristicManhattanDistance,
-        HeuristicTilesOutOfRowCol,
-        HeuristicMisplacedTiles,
+/* obsolete */
+/*
+typedef enum {
+    HeuristicManhattanDistance,
+    HeuristicTilesOutOfRowCol,
+    HeuristicMisplacedTiles,
 
-        HeuristicNotSet,
-    } Heuristic;
+    HeuristicNotSet,
+} Heuristic;
 
-    int calc_h_value(Heuristic heuristic, State from, State to);
-    */
+int calc_h_value(Heuristic heuristic, State from, State to);
+*/

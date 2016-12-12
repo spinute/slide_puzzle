@@ -7,6 +7,21 @@ TEST_GROUP(pq);
 static PQ    q;
 static State s, g;
 
+static bool
+heap_consistent(PQ pq)
+{
+    for (int i = 0; i < pq->n_elems; ++i)
+    {
+        if (i != 0)
+        {
+            int ui = (i - 1) >> 1;
+            TEST_ASSERT(pq->array[ui].f >= pq->array[i].f);
+        }
+        int li = (i << 1) + 1;
+        int ri = li + 1;
+    }
+}
+
 TEST_SETUP(pq)
 {
     state_panel s_list[STATE_WIDTH * STATE_WIDTH] = {1, 2, 3, 4, STATE_EMPTY,

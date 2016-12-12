@@ -164,19 +164,18 @@ main(int argc, char *argv[])
     root_h_value = calc_hvalue(s_list);
 
     {
-	    uchar goal[STATE_N];
-	    State init_state = state_init(s_list, 0),
-		  goal_state;
+        uchar goal[STATE_N];
+        State init_state = state_init(s_list, 0), goal_state;
 
-	    for (int i = 0; i < STATE_N; ++i)
-		goal[i] = i;
-	    goal_state = state_init(goal, 0);
+        for (int i  = 0; i < STATE_N; ++i)
+            goal[i] = i;
+        goal_state  = state_init(goal, 0);
 
-	    if (distributor_bfs(init_state, goal_state, s_list, N_CORE))
-	    {
-		    puts("solution is found by distributor");
-		    return 0;
-	    }
+        if (distributor_bfs(init_state, goal_state, s_list, N_CORE))
+        {
+            puts("solution is found by distributor");
+            return 0;
+        }
     }
 
     init_mdist(h_diff_table);
@@ -199,7 +198,8 @@ main(int argc, char *argv[])
 
         printf("call idas_kernel(block=%d, thread=%d)\n", N_BLOCK,
                N_CORE / N_BLOCK);
-        idas_parallel_main( d_s_list, d_plan, f_limit, d_h_diff_table, d_movable_table);
+        idas_parallel_main(d_s_list, d_plan, f_limit, d_h_diff_table,
+                           d_movable_table);
 
         CUDA_CHECK(cudaMemcpy(plan, d_plan, plan_size, cudaMemcpyDeviceToHost));
 

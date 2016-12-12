@@ -4,7 +4,7 @@
 #define N_CORE N_BLOCK * 32
 
 #define STATE_WIDTH 4
-#define STATE_N (STATE_WIDTH*STATE_WIDTH)
+#define STATE_N (STATE_WIDTH * STATE_WIDTH)
 #define POS_X(pos) ((pos) % STATE_WIDTH)
 #define POS_Y(pos) ((pos) / STATE_WIDTH)
 
@@ -17,7 +17,7 @@
 #define PLAN_LEN_MAX ((1 << STACK_DIR_BITS) * STACK_BUF_BYTES)
 
 typedef unsigned char uchar;
-typedef uchar DirDev;
+typedef uchar         DirDev;
 #define dir_reverse_dev(dir) ((DirDev)(3 - (dir)))
 #define DIR_N 4
 #define DIR_FIRST 0
@@ -30,4 +30,5 @@ typedef uchar DirDev;
 
 #include <stdbool.h>
 
-void idas_parallel_main(uchar *input, signed char *plan, int f_limit, signed char *h_diff_table, bool *movable_table);
+void idas_parallel_main(uchar *input, signed char *plan, int f_limit,
+                        signed char *h_diff_table, bool *movable_table);

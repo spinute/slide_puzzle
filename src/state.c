@@ -80,7 +80,7 @@ state_is_goal(State state)
 static inline State
 state_alloc(void)
 {
-    return (State)palloc(sizeof(struct state_tag));
+    return (State) palloc(sizeof(struct state_tag));
 }
 
 static inline void
@@ -98,7 +98,7 @@ state_init(state_panel v_list[STATE_WIDTH * STATE_WIDTH], int depth)
     assert(depth >= 0);
 
     state->depth  = depth;
-    state->parent = (Direction)-1;
+    state->parent = (Direction) -1;
 
     for (idx_t j = 0; j < STATE_WIDTH; ++j)
         for (idx_t i = 0; i < STATE_WIDTH; ++i)

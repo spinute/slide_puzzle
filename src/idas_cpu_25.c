@@ -26,7 +26,7 @@ static struct dir_stack_tag
 static inline void
 stack_put(Direction dir)
 {
-	stack.buf[stack.i] = dir;
+    stack.buf[stack.i] = dir;
     ++stack.i;
 }
 static inline bool
@@ -58,7 +58,7 @@ stack_dump(void)
 
 #define STATE_EMPTY 0
 #define STATE_WIDTH 5
-#define STATE_N (STATE_WIDTH*STATE_WIDTH)
+#define STATE_N (STATE_WIDTH * STATE_WIDTH)
 
 #define POS_X(pos) ((pos) % STATE_WIDTH)
 #define POS_Y(pos) ((pos) / STATE_WIDTH)
@@ -69,9 +69,9 @@ stack_dump(void)
 
 static struct state_tag
 {
-	uchar tile[STATE_N];
-    uchar         empty;
-    uchar         h_value; /* ub of h_value is 8*24 for manhattan dist */
+    uchar tile[STATE_N];
+    uchar empty;
+    uchar h_value; /* ub of h_value is 8*24 for manhattan dist */
 } state;
 
 #define state_tile_get(i) (state.tile[i])
@@ -223,22 +223,22 @@ state_move(Direction dir)
 static bool
 idas_internal(int f_limit, long long *ret_nodes_expanded)
 {
-    uchar dir = 0;
-	long long nodes_expanded = 0;
+    uchar     dir            = 0;
+    long long nodes_expanded = 0;
 
     for (;;)
     {
         if (state_is_goal())
         {
             state_dump();
-			*ret_nodes_expanded = nodes_expanded;
+            *ret_nodes_expanded = nodes_expanded;
             return true;
         }
 
         if ((stack_is_empty() || stack_peak() != dir_reverse(dir)) &&
             state_movable(dir))
         {
-			++nodes_expanded;
+            ++nodes_expanded;
 
             if (state_move_with_limit(dir, f_limit))
             {
@@ -251,10 +251,10 @@ idas_internal(int f_limit, long long *ret_nodes_expanded)
         while (++dir == DIR_N)
         {
             if (stack_is_empty())
-			{
-				*ret_nodes_expanded = nodes_expanded;
+            {
+                *ret_nodes_expanded = nodes_expanded;
                 return false;
-			}
+            }
 
             dir = stack_pop();
             state_move(dir_reverse(dir));
@@ -265,10 +265,9 @@ idas_internal(int f_limit, long long *ret_nodes_expanded)
 void
 idas_kernel(uchar *input)
 {
-	long long nodes_expanded = 0,
-		nodes_expanded_first = 0;
-    int f_limit;
-	bool found;
+    long long nodes_expanded = 0, nodes_expanded_first = 0;
+    int       f_limit;
+    bool      found;
     init_mdist();
     init_movable_table();
     state_tile_fill(input);
@@ -276,30 +275,32 @@ idas_kernel(uchar *input)
 
     state_dump();
 
-	{
-		f_limit = state.h_value;
-		nodes_expanded_first = 0;
-		found = idas_internal(f_limit, &nodes_expanded_first);
-		printf("f_limit=%3d, expanded nodes = %lld\n", f_limit, nodes_expanded);
-	}
-	if (!found) {
-		++f_limit;
-		nodes_expanded = 0;
-		found = idas_internal(f_limit, &nodes_expanded);
-		printf("f_limit=%3d, expanded nodes = %lld\n", f_limit, nodes_expanded);
+    {
+        f_limit              = state.h_value;
+        nodes_expanded_first = 0;
+        found                = idas_internal(f_limit, &nodes_expanded_first);
+        printf("f_limit=%3d, expanded nodes = %lld\n", f_limit, nodes_expanded);
+    }
+    if (!found)
+    {
+        ++f_limit;
+        nodes_expanded = 0;
+        found          = idas_internal(f_limit, &nodes_expanded);
+        printf("f_limit=%3d, expanded nodes = %lld\n", f_limit, nodes_expanded);
 
-		f_limit += nodes_expanded==nodes_expanded_first ? 1 : 2;
+        f_limit += nodes_expanded == nodes_expanded_first ? 1 : 2;
 
-		for (;;f_limit+=2)
-		{
-			nodes_expanded = 0;
-			found = idas_internal(f_limit, &nodes_expanded);
-			printf("f_limit=%3d, expanded nodes = %lld\n", f_limit, nodes_expanded);
+        for (;; f_limit += 2)
+        {
+            nodes_expanded = 0;
+            found          = idas_internal(f_limit, &nodes_expanded);
+            printf("f_limit=%3d, expanded nodes = %lld\n", f_limit,
+                   nodes_expanded);
 
-			if (found)
-				break;
-		}
-	}
+            if (found)
+                break;
+        }
+    }
 }
 
 /* host implementation */
@@ -376,9 +377,9 @@ main(int argc, char *argv[])
     load_state_from_file(argv[1], s_list);
     idas_kernel(s_list);
 
-	stack_dump();
+    stack_dump();
 
-	avoid_unused_static_assertions();
+    avoid_unused_static_assertions();
 
     return 0;
 }

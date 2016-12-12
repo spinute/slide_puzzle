@@ -2,8 +2,8 @@
 #include "./state.h"
 #include "./utils.h"
 
-#include <stdint.h>
 #include <stddef.h>
+#include <stdint.h>
 #include <string.h>
 
 /* XXX: hash function for State should be surveyed */
