@@ -275,7 +275,11 @@ idas_kernel(Input *input, int *input_ends, signed char *plan, search_stat *stat,
 #include <stdio.h>
 #include <stdlib.h>
 
+#ifndef UNABLE_LOG
 #define elog(...) fprintf(stderr, __VA_ARGS__)
+#else
+#define elog(...) ;
+#endif
 
 void *
 palloc(size_t size)
@@ -1211,10 +1215,10 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
             break;
     }
 
-	int estimation_after_devision = stat[i] / cnt;
 
     for (int id = 0; id < cnt; ++id)
     {
+	int estimation_after_devision = stat[i].nodes_expanded / cnt;
         int   ofs   = id == 0 ? i : tail - 1 + id;
         State state = pq_pop(pq);
         assert(state);
@@ -1229,11 +1233,11 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
 		stat[ofs].nodes_expanded = estimation_after_devision;
     }
 
-    printf("i=%d: devided node into %d nodes(expected=%d)\n", i, cnt, devide_n);
+    elog("i=%d: devided node into %d nodes(expected=%d)\n", i, cnt, devide_n);
 
     pq_fini(pq);
 
-    return cnt - 1;
+    return cnt==0 ? 0 : cnt - 1;
 }
 
 /* main */
@@ -1377,26 +1381,26 @@ avoid_unused_static_assertions(void)
 
 static char dir_char[] = {'U', 'R', 'L', 'D'};
 
+#define N_INPUTS (N_WORKERS * 8)
 int
 main(int argc, char *argv[])
 {
-	int n_inputs = N_WORKERS * 8; /* TODO: should be dynamically extended */
     int          cnt_inputs;
 
-    int          input_size = sizeof(Input) * n_inputs;
-    Input        *input = palloc(input_size);
+    int          input_size = sizeof(Input) * N_INPUTS;
+    Input        input[N_INPUTS];
     Input *      d_input;
 
     int          input_ends_size = sizeof(int) * N_WORKERS;
     int          input_ends[N_WORKERS];
     int *        d_input_ends;
 
-    int          plan_size = sizeof(signed char) * PLAN_LEN_MAX * n_inputs;
-    signed char  *plan = palloc(plan_size);
+    int          plan_size = sizeof(signed char) * PLAN_LEN_MAX * N_INPUTS;
+    signed char  plan[PLAN_LEN_MAX*N_INPUTS];
     signed char *d_plan;
 
-    int          stat_size = sizeof(search_stat) * n_inputs;
-    search_stat *stat = palloc(stat_size);
+    int          stat_size = sizeof(search_stat) * N_INPUTS;
+    search_stat stat[N_INPUTS];
     search_stat *d_stat;
 
     bool         movable_table[STATE_N * DIR_N];
@@ -1467,7 +1471,7 @@ main(int argc, char *argv[])
             if (stat[i].solved)
             {
                 elog("core id = %d\n", i);
-                elog("cpu len=%d: ", input[i].init_depth);
+                printf("cpu len=%d: \n", input[i].init_depth);
 
                 /* CPU side output */
                 // FIXME: Not implemented, for now. It is easy to search path
@@ -1485,32 +1489,47 @@ main(int argc, char *argv[])
         long long int sum_of_expansion = 0;
         for (int i = 0; i < cnt_inputs; ++i)
             sum_of_expansion += stat[i].nodes_expanded;
-        elog("sum of expanded nodes: %lld\n", sum_of_expansion);
 
         long long int increased = 0;
-		long long int avarage_expected_load = sum_of_expansion / N_WORKERS;
-        elog("avarage expanded nodes: %lld\n", avarage_expected_load);
+	long long int avarage_expected_load = sum_of_expansion / N_WORKERS;
 
-		elog("stat: nodes over avarege\n");
-        for (int i = 0; i < cnt_inputs; ++i)
-            if (stat[i].nodes_expanded > avarage_expected_load)
-				elog("i=%d:n=%lld ", stat[i].nodes_expanded);
-		elog("\n");
 
-        for (int i = 0; i < cnt_inputs; ++i)
-        {
-            int policy =
-                stat[i].nodes_expanded / (avarage_expected_load + 1) + 1;
-            if (policy > 1 && stat[i].nodes_expanded > 20)
-            {
-                elog("i=%d(%lld) will be devided\n", i,
-                       stat[i].nodes_expanded);
-                increased += input_devide(input, stat, i, policy,
-                                          cnt_inputs + increased);
-            }
-        }
+	int stat_cnt[10] = {0, 0, 0, 0, 0, 0, 0};
+	for (int i = 0; i < cnt_inputs; ++i)
+	{
+		if (stat[i].nodes_expanded < avarage_expected_load)
+			stat_cnt[0]++;
+		else if (stat[i].nodes_expanded < 2*avarage_expected_load)
+			stat_cnt[1]++;
+		else if (stat[i].nodes_expanded < 4*avarage_expected_load)
+			stat_cnt[2]++;
+		else if (stat[i].nodes_expanded < 8*avarage_expected_load)
+			stat_cnt[3]++;
+		else if (stat[i].nodes_expanded < 16*avarage_expected_load)
+			stat_cnt[4]++;
+		else if (stat[i].nodes_expanded < 32*avarage_expected_load)
+			stat_cnt[5]++;
+		else
+			stat_cnt[6]++;
 
-        if (cnt_inputs + increased > n_inputs)
+		int policy =
+			stat[i].nodes_expanded / (avarage_expected_load + 1) + 1;
+
+		if (policy > 1 && stat[i].nodes_expanded > 20)
+		{
+			elog("i=%d(%lld) will be devided\n", i,
+					stat[i].nodes_expanded);
+			increased += input_devide(input, stat, i, policy,
+					cnt_inputs + increased);
+		}
+	}
+        elog("STAT: sum of expanded nodes: %lld\n", sum_of_expansion);
+        elog("STAT: avarage expanded nodes: %lld\n", avarage_expected_load);
+	elog("STAT: av=%d, 2av=%d, 4av=%d, 8av=%d, 16av=%d, 32av=%d, more=%d\n",
+	stat_cnt[0], stat_cnt[1], stat_cnt[2], stat_cnt[3], stat_cnt[4],
+	stat_cnt[5], stat_cnt[6]);
+
+        if (cnt_inputs + increased > N_INPUTS)
         {
 			elog("cnt_inputs too large");
 			abort();

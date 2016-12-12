@@ -13,7 +13,9 @@ all: cpu cuda
 cuda: cumain device_prop cusingle cubase
 cpu: cpumain cpu25
 
-cumain: idas_distr.cu
+custatic: idas_dynamic.cu
+	nvcc -o $@ $(NVCC_FLAGS) $<
+custatic: idas_static.cu
 	nvcc -o $@ $(NVCC_FLAGS) $<
 cubase: idas_distr_baseline.cu
 	nvcc -o $@ $(NVCC_FLAGS) $<
