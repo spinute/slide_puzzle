@@ -329,7 +329,6 @@ typedef struct state_tag_cpu
     uchar                 pos[STATE_WIDTH][STATE_WIDTH];
     idx_t                 i, j; /* pos of empty */
     Direction             parent_dir;
-    struct state_tag_cpu *parent_state;
     int                   h_value;
 } * State;
 
@@ -393,9 +392,9 @@ State
 state_init(uchar v_list[STATE_WIDTH * STATE_WIDTH], int init_depth)
 {
     State state = state_alloc();
-    int   cnt   = init_depth;
+    int   cnt   = 0;
 
-    state->depth      = 0;
+    state->depth      = init_depth;
     state->parent_dir = (Direction) -1;
 
     for (idx_t j = 0; j < STATE_WIDTH; ++j)
@@ -1099,7 +1098,6 @@ distribute_astar(State init_state, Input input[], int input_ends[], int distr_n,
             {
                 State next_state = state_copy(state);
                 state_move(next_state, (Direction) dir);
-                next_state->parent_state = state;
                 next_state->depth++;
 
                 ht_status = ht_insert(closed, next_state, &ht_value);
@@ -1156,6 +1154,7 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
     int      cnt = 0;
     int *    ht_value;
     State    state = state_init(input[i].tiles, input[i].init_depth);
+    state->parent_dir = input[i].parent_dir;
     PQ       pq    = pq_init(32);
     HTStatus ht_status;
     pq_put(pq, state, state_get_hvalue(state), 0);
@@ -1192,7 +1191,6 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
             {
                 State next_state = state_copy(state);
                 state_move(next_state, (Direction) dir);
-                next_state->parent_state = state;
                 next_state->depth++;
 
                 ht_status = ht_insert(closed, next_state, &ht_value);
@@ -1492,7 +1490,7 @@ main(int argc, char *argv[])
         {
             int policy =
                 stat[i].nodes_expanded / (sum_of_expansion / N_WORKERS + 1) + 1;
-            if (policy > 1 && stat[i].nodes_expanded > 20)
+            if (policy > 1 && stat[i].nodes_expanded > 2000)
             {
                 printf("i=%d(%lld) will be devided\n", i,
                        stat[i].nodes_expanded);
