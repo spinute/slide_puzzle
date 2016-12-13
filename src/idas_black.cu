@@ -194,7 +194,8 @@ idas_internal(int f_limit, long long *ret_nodes_expanded, Input input)
     for (;;)
     {
         if (state_is_goal())
-	    asm("trap;"); /* solution found */
+			asm("trap;"); /* solution found */
+		/* if continue search until solution found, just return true */
 
         if (((stack_is_empty() && dir_reverse(dir) != input.parent_dir) ||
              stack_peak() != dir_reverse(dir)) &&
@@ -228,6 +229,7 @@ __global__ void
 idas_kernel(Input *input, int *input_ends, signed char *plan, search_stat *stat,
             int f_limit, signed char *h_diff_table, bool *movable_table)
 {
+    long long nodes_expanded = 0;
     int       tid            = threadIdx.x;
     int       bid            = blockIdx.x;
     int       id             = tid + bid * blockDim.x;
@@ -247,7 +249,6 @@ idas_kernel(Input *input, int *input_ends, signed char *plan, search_stat *stat,
     for (int input_i = id == 0 ? 0 : input_ends[id - 1];
          input_i < input_ends[id]; ++input_i)
     {
-		long long nodes_expanded = 0;
         stack_init(input[input_i]);
         state_tile_fill(input[input_i]);
         state_init_hvalue();

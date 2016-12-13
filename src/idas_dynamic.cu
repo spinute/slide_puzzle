@@ -25,7 +25,7 @@ typedef signed char   Direction;
 
 __device__ __shared__ static struct dir_stack_tag
 {
-    uchar i;
+    uchar i, j;
     int   init_depth;
     uchar buf[PLAN_LEN_MAX];
 } stack[BLOCK_DIM];
@@ -49,6 +49,7 @@ __device__ static inline void
 stack_init(Input input)
 {
     STACK.i          = 0;
+	STACK.j          = 0;
     STACK.init_depth = input.init_depth;
 }
 
@@ -61,7 +62,7 @@ stack_put(Direction dir)
 __device__ static inline bool
 stack_is_empty(void)
 {
-    return STACK.i == 0;
+    return STACK.i == STACK.j;
 }
 __device__ static inline Direction
 stack_pop(void)
@@ -186,41 +187,55 @@ state_move(Direction dir)
  */
 
 __device__ static bool
-idas_internal(int f_limit, long long *ret_nodes_expanded, Input input)
+idas_internal(int f_limit)
 {
-    uchar     dir            = 0;
-    long long nodes_expanded = 0;
+    int       tid            = threadIdx.x;
+    int       bid            = blockIdx.x;
+    int       id             = tid + bid * blockDim.x;
 
-    for (;;)
+    for (int i = id == 0 ? 0 : input_ends[id - 1];
+         i < input_ends[id]; ++i)
     {
-        if (state_is_goal())
-	    asm("trap;"); /* solution found */
+		long long nodes_expanded = 0;
+		uchar     dir            = 0;
+		Input this_input = input[i]
+        stack_init(this_input);
+        state_tile_fill(this_input);
+        state_init_hvalue();
 
-        if (((stack_is_empty() && dir_reverse(dir) != input.parent_dir) ||
-             stack_peak() != dir_reverse(dir)) &&
-            state_movable(dir))
-        {
-            ++nodes_expanded;
+		for (;;)
+		{
+			if (state_is_goal())
+				asm("trap;"); /* solution found */
+			/* if continue search until solution found, just return true */
 
-            if (state_move_with_limit(dir, f_limit))
-            {
-                stack_put(dir);
-                dir = 0;
-                continue;
-            }
-        }
+			if (((stack_is_empty() && dir_reverse(dir) != this_input.parent_dir) ||
+						stack_peak() != dir_reverse(dir)) &&
+					state_movable(dir))
+			{
+				++nodes_expanded;
+				/* sometimes check idle here */
+				/* and load balance if needed */
 
-        while (++dir == DIR_N)
-        {
-            if (stack_is_empty())
-            {
-                *ret_nodes_expanded = nodes_expanded;
-                return false;
-            }
+				if (state_move_with_limit(dir, f_limit))
+				{
+					stack_put(dir);
+					dir = 0;
+					continue;
+				}
+			}
 
-            dir = stack_pop();
-            state_move(dir_reverse(dir));
-        }
+			while (++dir == DIR_N)
+			{
+				if (stack_is_empty())
+					break;
+
+				dir = stack_pop();
+				state_move(dir_reverse(dir));
+			}
+		}
+
+        stat[i].nodes_expanded = nodes_expanded;
     }
 }
 
@@ -228,7 +243,6 @@ __global__ void
 idas_kernel(Input *input, int *input_ends, signed char *plan, search_stat *stat,
             int f_limit, signed char *h_diff_table, bool *movable_table)
 {
-    long long nodes_expanded = 0;
     int       tid            = threadIdx.x;
     int       bid            = blockIdx.x;
     int       id             = tid + bid * blockDim.x;
@@ -245,25 +259,7 @@ idas_kernel(Input *input, int *input_ends, signed char *plan, search_stat *stat,
 
     __syncthreads();
 
-    for (int input_i = id == 0 ? 0 : input_ends[id - 1];
-         input_i < input_ends[id]; ++input_i)
-    {
-        stack_init(input[input_i]);
-        state_tile_fill(input[input_i]);
-        state_init_hvalue();
-
-        if (idas_internal(f_limit, &nodes_expanded, input[input_i]))
-        {
-            stat[input_i].solved = true;
-            stat[input_i].len    = (int) STACK.i;
-            for (uchar i                         = 0; i < STACK.i; ++i)
-                plan[i + input_i * PLAN_LEN_MAX] = STACK.buf[i];
-        }
-        else
-            stat[input_i].solved = false;
-
-        stat[input_i].nodes_expanded = nodes_expanded;
-    }
+	idas_internal(f_limit);
 }
 
 /* host library implementation */
