@@ -219,54 +219,54 @@ idas_internal(int f_limit, long long *ret_nodes_expanded, Input input)
             {
                 *ret_nodes_expanded = nodes_expanded;
                 return false;
-            }
+			}
 
-            dir = stack_pop();
-            state_move(dir_reverse(dir));
-        }
-    }
+			dir = stack_pop();
+			state_move(dir_reverse(dir));
+		}
+	}
 }
 
-__global__ void
+	__global__ void
 idas_kernel(Input *input, int *input_ends, signed char *plan, search_stat *stat,
-            int f_limit, signed char *h_diff_table, bool *movable_table)
+		int f_limit, signed char *h_diff_table, bool *movable_table)
 {
-    long long nodes_expanded = 0;
-    int       tid            = threadIdx.x;
-    int       bid            = blockIdx.x;
-    int       id             = tid + bid * blockDim.x;
+	long long nodes_expanded = 0;
+	int       tid            = threadIdx.x;
+	int       bid            = blockIdx.x;
+	int       id             = tid + bid * blockDim.x;
 
-    for (int dir = 0; dir < DIR_N; ++dir)
-        for (int i = tid; i < STATE_N; i += blockDim.x)
-            if (i < STATE_N)
-                movable_table_shared[i][dir] = movable_table[i * DIR_N + dir];
-    for (int i = 0; i < STATE_N * DIR_N; ++i)
-        for (int j = tid; j < STATE_N; j += blockDim.x)
-            if (j < STATE_N)
-                h_diff_table_shared[j][i / DIR_N][i % DIR_N] =
-                    h_diff_table[j * STATE_N * DIR_N + i];
+	for (int dir = 0; dir < DIR_N; ++dir)
+		for (int i = tid; i < STATE_N; i += blockDim.x)
+			if (i < STATE_N)
+				movable_table_shared[i][dir] = movable_table[i * DIR_N + dir];
+	for (int i = 0; i < STATE_N * DIR_N; ++i)
+		for (int j = tid; j < STATE_N; j += blockDim.x)
+			if (j < STATE_N)
+				h_diff_table_shared[j][i / DIR_N][i % DIR_N] =
+					h_diff_table[j * STATE_N * DIR_N + i];
 
-    __syncthreads();
+	__syncthreads();
 
-    for (int input_i = id == 0 ? 0 : input_ends[id - 1];
-         input_i < input_ends[id]; ++input_i)
-    {
-        stack_init(input[input_i]);
-        state_tile_fill(input[input_i]);
-        state_init_hvalue();
+	for (int input_i = id == 0 ? 0 : input_ends[id - 1];
+			input_i < input_ends[id]; ++input_i)
+	{
+		stack_init(input[input_i]);
+		state_tile_fill(input[input_i]);
+		state_init_hvalue();
 
-        if (idas_internal(f_limit, &nodes_expanded, input[input_i]))
-        {
-            stat[input_i].solved = true;
-            stat[input_i].len    = (int) STACK.i;
-            for (uchar i                         = 0; i < STACK.i; ++i)
-                plan[i + input_i * PLAN_LEN_MAX] = STACK.buf[i];
-        }
-        else
-            stat[input_i].solved = false;
+		if (idas_internal(f_limit, &nodes_expanded, input[input_i]))
+		{
+			stat[input_i].solved = true;
+			stat[input_i].len    = (int) STACK.i;
+			for (uchar i                         = 0; i < STACK.i; ++i)
+				plan[i + input_i * PLAN_LEN_MAX] = STACK.buf[i];
+		}
+		else
+			stat[input_i].solved = false;
 
-        stat[input_i].nodes_expanded = nodes_expanded;
-    }
+		stat[input_i].nodes_expanded = nodes_expanded;
+	}
 }
 
 /* host library implementation */
@@ -283,32 +283,32 @@ idas_kernel(Input *input, int *input_ends, signed char *plan, search_stat *stat,
 #define elog(...) ;
 #endif
 
-void *
+	void *
 palloc(size_t size)
 {
-    void *ptr = malloc(size);
-    if (!ptr)
-        elog("malloc failed\n");
+	void *ptr = malloc(size);
+	if (!ptr)
+		elog("malloc failed\n");
 
-    return ptr;
+	return ptr;
 }
 
-void *
+	void *
 repalloc(void *old_ptr, size_t new_size)
 {
-    void *ptr = realloc(old_ptr, new_size);
-    if (!ptr)
-        elog("realloc failed\n");
+	void *ptr = realloc(old_ptr, new_size);
+	if (!ptr)
+		elog("realloc failed\n");
 
-    return ptr;
+	return ptr;
 }
 
-void
+	void
 pfree(void *ptr)
 {
-    if (!ptr)
-        elog("empty ptr\n");
-    free(ptr);
+	if (!ptr)
+		elog("empty ptr\n");
+	free(ptr);
 }
 
 #include <assert.h>
@@ -331,11 +331,11 @@ typedef unsigned char idx_t;
 
 typedef struct state_tag_cpu
 {
-    int       depth; /* XXX: needed? */
-    uchar     pos[STATE_WIDTH][STATE_WIDTH];
-    idx_t     i, j; /* pos of empty */
-    Direction parent_dir;
-    int       h_value;
+	int       depth; /* XXX: needed? */
+	uchar     pos[STATE_WIDTH][STATE_WIDTH];
+	idx_t     i, j; /* pos of empty */
+	Direction parent_dir;
+	int       h_value;
 } * State;
 
 #define v(state, i, j) ((state)->pos[i][j])
@@ -346,270 +346,270 @@ typedef struct state_tag_cpu
 #define uv(state) (v(state, state->i, state->j - 1))
 
 static uchar from_x[STATE_WIDTH * STATE_WIDTH],
-    from_y[STATE_WIDTH * STATE_WIDTH];
+			 from_y[STATE_WIDTH * STATE_WIDTH];
 
-static inline void
+	static inline void
 fill_from_xy(State from)
 {
-    for (idx_t x = 0; x < STATE_WIDTH; ++x)
-        for (idx_t y = 0; y < STATE_WIDTH; ++y)
-        {
-            from_x[v(from, x, y)] = x;
-            from_y[v(from, x, y)] = y;
-        }
+	for (idx_t x = 0; x < STATE_WIDTH; ++x)
+		for (idx_t y = 0; y < STATE_WIDTH; ++y)
+		{
+			from_x[v(from, x, y)] = x;
+			from_y[v(from, x, y)] = y;
+		}
 }
 
 static char assert_state_width_is_four2[STATE_WIDTH == 4 ? 1 : -1];
-static inline int
+	static inline int
 heuristic_manhattan_distance(State from)
 {
-    int h_value = 0;
+	int h_value = 0;
 
-    fill_from_xy(from);
+	fill_from_xy(from);
 
-    for (idx_t i = 1; i < STATE_N; ++i)
-    {
-        h_value += distance(from_x[i], i & 3);
-        h_value += distance(from_y[i], i >> 2);
-    }
+	for (idx_t i = 1; i < STATE_N; ++i)
+	{
+		h_value += distance(from_x[i], i & 3);
+		h_value += distance(from_y[i], i >> 2);
+	}
 
-    return h_value;
+	return h_value;
 }
 
-bool
+	bool
 state_is_goal(State state)
 {
-    return state->h_value == 0;
+	return state->h_value == 0;
 }
 
-static inline State
+	static inline State
 state_alloc(void)
 {
-    return (State) palloc(sizeof(struct state_tag_cpu));
+	return (State) palloc(sizeof(struct state_tag_cpu));
 }
 
-static inline void
+	static inline void
 state_free(State state)
 {
-    pfree(state);
+	pfree(state);
 }
 
-State
+	State
 state_init(uchar v_list[STATE_WIDTH * STATE_WIDTH], int init_depth)
 {
-    State state = state_alloc();
-    int   cnt   = 0;
+	State state = state_alloc();
+	int   cnt   = 0;
 
-    state->depth      = init_depth;
-    state->parent_dir = (Direction) -1;
+	state->depth      = init_depth;
+	state->parent_dir = (Direction) -1;
 
-    for (idx_t j = 0; j < STATE_WIDTH; ++j)
-        for (idx_t i = 0; i < STATE_WIDTH; ++i)
-        {
-            if (v_list[cnt] == 0)
-            {
-                state->i = i;
-                state->j = j;
-            }
-            v(state, i, j) = v_list[cnt++];
-        }
+	for (idx_t j = 0; j < STATE_WIDTH; ++j)
+		for (idx_t i = 0; i < STATE_WIDTH; ++i)
+		{
+			if (v_list[cnt] == 0)
+			{
+				state->i = i;
+				state->j = j;
+			}
+			v(state, i, j) = v_list[cnt++];
+		}
 
-    state->h_value = heuristic_manhattan_distance(state);
+	state->h_value = heuristic_manhattan_distance(state);
 
-    return state;
+	return state;
 }
 
-void
+	void
 state_fini(State state)
 {
-    state_free(state);
+	state_free(state);
 }
 
-State
+	State
 state_copy(State src)
 {
-    State dst = state_alloc();
+	State dst = state_alloc();
 
-    memcpy(dst, src, sizeof(*src));
+	memcpy(dst, src, sizeof(*src));
 
-    return dst;
+	return dst;
 }
 
-static inline bool
+	static inline bool
 state_left_movable(State state)
 {
-    return state->i != 0;
+	return state->i != 0;
 }
-static inline bool
+	static inline bool
 state_down_movable(State state)
 {
-    return state->j != STATE_WIDTH - 1;
+	return state->j != STATE_WIDTH - 1;
 }
-static inline bool
+	static inline bool
 state_right_movable(State state)
 {
-    return state->i != STATE_WIDTH - 1;
+	return state->i != STATE_WIDTH - 1;
 }
-static inline bool
+	static inline bool
 state_up_movable(State state)
 {
-    return state->j != 0;
+	return state->j != 0;
 }
 
-bool
+	bool
 state_movable(State state, Direction dir)
 {
-    return (dir != DIR_LEFT || state_left_movable(state)) &&
-           (dir != DIR_DOWN || state_down_movable(state)) &&
-           (dir != DIR_RIGHT || state_right_movable(state)) &&
-           (dir != DIR_UP || state_up_movable(state));
+	return (dir != DIR_LEFT || state_left_movable(state)) &&
+		(dir != DIR_DOWN || state_down_movable(state)) &&
+		(dir != DIR_RIGHT || state_right_movable(state)) &&
+		(dir != DIR_UP || state_up_movable(state));
 }
 
 /*
-static inline int
-calc_h_diff(idx_t who, idx_t from_x, idx_t from_y, Direction rdir)
-{
-    idx_t right_x = who % STATE_WIDTH;
-    idx_t right_y = who / STATE_WIDTH;
+   static inline int
+   calc_h_diff(idx_t who, idx_t from_x, idx_t from_y, Direction rdir)
+   {
+   idx_t right_x = who % STATE_WIDTH;
+   idx_t right_y = who / STATE_WIDTH;
 
-    switch (rdir)
-    {
-    case LEFT:
-        return right_x > from_x ? -1 : 1;
-    case RIGHT:
-        return right_x < from_x ? -1 : 1;
-    case UP:
-        return right_y > from_y ? -1 : 1;
-    case DOWN:
-        return right_y < from_y ? -1 : 1;
-    }
-}
-*/
+   switch (rdir)
+   {
+   case LEFT:
+   return right_x > from_x ? -1 : 1;
+   case RIGHT:
+   return right_x < from_x ? -1 : 1;
+   case UP:
+   return right_y > from_y ? -1 : 1;
+   case DOWN:
+   return right_y < from_y ? -1 : 1;
+   }
+   }
+ */
 #define h_diff(who, from_i, from_j, dir)                                       \
-    (h_diff_table[((who) << 6) + ((from_j) << 4) + ((from_i) << 2) + (dir)])
+	(h_diff_table[((who) << 6) + ((from_j) << 4) + ((from_i) << 2) + (dir)])
 static int h_diff_table[STATE_N * STATE_N * DIR_N] = {
-    1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,
-    1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,
-    -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1,
-    1,  -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,
-    1,  1,  -1, 1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1,
-    1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, -1,
-    1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,  1,  1,
-    -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  -1, -1, 1,  1,  -1, -1, 1,  1,
-    -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,
-    1,  -1, 1,  -1, 1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,
-    -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1,  -1,
-    -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, -1, 1,  1,
-    -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, -1, 1,  1,  -1, -1, 1,
-    1,  -1, -1, 1,  1,  -1, 1,  1,  1,  1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,
-    -1, -1, 1,  1,  -1, -1, 1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,
-    1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,
-    -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,
-    -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  -1, 1,  1,  1,  1,
-    1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1,
-    1,  -1, 1,  -1, 1,  -1, 1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,
-    -1, 1,  -1, 1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1,
-    -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  -1, -1,
-    1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, -1, 1,  1,  -1,
-    -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,  -1, 1,  -1, 1,  -1, 1,  -1,
-    1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,
-    1,  1,  1,  1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,
-    1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  1,
-    1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  1,  -1,
-    1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  1,  1,  1,  1,  -1,
-    1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,
-    -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,
-    1,  -1, -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1,
-    1,  -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, -1, 1,
-    1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,  -1, 1,  -1,
-    1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,
-    1,  1,  -1, 1,  1,  -1, -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1,
-    1,  1,  -1, 1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1,
-    1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1,
-    1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,  1,
-    -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,
-    -1, -1, 1,  1,  -1, 1,  1,  1,  1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1,
-    -1, 1,  1,  -1, -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,
-    -1, -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,
-    1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  -1, 1,  -1,
-    1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  -1, 1,  -1, 1,  1,  1,
-    -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,
-    -1, -1, 1,  1,  -1, -1, 1,  -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  1,
-    1,  -1, 1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1,
-    1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  -1, 1,
-    -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  -1, 1,  1,  1,  -1,
-    1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,
-    -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1,
-    1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,
-    -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1};
+	1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,
+	1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,
+	-1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1,
+	1,  -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,
+	1,  1,  -1, 1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1,
+	1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, -1,
+	1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,  1,  1,
+	-1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  -1, -1, 1,  1,  -1, -1, 1,  1,
+	-1, 1,  1,  1,  -1, 1,  -1, 1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,
+	1,  -1, 1,  -1, 1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,
+	-1, 1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1,  -1,
+	-1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, -1, 1,  1,
+	-1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, -1, 1,  1,  -1, -1, 1,
+	1,  -1, -1, 1,  1,  -1, 1,  1,  1,  1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,
+	-1, -1, 1,  1,  -1, -1, 1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,
+	1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,
+	-1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,
+	-1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  -1, 1,  1,  1,  1,
+	1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1,
+	1,  -1, 1,  -1, 1,  -1, 1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,
+	-1, 1,  -1, 1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1,
+	-1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  -1, -1,
+	1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, -1, 1,  1,  -1,
+	-1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,  -1, 1,  -1, 1,  -1, 1,  -1,
+	1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,
+	1,  1,  1,  1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,
+	1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  1,
+	1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  1,  -1,
+	1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  1,  1,  1,  1,  -1,
+	1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,
+	-1, 1,  -1, 1,  -1, 1,  1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,
+	1,  -1, -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1,
+	1,  -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  -1, -1, 1,
+	1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  -1, 1,  -1, 1,  -1,
+	1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,
+	1,  1,  -1, 1,  1,  -1, -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1,
+	1,  1,  -1, 1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, 1,  1,  1,  -1, 1,  -1,
+	1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1,
+	1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  1,  1,
+	-1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,
+	-1, -1, 1,  1,  -1, 1,  1,  1,  1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1,
+	-1, 1,  1,  -1, -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,
+	-1, -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,
+	1,  1,  1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  -1, 1,  -1,
+	1,  1,  1,  -1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  -1, 1,  -1, 1,  1,  1,
+	-1, 1,  1,  -1, -1, 1,  1,  -1, -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,
+	-1, -1, 1,  1,  -1, -1, 1,  -1, 1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  1,
+	1,  -1, 1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1,
+	1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  -1, 1,
+	-1, 1,  -1, 1,  -1, 1,  1,  1,  -1, 1,  1,  -1, -1, 1,  -1, 1,  1,  1,  -1,
+	1,  1,  1,  1,  1,  1,  1,  1,  -1, 1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,
+	-1, 1,  -1, 1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1,
+	1,  1,  1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  -1, 1,  1,  1,
+	-1, 1,  -1, 1,  1,  1,  -1, 1,  1,  1,  -1, 1,  1,  1,  1,  1,  1};
 
-void
+	void
 state_move(State state, Direction dir)
 {
-    idx_t who;
-    assert(state_movable(state, dir));
+	idx_t who;
+	assert(state_movable(state, dir));
 
-    switch (dir)
-    {
-    case DIR_LEFT:
-        who = ev(state) = lv(state);
-        state->i--;
-        break;
-    case DIR_DOWN:
-        who = ev(state) = dv(state);
-        state->j++;
-        break;
-    case DIR_RIGHT:
-        who = ev(state) = rv(state);
-        state->i++;
-        break;
-    case DIR_UP:
-        who = ev(state) = uv(state);
-        state->j--;
-        break;
-    default:
-        elog("unexpected direction");
-        assert(false);
-    }
+	switch (dir)
+	{
+		case DIR_LEFT:
+			who = ev(state) = lv(state);
+			state->i--;
+			break;
+		case DIR_DOWN:
+			who = ev(state) = dv(state);
+			state->j++;
+			break;
+		case DIR_RIGHT:
+			who = ev(state) = rv(state);
+			state->i++;
+			break;
+		case DIR_UP:
+			who = ev(state) = uv(state);
+			state->j--;
+			break;
+		default:
+			elog("unexpected direction");
+			assert(false);
+	}
 
-    state->h_value =
-        state->h_value + h_diff(who, state->i, state->j, dir_reverse(dir));
-    // state->h_value = state->h_value + calc_h_diff(who, state->i, state->j,
-    // dir);
-    state->parent_dir = dir;
+	state->h_value =
+		state->h_value + h_diff(who, state->i, state->j, dir_reverse(dir));
+	// state->h_value = state->h_value + calc_h_diff(who, state->i, state->j,
+	// dir);
+	state->parent_dir = dir;
 }
 
-bool
+	bool
 state_pos_equal(State s1, State s2)
 {
-    for (idx_t i = 0; i < STATE_WIDTH; ++i)
-        for (idx_t j = 0; j < STATE_WIDTH; ++j)
-            if (v(s1, i, j) != v(s2, i, j))
-                return false;
+	for (idx_t i = 0; i < STATE_WIDTH; ++i)
+		for (idx_t j = 0; j < STATE_WIDTH; ++j)
+			if (v(s1, i, j) != v(s2, i, j))
+				return false;
 
-    return true;
+	return true;
 }
 
-size_t
+	size_t
 state_hash(State state)
 {
-    /* FIXME: for A* */
-    size_t hash_value = 0;
-    for (idx_t i = 0; i < STATE_WIDTH; ++i)
-        for (idx_t j = 0; j < STATE_WIDTH; ++j)
-            hash_value ^= (v(state, i, j) << ((i * 3 + j) << 2));
-    return hash_value;
+	/* FIXME: for A* */
+	size_t hash_value = 0;
+	for (idx_t i = 0; i < STATE_WIDTH; ++i)
+		for (idx_t j = 0; j < STATE_WIDTH; ++j)
+			hash_value ^= (v(state, i, j) << ((i * 3 + j) << 2));
+	return hash_value;
 }
-int
+	int
 state_get_hvalue(State state)
 {
-    return state->h_value;
+	return state->h_value;
 }
 
-int
+	int
 state_get_depth(State state)
 {
-    return state->depth;
+	return state->depth;
 }
 
 #include <stddef.h>
@@ -620,234 +620,234 @@ state_get_depth(State state)
 #endif
 
 typedef enum {
-    HT_SUCCESS = 0,
-    HT_FAILED_FOUND,
-    HT_FAILED_NOT_FOUND,
+	HT_SUCCESS = 0,
+	HT_FAILED_FOUND,
+	HT_FAILED_NOT_FOUND,
 } HTStatus;
 
 /* XXX: hash function for State should be surveyed */
-inline static size_t
+	inline static size_t
 hashfunc(State key)
 {
-    return state_hash(key);
+	return state_hash(key);
 }
 
 typedef struct ht_entry_tag *HTEntry;
 struct ht_entry_tag
 {
-    HTEntry next;
-    State   key;
-    int     value;
+	HTEntry next;
+	State   key;
+	int     value;
 };
 
-static HTEntry
+	static HTEntry
 ht_entry_init(State key)
 {
-    HTEntry entry = (HTEntry) palloc(sizeof(*entry));
+	HTEntry entry = (HTEntry) palloc(sizeof(*entry));
 
-    entry->key  = state_copy(key);
-    entry->next = NULL;
+	entry->key  = state_copy(key);
+	entry->next = NULL;
 
-    return entry;
+	return entry;
 }
 
-static void
+	static void
 ht_entry_fini(HTEntry entry)
 {
-    pfree(entry);
+	pfree(entry);
 }
 
 typedef struct ht_tag
 {
-    size_t   n_bins;
-    size_t   n_elems;
-    HTEntry *bin;
+	size_t   n_bins;
+	size_t   n_elems;
+	HTEntry *bin;
 } * HT;
 
-static bool
+	static bool
 ht_rehash_required(HT ht)
 {
-    return ht->n_bins <= ht->n_elems; /* TODO: local policy is also needed */
+	return ht->n_bins <= ht->n_elems; /* TODO: local policy is also needed */
 }
 
-static size_t
+	static size_t
 calc_n_bins(size_t required)
 {
-    /* NOTE: n_bins is used for mask and hence it should be pow of 2, fon now */
-    size_t size = 1;
-    assert(required > 0);
+	/* NOTE: n_bins is used for mask and hence it should be pow of 2, fon now */
+	size_t size = 1;
+	assert(required > 0);
 
-    while (required > size)
-        size <<= 1;
+	while (required > size)
+		size <<= 1;
 
-    return size;
+	return size;
 }
 
-HT
+	HT
 ht_init(size_t init_size_hint)
 {
-    size_t n_bins = calc_n_bins(init_size_hint);
-    HT     ht     = (HT) palloc(sizeof(*ht));
+	size_t n_bins = calc_n_bins(init_size_hint);
+	HT     ht     = (HT) palloc(sizeof(*ht));
 
-    ht->n_bins  = n_bins;
-    ht->n_elems = 0;
+	ht->n_bins  = n_bins;
+	ht->n_elems = 0;
 
-    assert(sizeof(*ht->bin) <= SIZE_MAX / n_bins);
-    ht->bin = (HTEntry *) palloc(sizeof(*ht->bin) * n_bins);
-    memset(ht->bin, 0, sizeof(*ht->bin) * n_bins);
+	assert(sizeof(*ht->bin) <= SIZE_MAX / n_bins);
+	ht->bin = (HTEntry *) palloc(sizeof(*ht->bin) * n_bins);
+	memset(ht->bin, 0, sizeof(*ht->bin) * n_bins);
 
-    return ht;
+	return ht;
 }
 
-static void
+	static void
 ht_rehash(HT ht)
 {
-    HTEntry *new_bin;
-    size_t   new_size = ht->n_bins << 1;
+	HTEntry *new_bin;
+	size_t   new_size = ht->n_bins << 1;
 
-    assert(ht->n_bins<SIZE_MAX>> 1);
+	assert(ht->n_bins<SIZE_MAX>> 1);
 
-    new_bin = (HTEntry *) palloc(sizeof(*new_bin) * new_size);
-    memset(new_bin, 0, sizeof(*new_bin) * new_size);
+	new_bin = (HTEntry *) palloc(sizeof(*new_bin) * new_size);
+	memset(new_bin, 0, sizeof(*new_bin) * new_size);
 
-    for (size_t i = 0; i < ht->n_bins; ++i)
-    {
-        HTEntry entry = ht->bin[i];
+	for (size_t i = 0; i < ht->n_bins; ++i)
+	{
+		HTEntry entry = ht->bin[i];
 
-        while (entry)
-        {
-            HTEntry next = entry->next;
+		while (entry)
+		{
+			HTEntry next = entry->next;
 
-            size_t idx   = hashfunc(entry->key) & (new_size - 1);
-            entry->next  = new_bin[idx];
-            new_bin[idx] = entry;
+			size_t idx   = hashfunc(entry->key) & (new_size - 1);
+			entry->next  = new_bin[idx];
+			new_bin[idx] = entry;
 
-            entry = next;
-        }
-    }
+			entry = next;
+		}
+	}
 
-    pfree(ht->bin);
-    ht->n_bins = new_size;
-    ht->bin    = new_bin;
+	pfree(ht->bin);
+	ht->n_bins = new_size;
+	ht->bin    = new_bin;
 }
 
-void
+	void
 ht_fini(HT ht)
 {
-    for (size_t i = 0; i < ht->n_bins; ++i)
-    {
-        HTEntry entry = ht->bin[i];
-        while (entry)
-        {
-            HTEntry next = entry->next;
-            state_fini(entry->key);
-            ht_entry_fini(entry);
-            entry = next;
-        }
-    }
+	for (size_t i = 0; i < ht->n_bins; ++i)
+	{
+		HTEntry entry = ht->bin[i];
+		while (entry)
+		{
+			HTEntry next = entry->next;
+			state_fini(entry->key);
+			ht_entry_fini(entry);
+			entry = next;
+		}
+	}
 
-    pfree(ht->bin);
-    pfree(ht);
+	pfree(ht->bin);
+	pfree(ht);
 }
 
-HTStatus
+	HTStatus
 ht_search(HT ht, State key, int *ret_value)
 {
-    size_t  i     = hashfunc(key) & (ht->n_bins - 1);
-    HTEntry entry = ht->bin[i];
+	size_t  i     = hashfunc(key) & (ht->n_bins - 1);
+	HTEntry entry = ht->bin[i];
 
-    while (entry)
-    {
-        if (state_pos_equal(key, entry->key))
-        {
-            *ret_value = entry->value;
-            return HT_SUCCESS;
-        }
+	while (entry)
+	{
+		if (state_pos_equal(key, entry->key))
+		{
+			*ret_value = entry->value;
+			return HT_SUCCESS;
+		}
 
-        entry = entry->next;
-    }
+		entry = entry->next;
+	}
 
-    return HT_FAILED_NOT_FOUND;
+	return HT_FAILED_NOT_FOUND;
 }
 
-HTStatus
+	HTStatus
 ht_insert(HT ht, State key, int **value)
 {
-    size_t  i;
-    HTEntry entry, new_entry;
+	size_t  i;
+	HTEntry entry, new_entry;
 
-    if (ht_rehash_required(ht))
-        ht_rehash(ht);
+	if (ht_rehash_required(ht))
+		ht_rehash(ht);
 
-    i     = hashfunc(key) & (ht->n_bins - 1);
-    entry = ht->bin[i];
+	i     = hashfunc(key) & (ht->n_bins - 1);
+	entry = ht->bin[i];
 
-    while (entry)
-    {
-        if (state_pos_equal(key, entry->key))
-        {
-            *value = &entry->value;
-            return HT_FAILED_FOUND;
-        }
+	while (entry)
+	{
+		if (state_pos_equal(key, entry->key))
+		{
+			*value = &entry->value;
+			return HT_FAILED_FOUND;
+		}
 
-        entry = entry->next;
-    }
+		entry = entry->next;
+	}
 
-    new_entry = ht_entry_init(key);
+	new_entry = ht_entry_init(key);
 
-    new_entry->next = ht->bin[i];
-    ht->bin[i]      = new_entry;
-    *value          = &new_entry->value;
+	new_entry->next = ht->bin[i];
+	ht->bin[i]      = new_entry;
+	*value          = &new_entry->value;
 
-    assert(ht->n_elems < SIZE_MAX);
-    ht->n_elems++;
+	assert(ht->n_elems < SIZE_MAX);
+	ht->n_elems++;
 
-    return HT_SUCCESS;
+	return HT_SUCCESS;
 }
 
-HTStatus
+	HTStatus
 ht_delete(HT ht, State key)
 {
-    size_t  i     = hashfunc(key) & (ht->n_bins - 1);
-    HTEntry entry = ht->bin[i], prev;
+	size_t  i     = hashfunc(key) & (ht->n_bins - 1);
+	HTEntry entry = ht->bin[i], prev;
 
-    if (!entry)
-        return HT_FAILED_NOT_FOUND;
+	if (!entry)
+		return HT_FAILED_NOT_FOUND;
 
-    if (state_pos_equal(key, entry->key))
-    {
-        ht->bin[i] = entry->next;
-        ht_entry_fini(entry);
-        return HT_SUCCESS;
-    }
+	if (state_pos_equal(key, entry->key))
+	{
+		ht->bin[i] = entry->next;
+		ht_entry_fini(entry);
+		return HT_SUCCESS;
+	}
 
-    prev  = entry;
-    entry = entry->next;
+	prev  = entry;
+	entry = entry->next;
 
-    while (entry)
-    {
-        if (state_pos_equal(key, entry->key))
-        {
-            prev->next = entry->next;
-            ht_entry_fini(entry);
+	while (entry)
+	{
+		if (state_pos_equal(key, entry->key))
+		{
+			prev->next = entry->next;
+			ht_entry_fini(entry);
 
-            assert(ht->n_elems > 0);
-            ht->n_elems--;
+			assert(ht->n_elems > 0);
+			ht->n_elems--;
 
-            return HT_SUCCESS;
-        }
+			return HT_SUCCESS;
+		}
 
-        prev  = entry;
-        entry = entry->next;
-    }
+		prev  = entry;
+		entry = entry->next;
+	}
 
-    return HT_FAILED_NOT_FOUND;
+	return HT_FAILED_NOT_FOUND;
 }
 
-void
+	void
 ht_dump(HT ht)
 {
-    elog("%s: n_elems=%zu, n_bins=%zu\n", __func__, ht->n_elems, ht->n_bins);
+	elog("%s: n_elems=%zu, n_bins=%zu\n", __func__, ht->n_elems, ht->n_bins);
 }
 
 /*
@@ -859,16 +859,16 @@ ht_dump(HT ht)
 
 typedef struct pq_entry_tag
 {
-    State state;
-    int   f, g;
+	State state;
+	int   f, g;
 } PQEntryData;
 typedef PQEntryData *PQEntry;
 
 /* tiebreaking is done comparing g value */
-static inline bool
+	static inline bool
 pq_entry_higher_priority(PQEntry e1, PQEntry e2)
 {
-    return e1->f < e2->f || (e1->f == e2->f && e1->g >= e2->g);
+	return e1->f < e2->f || (e1->f == e2->f && e1->g >= e2->g);
 }
 
 /*
@@ -879,192 +879,192 @@ pq_entry_higher_priority(PQEntry e1, PQEntry e2)
  */
 typedef struct pq_tag
 {
-    size_t       n_elems;
-    size_t       capa;
-    PQEntryData *array;
+	size_t       n_elems;
+	size_t       capa;
+	PQEntryData *array;
 } * PQ;
 
-static inline size_t
+	static inline size_t
 calc_init_capa(size_t capa_hint)
 {
-    size_t capa = 1;
-    assert(capa_hint > 0);
+	size_t capa = 1;
+	assert(capa_hint > 0);
 
-    while (capa < capa_hint)
-        capa <<= 1;
-    return capa - 1;
+	while (capa < capa_hint)
+		capa <<= 1;
+	return capa - 1;
 }
 
-PQ
+	PQ
 pq_init(size_t init_capa_hint)
 {
-    PQ pq = (PQ) palloc(sizeof(*pq));
+	PQ pq = (PQ) palloc(sizeof(*pq));
 
-    pq->n_elems = 0;
-    pq->capa    = calc_init_capa(init_capa_hint);
+	pq->n_elems = 0;
+	pq->capa    = calc_init_capa(init_capa_hint);
 
-    assert(pq->capa <= SIZE_MAX / sizeof(PQEntryData));
-    pq->array = (PQEntryData *) palloc(sizeof(PQEntryData) * pq->capa);
+	assert(pq->capa <= SIZE_MAX / sizeof(PQEntryData));
+	pq->array = (PQEntryData *) palloc(sizeof(PQEntryData) * pq->capa);
 
-    return pq;
+	return pq;
 }
 
-void
+	void
 pq_fini(PQ pq)
 {
-    for (size_t i = 0; i < pq->n_elems; ++i)
-        state_fini(pq->array[i].state);
+	for (size_t i = 0; i < pq->n_elems; ++i)
+		state_fini(pq->array[i].state);
 
-    pfree(pq->array);
-    pfree(pq);
+	pfree(pq->array);
+	pfree(pq);
 }
 
-static inline bool
+	static inline bool
 pq_is_full(PQ pq)
 {
-    assert(pq->n_elems <= pq->capa);
-    return pq->n_elems == pq->capa;
+	assert(pq->n_elems <= pq->capa);
+	return pq->n_elems == pq->capa;
 }
 
-static inline void
+	static inline void
 pq_extend(PQ pq)
 {
-    pq->capa = (pq->capa << 1) + 1;
-    assert(pq->capa <= SIZE_MAX / sizeof(PQEntryData));
+	pq->capa = (pq->capa << 1) + 1;
+	assert(pq->capa <= SIZE_MAX / sizeof(PQEntryData));
 
-    pq->array =
-        (PQEntryData *) repalloc(pq->array, sizeof(PQEntryData) * pq->capa);
+	pq->array =
+		(PQEntryData *) repalloc(pq->array, sizeof(PQEntryData) * pq->capa);
 }
 
-static inline void
+	static inline void
 pq_swap_entry(PQ pq, size_t i, size_t j)
 {
-    PQEntryData tmp = pq->array[i];
-    pq->array[i]    = pq->array[j];
-    pq->array[j]    = tmp;
+	PQEntryData tmp = pq->array[i];
+	pq->array[i]    = pq->array[j];
+	pq->array[j]    = tmp;
 }
 
-static inline size_t
+	static inline size_t
 pq_up(size_t i)
 {
-    /* NOTE: By using 1-origin, it may be written more simply, i >> 1 */
-    return (i - 1) >> 1;
+	/* NOTE: By using 1-origin, it may be written more simply, i >> 1 */
+	return (i - 1) >> 1;
 }
 
-static inline size_t
+	static inline size_t
 pq_left(size_t i)
 {
-    return (i << 1) + 1;
+	return (i << 1) + 1;
 }
 
-static void
+	static void
 heapify_up(PQ pq)
 {
-    for (size_t i = pq->n_elems; i > 0;)
-    {
-        size_t ui = pq_up(i);
-        assert(i > 0);
-        if (!pq_entry_higher_priority(&pq->array[i], &pq->array[ui]))
-            break;
+	for (size_t i = pq->n_elems; i > 0;)
+	{
+		size_t ui = pq_up(i);
+		assert(i > 0);
+		if (!pq_entry_higher_priority(&pq->array[i], &pq->array[ui]))
+			break;
 
-        pq_swap_entry(pq, i, ui);
-        i = ui;
-    }
+		pq_swap_entry(pq, i, ui);
+		i = ui;
+	}
 }
 
-void
+	void
 pq_put(PQ pq, State state, int f, int g)
 {
-    if (pq_is_full(pq))
-        pq_extend(pq);
+	if (pq_is_full(pq))
+		pq_extend(pq);
 
-    pq->array[pq->n_elems].state = state_copy(state);
-    pq->array[pq->n_elems].f     = f; /* this may be abundant */
-    pq->array[pq->n_elems].g     = g;
-    heapify_up(pq);
-    ++pq->n_elems;
+	pq->array[pq->n_elems].state = state_copy(state);
+	pq->array[pq->n_elems].f     = f; /* this may be abundant */
+	pq->array[pq->n_elems].g     = g;
+	heapify_up(pq);
+	++pq->n_elems;
 }
 
-static void
+	static void
 heapify_down(PQ pq)
 {
-    size_t sentinel = pq->n_elems;
+	size_t sentinel = pq->n_elems;
 
-    for (size_t i = 0;;)
-    {
-        size_t ri, li = pq_left(i);
-        if (li >= sentinel)
-            break;
+	for (size_t i = 0;;)
+	{
+		size_t ri, li = pq_left(i);
+		if (li >= sentinel)
+			break;
 
-        ri = li + 1;
-        if (ri >= sentinel)
-        {
-            if (pq_entry_higher_priority(&pq->array[li], &pq->array[i]))
-                pq_swap_entry(pq, i, li);
-            /* Reached the bottom */
-            break;
-        }
+		ri = li + 1;
+		if (ri >= sentinel)
+		{
+			if (pq_entry_higher_priority(&pq->array[li], &pq->array[i]))
+				pq_swap_entry(pq, i, li);
+			/* Reached the bottom */
+			break;
+		}
 
-        /* NOTE: If p(ri) == p(li), it may be good to go right
-         * since the filling order is left-first */
-        if (pq_entry_higher_priority(&pq->array[li], &pq->array[ri]))
-        {
-            if (!pq_entry_higher_priority(&pq->array[i], &pq->array[li]))
-                break;
+		/* NOTE: If p(ri) == p(li), it may be good to go right
+		 * since the filling order is left-first */
+		if (pq_entry_higher_priority(&pq->array[li], &pq->array[ri]))
+		{
+			if (!pq_entry_higher_priority(&pq->array[i], &pq->array[li]))
+				break;
 
-            pq_swap_entry(pq, i, li);
-            i = li;
-        }
-        else
-        {
-            if (!pq_entry_higher_priority(&pq->array[i], &pq->array[ri]))
-                break;
+			pq_swap_entry(pq, i, li);
+			i = li;
+		}
+		else
+		{
+			if (!pq_entry_higher_priority(&pq->array[i], &pq->array[ri]))
+				break;
 
-            pq_swap_entry(pq, i, ri);
-            i = ri;
-        }
-    }
+			pq_swap_entry(pq, i, ri);
+			i = ri;
+		}
+	}
 }
 
-State
+	State
 pq_pop(PQ pq)
 {
-    State ret_state;
+	State ret_state;
 
-    if (pq->n_elems == 0)
-        return NULL;
+	if (pq->n_elems == 0)
+		return NULL;
 
-    ret_state = pq->array[0].state;
+	ret_state = pq->array[0].state;
 
-    --pq->n_elems;
-    pq->array[0] = pq->array[pq->n_elems];
-    heapify_down(pq);
+	--pq->n_elems;
+	pq->array[0] = pq->array[pq->n_elems];
+	heapify_down(pq);
 
-    return ret_state;
+	return ret_state;
 }
 
-void
+	void
 pq_dump(PQ pq)
 {
-    elog("%s: n_elems=%zu, capa=%zu\n", __func__, pq->n_elems, pq->capa);
-    for (size_t i = 0, cr_required = 1; i < pq->n_elems; i++)
-    {
-        if (i == cr_required)
-        {
-            elog("\n");
-            cr_required = (cr_required << 1) + 1;
-        }
-        elog("%d,", pq->array[i].f);
-        elog("%d ", pq->array[i].g);
-    }
-    elog("\n");
+	elog("%s: n_elems=%zu, capa=%zu\n", __func__, pq->n_elems, pq->capa);
+	for (size_t i = 0, cr_required = 1; i < pq->n_elems; i++)
+	{
+		if (i == cr_required)
+		{
+			elog("\n");
+			cr_required = (cr_required << 1) + 1;
+		}
+		elog("%d,", pq->array[i].f);
+		elog("%d ", pq->array[i].g);
+	}
+	elog("\n");
 }
 
 static HT closed;
 
-bool
+	bool
 distribute_astar(State init_state, Input input[], int input_ends[], int distr_n,
-                 int *cnt_inputs)
+                 int *cnt_inputs, *int min_fvalue)
 {
     int      cnt = 0;
     State    state;
@@ -1126,6 +1126,7 @@ distribute_astar(State init_state, Input input[], int input_ends[], int distr_n,
             break;
     }
 
+	int min_fvalue = INT_MAX;
     *cnt_inputs = cnt;
     if (!solved)
     {
@@ -1141,6 +1142,8 @@ distribute_astar(State init_state, Input input[], int input_ends[], int distr_n,
 
             input[id].init_depth = state_get_depth(state);
             input[id].parent_dir = state->parent_dir;
+			if (min_fvalue > state_get_depth(state) + state_get_hvalue(state))
+				min_fvalue = state_get_depth(state) + state_get_hvalue(state);
         }
 
         printf("distr_n=%d, n_worers=%d, cnt=%d\n", distr_n, N_WORKERS, cnt);
@@ -1407,7 +1410,7 @@ main(int argc, char *argv[])
     signed char *d_h_diff_table;
     int h_diff_table_size = sizeof(signed char) * STATE_N * STATE_N * DIR_N;
 
-    int root_h_value = 0;
+    int min_fvalue = 0;
 
     if (argc < 2)
     {
@@ -1416,13 +1419,12 @@ main(int argc, char *argv[])
     }
 
     load_state_from_file(argv[1], input[0].tiles);
-    root_h_value = calc_hvalue(input[0].tiles);
 
     {
         State init_state = state_init(input[0].tiles, 0);
 
         if (distribute_astar(init_state, input, input_ends, N_INIT_DISTRIBUTION,
-                             &cnt_inputs))
+                             &cnt_inputs, &min_fvalue))
         {
             puts("solution is found by distributor");
             return 0;
@@ -1447,7 +1449,7 @@ main(int argc, char *argv[])
     CUDA_CHECK(cudaMemset(d_plan, 0, plan_size));
     CUDA_CHECK(cudaMemset(d_stat, 0, stat_size));
 
-    for (uchar f_limit = root_h_value;; f_limit += 2)
+    for (uchar f_limit = min_fvalue;; f_limit += 2)
     {
         elog("f=%d\n", (int) f_limit);
         CUDA_CHECK(
