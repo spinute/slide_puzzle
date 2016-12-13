@@ -1126,10 +1126,10 @@ distribute_astar(State init_state, Input input[], int input_ends[], int distr_n,
             break;
     }
 
-	int min_fvalue = INT_MAX;
     *cnt_inputs = cnt;
     if (!solved)
     {
+	    int minf = INT_MAX;
         for (int id = 0; id < cnt; ++id)
         {
             State state = pq_pop(q);
@@ -1142,9 +1142,10 @@ distribute_astar(State init_state, Input input[], int input_ends[], int distr_n,
 
             input[id].init_depth = state_get_depth(state);
             input[id].parent_dir = state->parent_dir;
-			if (min_fvalue > state_get_depth(state) + state_get_hvalue(state))
-				min_fvalue = state_get_depth(state) + state_get_hvalue(state);
+			if (minf > state_get_depth(state) + state_get_hvalue(state))
+				minf = state_get_depth(state) + state_get_hvalue(state);
         }
+	*min_fvalue = minf;
 
         printf("distr_n=%d, n_worers=%d, cnt=%d\n", distr_n, N_WORKERS, cnt);
         for (int id               = 0; id < N_WORKERS; ++id)
