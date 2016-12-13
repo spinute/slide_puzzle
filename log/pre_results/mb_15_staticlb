@@ -1,0 +1,5067 @@
+nohup: ignoring input
+*prob000
+f=35
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35157
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=2, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=37
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35417
+STAT: avarage expanded nodes: 11
+STAT: av=12284, 2av=0, 4av=0, 8av=3, 16av=1, 32av=0, more=0
+input count: 12311
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 37575
+STAT: avarage expanded nodes: 12
+STAT: av=12285, 2av=2, 4av=6, 8av=7, 16av=10, 32av=1, more=0
+input count: 12496
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 51329
+STAT: avarage expanded nodes: 16
+STAT: av=12355, 2av=22, 4av=45, 8av=33, 16av=27, 32av=13, more=1
+input count: 13387
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 148855
+STAT: avarage expanded nodes: 48
+STAT: av=12824, 2av=210, 4av=195, 8av=107, 16av=40, 32av=7, more=4
+input count: 15412
+f=45
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.180000 (  0.187933)
+prob001
+f=32
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35241
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=0, 4av=0, 8av=2, 16av=0, 32av=0, more=0
+input count: 12299
+f=34
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35941
+STAT: avarage expanded nodes: 11
+STAT: av=12289, 2av=1, 4av=4, 8av=2, 16av=2, 32av=1, more=0
+input count: 12366
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 42020
+STAT: avarage expanded nodes: 13
+STAT: av=12303, 2av=6, 4av=19, 8av=17, 16av=14, 32av=6, more=1
+input count: 12838
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 72313
+STAT: avarage expanded nodes: 23
+STAT: av=12570, 2av=60, 4av=80, 8av=78, 16av=35, 32av=9, more=6
+input count: 14299
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 249573
+STAT: avarage expanded nodes: 81
+STAT: av=13549, 2av=370, 4av=247, 8av=88, 16av=33, 32av=12, more=0
+input count: 16400
+f=42
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.230000 (  0.220142)
+prob002
+f=32
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35265
+STAT: avarage expanded nodes: 11
+STAT: av=12285, 2av=1, 4av=2, 8av=1, 16av=0, 32av=0, more=0
+input count: 12297
+f=34
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36606
+STAT: avarage expanded nodes: 11
+STAT: av=12273, 2av=3, 4av=6, 8av=9, 16av=5, 32av=1, more=0
+input count: 12414
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 43674
+STAT: avarage expanded nodes: 14
+STAT: av=12307, 2av=18, 4av=38, 8av=31, 16av=16, 32av=4, more=0
+input count: 12939
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 82393
+STAT: avarage expanded nodes: 26
+STAT: av=12509, 2av=126, 4av=162, 8av=93, 16av=44, 32av=5, more=0
+input count: 14529
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 283313
+STAT: avarage expanded nodes: 92
+STAT: av=13601, 2av=516, 4av=305, 8av=96, 16av=11, 32av=0, more=0
+input count: 16542
+f=42
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.160000 (  0.156656)
+prob003
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35706
+STAT: avarage expanded nodes: 11
+STAT: av=12283, 2av=0, 4av=2, 8av=0, 16av=1, 32av=2, more=0
+input count: 12336
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 41949
+STAT: avarage expanded nodes: 13
+STAT: av=12304, 2av=2, 4av=5, 8av=6, 16av=13, 32av=2, more=4
+input count: 12806
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 100586
+STAT: avarage expanded nodes: 32
+STAT: av=12609, 2av=41, 4av=56, 8av=43, 16av=26, 32av=18, more=13
+input count: 14707
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 555282
+STAT: avarage expanded nodes: 180
+STAT: av=14122, 2av=270, 4av=162, 8av=83, 16av=43, 32av=18, more=9
+input count: 17178
+f=49
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.500000 (  0.500381)
+prob004
+f=29
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35104
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=31
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35352
+STAT: avarage expanded nodes: 11
+STAT: av=12282, 2av=1, 4av=3, 8av=1, 16av=1, 32av=0, more=0
+input count: 12310
+f=33
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 37484
+STAT: avarage expanded nodes: 12
+STAT: av=12280, 2av=0, 4av=10, 8av=13, 16av=5, 32av=2, more=0
+input count: 12487
+f=35
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 47102
+STAT: avarage expanded nodes: 15
+STAT: av=12361, 2av=23, 4av=34, 8av=39, 16av=20, 32av=9, more=1
+input count: 13174
+f=37
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 95272
+STAT: avarage expanded nodes: 31
+STAT: av=12688, 2av=164, 4av=181, 8av=101, 16av=33, 32av=7, more=0
+input count: 14827
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 306476
+STAT: avarage expanded nodes: 99
+STAT: av=13881, 2av=569, 4av=293, 8av=67, 16av=15, 32av=2, more=0
+input count: 16772
+f=41
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.170000 (  0.176253)
+prob005
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35310
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=0, 4av=0, 8av=1, 16av=1, 32av=0, more=0
+input count: 12302
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 37528
+STAT: avarage expanded nodes: 12
+STAT: av=12283, 2av=6, 4av=2, 8av=4, 16av=5, 32av=0, more=2
+input count: 12478
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 56106
+STAT: avarage expanded nodes: 18
+STAT: av=12392, 2av=13, 4av=22, 8av=22, 16av=12, 32av=9, more=8
+input count: 13525
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 190577
+STAT: avarage expanded nodes: 62
+STAT: av=13196, 2av=88, 4av=99, 8av=61, 16av=52, 32av=19, more=10
+input count: 15783
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 992930
+STAT: avarage expanded nodes: 323
+STAT: av=15041, 2av=391, 4av=230, 8av=72, 16av=35, 32av=9, more=5
+input count: 18025
+f=46
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.210000 (  1.209771)
+prob006
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35187
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=0, 4av=1, 8av=1, 16av=0, 32av=0, more=0
+input count: 12293
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35748
+STAT: avarage expanded nodes: 11
+STAT: av=12283, 2av=1, 4av=1, 8av=6, 16av=2, 32av=0, more=0
+input count: 12346
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 39117
+STAT: avarage expanded nodes: 12
+STAT: av=12299, 2av=6, 4av=12, 8av=16, 16av=9, 32av=3, more=1
+input count: 12639
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 59424
+STAT: avarage expanded nodes: 19
+STAT: av=12436, 2av=44, 4av=55, 8av=60, 16av=33, 32av=8, more=3
+input count: 13757
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 181914
+STAT: avarage expanded nodes: 59
+STAT: av=13082, 2av=269, 4av=255, 8av=107, 16av=38, 32av=4, more=2
+input count: 15839
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 941800
+STAT: avarage expanded nodes: 306
+STAT: av=14908, 2av=618, 4av=247, 8av=55, 16av=9, 32av=2, more=0
+input count: 17671
+f=50
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.610000 (  0.599962)
+prob007
+f=37
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36573
+STAT: avarage expanded nodes: 11
+STAT: av=12278, 2av=3, 4av=1, 8av=0, 16av=1, 32av=5, more=0
+input count: 12404
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 57608
+STAT: avarage expanded nodes: 18
+STAT: av=12346, 2av=3, 4av=9, 8av=16, 16av=6, 32av=14, more=10
+input count: 13561
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 216324
+STAT: avarage expanded nodes: 70
+STAT: av=13252, 2av=91, 4av=83, 8av=55, 16av=39, 32av=24, more=17
+input count: 15915
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1216467
+STAT: avarage expanded nodes: 395
+STAT: av=15241, 2av=338, 4av=186, 8av=94, 16av=34, 32av=14, more=8
+input count: 18246
+f=45
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.760000 (  0.761235)
+prob008
+f=34
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35434
+STAT: avarage expanded nodes: 11
+STAT: av=12284, 2av=0, 4av=1, 8av=2, 16av=1, 32av=0, more=0
+input count: 12312
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 37759
+STAT: avarage expanded nodes: 12
+STAT: av=12296, 2av=0, 4av=3, 8av=5, 16av=5, 32av=1, more=2
+input count: 12510
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 58159
+STAT: avarage expanded nodes: 18
+STAT: av=12409, 2av=17, 4av=20, 8av=28, 16av=13, 32av=12, more=11
+input count: 13683
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 175007
+STAT: avarage expanded nodes: 56
+STAT: av=13300, 2av=109, 4av=129, 8av=68, 16av=44, 32av=24, more=9
+input count: 15908
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 806503
+STAT: avarage expanded nodes: 262
+STAT: av=15114, 2av=456, 4av=223, 8av=76, 16av=24, 32av=11, more=4
+input count: 18109
+f=44
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.460000 (  0.458514)
+prob009
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35143
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=1, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35632
+STAT: avarage expanded nodes: 11
+STAT: av=12284, 2av=1, 4av=1, 8av=1, 16av=0, 32av=0, more=1
+input count: 12328
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 42283
+STAT: avarage expanded nodes: 13
+STAT: av=12306, 2av=1, 4av=1, 8av=7, 16av=5, 32av=2, more=6
+input count: 12831
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 122685
+STAT: avarage expanded nodes: 39
+STAT: av=12697, 2av=22, 4av=32, 8av=27, 16av=23, 32av=13, more=17
+input count: 14935
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 850243
+STAT: avarage expanded nodes: 276
+STAT: av=14528, 2av=170, 4av=91, 8av=60, 16av=47, 32av=26, more=13
+input count: 17611
+f=49
+call idas_kernel(block=96, thread=32)
+*distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.810000 (  0.804147)
+prob010
+f=34
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35281
+STAT: avarage expanded nodes: 11
+STAT: av=12285, 2av=2, 4av=0, 8av=0, 16av=1, 32av=0, more=0
+input count: 12300
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 38088
+STAT: avarage expanded nodes: 12
+STAT: av=12283, 2av=2, 4av=2, 8av=5, 16av=4, 32av=1, more=3
+input count: 12521
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 60170
+STAT: avarage expanded nodes: 19
+STAT: av=12412, 2av=11, 4av=27, 8av=30, 16av=19, 32av=17, more=5
+input count: 13724
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 200225
+STAT: avarage expanded nodes: 65
+STAT: av=13283, 2av=170, 4av=138, 8av=79, 16av=38, 32av=7, more=9
+input count: 16002
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 994152
+STAT: avarage expanded nodes: 323
+STAT: av=15263, 2av=434, 4av=212, 8av=53, 16av=26, 32av=10, more=4
+input count: 18213
+f=44
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.710000 (  0.706422)
+prob011
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35680
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=0, 4av=0, 8av=0, 16av=1, 32av=0, more=1
+input count: 12333
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 45845
+STAT: avarage expanded nodes: 14
+STAT: av=12317, 2av=0, 4av=1, 8av=3, 16av=3, 32av=3, more=6
+input count: 13038
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 168478
+STAT: avarage expanded nodes: 54
+STAT: av=12925, 2av=17, 4av=26, 8av=26, 16av=19, 32av=12, more=13
+input count: 15384
+f=53
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.480000 (  0.481126)
+prob012
+f=35
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35187
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=0, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+input count: 12294
+f=37
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35671
+STAT: avarage expanded nodes: 11
+STAT: av=12289, 2av=0, 4av=0, 8av=4, 16av=0, 32av=1, more=0
+input count: 12339
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 39330
+STAT: avarage expanded nodes: 12
+STAT: av=12308, 2av=4, 4av=5, 8av=11, 16av=4, 32av=6, more=1
+input count: 12650
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 61541
+STAT: avarage expanded nodes: 20
+STAT: av=12504, 2av=32, 4av=42, 8av=31, 16av=18, 32av=16, more=7
+input count: 13831
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 210277
+STAT: avarage expanded nodes: 68
+STAT: av=13339, 2av=197, 4av=148, 8av=79, 16av=43, 32av=20, more=5
+input count: 16024
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1083679
+STAT: avarage expanded nodes: 352
+STAT: av=15211, 2av=492, 4av=214, 8av=73, 16av=25, 32av=7, more=2
+input count: 18082
+f=47
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.520000 (  0.513933)
+prob013
+f=34
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35165
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=2, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35638
+STAT: avarage expanded nodes: 11
+STAT: av=12280, 2av=0, 4av=4, 8av=2, 16av=1, 32av=1, more=0
+input count: 12331
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 40407
+STAT: avarage expanded nodes: 13
+STAT: av=12286, 2av=3, 4av=16, 8av=8, 16av=8, 32av=9, more=1
+input count: 12700
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 74914
+STAT: avarage expanded nodes: 24
+STAT: av=12457, 2av=62, 4av=54, 8av=73, 16av=35, 32av=13, more=6
+input count: 14198
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 287945
+STAT: avarage expanded nodes: 93
+STAT: av=13488, 2av=344, 4av=217, 8av=98, 16av=35, 32av=11, more=5
+input count: 16507
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1513183
+STAT: avarage expanded nodes: 492
+STAT: av=15590, 2av=648, 4av=213, 8av=38, 16av=16, 32av=1, more=1
+input count: 18370
+f=46
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.440000 (  0.442582)
+prob014
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35506
+STAT: avarage expanded nodes: 11
+STAT: av=12283, 2av=1, 4av=1, 8av=0, 16av=3, 32av=0, more=0
+input count: 12322
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 40174
+STAT: avarage expanded nodes: 13
+STAT: av=12285, 2av=4, 4av=9, 8av=16, 16av=3, 32av=2, more=3
+input count: 12678
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 70765
+STAT: avarage expanded nodes: 23
+STAT: av=12523, 2av=34, 4av=46, 8av=31, 16av=26, 32av=10, more=8
+input count: 14084
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 292607
+STAT: avarage expanded nodes: 95
+STAT: av=13607, 2av=195, 4av=134, 8av=93, 16av=34, 32av=10, more=11
+input count: 16448
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1667882
+STAT: avarage expanded nodes: 542
+STAT: av=15721, 2av=427, 4av=177, 8av=82, 16av=29, 32av=9, more=3
+input count: 18528
+f=46
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.130000 (  1.129333)
+prob015
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35254
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=1, 4av=0, 8av=0, 16av=1, 32av=0, more=0
+input count: 12298
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36459
+STAT: avarage expanded nodes: 11
+STAT: av=12290, 2av=1, 4av=1, 8av=1, 16av=1, 32av=3, more=1
+input count: 12407
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 43945
+STAT: avarage expanded nodes: 14
+STAT: av=12351, 2av=10, 4av=12, 8av=15, 16av=9, 32av=7, more=3
+input count: 12960
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 99946
+STAT: avarage expanded nodes: 32
+STAT: av=12750, 2av=51, 4av=51, 8av=51, 16av=32, 32av=9, more=16
+input count: 14803
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 475062
+STAT: avarage expanded nodes: 154
+STAT: av=14227, 2av=259, 4av=154, 8av=96, 16av=50, 32av=10, more=7
+input count: 17179
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 2897453
+STAT: avarage expanded nodes: 943
+STAT: av=16369, 2av=514, 4av=204, 8av=64, 16av=19, 32av=8, more=1
+input count: 19076
+f=50
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.520000 (  1.518746)
+prob016
+f=31
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35140
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=1, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+input count: 12290
+f=33
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35664
+STAT: avarage expanded nodes: 11
+STAT: av=12283, 2av=1, 4av=0, 8av=3, 16av=3, 32av=0, more=0
+input count: 12335
+f=35
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 38176
+STAT: avarage expanded nodes: 12
+STAT: av=12300, 2av=4, 4av=8, 8av=12, 16av=7, 32av=4, more=0
+input count: 12553
+f=37
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 55070
+STAT: avarage expanded nodes: 17
+STAT: av=12398, 2av=21, 4av=51, 8av=45, 16av=21, 32av=13, more=4
+input count: 13592
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 150432
+STAT: avarage expanded nodes: 48
+STAT: av=13039, 2av=221, 4av=190, 8av=85, 16av=36, 32av=19, more=2
+input count: 15630
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 644671
+STAT: avarage expanded nodes: 209
+STAT: av=14749, 2av=536, 4av=252, 8av=68, 16av=20, 32av=5, more=0
+input count: 17595
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 3237160
+STAT: avarage expanded nodes: 1053
+STAT: av=16867, 2av=568, 4av=132, 8av=23, 16av=5, 32av=0, more=0
+input count: 18858
+f=45
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.510000 (  0.500883)
+prob017
+f=30
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35181
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=1, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+input count: 12292
+f=32
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36008
+STAT: avarage expanded nodes: 11
+STAT: av=12281, 2av=0, 4av=3, 8av=5, 16av=3, 32av=0, more=0
+input count: 12365
+f=34
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 40072
+STAT: avarage expanded nodes: 13
+STAT: av=12305, 2av=7, 4av=24, 8av=16, 16av=10, 32av=2, more=1
+input count: 12694
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 62586
+STAT: avarage expanded nodes: 20
+STAT: av=12433, 2av=70, 4av=85, 8av=64, 16av=30, 32av=11, more=1
+input count: 13909
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 191217
+STAT: avarage expanded nodes: 62
+STAT: av=13185, 2av=317, 4av=262, 8av=108, 16av=30, 32av=7, more=0
+input count: 15937
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 834608
+STAT: avarage expanded nodes: 271
+STAT: av=14951, 2av=718, 4av=215, 8av=45, 16av=8, 32av=0, more=0
+input count: 17728
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 3929201
+STAT: avarage expanded nodes: 1279
+STAT: av=17037, 2av=601, 4av=80, 8av=9, 16av=1, 32av=0, more=0
+input count: 18776
+f=44
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.540000 (  0.537036)
+prob018
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35250
+STAT: avarage expanded nodes: 11
+STAT: av=12285, 2av=1, 4av=0, 8av=2, 16av=0, 32av=0, more=0
+input count: 12298
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 37254
+STAT: avarage expanded nodes: 12
+STAT: av=12279, 2av=0, 4av=1, 8av=8, 16av=7, 32av=3, more=0
+input count: 12458
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 48408
+STAT: avarage expanded nodes: 15
+STAT: av=12352, 2av=14, 4av=26, 8av=34, 16av=20, 32av=7, more=5
+input count: 13234
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 124305
+STAT: avarage expanded nodes: 40
+STAT: av=12846, 2av=115, 4av=127, 8av=84, 16av=37, 32av=19, more=6
+input count: 15163
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 603436
+STAT: avarage expanded nodes: 196
+STAT: av=14296, 2av=504, 4av=234, 8av=91, 16av=28, 32av=10, more=0
+input count: 17341
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 3503252
+STAT: avarage expanded nodes: 1140
+STAT: av=16488, 2av=646, 4av=171, 8av=26, 16av=8, 32av=2, more=0
+input count: 18813
+f=51
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.630000 (  0.628649)
+prob019
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35400
+STAT: avarage expanded nodes: 11
+STAT: av=12285, 2av=0, 4av=2, 8av=0, 16av=0, 32av=1, more=0
+input count: 12314
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 39729
+STAT: avarage expanded nodes: 12
+STAT: av=12296, 2av=3, 4av=3, 8av=4, 16av=4, 32av=2, more=2
+input count: 12662
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 87239
+STAT: avarage expanded nodes: 28
+STAT: av=12558, 2av=11, 4av=35, 8av=19, 16av=16, 32av=9, more=14
+input count: 14403
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 454865
+STAT: avarage expanded nodes: 148
+STAT: av=14054, 2av=109, 4av=100, 8av=70, 16av=33, 32av=21, more=16
+input count: 17000
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 3149237
+STAT: avarage expanded nodes: 1025
+STAT: av=16288, 2av=392, 4av=184, 8av=74, 16av=39, 32av=20, more=3
+input count: 19366
+f=53
+call idas_kernel(block=96, thread=32)
+*distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   2.390000 (  2.387669)
+prob020
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35165
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=0, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+input count: 12292
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35602
+STAT: avarage expanded nodes: 11
+STAT: av=12284, 2av=1, 4av=3, 8av=2, 16av=1, 32av=1, more=0
+input count: 12329
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 38207
+STAT: avarage expanded nodes: 12
+STAT: av=12301, 2av=5, 4av=3, 8av=9, 16av=8, 32av=2, more=1
+input count: 12548
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 53935
+STAT: avarage expanded nodes: 17
+STAT: av=12404, 2av=19, 4av=48, 8av=38, 16av=26, 32av=8, more=5
+input count: 13518
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 150702
+STAT: avarage expanded nodes: 49
+STAT: av=13002, 2av=220, 4av=162, 8av=86, 16av=32, 32av=9, more=7
+input count: 15574
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 758959
+STAT: avarage expanded nodes: 247
+STAT: av=14771, 2av=495, 4av=206, 8av=61, 16av=27, 32av=12, more=2
+input count: 17691
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 4247529
+STAT: avarage expanded nodes: 1382
+STAT: av=16927, 2av=575, 4av=128, 8av=52, 16av=8, 32av=1, more=0
+input count: 19140
+f=50
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.240000 (  1.243932)
+prob021
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35878
+STAT: avarage expanded nodes: 11
+STAT: av=12284, 2av=1, 4av=0, 8av=1, 16av=1, 32av=0, more=1
+input count: 12352
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 47251
+STAT: avarage expanded nodes: 15
+STAT: av=12327, 2av=1, 4av=4, 8av=5, 16av=7, 32av=3, more=5
+input count: 13099
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 141987
+STAT: avarage expanded nodes: 46
+STAT: av=12971, 2av=25, 4av=29, 8av=25, 16av=16, 32av=18, more=15
+input count: 15278
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 835874
+STAT: avarage expanded nodes: 272
+STAT: av=14807, 2av=183, 4av=135, 8av=92, 16av=29, 32av=23, more=9
+input count: 17859
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 4703823
+STAT: avarage expanded nodes: 1531
+STAT: av=17057, 2av=532, 4av=161, 8av=68, 16av=29, 32av=9, more=3
+input count: 19974
+f=46
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   5.640000 (  5.641444)
+prob022
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35192
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=0, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+input count: 12293
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36167
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=0, 4av=0, 8av=2, 16av=1, 32av=2, more=1
+input count: 12380
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 45754
+STAT: avarage expanded nodes: 14
+STAT: av=12333, 2av=3, 4av=3, 8av=14, 16av=14, 32av=6, more=7
+input count: 13063
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 116463
+STAT: avarage expanded nodes: 37
+STAT: av=12817, 2av=70, 4av=65, 8av=53, 16av=23, 32av=21, more=14
+input count: 15095
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 642596
+STAT: avarage expanded nodes: 209
+STAT: av=14546, 2av=246, 4av=155, 8av=75, 16av=50, 32av=17, more=6
+input count: 17539
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 4341465
+STAT: avarage expanded nodes: 1413
+STAT: av=16748, 2av=504, 4av=187, 8av=72, 16av=21, 32av=6, more=1
+input count: 19497
+f=53
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.450000 (  1.441693)
+prob023
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35153
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35394
+STAT: avarage expanded nodes: 11
+STAT: av=12281, 2av=3, 4av=2, 8av=2, 16av=0, 32av=0, more=0
+input count: 12306
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 37171
+STAT: avarage expanded nodes: 12
+STAT: av=12279, 2av=3, 4av=8, 8av=8, 16av=7, 32av=1, more=0
+input count: 12457
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 49404
+STAT: avarage expanded nodes: 16
+STAT: av=12342, 2av=28, 4av=28, 8av=23, 16av=20, 32av=12, more=4
+input count: 13251
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 142040
+STAT: avarage expanded nodes: 46
+STAT: av=12813, 2av=131, 4av=157, 8av=86, 16av=44, 32av=14, more=6
+input count: 15296
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 748008
+STAT: avarage expanded nodes: 243
+STAT: av=14432, 2av=497, 4av=248, 8av=81, 16av=27, 32av=11, more=0
+input count: 17481
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 4518802
+STAT: avarage expanded nodes: 1470
+STAT: av=16640, 2av=637, 4av=167, 8av=31, 16av=6, 32av=0, more=0
+input count: 19005
+f=53
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.940000 (  0.935566)
+prob024
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35150
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=3, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12289
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35375
+STAT: avarage expanded nodes: 11
+STAT: av=12284, 2av=2, 4av=0, 8av=2, 16av=1, 32av=0, more=0
+input count: 12308
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 37556
+STAT: avarage expanded nodes: 12
+STAT: av=12280, 2av=2, 4av=8, 8av=8, 16av=8, 32av=2, more=0
+input count: 12489
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 52882
+STAT: avarage expanded nodes: 17
+STAT: av=12341, 2av=36, 4av=37, 8av=41, 16av=22, 32av=8, more=4
+input count: 13414
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 161031
+STAT: avarage expanded nodes: 52
+STAT: av=12893, 2av=213, 4av=163, 8av=93, 16av=36, 32av=12, more=4
+input count: 15496
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 887877
+STAT: avarage expanded nodes: 289
+STAT: av=14713, 2av=498, 4av=189, 8av=52, 16av=27, 32av=15, more=2
+input count: 17557
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 5493487
+STAT: avarage expanded nodes: 1788
+STAT: av=16846, 2av=521, 4av=139, 8av=38, 16av=10, 32av=3, more=0
+input count: 18954
+f=50
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.250000 (  1.250198)
+prob025
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35112
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35137
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=2, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35449
+STAT: avarage expanded nodes: 11
+STAT: av=12279, 2av=4, 4av=2, 8av=1, 16av=2, 32av=0, more=0
+input count: 12311
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 37750
+STAT: avarage expanded nodes: 12
+STAT: av=12278, 2av=8, 4av=4, 8av=12, 16av=5, 32av=4, more=0
+input count: 12504
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 53692
+STAT: avarage expanded nodes: 17
+STAT: av=12349, 2av=38, 4av=39, 8av=42, 16av=21, 32av=9, more=6
+input count: 13484
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 166459
+STAT: avarage expanded nodes: 54
+STAT: av=12997, 2av=197, 4av=139, 8av=91, 16av=37, 32av=15, more=8
+input count: 15576
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 909735
+STAT: avarage expanded nodes: 296
+STAT: av=14769, 2av=483, 4av=215, 8av=73, 16av=26, 32av=9, more=1
+input count: 17647
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 5662022
+STAT: avarage expanded nodes: 1843
+STAT: av=16915, 2av=528, 4av=154, 8av=41, 16av=8, 32av=1, more=0
+input count: 19100
+f=52
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.000000 (  1.009384)
+prob026
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35135
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=1, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35389
+STAT: avarage expanded nodes: 11
+STAT: av=12282, 2av=2, 4av=3, 8av=0, 16av=1, 32av=0, more=0
+input count: 12306
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 37697
+STAT: avarage expanded nodes: 12
+STAT: av=12280, 2av=3, 4av=8, 8av=8, 16av=3, 32av=3, more=1
+input count: 12496
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 54778
+STAT: avarage expanded nodes: 17
+STAT: av=12368, 2av=18, 4av=47, 8av=27, 16av=17, 32av=14, more=5
+input count: 13523
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 177909
+STAT: avarage expanded nodes: 57
+STAT: av=13065, 2av=164, 4av=152, 8av=71, 16av=44, 32av=21, more=6
+input count: 15734
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1030903
+STAT: avarage expanded nodes: 335
+STAT: av=14962, 2av=459, 4av=186, 8av=82, 16av=34, 32av=9, more=2
+input count: 17858
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 6452502
+STAT: avarage expanded nodes: 2100
+STAT: av=17117, 2av=547, 4av=145, 8av=42, 16av=3, 32av=4, more=0
+input count: 19285
+f=52
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.590000 (  1.593786)
+prob027
+f=24
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35128
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=26
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35345
+STAT: avarage expanded nodes: 11
+STAT: av=12280, 2av=4, 4av=3, 8av=1, 16av=0, 32av=0, more=0
+input count: 12301
+f=28
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36144
+STAT: avarage expanded nodes: 11
+STAT: av=12278, 2av=6, 4av=9, 8av=4, 16av=4, 32av=0, more=0
+input count: 12375
+f=30
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 39005
+STAT: avarage expanded nodes: 12
+STAT: av=12304, 2av=16, 4av=17, 8av=31, 16av=7, 32av=0, more=0
+input count: 12639
+f=32
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 53283
+STAT: avarage expanded nodes: 17
+STAT: av=12380, 2av=53, 4av=117, 8av=69, 16av=17, 32av=3, more=0
+input count: 13499
+f=34
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 110044
+STAT: avarage expanded nodes: 35
+STAT: av=12831, 2av=301, 4av=247, 8av=95, 16av=19, 32av=6, more=0
+input count: 15221
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 338708
+STAT: avarage expanded nodes: 110
+STAT: av=14248, 2av=675, 4av=250, 8av=39, 16av=8, 32av=0, more=1
+input count: 16898
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1265134
+STAT: avarage expanded nodes: 411
+STAT: av=16138, 2av=666, 4av=82, 8av=7, 16av=4, 32av=0, more=1
+input count: 17963
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 5233774
+STAT: avarage expanded nodes: 1703
+STAT: av=17514, 2av=411, 4av=29, 8av=4, 16av=4, 32av=0, more=1
+input count: 18566
+f=42
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.590000 (  0.581977)
+prob028
+f=35
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35303
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=0, 4av=0, 8av=0, 16av=0, 32av=1, more=0
+input count: 12304
+f=37
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36856
+STAT: avarage expanded nodes: 11
+STAT: av=12296, 2av=0, 4av=0, 8av=5, 16av=0, 32av=1, more=2
+input count: 12446
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 47668
+STAT: avarage expanded nodes: 15
+STAT: av=12395, 2av=4, 4av=9, 8av=14, 16av=7, 32av=9, more=8
+input count: 13201
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 111767
+STAT: avarage expanded nodes: 36
+STAT: av=12929, 2av=74, 4av=72, 8av=52, 16av=42, 32av=23, more=9
+input count: 15113
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 437452
+STAT: avarage expanded nodes: 142
+STAT: av=14415, 2av=345, 4av=202, 8av=95, 16av=38, 32av=16, more=2
+input count: 17365
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 2094909
+STAT: avarage expanded nodes: 681
+STAT: av=16481, 2av=631, 4av=180, 8av=56, 16av=16, 32av=1, more=0
+input count: 19088
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 11052715
+STAT: avarage expanded nodes: 3597
+STAT: av=18409, 2av=578, 4av=87, 8av=12, 16av=2, 32av=0, more=0
+input count: 20107
+f=49
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.630000 (  1.637733)
+prob029
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35808
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=0, 4av=0, 8av=0, 16av=1, 32av=1, more=1
+input count: 12345
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 43138
+STAT: avarage expanded nodes: 14
+STAT: av=12324, 2av=2, 4av=1, 8av=7, 16av=4, 32av=2, more=5
+input count: 12867
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 113941
+STAT: avarage expanded nodes: 37
+STAT: av=12742, 2av=21, 4av=32, 8av=22, 16av=21, 32av=14, more=15
+input count: 14871
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 772523
+STAT: avarage expanded nodes: 251
+STAT: av=14438, 2av=168, 4av=133, 8av=67, 16av=41, 32av=12, more=12
+input count: 17538
+f=53
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 5831949
+STAT: avarage expanded nodes: 1898
+STAT: av=16881, 2av=375, 4av=168, 8av=66, 16av=31, 32av=10, more=7
+input count: 19834
+f=55
+call idas_kernel(block=96, thread=32)
+*distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   4.420000 (  4.411219)
+prob030
+f=35
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35139
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=1, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=37
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35430
+STAT: avarage expanded nodes: 11
+STAT: av=12285, 2av=2, 4av=0, 8av=0, 16av=0, 32av=1, more=0
+input count: 12310
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 39237
+STAT: avarage expanded nodes: 12
+STAT: av=12298, 2av=1, 4av=2, 8av=1, 16av=2, 32av=2, more=4
+input count: 12621
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 75444
+STAT: avarage expanded nodes: 24
+STAT: av=12545, 2av=10, 4av=15, 8av=14, 16av=10, 32av=16, more=11
+input count: 14180
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 311184
+STAT: avarage expanded nodes: 101
+STAT: av=13887, 2av=92, 4av=93, 8av=35, 16av=33, 32av=27, more=13
+input count: 16711
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1887494
+STAT: avarage expanded nodes: 614
+STAT: av=16091, 2av=323, 4av=156, 8av=86, 16av=34, 32av=13, more=8
+input count: 19121
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 11209864
+STAT: avarage expanded nodes: 3649
+STAT: av=18353, 2av=527, 4av=165, 8av=45, 16av=21, 32av=10, more=0
+input count: 20923
+f=49
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.010000   4.640000 (  4.625315)
+prob031
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35141
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35729
+STAT: avarage expanded nodes: 11
+STAT: av=12281, 2av=1, 4av=1, 8av=3, 16av=1, 32av=1, more=0
+input count: 12336
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 45276
+STAT: avarage expanded nodes: 14
+STAT: av=12295, 2av=3, 4av=6, 8av=7, 16av=16, 32av=1, more=8
+input count: 13002
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 154773
+STAT: avarage expanded nodes: 50
+STAT: av=12762, 2av=63, 4av=47, 8av=49, 16av=42, 32av=23, more=16
+input count: 15222
+f=54
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1156002
+STAT: avarage expanded nodes: 376
+STAT: av=14595, 2av=290, 4av=170, 8av=105, 16av=38, 32av=18, more=6
+input count: 17715
+f=56
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.900000 (  0.902240)
+prob032
+f=33
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35139
+STAT: avarage expanded nodes: 11
+STAT: av=12289, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12289
+f=35
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35173
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=0, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+input count: 12291
+f=37
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36072
+STAT: avarage expanded nodes: 11
+STAT: av=12280, 2av=2, 4av=3, 8av=2, 16av=3, 32av=0, more=1
+input count: 12365
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 42675
+STAT: avarage expanded nodes: 13
+STAT: av=12310, 2av=6, 4av=9, 8av=18, 16av=14, 32av=5, more=3
+input count: 12888
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 93452
+STAT: avarage expanded nodes: 30
+STAT: av=12606, 2av=86, 4av=67, 8av=70, 16av=39, 32av=10, more=10
+input count: 14651
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 369764
+STAT: avarage expanded nodes: 120
+STAT: av=13893, 2av=390, 4av=226, 8av=97, 16av=32, 32av=10, more=3
+input count: 16979
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1941152
+STAT: avarage expanded nodes: 631
+STAT: av=16092, 2av=629, 4av=204, 8av=40, 16av=12, 32av=2, more=0
+input count: 18740
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 10559811
+STAT: avarage expanded nodes: 3437
+STAT: av=18091, 2av=564, 4av=81, 8av=2, 16av=2, 32av=0, more=0
+input count: 19772
+f=49
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.200000 (  1.190626)
+prob033
+f=35
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35118
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=37
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35375
+STAT: avarage expanded nodes: 11
+STAT: av=12281, 2av=3, 4av=1, 8av=3, 16av=0, 32av=0, more=0
+input count: 12304
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 38465
+STAT: avarage expanded nodes: 12
+STAT: av=12281, 2av=1, 4av=2, 8av=6, 16av=7, 32av=7, more=0
+input count: 12556
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 67997
+STAT: avarage expanded nodes: 22
+STAT: av=12395, 2av=34, 4av=33, 8av=34, 16av=35, 32av=18, more=7
+input count: 13923
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 300550
+STAT: avarage expanded nodes: 97
+STAT: av=13323, 2av=248, 4av=183, 8av=101, 16av=49, 32av=14, more=5
+input count: 16238
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1759760
+STAT: avarage expanded nodes: 572
+STAT: av=15349, 2av=592, 4av=207, 8av=68, 16av=19, 32av=2, more=1
+input count: 18162
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 10458327
+STAT: avarage expanded nodes: 3404
+STAT: av=17411, 2av=633, 4av=100, 8av=15, 16av=3, 32av=0, more=0
+input count: 19381
+f=49
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.330000 (  1.334234)
+prob034
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35162
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=0, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+input count: 12292
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36698
+STAT: avarage expanded nodes: 11
+STAT: av=12278, 2av=1, 4av=0, 8av=9, 16av=1, 32av=3, more=0
+input count: 12420
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 52501
+STAT: avarage expanded nodes: 17
+STAT: av=12342, 2av=7, 4av=18, 8av=17, 16av=14, 32av=16, more=6
+input count: 13363
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 209411
+STAT: avarage expanded nodes: 68
+STAT: av=13024, 2av=95, 4av=93, 8av=72, 16av=48, 32av=18, more=13
+input count: 15742
+f=53
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1566810
+STAT: avarage expanded nodes: 510
+STAT: av=14999, 2av=380, 4av=229, 8av=82, 16av=36, 32av=14, more=2
+input count: 18100
+f=55
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 12054132
+STAT: avarage expanded nodes: 3923
+STAT: av=17269, 2av=585, 4av=179, 8av=59, 16av=7, 32av=1, more=0
+input count: 19800
+f=57
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   2.750000 (  2.740634)
+prob035
+f=31
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35149
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=1, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+input count: 12291
+f=33
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35358
+STAT: avarage expanded nodes: 11
+STAT: av=12285, 2av=1, 4av=3, 8av=2, 16av=0, 32av=0, more=0
+input count: 12308
+f=35
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36384
+STAT: avarage expanded nodes: 11
+STAT: av=12290, 2av=3, 4av=3, 8av=6, 16av=6, 32av=0, more=0
+input count: 12405
+f=37
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 41802
+STAT: avarage expanded nodes: 13
+STAT: av=12328, 2av=16, 4av=20, 8av=19, 16av=16, 32av=5, more=1
+input count: 12843
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 70085
+STAT: avarage expanded nodes: 22
+STAT: av=12532, 2av=88, 4av=102, 8av=69, 16av=44, 32av=6, more=2
+input count: 14234
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 202427
+STAT: avarage expanded nodes: 65
+STAT: av=13433, 2av=398, 4av=288, 8av=86, 16av=26, 32av=2, more=1
+input count: 16232
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 830610
+STAT: avarage expanded nodes: 270
+STAT: av=15307, 2av=673, 4av=207, 8av=40, 16av=4, 32av=1, more=0
+input count: 17875
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 4002210
+STAT: avarage expanded nodes: 1302
+STAT: av=17252, 2av=535, 4av=78, 8av=6, 16av=4, 32av=0, more=0
+input count: 18818
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 19512454
+STAT: avarage expanded nodes: 6351
+STAT: av=18462, 2av=318, 4av=34, 8av=4, 16av=0, 32av=0, more=0
+input count: 19304
+f=49
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.280000 (  1.280887)
+prob036
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35504
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=0, 4av=0, 8av=0, 16av=3, 32av=0, more=0
+input count: 12321
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 39531
+STAT: avarage expanded nodes: 12
+STAT: av=12301, 2av=5, 4av=2, 8av=2, 16av=5, 32av=2, more=4
+input count: 12652
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 74930
+STAT: avarage expanded nodes: 24
+STAT: av=12539, 2av=16, 4av=26, 8av=23, 16av=21, 32av=18, more=9
+input count: 14186
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 322240
+STAT: avarage expanded nodes: 104
+STAT: av=13741, 2av=154, 4av=127, 8av=93, 16av=43, 32av=22, more=6
+input count: 16634
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 2042272
+STAT: avarage expanded nodes: 664
+STAT: av=15807, 2av=467, 4av=244, 8av=81, 16av=29, 32av=3, more=3
+input count: 18796
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 13065458
+STAT: avarage expanded nodes: 4253
+STAT: av=17974, 2av=666, 4av=125, 8av=23, 16av=7, 32av=1, more=0
+input count: 20218
+f=52
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   2.660000 (  2.667070)
+prob037
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35341
+STAT: avarage expanded nodes: 11
+STAT: av=12285, 2av=1, 4av=1, 8av=1, 16av=1, 32av=0, more=0
+input count: 12307
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 38164
+STAT: avarage expanded nodes: 12
+STAT: av=12288, 2av=1, 4av=5, 8av=5, 16av=3, 32av=3, more=2
+input count: 12533
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 59866
+STAT: avarage expanded nodes: 19
+STAT: av=12440, 2av=14, 4av=22, 8av=17, 16av=13, 32av=17, more=10
+input count: 13727
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 243144
+STAT: avarage expanded nodes: 79
+STAT: av=13333, 2av=124, 4av=124, 8av=74, 16av=50, 32av=13, more=9
+input count: 16098
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1577797
+STAT: avarage expanded nodes: 513
+STAT: av=15358, 2av=421, 4av=191, 8av=83, 16av=29, 32av=15, more=1
+input count: 18317
+f=54
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 11500061
+STAT: avarage expanded nodes: 3743
+STAT: av=17552, 2av=527, 4av=173, 8av=52, 16av=9, 32av=4, more=0
+input count: 19922
+f=56
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   2.900000 (  2.880315)
+prob038
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35134
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=0, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+input count: 12290
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35478
+STAT: avarage expanded nodes: 11
+STAT: av=12280, 2av=4, 4av=2, 8av=3, 16av=1, 32av=0, more=0
+input count: 12319
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 37322
+STAT: avarage expanded nodes: 12
+STAT: av=12280, 2av=10, 4av=15, 8av=9, 16av=3, 32av=2, more=0
+input count: 12473
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 47679
+STAT: avarage expanded nodes: 15
+STAT: av=12332, 2av=26, 4av=51, 8av=41, 16av=17, 32av=4, more=2
+input count: 13188
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 108683
+STAT: avarage expanded nodes: 35
+STAT: av=12679, 2av=209, 4av=160, 8av=94, 16av=33, 32av=11, more=2
+input count: 15022
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 488590
+STAT: avarage expanded nodes: 159
+STAT: av=14142, 2av=547, 4av=237, 8av=67, 16av=18, 32av=11, more=0
+input count: 17081
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 2706042
+STAT: avarage expanded nodes: 880
+STAT: av=16269, 2av=640, 4av=113, 8av=50, 16av=9, 32av=0, more=0
+input count: 18610
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 16113573
+STAT: avarage expanded nodes: 5245
+STAT: av=18061, 2av=476, 4av=59, 8av=12, 16av=2, 32av=0, more=0
+input count: 19498
+f=54
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.450000 (  1.450420)
+prob039
+f=35
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35168
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=0, 4av=2, 8av=0, 16av=0, 32av=0, more=0
+input count: 12292
+f=37
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35715
+STAT: avarage expanded nodes: 11
+STAT: av=12285, 2av=0, 4av=2, 8av=1, 16av=4, 32av=0, more=0
+input count: 12341
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 39959
+STAT: avarage expanded nodes: 13
+STAT: av=12294, 2av=6, 4av=15, 8av=13, 16av=6, 32av=6, more=1
+input count: 12674
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 66185
+STAT: avarage expanded nodes: 21
+STAT: av=12466, 2av=40, 4av=75, 8av=47, 16av=30, 32av=11, more=5
+input count: 14000
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 210303
+STAT: avarage expanded nodes: 68
+STAT: av=13371, 2av=276, 4av=211, 8av=94, 16av=31, 32av=16, more=1
+input count: 16176
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1001664
+STAT: avarage expanded nodes: 326
+STAT: av=15282, 2av=591, 4av=236, 8av=52, 16av=11, 32av=1, more=3
+input count: 18090
+f=47
+call idas_kernel(block=96, thread=32)
+*distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.480000 (  0.484785)
+prob040
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35109
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35823
+STAT: avarage expanded nodes: 11
+STAT: av=12280, 2av=3, 4av=1, 8av=2, 16av=1, 32av=0, more=1
+input count: 12346
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 42889
+STAT: avarage expanded nodes: 13
+STAT: av=12300, 2av=3, 4av=8, 8av=14, 16av=10, 32av=7, more=4
+input count: 12881
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 95850
+STAT: avarage expanded nodes: 31
+STAT: av=12663, 2av=46, 4av=55, 8av=61, 16av=30, 32av=16, more=10
+input count: 14655
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 451025
+STAT: avarage expanded nodes: 146
+STAT: av=14086, 2av=243, 4av=180, 8av=88, 16av=44, 32av=6, more=8
+input count: 17001
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 2822087
+STAT: avarage expanded nodes: 918
+STAT: av=16256, 2av=478, 4av=178, 8av=59, 16av=18, 32av=6, more=6
+input count: 18950
+f=51
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.370000 (  1.369886)
+prob041
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35160
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=0, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+input count: 12293
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35741
+STAT: avarage expanded nodes: 11
+STAT: av=12284, 2av=1, 4av=1, 8av=4, 16av=3, 32av=0, more=0
+input count: 12340
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 39140
+STAT: avarage expanded nodes: 12
+STAT: av=12303, 2av=7, 4av=6, 8av=9, 16av=9, 32av=5, more=1
+input count: 12630
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 57906
+STAT: avarage expanded nodes: 18
+STAT: av=12481, 2av=32, 4av=36, 8av=34, 16av=24, 32av=20, more=3
+input count: 13755
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 164660
+STAT: avarage expanded nodes: 53
+STAT: av=13234, 2av=180, 4av=177, 8av=108, 16av=41, 32av=11, more=4
+input count: 15815
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 734170
+STAT: avarage expanded nodes: 238
+STAT: av=14908, 2av=557, 4av=250, 8av=80, 16av=15, 32av=5, more=0
+input count: 17803
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 3838650
+STAT: avarage expanded nodes: 1249
+STAT: av=17039, 2av=610, 4av=129, 8av=23, 16av=2, 32av=0, more=0
+input count: 19051
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 20652831
+STAT: avarage expanded nodes: 6722
+STAT: av=18575, 2av=442, 4av=29, 8av=5, 16av=0, 32av=0, more=0
+input count: 19722
+f=52
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.460000 (  1.450325)
+prob042
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35154
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=1, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12289
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35605
+STAT: avarage expanded nodes: 11
+STAT: av=12283, 2av=1, 4av=1, 8av=3, 16av=0, 32av=1, more=0
+input count: 12325
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 40429
+STAT: avarage expanded nodes: 13
+STAT: av=12293, 2av=4, 4av=6, 8av=7, 16av=8, 32av=4, more=3
+input count: 12684
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 74708
+STAT: avarage expanded nodes: 24
+STAT: av=12513, 2av=38, 4av=40, 8av=45, 16av=27, 32av=13, more=8
+input count: 14182
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 341443
+STAT: avarage expanded nodes: 111
+STAT: av=13668, 2av=231, 4av=152, 8av=69, 16av=35, 32av=18, more=9
+input count: 16580
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 2119628
+STAT: avarage expanded nodes: 689
+STAT: av=15793, 2av=488, 4av=200, 8av=65, 16av=22, 32av=9, more=3
+input count: 18677
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 13719240
+STAT: avarage expanded nodes: 4465
+STAT: av=17946, 2av=572, 4av=117, 8av=31, 16av=10, 32av=1, more=0
+input count: 20085
+f=52
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   2.220000 (  2.228439)
+prob043
+f=33
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35187
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=0, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+input count: 12295
+f=35
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35985
+STAT: avarage expanded nodes: 11
+STAT: av=12284, 2av=3, 4av=4, 8av=1, 16av=1, 32av=2, more=0
+input count: 12362
+f=37
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 43902
+STAT: avarage expanded nodes: 14
+STAT: av=12302, 2av=5, 4av=12, 8av=20, 16av=14, 32av=6, more=3
+input count: 12925
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 84689
+STAT: avarage expanded nodes: 27
+STAT: av=12668, 2av=70, 4av=72, 8av=68, 16av=25, 32av=12, more=10
+input count: 14561
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 324644
+STAT: avarage expanded nodes: 105
+STAT: av=13911, 2av=331, 4av=179, 8av=89, 16av=35, 32av=9, more=7
+input count: 16780
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1576897
+STAT: avarage expanded nodes: 513
+STAT: av=15945, 2av=562, 4av=191, 8av=61, 16av=18, 32av=3, more=0
+input count: 18568
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 8024813
+STAT: avarage expanded nodes: 2612
+STAT: av=17926, 2av=519, 4av=94, 8av=28, 16av=0, 32av=1, more=0
+input count: 19639
+f=47
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.080000 (  1.076355)
+prob044
+f=34
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35337
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=0, 4av=0, 8av=1, 16av=1, 32av=0, more=0
+input count: 12307
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36964
+STAT: avarage expanded nodes: 12
+STAT: av=12292, 2av=1, 4av=4, 8av=4, 16av=3, 32av=2, more=1
+input count: 12441
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 47325
+STAT: avarage expanded nodes: 15
+STAT: av=12365, 2av=4, 4av=19, 8av=18, 16av=17, 32av=15, more=3
+input count: 13165
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 93707
+STAT: avarage expanded nodes: 30
+STAT: av=12807, 2av=121, 4av=110, 8av=60, 16av=45, 32av=20, more=2
+input count: 14867
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 311324
+STAT: avarage expanded nodes: 101
+STAT: av=14030, 2av=423, 4av=284, 8av=107, 16av=21, 32av=2, more=0
+input count: 16888
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1382923
+STAT: avarage expanded nodes: 450
+STAT: av=15990, 2av=697, 4av=174, 8av=25, 16av=2, 32av=0, more=0
+input count: 18355
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 6797478
+STAT: avarage expanded nodes: 2212
+STAT: av=17831, 2av=459, 4av=55, 8av=9, 16av=1, 32av=0, more=0
+input count: 19093
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 33608145
+STAT: avarage expanded nodes: 10940
+STAT: av=18766, 2av=307, 4av=12, 8av=7, 16av=1, 32av=0, more=0
+input count: 19515
+f=50
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.310000 (  1.314821)
+prob045
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35582
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=1
+input count: 12326
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 41914
+STAT: avarage expanded nodes: 13
+STAT: av=12312, 2av=0, 4av=0, 8av=1, 16av=4, 32av=3, more=6
+input count: 12802
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 96812
+STAT: avarage expanded nodes: 31
+STAT: av=12708, 2av=21, 4av=14, 8av=13, 16av=14, 32av=11, more=21
+input count: 14667
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 505056
+STAT: avarage expanded nodes: 164
+STAT: av=14336, 2av=104, 4av=78, 8av=68, 16av=39, 32av=25, more=17
+input count: 17269
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 3622222
+STAT: avarage expanded nodes: 1179
+STAT: av=16624, 2av=321, 4av=174, 8av=83, 16av=48, 32av=14, more=5
+input count: 19580
+f=54
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 25861552
+STAT: avarage expanded nodes: 8418
+STAT: av=18814, 2av=532, 4av=152, 8av=64, 16av=14, 32av=3, more=1
+input count: 21242
+f=56
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   6.790000 (  6.793006)
+prob046
+f=32
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35180
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=3, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12289
+f=34
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36376
+STAT: avarage expanded nodes: 11
+STAT: av=12272, 2av=5, 4av=3, 8av=4, 16av=3, 32av=2, more=0
+input count: 12386
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 44254
+STAT: avarage expanded nodes: 14
+STAT: av=12307, 2av=19, 4av=13, 8av=19, 16av=18, 32av=8, more=2
+input count: 12966
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 95006
+STAT: avarage expanded nodes: 30
+STAT: av=12627, 2av=84, 4av=104, 8av=93, 16av=39, 32av=14, more=5
+input count: 14761
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 366643
+STAT: avarage expanded nodes: 119
+STAT: av=13922, 2av=448, 4av=255, 8av=105, 16av=24, 32av=7, more=0
+input count: 16897
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1751655
+STAT: avarage expanded nodes: 570
+STAT: av=15939, 2av=743, 4av=181, 8av=29, 16av=5, 32av=0, more=0
+input count: 18491
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 8883370
+STAT: avarage expanded nodes: 2891
+STAT: av=17900, 2av=537, 4av=49, 8av=4, 16av=1, 32av=0, more=0
+input count: 19329
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 45158897
+STAT: avarage expanded nodes: 14700
+STAT: av=19040, 2av=266, 4av=20, 8av=2, 16av=1, 32av=0, more=0
+input count: 19714
+f=48
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.920000 (  1.914829)
+prob047
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35198
+STAT: avarage expanded nodes: 11
+STAT: av=12285, 2av=1, 4av=2, 8av=0, 16av=0, 32av=0, more=0
+input count: 12295
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 37642
+STAT: avarage expanded nodes: 12
+STAT: av=12282, 2av=0, 4av=2, 8av=2, 16av=4, 32av=3, more=2
+input count: 12489
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 67693
+STAT: avarage expanded nodes: 22
+STAT: av=12411, 2av=13, 4av=12, 8av=15, 16av=13, 32av=12, more=13
+input count: 13874
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 381109
+STAT: avarage expanded nodes: 124
+STAT: av=13564, 2av=93, 4av=86, 8av=53, 16av=33, 32av=27, more=18
+input count: 16465
+f=53
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 3069250
+STAT: avarage expanded nodes: 999
+STAT: av=15869, 2av=262, 4av=181, 8av=76, 16av=52, 32av=19, more=6
+input count: 18939
+f=55
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 24908361
+STAT: avarage expanded nodes: 8108
+STAT: av=18158, 2av=490, 4av=200, 8av=61, 16av=26, 32av=4, more=0
+input count: 20767
+f=57
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   7.470000 (  7.474201)
+prob048
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35234
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=1, 4av=2, 8av=0, 16av=0, 32av=0, more=0
+input count: 12296
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36497
+STAT: avarage expanded nodes: 11
+STAT: av=12277, 2av=1, 4av=6, 8av=7, 16av=3, 32av=2, more=0
+input count: 12407
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 40762
+STAT: avarage expanded nodes: 13
+STAT: av=12351, 2av=6, 4av=18, 8av=11, 16av=15, 32av=6, more=0
+input count: 12777
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 71975
+STAT: avarage expanded nodes: 23
+STAT: av=12499, 2av=45, 4av=99, 8av=76, 16av=44, 32av=12, more=2
+input count: 14196
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 257675
+STAT: avarage expanded nodes: 83
+STAT: av=13442, 2av=335, 4av=267, 8av=107, 16av=39, 32av=6, more=0
+input count: 16346
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1379594
+STAT: avarage expanded nodes: 449
+STAT: av=15435, 2av=626, 4av=223, 8av=53, 16av=9, 32av=0, more=0
+input count: 18044
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 7905764
+STAT: avarage expanded nodes: 2573
+STAT: av=17372, 2av=585, 4av=74, 8av=13, 16av=0, 32av=0, more=0
+input count: 19004
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 45466393
+STAT: avarage expanded nodes: 14800
+STAT: av=18613, 2av=360, 4av=26, 8av=4, 16av=1, 32av=0, more=0
+input count: 19497
+f=54
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   2.060000 (  2.050476)
+prob049
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35876
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=1
+input count: 12352
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 47853
+STAT: avarage expanded nodes: 15
+STAT: av=12339, 2av=3, 4av=0, 8av=0, 16av=1, 32av=3, more=6
+input count: 13136
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 183422
+STAT: avarage expanded nodes: 59
+STAT: av=13066, 2av=9, 4av=10, 8av=14, 16av=9, 32av=7, more=21
+input count: 15543
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1392151
+STAT: avarage expanded nodes: 453
+STAT: av=15267, 2av=85, 4av=67, 8av=59, 16av=31, 32av=18, more=16
+input count: 18334
+f=53
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 11016501
+STAT: avarage expanded nodes: 3586
+STAT: av=17795, 2av=279, 4av=132, 8av=64, 16av=37, 32av=17, more=10
+input count: 20832
+f=55
+call idas_kernel(block=96, thread=32)
+*distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   9.590000 (  9.600237)
+prob050
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36097
+STAT: avarage expanded nodes: 11
+STAT: av=12285, 2av=0, 4av=0, 8av=0, 16av=2, 32av=0, more=2
+input count: 12370
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 46724
+STAT: avarage expanded nodes: 15
+STAT: av=12340, 2av=4, 4av=1, 8av=3, 16av=10, 32av=6, more=6
+input count: 13074
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 135721
+STAT: avarage expanded nodes: 44
+STAT: av=12932, 2av=31, 4av=23, 8av=28, 16av=27, 32av=14, more=19
+input count: 15224
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 846603
+STAT: avarage expanded nodes: 275
+STAT: av=14764, 2av=182, 4av=117, 8av=87, 16av=41, 32av=18, more=15
+input count: 17853
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 5538640
+STAT: avarage expanded nodes: 1802
+STAT: av=17134, 2av=409, 4av=186, 8av=80, 16av=31, 32av=8, more=5
+input count: 20070
+f=53
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 34563079
+STAT: avarage expanded nodes: 11251
+STAT: av=19359, 2av=528, 4av=137, 8av=30, 16av=12, 32av=4, more=0
+input count: 21486
+f=55
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000  11.830000 ( 11.827580)
+prob051
+f=37
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35181
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=1, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+input count: 12291
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35909
+STAT: avarage expanded nodes: 11
+STAT: av=12282, 2av=1, 4av=2, 8av=2, 16av=4, 32av=0, more=0
+input count: 12353
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 40504
+STAT: avarage expanded nodes: 13
+STAT: av=12304, 2av=6, 4av=15, 8av=10, 16av=11, 32av=6, more=1
+input count: 12724
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 70967
+STAT: avarage expanded nodes: 23
+STAT: av=12489, 2av=65, 4av=71, 8av=49, 16av=30, 32av=15, more=5
+input count: 14125
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 268689
+STAT: avarage expanded nodes: 87
+STAT: av=13468, 2av=307, 4av=202, 8av=95, 16av=38, 32av=10, more=5
+input count: 16363
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1459950
+STAT: avarage expanded nodes: 475
+STAT: av=15486, 2av=593, 4av=205, 8av=51, 16av=25, 32av=2, more=1
+input count: 18302
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 8479193
+STAT: avarage expanded nodes: 2760
+STAT: av=17609, 2av=577, 4av=91, 8av=20, 16av=4, 32av=1, more=0
+input count: 19490
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 47850895
+STAT: avarage expanded nodes: 15576
+STAT: av=19045, 2av=413, 4av=27, 8av=4, 16av=1, 32av=0, more=0
+input count: 20153
+f=53
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   5.190000 (  5.184681)
+prob052
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35399
+STAT: avarage expanded nodes: 11
+STAT: av=12285, 2av=0, 4av=1, 8av=0, 16av=2, 32av=0, more=0
+input count: 12313
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 38606
+STAT: avarage expanded nodes: 12
+STAT: av=12295, 2av=1, 4av=4, 8av=3, 16av=3, 32av=4, more=3
+input count: 12577
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 61709
+STAT: avarage expanded nodes: 20
+STAT: av=12491, 2av=13, 4av=16, 8av=18, 16av=17, 32av=10, more=12
+input count: 13792
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 208098
+STAT: avarage expanded nodes: 67
+STAT: av=13504, 2av=93, 4av=80, 8av=32, 16av=45, 32av=21, more=17
+input count: 16154
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1132010
+STAT: avarage expanded nodes: 368
+STAT: av=15528, 2av=305, 4av=166, 8av=80, 16av=46, 32av=27, more=2
+input count: 18590
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 6851671
+STAT: avarage expanded nodes: 2230
+STAT: av=17808, 2av=513, 4av=177, 8av=71, 16av=18, 32av=3, more=0
+input count: 20343
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 41391805
+STAT: avarage expanded nodes: 13473
+STAT: av=19693, 2av=526, 4av=109, 8av=14, 16av=1, 32av=0, more=0
+input count: 21416
+f=54
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   5.240000 (  5.241891)
+prob053
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35151
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=0, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+input count: 12291
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35357
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=2, 4av=0, 8av=2, 16av=1, 32av=0, more=0
+input count: 12306
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36846
+STAT: avarage expanded nodes: 11
+STAT: av=12282, 2av=1, 4av=8, 8av=8, 16av=5, 32av=2, more=0
+input count: 12444
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 44659
+STAT: avarage expanded nodes: 14
+STAT: av=12325, 2av=34, 4av=24, 8av=36, 16av=19, 32av=6, more=0
+input count: 13028
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 85734
+STAT: avarage expanded nodes: 27
+STAT: av=12569, 2av=171, 4av=149, 8av=96, 16av=32, 32av=10, more=1
+input count: 14636
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 303252
+STAT: avarage expanded nodes: 98
+STAT: av=13736, 2av=533, 4av=283, 8av=61, 16av=17, 32av=6, more=0
+input count: 16650
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1498465
+STAT: avarage expanded nodes: 487
+STAT: av=15834, 2av=633, 4av=149, 8av=25, 16av=8, 32av=1, more=0
+input count: 18126
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 8062922
+STAT: avarage expanded nodes: 2624
+STAT: av=17597, 2av=463, 4av=58, 8av=7, 16av=1, 32av=0, more=0
+input count: 18940
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 44208866
+STAT: avarage expanded nodes: 14390
+STAT: av=18638, 2av=285, 4av=13, 8av=3, 16av=1, 32av=0, more=0
+input count: 19353
+f=54
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   2.510000 (  2.514016)
+prob054
+f=34
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35123
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35239
+STAT: avarage expanded nodes: 11
+STAT: av=12284, 2av=3, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+input count: 12294
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36194
+STAT: avarage expanded nodes: 11
+STAT: av=12281, 2av=1, 4av=3, 8av=4, 16av=4, 32av=1, more=0
+input count: 12382
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 42818
+STAT: avarage expanded nodes: 13
+STAT: av=12307, 2av=14, 4av=14, 8av=21, 16av=18, 32av=7, more=1
+input count: 12897
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 82181
+STAT: avarage expanded nodes: 26
+STAT: av=12561, 2av=91, 4av=103, 8av=88, 16av=42, 32av=9, more=3
+input count: 14477
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 319659
+STAT: avarage expanded nodes: 104
+STAT: av=13641, 2av=454, 4av=251, 8av=99, 16av=25, 32av=5, more=2
+input count: 16652
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1680842
+STAT: avarage expanded nodes: 547
+STAT: av=15790, 2av=656, 4av=167, 8av=30, 16av=7, 32av=2, more=0
+input count: 18166
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 9652391
+STAT: avarage expanded nodes: 3142
+STAT: av=17569, 2av=525, 4av=58, 8av=14, 16av=0, 32av=0, more=0
+input count: 19051
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 55008105
+STAT: avarage expanded nodes: 17906
+STAT: av=18712, 2av=313, 4av=22, 8av=4, 16av=0, 32av=0, more=0
+input count: 19513
+f=52
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   2.620000 (  2.615155)
+prob055
+f=33
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35136
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=1, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=35
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35310
+STAT: avarage expanded nodes: 11
+STAT: av=12283, 2av=2, 4av=1, 8av=1, 16av=1, 32av=0, more=0
+input count: 12302
+f=37
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 37487
+STAT: avarage expanded nodes: 12
+STAT: av=12281, 2av=2, 4av=5, 8av=4, 16av=7, 32av=2, more=1
+input count: 12478
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 50597
+STAT: avarage expanded nodes: 16
+STAT: av=12374, 2av=13, 4av=23, 8av=28, 16av=23, 32av=13, more=4
+input count: 13338
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 126296
+STAT: avarage expanded nodes: 41
+STAT: av=12874, 2av=135, 4av=158, 8av=111, 16av=44, 32av=13, more=3
+input count: 15288
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 533852
+STAT: avarage expanded nodes: 173
+STAT: av=14343, 2av=550, 4av=290, 8av=79, 16av=24, 32av=2, more=0
+input count: 17377
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 2659314
+STAT: avarage expanded nodes: 865
+STAT: av=16475, 2av=724, 4av=155, 8av=20, 16av=3, 32av=0, more=0
+input count: 18837
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 13710794
+STAT: avarage expanded nodes: 4463
+STAT: av=18337, 2av=457, 4av=38, 8av=2, 16av=3, 32av=0, more=0
+input count: 19519
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 70161595
+STAT: avarage expanded nodes: 22839
+STAT: av=19228, 2av=274, 4av=14, 8av=1, 16av=2, 32av=0, more=0
+input count: 19860
+f=51
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.010000   5.130000 (  5.118039)
+prob056
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35182
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=0, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+input count: 12293
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36805
+STAT: avarage expanded nodes: 11
+STAT: av=12277, 2av=2, 4av=2, 8av=7, 16av=2, 32av=2, more=1
+input count: 12432
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 49442
+STAT: avarage expanded nodes: 16
+STAT: av=12355, 2av=7, 4av=25, 8av=18, 16av=15, 32av=8, more=4
+input count: 13233
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 158447
+STAT: avarage expanded nodes: 51
+STAT: av=12908, 2av=112, 4av=85, 8av=68, 16av=33, 32av=18, more=9
+input count: 15439
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 933494
+STAT: avarage expanded nodes: 303
+STAT: av=14779, 2av=338, 4av=200, 8av=73, 16av=31, 32av=10, more=8
+input count: 17802
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 6055017
+STAT: avarage expanded nodes: 1971
+STAT: av=17025, 2av=542, 4av=147, 8av=64, 16av=15, 32av=7, more=2
+input count: 19587
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 38695226
+STAT: avarage expanded nodes: 12596
+STAT: av=18956, 2av=515, 4av=92, 8av=18, 16av=6, 32av=0, more=0
+input count: 20637
+f=54
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   5.770000 (  5.772226)
+prob057
+f=31
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35116
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=33
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35273
+STAT: avarage expanded nodes: 11
+STAT: av=12283, 2av=1, 4av=3, 8av=1, 16av=0, 32av=0, more=0
+input count: 12298
+f=35
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35907
+STAT: avarage expanded nodes: 11
+STAT: av=12278, 2av=4, 4av=9, 8av=7, 16av=0, 32av=0, more=0
+input count: 12356
+f=37
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 38617
+STAT: avarage expanded nodes: 12
+STAT: av=12301, 2av=5, 4av=23, 8av=17, 16av=9, 32av=1, more=0
+input count: 12599
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 54369
+STAT: avarage expanded nodes: 17
+STAT: av=12345, 2av=59, 4av=94, 8av=75, 16av=21, 32av=5, more=0
+input count: 13563
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 125955
+STAT: avarage expanded nodes: 41
+STAT: av=12839, 2av=360, 4av=250, 8av=87, 16av=24, 32av=3, more=0
+input count: 15338
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 488065
+STAT: avarage expanded nodes: 158
+STAT: av=14327, 2av=721, 4av=243, 8av=42, 16av=5, 32av=0, more=0
+input count: 17146
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 2322826
+STAT: avarage expanded nodes: 756
+STAT: av=16439, 2av=637, 4av=61, 8av=8, 16av=1, 32av=0, more=0
+input count: 18196
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 11703700
+STAT: avarage expanded nodes: 3809
+STAT: av=17876, 2av=298, 4av=18, 8av=3, 16av=1, 32av=0, more=0
+input count: 18642
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 59780189
+STAT: avarage expanded nodes: 19459
+STAT: av=18462, 2av=165, 4av=11, 8av=3, 16av=1, 32av=0, more=0
+input count: 18850
+f=51
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   2.710000 (  2.710878)
+prob058
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35156
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=2, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35603
+STAT: avarage expanded nodes: 11
+STAT: av=12280, 2av=1, 4av=3, 8av=1, 16av=3, 32av=0, more=0
+input count: 12328
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 38806
+STAT: avarage expanded nodes: 12
+STAT: av=12290, 2av=1, 4av=11, 8av=16, 16av=5, 32av=4, more=1
+input count: 12599
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 64515
+STAT: avarage expanded nodes: 21
+STAT: av=12408, 2av=42, 4av=50, 8av=48, 16av=28, 32av=17, more=6
+input count: 13868
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 232530
+STAT: avarage expanded nodes: 75
+STAT: av=13247, 2av=251, 4av=218, 8av=85, 16av=49, 32av=18, more=0
+input count: 16108
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1373878
+STAT: avarage expanded nodes: 447
+STAT: av=15215, 2av=571, 4av=221, 8av=86, 16av=14, 32av=1, more=0
+input count: 18040
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 8367452
+STAT: avarage expanded nodes: 2723
+STAT: av=17279, 2av=643, 4av=104, 8av=13, 16av=1, 32av=0, more=0
+input count: 19241
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 52782171
+STAT: avarage expanded nodes: 17181
+STAT: av=18786, 2av=416, 4av=34, 8av=5, 16av=0, 32av=0, more=0
+input count: 19916
+f=54
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   2.610000 (  2.614226)
+prob059
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35128
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=1, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12289
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35360
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=0, 4av=0, 8av=2, 16av=1, 32av=0, more=0
+input count: 12309
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 37703
+STAT: avarage expanded nodes: 12
+STAT: av=12281, 2av=3, 4av=7, 8av=9, 16av=5, 32av=4, more=0
+input count: 12500
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 53157
+STAT: avarage expanded nodes: 17
+STAT: av=12367, 2av=31, 4av=38, 8av=23, 16av=24, 32av=9, more=8
+input count: 13440
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 161713
+STAT: avarage expanded nodes: 52
+STAT: av=13020, 2av=146, 4av=117, 8av=84, 16av=45, 32av=20, more=8
+input count: 15583
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 929336
+STAT: avarage expanded nodes: 302
+STAT: av=14786, 2av=443, 4av=221, 8av=97, 16av=27, 32av=9, more=0
+input count: 17795
+f=53
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 6009646
+STAT: avarage expanded nodes: 1956
+STAT: av=17007, 2av=576, 4av=164, 8av=42, 16av=6, 32av=0, more=0
+input count: 19308
+f=55
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 38688540
+STAT: avarage expanded nodes: 12593
+STAT: av=18771, 2av=466, 4av=65, 8av=4, 16av=2, 32av=0, more=0
+input count: 20177
+f=57
+call idas_kernel(block=96, thread=32)
+*distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   3.310000 (  3.304770)
+prob060
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35149
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35205
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=0, 4av=2, 8av=0, 16av=0, 32av=0, more=0
+input count: 12292
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35945
+STAT: avarage expanded nodes: 11
+STAT: av=12282, 2av=1, 4av=4, 8av=2, 16av=2, 32av=1, more=0
+input count: 12354
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 41481
+STAT: avarage expanded nodes: 13
+STAT: av=12312, 2av=9, 4av=9, 8av=7, 16av=9, 32av=5, more=3
+input count: 12784
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 79809
+STAT: avarage expanded nodes: 25
+STAT: av=12591, 2av=43, 4av=54, 8av=40, 16av=34, 32av=12, more=10
+input count: 14413
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 329888
+STAT: avarage expanded nodes: 107
+STAT: av=13831, 2av=258, 4av=183, 8av=84, 16av=35, 32av=14, more=8
+input count: 16708
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1888539
+STAT: avarage expanded nodes: 614
+STAT: av=15840, 2av=594, 4av=189, 8av=58, 16av=19, 32av=6, more=2
+input count: 18665
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 11322413
+STAT: avarage expanded nodes: 3685
+STAT: av=17977, 2av=573, 4av=85, 8av=23, 16av=7, 32av=0, more=0
+input count: 19838
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 66313550
+STAT: avarage expanded nodes: 21586
+STAT: av=19437, 2av=364, 4av=28, 8av=8, 16av=1, 32av=0, more=0
+input count: 20412
+f=54
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   4.700000 (  4.699389)
+prob061
+f=32
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35139
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=1, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=34
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35287
+STAT: avarage expanded nodes: 11
+STAT: av=12282, 2av=3, 4av=2, 8av=1, 16av=0, 32av=0, more=0
+input count: 12299
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36337
+STAT: avarage expanded nodes: 11
+STAT: av=12282, 2av=1, 4av=1, 8av=10, 16av=5, 32av=0, more=0
+input count: 12397
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 39421
+STAT: avarage expanded nodes: 12
+STAT: av=12323, 2av=18, 4av=24, 8av=21, 16av=10, 32av=1, more=0
+input count: 12678
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 57630
+STAT: avarage expanded nodes: 18
+STAT: av=12415, 2av=61, 4av=93, 8av=72, 16av=32, 32av=5, more=0
+input count: 13740
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 153695
+STAT: avarage expanded nodes: 50
+STAT: av=12983, 2av=347, 4av=263, 8av=131, 16av=13, 32av=3, more=0
+input count: 15645
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 622061
+STAT: avarage expanded nodes: 202
+STAT: av=14622, 2av=749, 4av=237, 8av=30, 16av=7, 32av=0, more=0
+input count: 17418
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 3009302
+STAT: avarage expanded nodes: 979
+STAT: av=16699, 2av=642, 4av=69, 8av=6, 16av=2, 32av=0, more=0
+input count: 18467
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 15624384
+STAT: avarage expanded nodes: 5086
+STAT: av=18079, 2av=365, 4av=17, 8av=4, 16av=2, 32av=0, more=0
+input count: 18980
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 80845037
+STAT: avarage expanded nodes: 26316
+STAT: av=18758, 2av=207, 4av=9, 8av=3, 16av=3, 32av=0, more=0
+input count: 19256
+f=52
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   2.820000 (  2.817503)
+prob062
+f=34
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35146
+STAT: avarage expanded nodes: 11
+STAT: av=12289, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12289
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35214
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=2, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+input count: 12293
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35676
+STAT: avarage expanded nodes: 11
+STAT: av=12284, 2av=2, 4av=3, 8av=1, 16av=3, 32av=0, more=0
+input count: 12334
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 37697
+STAT: avarage expanded nodes: 12
+STAT: av=12294, 2av=8, 4av=9, 8av=17, 16av=5, 32av=1, more=0
+input count: 12514
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 47980
+STAT: avarage expanded nodes: 15
+STAT: av=12356, 2av=32, 4av=47, 8av=48, 16av=25, 32av=5, more=1
+input count: 13234
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 104184
+STAT: avarage expanded nodes: 33
+STAT: av=12655, 2av=229, 4av=204, 8av=105, 16av=37, 32av=4, more=0
+input count: 15018
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 391244
+STAT: avarage expanded nodes: 127
+STAT: av=14038, 2av=630, 4av=266, 8av=74, 16av=10, 32av=0, more=0
+input count: 16931
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1887343
+STAT: avarage expanded nodes: 614
+STAT: av=16087, 2av=726, 4av=109, 8av=8, 16av=1, 32av=0, more=0
+input count: 18260
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 9978395
+STAT: avarage expanded nodes: 3248
+STAT: av=17805, 2av=432, 4av=20, 8av=2, 16av=1, 32av=0, more=0
+input count: 18923
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 53177859
+STAT: avarage expanded nodes: 17310
+STAT: av=18682, 2av=234, 4av=4, 8av=2, 16av=1, 32av=0, more=0
+input count: 19254
+f=54
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   2.100000 (  2.096338)
+prob063
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35145
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=1, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+input count: 12290
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35671
+STAT: avarage expanded nodes: 11
+STAT: av=12284, 2av=0, 4av=1, 8av=2, 16av=2, 32av=1, more=0
+input count: 12337
+f=54
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 39336
+STAT: avarage expanded nodes: 12
+STAT: av=12297, 2av=5, 4av=11, 8av=15, 16av=5, 32av=1, more=3
+input count: 12650
+f=56
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 77570
+STAT: avarage expanded nodes: 25
+STAT: av=12465, 2av=40, 4av=59, 8av=46, 16av=17, 32av=14, more=9
+input count: 14206
+f=58
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 458994
+STAT: avarage expanded nodes: 149
+STAT: av=13722, 2av=204, 4av=146, 8av=72, 16av=33, 32av=19, more=10
+input count: 16667
+f=60
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 4273443
+STAT: avarage expanded nodes: 1391
+STAT: av=15970, 2av=421, 4av=159, 8av=70, 16av=27, 32av=15, more=5
+input count: 18881
+f=62
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 40606897
+STAT: avarage expanded nodes: 13218
+STAT: av=18158, 2av=500, 4av=146, 8av=57, 16av=17, 32av=3, more=0
+input count: 20472
+f=64
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   7.540000 (  7.549067)
+prob064
+f=32
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35139
+STAT: avarage expanded nodes: 11
+STAT: av=12289, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12289
+f=34
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35187
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=1, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+input count: 12292
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35608
+STAT: avarage expanded nodes: 11
+STAT: av=12280, 2av=2, 4av=6, 8av=4, 16av=0, 32av=0, more=0
+input count: 12330
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 38050
+STAT: avarage expanded nodes: 12
+STAT: av=12279, 2av=4, 4av=21, 8av=19, 16av=7, 32av=0, more=0
+input count: 12547
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 50927
+STAT: avarage expanded nodes: 16
+STAT: av=12338, 2av=44, 4av=83, 8av=52, 16av=25, 32av=5, more=0
+input count: 13397
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 120448
+STAT: avarage expanded nodes: 39
+STAT: av=12756, 2av=289, 4av=221, 8av=95, 16av=31, 32av=5, more=0
+input count: 15207
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 525904
+STAT: avarage expanded nodes: 171
+STAT: av=14244, 2av=668, 4av=221, 8av=57, 16av=15, 32av=2, more=0
+input count: 17083
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 2799603
+STAT: avarage expanded nodes: 911
+STAT: av=16328, 2av=610, 4av=115, 8av=27, 16av=3, 32av=0, more=0
+input count: 18330
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 16028859
+STAT: avarage expanded nodes: 5217
+STAT: av=17828, 2av=447, 4av=49, 8av=5, 16av=1, 32av=0, more=0
+input count: 19029
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 89700901
+STAT: avarage expanded nodes: 29199
+STAT: av=18690, 2av=320, 4av=15, 8av=3, 16av=1, 32av=0, more=0
+input count: 19451
+f=52
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   5.580000 (  5.584589)
+prob065
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35136
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35445
+STAT: avarage expanded nodes: 11
+STAT: av=12284, 2av=0, 4av=1, 8av=1, 16av=2, 32av=0, more=0
+input count: 12313
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 40085
+STAT: avarage expanded nodes: 13
+STAT: av=12282, 2av=2, 4av=12, 8av=6, 16av=4, 32av=5, more=2
+input count: 12662
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 81078
+STAT: avarage expanded nodes: 26
+STAT: av=12511, 2av=33, 4av=40, 8av=29, 16av=18, 32av=18, more=13
+input count: 14294
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 386921
+STAT: avarage expanded nodes: 125
+STAT: av=13852, 2av=161, 4av=129, 8av=82, 16av=40, 32av=15, more=15
+input count: 16762
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 2338937
+STAT: avarage expanded nodes: 761
+STAT: av=15969, 2av=464, 4av=209, 8av=77, 16av=32, 32av=8, more=3
+input count: 18908
+f=53
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 14953434
+STAT: avarage expanded nodes: 4867
+STAT: av=18103, 2av=612, 4av=151, 8av=36, 16av=5, 32av=1, more=0
+input count: 20377
+f=55
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 92037397
+STAT: avarage expanded nodes: 29960
+STAT: av=19844, 2av=468, 4av=59, 8av=5, 16av=1, 32av=0, more=0
+input count: 21204
+f=57
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000  13.870000 ( 13.861887)
+prob066
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35203
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=1, 4av=1, 8av=1, 16av=0, 32av=0, more=0
+input count: 12295
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36607
+STAT: avarage expanded nodes: 11
+STAT: av=12285, 2av=1, 4av=0, 8av=2, 16av=3, 32av=4, more=0
+input count: 12414
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 47111
+STAT: avarage expanded nodes: 15
+STAT: av=12346, 2av=10, 4av=14, 8av=20, 16av=9, 32av=8, more=7
+input count: 13127
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 107671
+STAT: avarage expanded nodes: 35
+STAT: av=12838, 2av=81, 4av=89, 8av=55, 16av=35, 32av=20, more=9
+input count: 15006
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 472744
+STAT: avarage expanded nodes: 153
+STAT: av=14273, 2av=379, 4av=204, 8av=101, 16av=33, 32av=12, more=4
+input count: 17327
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 2552673
+STAT: avarage expanded nodes: 830
+STAT: av=16490, 2av=606, 4av=166, 8av=46, 16av=16, 32av=3, more=0
+input count: 19011
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 14491055
+STAT: avarage expanded nodes: 4717
+STAT: av=18371, 2av=534, 4av=94, 8av=10, 16av=2, 32av=0, more=0
+input count: 20002
+f=54
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 83397209
+STAT: avarage expanded nodes: 27147
+STAT: av=19576, 2av=385, 4av=38, 8av=3, 16av=0, 32av=0, more=0
+input count: 20598
+f=56
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   6.330000 (  6.331654)
+prob067
+f=32
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35142
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=34
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35203
+STAT: avarage expanded nodes: 11
+STAT: av=12285, 2av=2, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+input count: 12291
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35739
+STAT: avarage expanded nodes: 11
+STAT: av=12278, 2av=2, 4av=5, 8av=5, 16av=1, 32av=0, more=0
+input count: 12336
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 38959
+STAT: avarage expanded nodes: 12
+STAT: av=12281, 2av=12, 4av=13, 8av=18, 16av=10, 32av=1, more=1
+input count: 12606
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 57784
+STAT: avarage expanded nodes: 18
+STAT: av=12389, 2av=44, 4av=62, 8av=66, 16av=37, 32av=7, more=1
+input count: 13720
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 161430
+STAT: avarage expanded nodes: 52
+STAT: av=13042, 2av=284, 4av=258, 8av=94, 16av=32, 32av=9, more=1
+input count: 15726
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 728138
+STAT: avarage expanded nodes: 237
+STAT: av=14778, 2av=668, 4av=213, 8av=50, 16av=14, 32av=3, more=0
+input count: 17589
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 3692527
+STAT: avarage expanded nodes: 1201
+STAT: av=16871, 2av=603, 4av=101, 8av=13, 16av=1, 32av=0, more=0
+input count: 18722
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 19424618
+STAT: avarage expanded nodes: 6323
+STAT: av=18323, 2av=369, 4av=27, 8av=2, 16av=1, 32av=0, more=0
+input count: 19293
+f=50
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.280000 (  1.278762)
+prob068
+f=32
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35124
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=1, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=34
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35339
+STAT: avarage expanded nodes: 11
+STAT: av=12281, 2av=3, 4av=2, 8av=2, 16av=0, 32av=0, more=0
+input count: 12303
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36310
+STAT: avarage expanded nodes: 11
+STAT: av=12281, 2av=5, 4av=8, 8av=6, 16av=3, 32av=0, more=0
+input count: 12391
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 41543
+STAT: avarage expanded nodes: 13
+STAT: av=12313, 2av=9, 4av=23, 8av=28, 16av=14, 32av=4, more=0
+input count: 12814
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 67789
+STAT: avarage expanded nodes: 22
+STAT: av=12491, 2av=107, 4av=97, 8av=79, 16av=31, 32av=9, more=0
+input count: 14103
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 198733
+STAT: avarage expanded nodes: 64
+STAT: av=13287, 2av=410, 4av=262, 8av=121, 16av=21, 32av=2, more=0
+input count: 16084
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 863153
+STAT: avarage expanded nodes: 280
+STAT: av=15092, 2av=734, 4av=226, 8av=32, 16av=0, 32av=0, more=0
+input count: 17772
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 4362358
+STAT: avarage expanded nodes: 1420
+STAT: av=17108, 2av=597, 4av=62, 8av=5, 16av=0, 32av=0, more=0
+input count: 18737
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 23032490
+STAT: avarage expanded nodes: 7497
+STAT: av=18383, 2av=330, 4av=20, 8av=4, 16av=0, 32av=0, more=0
+input count: 19204
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 122135168
+STAT: avarage expanded nodes: 39757
+STAT: av=18959, 2av=234, 4av=8, 8av=3, 16av=0, 32av=0, more=0
+input count: 19503
+f=52
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   4.370000 (  4.374209)
+prob069
+f=28
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35112
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=30
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35220
+STAT: avarage expanded nodes: 11
+STAT: av=12284, 2av=1, 4av=3, 8av=0, 16av=0, 32av=0, more=0
+input count: 12296
+f=32
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35657
+STAT: avarage expanded nodes: 11
+STAT: av=12283, 2av=2, 4av=6, 8av=4, 16av=1, 32av=0, more=0
+input count: 12338
+f=34
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 38140
+STAT: avarage expanded nodes: 12
+STAT: av=12288, 2av=10, 4av=19, 8av=13, 16av=6, 32av=2, more=0
+input count: 12547
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 49863
+STAT: avarage expanded nodes: 16
+STAT: av=12360, 2av=42, 4av=70, 8av=50, 16av=20, 32av=4, more=1
+input count: 13321
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 101997
+STAT: avarage expanded nodes: 33
+STAT: av=12725, 2av=255, 4av=220, 8av=91, 16av=24, 32av=4, more=2
+input count: 15003
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 340467
+STAT: avarage expanded nodes: 110
+STAT: av=14033, 2av=682, 4av=209, 8av=61, 16av=17, 32av=1, more=0
+input count: 16830
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1401960
+STAT: avarage expanded nodes: 456
+STAT: av=16038, 2av=665, 4av=104, 8av=19, 16av=3, 32av=1, more=0
+input count: 18007
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 6223378
+STAT: avarage expanded nodes: 2025
+STAT: av=17571, 2av=398, 4av=29, 8av=6, 16av=2, 32av=1, more=0
+input count: 18588
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 28244436
+STAT: avarage expanded nodes: 9194
+STAT: av=18350, 2av=223, 4av=7, 8av=4, 16av=3, 32av=1, more=0
+input count: 18868
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 129348628
+STAT: avarage expanded nodes: 42105
+STAT: av=18684, 2av=166, 4av=10, 8av=5, 16av=2, 32av=1, more=0
+input count: 19061
+f=50
+call idas_kernel(block=96, thread=32)
+*distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   4.820000 (  4.810707)
+prob070
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35214
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=0, 4av=0, 8av=0, 16av=1, 32av=0, more=0
+input count: 12295
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36153
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=0, 4av=2, 8av=3, 16av=2, 32av=0, more=1
+input count: 12379
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 44233
+STAT: avarage expanded nodes: 14
+STAT: av=12323, 2av=8, 4av=11, 8av=21, 16av=7, 32av=6, more=3
+input count: 12949
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 108919
+STAT: avarage expanded nodes: 35
+STAT: av=12702, 2av=69, 4av=63, 8av=59, 16av=31, 32av=11, more=14
+input count: 14872
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 559066
+STAT: avarage expanded nodes: 181
+STAT: av=14227, 2av=290, 4av=198, 8av=86, 16av=49, 32av=19, more=3
+input count: 17245
+f=53
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 3657636
+STAT: avarage expanded nodes: 1190
+STAT: av=16382, 2av=576, 4av=195, 8av=67, 16av=24, 32av=1, more=0
+input count: 19105
+f=55
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 24563277
+STAT: avarage expanded nodes: 7995
+STAT: av=18433, 2av=556, 4av=96, 8av=18, 16av=2, 32av=0, more=0
+input count: 20168
+f=57
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   3.490000 (  3.495064)
+prob071
+f=37
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35126
+STAT: avarage expanded nodes: 11
+STAT: av=12289, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12289
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35199
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=0, 4av=1, 8av=1, 16av=0, 32av=0, more=0
+input count: 12296
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35805
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=1, 4av=3, 8av=2, 16av=3, 32av=0, more=0
+input count: 12349
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 40590
+STAT: avarage expanded nodes: 13
+STAT: av=12292, 2av=7, 4av=20, 8av=13, 16av=13, 32av=1, more=3
+input count: 12712
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 78975
+STAT: avarage expanded nodes: 25
+STAT: av=12442, 2av=70, 4av=70, 8av=66, 16av=40, 32av=19, more=5
+input count: 14309
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 376465
+STAT: avarage expanded nodes: 122
+STAT: av=13610, 2av=348, 4av=198, 8av=96, 16av=42, 32av=14, more=1
+input count: 16584
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 2465180
+STAT: avarage expanded nodes: 802
+STAT: av=15734, 2av=570, 4av=197, 8av=66, 16av=15, 32av=2, more=0
+input count: 18407
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 16845305
+STAT: avarage expanded nodes: 5483
+STAT: av=17747, 2av=554, 4av=89, 8av=16, 16av=1, 32av=0, more=0
+input count: 19494
+f=53
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 109674901
+STAT: avarage expanded nodes: 35701
+STAT: av=19121, 2av=358, 4av=13, 8av=2, 16av=0, 32av=0, more=0
+input count: 20045
+f=55
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000  11.680000 ( 11.678630)
+prob072
+f=33
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35107
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=35
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35235
+STAT: avarage expanded nodes: 11
+STAT: av=12284, 2av=3, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+input count: 12294
+f=37
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36296
+STAT: avarage expanded nodes: 11
+STAT: av=12280, 2av=2, 4av=2, 8av=4, 16av=5, 32av=1, more=0
+input count: 12388
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 40793
+STAT: avarage expanded nodes: 13
+STAT: av=12322, 2av=14, 4av=14, 8av=20, 16av=17, 32av=0, more=1
+input count: 12764
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 69013
+STAT: avarage expanded nodes: 22
+STAT: av=12463, 2av=86, 4av=96, 8av=81, 16av=23, 32av=13, more=2
+input count: 14119
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 221566
+STAT: avarage expanded nodes: 72
+STAT: av=13361, 2av=370, 4av=262, 8av=86, 16av=31, 32av=9, more=0
+input count: 16164
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1064256
+STAT: avarage expanded nodes: 346
+STAT: av=15187, 2av=720, 4av=206, 8av=42, 16av=9, 32av=0, more=0
+input count: 17905
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 5681857
+STAT: avarage expanded nodes: 1849
+STAT: av=17254, 2av=563, 4av=82, 8av=5, 16av=1, 32av=0, more=0
+input count: 18869
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 31349405
+STAT: avarage expanded nodes: 10204
+STAT: av=18539, 2av=304, 4av=24, 8av=1, 16av=1, 32av=0, more=0
+input count: 19340
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 170923192
+STAT: avarage expanded nodes: 55639
+STAT: av=19103, 2av=227, 4av=7, 8av=1, 16av=2, 32av=0, more=0
+input count: 19653
+f=53
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000  11.360000 ( 11.352661)
+prob073
+f=36
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35161
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=0, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+input count: 12290
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35554
+STAT: avarage expanded nodes: 11
+STAT: av=12281, 2av=2, 4av=3, 8av=3, 16av=1, 32av=0, more=0
+input count: 12321
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 39073
+STAT: avarage expanded nodes: 12
+STAT: av=12285, 2av=3, 4av=5, 8av=13, 16av=8, 32av=6, more=1
+input count: 12612
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 59093
+STAT: avarage expanded nodes: 19
+STAT: av=12419, 2av=35, 4av=55, 8av=62, 16av=22, 32av=16, more=3
+input count: 13731
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 179218
+STAT: avarage expanded nodes: 58
+STAT: av=13041, 2av=291, 4av=247, 8av=112, 16av=30, 32av=10, more=0
+input count: 15838
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 845132
+STAT: avarage expanded nodes: 275
+STAT: av=14880, 2av=668, 4av=238, 8av=42, 16av=9, 32av=1, more=0
+input count: 17638
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 4467608
+STAT: avarage expanded nodes: 1454
+STAT: av=16986, 2av=544, 4av=102, 8av=4, 16av=2, 32av=0, more=0
+input count: 18643
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 24168246
+STAT: avarage expanded nodes: 7867
+STAT: av=18246, 2av=363, 4av=28, 8av=5, 16av=1, 32av=0, more=0
+input count: 19231
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 129486156
+STAT: avarage expanded nodes: 42150
+STAT: av=18933, 2av=285, 4av=9, 8av=2, 16av=2, 32av=0, more=0
+input count: 19628
+f=54
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   5.180000 (  5.178526)
+prob074
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35181
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=0, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+input count: 12292
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35864
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=0, 4av=1, 8av=1, 16av=3, 32av=1, more=0
+input count: 12351
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 42930
+STAT: avarage expanded nodes: 13
+STAT: av=12309, 2av=4, 4av=9, 8av=10, 16av=8, 32av=5, more=6
+input count: 12882
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 101100
+STAT: avarage expanded nodes: 32
+STAT: av=12679, 2av=53, 4av=50, 8av=47, 16av=18, 32av=18, more=17
+input count: 14769
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 538584
+STAT: avarage expanded nodes: 175
+STAT: av=14195, 2av=260, 4av=153, 8av=84, 16av=47, 32av=22, more=8
+input count: 17190
+f=53
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 3608656
+STAT: avarage expanded nodes: 1174
+STAT: av=16366, 2av=478, 4av=233, 8av=84, 16av=25, 32av=4, more=0
+input count: 19158
+f=55
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 24003821
+STAT: avarage expanded nodes: 7813
+STAT: av=18417, 2av=578, 4av=136, 8av=24, 16av=3, 32av=0, more=0
+input count: 20369
+f=57
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 154775838
+STAT: avarage expanded nodes: 50382
+STAT: av=19889, 2av=419, 4av=51, 8av=8, 16av=2, 32av=0, more=0
+input count: 21052
+f=59
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000  16.250000 ( 16.248188)
+prob075
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35159
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=0, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+input count: 12292
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36074
+STAT: avarage expanded nodes: 11
+STAT: av=12279, 2av=1, 4av=2, 8av=5, 16av=5, 32av=0, more=0
+input count: 12368
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 42039
+STAT: avarage expanded nodes: 13
+STAT: av=12303, 2av=6, 4av=23, 8av=17, 16av=9, 32av=8, more=2
+input count: 12840
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 82110
+STAT: avarage expanded nodes: 26
+STAT: av=12536, 2av=88, 4av=94, 8av=66, 16av=37, 32av=14, more=5
+input count: 14463
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 341865
+STAT: avarage expanded nodes: 111
+STAT: av=13704, 2av=395, 4av=225, 8av=105, 16av=24, 32av=7, more=3
+input count: 16659
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1982444
+STAT: avarage expanded nodes: 645
+STAT: av=15826, 2av=587, 4av=192, 8av=39, 16av=8, 32av=6, more=1
+input count: 18418
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 11942639
+STAT: avarage expanded nodes: 3887
+STAT: av=17762, 2av=553, 4av=82, 8av=17, 16av=4, 32av=0, more=0
+input count: 19510
+f=53
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   2.100000 (  2.099471)
+prob076
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35272
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=0, 4av=0, 8av=2, 16av=0, 32av=0, more=0
+input count: 12298
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36762
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=5, 4av=2, 8av=0, 16av=3, 32av=0, more=2
+input count: 12422
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 47866
+STAT: avarage expanded nodes: 15
+STAT: av=12386, 2av=4, 4av=6, 8av=6, 16av=12, 32av=3, more=5
+input count: 13190
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 133842
+STAT: avarage expanded nodes: 43
+STAT: av=13011, 2av=33, 4av=45, 8av=42, 16av=37, 32av=10, more=12
+input count: 15311
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 753138
+STAT: avarage expanded nodes: 245
+STAT: av=14782, 2av=249, 4av=142, 8av=71, 16av=41, 32av=16, more=10
+input count: 17812
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 4607644
+STAT: avarage expanded nodes: 1499
+STAT: av=17028, 2av=482, 4av=199, 8av=66, 16av=22, 32av=13, more=2
+input count: 19916
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 27687078
+STAT: avarage expanded nodes: 9012
+STAT: av=19203, 2av=557, 4av=120, 8av=26, 16av=9, 32av=1, more=0
+input count: 21215
+f=54
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 163581892
+STAT: avarage expanded nodes: 53249
+STAT: av=20780, 2av=392, 4av=36, 8av=5, 16av=1, 32av=1, more=0
+input count: 21848
+f=56
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000  11.250000 ( 11.252871)
+prob077
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35455
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=0, 4av=0, 8av=0, 16av=0, 32av=1, more=0
+input count: 12315
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 40962
+STAT: avarage expanded nodes: 13
+STAT: av=12306, 2av=0, 4av=2, 8av=3, 16av=1, 32av=1, more=2
+input count: 12723
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 109556
+STAT: avarage expanded nodes: 35
+STAT: av=12654, 2av=10, 4av=17, 8av=18, 16av=7, 32av=6, more=11
+input count: 14750
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 765704
+STAT: avarage expanded nodes: 249
+STAT: av=14458, 2av=104, 4av=65, 8av=49, 16av=40, 32av=17, more=17
+input count: 17477
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 6077218
+STAT: avarage expanded nodes: 1978
+STAT: av=16891, 2av=290, 4av=159, 8av=77, 16av=35, 32av=15, more=10
+input count: 19875
+f=54
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 43376676
+STAT: avarage expanded nodes: 14120
+STAT: av=19084, 2av=530, 4av=183, 8av=50, 16av=25, 32av=2, more=1
+input count: 21649
+f=56
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000  11.820000 ( 11.824453)
+prob078
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35871
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=1
+input count: 12349
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 46148
+STAT: avarage expanded nodes: 15
+STAT: av=12335, 2av=1, 4av=2, 8av=0, 16av=1, 32av=5, more=5
+input count: 13021
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 115100
+STAT: avarage expanded nodes: 37
+STAT: av=12953, 2av=11, 4av=9, 8av=13, 16av=19, 32av=7, more=9
+input count: 15059
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 699971
+STAT: avarage expanded nodes: 227
+STAT: av=14811, 2av=85, 4av=61, 8av=48, 16av=24, 32av=14, more=16
+input count: 17777
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 4726804
+STAT: avarage expanded nodes: 1538
+STAT: av=17284, 2av=229, 4av=125, 8av=71, 16av=30, 32av=27, more=11
+input count: 20337
+f=53
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 31296250
+STAT: avarage expanded nodes: 10187
+STAT: av=19586, 2av=458, 4av=192, 8av=70, 16av=20, 32av=6, more=5
+input count: 22343
+f=55
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 209284072
+STAT: avarage expanded nodes: 68126
+STAT: av=21686, 2av=518, 4av=102, 8av=26, 16av=7, 32av=3, more=1
+input count: 23613
+f=57
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000  60.020000 ( 60.006432)
+prob079
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35248
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=1, 4av=0, 8av=0, 16av=1, 32av=0, more=0
+input count: 12297
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36792
+STAT: avarage expanded nodes: 11
+STAT: av=12284, 2av=2, 4av=1, 8av=2, 16av=6, 32av=1, more=1
+input count: 12430
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 47333
+STAT: avarage expanded nodes: 15
+STAT: av=12368, 2av=5, 4av=12, 8av=14, 16av=18, 32av=6, more=7
+input count: 13157
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 121700
+STAT: avarage expanded nodes: 39
+STAT: av=12878, 2av=83, 4av=76, 8av=63, 16av=28, 32av=21, more=8
+input count: 15166
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 658944
+STAT: avarage expanded nodes: 214
+STAT: av=14600, 2av=294, 4av=146, 8av=73, 16av=27, 32av=16, more=10
+input count: 17537
+f=54
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 4196158
+STAT: avarage expanded nodes: 1365
+STAT: av=16839, 2av=435, 4av=163, 8av=62, 16av=28, 32av=7, more=3
+input count: 19443
+f=56
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 27048335
+STAT: avarage expanded nodes: 8804
+STAT: av=18795, 2av=480, 4av=125, 8av=33, 16av=7, 32av=3, more=0
+input count: 20735
+f=58
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 178110477
+STAT: avarage expanded nodes: 57978
+STAT: av=20270, 2av=405, 4av=46, 8av=13, 16av=0, 32av=1, more=0
+input count: 21480
+f=60
+call idas_kernel(block=96, thread=32)
+*distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000  23.110000 ( 23.103570)
+prob080
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35354
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=0, 4av=0, 8av=0, 16av=0, 32av=1, more=0
+input count: 12306
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 37522
+STAT: avarage expanded nodes: 12
+STAT: av=12296, 2av=1, 4av=2, 8av=1, 16av=1, 32av=2, more=3
+input count: 12484
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 53476
+STAT: avarage expanded nodes: 17
+STAT: av=12429, 2av=11, 4av=5, 8av=5, 16av=12, 32av=13, more=9
+input count: 13458
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 174071
+STAT: avarage expanded nodes: 56
+STAT: av=13211, 2av=43, 4av=70, 8av=61, 16av=34, 32av=25, more=14
+input count: 15742
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1023316
+STAT: avarage expanded nodes: 333
+STAT: av=15123, 2av=280, 4av=173, 8av=94, 16av=44, 32av=24, more=4
+input count: 18136
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 6435666
+STAT: avarage expanded nodes: 2094
+STAT: av=17270, 2av=587, 4av=193, 8av=63, 16av=21, 32av=2, more=0
+input count: 19967
+f=54
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 42447229
+STAT: avarage expanded nodes: 13817
+STAT: av=19244, 2av=585, 4av=115, 8av=22, 16av=1, 32av=0, more=0
+input count: 21092
+f=56
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 272099761
+STAT: avarage expanded nodes: 88574
+STAT: av=20659, 2av=408, 4av=19, 8av=6, 16av=0, 32av=0, more=0
+input count: 21669
+f=58
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000  12.960000 ( 12.965260)
+prob081
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35120
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35198
+STAT: avarage expanded nodes: 11
+STAT: av=12284, 2av=3, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+input count: 12292
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 37338
+STAT: avarage expanded nodes: 12
+STAT: av=12274, 2av=0, 4av=4, 8av=5, 16av=5, 32av=4, more=0
+input count: 12461
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 63773
+STAT: avarage expanded nodes: 20
+STAT: av=12357, 2av=18, 4av=23, 8av=17, 16av=17, 32av=17, more=12
+input count: 13785
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 335488
+STAT: avarage expanded nodes: 109
+STAT: av=13385, 2av=121, 4av=113, 8av=94, 16av=39, 32av=21, more=12
+input count: 16289
+f=53
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 2799863
+STAT: avarage expanded nodes: 911
+STAT: av=15549, 2av=413, 4av=189, 8av=82, 16av=42, 32av=10, more=4
+input count: 18614
+f=55
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 23209568
+STAT: avarage expanded nodes: 7555
+STAT: av=17836, 2av=550, 4av=169, 8av=45, 16av=13, 32av=1, more=0
+input count: 20217
+f=57
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 175977701
+STAT: avarage expanded nodes: 57284
+STAT: av=19621, 2av=533, 4av=54, 8av=8, 16av=1, 32av=0, more=0
+input count: 21143
+f=59
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000  11.230000 ( 11.222585)
+prob082
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35335
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=0, 4av=0, 8av=1, 16av=1, 32av=0, more=0
+input count: 12304
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 37019
+STAT: avarage expanded nodes: 12
+STAT: av=12292, 2av=2, 4av=0, 8av=2, 16av=4, 32av=3, more=1
+input count: 12446
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 49202
+STAT: avarage expanded nodes: 16
+STAT: av=12367, 2av=8, 4av=21, 8av=11, 16av=22, 32av=14, more=3
+input count: 13241
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 126451
+STAT: avarage expanded nodes: 41
+STAT: av=12867, 2av=102, 4av=114, 8av=86, 16av=47, 32av=19, more=6
+input count: 15241
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 595149
+STAT: avarage expanded nodes: 193
+STAT: av=14407, 2av=457, 4av=249, 8av=94, 16av=26, 32av=8, more=0
+input count: 17392
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 3480973
+STAT: avarage expanded nodes: 1133
+STAT: av=16530, 2av=660, 4av=166, 8av=34, 16av=2, 32av=0, more=0
+input count: 18911
+f=53
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 20944943
+STAT: avarage expanded nodes: 6818
+STAT: av=18344, 2av=511, 4av=54, 8av=2, 16av=0, 32av=0, more=0
+input count: 19768
+f=55
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 125102497
+STAT: avarage expanded nodes: 40723
+STAT: av=19441, 2av=309, 4av=17, 8av=1, 16av=0, 32av=0, more=0
+input count: 20233
+f=57
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000   7.210000 (  7.208386)
+prob083
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35700
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=0, 4av=0, 8av=1, 16av=0, 32av=0, more=1
+input count: 12338
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 45873
+STAT: avarage expanded nodes: 14
+STAT: av=12308, 2av=1, 4av=4, 8av=6, 16av=6, 32av=4, more=9
+input count: 13035
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 102760
+STAT: avarage expanded nodes: 33
+STAT: av=12849, 2av=37, 4av=34, 8av=46, 16av=36, 32av=21, more=12
+input count: 14884
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 472114
+STAT: avarage expanded nodes: 153
+STAT: av=14296, 2av=246, 4av=172, 8av=91, 16av=57, 32av=14, more=8
+input count: 17306
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 2492928
+STAT: avarage expanded nodes: 811
+STAT: av=16435, 2av=552, 4av=240, 8av=55, 16av=17, 32av=5, more=2
+input count: 19247
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 13978514
+STAT: avarage expanded nodes: 4550
+STAT: av=18513, 2av=581, 4av=126, 8av=18, 16av=6, 32av=2, more=1
+input count: 20531
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 77992803
+STAT: avarage expanded nodes: 25388
+STAT: av=19987, 2av=482, 4av=54, 8av=7, 16av=1, 32av=0, more=0
+input count: 21351
+f=54
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 425103064
+STAT: avarage expanded nodes: 138379
+STAT: av=21000, 2av=328, 4av=20, 8av=2, 16av=1, 32av=0, more=0
+input count: 21820
+f=56
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000  18.780000 ( 18.781877)
+prob084
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35246
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=0, 4av=0, 8av=2, 16av=0, 32av=0, more=0
+input count: 12298
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36312
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=0, 4av=2, 8av=4, 16av=4, 32av=2, more=0
+input count: 12390
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 44628
+STAT: avarage expanded nodes: 14
+STAT: av=12311, 2av=10, 4av=20, 8av=18, 16av=21, 32av=7, more=3
+input count: 12985
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 105558
+STAT: avarage expanded nodes: 34
+STAT: av=12637, 2av=111, 4av=90, 8av=78, 16av=49, 32av=12, more=8
+input count: 14829
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 604439
+STAT: avarage expanded nodes: 196
+STAT: av=14031, 2av=412, 4av=245, 8av=97, 16av=31, 32av=10, more=3
+input count: 17164
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 4304252
+STAT: avarage expanded nodes: 1401
+STAT: av=16329, 2av=563, 4av=215, 8av=43, 16av=14, 32av=0, more=0
+input count: 18876
+f=54
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 30869900
+STAT: avarage expanded nodes: 10048
+STAT: av=18226, 2av=534, 4av=107, 8av=8, 16av=1, 32av=0, more=0
+input count: 19932
+f=56
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 212368974
+STAT: avarage expanded nodes: 69130
+STAT: av=19516, 2av=396, 4av=19, 8av=0, 16av=1, 32av=0, more=0
+input count: 20511
+f=58
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000  10.940000 ( 10.934583)
+prob085
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35106
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=1, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35442
+STAT: avarage expanded nodes: 11
+STAT: av=12282, 2av=1, 4av=2, 8av=2, 16av=1, 32av=0, more=0
+input count: 12317
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 39983
+STAT: avarage expanded nodes: 13
+STAT: av=12289, 2av=6, 4av=3, 8av=6, 16av=6, 32av=4, more=3
+input count: 12651
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 84463
+STAT: avarage expanded nodes: 27
+STAT: av=12512, 2av=28, 4av=38, 8av=19, 16av=21, 32av=20, more=13
+input count: 14352
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 461151
+STAT: avarage expanded nodes: 150
+STAT: av=13885, 2av=187, 4av=121, 8av=84, 16av=45, 32av=21, more=9
+input count: 16853
+f=53
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 3353716
+STAT: avarage expanded nodes: 1091
+STAT: av=16056, 2av=461, 4av=223, 8av=76, 16av=29, 32av=5, more=3
+input count: 18975
+f=55
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 24080698
+STAT: avarage expanded nodes: 7838
+STAT: av=18215, 2av=592, 4av=139, 8av=22, 16av=6, 32av=0, more=1
+input count: 20327
+f=57
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 163631261
+STAT: avarage expanded nodes: 53265
+STAT: av=19865, 2av=425, 4av=31, 8av=4, 16av=2, 32av=0, more=0
+input count: 21027
+f=59
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000  14.270000 ( 14.272117)
+prob086
+f=38
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35122
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=40
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36011
+STAT: avarage expanded nodes: 11
+STAT: av=12283, 2av=0, 4av=1, 8av=1, 16av=0, 32av=2, more=1
+input count: 12363
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 48817
+STAT: avarage expanded nodes: 15
+STAT: av=12329, 2av=2, 4av=7, 8av=6, 16av=5, 32av=5, more=9
+input count: 13199
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 163531
+STAT: avarage expanded nodes: 53
+STAT: av=13007, 2av=44, 4av=44, 8av=42, 16av=29, 32av=15, more=18
+input count: 15468
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 949590
+STAT: avarage expanded nodes: 309
+STAT: av=14956, 2av=206, 4av=150, 8av=77, 16av=54, 32av=12, more=13
+input count: 18038
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 6054979
+STAT: avarage expanded nodes: 1971
+STAT: av=17269, 2av=452, 4av=206, 8av=66, 16av=34, 32av=10, more=1
+input count: 20067
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35504957
+STAT: avarage expanded nodes: 11557
+STAT: av=19365, 2av=516, 4av=138, 8av=36, 16av=12, 32av=0, more=0
+input count: 21356
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 198082065
+STAT: avarage expanded nodes: 64479
+STAT: av=20871, 2av=428, 4av=50, 8av=6, 16av=1, 32av=0, more=0
+input count: 22073
+f=54
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1069563265
+STAT: avarage expanded nodes: 348165
+STAT: av=21785, 2av=266, 4av=19, 8av=2, 16av=0, 32av=1, more=0
+input count: 22475
+f=56
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000  47.350000 ( 47.337332)
+prob087
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35110
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35205
+STAT: avarage expanded nodes: 11
+STAT: av=12284, 2av=1, 4av=3, 8av=0, 16av=0, 32av=0, more=0
+input count: 12294
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 37378
+STAT: avarage expanded nodes: 12
+STAT: av=12282, 2av=2, 4av=2, 8av=3, 16av=2, 32av=1, more=2
+input count: 12468
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 58136
+STAT: avarage expanded nodes: 18
+STAT: av=12407, 2av=11, 4av=19, 8av=9, 16av=10, 32av=3, more=9
+input count: 13652
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 210917
+STAT: avarage expanded nodes: 68
+STAT: av=13462, 2av=63, 4av=54, 8av=30, 16av=16, 32av=9, more=18
+input count: 16044
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1356762
+STAT: avarage expanded nodes: 441
+STAT: av=15646, 2av=186, 4av=91, 8av=45, 16av=38, 32av=22, more=16
+input count: 18648
+f=53
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 8383666
+STAT: avarage expanded nodes: 2729
+STAT: av=17944, 2av=412, 4av=177, 8av=69, 16av=27, 32av=15, more=4
+input count: 20833
+f=55
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 52741893
+STAT: avarage expanded nodes: 17168
+STAT: av=20050, 2av=576, 4av=159, 8av=37, 16av=10, 32av=1, more=0
+input count: 22321
+f=57
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 321752355
+STAT: avarage expanded nodes: 104737
+STAT: av=21774, 2av=479, 4av=59, 8av=9, 16av=0, 32av=0, more=0
+input count: 23135
+f=59
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000  40.950000 ( 40.939169)
+prob088
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35360
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=0, 4av=0, 8av=1, 16av=1, 32av=0, more=0
+input count: 12306
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 37975
+STAT: avarage expanded nodes: 12
+STAT: av=12291, 2av=0, 4av=0, 8av=3, 16av=6, 32av=5, more=1
+input count: 12516
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 55397
+STAT: avarage expanded nodes: 18
+STAT: av=12416, 2av=25, 4av=21, 8av=18, 16av=15, 32av=12, more=9
+input count: 13542
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 175958
+STAT: avarage expanded nodes: 57
+STAT: av=13166, 2av=114, 4av=103, 8av=85, 16av=40, 32av=23, more=11
+input count: 15745
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 885852
+STAT: avarage expanded nodes: 288
+STAT: av=14995, 2av=397, 4av=216, 8av=82, 16av=39, 32av=14, more=2
+input count: 17966
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 5273948
+STAT: avarage expanded nodes: 1716
+STAT: av=17176, 2av=537, 4av=197, 8av=45, 16av=10, 32av=1, more=0
+input count: 19512
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 30460794
+STAT: avarage expanded nodes: 9915
+STAT: av=18910, 2av=504, 4av=89, 8av=7, 16av=2, 32av=0, more=0
+input count: 20458
+f=53
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 174801865
+STAT: avarage expanded nodes: 56901
+STAT: av=20133, 2av=301, 4av=23, 8av=0, 16av=1, 32av=0, more=0
+input count: 20914
+f=55
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 970419526
+STAT: avarage expanded nodes: 315891
+STAT: av=20687, 2av=215, 4av=11, 8av=0, 16av=1, 32av=0, more=0
+input count: 21194
+f=57
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000  33.920000 ( 33.915071)
+prob089
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35198
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=1, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+input count: 12294
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36598
+STAT: avarage expanded nodes: 11
+STAT: av=12279, 2av=2, 4av=1, 8av=7, 16av=2, 32av=3, more=0
+input count: 12413
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 49472
+STAT: avarage expanded nodes: 16
+STAT: av=12358, 2av=4, 4av=6, 8av=12, 16av=13, 32av=15, more=5
+input count: 13220
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 166329
+STAT: avarage expanded nodes: 54
+STAT: av=12950, 2av=70, 4av=69, 8av=55, 16av=37, 32av=27, more=12
+input count: 15402
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1128920
+STAT: avarage expanded nodes: 367
+STAT: av=14761, 2av=284, 4av=183, 8av=109, 16av=39, 32av=21, more=5
+input count: 17795
+f=53
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 8366491
+STAT: avarage expanded nodes: 2723
+STAT: av=16945, 2av=569, 4av=201, 8av=59, 16av=17, 32av=4, more=0
+input count: 19647
+f=55
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 59679201
+STAT: avarage expanded nodes: 19426
+STAT: av=18962, 2av=576, 4av=91, 8av=13, 16av=4, 32av=1, more=0
+input count: 20799
+f=57
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 402679066
+STAT: avarage expanded nodes: 131080
+STAT: av=20443, 2av=330, 4av=21, 8av=2, 16av=2, 32av=1, more=0
+input count: 21314
+f=59
+call idas_kernel(block=96, thread=32)
+*distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000  22.450000 ( 22.436734)
+prob090
+f=31
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35143
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=1, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12289
+f=33
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35241
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=1, 4av=1, 8av=1, 16av=0, 32av=0, more=0
+input count: 12296
+f=35
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35906
+STAT: avarage expanded nodes: 11
+STAT: av=12283, 2av=0, 4av=6, 8av=4, 16av=3, 32av=0, more=0
+input count: 12359
+f=37
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 39109
+STAT: avarage expanded nodes: 12
+STAT: av=12296, 2av=14, 4av=17, 8av=22, 16av=8, 32av=2, more=0
+input count: 12634
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 54108
+STAT: avarage expanded nodes: 17
+STAT: av=12420, 2av=47, 4av=76, 8av=61, 16av=22, 32av=7, more=1
+input count: 13601
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 127340
+STAT: avarage expanded nodes: 41
+STAT: av=12992, 2av=281, 4av=195, 8av=89, 16av=34, 32av=10, more=0
+input count: 15458
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 475744
+STAT: avarage expanded nodes: 154
+STAT: av=14535, 2av=654, 4av=197, 8av=55, 16av=13, 32av=4, more=0
+input count: 17309
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 2169641
+STAT: avarage expanded nodes: 706
+STAT: av=16618, 2av=556, 4av=112, 8av=20, 16av=3, 32av=0, more=0
+input count: 18479
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 10506885
+STAT: avarage expanded nodes: 3420
+STAT: av=18055, 2av=371, 4av=47, 8av=6, 16av=0, 32av=0, more=0
+input count: 19116
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 50645461
+STAT: avarage expanded nodes: 16486
+STAT: av=18874, 2av=229, 4av=11, 8av=2, 16av=0, 32av=0, more=0
+input count: 19445
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 242380592
+STAT: avarage expanded nodes: 78899
+STAT: av=19296, 2av=141, 4av=6, 8av=2, 16av=0, 32av=0, more=0
+input count: 19636
+f=53
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1156007348
+STAT: avarage expanded nodes: 376304
+STAT: av=19511, 2av=116, 4av=7, 8av=2, 16av=0, 32av=0, more=0
+input count: 19792
+f=55
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000  33.920000 ( 33.915665)
+prob091
+f=35
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35115
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=1, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12289
+f=37
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35288
+STAT: avarage expanded nodes: 11
+STAT: av=12284, 2av=1, 4av=3, 8av=0, 16av=1, 32av=0, more=0
+input count: 12303
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36706
+STAT: avarage expanded nodes: 11
+STAT: av=12285, 2av=1, 4av=4, 8av=3, 16av=10, 32av=0, more=0
+input count: 12429
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 43808
+STAT: avarage expanded nodes: 14
+STAT: av=12333, 2av=21, 4av=26, 8av=21, 16av=19, 32av=9, more=0
+input count: 12963
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 81202
+STAT: avarage expanded nodes: 26
+STAT: av=12613, 2av=112, 4av=98, 8av=88, 16av=42, 32av=7, more=3
+input count: 14500
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 312809
+STAT: avarage expanded nodes: 101
+STAT: av=13603, 2av=501, 4av=275, 8av=89, 16av=28, 32av=3, more=1
+input count: 16623
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1507891
+STAT: avarage expanded nodes: 490
+STAT: av=15727, 2av=690, 4av=169, 8av=32, 16av=4, 32av=1, more=0
+input count: 18154
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 7912434
+STAT: avarage expanded nodes: 2575
+STAT: av=17534, 2av=545, 4av=64, 8av=10, 16av=1, 32av=0, more=0
+input count: 19064
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 42774136
+STAT: avarage expanded nodes: 13923
+STAT: av=18634, 2av=396, 4av=29, 8av=5, 16av=0, 32av=0, more=0
+input count: 19631
+f=53
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 227019316
+STAT: avarage expanded nodes: 73899
+STAT: av=19362, 2av=252, 4av=13, 8av=4, 16av=0, 32av=0, more=0
+input count: 19950
+f=55
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1184385288
+STAT: avarage expanded nodes: 385542
+STAT: av=19746, 2av=189, 4av=11, 8av=4, 16av=0, 32av=0, more=0
+input count: 20197
+f=57
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000  36.770000 ( 36.765352)
+prob092
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35160
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=0, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+input count: 12294
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36029
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=0, 4av=2, 8av=1, 16av=2, 32av=1, more=1
+input count: 12368
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 45156
+STAT: avarage expanded nodes: 14
+STAT: av=12324, 2av=1, 4av=9, 8av=10, 16av=8, 32av=11, more=5
+input count: 13018
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 112796
+STAT: avarage expanded nodes: 36
+STAT: av=12753, 2av=72, 4av=68, 8av=66, 16av=31, 32av=15, more=13
+input count: 14993
+f=54
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 620725
+STAT: avarage expanded nodes: 202
+STAT: av=14322, 2av=344, 4av=188, 8av=93, 16av=28, 32av=10, more=8
+input count: 17365
+f=56
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 4489971
+STAT: avarage expanded nodes: 1461
+STAT: av=16621, 2av=509, 4av=151, 8av=56, 16av=18, 32av=8, more=2
+input count: 19196
+f=58
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 32597231
+STAT: avarage expanded nodes: 10611
+STAT: av=18556, 2av=513, 4av=92, 8av=25, 16av=9, 32av=1, more=0
+input count: 20398
+f=60
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 230625895
+STAT: avarage expanded nodes: 75073
+STAT: av=20003, 2av=349, 4av=34, 8av=10, 16av=2, 32av=0, more=0
+input count: 21048
+f=62
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000  29.070000 ( 29.063123)
+prob093
+f=33
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35133
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=35
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35165
+STAT: avarage expanded nodes: 11
+STAT: av=12285, 2av=3, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=37
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35376
+STAT: avarage expanded nodes: 11
+STAT: av=12283, 2av=1, 4av=1, 8av=3, 16av=0, 32av=0, more=0
+input count: 12306
+f=39
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36063
+STAT: avarage expanded nodes: 11
+STAT: av=12282, 2av=9, 4av=10, 8av=2, 16av=3, 32av=0, more=0
+input count: 12370
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 39434
+STAT: avarage expanded nodes: 12
+STAT: av=12298, 2av=11, 4av=25, 8av=25, 16av=10, 32av=1, more=0
+input count: 12673
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 55417
+STAT: avarage expanded nodes: 18
+STAT: av=12407, 2av=88, 4av=84, 8av=67, 16av=21, 32av=6, more=0
+input count: 13636
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 127172
+STAT: avarage expanded nodes: 41
+STAT: av=12908, 2av=331, 4av=286, 8av=89, 16av=16, 32av=6, more=0
+input count: 15430
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 480198
+STAT: avarage expanded nodes: 156
+STAT: av=14349, 2av=800, 4av=240, 8av=37, 16av=4, 32av=0, more=0
+input count: 17261
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 2201167
+STAT: avarage expanded nodes: 716
+STAT: av=16499, 2av=672, 4av=83, 8av=7, 16av=0, 32av=0, more=0
+input count: 18416
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 10949600
+STAT: avarage expanded nodes: 3564
+STAT: av=18035, 2av=357, 4av=22, 8av=2, 16av=0, 32av=0, more=0
+input count: 18955
+f=53
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 55522423
+STAT: avarage expanded nodes: 18073
+STAT: av=18748, 2av=194, 4av=11, 8av=2, 16av=0, 32av=0, more=0
+input count: 19214
+f=55
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 282300918
+STAT: avarage expanded nodes: 91894
+STAT: av=19052, 2av=154, 4av=6, 8av=2, 16av=0, 32av=0, more=0
+input count: 19410
+f=57
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1448083422
+STAT: avarage expanded nodes: 471381
+STAT: av=19254, 2av=148, 4av=7, 8av=1, 16av=0, 32av=0, more=0
+input count: 19587
+f=59
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000  60.790000 ( 60.771728)
+prob094
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35348
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=0, 4av=0, 8av=1, 16av=1, 32av=0, more=0
+input count: 12306
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 38374
+STAT: avarage expanded nodes: 12
+STAT: av=12291, 2av=3, 4av=0, 8av=5, 16av=4, 32av=1, more=2
+input count: 12550
+f=54
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 94202
+STAT: avarage expanded nodes: 30
+STAT: av=12437, 2av=20, 4av=27, 8av=19, 16av=19, 32av=14, more=14
+input count: 14409
+f=56
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 777015
+STAT: avarage expanded nodes: 252
+STAT: av=14078, 2av=125, 4av=98, 8av=45, 16av=26, 32av=28, more=9
+input count: 17050
+f=58
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 7192278
+STAT: avarage expanded nodes: 2341
+STAT: av=16529, 2av=245, 4av=143, 8av=67, 16av=39, 32av=18, more=9
+input count: 19389
+f=60
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 60341860
+STAT: avarage expanded nodes: 19642
+STAT: av=18687, 2av=444, 4av=171, 8av=49, 16av=30, 32av=6, more=2
+input count: 21197
+f=62
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 471506681
+STAT: avarage expanded nodes: 153485
+STAT: av=20597, 2av=448, 4av=119, 8av=26, 16av=5, 32av=2, more=0
+input count: 22341
+f=64
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000  74.720000 ( 74.712067)
+prob095
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35162
+STAT: avarage expanded nodes: 11
+STAT: av=12287, 2av=1, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35501
+STAT: avarage expanded nodes: 11
+STAT: av=12281, 2av=0, 4av=0, 8av=7, 16av=0, 32av=0, more=0
+input count: 12318
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36461
+STAT: avarage expanded nodes: 11
+STAT: av=12292, 2av=2, 4av=10, 8av=12, 16av=2, 32av=0, more=0
+input count: 12418
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 42864
+STAT: avarage expanded nodes: 13
+STAT: av=12317, 2av=9, 4av=35, 8av=32, 16av=22, 32av=3, more=0
+input count: 12918
+f=54
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 77239
+STAT: avarage expanded nodes: 25
+STAT: av=12543, 2av=99, 4av=151, 8av=83, 16av=33, 32av=9, more=0
+input count: 14377
+f=56
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 288726
+STAT: avarage expanded nodes: 93
+STAT: av=13509, 2av=475, 4av=265, 8av=106, 16av=15, 32av=7, more=0
+input count: 16497
+f=58
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1575093
+STAT: avarage expanded nodes: 512
+STAT: av=15614, 2av=652, 4av=190, 8av=39, 16av=2, 32av=0, more=0
+input count: 18109
+f=60
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 9693651
+STAT: avarage expanded nodes: 3155
+STAT: av=17507, 2av=537, 4av=59, 8av=6, 16av=0, 32av=0, more=0
+input count: 19074
+f=62
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 62298570
+STAT: avarage expanded nodes: 20279
+STAT: av=18744, 2av=310, 4av=20, 8av=0, 16av=0, 32av=0, more=0
+input count: 19571
+f=64
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 405437053
+STAT: avarage expanded nodes: 131978
+STAT: av=19374, 2av=196, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+input count: 19852
+f=66
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000  15.290000 ( 15.290427)
+prob096
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35112
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12288
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36738
+STAT: avarage expanded nodes: 11
+STAT: av=12284, 2av=0, 4av=0, 8av=1, 16av=1, 32av=0, more=2
+input count: 12425
+f=54
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 64034
+STAT: avarage expanded nodes: 20
+STAT: av=12394, 2av=3, 4av=0, 8av=8, 16av=4, 32av=7, more=9
+input count: 13774
+f=56
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 393615
+STAT: avarage expanded nodes: 128
+STAT: av=13601, 2av=42, 4av=43, 8av=31, 16av=21, 32av=17, more=19
+input count: 16447
+f=58
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 3679559
+STAT: avarage expanded nodes: 1197
+STAT: av=15964, 2av=200, 4av=134, 8av=77, 16av=38, 32av=20, more=14
+input count: 19147
+f=60
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 32537859
+STAT: avarage expanded nodes: 10591
+STAT: av=18386, 2av=430, 4av=200, 8av=91, 16av=29, 32av=10, more=1
+input count: 21290
+f=62
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 273471513
+STAT: avarage expanded nodes: 89020
+STAT: av=20546, 2av=565, 4av=137, 8av=35, 16av=6, 32av=1, more=0
+input count: 22714
+f=64
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 2171985968
+STAT: avarage expanded nodes: 707026
+STAT: av=22207, 2av=463, 4av=35, 8av=8, 16av=1, 32av=0, more=0
+input count: 23519
+f=66
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000 161.950000 (161.927397)
+prob097
+f=41
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35128
+STAT: avarage expanded nodes: 11
+STAT: av=12289, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+input count: 12289
+f=43
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35233
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=1, 4av=1, 8av=1, 16av=0, 32av=0, more=0
+input count: 12298
+f=45
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36333
+STAT: avarage expanded nodes: 11
+STAT: av=12282, 2av=4, 4av=4, 8av=2, 16av=4, 32av=2, more=0
+input count: 12392
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 46304
+STAT: avarage expanded nodes: 15
+STAT: av=12305, 2av=11, 4av=27, 8av=19, 16av=19, 32av=8, more=3
+input count: 13059
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 114981
+STAT: avarage expanded nodes: 37
+STAT: av=12652, 2av=123, 4av=133, 8av=89, 16av=43, 32av=14, more=5
+input count: 14966
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 593073
+STAT: avarage expanded nodes: 193
+STAT: av=14147, 2av=463, 4av=241, 8av=73, 16av=33, 32av=6, more=3
+input count: 17103
+f=53
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 3953930
+STAT: avarage expanded nodes: 1287
+STAT: av=16311, 2av=590, 4av=146, 8av=47, 16av=8, 32av=1, more=0
+input count: 18600
+f=55
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 27231770
+STAT: avarage expanded nodes: 8864
+STAT: av=18013, 2av=504, 4av=71, 8av=12, 16av=0, 32av=0, more=0
+input count: 19501
+f=57
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 183652152
+STAT: avarage expanded nodes: 59782
+STAT: av=19196, 2av=277, 4av=28, 8av=0, 16av=0, 32av=0, more=0
+input count: 19935
+f=59
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1200766414
+STAT: avarage expanded nodes: 390874
+STAT: av=19748, 2av=172, 4av=15, 8av=0, 16av=0, 32av=0, more=0
+input count: 20149
+f=61
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12289
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000  41.310000 ( 41.304686)
+prob098
+f=42
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35195
+STAT: avarage expanded nodes: 11
+STAT: av=12286, 2av=0, 4av=1, 8av=1, 16av=0, 32av=0, more=0
+input count: 12295
+f=44
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 36090
+STAT: avarage expanded nodes: 11
+STAT: av=12288, 2av=1, 4av=1, 8av=2, 16av=2, 32av=0, more=1
+input count: 12373
+f=46
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 43017
+STAT: avarage expanded nodes: 14
+STAT: av=12328, 2av=2, 4av=16, 8av=11, 16av=9, 32av=4, more=3
+input count: 12881
+f=48
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 98361
+STAT: avarage expanded nodes: 32
+STAT: av=12673, 2av=53, 4av=58, 8av=46, 16av=26, 32av=13, more=12
+input count: 14705
+f=50
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 488680
+STAT: avarage expanded nodes: 159
+STAT: av=14128, 2av=252, 4av=164, 8av=90, 16av=45, 32av=19, more=7
+input count: 17041
+f=52
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 2988852
+STAT: avarage expanded nodes: 972
+STAT: av=16187, 2av=544, 4av=212, 8av=69, 16av=24, 32av=5, more=0
+input count: 18927
+f=54
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 18216864
+STAT: avarage expanded nodes: 5929
+STAT: av=18190, 2av=597, 4av=123, 8av=12, 16av=4, 32av=1, more=0
+input count: 20108
+f=56
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 108963322
+STAT: avarage expanded nodes: 35469
+STAT: av=19704, 2av=373, 4av=25, 8av=3, 16av=2, 32av=1, more=0
+input count: 20694
+f=58
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 639957478
+STAT: avarage expanded nodes: 208319
+STAT: av=20455, 2av=228, 4av=5, 8av=3, 16av=2, 32av=1, more=0
+input count: 20999
+f=60
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 3661330593
+STAT: avarage expanded nodes: 1191839
+STAT: av=20820, 2av=167, 4av=5, 8av=4, 16av=2, 32av=1, more=0
+input count: 21207
+f=62
+call idas_kernel(block=96, thread=32)
+.distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000 138.030000 (137.998979)
+prob099
+f=47
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 35320
+STAT: avarage expanded nodes: 11
+STAT: av=12285, 2av=0, 4av=0, 8av=2, 16av=1, 32av=0, more=0
+input count: 12305
+f=49
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 38657
+STAT: avarage expanded nodes: 12
+STAT: av=12287, 2av=3, 4av=2, 8av=3, 16av=1, 32av=6, more=3
+input count: 12574
+f=51
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 73328
+STAT: avarage expanded nodes: 23
+STAT: av=12451, 2av=13, 4av=33, 8av=24, 16av=26, 32av=12, more=15
+input count: 14111
+f=53
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 383074
+STAT: avarage expanded nodes: 124
+STAT: av=13693, 2av=145, 4av=115, 8av=87, 16av=41, 32av=17, more=13
+input count: 16630
+f=55
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 2928114
+STAT: avarage expanded nodes: 953
+STAT: av=15876, 2av=440, 4av=185, 8av=85, 16av=25, 32av=15, more=4
+input count: 18903
+f=57
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 21611325
+STAT: avarage expanded nodes: 7034
+STAT: av=18123, 2av=559, 4av=176, 8av=35, 16av=6, 32av=3, more=1
+input count: 20439
+f=59
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 152216002
+STAT: avarage expanded nodes: 49549
+STAT: av=19843, 2av=517, 4av=71, 8av=7, 16av=1, 32av=0, more=0
+input count: 21366
+f=61
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 1025201970
+STAT: avarage expanded nodes: 333724
+STAT: av=21039, 2av=308, 4av=14, 8av=5, 16av=0, 32av=0, more=0
+input count: 21836
+f=63
+call idas_kernel(block=96, thread=32)
+STAT: sum of expanded nodes: 6598472251
+STAT: avarage expanded nodes: 2147940
+STAT: av=21624, 2av=199, 4av=9, 8av=4, 16av=0, 32av=0, more=0
+input count: 22110
+f=65
+call idas_kernel(block=96, thread=32)
+distr_n=12288, n_worers=3072, cnt=12288
+Error: src/idas_dynamic.cu:1369 code:4, reason: unspecified launch failure
+  0.000000   0.000000 258.510000 (258.479532)
+900.60user 515.04system 23:35.33elapsed 100%CPU (0avgtext+0avgdata 44292maxresident)k
+0inputs+544outputs (0major+491581minor)pagefaults 0swaps
