@@ -194,11 +194,7 @@ idas_internal(int f_limit, long long *ret_nodes_expanded, Input input)
     for (;;)
     {
         if (state_is_goal())
-        {
-            *ret_nodes_expanded = nodes_expanded;
-            abort(); /* goal found */
-            return true;
-        }
+	    asm("trap;"); /* solution found */
 
         if (((stack_is_empty() && dir_reverse(dir) != input.parent_dir) ||
              stack_peak() != dir_reverse(dir)) &&
@@ -1357,7 +1353,7 @@ main(int argc, char *argv[])
         idas_kernel<<<N_BLOCKS, BLOCK_DIM>>>(d_input, d_input_ends, d_plan,
                                              d_stat, f_limit, d_h_diff_table,
                                              d_movable_table);
-        CUDA_CHECK(cudaPeekAtLastError());
+        CUDA_CHECK(cudaGetLastError());
 
         CUDA_CHECK(cudaMemcpy(plan, d_plan, plan_size, cudaMemcpyDeviceToHost));
         CUDA_CHECK(cudaMemcpy(stat, d_stat, stat_size, cudaMemcpyDeviceToHost));
@@ -1409,7 +1405,7 @@ main(int argc, char *argv[])
             int policy =
                 stat[i].nodes_expanded / (avarage_expected_load + 1) + 1;
 
-            if (policy > 1 && stat[i].nodes_expanded > 10)
+            if (policy > 1 && stat[i].nodes_expanded > 20)
                 increased += input_devide(input, stat, i, policy,
                                           cnt_inputs + increased);
         }
