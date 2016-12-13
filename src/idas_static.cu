@@ -1409,7 +1409,7 @@ main(int argc, char *argv[])
             int policy =
                 stat[i].nodes_expanded / (avarage_expected_load + 1) + 1;
 
-            if (policy > 1 && stat[i].nodes_expanded > 20)
+            if (policy > 1 && stat[i].nodes_expanded > 10)
                 increased += input_devide(input, stat, i, policy,
                                           cnt_inputs + increased);
         }
