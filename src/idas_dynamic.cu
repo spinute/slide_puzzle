@@ -465,26 +465,6 @@ state_movable(State state, Direction dir)
 		(dir != DIR_UP || state_up_movable(state));
 }
 
-/*
-   static inline int
-   calc_h_diff(idx_t who, idx_t from_x, idx_t from_y, Direction rdir)
-   {
-   idx_t right_x = who % STATE_WIDTH;
-   idx_t right_y = who / STATE_WIDTH;
-
-   switch (rdir)
-   {
-   case LEFT:
-   return right_x > from_x ? -1 : 1;
-   case RIGHT:
-   return right_x < from_x ? -1 : 1;
-   case UP:
-   return right_y > from_y ? -1 : 1;
-   case DOWN:
-   return right_y < from_y ? -1 : 1;
-   }
-   }
- */
 #define h_diff(who, from_i, from_j, dir)                                       \
 	(h_diff_table[((who) << 6) + ((from_j) << 4) + ((from_i) << 2) + (dir)])
 static int h_diff_table[STATE_N * STATE_N * DIR_N] = {
@@ -574,8 +554,6 @@ state_move(State state, Direction dir)
 
 	state->h_value =
 		state->h_value + h_diff(who, state->i, state->j, dir_reverse(dir));
-	// state->h_value = state->h_value + calc_h_diff(who, state->i, state->j,
-	// dir);
 	state->parent_dir = dir;
 }
 
@@ -1129,7 +1107,7 @@ distribute_astar(State init_state, Input input[], int input_ends[], int distr_n,
     *cnt_inputs = cnt;
     if (!solved)
     {
-	    int minf = INT_MAX;
+	int minf = INT_MAX;
         for (int id = 0; id < cnt; ++id)
         {
             State state = pq_pop(q);
@@ -1305,25 +1283,6 @@ load_state_from_file(const char *fname, uchar *s)
             exit_failure("Error: %s:%d code:%d, reason: %s\n", __FILE__,       \
                          __LINE__, e, cudaGetErrorString(e));                  \
     } while (0)
-
-__host__ static int
-calc_hvalue(uchar s_list[])
-{
-    int from_x[STATE_N], from_y[STATE_N];
-    int h_value = 0;
-
-    for (int i = 0; i < STATE_N; ++i)
-    {
-        from_x[s_list[i]] = POS_X(i);
-        from_y[s_list[i]] = POS_Y(i);
-    }
-    for (int i = 1; i < STATE_N; ++i)
-    {
-        h_value += abs(from_x[i] - POS_X(i));
-        h_value += abs(from_y[i] - POS_Y(i));
-    }
-    return h_value;
-}
 
 #define h_d_t(op, i, dir)                                                      \
     (h_diff_table[(op) *STATE_N * DIR_N + (i) *DIR_N + (dir)])
