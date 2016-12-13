@@ -1064,7 +1064,7 @@ static HT closed;
 
 	bool
 distribute_astar(State init_state, Input input[], int input_ends[], int distr_n,
-                 int *cnt_inputs, *int min_fvalue)
+                 int *cnt_inputs, int *min_fvalue)
 {
     int      cnt = 0;
     State    state;
