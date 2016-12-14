@@ -7,6 +7,7 @@
 #define N_INIT_DISTRIBUTION (N_WORKERS * 4)
 #define N_INPUTS (N_WORKERS * 8)
 #define PLAN_LEN_MAX 255
+#define BLACKLIST_BITS 12
 
 #define STATE_WIDTH 4
 #define STATE_N (STATE_WIDTH * STATE_WIDTH)
@@ -37,6 +38,7 @@ typedef struct search_stat_tag
     bool      solved;
     int       len;
     long long nodes_expanded;
+    int nodes_pruned;
 } search_stat;
 typedef struct input_tag
 {
@@ -44,6 +46,30 @@ typedef struct input_tag
     int       init_depth;
     Direction parent_dir;
 } Input;
+
+static inline int
+korf_hash(uchar tiles[])
+{
+	int h = tiles[0];
+	for (int i = 1; i < STATE_N; ++i)
+		h += h*3 + tiles[i];
+	return h;
+}
+__device__ static inline long long
+korf_hash(uchar tiles[])
+{
+	long long h = tiles[0];
+	for (long long i = 1; i < STATE_N; ++i)
+		h += h*3 + tiles[i];
+	return h;
+}
+typedef struct blacklist_entry_tag
+{
+	uchar tiles[STATE_N];
+	long long hash;
+	int g_value;
+} BlackListEntry;
+__shared__ BlackListEntry blacklist_dev[1 << BLACKLIST_BITS];
 
 __device__ static inline void
 stack_init(Input input)
@@ -182,6 +208,19 @@ state_move(Direction dir)
     STATE_EMPTY             = new_empty;
 }
 
+__device__ static inline bool
+blacklist_query(int *g_value)
+{
+	long long hash = korf_hash(STATE_TILE);
+	BlackListEntry e = blacklist_dev[hash & ((1u<<BLACKLIST_BITS) - 1)];
+	if (e.hash != hash)
+		return false;
+	for (int i = 0; i < STATE_N; ++i)
+		if (e.tiles[i] != STATE_TILE(i))
+			return false;
+	return true;
+}
+
 /*
  * solver implementation
  */
@@ -197,7 +236,9 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
          i < input_ends[id]; ++i)
     {
 		long long nodes_expanded = 0;
+		int nodes_pruned = 0;
 		uchar     dir            = 0;
+		int blacklist_g;
 		Input this_input = input[i];
         stack_init(this_input);
         state_tile_fill(this_input);
@@ -219,9 +260,15 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 
 				if (state_move_with_limit(dir, f_limit))
 				{
-					stack_put(dir);
-					dir = 0;
-					continue;
+					if (!(blacklist_query(&blacklist_g) &&
+							blacklist_g < this_input.depth + STACK.i))
+					{
+						stack_put(dir);
+						dir = 0;
+						continue;
+					}
+					else
+						++nodes_pruned;
 				}
 			}
 
@@ -237,6 +284,7 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 
 END_THIS_NODE:
         stat[i].nodes_expanded = nodes_expanded;
+        stat[i].nodes_pruned = nodes_pruned;
 
 		/* if my own works have done, get other's work here */
 
@@ -245,7 +293,8 @@ END_THIS_NODE:
 }
 
 __global__ void
-idas_kernel(Input *input, int *input_ends, signed char *plan, search_stat *stat,
+idas_kernel(Input *input, int *input_ends, signed char *plan,
+		BlackListEntry *blacklist, search_stat *stat,
             int f_limit, signed char *h_diff_table, bool *movable_table)
 {
     int       tid            = threadIdx.x;
@@ -259,6 +308,8 @@ idas_kernel(Input *input, int *input_ends, signed char *plan, search_stat *stat,
             if (j < STATE_N)
                 h_diff_table_shared[j][i / DIR_N][i % DIR_N] =
                     h_diff_table[j * STATE_N * DIR_N + i];
+	for (int i = tid; i < 1<<BLACKLIST_BITS; i += blockDim.x)
+		blacklist_dev[i] = blacklist[i];
 
     __syncthreads();
 
@@ -328,13 +379,13 @@ typedef unsigned char idx_t;
 typedef struct state_tag_cpu
 {
     int       depth; /* XXX: needed? */
-    uchar     pos[STATE_WIDTH][STATE_WIDTH];
+    uchar     pos[STATE_WIDTH*STATE_WIDTH];
     idx_t     i, j; /* pos of empty */
     Direction parent_dir;
     int       h_value;
 } * State;
 
-#define v(state, i, j) ((state)->pos[i][j])
+#define v(state, i, j) ((state)->pos[i+j*STATE_WIDTH])
 #define ev(state) (v(state, state->i, state->j))
 #define lv(state) (v(state, state->i - 1, state->j))
 #define dv(state) (v(state, state->i, state->j + 1))
@@ -969,7 +1020,7 @@ pq_dump(PQ pq)
     elog("\n");
 }
 
-static HT closed, black_list;
+static HT closed, BL1, BL2;
 
 bool
 distribute_astar(State init_state, Input input[], int input_ends[], int distr_n,
@@ -982,7 +1033,8 @@ distribute_astar(State init_state, Input input[], int input_ends[], int distr_n,
     int *    ht_value;
     bool     solved = false;
     closed          = ht_init(10000);
-    black_list      = ht_init(100);
+    BL1      = ht_init(1000);
+    BL2      = ht_init(1000);
 
     ht_status = ht_insert(closed, init_state, &ht_value);
     *ht_value = 0;
@@ -1046,8 +1098,7 @@ distribute_astar(State init_state, Input input[], int input_ends[], int distr_n,
             assert(state);
 
             for (int i = 0; i < STATE_N; ++i)
-                input[id].tiles[i] =
-                    state->pos[i % STATE_WIDTH][i / STATE_WIDTH];
+                input[id].tiles[i] = state->pos[i];
             input[id].tiles[state->i + (state->j * STATE_WIDTH)] = 0;
 
             input[id].init_depth = state_get_depth(state);
@@ -1076,7 +1127,7 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
     State state       = state_init(input[i].tiles, input[i].init_depth);
     state->parent_dir = input[i].parent_dir;
     PQ       pq       = pq_init(32);
-    HTStatus ht_status = ht_insert(black_list, state, &ht_value);
+    HTStatus ht_status = ht_insert(BL1, state, &ht_value);
 
 	if (ht_status == HT_FAILED_FOUND && *ht_value > state_get_depth(state))
 		*ht_value = state_get_depth(state);
@@ -1141,15 +1192,12 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
         State state                     = pq_pop(pq);
         assert(state);
 
-		/* insertion to black list here is optional */
-/*
-		ht_status = ht_insert(black_list, state, &ht_value);
+		ht_status = ht_insert(BL2, state, &ht_value);
 		if (ht_status == HT_FAILED_FOUND && *ht_value > state_get_depth(state))
 			*ht_value = state_get_depth(state);
-*/
 
         for (int j              = 0; j < STATE_N; ++j)
-            input[ofs].tiles[j] = state->pos[j % STATE_WIDTH][j / STATE_WIDTH];
+            input[ofs].tiles[j] = state->pos[j];
         input[ofs].tiles[state->i + (state->j * STATE_WIDTH)] = 0;
 
         input[ofs].init_depth = state_get_depth(state);
@@ -1161,6 +1209,33 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
     pq_fini(pq);
 
     return cnt == 0 ? 0 : cnt - 1;
+}
+
+static void
+fill_blacklist_internal(BlackListEntry blacklist[], HT bl)
+{
+	for (int i = 0; i < bl->n_bins; ++i)
+	{
+		HTEntry e = bl.bin[i];
+		while (e)
+		{
+			HTEntry next = e->next;
+			State s = e->key;
+			int hash = korf_hash(s);
+			BlackListEntry *ble = blacklist[hash & (1u << BLACKLIST_BITS)];
+			ble->hash = hash;
+			for (int p = 0; p < STATE_N; ++p)
+				ble->tiles[p] = s->pos[p];
+			ble->g_value = state_get_depth(s);
+		}
+	}
+}
+
+static void
+fill_blacklist(BlackListEntry blacklist[])
+{
+	fill_blacklist_internal(blacklist, BL2);
+	fill_blacklist_internal(blacklist, BL1);
 }
 
 /* main */
@@ -1306,9 +1381,14 @@ main(int argc, char *argv[])
     search_stat  stat[N_INPUTS];
     search_stat *d_stat;
 
+    int          blacklist_size = sizeof(BlackListEntry) * (1 << BLACKLIST_BITS);
+    BlackListEntry  h_blacklist[N_INPUTS];
+    BlackListEntry *d_blacklist;
+
     bool         movable_table[STATE_N * DIR_N];
     bool *       d_movable_table;
     int          movable_table_size = sizeof(bool) * STATE_N * DIR_N;
+
     signed char  h_diff_table[STATE_N * STATE_N * DIR_N];
     signed char *d_h_diff_table;
     int h_diff_table_size = sizeof(signed char) * STATE_N * STATE_N * DIR_N;
@@ -1341,6 +1421,7 @@ main(int argc, char *argv[])
     CUDA_CHECK(cudaMalloc((void **) &d_input_ends, input_ends_size));
     CUDA_CHECK(cudaMalloc((void **) &d_plan, plan_size));
     CUDA_CHECK(cudaMalloc((void **) &d_stat, stat_size));
+    CUDA_CHECK(cudaMalloc((void **) &d_blacklist, blacklist_size));
     CUDA_CHECK(cudaMalloc((void **) &d_movable_table, movable_table_size));
     CUDA_CHECK(cudaMalloc((void **) &d_h_diff_table, h_diff_table_size));
     CUDA_CHECK(cudaMemcpy(d_movable_table, movable_table, movable_table_size,
@@ -1351,6 +1432,7 @@ main(int argc, char *argv[])
     CUDA_CHECK(cudaMemset(d_input, 0, input_size));
     CUDA_CHECK(cudaMemset(d_plan, 0, plan_size));
     CUDA_CHECK(cudaMemset(d_stat, 0, stat_size));
+    CUDA_CHECK(cudaMemset(d_blacklist, 0, blacklist_size));
 
     for (uchar f_limit = min_fvalue;; f_limit += 2)
     {
@@ -1360,11 +1442,15 @@ main(int argc, char *argv[])
         CUDA_CHECK(cudaMemcpy(d_input_ends, input_ends, input_ends_size,
                               cudaMemcpyHostToDevice));
 
+		fill_blacklist(h_blacklist);
+        CUDA_CHECK(cudaMemcpy(d_blacklist, h_blacklist, blacklist_size,
+                              cudaMemcpyHostToDevice));
+
         elog("blacklist -> %d\n", black_list->n_elems);
         elog("kernel(block=%d, thread=%d)\n", N_BLOCKS, BLOCK_DIM);
         idas_kernel<<<N_BLOCKS, BLOCK_DIM>>>(d_input, d_input_ends, d_plan,
-                                             d_stat, f_limit, d_h_diff_table,
-                                             d_movable_table);
+                                             d_blacklist, d_stat, f_limit,
+											 d_h_diff_table, d_movable_table);
         CUDA_CHECK(cudaGetLastError());
 
         CUDA_CHECK(cudaMemcpy(plan, d_plan, plan_size, cudaMemcpyDeviceToHost));
@@ -1392,6 +1478,10 @@ main(int argc, char *argv[])
         long long int sum_of_expansion = 0;
         for (int i = 0; i < cnt_inputs; ++i)
             sum_of_expansion += stat[i].nodes_expanded;
+
+        long long int sum_of_pruned = 0;
+        for (int i = 0; i < cnt_inputs; ++i)
+            sum_of_pruned += stat[i].nodes_pruned;
 
         long long int increased             = 0;
         long long int avarage_expected_load = sum_of_expansion / N_WORKERS;
@@ -1426,6 +1516,8 @@ main(int argc, char *argv[])
         elog("STAT: av=%d, 2av=%d, 4av=%d, 8av=%d, 16av=%d, 32av=%d, more=%d\n",
              stat_cnt[0], stat_cnt[1], stat_cnt[2], stat_cnt[3], stat_cnt[4],
              stat_cnt[5], stat_cnt[6]);
+
+        elog("STAT: sum of pruned nodes: %lld\n", sum_of_pruned);
 
         if (cnt_inputs + increased > N_INPUTS)
         {
