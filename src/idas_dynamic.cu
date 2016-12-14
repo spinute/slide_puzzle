@@ -236,6 +236,10 @@ idas_internal(int f_limit)
 		}
 
         stat[i].nodes_expanded = nodes_expanded;
+
+		/* if my own works have done, get other's work here */
+
+		/* if every work finished, then return*/
     }
 }
 
