@@ -1142,9 +1142,11 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
         assert(state);
 
 		/* insertion to black list here is optional */
+/*
 		ht_status = ht_insert(black_list, state, &ht_value);
 		if (ht_status == HT_FAILED_FOUND && *ht_value > state_get_depth(state))
 			*ht_value = state_get_depth(state);
+*/
 
         for (int j              = 0; j < STATE_N; ++j)
             input[ofs].tiles[j] = state->pos[j % STATE_WIDTH][j / STATE_WIDTH];
