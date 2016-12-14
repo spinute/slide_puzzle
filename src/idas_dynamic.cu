@@ -186,8 +186,8 @@ state_move(Direction dir)
  * solver implementation
  */
 
-__device__ static bool
-idas_internal(int f_limit)
+__device__ static void
+idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 {
     int       tid            = threadIdx.x;
     int       bid            = blockIdx.x;
@@ -198,7 +198,7 @@ idas_internal(int f_limit)
     {
 		long long nodes_expanded = 0;
 		uchar     dir            = 0;
-		Input this_input = input[i]
+		Input this_input = input[i];
         stack_init(this_input);
         state_tile_fill(this_input);
         state_init_hvalue();
@@ -228,13 +228,14 @@ idas_internal(int f_limit)
 			while (++dir == DIR_N)
 			{
 				if (stack_is_empty())
-					break;
+					goto END_THIS_NODE;
 
 				dir = stack_pop();
 				state_move(dir_reverse(dir));
 			}
 		}
 
+END_THIS_NODE:
         stat[i].nodes_expanded = nodes_expanded;
 
 		/* if my own works have done, get other's work here */
@@ -248,8 +249,6 @@ idas_kernel(Input *input, int *input_ends, signed char *plan, search_stat *stat,
             int f_limit, signed char *h_diff_table, bool *movable_table)
 {
     int       tid            = threadIdx.x;
-    int       bid            = blockIdx.x;
-    int       id             = tid + bid * blockDim.x;
 
     for (int dir = 0; dir < DIR_N; ++dir)
         for (int i = tid; i < STATE_N; i += blockDim.x)
@@ -263,7 +262,7 @@ idas_kernel(Input *input, int *input_ends, signed char *plan, search_stat *stat,
 
     __syncthreads();
 
-	idas_internal(f_limit);
+	idas_internal(f_limit, input, input_ends, stat);
 }
 
 /* host library implementation */
