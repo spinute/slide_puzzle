@@ -7,7 +7,7 @@
 #define N_INIT_DISTRIBUTION (N_WORKERS * 4)
 #define N_INPUTS (N_WORKERS * 8)
 #define PLAN_LEN_MAX 255
-#define BLACKLIST_BITS 12
+#define BLACKLIST_BITS 10
 
 #define STATE_WIDTH 4
 #define STATE_N (STATE_WIDTH * STATE_WIDTH)
@@ -47,16 +47,16 @@ typedef struct input_tag
     Direction parent_dir;
 } Input;
 
-static inline int
+__host__ static inline long long
 korf_hash(uchar tiles[])
 {
-	int h = tiles[0];
+	long long  h = tiles[0];
 	for (int i = 1; i < STATE_N; ++i)
 		h += h*3 + tiles[i];
 	return h;
 }
 __device__ static inline long long
-korf_hash(uchar tiles[])
+korf_hash_dev(uchar tiles[])
 {
 	long long h = tiles[0];
 	for (long long i = 1; i < STATE_N; ++i)
@@ -211,7 +211,7 @@ state_move(Direction dir)
 __device__ static inline bool
 blacklist_query(int *g_value)
 {
-	long long hash = korf_hash(STATE_TILE);
+	long long hash = korf_hash_dev(state[threadIdx.x].tile);
 	BlackListEntry e = blacklist_dev[hash & ((1u<<BLACKLIST_BITS) - 1)];
 	if (e.hash != hash)
 		return false;
@@ -261,7 +261,7 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 				if (state_move_with_limit(dir, f_limit))
 				{
 					if (!(blacklist_query(&blacklist_g) &&
-							blacklist_g < this_input.depth + STACK.i))
+							blacklist_g <= this_input.init_depth + STACK.i))
 					{
 						stack_put(dir);
 						dir = 0;
@@ -379,13 +379,13 @@ typedef unsigned char idx_t;
 typedef struct state_tag_cpu
 {
     int       depth; /* XXX: needed? */
-    uchar     pos[STATE_WIDTH*STATE_WIDTH];
+    uchar     pos[STATE_WIDTH][STATE_WIDTH];
     idx_t     i, j; /* pos of empty */
     Direction parent_dir;
     int       h_value;
 } * State;
 
-#define v(state, i, j) ((state)->pos[i+j*STATE_WIDTH])
+#define v(state, i, j) ((state)->pos[i][j])
 #define ev(state) (v(state, state->i, state->j))
 #define lv(state) (v(state, state->i - 1, state->j))
 #define dv(state) (v(state, state->i, state->j + 1))
@@ -1098,7 +1098,7 @@ distribute_astar(State init_state, Input input[], int input_ends[], int distr_n,
             assert(state);
 
             for (int i = 0; i < STATE_N; ++i)
-                input[id].tiles[i] = state->pos[i];
+                input[id].tiles[i] = state->pos[i%STATE_WIDTH][i/STATE_WIDTH];
             input[id].tiles[state->i + (state->j * STATE_WIDTH)] = 0;
 
             input[id].init_depth = state_get_depth(state);
@@ -1197,7 +1197,7 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
 			*ht_value = state_get_depth(state);
 
         for (int j              = 0; j < STATE_N; ++j)
-            input[ofs].tiles[j] = state->pos[j];
+            input[ofs].tiles[j] = state->pos[j%STATE_WIDTH][j/STATE_WIDTH];
         input[ofs].tiles[state->i + (state->j * STATE_WIDTH)] = 0;
 
         input[ofs].init_depth = state_get_depth(state);
@@ -1216,17 +1216,21 @@ fill_blacklist_internal(BlackListEntry blacklist[], HT bl)
 {
 	for (int i = 0; i < bl->n_bins; ++i)
 	{
-		HTEntry e = bl.bin[i];
+		HTEntry e = bl->bin[i];
 		while (e)
 		{
 			HTEntry next = e->next;
 			State s = e->key;
-			int hash = korf_hash(s);
-			BlackListEntry *ble = blacklist[hash & (1u << BLACKLIST_BITS)];
+			uchar til[STATE_N];
+			for (int j = 0; j < STATE_N; ++j)
+				til[j] = s->pos[j%STATE_WIDTH][j/STATE_WIDTH];
+			int hash = korf_hash(til);
+			BlackListEntry *ble = &blacklist[hash & (1u << BLACKLIST_BITS)];
 			ble->hash = hash;
 			for (int p = 0; p < STATE_N; ++p)
-				ble->tiles[p] = s->pos[p];
+				ble->tiles[p] = til[p];
 			ble->g_value = state_get_depth(s);
+e = next;
 		}
 	}
 }
@@ -1446,7 +1450,7 @@ main(int argc, char *argv[])
         CUDA_CHECK(cudaMemcpy(d_blacklist, h_blacklist, blacklist_size,
                               cudaMemcpyHostToDevice));
 
-        elog("blacklist -> %d\n", black_list->n_elems);
+        elog("BL1: %d, BL2: %d\n", BL1->n_elems, BL2->n_elems);
         elog("kernel(block=%d, thread=%d)\n", N_BLOCKS, BLOCK_DIM);
         idas_kernel<<<N_BLOCKS, BLOCK_DIM>>>(d_input, d_input_ends, d_plan,
                                              d_blacklist, d_stat, f_limit,
