@@ -187,6 +187,7 @@ state_move(Direction dir)
  * solver implementation
  */
 
+__shared__ int input_i_shared;
 __device__ static void
 idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 {
@@ -196,11 +197,12 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 
 	int input_begin = bid == 0 ? 0 : input_ends[bid-1];
 	int input_end = input_ends[bid];
+	int input_i = input_begin+tid;
 
 	/* input surely includes more warks than #warp by devision condition */
-	Input this_input = input[input_begin + tid];
+	input_i_shared = input_begin + 32;
+	Input this_input = input[input_i];
 
-	__shared__ int input_i = input_begin + 32;
 	for (;;)
     {
 		long long nodes_expanded = 0;
@@ -245,8 +247,8 @@ END_THIS_NODE:
         stat[input_i].nodes_expanded = nodes_expanded;
         stat[input_i].thread = id;
 
-		input_i = atomicInc(input_i, input_end);
-		if (input_i == 0)
+		input_i = atomicInc(&input_i_shared, UINT_MAX);
+		if (input_i >= input_end)
 			break; /* XXX: get job from other threads */
 		this_input = input[input_i];
     }
