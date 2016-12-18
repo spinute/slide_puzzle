@@ -194,12 +194,17 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
     int       bid            = blockIdx.x;
     int       id             = tid + bid * blockDim.x;
 
-    for (int i = id == 0 ? 0 : input_ends[id - 1];
-         i < input_ends[id]; ++i)
+	int input_begin = bid == 0 ? 0 : input_ends[bid-1];
+	int input_end = input_ends[bid];
+
+	/* input surely includes more warks than #warp by devision condition */
+	Input this_input = input[input_begin + tid];
+
+	__shared__ int input_i = input_begin + 32;
+	for (;;)
     {
 		long long nodes_expanded = 0;
 		uchar     dir            = 0;
-		Input this_input = input[i];
         stack_init(this_input);
         state_tile_fill(this_input);
         state_init_hvalue();
@@ -237,12 +242,13 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 		}
 
 END_THIS_NODE:
-        stat[i].nodes_expanded = nodes_expanded;
-        stat[i].thread = id;
+        stat[input_i].nodes_expanded = nodes_expanded;
+        stat[input_i].thread = id;
 
-		/* if my own works have done, get other's work here */
-
-		/* if every work finished, then return*/
+		input_i = atomicInc(input_i, input_end);
+		if (input_i == 0)
+			break; /* XXX: get job from other threads */
+		this_input = input[input_i];
     }
 }
 
