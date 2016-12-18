@@ -187,7 +187,7 @@ state_move(Direction dir)
  * solver implementation
  */
 
-__shared__ int input_i_shared;
+__shared__ unsigned int input_i_shared;
 __device__ static void
 idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 {
