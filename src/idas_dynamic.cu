@@ -1,7 +1,7 @@
 #include <stdbool.h>
 
 #define BLOCK_DIM (32)
-#define N_BLOCKS (48 * 2)
+#define N_BLOCKS (8)
 // bug?? #define N_BLOCKS (48 * 4)
 #define N_WORKERS (N_BLOCKS * BLOCK_DIM)
 #define N_INIT_DISTRIBUTION (N_WORKERS * 4)
@@ -200,7 +200,8 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 	int input_i = input_begin+tid;
 
 	/* input surely includes more warks than #warp by devision condition */
-	input_i_shared = input_begin + 32;
+	if (tid == 0)
+		input_i_shared = input_begin + 32;
 	Input this_input = input[input_i];
 
 	for (;;)
@@ -1141,7 +1142,7 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
 
     for (int id = 0; id < cnt; ++id)
     {
-        int   estimation_after_devision = stat[i].nodes_expanded / cnt;
+        int   estimation_after_devision = stat[i].nodes_expanded / cnt; /* XXX: fix to consider f-value */
         int   ofs                       = id == 0 ? i : tail - 1 + id;
         State state                     = pq_pop(pq);
         assert(state);
@@ -1387,7 +1388,7 @@ main(int argc, char *argv[])
             }
 
 		long long int nodes_expanded_by_threads[N_WORKERS];
-		memset(nodes_expanded_by_threads, 0, sizeof(long long int) * N_WORKERS);
+		memset(nodes_expanded_by_threads, 0, sizeof(nodes_expanded_by_threads[0]) * N_WORKERS);
         long long int sum_of_expansion = 0;
         for (int i = 0; i < cnt_inputs; ++i)
 		{
@@ -1417,7 +1418,7 @@ main(int argc, char *argv[])
                 stat_cnt[6]++;
 
             int policy =
-                stat[i].nodes_expanded / (avarage_expected_load + 1) + 1;
+                (stat[i].nodes_expanded - 1)/ avarage_expected_load + 1;
 
             if (policy > 1 && stat[i].nodes_expanded > 20)
                 increased += input_devide(input, stat, i, policy,
@@ -1469,12 +1470,13 @@ main(int argc, char *argv[])
             load += stat[i].nodes_expanded;
             if (load >= avarage_expected_load*BLOCK_DIM)
             {
+printf("i=%d", i); puts("");
                 load             = 0;
                 input_ends[id++] = i;
             }
         }
 
-        while (id < N_WORKERS)
+        while (id < N_BLOCKS)
             input_ends[id++] = cnt_inputs;
     }
 solution_found:
