@@ -1,6 +1,6 @@
 #include <stdbool.h>
 
-#define BLOCK_DIM 32
+#define BLOCK_DIM (32)
 #define N_BLOCKS (48 * 2)
 // bug?? #define N_BLOCKS (48 * 4)
 #define N_WORKERS (N_BLOCKS * BLOCK_DIM)
@@ -12,7 +12,7 @@
 #define STATE_N (STATE_WIDTH * STATE_WIDTH)
 
 typedef unsigned char uchar;
-typedef signed char   Direction;
+ypedef signed char   Direction;
 #define dir_reverse(dir) ((Direction)(3 - (dir)))
 #define DIR_N 4
 #define DIR_FIRST 0
@@ -37,6 +37,7 @@ typedef struct search_stat_tag
     bool      solved;
     int       len;
     long long nodes_expanded;
+	int thread;
 } search_stat;
 typedef struct input_tag
 {
@@ -237,6 +238,7 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 
 END_THIS_NODE:
         stat[i].nodes_expanded = nodes_expanded;
+        stat[i].thread = id;
 
 		/* if my own works have done, get other's work here */
 
@@ -1376,30 +1378,67 @@ main(int argc, char *argv[])
                 goto solution_found;
             }
 
+		long long int nodes_expanded_by_threads[N_BLOCKS * BLOCK_DIM];
+		memset(nodes_expanded_by_threads, 0, sizeof(long long int) * N_BLOCKS * BLOCK_DIM);
         long long int sum_of_expansion = 0;
         for (int i = 0; i < cnt_inputs; ++i)
+		{
             sum_of_expansion += stat[i].nodes_expanded;
+			nodes_expanded_by_threads[stat[i].thread] += stat[i].nodes_expanded;
+		}
 
         long long int increased             = 0;
-        long long int avarage_expected_load = sum_of_expansion / N_WORKERS;
+		long long int avarage_expected_load_nodes = sum_of_expansion / cnt_inputs;
 
         int stat_cnt[10] = {0, 0, 0, 0, 0, 0, 0};
         for (int i = 0; i < cnt_inputs; ++i)
         {
-            if (stat[i].nodes_expanded < avarage_expected_load)
+            if (stat[i].nodes_expanded < avarage_expected_load_nodes)
                 stat_cnt[0]++;
-            else if (stat[i].nodes_expanded < 2 * avarage_expected_load)
+            else if (stat[i].nodes_expanded < 2 * avarage_expected_load_nodes)
                 stat_cnt[1]++;
-            else if (stat[i].nodes_expanded < 4 * avarage_expected_load)
+            else if (stat[i].nodes_expanded < 4 * avarage_expected_load_nodes)
                 stat_cnt[2]++;
-            else if (stat[i].nodes_expanded < 8 * avarage_expected_load)
+            else if (stat[i].nodes_expanded < 8 * avarage_expected_load_nodes)
                 stat_cnt[3]++;
-            else if (stat[i].nodes_expanded < 16 * avarage_expected_load)
+            else if (stat[i].nodes_expanded < 16 * avarage_expected_load_nodes)
                 stat_cnt[4]++;
-            else if (stat[i].nodes_expanded < 32 * avarage_expected_load)
+            else if (stat[i].nodes_expanded < 32 * avarage_expected_load_nodes)
                 stat_cnt[5]++;
             else
                 stat_cnt[6]++;
+
+            int policy =
+                stat[i].nodes_expanded / (avarage_expected_load_nodes + 1) + 1;
+
+            if (policy > 1 && stat[i].nodes_expanded > 20)
+                increased += input_devide(input, stat, i, policy,
+                                          cnt_inputs + increased);
+        }
+        elog("STAT: sum of expanded nodes: %lld\n", sum_of_expansion);
+        elog("STAT: avarage expanded nodes: %lld\n", avarage_expected_load_nodes);
+        elog("STAT: av=%d, 2av=%d, 4av=%d, 8av=%d, 16av=%d, 32av=%d, more=%d\n",
+             stat_cnt[0], stat_cnt[1], stat_cnt[2], stat_cnt[3], stat_cnt[4],
+             stat_cnt[5], stat_cnt[6]);
+
+        long long int avarage_expected_load = sum_of_expansion / N_WORKERS;
+        int stat_thread[10] = {0, 0, 0, 0, 0, 0, 0};
+        for (int i = 0; i < cnt_inputs; ++i)
+        {
+            if (stat[i].nodes_expanded < avarage_expected_load)
+                stat_thread[0]++;
+            else if (stat[i].nodes_expanded < 2 * avarage_expected_load)
+                stat_thread[1]++;
+            else if (stat[i].nodes_expanded < 4 * avarage_expected_load)
+                stat_thread[2]++;
+            else if (stat[i].nodes_expanded < 8 * avarage_expected_load)
+                stat_thread[3]++;
+            else if (stat[i].nodes_expanded < 16 * avarage_expected_load)
+                stat_thread[4]++;
+            else if (stat[i].nodes_expanded < 32 * avarage_expected_load)
+                stat_thread[5]++;
+            else
+                stat_thread[6]++;
 
             int policy =
                 stat[i].nodes_expanded / (avarage_expected_load + 1) + 1;
@@ -1408,11 +1447,10 @@ main(int argc, char *argv[])
                 increased += input_devide(input, stat, i, policy,
                                           cnt_inputs + increased);
         }
-        elog("STAT: sum of expanded nodes: %lld\n", sum_of_expansion);
-        elog("STAT: avarage expanded nodes: %lld\n", avarage_expected_load);
+        elog("STAT: avarage thread_wors: %lld\n", avarage_expected_load);
         elog("STAT: av=%d, 2av=%d, 4av=%d, 8av=%d, 16av=%d, 32av=%d, more=%d\n",
-             stat_cnt[0], stat_cnt[1], stat_cnt[2], stat_cnt[3], stat_cnt[4],
-             stat_cnt[5], stat_cnt[6]);
+             stat_thread[0], stat_thread[1], stat_thread[2], stat_thread[3],
+			 stat_thread[4], stat_thread[5], stat_thread[6]);
 
         if (cnt_inputs + increased > N_INPUTS)
         {
