@@ -7,15 +7,22 @@ CUDA_INC += -I$(CUDA_PATH)/include
 DEBUGFLAGS = -G -Xcompiler -rdynamic -gencode arch=compute_30,code=sm_30 -g
 NVCC_FLAGS = -O2  -arch=sm_30 #$(DEBUGFLAGS)
 CFLAGS = -O2 -std=c99 -Wall -Wextra
-objects = cumain device_prop cusingle cubase cpumain cpu25
+objects = cumain custatic device_prop cusingle cubase cpumain cpu25
 
 all: cpu cuda
+<<<<<<< Updated upstream
 cuda: cumain cublack custatic device_prop cusingle cubase
 cpu: cpumain cpu25
 
 cumain: idas_dynamic.cu
 	nvcc -o $@ $(NVCC_FLAGS) $<
 cublack: idas_black.cu
+=======
+cuda: cumain custatic device_prop cusingle cubase
+cpu: cpumain cpu25
+
+cumain: idas_dynamic.cu
+>>>>>>> Stashed changes
 	nvcc -o $@ $(NVCC_FLAGS) $<
 custatic: idas_static.cu
 	nvcc -o $@ $(NVCC_FLAGS) $<
