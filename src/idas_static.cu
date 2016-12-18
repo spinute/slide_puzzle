@@ -12,7 +12,7 @@
 #define STATE_N (STATE_WIDTH * STATE_WIDTH)
 
 typedef unsigned char uchar;
-ypedef signed char   Direction;
+typedef signed char   Direction;
 #define dir_reverse(dir) ((Direction)(3 - (dir)))
 #define DIR_N 4
 #define DIR_FIRST 0
