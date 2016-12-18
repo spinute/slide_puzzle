@@ -1,6 +1,6 @@
 #include <stdbool.h>
 
-#define BLOCK_DIM 32
+#define BLOCK_DIM (32)
 #define N_BLOCKS (48 * 2)
 // bug?? #define N_BLOCKS (48 * 4)
 #define N_WORKERS (N_BLOCKS * BLOCK_DIM)
@@ -25,7 +25,7 @@ typedef signed char   Direction;
 
 __device__ __shared__ static struct dir_stack_tag
 {
-    uchar i;
+    uchar i, j;
     int   init_depth;
     uchar buf[PLAN_LEN_MAX];
 } stack[BLOCK_DIM];
@@ -37,6 +37,7 @@ typedef struct search_stat_tag
     bool      solved;
     int       len;
     long long nodes_expanded;
+	int thread;
 } search_stat;
 typedef struct input_tag
 {
@@ -49,6 +50,7 @@ __device__ static inline void
 stack_init(Input input)
 {
     STACK.i          = 0;
+	STACK.j          = 0;
     STACK.init_depth = input.init_depth;
 }
 
@@ -61,7 +63,7 @@ stack_put(Direction dir)
 __device__ static inline bool
 stack_is_empty(void)
 {
-    return STACK.i == 0;
+    return STACK.i == STACK.j;
 }
 __device__ static inline Direction
 stack_pop(void)
@@ -185,42 +187,62 @@ state_move(Direction dir)
  * solver implementation
  */
 
-__device__ static bool
-idas_internal(int f_limit, long long *ret_nodes_expanded, Input input)
+__device__ static void
+idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 {
-    uchar     dir            = 0;
-    long long nodes_expanded = 0;
+    int       tid            = threadIdx.x;
+    int       bid            = blockIdx.x;
+    int       id             = tid + bid * blockDim.x;
 
-    for (;;)
+    for (int i = id == 0 ? 0 : input_ends[id - 1];
+         i < input_ends[id]; ++i)
     {
-        if (state_is_goal())
-	    asm("trap;"); /* solution found */
+		long long nodes_expanded = 0;
+		uchar     dir            = 0;
+		Input this_input = input[i];
+        stack_init(this_input);
+        state_tile_fill(this_input);
+        state_init_hvalue();
 
-        if (((stack_is_empty() && dir_reverse(dir) != input.parent_dir) ||
-             stack_peak() != dir_reverse(dir)) &&
-            state_movable(dir))
-        {
-            ++nodes_expanded;
+		for (;;)
+		{
+			if (state_is_goal())
+				asm("trap;"); /* solution found */
+			/* if continue search until solution found, just return true */
 
-            if (state_move_with_limit(dir, f_limit))
-            {
-                stack_put(dir);
-                dir = 0;
-                continue;
-            }
-        }
+			if (((stack_is_empty() && dir_reverse(dir) != this_input.parent_dir) ||
+						stack_peak() != dir_reverse(dir)) &&
+					state_movable(dir))
+			{
+				++nodes_expanded;
+				/* sometimes check idle here */
+				/* and load balance if needed */
 
-        while (++dir == DIR_N)
-        {
-            if (stack_is_empty())
-            {
-                *ret_nodes_expanded = nodes_expanded;
-                return false;
-            }
+				if (state_move_with_limit(dir, f_limit))
+				{
+					stack_put(dir);
+					dir = 0;
+					continue;
+				}
+			}
 
-            dir = stack_pop();
-            state_move(dir_reverse(dir));
-        }
+			while (++dir == DIR_N)
+			{
+				if (stack_is_empty())
+					goto END_THIS_NODE;
+
+				dir = stack_pop();
+				state_move(dir_reverse(dir));
+			}
+		}
+
+END_THIS_NODE:
+        stat[i].nodes_expanded = nodes_expanded;
+        stat[i].thread = id;
+
+		/* if my own works have done, get other's work here */
+
+		/* if every work finished, then return*/
     }
 }
 
@@ -229,8 +251,6 @@ idas_kernel(Input *input, int *input_ends, signed char *plan, search_stat *stat,
             int f_limit, signed char *h_diff_table, bool *movable_table)
 {
     int       tid            = threadIdx.x;
-    int       bid            = blockIdx.x;
-    int       id             = tid + bid * blockDim.x;
 
     for (int dir = 0; dir < DIR_N; ++dir)
         for (int i = tid; i < STATE_N; i += blockDim.x)
@@ -244,26 +264,7 @@ idas_kernel(Input *input, int *input_ends, signed char *plan, search_stat *stat,
 
     __syncthreads();
 
-    for (int input_i = id == 0 ? 0 : input_ends[id - 1];
-         input_i < input_ends[id]; ++input_i)
-    {
-		long long nodes_expanded = 0;
-        stack_init(input[input_i]);
-        state_tile_fill(input[input_i]);
-        state_init_hvalue();
-
-        if (idas_internal(f_limit, &nodes_expanded, input[input_i]))
-        {
-            stat[input_i].solved = true;
-            stat[input_i].len    = (int) STACK.i;
-            for (uchar i                         = 0; i < STACK.i; ++i)
-                plan[i + input_i * PLAN_LEN_MAX] = STACK.buf[i];
-        }
-        else
-            stat[input_i].solved = false;
-
-        stat[input_i].nodes_expanded = nodes_expanded;
-    }
+	idas_internal(f_limit, input, input_ends, stat);
 }
 
 /* host library implementation */
@@ -1377,30 +1378,67 @@ main(int argc, char *argv[])
                 goto solution_found;
             }
 
+		long long int nodes_expanded_by_threads[N_BLOCKS * BLOCK_DIM];
+		memset(nodes_expanded_by_threads, 0, sizeof(long long int) * N_BLOCKS * BLOCK_DIM);
         long long int sum_of_expansion = 0;
         for (int i = 0; i < cnt_inputs; ++i)
+		{
             sum_of_expansion += stat[i].nodes_expanded;
+			nodes_expanded_by_threads[stat[i].thread] += stat[i].nodes_expanded;
+		}
 
         long long int increased             = 0;
-        long long int avarage_expected_load = sum_of_expansion / N_WORKERS;
+		long long int avarage_expected_load_nodes = sum_of_expansion / cnt_inputs;
 
         int stat_cnt[10] = {0, 0, 0, 0, 0, 0, 0};
         for (int i = 0; i < cnt_inputs; ++i)
         {
-            if (stat[i].nodes_expanded < avarage_expected_load)
+            if (stat[i].nodes_expanded < avarage_expected_load_nodes)
                 stat_cnt[0]++;
-            else if (stat[i].nodes_expanded < 2 * avarage_expected_load)
+            else if (stat[i].nodes_expanded < 2 * avarage_expected_load_nodes)
                 stat_cnt[1]++;
-            else if (stat[i].nodes_expanded < 4 * avarage_expected_load)
+            else if (stat[i].nodes_expanded < 4 * avarage_expected_load_nodes)
                 stat_cnt[2]++;
-            else if (stat[i].nodes_expanded < 8 * avarage_expected_load)
+            else if (stat[i].nodes_expanded < 8 * avarage_expected_load_nodes)
                 stat_cnt[3]++;
-            else if (stat[i].nodes_expanded < 16 * avarage_expected_load)
+            else if (stat[i].nodes_expanded < 16 * avarage_expected_load_nodes)
                 stat_cnt[4]++;
-            else if (stat[i].nodes_expanded < 32 * avarage_expected_load)
+            else if (stat[i].nodes_expanded < 32 * avarage_expected_load_nodes)
                 stat_cnt[5]++;
             else
                 stat_cnt[6]++;
+
+            int policy =
+                stat[i].nodes_expanded / (avarage_expected_load_nodes + 1) + 1;
+
+            if (policy > 1 && stat[i].nodes_expanded > 20)
+                increased += input_devide(input, stat, i, policy,
+                                          cnt_inputs + increased);
+        }
+        elog("STAT: sum of expanded nodes: %lld\n", sum_of_expansion);
+        elog("STAT: avarage expanded nodes: %lld\n", avarage_expected_load_nodes);
+        elog("STAT: av=%d, 2av=%d, 4av=%d, 8av=%d, 16av=%d, 32av=%d, more=%d\n",
+             stat_cnt[0], stat_cnt[1], stat_cnt[2], stat_cnt[3], stat_cnt[4],
+             stat_cnt[5], stat_cnt[6]);
+
+        long long int avarage_expected_load = sum_of_expansion / N_WORKERS;
+        int stat_thread[10] = {0, 0, 0, 0, 0, 0, 0};
+        for (int i = 0; i < cnt_inputs; ++i)
+        {
+            if (stat[i].nodes_expanded < avarage_expected_load)
+                stat_thread[0]++;
+            else if (stat[i].nodes_expanded < 2 * avarage_expected_load)
+                stat_thread[1]++;
+            else if (stat[i].nodes_expanded < 4 * avarage_expected_load)
+                stat_thread[2]++;
+            else if (stat[i].nodes_expanded < 8 * avarage_expected_load)
+                stat_thread[3]++;
+            else if (stat[i].nodes_expanded < 16 * avarage_expected_load)
+                stat_thread[4]++;
+            else if (stat[i].nodes_expanded < 32 * avarage_expected_load)
+                stat_thread[5]++;
+            else
+                stat_thread[6]++;
 
             int policy =
                 stat[i].nodes_expanded / (avarage_expected_load + 1) + 1;
@@ -1409,11 +1447,10 @@ main(int argc, char *argv[])
                 increased += input_devide(input, stat, i, policy,
                                           cnt_inputs + increased);
         }
-        elog("STAT: sum of expanded nodes: %lld\n", sum_of_expansion);
-        elog("STAT: avarage expanded nodes: %lld\n", avarage_expected_load);
+        elog("STAT: avarage thread_wors: %lld\n", avarage_expected_load);
         elog("STAT: av=%d, 2av=%d, 4av=%d, 8av=%d, 16av=%d, 32av=%d, more=%d\n",
-             stat_cnt[0], stat_cnt[1], stat_cnt[2], stat_cnt[3], stat_cnt[4],
-             stat_cnt[5], stat_cnt[6]);
+             stat_thread[0], stat_thread[1], stat_thread[2], stat_thread[3],
+			 stat_thread[4], stat_thread[5], stat_thread[6]);
 
         if (cnt_inputs + increased > N_INPUTS)
         {

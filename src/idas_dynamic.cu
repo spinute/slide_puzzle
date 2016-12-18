@@ -1059,9 +1059,9 @@ distribute_astar(State init_state, Input input[], int input_ends[], int distr_n,
         *min_fvalue = minf;
 
         printf("distr_n=%d, n_worers=%d, cnt=%d\n", distr_n, N_WORKERS, cnt);
-        for (int id               = 0; id < N_WORKERS; ++id)
-            input_ends[id]        = (distr_n / N_WORKERS) * (id + 1) - 1;
-        input_ends[N_WORKERS - 1] = cnt;
+        for (int id               = 0; id < N_BLOCKS; ++id)
+            input_ends[id]        = (distr_n / N_BLOCKS) * (id + 1) - 1;
+        input_ends[N_BLOCKS - 1] = cnt;
     }
 
     pq_fini(q);
@@ -1284,8 +1284,8 @@ main(int argc, char *argv[])
     Input  input[N_INPUTS];
     Input *d_input;
 
-    int  input_ends_size = sizeof(int) * N_WORKERS;
-    int  input_ends[N_WORKERS];
+    int  input_ends_size = sizeof(int) * N_BLOCKS;
+    int  input_ends[N_BLOCKS];
     int *d_input_ends;
 
     int          plan_size = sizeof(signed char) * PLAN_LEN_MAX * N_INPUTS;
@@ -1378,8 +1378,8 @@ main(int argc, char *argv[])
                 goto solution_found;
             }
 
-		long long int nodes_expanded_by_threads[N_BLOCKS * BLOCK_DIM];
-		memset(nodes_expanded_by_threads, 0, sizeof(long long int) * N_BLOCKS * BLOCK_DIM);
+		long long int nodes_expanded_by_threads[N_WORKERS];
+		memset(nodes_expanded_by_threads, 0, sizeof(long long int) * N_WORKERS);
         long long int sum_of_expansion = 0;
         for (int i = 0; i < cnt_inputs; ++i)
 		{
@@ -1459,7 +1459,7 @@ main(int argc, char *argv[])
         for (int i = 0, load = 0; i < cnt_inputs; ++i)
         {
             load += stat[i].nodes_expanded;
-            if (load >= avarage_expected_load)
+            if (load >= avarage_expected_load*BLOCK_DIM)
             {
                 load             = 0;
                 input_ends[id++] = i;
