@@ -1396,7 +1396,7 @@ main(int argc, char *argv[])
 			nodes_expanded_by_threads[stat[i].thread] += stat[i].nodes_expanded;
 		}
 
-        long long int increased             = 0;
+        int increased             = 0;
 		long long int avarage_expected_load = sum_of_expansion / N_WORKERS;
 
         int stat_cnt[10] = {0, 0, 0, 0, 0, 0, 0};
@@ -1437,7 +1437,7 @@ main(int argc, char *argv[])
         }
 
         cnt_inputs += increased;
-        elog("input count: %lld\n", cnt_inputs);
+        elog("input count: %d\n", cnt_inputs);
 
         int stat_thread[10] = {0, 0, 0, 0, 0, 0, 0};
         for (int i = 0; i < N_WORKERS; ++i)
