@@ -38,7 +38,7 @@ typedef struct search_stat_tag
 {
     bool      solved;
     int       len;
-    long long nodes_expanded;
+    unsigned long long nodes_expanded;
 	int thread;
 } search_stat;
 typedef struct input_tag
@@ -197,17 +197,18 @@ typedef enum {
 	thread_sharing = 1,
 	thread_stopping = 2,
 } ThreadState;
-__shared__ thread_state[32];
+__shared__ ThreadState thread_state[32];
 
 __device__ static bool
 get_works(Input *input, uchar *dir)
 {
+	int tid = threadIdx.x;
 	int target = 32-tid;
 	int i = 0;
 	for (;;)
 	{
 		ThreadState old =
-			atomicCAS(&thread_state[target+i], thread_running, thread_sharing);
+			(ThreadState)atomicCAS(&thread_state[target+i], thread_running, thread_sharing);
 		if (old == thread_running)
 		{
 			int j = stack[target].j;
@@ -262,7 +263,7 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 	if (input_begin == input_end)
 	{
 		thread_state[tid] = thread_stopping;
-		if (!get_works(input, dir))
+		if (!get_works(input, &dir))
 			return;
 	}
 
@@ -277,7 +278,7 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 
 	for (;;)
     {
-		long long nodes_expanded = 0;
+		unsigned long long nodes_expanded = 0;
 
 		for (;;)
 		{
@@ -317,7 +318,7 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 		}
 
 END_THIS_NODE:
-        atomicAdd(&stat[input_i].nodes_expanded, nodes_expanded);
+        atomicAdd((&stat[input_i].nodes_expanded, nodes_expanded);
         stat[input_i].thread = id; /* just a reference, so not atomic for now */
 
 		input_i = atomicInc(&input_i_shared, UINT_MAX);
@@ -1474,9 +1475,9 @@ main(int argc, char *argv[])
                 goto solution_found;
             }
 
-		long long int nodes_expanded_by_threads[N_WORKERS];
+		unsigned long long int nodes_expanded_by_threads[N_WORKERS];
 		memset(nodes_expanded_by_threads, 0, sizeof(nodes_expanded_by_threads[0]) * N_WORKERS);
-        long long int sum_of_expansion = 0;
+        unsigned long long int sum_of_expansion = 0;
         for (int i = 0; i < cnt_inputs; ++i)
 		{
             sum_of_expansion += stat[i].nodes_expanded;
@@ -1484,7 +1485,7 @@ main(int argc, char *argv[])
 		}
 
         int increased             = 0;
-		long long int avarage_expected_load = sum_of_expansion / N_WORKERS;
+		unsigned long long int avarage_expected_load = sum_of_expansion / N_WORKERS;
 
         int stat_cnt[10] = {0, 0, 0, 0, 0, 0, 0};
         for (int i = 0; i < cnt_inputs; ++i)
