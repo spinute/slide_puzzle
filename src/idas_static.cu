@@ -207,8 +207,11 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 		for (;;)
 		{
 			if (state_is_goal())
-				asm("trap;"); /* solution found */
-			/* if continue search until solution found, just return true */
+				//asm("trap;"); /* solution found */
+			{
+				stat[i].solved = true;
+				return;
+			}
 
 			if (((stack_is_empty() && dir_reverse(dir) != this_input.parent_dir) ||
 						stack_peak() != dir_reverse(dir)) &&
@@ -1423,19 +1426,19 @@ main(int argc, char *argv[])
 
         long long int avarage_expected_load = sum_of_expansion / N_WORKERS;
         int stat_thread[10] = {0, 0, 0, 0, 0, 0, 0};
-        for (int i = 0; i < cnt_inputs; ++i)
+        for (int i = 0; i < N_WORKERS; ++i)
         {
-            if (stat[i].nodes_expanded < avarage_expected_load)
+            if (nodes_expanded_by_threads[i]< avarage_expected_load)
                 stat_thread[0]++;
-            else if (stat[i].nodes_expanded < 2 * avarage_expected_load)
+            else if (nodes_expanded_by_threads[i]< 2 * avarage_expected_load)
                 stat_thread[1]++;
-            else if (stat[i].nodes_expanded < 4 * avarage_expected_load)
+            else if (nodes_expanded_by_threads[i]< 4 * avarage_expected_load)
                 stat_thread[2]++;
-            else if (stat[i].nodes_expanded < 8 * avarage_expected_load)
+            else if (nodes_expanded_by_threads[i]< 8 * avarage_expected_load)
                 stat_thread[3]++;
-            else if (stat[i].nodes_expanded < 16 * avarage_expected_load)
+            else if (nodes_expanded_by_threads[i]< 16 * avarage_expected_load)
                 stat_thread[4]++;
-            else if (stat[i].nodes_expanded < 32 * avarage_expected_load)
+            else if (nodes_expanded_by_threads[i]< 32 * avarage_expected_load)
                 stat_thread[5]++;
             else
                 stat_thread[6]++;

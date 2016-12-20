@@ -218,8 +218,11 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 		for (;;)
 		{
 			if (state_is_goal())
-				asm("trap;"); /* solution found */
-			/* if continue search until solution found, just return true */
+				//asm("trap;"); /* solution found */
+			{
+				stat[input_i].solved = true;
+				return;
+			}
 
 			if (((stack_is_empty() && dir_reverse(dir) != this_input.parent_dir) ||
 						stack_peak() != dir_reverse(dir)) &&
