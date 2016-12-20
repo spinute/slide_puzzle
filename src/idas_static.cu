@@ -210,6 +210,7 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 				//asm("trap;"); /* solution found */
 			{
 				stat[i].solved = true;
+				stat[input_i].len = STACK.i;;
 				return;
 			}
 

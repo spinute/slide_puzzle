@@ -221,6 +221,8 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 				//asm("trap;"); /* solution found */
 			{
 				stat[input_i].solved = true;
+				/* copy stack to output */
+				stat[input_i].len = STACK.i;;
 				return;
 			}
 
@@ -255,6 +257,8 @@ END_THIS_NODE:
         stat[input_i].thread = id;
 
 		input_i = atomicInc(&input_i_shared, UINT_MAX);
+		//input_i = ++input_i_shared;
+
 		if (input_i >= input_end)
 			break; /* XXX: get job from other threads */
 		this_input = input[input_i];
