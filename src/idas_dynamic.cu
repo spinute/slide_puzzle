@@ -38,7 +38,7 @@ typedef struct search_stat_tag
 {
     bool      solved;
     int       len;
-    unsigned long long nodes_expanded;
+    unsigned long long int nodes_expanded;
 	int thread;
 } search_stat;
 typedef struct input_tag
@@ -195,7 +195,7 @@ __shared__ unsigned int input_i_shared;
 #define thread_running (0)
 #define thread_sharing (1)
 #define thread_stopping (2)
-__shared__ uchar thread_state[32];
+__shared__ int thread_state[32];
 
 __device__ static bool
 get_works(Input *input, uchar *dir)
@@ -244,21 +244,6 @@ get_works(Input *input, uchar *dir)
 	return false;
 }
 
-#if __CUDA_ARCH__ < 600
-__device__ unsigned long long atomicAdd(unsigned long long* address, unsigned long long val)
-{
-	unsigned long long old = *address,
-				  assumed;
-
-	do {
-		assumed = old;
-		old = atomicCAS(address_as_ull, assumed, val + assumed);
-	} while (assumed != old);
-
-	return old;
-}
-#endif
-
 __device__ static void
 idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 {
@@ -290,7 +275,7 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 
 	for (;;)
     {
-		unsigned long long nodes_expanded = 0;
+		unsigned long long int nodes_expanded = 0;
 
 		for (;;)
 		{
