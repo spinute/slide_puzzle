@@ -212,6 +212,8 @@ get_works(Input *input, uchar *dir)
 			if (j == stack[target].i)
 			{
 				i++;
+			if (i == 31)
+				break;
 				continue;
 			}
 
@@ -257,6 +259,7 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 	uchar     dir            = 0;
 	thread_state[tid] = thread_running;
 
+	STACK.input_i = input_i;
 	if (input_begin == input_end)
 	{
 		thread_state[tid] = thread_stopping;
