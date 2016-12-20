@@ -207,12 +207,15 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 		for (;;)
 		{
 			if (state_is_goal())
-				//asm("trap;"); /* solution found */
+			asm("trap;"); /* solution found */
+			/*
 			{
 				stat[i].solved = true;
-				stat[input_i].len = STACK.i;;
+				// copy stack to output
+				stat[i].len = STACK.i;;
 				return;
 			}
+			*/
 
 			if (((stack_is_empty() && dir_reverse(dir) != this_input.parent_dir) ||
 						stack_peak() != dir_reverse(dir)) &&

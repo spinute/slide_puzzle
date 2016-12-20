@@ -63,7 +63,7 @@ stack_put(Direction dir)
 __device__ static inline bool
 stack_is_empty(void)
 {
-    return STACK.i == STACK.j;
+    return STACK.i <= STACK.j;
 }
 __device__ static inline Direction
 stack_pop(void)
@@ -188,6 +188,17 @@ state_move(Direction dir)
  */
 
 __shared__ unsigned int input_i_shared;
+__shared__ enum {
+	thread_running,
+	thread_stopping,
+} thread_state[32];
+
+__device__ static bool
+get_works(void)
+{
+	return false;
+}
+
 __device__ static void
 idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 {
@@ -198,9 +209,13 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 	int input_begin = bid == 0 ? 0 : input_ends[bid-1];
 	int input_end = input_ends[bid];
 	int input_i = input_begin+tid;
+	thread_state[tid] = thread_running;
 
 	if (input_begin == input_end)
-		return;
+	{
+		if (!get_works())
+			return;
+	}
 
 	/* input surely includes more warks than #warp by devision condition */
 	if (tid == 0)
@@ -218,21 +233,21 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 		for (;;)
 		{
 			if (state_is_goal())
-				//asm("trap;"); /* solution found */
+				asm("trap;"); /* solution found */
+			/*
 			{
 				stat[input_i].solved = true;
-				/* copy stack to output */
+				// copy stack to output
 				stat[input_i].len = STACK.i;;
 				return;
 			}
+			*/
 
 			if (((stack_is_empty() && dir_reverse(dir) != this_input.parent_dir) ||
 						stack_peak() != dir_reverse(dir)) &&
 					state_movable(dir))
 			{
 				++nodes_expanded;
-				/* sometimes check idle here */
-				/* and load balance if needed */
 
 				if (state_move_with_limit(dir, f_limit))
 				{
@@ -257,10 +272,15 @@ END_THIS_NODE:
         stat[input_i].thread = id;
 
 		input_i = atomicInc(&input_i_shared, UINT_MAX);
-		//input_i = ++input_i_shared;
+		//input_i = ++input_i_shared; /* avoiding atomic operation may improve performance */
 
 		if (input_i >= input_end)
-			break; /* XXX: get job from other threads */
+		{
+			if (get_works())
+				continue;
+			else
+				return;
+		}
 		this_input = input[input_i];
     }
 }
