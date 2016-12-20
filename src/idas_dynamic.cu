@@ -244,17 +244,6 @@ get_works(Input *input, uchar *dir)
 	return false;
 }
 
-__device__ void myAtomicAdd(unsigned long long int* address, unsigned long long int val)
-{
-	unsigned long long old = *address,
-				  assumed;
-
-	do {
-		assumed = old;
-		old = atomicCAS(address, assumed, val + assumed);
-	} while (assumed != old);
-}
-
 __device__ static void
 idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 {
@@ -326,7 +315,7 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 		}
 
 END_THIS_NODE:
-        myAtomicAdd((&stat[input_i].nodes_expanded, nodes_expanded);
+        aomicAdd(&stat[input_i].nodes_expanded, nodes_expanded);
         stat[input_i].thread = id; /* just a reference, so not atomic for now */
 
 		input_i = atomicInc(&input_i_shared, UINT_MAX);
