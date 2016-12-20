@@ -1,7 +1,7 @@
 #include <stdbool.h>
 
 #define BLOCK_DIM (32)
-#define N_BLOCKS (8)
+#define N_BLOCKS (48)
 // bug?? #define N_BLOCKS (48 * 4)
 #define N_WORKERS (N_BLOCKS * BLOCK_DIM)
 #define N_INIT_DISTRIBUTION (N_WORKERS * 4)
@@ -1421,14 +1421,20 @@ main(int argc, char *argv[])
                 (stat[i].nodes_expanded - 1)/ avarage_expected_load + 1;
 
             if (policy > 1 && stat[i].nodes_expanded > 20)
+	    {
+		    elog("DEBUG: devide i=%d, stat[i].nodes_expanded=%lld\n",
+				    i, stat[i].nodes_expanded);
                 increased += input_devide(input, stat, i, policy,
                                           cnt_inputs + increased);
+	    }
         }
         elog("STAT: sum of expanded nodes: %lld\n", sum_of_expansion);
         elog("STAT: avarage expanded nodes: %lld\n", avarage_expected_load);
         elog("STAT: av=%d, 2av=%d, 4av=%d, 8av=%d, 16av=%d, 32av=%d, more=%d\n",
              stat_cnt[0], stat_cnt[1], stat_cnt[2], stat_cnt[3], stat_cnt[4],
              stat_cnt[5], stat_cnt[6]);
+
+	elog("DEBUG: cnt_inputs=%d, increased=%d\n", cnt_inputs, increased);
 
         if (cnt_inputs + increased > N_INPUTS)
         {
@@ -1478,6 +1484,7 @@ printf("i=%d", i); puts("");
 
         while (id < N_BLOCKS)
             input_ends[id++] = cnt_inputs;
+	input_ends[N_BLOCKS-1] = cnt_inputs;
     }
 solution_found:
 
