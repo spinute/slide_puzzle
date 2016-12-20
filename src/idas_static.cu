@@ -1,7 +1,7 @@
 #include <stdbool.h>
 
 #define BLOCK_DIM (32)
-#define N_BLOCKS (48 * 2)
+#define N_BLOCKS (48)
 // bug?? #define N_BLOCKS (48 * 4)
 #define N_WORKERS (N_BLOCKS * BLOCK_DIM)
 #define N_INIT_DISTRIBUTION (N_WORKERS * 4)
@@ -1387,8 +1387,8 @@ main(int argc, char *argv[])
 			nodes_expanded_by_threads[stat[i].thread] += stat[i].nodes_expanded;
 		}
 
-        long long int increased             = 0;
-		long long int avarage_expected_load_nodes = sum_of_expansion / cnt_inputs;
+        int increased             = 0;
+		long long int avarage_expected_load_nodes = sum_of_expansion / N_WORKERS;
 
         int stat_cnt[10] = {0, 0, 0, 0, 0, 0, 0};
         for (int i = 0; i < cnt_inputs; ++i)
@@ -1409,9 +1409,9 @@ main(int argc, char *argv[])
                 stat_cnt[6]++;
 
             int policy =
-                stat[i].nodes_expanded / (avarage_expected_load_nodes + 1) + 1;
+                (stat[i].nodes_expanded-1) / avarage_expected_load_nodes + 1;
 
-            if (policy > 1 && stat[i].nodes_expanded > 20)
+            if (policy > 1 && stat[i].nodes_expanded > 100)
                 increased += input_devide(input, stat, i, policy,
                                           cnt_inputs + increased);
         }
@@ -1439,13 +1439,6 @@ main(int argc, char *argv[])
                 stat_thread[5]++;
             else
                 stat_thread[6]++;
-
-            int policy =
-                stat[i].nodes_expanded / (avarage_expected_load + 1) + 1;
-
-            if (policy > 1 && stat[i].nodes_expanded > 20)
-                increased += input_devide(input, stat, i, policy,
-                                          cnt_inputs + increased);
         }
         elog("STAT: avarage thread_wors: %lld\n", avarage_expected_load);
         elog("STAT: av=%d, 2av=%d, 4av=%d, 8av=%d, 16av=%d, 32av=%d, more=%d\n",
@@ -1454,12 +1447,13 @@ main(int argc, char *argv[])
 
         if (cnt_inputs + increased > N_INPUTS)
         {
-            elog("cnt_inputs too large");
+            elog("cnt_inputs too large, cnt_inputs=%d, increased=%d\n",
+			    cnt_inputs, increased);
             abort();
         }
 
         cnt_inputs += increased;
-        elog("input count: %lld\n", cnt_inputs);
+        elog("input count: %d\n", cnt_inputs);
 
         /* NOTE: optionally sort here by expected cost or g/h-value */
 
@@ -1476,6 +1470,7 @@ main(int argc, char *argv[])
 
         while (id < N_WORKERS)
             input_ends[id++] = cnt_inputs;
+	input_ends[N_WORKERS-1] = cnt_inputs;
     }
 solution_found:
 

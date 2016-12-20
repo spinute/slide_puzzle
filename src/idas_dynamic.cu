@@ -199,6 +199,9 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 	int input_end = input_ends[bid];
 	int input_i = input_begin+tid;
 
+	if (input_begin == input_end)
+		return;
+
 	/* input surely includes more warks than #warp by devision condition */
 	if (tid == 0)
 		input_i_shared = input_begin + 32;
@@ -1420,10 +1423,8 @@ main(int argc, char *argv[])
             int policy =
                 (stat[i].nodes_expanded - 1)/ avarage_expected_load + 1;
 
-            if (policy > 1 && stat[i].nodes_expanded > 20)
+            if (policy > 1 && stat[i].nodes_expanded > 100)
 	    {
-		    elog("DEBUG: devide i=%d, stat[i].nodes_expanded=%lld\n",
-				    i, stat[i].nodes_expanded);
                 increased += input_devide(input, stat, i, policy,
                                           cnt_inputs + increased);
 	    }
@@ -1476,7 +1477,6 @@ main(int argc, char *argv[])
             load += stat[i].nodes_expanded;
             if (load >= avarage_expected_load*BLOCK_DIM)
             {
-printf("i=%d", i); puts("");
                 load             = 0;
                 input_ends[id++] = i;
             }
