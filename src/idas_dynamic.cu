@@ -192,12 +192,10 @@ state_move(Direction dir)
  */
 
 __shared__ unsigned int input_i_shared;
-typedef enum {
-	thread_running = 0,
-	thread_sharing = 1,
-	thread_stopping = 2,
-} ThreadState;
-__shared__ ThreadState thread_state[32];
+#define thread_running (0)
+#define thread_sharing (1)
+#define thread_stopping (2)
+__shared__ uchar thread_state[32];
 
 __device__ static bool
 get_works(Input *input, uchar *dir)
@@ -207,8 +205,7 @@ get_works(Input *input, uchar *dir)
 	int i = 0;
 	for (;;)
 	{
-		ThreadState old =
-			(ThreadState)atomicCAS(&thread_state[target+i], thread_running, thread_sharing);
+		uchar old = atomicCAS(&thread_state[target+i], thread_running, thread_sharing);
 		if (old == thread_running)
 		{
 			int j = stack[target].j;
@@ -246,6 +243,21 @@ get_works(Input *input, uchar *dir)
 	}
 	return false;
 }
+
+#if __CUDA_ARCH__ < 600
+__device__ unsigned long long atomicAdd(unsigned long long* address, unsigned long long val)
+{
+	unsigned long long old = *address,
+				  assumed;
+
+	do {
+		assumed = old;
+		old = atomicCAS(address_as_ull, assumed, val + assumed);
+	} while (assumed != old);
+
+	return old;
+}
+#endif
 
 __device__ static void
 idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
