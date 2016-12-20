@@ -315,7 +315,7 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 		}
 
 END_THIS_NODE:
-        aomicAdd(&stat[input_i].nodes_expanded, nodes_expanded);
+        atomicAdd(&stat[input_i].nodes_expanded, nodes_expanded);
         stat[input_i].thread = id; /* just a reference, so not atomic for now */
 
 		input_i = atomicInc(&input_i_shared, UINT_MAX);
@@ -1557,7 +1557,7 @@ main(int argc, char *argv[])
         for (int i = 0, load = 0; i < cnt_inputs; ++i)
         {
             load += stat[i].nodes_expanded;
-            if (load >= avarage_expected_load*BLOCK_DIM)
+            if ((unsigned int) load >= avarage_expected_load*BLOCK_DIM)
             {
                 load             = 0;
                 input_ends[id++] = i;
