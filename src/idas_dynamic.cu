@@ -192,11 +192,12 @@ state_move(Direction dir)
  */
 
 __shared__ unsigned int input_i_shared;
-__shared__ typedef enum {
+typedef enum {
 	thread_running = 0,
 	thread_sharing = 1,
 	thread_stopping = 2,
-} ThreadState thread_state[32];
+} ThreadState;
+__shared__ thread_state[32];
 
 __device__ static bool
 get_works(Input *input, uchar *dir)
