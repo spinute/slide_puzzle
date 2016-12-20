@@ -26,7 +26,9 @@ typedef signed char   Direction;
 __device__ __shared__ static struct dir_stack_tag
 {
     uchar i, j;
+	uchar parent_dir;
     int   init_depth;
+	int   input_i;
     uchar buf[PLAN_LEN_MAX];
 } stack[BLOCK_DIM];
 
@@ -47,10 +49,12 @@ typedef struct input_tag
 } Input;
 
 __device__ static inline void
-stack_init(Input input)
+stack_init(Input input, int input_i)
 {
     STACK.i          = 0;
 	STACK.j          = 0;
+	STACK.input_i    = input_i;
+	STACK.parent_dir = input.parent_dir;
     STACK.init_depth = input.init_depth;
 }
 
@@ -188,14 +192,56 @@ state_move(Direction dir)
  */
 
 __shared__ unsigned int input_i_shared;
-__shared__ enum {
-	thread_running,
-	thread_stopping,
-} thread_state[32];
+__shared__ typedef enum {
+	thread_running = 0,
+	thread_sharing = 1,
+	thread_stopping = 2,
+} ThreadState thread_state[32];
 
 __device__ static bool
-get_works(void)
+get_works(Input *input, uchar *dir)
 {
+	int target = 32-tid;
+	int i = 0;
+	for (;;)
+	{
+		ThreadState old =
+			atomicCAS(&thread_state[target+i], thread_running, thread_sharing);
+		if (old == thread_running)
+		{
+			int j = stack[target].j;
+			if (j == stack[target].i)
+			{
+				i++;
+				continue;
+			}
+
+			int target_i = stack[target].input_i;
+			Input in = input[target_i];
+
+			stack_init(in, target_i);
+			state_tile_fill(in);
+			state_init_hvalue();
+
+			for (int idx = 0; idx < j; ++idx)
+				state_move(stack[target].buf[idx]);
+
+			STACK.parent_dir = j == 0 ? stack[target].parent_dir : stack[target].buf[j - 1];
+			*dir = j;
+			STACK.init_depth += j;
+			stack[target].j++;
+
+			thread_state[target] = thread_running;
+			thread_state[tid] = thread_running;
+			return true;
+		}
+		else if (old == thread_stopping)
+		{
+			++i;
+			if (i == 31)
+				break;
+		}
+	}
 	return false;
 }
 
@@ -209,11 +255,13 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 	int input_begin = bid == 0 ? 0 : input_ends[bid-1];
 	int input_end = input_ends[bid];
 	int input_i = input_begin+tid;
+	uchar     dir            = 0;
 	thread_state[tid] = thread_running;
 
 	if (input_begin == input_end)
 	{
-		if (!get_works())
+		thread_state[tid] = thread_stopping;
+		if (!get_works(input, dir))
 			return;
 	}
 
@@ -222,13 +270,13 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 		input_i_shared = input_begin + 32;
 	Input this_input = input[input_i];
 
+	stack_init(this_input, input_i);
+	state_tile_fill(this_input);
+	state_init_hvalue();
+
 	for (;;)
     {
 		long long nodes_expanded = 0;
-		uchar     dir            = 0;
-        stack_init(this_input);
-        state_tile_fill(this_input);
-        state_init_hvalue();
 
 		for (;;)
 		{
@@ -243,7 +291,7 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 			}
 			*/
 
-			if (((stack_is_empty() && dir_reverse(dir) != this_input.parent_dir) ||
+			if (((stack_is_empty() && dir_reverse(dir) != STACK.parent_dir) ||
 						stack_peak() != dir_reverse(dir)) &&
 					state_movable(dir))
 			{
@@ -268,20 +316,28 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 		}
 
 END_THIS_NODE:
-        stat[input_i].nodes_expanded = nodes_expanded;
-        stat[input_i].thread = id;
+        atomicAdd(&stat[input_i].nodes_expanded, nodes_expanded);
+        stat[input_i].thread = id; /* just a reference, so not atomic for now */
 
 		input_i = atomicInc(&input_i_shared, UINT_MAX);
 		//input_i = ++input_i_shared; /* avoiding atomic operation may improve performance */
 
 		if (input_i >= input_end)
 		{
-			if (get_works())
+			thread_state[tid] = thread_stopping;
+			if (get_works(input, &dir))
+			{
 				continue;
+			}
 			else
 				return;
 		}
+
 		this_input = input[input_i];
+		dir            = 0;
+		stack_init(this_input, input_i);
+		state_tile_fill(this_input);
+		state_init_hvalue();
     }
 }
 
@@ -1379,10 +1435,10 @@ main(int argc, char *argv[])
 
     CUDA_CHECK(cudaMemset(d_input, 0, input_size));
     CUDA_CHECK(cudaMemset(d_plan, 0, plan_size));
-    CUDA_CHECK(cudaMemset(d_stat, 0, stat_size));
 
     for (uchar f_limit = min_fvalue;; f_limit += 2)
     {
+		CUDA_CHECK(cudaMemset(d_stat, 0, stat_size));
         elog("f=%d\n", (int) f_limit);
         CUDA_CHECK(
             cudaMemcpy(d_input, input, input_size, cudaMemcpyHostToDevice));
