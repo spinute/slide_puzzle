@@ -201,19 +201,18 @@ __device__ static bool
 get_works(Input *input, uchar *dir)
 {
 	int tid = threadIdx.x;
-	int target = 32-tid;
-	int i = 0;
+	int target = (tid + 1) & 31;
 	for (;;)
 	{
-		uchar old = atomicCAS(&thread_state[target+i], thread_running, thread_sharing);
+		uchar old = atomicCAS(&thread_state[target], thread_running, thread_sharing);
 		if (old == thread_running)
 		{
 			int j = stack[target].j;
 			if (j == stack[target].i)
 			{
-				i++;
-			if (i == 31)
-				break;
+				target = (target+1)&31;
+				if (target == tid)
+					break;
 				continue;
 			}
 
@@ -238,8 +237,8 @@ get_works(Input *input, uchar *dir)
 		}
 		else if (old == thread_stopping)
 		{
-			++i;
-			if (i == 31)
+			target = (target+1)&31;
+			if (target == tid)
 				break;
 		}
 	}
