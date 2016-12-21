@@ -1067,6 +1067,26 @@ pq_dump(PQ pq)
     elog("\n");
 }
 
+#include <stdlib.h>
+#include <string.h>
+
+int rrand(int m)
+{
+	return (int)((double)m * ( rand() / (RAND_MAX+1.0) ));
+}
+
+void shuffle_input(Input input[], int n_inputs)
+{
+	Input tmp;
+	size_t n = n_inputs;
+	while ( n > 1 ) {
+		size_t k = rrand(n--);
+		memcpy(&tmp, &input[n], siveof(Input));
+		memcpy&input[n], &input[k], siveof(Input));
+		memcpy&input[k], tmp, siveof(Input));
+	}
+} 
+
 static HT closed;
 
 bool
@@ -1152,6 +1172,7 @@ distribute_astar(State init_state, Input input[], int input_ends[], int distr_n,
             if (minf > state_get_depth(state) + state_get_hvalue(state))
                 minf = state_get_depth(state) + state_get_hvalue(state);
         }
+		shuffle_input(input, cnt);
         *min_fvalue = minf;
 
         printf("distr_n=%d, n_worers=%d, cnt=%d\n", distr_n, N_WORKERS, cnt);
@@ -1441,6 +1462,7 @@ main(int argc, char *argv[])
     {
 		CUDA_CHECK(cudaMemset(d_stat, 0, stat_size));
         elog("f=%d\n", (int) f_limit);
+
         CUDA_CHECK(
             cudaMemcpy(d_input, input, input_size, cudaMemcpyHostToDevice));
         CUDA_CHECK(cudaMemcpy(d_input_ends, input_ends, input_ends_size,
@@ -1552,6 +1574,8 @@ main(int argc, char *argv[])
         elog("STAT: av=%d, 2av=%d, 4av=%d, 8av=%d, 16av=%d, 32av=%d, more=%d\n",
              stat_thread[0], stat_thread[1], stat_thread[2], stat_thread[3],
 			 stat_thread[4], stat_thread[5], stat_thread[6]);
+
+		shuffle_input(input, cnt_inputs);
 
         /* NOTE: optionally sort here by expected cost or g/h-value */
 
