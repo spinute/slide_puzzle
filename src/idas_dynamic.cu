@@ -1084,10 +1084,10 @@ void shuffle_input(Input input[], int n_inputs)
 	while ( n > 1 ) {
 		size_t k = rrand(n--);
 		memcpy(&tmp, &input[n], siveof(Input));
-		memcpy&input[n], &input[k], siveof(Input));
-		memcpy&input[k], tmp, siveof(Input));
+		memcpy(&input[n], &input[k], siveof(Input));
+		memcpy(&input[k], tmp, siveof(Input));
 	}
-} 
+}
 
 static HT closed;
 
