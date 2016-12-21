@@ -211,6 +211,7 @@ get_works(Input *input, uchar *dir)
 			if (j == stack[target].i)
 			{
 				target = (target+1)&31;
+				thread_state[target] = thread_running;
 				if (target == tid)
 					break;
 				continue;
@@ -241,6 +242,7 @@ get_works(Input *input, uchar *dir)
 			if (target == tid)
 				break;
 		}
+		return false;
 	}
 	return false;
 }
