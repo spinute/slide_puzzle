@@ -10,10 +10,12 @@ CFLAGS = -O2 -std=c99 -Wall -Wextra
 objects = cumain custatic device_prop cusingle cubase cpumain cpu25
 
 all: cpu cuda
-cuda: cumain cublack custatic device_prop cusingle cubase
+cuda: cumain cublack custatic device_prop cusingle cubase cudynamic
 cpu: cpumain cpu25
 
-cumain: idas_dynamic.cu
+cumain: idas_global.cu
+	nvcc -o $@ $(NVCC_FLAGS) $<
+cudynamic: idas_dynamic.cu
 	nvcc -o $@ $(NVCC_FLAGS) $<
 cublack: idas_black.cu
 	nvcc -o $@ $(NVCC_FLAGS) $<
