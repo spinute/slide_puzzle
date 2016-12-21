@@ -4,8 +4,8 @@ VPATH = src
 
 CUDA_PATH = /usr/local/cuda
 CUDA_INC += -I$(CUDA_PATH)/include
-DEBUGFLAGS = -Xcompiler -rdynamic -G -gencode arch=compute_30,code=sm_30 -g -lineinfo
-NVCC_FLAGS = -Xcompiler -O2 -Xptxas -O2 --compiler-options -Wall -arch=sm_30  --resource-usage #$(DEBUGFLAGS)
+#NVCC_FLAGS = --compiler-options -Wall -arch=sm_30  --resource-usage -Xcompiler -rdynamic -G -gencode arch=compute_30,code=sm_30 -g -lineinfo
+NVCC_FLAGS = -Xcompiler -O2 -Xptxas -O2 --compiler-options -Wall -arch=sm_30  --resource-usage
 CFLAGS = -O2 -std=c99 -Wall -Wextra
 objects = cumain custatic device_prop cusingle cubase cpumain cpu25
 
