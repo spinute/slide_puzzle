@@ -191,7 +191,6 @@ state_move(Direction dir)
  * solver implementation
  */
 
-__shared__ unsigned int input_i_shared;
 #define thread_running (0)
 #define thread_sharing (1)
 #define thread_stopping (2)
@@ -248,29 +247,21 @@ get_works(Input *input, uchar *dir)
 }
 
 __device__ static void
-idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
+idas_internal(int cnt_inputs, int f_limit, Input *input, search_stat *stat)
 {
     int       tid            = threadIdx.x;
     int       bid            = blockIdx.x;
     int       id             = tid + bid * blockDim.x;
 
-	int input_begin = bid == 0 ? 0 : input_ends[bid-1];
-	int input_end = input_ends[bid];
-	int input_i = input_begin+tid;
+	int input_i = bid*32+tid;
+
+	if (input_i >= cnt_inputs)
+		return;
+
 	uchar     dir            = 0;
 	thread_state[tid] = thread_running;
-
 	STACK.input_i = input_i;
-	if (input_begin == input_end)
-	{
-		thread_state[tid] = thread_stopping;
-		if (!get_works(input, &dir))
-			return;
-	}
 
-	/* input surely includes more warks than #warp by devision condition */
-	if (tid == 0)
-		input_i_shared = input_begin + 32;
 	Input this_input = input[input_i];
 
 	stack_init(this_input, input_i);
@@ -285,14 +276,7 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 		{
 			if (state_is_goal())
 				asm("trap;"); /* solution found */
-			/*
-			{
-				stat[input_i].solved = true;
-				// copy stack to output
-				stat[input_i].len = STACK.i;;
-				return;
-			}
-			*/
+			/* { stat[input_i].solved = true; // copy stack to output; stat[input_i].len = STACK.i;; return; } */
 
 			if (((stack_is_empty() && dir_reverse(dir) != STACK.parent_dir) ||
 						stack_peak() != dir_reverse(dir)) &&
@@ -319,33 +303,17 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 		}
 
 END_THIS_NODE:
-        atomicAdd(&stat[input_i].nodes_expanded, nodes_expanded);
+		thread_state[tid] = thread_stopping;
+        atomicAdd(&stat[input_i].nodes_expanded, nodes_expanded); /* XXX: maybe heavy especially on SM_30 */
         stat[input_i].thread = id; /* just a reference, so not atomic for now */
 
-		input_i = atomicInc(&input_i_shared, UINT_MAX);
-		//input_i = ++input_i_shared; /* avoiding atomic operation may improve performance */
-
-		if (input_i >= input_end)
-		{
-			thread_state[tid] = thread_stopping;
-			if (get_works(input, &dir))
-			{
-				continue;
-			}
-			else
-				return;
-		}
-
-		this_input = input[input_i];
-		dir            = 0;
-		stack_init(this_input, input_i);
-		state_tile_fill(this_input);
-		state_init_hvalue();
+		if (!get_works(input, &dir))
+			return;
     }
 }
 
 __global__ void
-idas_kernel(Input *input, int *input_ends, signed char *plan, search_stat *stat,
+idas_kernel(int cnt_inputs, Input *input, signed char *plan, search_stat *stat,
             int f_limit, signed char *h_diff_table, bool *movable_table)
 {
     int       tid            = threadIdx.x;
@@ -362,7 +330,7 @@ idas_kernel(Input *input, int *input_ends, signed char *plan, search_stat *stat,
 
     __syncthreads();
 
-	idas_internal(f_limit, input, input_ends, stat);
+	idas_internal(cnt_inputs, f_limit, input, stat);
 }
 
 /* host library implementation */
@@ -1101,7 +1069,7 @@ void shuffle_input(Input input[], search_stat stat[], int n_inputs)
 static HT closed;
 
 bool
-distribute_astar(State init_state, Input input[], int input_ends[], int distr_n,
+distribute_astar(State init_state, Input input[], int distr_n,
                  int *cnt_inputs, int *min_fvalue)
 {
     int      cnt = 0;
@@ -1187,9 +1155,6 @@ distribute_astar(State init_state, Input input[], int input_ends[], int distr_n,
         *min_fvalue = minf;
 
         printf("distr_n=%d, n_worers=%d, cnt=%d\n", distr_n, N_WORKERS, cnt);
-        for (int id               = 0; id < N_BLOCKS; ++id)
-            input_ends[id]        = (distr_n / N_BLOCKS) * (id + 1) - 1;
-        input_ends[N_BLOCKS - 1] = cnt;
     }
 
     pq_fini(q);
@@ -1412,10 +1377,6 @@ main(int argc, char *argv[])
     Input  input[N_INPUTS];
     Input *d_input;
 
-    int  input_ends_size = sizeof(int) * N_BLOCKS;
-    int  input_ends[N_BLOCKS];
-    int *d_input_ends;
-
     int          plan_size = sizeof(signed char) * PLAN_LEN_MAX * N_INPUTS;
     signed char  plan[PLAN_LEN_MAX * N_INPUTS];
     signed char *d_plan;
@@ -1444,7 +1405,7 @@ main(int argc, char *argv[])
     {
         State init_state = state_init(input[0].tiles, 0);
 
-        if (distribute_astar(init_state, input, input_ends, N_INIT_DISTRIBUTION,
+        if (distribute_astar(init_state, input, N_INIT_DISTRIBUTION,
                              &cnt_inputs, &min_fvalue))
         {
             puts("solution is found by distributor");
@@ -1456,7 +1417,6 @@ main(int argc, char *argv[])
     init_movable_table(movable_table);
 
     CUDA_CHECK(cudaMalloc((void **) &d_input, input_size));
-    CUDA_CHECK(cudaMalloc((void **) &d_input_ends, input_ends_size));
     CUDA_CHECK(cudaMalloc((void **) &d_plan, plan_size));
     CUDA_CHECK(cudaMalloc((void **) &d_stat, stat_size));
     CUDA_CHECK(cudaMalloc((void **) &d_movable_table, movable_table_size));
@@ -1476,13 +1436,9 @@ main(int argc, char *argv[])
 
         CUDA_CHECK(
             cudaMemcpy(d_input, input, input_size, cudaMemcpyHostToDevice));
-        CUDA_CHECK(cudaMemcpy(d_input_ends, input_ends, input_ends_size,
-                              cudaMemcpyHostToDevice));
 
         elog("call idas_kernel(block=%d, thread=%d)\n", N_BLOCKS, BLOCK_DIM);
-        idas_kernel<<<N_BLOCKS, BLOCK_DIM>>>(d_input, d_input_ends, d_plan,
-                                             d_stat, f_limit, d_h_diff_table,
-                                             d_movable_table);
+        idas_kernel<<<N_BLOCKS, BLOCK_DIM>>>(cnt_inputs, d_input,  d_plan, d_stat, f_limit, d_h_diff_table, d_movable_table);
         CUDA_CHECK(cudaGetLastError());
 
         CUDA_CHECK(cudaMemcpy(plan, d_plan, plan_size, cudaMemcpyDeviceToHost));
@@ -1587,28 +1543,10 @@ main(int argc, char *argv[])
 			 stat_thread[4], stat_thread[5], stat_thread[6]);
 
 		shuffle_input(input, stat, cnt_inputs);
-
-        /* NOTE: optionally sort here by expected cost or g/h-value */
-
-        int id = 0;
-        for (int i = 0, load = 0; i < cnt_inputs; ++i)
-        {
-            load += stat[i].nodes_expanded;
-            if ((unsigned int) load >= avarage_expected_load*BLOCK_DIM)
-            {
-                load             = 0;
-                input_ends[id++] = i;
-            }
-        }
-
-        while (id < N_BLOCKS)
-            input_ends[id++] = cnt_inputs;
-	input_ends[N_BLOCKS-1] = cnt_inputs;
     }
 solution_found:
 
     CUDA_CHECK(cudaFree(d_input));
-    CUDA_CHECK(cudaFree(d_input_ends));
     CUDA_CHECK(cudaFree(d_plan));
     CUDA_CHECK(cudaFree(d_stat));
     CUDA_CHECK(cudaFree(d_movable_table));
