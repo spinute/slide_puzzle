@@ -1,7 +1,7 @@
 #include <stdbool.h>
 
 #define BLOCK_DIM (32)
-#define N_BLOCKS (48)
+#define N_BLOCKS (48*2)
 // bug?? #define N_BLOCKS (48 * 4)
 #define N_WORKERS (N_BLOCKS * BLOCK_DIM)
 #define N_INIT_DISTRIBUTION (N_WORKERS * 4)
@@ -1077,15 +1077,24 @@ int rrand(int m)
 	return (int)((double)m * ( rand() / (RAND_MAX+1.0) ));
 }
 
-void shuffle_input(Input input[], int n_inputs)
+void shuffle_input(Input input[], search_stat stat[], int n_inputs)
 {
 	Input tmp;
+	search_stat tmp_stat;
 	size_t n = n_inputs;
 	while ( n > 1 ) {
 		size_t k = rrand(n--);
+
 		memcpy(&tmp, &input[n], sizeof(Input));
 		memcpy(&input[n], &input[k], sizeof(Input));
 		memcpy(&input[k], &tmp, sizeof(Input));
+
+		if (stat)
+		{
+			memcpy(&tmp_stat, &stat[n], sizeof(Input));
+			memcpy(&stat[n], &stat[k], sizeof(Input));
+			memcpy(&stat[k], &tmp_stat, sizeof(Input));
+		}
 	}
 }
 
@@ -1174,7 +1183,7 @@ distribute_astar(State init_state, Input input[], int input_ends[], int distr_n,
             if (minf > state_get_depth(state) + state_get_hvalue(state))
                 minf = state_get_depth(state) + state_get_hvalue(state);
         }
-		shuffle_input(input, cnt);
+		shuffle_input(input, NULL, cnt);
         *min_fvalue = minf;
 
         printf("distr_n=%d, n_worers=%d, cnt=%d\n", distr_n, N_WORKERS, cnt);
@@ -1577,7 +1586,7 @@ main(int argc, char *argv[])
              stat_thread[0], stat_thread[1], stat_thread[2], stat_thread[3],
 			 stat_thread[4], stat_thread[5], stat_thread[6]);
 
-		shuffle_input(input, cnt_inputs);
+		shuffle_input(input, stat, cnt_inputs);
 
         /* NOTE: optionally sort here by expected cost or g/h-value */
 
