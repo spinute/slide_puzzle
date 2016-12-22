@@ -1,7 +1,7 @@
 #include <stdbool.h>
 
 #define BLOCK_DIM (32)
-#define N_BLOCKS (48*2)
+#define N_BLOCKS (48 * 2)
 // bug?? #define N_BLOCKS (48 * 4)
 #define N_WORKERS (N_BLOCKS * BLOCK_DIM)
 #define N_INIT_DISTRIBUTION (N_WORKERS * 4)
@@ -26,9 +26,9 @@ typedef signed char   Direction;
 __device__ __shared__ static struct dir_stack_tag
 {
     uchar i, j;
-	uchar parent_dir;
+    uchar parent_dir;
     int   init_depth;
-	int   input_i;
+    int   input_i;
     uchar buf[PLAN_LEN_MAX];
 } stack[BLOCK_DIM];
 
@@ -36,10 +36,10 @@ __device__ __shared__ static struct dir_stack_tag
 
 typedef struct search_stat_tag
 {
-    bool      solved;
-    int       len;
+    bool                   solved;
+    int                    len;
     unsigned long long int nodes_expanded;
-	int thread;
+    int                    thread;
 } search_stat;
 typedef struct input_tag
 {
@@ -52,9 +52,9 @@ __device__ static inline void
 stack_init(Input input, int input_i)
 {
     STACK.i          = 0;
-	STACK.j          = 0;
-	STACK.input_i    = input_i;
-	STACK.parent_dir = input.parent_dir;
+    STACK.j          = 0;
+    STACK.input_i    = input_i;
+    STACK.parent_dir = input.parent_dir;
     STACK.init_depth = input.init_depth;
 }
 
@@ -199,116 +199,121 @@ __shared__ int thread_state[32];
 __device__ static bool
 get_works(Input *input, uchar *dir)
 {
-	int tid = threadIdx.x;
-	int target = (tid + 1) & 31;
-	for (;;)
-	{
-		uchar old = atomicCAS(&thread_state[target], thread_running, thread_sharing);
-		if (old == thread_running)
-		{
-			int j = stack[target].j;
-			if (j == stack[target].i)
-			{
-				target = (target+1)&31;
-				thread_state[target] = thread_running;
-				if (target == tid)
-					break;
-				continue;
-			}
+    int tid    = threadIdx.x;
+    int target = (tid + 1) & 31;
+    for (;;)
+    {
+        uchar old =
+            atomicCAS(&thread_state[target], thread_running, thread_sharing);
+        if (old == thread_running)
+        {
+            int j = stack[target].j;
+            if (j == stack[target].i)
+            {
+                target               = (target + 1) & 31;
+                thread_state[target] = thread_running;
+                if (target == tid)
+                    break;
+                continue;
+            }
 
-			int target_i = stack[target].input_i;
-			Input in = input[target_i];
+            int   target_i = stack[target].input_i;
+            Input in       = input[target_i];
 
-			stack_init(in, target_i);
-			state_tile_fill(in);
-			state_init_hvalue();
+            stack_init(in, target_i);
+            state_tile_fill(in);
+            state_init_hvalue();
 
-			for (int idx = 0; idx < j; ++idx)
-				state_move(stack[target].buf[idx]);
+            for (int idx = 0; idx < j; ++idx)
+                state_move(stack[target].buf[idx]);
 
-			STACK.parent_dir = j == 0 ? stack[target].parent_dir : stack[target].buf[j - 1];
-			*dir = j;
-			STACK.init_depth += j;
-			stack[target].j++;
+            STACK.parent_dir =
+                j == 0 ? stack[target].parent_dir : stack[target].buf[j - 1];
+            *dir = j;
+            STACK.init_depth += j;
+            stack[target].j++;
 
-			thread_state[target] = thread_running;
-			thread_state[tid] = thread_running;
-			return true;
-		}
-		else if (old == thread_stopping)
-		{
-			target = (target+1)&31;
-			if (target == tid)
-				break;
-		}
-		return false;
-	}
-	return false;
+            thread_state[target] = thread_running;
+            thread_state[tid]    = thread_running;
+            return true;
+        }
+        else if (old == thread_stopping)
+        {
+            target = (target + 1) & 31;
+            if (target == tid)
+                break;
+        }
+        return false;
+    }
+    return false;
 }
 
 __device__ static void
 idas_internal(int cnt_inputs, int f_limit, Input *input, search_stat *stat)
 {
-    int       tid            = threadIdx.x;
-    int       bid            = blockIdx.x;
-    int       id             = tid + bid * blockDim.x;
+    int tid = threadIdx.x;
+    int bid = blockIdx.x;
+    int id  = tid + bid * blockDim.x;
 
-	int input_i = bid*32+tid;
+    int input_i = bid * 32 + tid;
 
-	if (input_i >= cnt_inputs)
-		return;
+    if (input_i >= cnt_inputs)
+        return;
 
-	uchar     dir            = 0;
-	thread_state[tid] = thread_running;
-	STACK.input_i = input_i;
+    uchar dir         = 0;
+    thread_state[tid] = thread_running;
+    STACK.input_i     = input_i;
 
-	Input this_input = input[input_i];
+    Input this_input = input[input_i];
 
-	stack_init(this_input, input_i);
-	state_tile_fill(this_input);
-	state_init_hvalue();
+    stack_init(this_input, input_i);
+    state_tile_fill(this_input);
+    state_init_hvalue();
 
-	for (;;)
+    for (;;)
     {
-		unsigned long long nodes_expanded = 0;
+        unsigned long long nodes_expanded = 0;
 
-		for (;;)
-		{
-			if (state_is_goal())
-				asm("trap;"); /* solution found */
-			/* { stat[input_i].solved = true; // copy stack to output; stat[input_i].len = STACK.i;; return; } */
+        for (;;)
+        {
+            if (state_is_goal())
+                asm("trap;"); /* solution found */
+            /* { stat[input_i].solved = true; // copy stack to output;
+             * stat[input_i].len = STACK.i;; return; } */
 
-			if (((stack_is_empty() && dir_reverse(dir) != STACK.parent_dir) ||
-						stack_peak() != dir_reverse(dir)) &&
-					state_movable(dir))
-			{
-				++nodes_expanded;
+            if (((stack_is_empty() && dir_reverse(dir) != STACK.parent_dir) ||
+                 stack_peak() != dir_reverse(dir)) &&
+                state_movable(dir))
+            {
+                ++nodes_expanded;
 
-				if (state_move_with_limit(dir, f_limit))
-				{
-					stack_put(dir);
-					dir = 0;
-					continue;
-				}
-			}
+                if (state_move_with_limit(dir, f_limit))
+                {
+                    stack_put(dir);
+                    dir = 0;
+                    continue;
+                }
+            }
 
-			while (++dir == DIR_N)
-			{
-				if (stack_is_empty())
-					goto END_THIS_NODE;
+            while (++dir == DIR_N)
+            {
+                if (stack_is_empty())
+                    goto END_THIS_NODE;
 
-				dir = stack_pop();
-				state_move(dir_reverse(dir));
-			}
-		}
+                dir = stack_pop();
+                state_move(dir_reverse(dir));
+            }
+        }
 
-END_THIS_NODE:
-		thread_state[tid] = thread_stopping;
-        atomicAdd(&stat[input_i].nodes_expanded, nodes_expanded); /* XXX: maybe heavy especially on SM_30 */
+    END_THIS_NODE:
+        thread_state[tid] = thread_stopping;
+        atomicAdd(&stat[input_i].nodes_expanded,
+                  nodes_expanded); /* XXX: maybe heavy especially in SM_30 */
+        // stat[input_i].nodes_expanded += nodes_expanded;
         stat[input_i].thread = id; /* just a reference, so not atomic for now */
 
-		if (!get_works(input, &dir))
-			return;
+        if (!get_works(input, &dir))
+            return;
     }
 }
 
@@ -316,7 +321,7 @@ __global__ void
 idas_kernel(int cnt_inputs, Input *input, signed char *plan, search_stat *stat,
             int f_limit, signed char *h_diff_table, bool *movable_table)
 {
-    int       tid            = threadIdx.x;
+    int tid = threadIdx.x;
 
     for (int dir = 0; dir < DIR_N; ++dir)
         for (int i = tid; i < STATE_N; i += blockDim.x)
@@ -330,7 +335,7 @@ idas_kernel(int cnt_inputs, Input *input, signed char *plan, search_stat *stat,
 
     __syncthreads();
 
-	idas_internal(cnt_inputs, f_limit, input, stat);
+    idas_internal(cnt_inputs, f_limit, input, stat);
 }
 
 /* host library implementation */
@@ -1040,37 +1045,40 @@ pq_dump(PQ pq)
 #include <stdlib.h>
 #include <string.h>
 
-int rrand(int m)
+int
+rrand(int m)
 {
-	return (int)((double)m * ( rand() / (RAND_MAX+1.0) ));
+    return (int) ((double) m * (rand() / (RAND_MAX + 1.0)));
 }
 
-void shuffle_input(Input input[], search_stat stat[], int n_inputs)
+void
+shuffle_input(Input input[], search_stat stat[], int n_inputs)
 {
-	Input tmp;
-	search_stat tmp_stat;
-	size_t n = n_inputs;
-	while ( n > 1 ) {
-		size_t k = rrand(n--);
+    Input       tmp;
+    search_stat tmp_stat;
+    size_t      n = n_inputs;
+    while (n > 1)
+    {
+        size_t k = rrand(n--);
 
-		memcpy(&tmp, &input[n], sizeof(Input));
-		memcpy(&input[n], &input[k], sizeof(Input));
-		memcpy(&input[k], &tmp, sizeof(Input));
+        memcpy(&tmp, &input[n], sizeof(Input));
+        memcpy(&input[n], &input[k], sizeof(Input));
+        memcpy(&input[k], &tmp, sizeof(Input));
 
-		if (stat)
-		{
-			memcpy(&tmp_stat, &stat[n], sizeof(Input));
-			memcpy(&stat[n], &stat[k], sizeof(Input));
-			memcpy(&stat[k], &tmp_stat, sizeof(Input));
-		}
-	}
+        if (stat)
+        {
+            memcpy(&tmp_stat, &stat[n], sizeof(Input));
+            memcpy(&stat[n], &stat[k], sizeof(Input));
+            memcpy(&stat[k], &tmp_stat, sizeof(Input));
+        }
+    }
 }
 
 static HT closed;
 
 bool
-distribute_astar(State init_state, Input input[], int distr_n,
-                 int *cnt_inputs, int *min_fvalue)
+distribute_astar(State init_state, Input input[], int distr_n, int *cnt_inputs,
+                 int *min_fvalue)
 {
     int      cnt = 0;
     State    state;
@@ -1151,7 +1159,7 @@ distribute_astar(State init_state, Input input[], int distr_n,
             if (minf > state_get_depth(state) + state_get_hvalue(state))
                 minf = state_get_depth(state) + state_get_hvalue(state);
         }
-		shuffle_input(input, NULL, cnt);
+        shuffle_input(input, NULL, cnt);
         *min_fvalue = minf;
 
         printf("distr_n=%d, n_worers=%d, cnt=%d\n", distr_n, N_WORKERS, cnt);
@@ -1226,9 +1234,10 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
 
     for (int id = 0; id < cnt; ++id)
     {
-        int   estimation_after_devision = stat[i].nodes_expanded / cnt; /* XXX: fix to consider f-value */
-        int   ofs                       = id == 0 ? i : tail - 1 + id;
-        State state                     = pq_pop(pq);
+        int estimation_after_devision =
+            stat[i].nodes_expanded / cnt; /* XXX: fix to consider f-value */
+        int   ofs   = id == 0 ? i : tail - 1 + id;
+        State state = pq_pop(pq);
         assert(state);
 
         for (int j              = 0; j < STATE_N; ++j)
@@ -1431,14 +1440,16 @@ main(int argc, char *argv[])
 
     for (uchar f_limit = min_fvalue;; f_limit += 2)
     {
-		CUDA_CHECK(cudaMemset(d_stat, 0, stat_size));
+        CUDA_CHECK(cudaMemset(d_stat, 0, stat_size));
         elog("f=%d\n", (int) f_limit);
 
         CUDA_CHECK(
             cudaMemcpy(d_input, input, input_size, cudaMemcpyHostToDevice));
 
         elog("call idas_kernel(block=%d, thread=%d)\n", N_BLOCKS, BLOCK_DIM);
-        idas_kernel<<<N_BLOCKS, BLOCK_DIM>>>(cnt_inputs, d_input,  d_plan, d_stat, f_limit, d_h_diff_table, d_movable_table);
+        idas_kernel<<<N_BLOCKS, BLOCK_DIM>>>(cnt_inputs, d_input, d_plan,
+                                             d_stat, f_limit, d_h_diff_table,
+                                             d_movable_table);
         CUDA_CHECK(cudaGetLastError());
 
         CUDA_CHECK(cudaMemcpy(plan, d_plan, plan_size, cudaMemcpyDeviceToHost));
@@ -1463,17 +1474,19 @@ main(int argc, char *argv[])
                 goto solution_found;
             }
 
-		unsigned long long int nodes_expanded_by_threads[N_WORKERS];
-		memset(nodes_expanded_by_threads, 0, sizeof(nodes_expanded_by_threads[0]) * N_WORKERS);
+        unsigned long long int nodes_expanded_by_threads[N_WORKERS];
+        memset(nodes_expanded_by_threads, 0,
+               sizeof(nodes_expanded_by_threads[0]) * N_WORKERS);
         unsigned long long int sum_of_expansion = 0;
         for (int i = 0; i < cnt_inputs; ++i)
-		{
+        {
             sum_of_expansion += stat[i].nodes_expanded;
-			nodes_expanded_by_threads[stat[i].thread] += stat[i].nodes_expanded;
-		}
+            nodes_expanded_by_threads[stat[i].thread] += stat[i].nodes_expanded;
+        }
 
-        int increased             = 0;
-		unsigned long long int avarage_expected_load = sum_of_expansion / N_WORKERS;
+        int                    increased = 0;
+        unsigned long long int avarage_expected_load =
+            sum_of_expansion / N_WORKERS;
 
         int stat_cnt[10] = {0, 0, 0, 0, 0, 0, 0};
         for (int i = 0; i < cnt_inputs; ++i)
@@ -1494,13 +1507,13 @@ main(int argc, char *argv[])
                 stat_cnt[6]++;
 
             int policy =
-                (stat[i].nodes_expanded - 1)/ avarage_expected_load + 1;
+                (stat[i].nodes_expanded - 1) / avarage_expected_load + 1;
 
             if (policy > 1 && stat[i].nodes_expanded > 100)
-	    {
+            {
                 increased += input_devide(input, stat, i, policy,
                                           cnt_inputs + increased);
-	    }
+            }
         }
         elog("STAT: sum of expanded nodes: %lld\n", sum_of_expansion);
         elog("STAT: avarage expanded nodes: %lld\n", avarage_expected_load);
@@ -1508,11 +1521,12 @@ main(int argc, char *argv[])
              stat_cnt[0], stat_cnt[1], stat_cnt[2], stat_cnt[3], stat_cnt[4],
              stat_cnt[5], stat_cnt[6]);
 
-	elog("DEBUG: cnt_inputs=%d, increased=%d\n", cnt_inputs, increased);
+        elog("DEBUG: cnt_inputs=%d, increased=%d\n", cnt_inputs, increased);
 
         if (cnt_inputs + increased > N_INPUTS)
         {
-            elog("cnt_inputs too large, cnt_inputs=%d\n", cnt_inputs + increased);
+            elog("cnt_inputs too large, cnt_inputs=%d\n",
+                 cnt_inputs + increased);
             abort();
         }
 
@@ -1522,17 +1536,17 @@ main(int argc, char *argv[])
         int stat_thread[10] = {0, 0, 0, 0, 0, 0, 0};
         for (int i = 0; i < N_WORKERS; ++i)
         {
-            if (nodes_expanded_by_threads[i]< avarage_expected_load)
+            if (nodes_expanded_by_threads[i] < avarage_expected_load)
                 stat_thread[0]++;
-            else if (nodes_expanded_by_threads[i]< 2 * avarage_expected_load)
+            else if (nodes_expanded_by_threads[i] < 2 * avarage_expected_load)
                 stat_thread[1]++;
-            else if (nodes_expanded_by_threads[i]< 4 * avarage_expected_load)
+            else if (nodes_expanded_by_threads[i] < 4 * avarage_expected_load)
                 stat_thread[2]++;
-            else if (nodes_expanded_by_threads[i]< 8 * avarage_expected_load)
+            else if (nodes_expanded_by_threads[i] < 8 * avarage_expected_load)
                 stat_thread[3]++;
-            else if (nodes_expanded_by_threads[i]< 16 * avarage_expected_load)
+            else if (nodes_expanded_by_threads[i] < 16 * avarage_expected_load)
                 stat_thread[4]++;
-            else if (nodes_expanded_by_threads[i]< 32 * avarage_expected_load)
+            else if (nodes_expanded_by_threads[i] < 32 * avarage_expected_load)
                 stat_thread[5]++;
             else
                 stat_thread[6]++;
@@ -1540,9 +1554,9 @@ main(int argc, char *argv[])
         elog("STAT: avarage thread_wors: %lld\n", avarage_expected_load);
         elog("STAT: av=%d, 2av=%d, 4av=%d, 8av=%d, 16av=%d, 32av=%d, more=%d\n",
              stat_thread[0], stat_thread[1], stat_thread[2], stat_thread[3],
-			 stat_thread[4], stat_thread[5], stat_thread[6]);
+             stat_thread[4], stat_thread[5], stat_thread[6]);
 
-		shuffle_input(input, stat, cnt_inputs);
+        shuffle_input(input, stat, cnt_inputs);
     }
 solution_found:
 
