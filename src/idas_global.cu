@@ -274,36 +274,39 @@ idas_internal(int cnt_inputs, int f_limit, Input *input, search_stat *stat)
     {
         unsigned long long nodes_expanded = 0;
 
-        for (;;)
-        {
-            if (state_is_goal())
-                asm("trap;"); /* solution found */
-            /* { stat[input_i].solved = true; // copy stack to output;
-             * stat[input_i].len = STACK.i;; return; } */
+		if (thread_state[tid] = thread_running)
+			for (;;)
+			{
+				if (state_is_goal())
+					asm("trap;"); /* solution found */
+				/* { stat[input_i].solved = true; // copy stack to output;
+				 * stat[input_i].len = STACK.i;; return; } */
 
-            if (((stack_is_empty() && dir_reverse(dir) != STACK.parent_dir) ||
-                 stack_peak() != dir_reverse(dir)) &&
-                state_movable(dir))
-            {
-                ++nodes_expanded;
+				if (((stack_is_empty() && dir_reverse(dir) != STACK.parent_dir) ||
+							stack_peak() != dir_reverse(dir)) &&
+						state_movable(dir))
+				{
+					++nodes_expanded;
+					if (nodes_expanded & 1023u == 0)
+						goto DISTRIBUTE;
 
-                if (state_move_with_limit(dir, f_limit))
-                {
-                    stack_put(dir);
-                    dir = 0;
-                    continue;
-                }
-            }
+					if (state_move_with_limit(dir, f_limit))
+					{
+						stack_put(dir);
+						dir = 0;
+						continue;
+					}
+				}
 
-            while (++dir == DIR_N)
-            {
-                if (stack_is_empty())
-                    goto END_THIS_NODE;
+				while (++dir == DIR_N)
+				{
+					if (stack_is_empty())
+						goto END_THIS_NODE;
 
-                dir = stack_pop();
-                state_move(dir_reverse(dir));
-            }
-        }
+					dir = stack_pop();
+					state_move(dir_reverse(dir));
+				}
+			}
 
     END_THIS_NODE:
         thread_state[tid] = thread_stopping;
@@ -312,7 +315,10 @@ idas_internal(int cnt_inputs, int f_limit, Input *input, search_stat *stat)
         // stat[input_i].nodes_expanded += nodes_expanded;
         stat[input_i].thread = id; /* just a reference, so not atomic for now */
 
-        if (!get_works(input, &dir))
+	DISTRIBUTE:
+        if (get_works(input, &dir))
+			continue;
+		else
             return;
     }
 }
