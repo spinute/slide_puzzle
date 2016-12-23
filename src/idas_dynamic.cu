@@ -1,12 +1,12 @@
 #include <stdbool.h>
 
 #define BLOCK_DIM (32)
-#define N_BLOCKS (48*2)
+#define N_BLOCKS (150)
 // bug?? #define N_BLOCKS (48 * 4)
 #define N_WORKERS (N_BLOCKS * BLOCK_DIM)
 #define N_INIT_DISTRIBUTION (N_WORKERS * 4)
 #define N_INPUTS (N_WORKERS * 8)
-#define PLAN_LEN_MAX 255
+#define PLAN_LEN_MAX 56
 
 #define STATE_WIDTH 4
 #define STATE_N (STATE_WIDTH * STATE_WIDTH)
@@ -103,10 +103,23 @@ __device__ __shared__ static struct state_tag
 #define STATE_HVALUE (state[threadIdx.x].h_value)
 #define distance(i, j) ((i) > (j) ? (i) - (j) : (j) - (i))
 
-#define H_DIFF(opponent, empty, empty_dir)                                     \
-    h_diff_table_shared[opponent][empty][empty_dir]
-__device__ __shared__ static signed char h_diff_table_shared[STATE_N][STATE_N]
-                                                            [DIR_N];
+__device__ static inline int calc_h_diff(int opponent, int new_empty, int empty_dir)
+{
+	int goal_x = POS_X(opponent);
+	int goal_y = POS_Y(opponent);
+	if (empty_dir == DIR_LEFT)
+		return POS_X(new_empty) < goal_x ? -1 : 1;
+	else if (empty_dir == DIR_RIGHT)
+		return POS_X(new_empty) > goal_x ? -1 : 1;
+	else if (empty_dir == DIR_UP)
+		return POS_Y(new_empty) < goal_y ? -1 : 1;
+	else
+		return POS_Y(new_empty) > goal_y ? -1 : 1;
+}
+#define H_DIFF(opponent, new_empty, empty_dir)                                     \
+		calc_h_diff(opponent, new_empty, empty_dir)
+//   h_diff_table_shared[opponent][new_empty][empty_dir]
+//__device__ __shared__ static signed char h_diff_table_shared[STATE_N][STATE_N][DIR_N];
 
 __device__ static void
 state_init_hvalue(void)
@@ -228,7 +241,7 @@ get_works(Input *input, uchar *dir)
 				state_move(stack[target].buf[idx]);
 
 			STACK.parent_dir = j == 0 ? stack[target].parent_dir : stack[target].buf[j - 1];
-			*dir = j;
+			*dir = stack[target].buf[j];
 			STACK.init_depth += j;
 			stack[target].j++;
 
@@ -241,6 +254,8 @@ get_works(Input *input, uchar *dir)
 			target = (target+1)&31;
 			if (target == tid)
 				break;
+			else
+				continue;
 		}
 		return false;
 	}
@@ -284,15 +299,13 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 		for (;;)
 		{
 			if (state_is_goal())
-				asm("trap;"); /* solution found */
-			/*
+				//asm("trap;"); /* solution found */
 			{
 				stat[input_i].solved = true;
 				// copy stack to output
 				stat[input_i].len = STACK.i;;
 				return;
 			}
-			*/
 
 			if (((stack_is_empty() && dir_reverse(dir) != STACK.parent_dir) ||
 						stack_peak() != dir_reverse(dir)) &&
@@ -354,11 +367,13 @@ idas_kernel(Input *input, int *input_ends, signed char *plan, search_stat *stat,
         for (int i = tid; i < STATE_N; i += blockDim.x)
             if (i < STATE_N)
                 movable_table_shared[i][dir] = movable_table[i * DIR_N + dir];
+	/*
     for (int i = 0; i < STATE_N * DIR_N; ++i)
         for (int j = tid; j < STATE_N; j += blockDim.x)
             if (j < STATE_N)
                 h_diff_table_shared[j][i / DIR_N][i % DIR_N] =
                     h_diff_table[j * STATE_N * DIR_N + i];
+	*/
 
     __syncthreads();
 

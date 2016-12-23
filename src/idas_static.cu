@@ -1,12 +1,12 @@
 #include <stdbool.h>
 
 #define BLOCK_DIM (32)
-#define N_BLOCKS (48)
+#define N_BLOCKS (150)
 // bug?? #define N_BLOCKS (48 * 4)
 #define N_WORKERS (N_BLOCKS * BLOCK_DIM)
 #define N_INIT_DISTRIBUTION (N_WORKERS * 4)
 #define N_INPUTS (N_WORKERS * 8)
-#define PLAN_LEN_MAX 255
+#define PLAN_LEN_MAX 56
 
 #define STATE_WIDTH 4
 #define STATE_N (STATE_WIDTH * STATE_WIDTH)
@@ -207,15 +207,13 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 		for (;;)
 		{
 			if (state_is_goal())
-			asm("trap;"); /* solution found */
-			/*
+			//asm("trap;"); /* solution found */
 			{
 				stat[i].solved = true;
 				// copy stack to output
 				stat[i].len = STACK.i;;
 				return;
 			}
-			*/
 
 			if (((stack_is_empty() && dir_reverse(dir) != this_input.parent_dir) ||
 						stack_peak() != dir_reverse(dir)) &&

@@ -229,7 +229,7 @@ get_works(Input *input, uchar *dir)
 
             STACK.parent_dir =
                 j == 0 ? stack[target].parent_dir : stack[target].buf[j - 1];
-            *dir = j;
+            *dir = stack[target].buf[j];
             STACK.init_depth += j;
             stack[target].j++;
 
@@ -242,6 +242,8 @@ get_works(Input *input, uchar *dir)
             target = (target + 1) & 31;
             if (target == tid)
                 break;
+			else
+				continue;
         }
         return false;
     }
@@ -271,9 +273,7 @@ idas_internal(int cnt_inputs, int f_limit, Input *input, search_stat *stat)
     state_init_hvalue();
 
     for (;;)
-    {
-        unsigned long long nodes_expanded = 0;
-
+    { unsigned long long nodes_expanded = 0; 
 		if (thread_state[tid] == thread_running)
 			for (;;)
 			{

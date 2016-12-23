@@ -16,12 +16,13 @@ main(int argc, char **argv)
 
     printf("%d available CUDA devices\n", devcnt);
 
+	for(int i = 0; i < devcnt; ++i)
     {
-        int dev = 0, driverVersion = 0, runtimeVersion = 0;
-        cudaSetDevice(dev);
+        int driverVersion = 0, runtimeVersion = 0;
+        cudaSetDevice(i);
         cudaDeviceProp prop;
-        cudaGetDeviceProperties(&prop, dev);
-        printf("Device %d: %s\n", dev, prop.name);
+        cudaGetDeviceProperties(&prop, i);
+        printf("Device %d: %s\n", i, prop.name);
 
         cudaDriverGetVersion(&driverVersion);
         cudaRuntimeGetVersion(&runtimeVersion);
