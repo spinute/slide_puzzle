@@ -228,7 +228,7 @@ get_works(Input *input, uchar *dir)
 				state_move(stack[target].buf[idx]);
 
 			STACK.parent_dir = j == 0 ? stack[target].parent_dir : stack[target].buf[j - 1];
-			*dir = j;
+            *dir = stack[target].buf[j];
 			STACK.init_depth += j;
 			stack[target].j++;
 
