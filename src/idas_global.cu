@@ -274,7 +274,7 @@ idas_internal(int cnt_inputs, int f_limit, Input *input, search_stat *stat)
     {
         unsigned long long nodes_expanded = 0;
 
-		if (thread_state[tid] = thread_running)
+		if (thread_state[tid] == thread_running)
 			for (;;)
 			{
 				if (state_is_goal())
