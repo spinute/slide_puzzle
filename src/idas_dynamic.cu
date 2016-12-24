@@ -209,7 +209,7 @@ __shared__ unsigned int input_i_shared;
 #define thread_sharing (1)
 #define thread_stopping (2)
 __shared__ int thread_state[32];
-__shared__ int n_running_threads;
+__shared__ unsigned int n_running_threads;
 
 __device__ static bool
 get_works(Input *input, uchar *dir)
@@ -283,9 +283,10 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 	if (input_begin == input_end)
 	{
 		thread_state[tid] = thread_stopping;
-				atomicDec(&n_running_threads, 1234);
+				atomicDec(&n_running_threads, 0);
 		if (!get_works(input, &dir))
 			return;
+		atomicInc(&n_running_threads, 34567);
 	}
 
 	/* input surely includes more warks than #warp by devision condition */
@@ -297,14 +298,18 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 	state_tile_fill(this_input);
 	state_init_hvalue();
 
+	unsigned long long nodes_expanded = 0;
 	for (;;)
     {
-		unsigned long long nodes_expanded = 0;
+		bool end_flag;
 
 		if (thread_state[tid] == thread_running)
+		{
+			end_flag = false;
 		for (;;)
 		{
-			bool end_flag = false;
+		if ((nodes_expanded & 1023u) == 1023u)
+			break;
 			if (state_is_goal())
 				//asm("trap;"); /* solution found */
 			{
@@ -319,8 +324,6 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 					state_movable(dir))
 			{
 				++nodes_expanded;
-					if (nodes_expanded & 1023u == 0)
-						goto DISTRIBUTE;
 
 				if (state_move_with_limit(dir, f_limit))
 				{
@@ -345,39 +348,42 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 			if (end_flag)
 				break;
 		}
+	}
 
 		if (end_flag)
 		{
-		thread_state[tid] = thread_stopping;
-		atomicDec(&n_running_threads,);
-		atomicAdd(&stat[input_i].nodes_expanded, nodes_expanded);
-		stat[input_i].thread = id; /* just a reference, so not atomic for now */
-	}
+			thread_state[tid] = thread_stopping;
+			atomicDec(&n_running_threads, 3456);
+			atomicAdd(&stat[input_i].nodes_expanded, nodes_expanded);
+			stat[input_i].thread = id; /* just a reference, so not atomic for now */
+			nodes_expanded = 0;
 
-		if (input_i_shared <= input_end)
-		{
-			input_i = atomicInc(&input_i_shared, UINT_MAX);
-			//input_i = ++input_i_shared; /* avoiding atomic operation may improve performance */
-			this_input = input[input_i];
-			dir            = 0;
-			stack_init(this_input, input_i);
-			state_tile_fill(this_input);
-			state_init_hvalue();
-			thread_state[tid] = thread_running;
-			atomicInc(&n_running_threads, 34567);
-	}
-
-		if (input_i >= input_end)
-		{
-			if (get_works(input, &dir))
+			if (input_i_shared <= input_end)
 			{
+				input_i = atomicInc(&input_i_shared, UINT_MAX);
+				//input_i = ++input_i_shared; /* avoiding atomic operation may improve performance */
+				this_input = input[input_i];
+				dir            = 0;
+				stack_init(this_input, input_i);
+				state_tile_fill(this_input);
+				state_init_hvalue();
+				thread_state[tid] = thread_running;
+				atomicInc(&n_running_threads, 34567);
 				continue;
 			}
-			else
-				return;
-		}
 
+			if (n_running_threads <= 16)
+				{
+					if (get_works(input, &dir))
+					{
+						atomicInc(&n_running_threads, 34567);
+						continue;
+					}
+					else
+						return;
+				}
     }
+	}
 }
 
 __global__ void
