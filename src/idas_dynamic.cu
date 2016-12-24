@@ -27,9 +27,9 @@ __device__ __shared__ static struct dir_stack_tag
 {
     uchar i, j;
 	uchar parent_dir;
-    int   init_depth;
-	int   input_i;
+    uchar   init_depth;
     uchar buf[PLAN_LEN_MAX];
+	int   input_i;
 } stack[BLOCK_DIM];
 
 #define STACK (stack[threadIdx.x])
@@ -209,6 +209,7 @@ __shared__ unsigned int input_i_shared;
 #define thread_sharing (1)
 #define thread_stopping (2)
 __shared__ int thread_state[32];
+__shared__ int n_running_threads;
 
 __device__ static bool
 get_works(Input *input, uchar *dir)
@@ -247,6 +248,7 @@ get_works(Input *input, uchar *dir)
 
 			thread_state[target] = thread_running;
 			thread_state[tid] = thread_running;
+			atomicInc(&n_running_threads, 1234);
 			return true;
 		}
 		else if (old == thread_stopping)
@@ -274,11 +276,14 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 	int input_i = input_begin+tid;
 	uchar     dir            = 0;
 	thread_state[tid] = thread_running;
+	if (tid == 0)
+		n_running_threads = 32;
 
 	STACK.input_i = input_i;
 	if (input_begin == input_end)
 	{
 		thread_state[tid] = thread_stopping;
+				atomicDec(&n_running_threads, 1234);
 		if (!get_works(input, &dir))
 			return;
 	}
@@ -296,8 +301,10 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
     {
 		unsigned long long nodes_expanded = 0;
 
+		if (thread_state[tid] == thread_running)
 		for (;;)
 		{
+			bool end_flag = false;
 			if (state_is_goal())
 				//asm("trap;"); /* solution found */
 			{
@@ -312,6 +319,8 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 					state_movable(dir))
 			{
 				++nodes_expanded;
+					if (nodes_expanded & 1023u == 0)
+						goto DISTRIBUTE;
 
 				if (state_move_with_limit(dir, f_limit))
 				{
@@ -324,23 +333,42 @@ idas_internal(int f_limit, Input *input, int *input_ends, search_stat *stat)
 			while (++dir == DIR_N)
 			{
 				if (stack_is_empty())
-					goto END_THIS_NODE;
+				{
+					end_flag = true;
+					break;
+				}
 
 				dir = stack_pop();
 				state_move(dir_reverse(dir));
 			}
+
+			if (end_flag)
+				break;
 		}
 
-END_THIS_NODE:
-        atomicAdd(&stat[input_i].nodes_expanded, nodes_expanded);
-        stat[input_i].thread = id; /* just a reference, so not atomic for now */
+		if (end_flag)
+		{
+		thread_state[tid] = thread_stopping;
+		atomicDec(&n_running_threads,);
+		atomicAdd(&stat[input_i].nodes_expanded, nodes_expanded);
+		stat[input_i].thread = id; /* just a reference, so not atomic for now */
+	}
 
-		input_i = atomicInc(&input_i_shared, UINT_MAX);
-		//input_i = ++input_i_shared; /* avoiding atomic operation may improve performance */
+		if (input_i_shared <= input_end)
+		{
+			input_i = atomicInc(&input_i_shared, UINT_MAX);
+			//input_i = ++input_i_shared; /* avoiding atomic operation may improve performance */
+			this_input = input[input_i];
+			dir            = 0;
+			stack_init(this_input, input_i);
+			state_tile_fill(this_input);
+			state_init_hvalue();
+			thread_state[tid] = thread_running;
+			atomicInc(&n_running_threads, 34567);
+	}
 
 		if (input_i >= input_end)
 		{
-			thread_state[tid] = thread_stopping;
 			if (get_works(input, &dir))
 			{
 				continue;
@@ -349,11 +377,6 @@ END_THIS_NODE:
 				return;
 		}
 
-		this_input = input[input_i];
-		dir            = 0;
-		stack_init(this_input, input_i);
-		state_tile_fill(this_input);
-		state_init_hvalue();
     }
 }
 

@@ -315,6 +315,8 @@ idas_internal(int cnt_inputs, int f_limit, Input *input, search_stat *stat)
         // stat[input_i].nodes_expanded += nodes_expanded;
         stat[input_i].thread = id; /* just a reference, so not atomic for now */
 
+		/* FIXME: only when doing distribution */
+
 	DISTRIBUTE:
         if (get_works(input, &dir))
 			continue;
