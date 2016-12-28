@@ -38,10 +38,16 @@ signed char h_diff_table_shared[STATE_N][STATE_N][DIR_N];
 
 #define distance(i, j) ((i) > (j) ? (i) - (j) : (j) - (i))
 __device__ static void
-state_init_hvalue(void)
+state_init(d_State state, Input *input)
 {
-    uchar from_x[STATE_N], from_y[STATE_N];
+    for (int i = 0; i < STATE_N; ++i)
+    {
+        if (input->tiles[i] == 0)
+            state->empty = i;
+		state->tile[i] = input->tiles[i];
+    }
 
+    uchar from_x[STATE_N], from_y[STATE_N];
     state->h_value = 0;
 
     for (int i = 0; i < STATE_N; ++i)
@@ -57,19 +63,8 @@ state_init_hvalue(void)
 }
 #undef distance
 
-__device__ static void
-state_tile_fill(Input input)
-{
-    for (int i = 0; i < STATE_N; ++i)
-    {
-        if (input.tiles[i] == 0)
-            state->empty = i;
-		state->tile[i] = input.tiles[i];
-    }
-}
-
 __device__ static inline bool
-state_is_goal(void)
+state_is_goal(d_State state)
 {
     return state->h_value == 0;
 }
@@ -77,7 +72,7 @@ state_is_goal(void)
 __device__ __shared__ static bool movable_table_shared[STATE_N][DIR_N];
 
 __device__ static inline bool
-state_movable(State state, Direction dir)
+state_movable(d_State state, Direction dir)
 {
     return movable_table_shared[state->empty][dir];
 }
@@ -86,7 +81,7 @@ __device__ __constant__ const static int pos_diff_table[DIR_N] = {
     -STATE_WIDTH, 1, -1, +STATE_WIDTH};
 
 __device__ static inline void
-state_move(Direction dir)
+state_move(d_State state, Direction dir)
 {
     int new_empty = state->empty + pos_diff_table[dir];
     int opponent  = state->tile[new_empty];
@@ -164,7 +159,7 @@ idas_internal(int f_limit, Input *input, search_stat *stat)
 	unsigned long long int loop_cnt = 0;
 	Input in = input[bid];
 
-    State state = state_init(in);
+    State state = state_init(&in);
 	if (state_get_f(state) > f_limit)
 		goto SEARCH_FINI;
 
