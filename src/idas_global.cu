@@ -1024,7 +1024,6 @@ distribute_astar(State init_state, Input input[], int distr_n, int *cnt_inputs,
     if (!solved)
     {
         int minf = INT_MAX;
-	pq_dump(q);
         for (int id = 0; id < cnt; ++id)
         {
             State state = pq_pop(q);
@@ -1252,7 +1251,7 @@ init_movable_table(bool movable_table[])
 }
 #undef m_t
 
-static char dir_char[] = {'U', 'R', 'L', 'D'};
+//static char dir_char[] = {'U', 'R', 'L', 'D'};
 
 #define INPUT_SIZE (sizeof(Input) * buf_len)
 #define STAT_SIZE (sizeof(search_stat) * buf_len)
@@ -1315,7 +1314,6 @@ main(int argc, char *argv[])
     for (uchar f_limit = min_fvalue;; f_limit += 2)
     {
         CUDA_CHECK(cudaMemset(d_stat, 0, STAT_SIZE));
-
         CUDA_CHECK( cudaMemcpy(d_input, input, INPUT_SIZE, cudaMemcpyHostToDevice));
 
         elog("f_limit=%d, n_roots=%d\n", (int) f_limit, n_roots);
@@ -1327,30 +1325,11 @@ main(int argc, char *argv[])
         CUDA_CHECK(cudaMemcpy(stat, d_stat, STAT_SIZE, cudaMemcpyDeviceToHost));
 
         for (int i = 0; i < n_roots; ++i)
-            if (stat[i].solved)
-            {
-                elog("core id = %d\n", i);
-                printf("cpu len=%d: \n", input[i].init_depth);
-
-                /* CPU side output */
-                // FIXME: Not implemented, for now. It is easy to search path
-                // from init state to this root.
-
-                /* GPU side output */
-                printf("gpu len=%d: ", stat[i].len);
-                for (int j = 0; j < stat[i].len; ++j)
-                    printf("%c ", dir_char[(int) plan[i * PLAN_LEN_MAX + j]]);
-                putchar('\n');
-
-                goto solution_found;
-            }
+		elog("%lld", stat[i].loads);
 
         unsigned long long int loads_sum = 0;
         for (int i = 0; i < n_roots; ++i)
-	{
-		elog("DEBUG: %lld", stat[i].loads);
             loads_sum += stat[i].loads;
-	}
 
         int                    increased = 0;
         unsigned long long int loads_av = loads_sum / n_roots;
@@ -1359,20 +1338,13 @@ main(int argc, char *argv[])
         int stat_cnt[10] = {0, 0, 0, 0, 0, 0, 0};
         for (int i = 0; i < n_roots; ++i)
         {
-            if (stat[i].loads < loads_av)
-                stat_cnt[0]++;
-            else if (stat[i].loads < 2 * loads_av)
-                stat_cnt[1]++;
-            else if (stat[i].loads < 4 * loads_av)
-                stat_cnt[2]++;
-            else if (stat[i].loads < 8 * loads_av)
-                stat_cnt[3]++;
-            else if (stat[i].loads < 16 * loads_av)
-                stat_cnt[4]++;
-            else if (stat[i].loads < 32 * loads_av)
-                stat_cnt[5]++;
-            else
-                stat_cnt[6]++;
+            if (stat[i].loads < loads_av) stat_cnt[0]++;
+            else if (stat[i].loads < 2 * loads_av) stat_cnt[1]++;
+            else if (stat[i].loads < 4 * loads_av) stat_cnt[2]++;
+            else if (stat[i].loads < 8 * loads_av) stat_cnt[3]++;
+            else if (stat[i].loads < 16 * loads_av) stat_cnt[4]++;
+            else if (stat[i].loads < 32 * loads_av) stat_cnt[5]++;
+            else stat_cnt[6]++;
 
             int policy = loads_av == 0 ? stat[i].loads : (stat[i].loads - 1) / loads_av + 1;
 
@@ -1407,8 +1379,8 @@ main(int argc, char *argv[])
 
         shuffle_input(input, n_roots); /* it may not be needed in case of idas_global */
     }
-solution_found:
 
+//solution_found:
     CUDA_CHECK(cudaFree(d_input));
     CUDA_CHECK(cudaFree(d_plan));
     CUDA_CHECK(cudaFree(d_stat));
