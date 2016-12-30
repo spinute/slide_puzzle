@@ -17,7 +17,7 @@ typedef signed char   Direction;
 #define DIR_RIGHT 1
 #define DIR_LEFT 2
 #define DIR_DOWN 3
-#define POS_X(pos) ((pos) & 3)
+#define POS_X(pos) ((pos) &3)
 #define POS_Y(pos) ((pos) >> 2)
 
 typedef struct search_stat_tag
@@ -41,27 +41,27 @@ typedef struct input_tag
 
 typedef struct state_tag
 {
-    uchar tile[STATE_N];
-    uchar empty;
-    uchar depth;
-    uchar parent_dir;
-    uchar h_value; /* ub of h_value is 6*16 */
+    uchar     tile[STATE_N];
+    uchar     empty;
+    uchar     depth;
+    Direction parent_dir;
+    uchar     h_value; /* ub of h_value is 6*16 */
 } d_State;
 
-__device__ __shared__ static
-signed char h_diff_table_shared[STATE_N][STATE_N][DIR_N];
+__device__ __shared__ static signed char h_diff_table_shared[STATE_N][STATE_N]
+                                                            [DIR_N];
 
 #define distance(i, j) ((i) > (j) ? (i) - (j) : (j) - (i))
 __device__ static void
 state_init(d_State *state, Input *input)
 {
-    state->depth = input->init_depth;
+    state->depth      = input->init_depth;
     state->parent_dir = input->parent_dir;
     for (int i = 0; i < STATE_N; ++i)
     {
         if (input->tiles[i] == 0)
             state->empty = i;
-		state->tile[i] = input->tiles[i];
+        state->tile[i]   = input->tiles[i];
     }
 
     uchar from_x[STATE_N], from_y[STATE_N];
@@ -88,7 +88,7 @@ state_is_goal(d_State *state)
 __device__ static inline int
 state_get_f(d_State *state)
 {
-	return state->depth + state->h_value;
+    return state->depth + state->h_value;
 }
 
 __device__ __shared__ static bool movable_table_shared[STATE_N][DIR_N];
@@ -110,44 +110,43 @@ state_move(d_State *state, Direction dir)
 
     state->h_value += h_diff_table_shared[opponent][new_empty][dir];
     state->tile[state->empty] = opponent;
-    state->empty             = new_empty;
-    state->parent_dir = dir;
+    state->empty              = new_empty;
+    state->parent_dir         = dir;
     ++state->depth;
 }
-
 
 /* stack implementation */
 
 typedef struct div_stack_tag
 {
     unsigned int n;
-    d_State buf[STACK_BUF_LEN];
+    d_State      buf[STACK_BUF_LEN];
 } d_Stack;
-
 
 __device__ static inline void
 stack_put(d_Stack *stack, d_State state)
 {
-	unsigned int i = atomicInc(&stack->n, UINT_MAX);
-    stack->buf[i] = state;
+    unsigned int i = atomicInc(&stack->n, UINT_MAX);
+    stack->buf[i]  = state;
 }
 __device__ static inline d_State *
 stack_pop(d_Stack *stack)
 {
-	int tid = threadIdx.x;
-	if (stack->n >= 32 / DIR_N)
-	{
-		if (tid == 0)
-			stack->n -= 32 / DIR_N;
-		return &stack->buf[tid >> 2];
-	}
-	else
-	{
-		d_State *ret_state = (tid >> 2) < stack->n ? &stack->buf[tid >> 2] : NULL;
-		if (tid == 0)
-			stack->n = 0;
-		return ret_state;
-	}
+    int tid = threadIdx.x;
+    if (stack->n >= 32 / DIR_N)
+    {
+        if (tid == 0)
+            stack->n -= 32 / DIR_N;
+        return &stack->buf[tid >> 2];
+    }
+    else
+    {
+        d_State *ret_state =
+            (tid >> 2) < stack->n ? &stack->buf[tid >> 2] : NULL;
+        if (tid == 0)
+            stack->n = 0;
+        return ret_state;
+    }
 }
 
 /*
@@ -156,59 +155,62 @@ stack_pop(d_Stack *stack)
 __device__ static void
 idas_internal(int f_limit, Input *input, search_stat *stat)
 {
-	__shared__ d_Stack stack;
-    int tid = threadIdx.x;
-    int bid = blockIdx.x;
-	unsigned long long int loop_cnt = 0;
-	Input in = input[bid];
+    __shared__ d_Stack     stack;
+    int                    tid      = threadIdx.x;
+    int                    bid      = blockIdx.x;
+    unsigned long long int loop_cnt = 0;
+    Input                  in       = input[bid];
 
-	d_State state;
-	state_init(&state, &in);
-	if (state_get_f(&state) > f_limit)
-		goto SEARCH_FINI;
+    d_State state;
+    state_init(&state, &in);
+    if (state_get_f(&state) > f_limit)
+        goto SEARCH_FINI;
 
-	if (tid == 0) {
-		stack.buf[0] = state;
-		stack.n = 1;
-	}
+    if (tid == 0)
+    {
+        stack.buf[0] = state;
+        stack.n      = 1;
+    }
 
-	for (;;)
-	{
-		if (stack.n == 0)
-			break;
+    for (;;)
+    {
+        if (stack.n == 0)
+            break;
 
-		++loop_cnt;
-		d_State *poped = stack_pop(&stack); /* get tid/4 th element */
-		if (poped)
-		{
-			uchar dir = tid & 3; /* choose my action */
+        ++loop_cnt;
+        d_State *poped = stack_pop(&stack); /* get tid/4 th element */
+        if (poped)
+        {
+            Direction dir = tid & 3; /* choose my action */
 
-			/* NOTE: always only 3 threads are required(max occupancy is 75%, it may be avoided using tabulation) */
-			if (poped->parent_dir == dir_reverse(dir))
-				continue;
-			if (state_movable(poped, dir))
-			{
-				d_State new_state = *poped;
-				state_move(&new_state, dir);
+            /* NOTE: always only 3 threads are required(max occupancy is 75%, it
+             * may be avoided using tabulation) */
+            if (poped->parent_dir == dir_reverse(dir))
+                continue;
+            if (state_movable(poped, dir))
+            {
+                d_State new_state = *poped;
+                state_move(&new_state, dir);
 
-				if (in.init_depth + state_get_f(&new_state) <= f_limit) {
-					if (state_is_goal(&new_state))
-						asm("trap;");
-					else
-						stack_put(&stack, new_state);
-				}
-			}
-		}
-	}
+                if (in.init_depth + state_get_f(&new_state) <= f_limit)
+                {
+                    if (state_is_goal(&new_state))
+                        asm("trap;");
+                    else
+                        stack_put(&stack, new_state);
+                }
+            }
+        }
+    }
 
 SEARCH_FINI:
-	stat->loads = loop_cnt;
+    stat->loads = loop_cnt;
 }
 
 /* XXX: movable table is effective in this case? */
 __global__ void
-idas_kernel(Input *input, signed char *plan, search_stat *stat,
-            int f_limit, signed char *h_diff_table, bool *movable_table)
+idas_kernel(Input *input, signed char *plan, search_stat *stat, int f_limit,
+            signed char *h_diff_table, bool *movable_table)
 {
     int tid = threadIdx.x;
 
@@ -545,6 +547,15 @@ int
 state_get_depth(State state)
 {
     return state->depth;
+}
+
+static void
+state_dump(State state)
+{
+    elog("LOG(state): depth=%d, h=%d, f=%d, ");
+    for (int i = 0; i < STATE_N; ++i)
+        elog("%d%c", state->pos[i % STATE_WIDTH][i / STATE_WIDTH],
+             i == STATE_N - 1 ? '\n' : ',');
 }
 
 #include <stddef.h>
@@ -942,8 +953,8 @@ rrand(int m)
 void
 shuffle_input(Input input[], int n_inputs)
 {
-    Input       tmp;
-    size_t      n = n_inputs;
+    Input  tmp;
+    size_t n = n_inputs;
     while (n > 1)
     {
         size_t k = rrand(n--);
@@ -1028,6 +1039,7 @@ distribute_astar(State init_state, Input input[], int distr_n, int *cnt_inputs,
         {
             State state = pq_pop(q);
             assert(state);
+            state_dump(state);
 
             for (int i = 0; i < STATE_N; ++i)
                 input[id].tiles[i] =
@@ -1039,6 +1051,7 @@ distribute_astar(State init_state, Input input[], int distr_n, int *cnt_inputs,
             if (minf > state_get_depth(state) + state_get_hvalue(state))
                 minf = state_get_depth(state) + state_get_hvalue(state);
         }
+        assert(pq_pop(q) == NULL);
         shuffle_input(input, cnt);
         *min_fvalue = minf;
     }
@@ -1049,7 +1062,8 @@ distribute_astar(State init_state, Input input[], int distr_n, int *cnt_inputs,
 }
 
 static int
-input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail, int *buf_len)
+input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail,
+             int *buf_len)
 {
     int   cnt = 0;
     int * ht_value;
@@ -1110,14 +1124,14 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail, i
             break;
     }
 
-	int new_buf_len = *buf_len;
-	while (tail + cnt >= new_buf_len)
-		new_buf_len <<= 1;
-	if (new_buf_len != *buf_len)
-	{
-		*buf_len = new_buf_len;
-		repalloc(input, sizeof(*input) * new_buf_len);
-	}
+    int new_buf_len = *buf_len;
+    while (tail + cnt >= new_buf_len)
+        new_buf_len <<= 1;
+    if (new_buf_len != *buf_len)
+    {
+        *buf_len = new_buf_len;
+        repalloc(input, sizeof(*input) * new_buf_len);
+    }
 
     for (int id = 0; id < cnt; ++id)
     {
@@ -1135,7 +1149,7 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail, i
 
     pq_fini(pq);
 
-	assert(cnt != 0); /* MAYBE */
+    assert(cnt != 0); /* MAYBE */
 
     return cnt == 0 ? 0 : cnt - 1;
 }
@@ -1204,6 +1218,20 @@ load_state_from_file(const char *fname, uchar *s)
                          __LINE__, e, cudaGetErrorString(e));                  \
     } while (0)
 
+__host__ static void *
+cudaPalloc(size_t size)
+{
+    void *ptr;
+    CUDA_CHECK(cudaMalloc(&ptr, size));
+    return ptr;
+}
+
+__host__ static void
+cudaPfree(void *ptr)
+{
+    CUDA_CHECK(cudaFree(ptr));
+}
+
 #define h_d_t(op, i, dir)                                                      \
     (h_diff_table[(op) *STATE_N * DIR_N + (i) *DIR_N + (dir)])
 __host__ static void
@@ -1251,61 +1279,55 @@ init_movable_table(bool movable_table[])
 }
 #undef m_t
 
-//static char dir_char[] = {'U', 'R', 'L', 'D'};
+// static char dir_char[] = {'U', 'R', 'L', 'D'};
 
 #define INPUT_SIZE (sizeof(Input) * buf_len)
 #define STAT_SIZE (sizeof(search_stat) * buf_len)
 #define PLAN_SIZE (PLAN_LEN_MAX * buf_len)
+#define MOVABLE_TABLE_SIZE (sizeof(bool) * STATE_N * DIR_N)
+#define H_DIFF_TABLE_SIZE (STATE_N * STATE_N * DIR_N)
 int
 main(int argc, char *argv[])
 {
     int n_roots;
 
-	int buf_len = N_INIT_DISTRIBUTION * 2;
+    int buf_len = N_INIT_DISTRIBUTION * 2;
 
-    Input  *input = (Input *)palloc(INPUT_SIZE), *d_input;
-    signed char *plan = (signed char *)palloc(PLAN_SIZE), *d_plan;
-    search_stat *stat = (search_stat *)palloc(STAT_SIZE), *d_stat;
-
-    int          movable_table_size = sizeof(bool) * STATE_N * DIR_N;
-    bool        *movable_table = (bool *)palloc(movable_table_size), *d_movable_table;
-
-    int h_diff_table_size = STATE_N * STATE_N * DIR_N;
-    signed char  *h_diff_table = (signed char *)palloc(h_diff_table_size), *d_h_diff_table;
+    Input *input                = (Input *) palloc(INPUT_SIZE),
+          *d_input              = (Input *) cudaPalloc(INPUT_SIZE);
+    signed char *plan           = (signed char *) palloc(PLAN_SIZE),
+                *d_plan         = (signed char *) cudaPalloc(PLAN_SIZE);
+    search_stat *stat           = (search_stat *) palloc(STAT_SIZE),
+                *d_stat         = (search_stat *) cudaPalloc(STAT_SIZE);
+    bool *movable_table         = (bool *) palloc(MOVABLE_TABLE_SIZE),
+         *d_movable_table       = (bool *) cudaPalloc(MOVABLE_TABLE_SIZE);
+    signed char *h_diff_table   = (signed char *) palloc(H_DIFF_TABLE_SIZE),
+                *d_h_diff_table = (signed char *) cudaPalloc(H_DIFF_TABLE_SIZE);
 
     int min_fvalue = 0;
 
-    if (argc < 2)
-    {
-        printf("usage: bin/cumain <ifname>\n");
-        exit(EXIT_FAILURE);
-    }
+    if (argc != 2)
+        exit_failure("usage: bin/cumain <ifname>\n");
 
     load_state_from_file(argv[1], input[0].tiles);
 
     {
         State init_state = state_init(input[0].tiles, 0);
-
-        if (distribute_astar(init_state, input, N_INIT_DISTRIBUTION,
-                             &n_roots, &min_fvalue))
+        if (distribute_astar(init_state, input, N_INIT_DISTRIBUTION, &n_roots,
+                             &min_fvalue))
         {
-            puts("solution is found by distributor");
-            return 0;
+            elog("solution is found by distributor\n");
+            goto solution_found;
         }
+        state_fini(init_state);
     }
 
     init_mdist(h_diff_table);
     init_movable_table(movable_table);
 
-    CUDA_CHECK(cudaMalloc((void **) &d_input, INPUT_SIZE));
-    CUDA_CHECK(cudaMalloc((void **) &d_plan, PLAN_SIZE));
-    CUDA_CHECK(cudaMalloc((void **) &d_stat, STAT_SIZE));
-    CUDA_CHECK(cudaMalloc((void **) &d_movable_table, movable_table_size));
-    CUDA_CHECK(cudaMalloc((void **) &d_h_diff_table, h_diff_table_size));
-
-    CUDA_CHECK(cudaMemcpy(d_movable_table, movable_table, movable_table_size,
+    CUDA_CHECK(cudaMemcpy(d_movable_table, movable_table, MOVABLE_TABLE_SIZE,
                           cudaMemcpyHostToDevice));
-    CUDA_CHECK(cudaMemcpy(d_h_diff_table, h_diff_table, h_diff_table_size,
+    CUDA_CHECK(cudaMemcpy(d_h_diff_table, h_diff_table, H_DIFF_TABLE_SIZE,
                           cudaMemcpyHostToDevice));
 
     CUDA_CHECK(cudaMemset(d_input, 0, INPUT_SIZE));
@@ -1314,85 +1336,98 @@ main(int argc, char *argv[])
     for (uchar f_limit = min_fvalue;; f_limit += 2)
     {
         CUDA_CHECK(cudaMemset(d_stat, 0, STAT_SIZE));
-        CUDA_CHECK( cudaMemcpy(d_input, input, INPUT_SIZE, cudaMemcpyHostToDevice));
+        CUDA_CHECK(
+            cudaMemcpy(d_input, input, INPUT_SIZE, cudaMemcpyHostToDevice));
 
         elog("f_limit=%d, n_roots=%d\n", (int) f_limit, n_roots);
-        idas_kernel<<<n_roots, BLOCK_DIM>>>(d_input, d_plan, d_stat,
-				f_limit, d_h_diff_table, d_movable_table);
-        CUDA_CHECK(cudaGetLastError()); /* asm trap is called when find solution */
+        idas_kernel<<<n_roots, BLOCK_DIM>>>(d_input, d_plan, d_stat, f_limit,
+                                            d_h_diff_table, d_movable_table);
+        CUDA_CHECK(
+            cudaGetLastError()); /* asm trap is called when find solution */
 
         CUDA_CHECK(cudaMemcpy(plan, d_plan, PLAN_SIZE, cudaMemcpyDeviceToHost));
         CUDA_CHECK(cudaMemcpy(stat, d_stat, STAT_SIZE, cudaMemcpyDeviceToHost));
 
         for (int i = 0; i < n_roots; ++i)
-		elog("%lld", stat[i].loads);
+            elog("%lld", stat[i].loads);
 
         unsigned long long int loads_sum = 0;
         for (int i = 0; i < n_roots; ++i)
             loads_sum += stat[i].loads;
 
         int                    increased = 0;
-        unsigned long long int loads_av = loads_sum / n_roots;
-	elog("DEBUG: loads_sum=%lld\n", loads_sum);
+        unsigned long long int loads_av  = loads_sum / n_roots;
+        elog("DEBUG: loads_sum=%lld\n", loads_sum);
 
         int stat_cnt[10] = {0, 0, 0, 0, 0, 0, 0};
         for (int i = 0; i < n_roots; ++i)
         {
-            if (stat[i].loads < loads_av) stat_cnt[0]++;
-            else if (stat[i].loads < 2 * loads_av) stat_cnt[1]++;
-            else if (stat[i].loads < 4 * loads_av) stat_cnt[2]++;
-            else if (stat[i].loads < 8 * loads_av) stat_cnt[3]++;
-            else if (stat[i].loads < 16 * loads_av) stat_cnt[4]++;
-            else if (stat[i].loads < 32 * loads_av) stat_cnt[5]++;
-            else stat_cnt[6]++;
+            if (stat[i].loads < loads_av)
+                stat_cnt[0]++;
+            else if (stat[i].loads < 2 * loads_av)
+                stat_cnt[1]++;
+            else if (stat[i].loads < 4 * loads_av)
+                stat_cnt[2]++;
+            else if (stat[i].loads < 8 * loads_av)
+                stat_cnt[3]++;
+            else if (stat[i].loads < 16 * loads_av)
+                stat_cnt[4]++;
+            else if (stat[i].loads < 32 * loads_av)
+                stat_cnt[5]++;
+            else
+                stat_cnt[6]++;
 
-            int policy = loads_av == 0 ? stat[i].loads : (stat[i].loads - 1) / loads_av + 1;
+            int policy = loads_av == 0 ? stat[i].loads
+                                       : (stat[i].loads - 1) / loads_av + 1;
 
-	    int buf_len_old = buf_len;
+            int buf_len_old = buf_len;
             if (policy > 1 && stat[i].loads > 10)
                 increased += input_devide(input, stat, i, policy,
                                           n_roots + increased, &buf_len);
 
-			if (buf_len != buf_len_old)
-			{
-				plan = (signed char *)repalloc(plan, PLAN_SIZE);
-				stat = (search_stat *)repalloc(stat, STAT_SIZE);
+            if (buf_len != buf_len_old)
+            {
+                plan = (signed char *) repalloc(plan, PLAN_SIZE);
+                stat = (search_stat *) repalloc(stat, STAT_SIZE);
 
-				CUDA_CHECK(cudaFree(d_input));
-				CUDA_CHECK(cudaFree(d_plan));
-				CUDA_CHECK(cudaFree(d_stat));
-				CUDA_CHECK(cudaMalloc((void **) &d_input, INPUT_SIZE));
-				CUDA_CHECK(cudaMalloc((void **) &d_plan, PLAN_SIZE));
-				CUDA_CHECK(cudaMalloc((void **) &d_stat, STAT_SIZE));
-			}
+                cudaPfree(d_input);
+                cudaPfree(d_plan);
+                cudaPfree(d_stat);
+                d_input = (Input *) cudaPalloc(INPUT_SIZE);
+                d_plan  = (signed char *) cudaPalloc(PLAN_SIZE);
+                d_stat  = (search_stat *) cudaPalloc(STAT_SIZE);
+            }
         }
 
         elog("STAT: loads: sum=%lld, av=%lld\n", loads_sum, loads_av);
-        elog("STAT: distr: av=%d, 2av=%d, 4av=%d, 8av=%d, 16av=%d, 32av=%d, more=%d\n",
+        elog("STAT: distr: av=%d, 2av=%d, 4av=%d, 8av=%d, 16av=%d, 32av=%d, "
+             "more=%d\n",
              stat_cnt[0], stat_cnt[1], stat_cnt[2], stat_cnt[3], stat_cnt[4],
              stat_cnt[5], stat_cnt[6]);
 
         n_roots += increased;
         elog("STAT: n_roots=%d(+%d)\n", n_roots, increased);
-	elog("DEBUG: buf_len=%d, input_len=%d, plan_len=%d, stat_len=%d\n",
-			(int)buf_len, (int)INPUT_SIZE, (int)PLAN_SIZE, (int)STAT_SIZE);
+        elog("DEBUG: buf_len=%d, input_len=%d, plan_len=%d, stat_len=%d\n",
+             (int) buf_len, (int) INPUT_SIZE, (int) PLAN_SIZE, (int) STAT_SIZE);
 
-        shuffle_input(input, n_roots); /* it may not be needed in case of idas_global */
+        shuffle_input(
+            input, n_roots); /* it may not be needed in case of idas_global */
     }
 
-//solution_found:
-    CUDA_CHECK(cudaFree(d_input));
-    CUDA_CHECK(cudaFree(d_plan));
-    CUDA_CHECK(cudaFree(d_stat));
-    CUDA_CHECK(cudaFree(d_movable_table));
-    CUDA_CHECK(cudaFree(d_h_diff_table));
+solution_found:
+    cudaPfree(d_input);
+    cudaPfree(d_plan);
+    cudaPfree(d_stat);
+    cudaPfree(d_movable_table);
+    cudaPfree(d_h_diff_table);
+
     CUDA_CHECK(cudaDeviceReset());
 
-	pfree(input);
-	pfree(plan);
-	pfree(stat);
-	pfree(movable_table);
-	pfree(h_diff_table);
+    pfree(input);
+    pfree(plan);
+    pfree(stat);
+    pfree(movable_table);
+    pfree(h_diff_table);
 
     return 0;
 }
