@@ -20,6 +20,19 @@ typedef signed char   Direction;
 #define POS_X(pos) ((pos) & 3)
 #define POS_Y(pos) ((pos) >> 2)
 
+typedef struct search_stat_tag
+{
+    bool                   solved;
+    int                    len;
+    unsigned long long int loads;
+} search_stat;
+typedef struct input_tag
+{
+    uchar     tiles[STATE_N];
+    int       init_depth;
+    Direction parent_dir;
+} Input;
+
 /* state implementation */
 
 /*
@@ -30,6 +43,8 @@ typedef struct state_tag
 {
     uchar tile[STATE_N];
     uchar empty;
+    uchar depth;
+    uchar parent_dir;
     uchar h_value; /* ub of h_value is 6*16 */
 } d_State;
 
@@ -38,8 +53,10 @@ signed char h_diff_table_shared[STATE_N][STATE_N][DIR_N];
 
 #define distance(i, j) ((i) > (j) ? (i) - (j) : (j) - (i))
 __device__ static void
-state_init(d_State state, Input *input)
+state_init(d_State *state, Input *input)
 {
+    state->depth = input->init_depth;
+    state->parent_dir = input->parent_dir;
     for (int i = 0; i < STATE_N; ++i)
     {
         if (input->tiles[i] == 0)
@@ -61,18 +78,23 @@ state_init(d_State state, Input *input)
         state->h_value += distance(from_y[i], POS_Y(i));
     }
 }
-#undef distance
 
 __device__ static inline bool
-state_is_goal(d_State state)
+state_is_goal(d_State *state)
 {
     return state->h_value == 0;
+}
+
+__device__ static inline int
+state_get_f(d_State *state)
+{
+	return state->depth + state->h_value;
 }
 
 __device__ __shared__ static bool movable_table_shared[STATE_N][DIR_N];
 
 __device__ static inline bool
-state_movable(d_State state, Direction dir)
+state_movable(d_State *state, Direction dir)
 {
     return movable_table_shared[state->empty][dir];
 }
@@ -81,7 +103,7 @@ __device__ __constant__ const static int pos_diff_table[DIR_N] = {
     -STATE_WIDTH, 1, -1, +STATE_WIDTH};
 
 __device__ static inline void
-state_move(d_State state, Direction dir)
+state_move(d_State *state, Direction dir)
 {
     int new_empty = state->empty + pos_diff_table[dir];
     int opponent  = state->tile[new_empty];
@@ -89,6 +111,8 @@ state_move(d_State state, Direction dir)
     state->h_value += h_diff_table_shared[opponent][new_empty][dir];
     state->tile[state->empty] = opponent;
     state->empty             = new_empty;
+    state->parent_dir = dir;
+    ++state->depth;
 }
 
 
@@ -96,28 +120,16 @@ state_move(d_State state, Direction dir)
 
 typedef struct div_stack_tag
 {
-    uchar n;
-    State buf[STACK_BUF_LEN];
+    unsigned int n;
+    d_State buf[STACK_BUF_LEN];
 } d_Stack;
 
-typedef struct search_stat_tag
-{
-    bool                   solved;
-    int                    len;
-    unsigned long long int loads;
-} search_stat;
-typedef struct input_tag
-{
-    uchar     tiles[STATE_N];
-    int       init_depth;
-    Direction parent_dir;
-} Input;
 
 __device__ static inline void
-stack_put(d_Stack *stack, State state)
+stack_put(d_Stack *stack, d_State state)
 {
-	unsigned int i = AtomicInc(stack->n, UINT_MAX);
-    stack->buf[i] = statk;
+	unsigned int i = atomicInc(&stack->n, UINT_MAX);
+    stack->buf[i] = state;
 }
 __device__ static inline d_State *
 stack_pop(d_Stack *stack)
@@ -131,73 +143,57 @@ stack_pop(d_Stack *stack)
 	}
 	else
 	{
-		State *ret_state = (tid >> 2) < stack->n ? &stack->buf[tid >> 2] : NULL;
+		d_State *ret_state = (tid >> 2) < stack->n ? &stack->buf[tid >> 2] : NULL;
 		if (tid == 0)
 			stack->n = 0;
 		return ret_state;
 	}
 }
-__device__ static void
-stack_fini(d_stack *stack)
-{
-	for (int i = threadIdx.x; i < stack->n; i+=blockDim)
-		if (i < stack->n)
-			state_fini(stack->buf[i]);
-}
 
 /*
  * solver implementation
  */
-
 __device__ static void
 idas_internal(int f_limit, Input *input, search_stat *stat)
 {
-	__shared__ unsigned char shared_buf[];
-	Stack stack = (Stack)shared_buf;
+	__shared__ d_Stack stack;
     int tid = threadIdx.x;
     int bid = blockIdx.x;
 	unsigned long long int loop_cnt = 0;
 	Input in = input[bid];
 
-    State state = state_init(&in);
-	if (state_get_f(state) > f_limit)
+	d_State state;
+	state_init(&state, &in);
+	if (state_get_f(&state) > f_limit)
 		goto SEARCH_FINI;
 
-	if (tid = 0) {
-		stack.buf[stack.i] = state;
-		stack.i = 1;
+	if (tid == 0) {
+		stack.buf[stack.n] = state;
+		stack.n = 1;
 	}
 
 	for (;;)
 	{
-		if (stack.i == 0)
+		if (stack.n == 0)
 			break;
 
 		++loop_cnt;
-		state = stack_pop(&stack); /* get tid/4 th element */
-		if (state)
+		d_State *poped = stack_pop(&stack); /* get tid/4 th element */
+		if (poped)
 		{
 			uchar dir = tid & 3; /* choose my action */
 
 			/* NOTE: always only 3 threads are required(max occupancy is 75%, it may be avoided using tabulation) */
-			if (state->parent_dir == dir_reverse(dir))
+			if (poped->parent_dir == dir_reverse(dir))
 				continue;
-			if (state_movable(state, dir))
+			if (state_movable(poped, dir))
 			{
-				State new_state = state_copy(state);
-				if (dir == 0)
-					state_fini(state);
-				state_move(new_state, dir);
+				d_State new_state = *poped;
+				state_move(&new_state, dir);
 
-				if (in.init_depth + state_get_f(new_state) > f_limit) {
-					state_fini(new_state);
-				}
-				else {
-					if (state_is_goal(new_state))
-					{
-						state_fini(new_state);
+				if (in.init_depth + state_get_f(&new_state) <= f_limit) {
+					if (state_is_goal(&new_state))
 						asm("trap;");
-					}
 					else
 						stack_put(&stack, new_state);
 				}
@@ -205,10 +201,8 @@ idas_internal(int f_limit, Input *input, search_stat *stat)
 		}
 	}
 
-	stack_fini(stack);
-
 SEARCH_FINI:
-	stat->loop_cnt = loop_cnt;
+	stat->loads = loop_cnt;
 }
 
 /* XXX: movable table is effective in this case? */
@@ -1268,15 +1262,15 @@ main(int argc, char *argv[])
 
 	int buf_len = N_INIT_DISTRIBUTION * 2;
 
-    Input  *input = palloc(INPUT_SIZE), *d_input;
-    signed char *plan = palloc(PLAN_SIZE), *d_plan;
-    search_stat *stat = palloc(STAT_SIZE), *d_stat;
+    Input  *input = (Input *)palloc(INPUT_SIZE), *d_input;
+    signed char *plan = (signed char *)palloc(PLAN_SIZE), *d_plan;
+    search_stat *stat = (search_stat *)palloc(STAT_SIZE), *d_stat;
 
     int          movable_table_size = sizeof(bool) * STATE_N * DIR_N;
-    bool        *movable_table = palloc(movable_table_size), *d_movable_table;
+    bool        *movable_table = (bool *)palloc(movable_table_size), *d_movable_table;
 
     int h_diff_table_size = STATE_N * STATE_N * DIR_N;
-    signed char  *h_diff_table = palloc(h_diff_table_size), *d_h_diff_table;
+    signed char  *h_diff_table = (signed char *)palloc(h_diff_table_size), *d_h_diff_table;
 
     int min_fvalue = 0;
 
@@ -1376,14 +1370,15 @@ main(int argc, char *argv[])
 
             int policy = (stat[i].loads - 1) / loads_av + 1;
 
+	    int buf_len_old = buf_len;
             if (policy > 1 && stat[i].loads > 10)
                 increased += input_devide(input, stat, i, policy,
                                           n_roots + increased, &buf_len);
 
-			if (plan_size < PLAN_SIZE)
+			if (buf_len != buf_len_old)
 			{
-				plan = repalloc(plan, PLAN_SIZE);
-				stat = repalloc(stat, STAT_SIZE);
+				plan = (signed char *)repalloc(plan, PLAN_SIZE);
+				stat = (search_stat *)repalloc(stat, STAT_SIZE);
 
 				CUDA_CHECK(cudaFree(d_input));
 				CUDA_CHECK(cudaFree(d_plan));

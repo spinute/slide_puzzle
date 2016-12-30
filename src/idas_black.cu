@@ -1214,7 +1214,7 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail)
 static void
 fill_blacklist_internal(BlackListEntry blacklist[], HT bl)
 {
-	for (int i = 0; i < bl->n_bins; ++i)
+	for (unsigned int i = 0; i < bl->n_bins; ++i)
 	{
 		HTEntry e = bl->bin[i];
 		while (e)
@@ -1450,7 +1450,7 @@ main(int argc, char *argv[])
         CUDA_CHECK(cudaMemcpy(d_blacklist, h_blacklist, blacklist_size,
                               cudaMemcpyHostToDevice));
 
-        elog("BL1: %d, BL2: %d\n", BL1->n_elems, BL2->n_elems);
+        elog("BL1: %zu, BL2: %zu\n", BL1->n_elems, BL2->n_elems);
         elog("kernel(block=%d, thread=%d)\n", N_BLOCKS, BLOCK_DIM);
         idas_kernel<<<N_BLOCKS, BLOCK_DIM>>>(d_input, d_input_ends, d_plan,
                                              d_blacklist, d_stat, f_limit,
@@ -1530,7 +1530,7 @@ main(int argc, char *argv[])
         }
 
         cnt_inputs += increased;
-        elog("input count: %lld\n", cnt_inputs);
+        elog("input count: %d\n", cnt_inputs);
 
         /* NOTE: optionally sort here by expected cost or g/h-value */
 

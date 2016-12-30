@@ -7,6 +7,7 @@ small_first_instances
 benchmarks/sample
 tags
 cscope.out
+
 cpumain
 cumain
 device_prop
@@ -17,3 +18,4 @@ cpu25
 cubase
 cublack
 custatic
+cudynamic
