@@ -927,7 +927,7 @@ heapify_down(PQ pq)
          * since the filling order is left-first */
         if (pq_entry_higher_priority(&pq->array[li], &pq->array[ri]))
         {
-            if (!pq_entry_higher_priority(&pq->array[i], &pq->array[li]))
+            if (!pq_entry_higher_priority(&pq->array[li], &pq->array[i]))
                 break;
 
             pq_swap_entry(pq, i, li);
@@ -935,7 +935,7 @@ heapify_down(PQ pq)
         }
         else
         {
-            if (!pq_entry_higher_priority(&pq->array[i], &pq->array[ri]))
+            if (!pq_entry_higher_priority(&pq->array[ri], &pq->array[i]))
                 break;
 
             pq_swap_entry(pq, i, ri);

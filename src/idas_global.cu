@@ -1,7 +1,7 @@
 #include <stdbool.h>
 
 #define BLOCK_DIM (32)
-#define N_INIT_DISTRIBUTION (96)
+#define N_INIT_DISTRIBUTION (32)
 #define PLAN_LEN_MAX 255
 #define STACK_BUF_LEN 255
 
@@ -168,7 +168,7 @@ idas_internal(int f_limit, Input *input, search_stat *stat)
 		goto SEARCH_FINI;
 
 	if (tid == 0) {
-		stack.buf[stack.n] = state;
+		stack.buf[0] = state;
 		stack.n = 1;
 	}
 
@@ -879,7 +879,7 @@ heapify_down(PQ pq)
          * since the filling order is left-first */
         if (pq_entry_higher_priority(&pq->array[li], &pq->array[ri]))
         {
-            if (!pq_entry_higher_priority(&pq->array[i], &pq->array[li]))
+            if (!pq_entry_higher_priority(&pq->array[li], &pq->array[i]))
                 break;
 
             pq_swap_entry(pq, i, li);
@@ -887,7 +887,7 @@ heapify_down(PQ pq)
         }
         else
         {
-            if (!pq_entry_higher_priority(&pq->array[i], &pq->array[ri]))
+            if (!pq_entry_higher_priority(&pq->array[ri], &pq->array[i]))
                 break;
 
             pq_swap_entry(pq, i, ri);
@@ -1020,9 +1020,11 @@ distribute_astar(State init_state, Input input[], int distr_n, int *cnt_inputs,
     }
 
     *cnt_inputs = cnt;
+    elog("LOG: init_distr, cnt=%d\n", cnt);
     if (!solved)
     {
         int minf = INT_MAX;
+	pq_dump(q);
         for (int id = 0; id < cnt; ++id)
         {
             State state = pq_pop(q);
@@ -1345,10 +1347,14 @@ main(int argc, char *argv[])
 
         unsigned long long int loads_sum = 0;
         for (int i = 0; i < n_roots; ++i)
+	{
+		elog("DEBUG: %lld", stat[i].loads);
             loads_sum += stat[i].loads;
+	}
 
         int                    increased = 0;
         unsigned long long int loads_av = loads_sum / n_roots;
+	elog("DEBUG: loads_sum=%lld\n", loads_sum);
 
         int stat_cnt[10] = {0, 0, 0, 0, 0, 0, 0};
         for (int i = 0; i < n_roots; ++i)
@@ -1368,7 +1374,7 @@ main(int argc, char *argv[])
             else
                 stat_cnt[6]++;
 
-            int policy = (stat[i].loads - 1) / loads_av + 1;
+            int policy = loads_av == 0 ? stat[i].loads : (stat[i].loads - 1) / loads_av + 1;
 
 	    int buf_len_old = buf_len;
             if (policy > 1 && stat[i].loads > 10)
@@ -1396,6 +1402,8 @@ main(int argc, char *argv[])
 
         n_roots += increased;
         elog("STAT: n_roots=%d(+%d)\n", n_roots, increased);
+	elog("DEBUG: buf_len=%d, input_len=%d, plan_len=%d, stat_len=%d\n",
+			(int)buf_len, (int)INPUT_SIZE, (int)PLAN_SIZE, (int)STAT_SIZE);
 
         shuffle_input(input, n_roots); /* it may not be needed in case of idas_global */
     }
