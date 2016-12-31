@@ -6,9 +6,8 @@
 #define BLOCK_DIM (32) /* FIXME: unstable when more than 32 */
 #define N_INIT_DISTRIBUTION (BLOCK_DIM * 64)
 #define MAX_GPU_PLAN (64)
-#define MAX_BUF_RATIO                                                          \
-    (32) /* XXX: this ratio should define dynamically, but cudaMalloc after    \
-            cudaFree fails */
+/* XXX: should be defined dynamically, but cudaMalloc after cudaFree fails */
+#define MAX_BUF_RATIO (32)
 
 #define STATE_WIDTH 4
 #define STATE_N (STATE_WIDTH * STATE_WIDTH)
@@ -30,6 +29,7 @@ typedef struct search_stat_tag
     bool                   solved;
     int                    len;
     unsigned long long int loads;
+	//bool assert_failed;
 } search_stat;
 typedef struct input_tag
 {
@@ -190,7 +190,7 @@ stack_pop(d_Stack *stack, d_State *state)
 /*
  * solver implementation
  */
-__device__ static void
+__device__ static bool
 idas_internal(d_Stack stack, int f_limit, unsigned long long *loads)
 {
 	d_State state;
