@@ -191,7 +191,7 @@ stack_pop(d_Stack *stack, d_State *state)
  * solver implementation
  */
 __device__ static bool
-idas_internal(d_Stack stack, int f_limit, unsigned long long *loads)
+idas_internal(d_Stack *stack, int f_limit, search_stat *stat)
 {
 	d_State state;
     unsigned long long int loop_cnt = 0;
@@ -200,7 +200,7 @@ idas_internal(d_Stack stack, int f_limit, unsigned long long *loads)
     {
         if (stack_is_empty(stack))
 		{
-			*loads = loop_cnt;
+			stat->loads = loop_cnt;
 			return false;
 		}
 
@@ -227,8 +227,9 @@ idas_internal(d_Stack stack, int f_limit, unsigned long long *loads)
 #ifndef SEARCH_ALL_THE_BEST
                         asm("trap;");
 #else
-						*loads = loop_cnt;
-						return true;
+			stat->loads = loop_cnt;
+			stat->len = state.depth;
+			return true;
 #endif
                     }
                     else
@@ -250,12 +251,13 @@ idas_kernel(Input *input, search_stat *stat, int f_limit,
     __shared__ d_Stack     stack;
     int tid = threadIdx.x;
 	int bid = blockIdx.x;
-	unsigned long long loads = 0;
+	if (tid == 0)
+		stat[bid].loads = 0;
 
 	d_State state;
-	state_init(&state, &in);
+	state_init(&state, &input[bid]);
 	if (state_get_f(state) > f_limit)
-		goto SEARCH_FINI;
+		return;
 
 	if (tid == 0)
 	{
@@ -273,11 +275,7 @@ idas_kernel(Input *input, search_stat *stat, int f_limit,
                     h_diff_table[j * DIR_N + dir];
 
 	__syncthreads();
-    stat[bid] = idas_internal(stack, f_limit, &loads);
-
-SEARCH_FINI:
-    if (tid == 0)
-        stat[bid].loads = loads;
+    stat[bid].solved = idas_internal(&stack, f_limit, &stat[bid]);
 }
 
 /* host library implementation */
@@ -1403,7 +1401,7 @@ main(int argc, char *argv[])
         for (int i = 0; i < n_roots; ++i)
             if (stat[i].solved)
             {
-                elog("find all the optimal solution(s)\n");
+                elog("find all the optimal solution(s), at depth=%d\n", stat[i].len);
                 goto solution_found;
             }
 #endif
