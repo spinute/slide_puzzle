@@ -3,8 +3,8 @@
 #undef SEARCH_ALL_THE_BEST
 #define PACKED
 
-#define BLOCK_DIM (32)
-#define N_INIT_DISTRIBUTION (BLOCK_DIM)
+#define BLOCK_DIM (32) /* FIXME: unstable when more than 32 */
+#define N_INIT_DISTRIBUTION (BLOCK_DIM*64)
 #define STACK_BUF_LEN (64*8)
 #define MAX_BUF_RATIO (32) /* XXX: this ratio should define dynamically, but cudaMalloc after cudaFree fails */
 
