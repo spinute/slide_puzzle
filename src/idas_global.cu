@@ -5,9 +5,9 @@
 
 #define BLOCK_DIM (32) /* FIXME: unstable when more than 32 */
 #define N_INIT_DISTRIBUTION (BLOCK_DIM * 64)
-#define MAX_GPU_PLAN (64)
+#define MAX_GPU_PLAN (24)
 /* XXX: should be defined dynamically, but cudaMalloc after cudaFree fails */
-#define MAX_BUF_RATIO (32)
+#define MAX_BUF_RATIO (256)
 
 #define STATE_WIDTH 4
 #define STATE_N (STATE_WIDTH * STATE_WIDTH)
