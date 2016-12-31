@@ -190,7 +190,7 @@ stack_pop(d_Stack *stack, d_State *state)
 /*
  * solver implementation
  */
-__device__ static bool
+__device__ static void
 idas_internal(d_Stack *stack, int f_limit, search_stat *stat)
 {
 	d_State state;
@@ -201,7 +201,9 @@ idas_internal(d_Stack *stack, int f_limit, search_stat *stat)
         if (stack_is_empty(stack))
 		{
 			stat->loads = loop_cnt;
-			return false;
+			if (!stat->solved)
+				stat->solved = false;
+			break;
 		}
 
         ++loop_cnt;
@@ -229,7 +231,7 @@ idas_internal(d_Stack *stack, int f_limit, search_stat *stat)
 #else
 			stat->loads = loop_cnt;
 			stat->len = state.depth;
-			return true;
+			stat->solved = true;
 #endif
                     }
                     else
@@ -275,7 +277,7 @@ idas_kernel(Input *input, search_stat *stat, int f_limit,
                     h_diff_table[j * DIR_N + dir];
 
 	__syncthreads();
-    stat[bid].solved = idas_internal(&stack, f_limit, &stat[bid]);
+    idas_internal(&stack, f_limit, &stat[bid]);
 }
 
 /* host library implementation */
@@ -1397,15 +1399,6 @@ main(int argc, char *argv[])
 
         CUDA_CHECK(cudaMemcpy(stat, d_stat, STAT_SIZE, cudaMemcpyDeviceToHost));
 
-#ifdef SEARCH_ALL_THE_BEST
-        for (int i = 0; i < n_roots; ++i)
-            if (stat[i].solved)
-            {
-                elog("find all the optimal solution(s), at depth=%d\n", stat[i].len);
-                goto solution_found;
-            }
-#endif
-
         unsigned long long int loads_sum = 0;
         for (int i = 0; i < n_roots; ++i)
             loads_sum += stat[i].loads;
@@ -1463,6 +1456,16 @@ main(int argc, char *argv[])
 
         n_roots += increased;
         elog("STAT: n_roots=%d(+%d)\n", n_roots, increased);
+
+#ifdef SEARCH_ALL_THE_BEST
+        for (int i = 0; i < n_roots; ++i)
+            if (stat[i].solved)
+            {
+                elog("find all the optimal solution(s), at depth=%d\n", stat[i].len);
+                goto solution_found;
+            }
+#endif
+
 
         // shuffle_input(input, n_roots); /* it may not be needed in case of
         // idas_global */
