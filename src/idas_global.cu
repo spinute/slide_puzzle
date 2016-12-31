@@ -3,7 +3,7 @@
 #define BLOCK_DIM (32)
 #define N_INIT_DISTRIBUTION (32)
 #define PLAN_LEN_MAX 255
-#define STACK_BUF_LEN 255
+#define STACK_BUF_LEN (255*8)
 
 #define STATE_WIDTH 4
 #define STATE_N (STATE_WIDTH * STATE_WIDTH)
@@ -80,23 +80,23 @@ state_init(d_State *state, Input *input)
 }
 
 __device__ static inline bool
-state_is_goal(d_State *state)
+state_is_goal(d_State state)
 {
-    return state->h_value == 0;
+    return state.h_value == 0;
 }
 
 __device__ static inline int
-state_get_f(d_State *state)
+state_get_f(d_State state)
 {
-    return state->depth + state->h_value;
+    return state.depth + state.h_value;
 }
 
 __device__ __shared__ static bool movable_table_shared[STATE_N][DIR_N];
 
 __device__ static inline bool
-state_movable(d_State *state, Direction dir)
+state_movable(d_State state, Direction dir)
 {
-    return movable_table_shared[state->empty][dir];
+    return movable_table_shared[state.empty][dir];
 }
 
 __device__ __constant__ const static int pos_diff_table[DIR_N] = {
@@ -135,16 +135,17 @@ stack_pop(d_Stack *stack, d_State *state)
     int tid = threadIdx.x;
     if (stack->n >= 32 / DIR_N)
     {
+        *state = stack->buf[stack->n - 1 - (tid >> 2)];
+	__syncthreads();
         if (tid == 0)
             stack->n -= 32 / DIR_N;
-        *state = stack->buf[tid >> 2];
 	return true;
     }
     else
     {
 	    bool ret = (tid >> 2) < stack->n;
 	    if (ret)
-		    *state =  stack->buf[tid >> 2];
+		    *state =  stack->buf[stack->n - 1 - (tid >> 2)];
 	__syncthreads();
         if (tid == 0)
             stack->n = 0;
@@ -166,26 +167,27 @@ idas_internal(int f_limit, Input *input, search_stat *stat)
 
     d_State state;
     state_init(&state, &in);
+    if (state_get_f(state) > f_limit)
+        goto SEARCH_FINI;
+
     if (tid == 0)
     {
         stack.buf[0] = state;
         stack.n      = 1;
     }
 
-    if (state_get_f(&state) > f_limit)
-        goto SEARCH_FINI;
-
     for (;;)
     {
+	d_State state;
 	    __syncthreads();
         if (stack.n == 0)
             break;
+        ++loop_cnt;
 	__syncthreads();
 
-        ++loop_cnt;
-	d_State state;
-	bool found = stack_pop(&stack, &state);
+	bool found = stack_pop(&stack, &state), put = false;
 	__syncthreads();
+
         if (found)
         {
             Direction dir = tid & 3;
@@ -194,23 +196,28 @@ idas_internal(int f_limit, Input *input, search_stat *stat)
              * may be avoided using tabulation) */
             if (state.parent_dir == dir_reverse(dir))
                 continue;
-            if (state_movable(&state, dir))
+            if (state_movable(state, dir))
             {
                 state_move(&state, dir);
 
-                if (in.init_depth + state_get_f(&state) <= f_limit)
+                if (in.init_depth + state_get_f(state) <= f_limit)
                 {
-                    if (state_is_goal(&state))
+                    if (state_is_goal(state))
                         asm("trap;");
                     else
-                        stack_put(&stack, state);
+			put = true;
                 }
             }
         }
+
+	__syncthreads();
+	if (put)
+		stack_put(&stack, state);
     }
 
 SEARCH_FINI:
-    stat[bid].loads = loop_cnt;
+    if (tid == 0)
+	    stat[bid].loads = loop_cnt;
 }
 
 /* XXX: movable table is effective in this case? */
@@ -1079,6 +1086,7 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail,
     HTStatus ht_status;
     pq_put(pq, state, state_get_hvalue(state), 0);
     ++cnt;
+    assert(devide_n > 0);
 
     while ((state = pq_pop(pq)))
     {
@@ -1137,11 +1145,14 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail,
     {
         *buf_len = new_buf_len;
         repalloc(input, sizeof(*input) * new_buf_len);
+	elog("LOG: host buf resize\n");
     }
+
+    input[i] = input[tail-1];
 
     for (int id = 0; id < cnt; ++id)
     {
-        int   ofs   = id == 0 ? i : tail - 1 + id;
+        int   ofs   = tail - 1 + id;
         State state = pq_pop(pq);
         assert(state);
 
@@ -1155,9 +1166,7 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail,
 
     pq_fini(pq);
 
-    assert(cnt != 0); /* MAYBE */
-
-    return cnt == 0 ? 0 : cnt - 1;
+    return cnt - 1;
 }
 
 /* main */
@@ -1228,6 +1237,7 @@ __host__ static void *
 cudaPalloc(size_t size)
 {
     void *ptr;
+    elog("palloc size=%zu\n", size);
     CUDA_CHECK(cudaMalloc(&ptr, size));
     return ptr;
 }
@@ -1355,7 +1365,8 @@ main(int argc, char *argv[])
         CUDA_CHECK(cudaMemcpy(stat, d_stat, STAT_SIZE, cudaMemcpyDeviceToHost));
 
         for (int i = 0; i < n_roots; ++i)
-            elog("%lld", stat[i].loads);
+            elog("%lld,", stat[i].loads);
+	puts("");
 
         unsigned long long int loads_sum = 0;
         for (int i = 0; i < n_roots; ++i)
