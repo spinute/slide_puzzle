@@ -65,13 +65,12 @@ state_init(d_State *state, Input *input)
     }
 
     uchar from_x[STATE_N], from_y[STATE_N];
-    state->h_value = 0;
-
     for (int i = 0; i < STATE_N; ++i)
     {
         from_x[state->tile[i]] = POS_X(i);
         from_y[state->tile[i]] = POS_Y(i);
     }
+    state->h_value = 0;
     for (int i = 1; i < STATE_N; ++i)
     {
         state->h_value += distance(from_x[i], POS_X(i));
@@ -133,20 +132,20 @@ __device__ static inline bool
 stack_pop(d_Stack *stack, d_State *state)
 {
     int tid = threadIdx.x;
-    if (stack->n >= 32 / DIR_N)
+    if (stack->n >= BLOCK_DIM / DIR_N)
     {
         *state = stack->buf[stack->n - 1 - (tid >> 2)];
-	__syncthreads();
+		__syncthreads();
         if (tid == 0)
-            stack->n -= 32 / DIR_N;
-	return true;
+            stack->n -= BLOCK_DIM / DIR_N;
+		return true;
     }
     else
     {
 	    bool ret = (tid >> 2) < stack->n;
 	    if (ret)
 		    *state =  stack->buf[stack->n - 1 - (tid >> 2)];
-	__syncthreads();
+		__syncthreads();
         if (tid == 0)
             stack->n = 0;
         return ret;
@@ -178,15 +177,15 @@ idas_internal(int f_limit, Input *input, search_stat *stat)
 
     for (;;)
     {
-	d_State state;
+		d_State state;
 	    __syncthreads();
         if (stack.n == 0)
             break;
         ++loop_cnt;
-	__syncthreads();
+		__syncthreads();
 
-	bool found = stack_pop(&stack, &state), put = false;
-	__syncthreads();
+		bool found = stack_pop(&stack, &state), put = false;
+		__syncthreads();
 
         if (found)
         {
@@ -200,12 +199,12 @@ idas_internal(int f_limit, Input *input, search_stat *stat)
             {
                 state_move(&state, dir);
 
-                if (in.init_depth + state_get_f(state) <= f_limit)
+                if (state_get_f(state) <= f_limit)
                 {
                     if (state_is_goal(state))
                         asm("trap;");
                     else
-			put = true;
+						put = true;
                 }
             }
         }
