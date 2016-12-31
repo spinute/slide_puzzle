@@ -129,23 +129,26 @@ stack_put(d_Stack *stack, d_State state)
     unsigned int i = atomicInc(&stack->n, UINT_MAX);
     stack->buf[i]  = state;
 }
-__device__ static inline d_State *
-stack_pop(d_Stack *stack)
+__device__ static inline bool
+stack_pop(d_Stack *stack, d_State *state)
 {
     int tid = threadIdx.x;
     if (stack->n >= 32 / DIR_N)
     {
         if (tid == 0)
             stack->n -= 32 / DIR_N;
-        return &stack->buf[tid >> 2];
+        *state = stack->buf[tid >> 2];
+	return true;
     }
     else
     {
-        d_State *ret_state =
-            (tid >> 2) < stack->n ? &stack->buf[tid >> 2] : NULL;
+	    bool ret = (tid >> 2) < stack->n;
+	    if (ret)
+		    *state =  stack->buf[tid >> 2];
+	__syncthreads();
         if (tid == 0)
             stack->n = 0;
-        return ret_state;
+        return ret;
     }
 }
 
@@ -163,48 +166,51 @@ idas_internal(int f_limit, Input *input, search_stat *stat)
 
     d_State state;
     state_init(&state, &in);
-    if (state_get_f(&state) > f_limit)
-        goto SEARCH_FINI;
-
     if (tid == 0)
     {
         stack.buf[0] = state;
         stack.n      = 1;
     }
 
+    if (state_get_f(&state) > f_limit)
+        goto SEARCH_FINI;
+
     for (;;)
     {
+	    __syncthreads();
         if (stack.n == 0)
             break;
+	__syncthreads();
 
         ++loop_cnt;
-        d_State *poped = stack_pop(&stack); /* get tid/4 th element */
-        if (poped)
+	d_State state;
+	bool found = stack_pop(&stack, &state);
+	__syncthreads();
+        if (found)
         {
-            Direction dir = tid & 3; /* choose my action */
+            Direction dir = tid & 3;
 
             /* NOTE: always only 3 threads are required(max occupancy is 75%, it
              * may be avoided using tabulation) */
-            if (poped->parent_dir == dir_reverse(dir))
+            if (state.parent_dir == dir_reverse(dir))
                 continue;
-            if (state_movable(poped, dir))
+            if (state_movable(&state, dir))
             {
-                d_State new_state = *poped;
-                state_move(&new_state, dir);
+                state_move(&state, dir);
 
-                if (in.init_depth + state_get_f(&new_state) <= f_limit)
+                if (in.init_depth + state_get_f(&state) <= f_limit)
                 {
-                    if (state_is_goal(&new_state))
+                    if (state_is_goal(&state))
                         asm("trap;");
                     else
-                        stack_put(&stack, new_state);
+                        stack_put(&stack, state);
                 }
             }
         }
     }
 
 SEARCH_FINI:
-    stat->loads = loop_cnt;
+    stat[bid].loads = loop_cnt;
 }
 
 /* XXX: movable table is effective in this case? */
@@ -223,8 +229,6 @@ idas_kernel(Input *input, signed char *plan, search_stat *stat, int f_limit,
             if (j < STATE_N)
                 h_diff_table_shared[j][i / DIR_N][i % DIR_N] =
                     h_diff_table[j * STATE_N * DIR_N + i];
-
-    __syncthreads();
 
     idas_internal(f_limit, input, stat);
 }
@@ -552,10 +556,12 @@ state_get_depth(State state)
 static void
 state_dump(State state)
 {
-    elog("LOG(state): depth=%d, h=%d, f=%d, ");
+    elog("LOG(state): depth=%d, h=%d, f=%d, ",
+		    state->depth, state->h_value, state->depth + state->h_value);
     for (int i = 0; i < STATE_N; ++i)
-        elog("%d%c", state->pos[i % STATE_WIDTH][i / STATE_WIDTH],
-             i == STATE_N - 1 ? '\n' : ',');
+        elog("%d%c",
+	i==state->i+STATE_WIDTH*state->j?0:state->pos[i % STATE_WIDTH][i / STATE_WIDTH],
+	i == STATE_N - 1 ? '\n' : ',');
 }
 
 #include <stddef.h>
