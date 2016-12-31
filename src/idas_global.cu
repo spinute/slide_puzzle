@@ -4,9 +4,11 @@
 #define PACKED
 
 #define BLOCK_DIM (32) /* FIXME: unstable when more than 32 */
-#define N_INIT_DISTRIBUTION (BLOCK_DIM*64)
-#define STACK_BUF_LEN (64*8)
-#define MAX_BUF_RATIO (32) /* XXX: this ratio should define dynamically, but cudaMalloc after cudaFree fails */
+#define N_INIT_DISTRIBUTION (BLOCK_DIM * 64)
+#define MAX_GPU_PLAN (64)
+#define MAX_BUF_RATIO                                                          \
+    (32) /* XXX: this ratio should define dynamically, but cudaMalloc after    \
+            cudaFree fails */
 
 #define STATE_WIDTH 4
 #define STATE_N (STATE_WIDTH * STATE_WIDTH)
@@ -48,7 +50,7 @@ __device__ __shared__ static signed char h_diff_table_shared[STATE_N][STATE_N]
 typedef struct state_tag
 {
 #ifndef PACKED
-    uchar     tile[STATE_N];
+    uchar tile[STATE_N];
 #else
     unsigned long long tile;
 #endif
@@ -67,14 +69,13 @@ typedef struct state_tag
 #define STATE_TILE_MASK ((1ull << STATE_TILE_BITS) - 1)
 #define state_tile_ofs(i) (i << 2)
 #define state_tile_get(i)                                                      \
-    ((state->tile & (STATE_TILE_MASK << state_tile_ofs(i))) >>     \
+    ((state->tile & (STATE_TILE_MASK << state_tile_ofs(i))) >>                 \
      state_tile_ofs(i))
 #define state_tile_set(i, val)                                                 \
     do                                                                         \
     {                                                                          \
-        state->tile &= ~((STATE_TILE_MASK) << state_tile_ofs(i));  \
-        state->tile |= ((unsigned long long) val)                  \
-                                   << state_tile_ofs(i);                       \
+        state->tile &= ~((STATE_TILE_MASK) << state_tile_ofs(i));              \
+        state->tile |= ((unsigned long long) val) << state_tile_ofs(i);        \
     } while (0)
 #endif
 
@@ -136,12 +137,13 @@ state_move(d_State *state, Direction dir)
 
     state->h_value += h_diff_table_shared[opponent][new_empty][dir];
     state_tile_set(state->empty, opponent);
-    state->empty              = new_empty;
-    state->parent_dir         = dir;
+    state->empty      = new_empty;
+    state->parent_dir = dir;
     ++state->depth;
 }
 
 /* stack implementation */
+#define STACK_BUF_LEN (MAX_GPU_PLAN * (BLOCK_DIM/DIR_N))
 
 typedef struct div_stack_tag
 {
@@ -149,81 +151,71 @@ typedef struct div_stack_tag
     d_State      buf[STACK_BUF_LEN];
 } d_Stack;
 
-__device__ static inline void
-stack_put(d_Stack *stack, d_State state)
+__device__ static inline bool
+stack_is_empty(d_Stack *stack)
 {
-    unsigned int i = atomicInc(&stack->n, UINT_MAX);
-    stack->buf[i]  = state;
+	bool ret = (stack->n == 0);
+	__syncthreads();
+	return ret;
+}
+
+__device__ static inline void
+stack_put(d_Stack *stack, d_State *state, bool put)
+{
+	if (put)
+	{
+		unsigned int i = atomicInc(
+				&stack->n, UINT_MAX); /* slow? especially in old CC environment */
+		stack->buf[i] = *state;
+	}
+	__syncthreads();
 }
 __device__ static inline bool
 stack_pop(d_Stack *stack, d_State *state)
 {
     int tid = threadIdx.x;
-    if (stack->n >= BLOCK_DIM / DIR_N)
-    {
-        *state = stack->buf[stack->n - 1 - (tid >> 2)];
-		__syncthreads();
-        if (tid == 0)
-            stack->n -= BLOCK_DIM / DIR_N;
-		return true;
-    }
-    else
-    {
-	    bool ret = (tid >> 2) < stack->n;
-	    if (ret)
-		    *state =  stack->buf[stack->n - 1 - (tid >> 2)];
-		__syncthreads();
-        if (tid == 0)
-            stack->n = 0;
-        return ret;
-    }
+    int i   = (int) stack->n - 1 - (int) (tid >> 2);
+    if (i >= 0)
+        *state = stack->buf[i];
+    __syncthreads();
+    if (tid == 0)
+        stack->n = stack->n >= BLOCK_DIM / DIR_N ?
+			stack->n - BLOCK_DIM / DIR_N : 0;
+	__syncthreads();
+    return i >= 0;
 }
+
+//__device__ __shared__ Direction candidate_dir_table[4][3] = {}
 
 /*
  * solver implementation
  */
 __device__ static void
-idas_internal(int f_limit, Input *input, search_stat *stat)
+idas_internal(d_Stack stack, int f_limit, unsigned long long *loads)
 {
-    __shared__ d_Stack     stack;
-    int                    tid      = threadIdx.x;
-    int                    bid      = blockIdx.x;
+	d_State state;
     unsigned long long int loop_cnt = 0;
-    Input                  in       = input[bid];
-
-    {
-    d_State state;
-    state_init(&state, &in);
-    if (state_get_f(state) > f_limit)
-        goto SEARCH_FINI;
-
-    if (tid == 0)
-    {
-        stack.buf[0] = state;
-        stack.n      = 1;
-    }
-    }
 
     for (;;)
     {
-		d_State state;
-	    __syncthreads();
-        if (stack.n == 0)
-            break;
-        ++loop_cnt;
-		__syncthreads();
+        if (stack_is_empty(stack))
+		{
+			*loads = loop_cnt;
+			return false;
+		}
 
-		bool found = stack_pop(&stack, &state), put = false;
-		__syncthreads();
+        ++loop_cnt;
+        bool found = stack_pop(stack, &state),
+			 put = false;
 
         if (found)
         {
-            Direction dir = tid & 3;
+            Direction dir = threadIdx.x & 3;
 
-            /* NOTE: always only 3 threads are required(max occupancy is 75%, it
-             * may be avoided using tabulation) */
+			/* NOTE: candidate_dir_table may be effective to avoid divergence */
             if (state.parent_dir == dir_reverse(dir))
                 continue;
+
             if (state_movable(state, dir))
             {
                 state_move(&state, dir);
@@ -231,28 +223,23 @@ idas_internal(int f_limit, Input *input, search_stat *stat)
                 if (state_get_f(state) <= f_limit)
                 {
                     if (state_is_goal(state))
-		    {
+                    {
 #ifndef SEARCH_ALL_THE_BEST
-                       asm("trap;");
+                        asm("trap;");
 #else
-			    stat[bid].solved = true;
-			    break;
+						*loads = loop_cnt;
+						return true;
 #endif
-		    }
+                    }
                     else
-						put = true;
+                        put = true;
                 }
             }
         }
 
-	__syncthreads();
-	if (put)
-		stack_put(&stack, state);
+        //__syncthreads(); // maybe useless
+		stack_put(stack, &state, put);
     }
-
-SEARCH_FINI:
-    if (tid == 0)
-	    stat[bid].loads = loop_cnt;
 }
 
 /* XXX: movable table is effective in this case? */
@@ -260,18 +247,37 @@ __global__ void
 idas_kernel(Input *input, search_stat *stat, int f_limit,
             signed char *h_diff_table, bool *movable_table)
 {
+    __shared__ d_Stack     stack;
     int tid = threadIdx.x;
+	int bid = blockIdx.x;
+	unsigned long long loads = 0;
 
-    for (int i = tid; i < STATE_N*DIR_N; i += blockDim.x)
-	    if (i < STATE_N*DIR_N)
-		    movable_table_shared[i/DIR_N][i%DIR_N] = movable_table[i];
+	d_State state;
+	state_init(&state, &in);
+	if (state_get_f(state) > f_limit)
+		goto SEARCH_FINI;
+
+	if (tid == 0)
+	{
+		stack.buf[0] = state;
+		stack.n      = 1;
+	}
+
+    for (int i = tid; i < STATE_N * DIR_N; i += blockDim.x)
+        if (i < STATE_N * DIR_N)
+            movable_table_shared[i / DIR_N][i % DIR_N] = movable_table[i];
     for (int dir = 0; dir < DIR_N; ++dir)
-        for (int j = tid; j < STATE_N*STATE_N; j += blockDim.x)
-            if (j < STATE_N*STATE_N)
-                h_diff_table_shared[j/STATE_N][j%STATE_N][dir] =
+        for (int j = tid; j < STATE_N * STATE_N; j += blockDim.x)
+            if (j < STATE_N * STATE_N)
+                h_diff_table_shared[j / STATE_N][j % STATE_N][dir] =
                     h_diff_table[j * DIR_N + dir];
 
-    idas_internal(f_limit, input, stat);
+	__syncthreads();
+    stat[bid] = idas_internal(stack, f_limit, &loads);
+
+SEARCH_FINI:
+    if (tid == 0)
+        stat[bid].loads = loads;
 }
 
 /* host library implementation */
@@ -597,12 +603,13 @@ state_get_depth(State state)
 static void
 state_dump(State state)
 {
-    elog("LOG(state): depth=%d, h=%d, f=%d, ",
-		    state->depth, state->h_value, state->depth + state->h_value);
+    elog("LOG(state): depth=%d, h=%d, f=%d, ", state->depth, state->h_value,
+         state->depth + state->h_value);
     for (int i = 0; i < STATE_N; ++i)
-        elog("%d%c",
-	i==state->i+STATE_WIDTH*state->j?0:state->pos[i % STATE_WIDTH][i / STATE_WIDTH],
-	i == STATE_N - 1 ? '\n' : ',');
+        elog("%d%c", i == state->i + STATE_WIDTH * state->j
+                         ? 0
+                         : state->pos[i % STATE_WIDTH][i / STATE_WIDTH],
+             i == STATE_N - 1 ? '\n' : ',');
 }
 
 #include <stddef.h>
@@ -1098,7 +1105,7 @@ distribute_astar(State init_state, Input input[], int distr_n, int *cnt_inputs,
                 minf = state_get_depth(state) + state_get_hvalue(state);
         }
         assert(pq_pop(q) == NULL);
-        //shuffle_input(input, cnt);
+        // shuffle_input(input, cnt);
         *min_fvalue = minf;
     }
 
@@ -1178,10 +1185,10 @@ input_devide(Input input[], search_stat stat[], int i, int devide_n, int tail,
     {
         *buf_len = new_buf_len;
         repalloc(input, sizeof(*input) * new_buf_len);
-	elog("LOG: host buf resize\n");
+        elog("LOG: host buf resize\n");
     }
 
-    input[i] = input[tail-1];
+    input[i] = input[tail - 1];
 
     for (int id = 0; id < cnt; ++id)
     {
@@ -1358,7 +1365,7 @@ main(int argc, char *argv[])
 
     {
         State init_state = state_init(input[0].tiles, 0);
-	state_dump(init_state);
+        state_dump(init_state);
         if (distribute_astar(init_state, input, N_INIT_DISTRIBUTION, &n_roots,
                              &min_fvalue))
         {
@@ -1394,11 +1401,11 @@ main(int argc, char *argv[])
 
 #ifdef SEARCH_ALL_THE_BEST
         for (int i = 0; i < n_roots; ++i)
-		if (stat[i].solved)
-		{
-			elog("find all the optimal solution(s)\n");
-			goto solution_found;
-		}
+            if (stat[i].solved)
+            {
+                elog("find all the optimal solution(s)\n");
+                goto solution_found;
+            }
 #endif
 
         unsigned long long int loads_sum = 0;
@@ -1411,15 +1418,24 @@ main(int argc, char *argv[])
         int stat_cnt[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0; i < n_roots; ++i)
         {
-            if (stat[i].loads < loads_av) stat_cnt[0]++;
-            else if (stat[i].loads < 2 * loads_av) stat_cnt[1]++;
-            else if (stat[i].loads < 4 * loads_av) stat_cnt[2]++;
-            else if (stat[i].loads < 8 * loads_av) stat_cnt[3]++;
-            else if (stat[i].loads < 16 * loads_av) stat_cnt[4]++;
-            else if (stat[i].loads < 32 * loads_av) stat_cnt[5]++;
-            else if (stat[i].loads < 64 * loads_av) stat_cnt[6]++;
-            else if (stat[i].loads < 128 * loads_av) stat_cnt[7]++;
-            else stat_cnt[8]++;
+            if (stat[i].loads < loads_av)
+                stat_cnt[0]++;
+            else if (stat[i].loads < 2 * loads_av)
+                stat_cnt[1]++;
+            else if (stat[i].loads < 4 * loads_av)
+                stat_cnt[2]++;
+            else if (stat[i].loads < 8 * loads_av)
+                stat_cnt[3]++;
+            else if (stat[i].loads < 16 * loads_av)
+                stat_cnt[4]++;
+            else if (stat[i].loads < 32 * loads_av)
+                stat_cnt[5]++;
+            else if (stat[i].loads < 64 * loads_av)
+                stat_cnt[6]++;
+            else if (stat[i].loads < 128 * loads_av)
+                stat_cnt[7]++;
+            else
+                stat_cnt[8]++;
 
             int policy = loads_av == 0 ? stat[i].loads
                                        : (stat[i].loads - 1) / loads_av + 1;
@@ -1431,7 +1447,7 @@ main(int argc, char *argv[])
 
             if (buf_len != buf_len_old)
             {
-		elog("XXX: fix MAX_BUF_RATIO\n");
+                elog("XXX: fix MAX_BUF_RATIO\n");
                 stat = (search_stat *) repalloc(stat, STAT_SIZE);
 
                 cudaPfree(d_input);
@@ -1450,7 +1466,8 @@ main(int argc, char *argv[])
         n_roots += increased;
         elog("STAT: n_roots=%d(+%d)\n", n_roots, increased);
 
-        //shuffle_input(input, n_roots); /* it may not be needed in case of idas_global */
+        // shuffle_input(input, n_roots); /* it may not be needed in case of
+        // idas_global */
     }
 
 solution_found:
