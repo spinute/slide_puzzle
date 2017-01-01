@@ -1,0 +1,2563 @@
+nohup: ignoring input
+*prob000
+LOG(state): depth=0, h=35, f=35, 14,1,9,6,4,8,12,5,7,2,3,0,10,11,13,15
+LOG: init_distr, cnt=2048
+f_limit=41
+STAT: loads: sum=2365, av=1
+STAT: distr: av=1435, 2av=152, 4av=232, 8av=158, 16av=66, 32av=5, 64av=0, 128av=0, more=0
+STAT: n_roots=2493(+445)
+f_limit=43
+STAT: loads: sum=13080, av=5
+STAT: distr: av=1525, 2av=550, 4av=347, 8av=70, 16av=1, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3452(+959)
+f_limit=45
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.070000 (  0.071713)
+prob001
+LOG(state): depth=0, h=30, f=30, 4,5,7,2,9,14,12,13,0,3,6,11,8,1,15,10
+LOG: init_distr, cnt=2048
+f_limit=38
+STAT: loads: sum=6125, av=2
+STAT: distr: av=727, 2av=754, 4av=410, 8av=141, 16av=16, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2447(+399)
+f_limit=40
+STAT: loads: sum=19209, av=7
+STAT: distr: av=1199, 2av=927, 4av=287, 8av=31, 16av=3, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3618(+1171)
+f_limit=42
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.060000 (  0.066488)
+prob002
+LOG(state): depth=0, h=28, f=28, 0,1,9,7,11,13,5,3,14,12,4,2,8,6,10,15
+LOG: init_distr, cnt=2048
+f_limit=36
+STAT: loads: sum=353, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2176(+128)
+f_limit=38
+STAT: loads: sum=6891, av=3
+STAT: distr: av=1254, 2av=624, 4av=226, 8av=67, 16av=5, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2573(+397)
+f_limit=40
+STAT: loads: sum=21280, av=8
+STAT: distr: av=1458, 2av=880, 4av=199, 8av=34, 16av=2, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3752(+1179)
+f_limit=42
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.080000 (  0.072932)
+prob003
+LOG(state): depth=0, h=39, f=39, 8,11,4,6,7,3,10,9,2,12,15,13,0,1,5,14
+LOG: init_distr, cnt=2048
+f_limit=43
+STAT: loads: sum=202, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2171(+123)
+f_limit=45
+STAT: loads: sum=10246, av=4
+STAT: distr: av=1213, 2av=552, 4av=340, 8av=54, 16av=10, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=3013(+842)
+f_limit=47
+STAT: loads: sum=38457, av=12
+STAT: distr: av=1788, 2av=918, 4av=235, 8av=54, 16av=16, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=5194(+2181)
+f_limit=49
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.080000 (  0.079973)
+prob004
+LOG(state): depth=0, h=29, f=29, 13,8,14,3,9,1,0,7,15,5,4,10,12,2,6,11
+LOG: init_distr, cnt=2048
+f_limit=35
+STAT: loads: sum=680, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2193(+145)
+f_limit=37
+STAT: loads: sum=6832, av=3
+STAT: distr: av=1418, 2av=438, 4av=243, 8av=90, 16av=4, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2725(+532)
+f_limit=39
+STAT: loads: sum=21746, av=7
+STAT: distr: av=1474, 2av=858, 4av=327, 8av=64, 16av=2, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=4154(+1429)
+f_limit=41
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.080000 (  0.075255)
+prob005
+LOG(state): depth=0, h=36, f=36, 7,11,8,3,14,0,6,15,1,4,13,9,5,12,2,10
+LOG: init_distr, cnt=2048
+f_limit=40
+STAT: loads: sum=2002, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2705(+657)
+f_limit=42
+STAT: loads: sum=13268, av=4
+STAT: distr: av=1646, 2av=518, 4av=384, 8av=132, 16av=23, 32av=1, 64av=1, 128av=0, more=0
+STAT: n_roots=4101(+1396)
+f_limit=44
+STAT: loads: sum=53834, av=13
+STAT: distr: av=2698, 2av=944, 4av=350, 8av=94, 16av=14, 32av=0, 64av=1, 128av=0, more=0
+STAT: n_roots=6709(+2608)
+f_limit=46
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.090000 (  0.084309)
+prob006
+LOG(state): depth=0, h=38, f=38, 12,8,15,13,1,0,5,4,6,3,2,11,9,7,14,10
+LOG: init_distr, cnt=2048
+f_limit=44
+STAT: loads: sum=3538, av=1
+STAT: distr: av=1076, 2av=232, 4av=402, 8av=233, 16av=102, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=2536(+488)
+f_limit=46
+STAT: loads: sum=15342, av=6
+STAT: distr: av=1492, 2av=694, 4av=304, 8av=43, 16av=3, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3523(+987)
+f_limit=48
+STAT: loads: sum=57842, av=16
+STAT: distr: av=2265, 2av=849, 4av=337, 8av=63, 16av=9, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=5714(+2191)
+f_limit=50
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.070000 (  0.077041)
+prob007
+LOG(state): depth=0, h=35, f=35, 6,0,5,10,11,12,9,2,1,7,4,3,14,8,13,15
+LOG: init_distr, cnt=2049
+f_limit=39
+STAT: loads: sum=2001, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2049
+STAT: n_roots=2983(+934)
+f_limit=41
+STAT: loads: sum=16985, av=5
+STAT: distr: av=1969, 2av=496, 4av=382, 8av=110, 16av=19, 32av=4, 64av=3, 128av=0, more=0
+STAT: n_roots=4660(+1677)
+f_limit=43
+STAT: loads: sum=72636, av=15
+STAT: distr: av=3216, 2av=936, 4av=355, 8av=116, 16av=28, 32av=5, 64av=4, 128av=0, more=0
+STAT: n_roots=7813(+3153)
+f_limit=45
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.090000 (  0.084148)
+prob008
+LOG(state): depth=0, h=32, f=32, 4,7,13,10,1,2,9,6,12,8,14,5,3,0,11,15
+LOG: init_distr, cnt=2049
+f_limit=38
+STAT: loads: sum=2772, av=1
+STAT: distr: av=1292, 2av=244, 4av=234, 8av=195, 16av=73, 32av=11, 64av=0, 128av=0, more=0
+STAT: n_roots=2510(+461)
+f_limit=40
+STAT: loads: sum=13022, av=5
+STAT: distr: av=1587, 2av=539, 4av=317, 8av=60, 16av=5, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=3528(+1018)
+f_limit=42
+STAT: loads: sum=47327, av=13
+STAT: distr: av=2281, 2av=786, 4av=364, 8av=90, 16av=6, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=5830(+2302)
+f_limit=44
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.080000 (  0.075401)
+prob009
+LOG(state): depth=0, h=37, f=37, 6,14,10,5,15,8,7,1,3,4,2,0,12,9,11,13
+LOG: init_distr, cnt=2048
+f_limit=43
+STAT: loads: sum=160, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2122(+74)
+f_limit=45
+STAT: loads: sum=10202, av=4
+STAT: distr: av=1366, 2av=436, 4av=227, 8av=72, 16av=16, 32av=4, 64av=0, 128av=0, more=1
+STAT: n_roots=3187(+1065)
+f_limit=47
+STAT: loads: sum=54299, av=17
+STAT: distr: av=2348, 2av=537, 4av=189, 8av=79, 16av=25, 32av=7, 64av=1, 128av=1, more=0
+STAT: n_roots=5256(+2069)
+f_limit=49
+*Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.080000 (  0.080886)
+prob010
+LOG(state): depth=0, h=32, f=32, 9,14,5,7,8,15,1,2,10,4,13,6,12,0,11,3
+LOG: init_distr, cnt=2048
+f_limit=38
+STAT: loads: sum=3494, av=1
+STAT: distr: av=1314, 2av=225, 4av=172, 8av=162, 16av=145, 32av=30, 64av=0, 128av=0, more=0
+STAT: n_roots=3244(+1196)
+f_limit=40
+STAT: loads: sum=17576, av=5
+STAT: distr: av=2065, 2av=517, 4av=554, 8av=101, 16av=6, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=4899(+1655)
+f_limit=42
+STAT: loads: sum=64390, av=13
+STAT: distr: av=2929, 2av=1443, 4av=426, 8av=93, 16av=7, 32av=0, 64av=1, 128av=0, more=0
+STAT: n_roots=8157(+3258)
+f_limit=44
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.080000 (  0.083151)
+prob011
+LOG(state): depth=0, h=45, f=45, 5,7,11,8,0,14,9,13,10,12,3,15,6,1,4,2
+LOG: init_distr, cnt=2048
+f_limit=49
+STAT: loads: sum=467, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2423(+375)
+f_limit=51
+STAT: loads: sum=15888, av=6
+STAT: distr: av=1586, 2av=485, 4av=277, 8av=54, 16av=17, 32av=2, 64av=0, 128av=1, more=1
+STAT: n_roots=3805(+1382)
+f_limit=53
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.080000 (  0.072126)
+prob012
+LOG(state): depth=0, h=35, f=35, 12,15,2,6,1,14,4,8,5,3,7,0,10,13,9,11
+LOG: init_distr, cnt=2048
+f_limit=41
+STAT: loads: sum=4293, av=2
+STAT: distr: av=1119, 2av=479, 4av=326, 8av=119, 16av=5, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2239(+191)
+f_limit=43
+STAT: loads: sum=15326, av=6
+STAT: distr: av=1223, 2av=623, 4av=339, 8av=50, 16av=3, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=3406(+1167)
+f_limit=45
+STAT: loads: sum=60272, av=17
+STAT: distr: av=2166, 2av=814, 4av=347, 8av=70, 16av=9, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=5638(+2232)
+f_limit=47
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.090000 (  0.083312)
+prob013
+LOG(state): depth=0, h=32, f=32, 3,14,9,11,5,4,8,2,13,12,6,7,10,1,15,0
+LOG: init_distr, cnt=2048
+f_limit=40
+STAT: loads: sum=6550, av=3
+STAT: distr: av=1139, 2av=555, 4av=296, 8av=58, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2370(+322)
+f_limit=42
+STAT: loads: sum=20267, av=8
+STAT: distr: av=1259, 2av=785, 4av=294, 8av=31, 16av=1, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3781(+1411)
+f_limit=44
+STAT: loads: sum=78775, av=20
+STAT: distr: av=2387, 2av=898, 4av=417, 8av=72, 16av=7, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=6374(+2593)
+f_limit=46
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.080000 (  0.083103)
+prob014
+LOG(state): depth=0, h=34, f=34, 13,9,14,6,12,8,1,2,3,4,0,7,5,10,11,15
+LOG: init_distr, cnt=2048
+f_limit=40
+STAT: loads: sum=5672, av=2
+STAT: distr: av=1157, 2av=357, 4av=304, 8av=199, 16av=28, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=2882(+834)
+f_limit=42
+STAT: loads: sum=22089, av=7
+STAT: distr: av=1621, 2av=807, 4av=381, 8av=59, 16av=10, 32av=4, 64av=0, 128av=0, more=0
+STAT: n_roots=4610(+1728)
+f_limit=44
+STAT: loads: sum=90618, av=19
+STAT: distr: av=3037, 2av=1047, 4av=399, 8av=106, 16av=14, 32av=7, 64av=0, 128av=0, more=0
+STAT: n_roots=7644(+3034)
+f_limit=46
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.090000 (  0.087150)
+prob015
+LOG(state): depth=0, h=36, f=36, 5,11,6,9,4,13,12,0,8,2,15,10,1,7,3,14
+LOG: init_distr, cnt=2048
+f_limit=42
+STAT: loads: sum=403, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2213(+165)
+f_limit=44
+STAT: loads: sum=9256, av=4
+STAT: distr: av=1371, 2av=500, 4av=286, 8av=49, 16av=7, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2803(+590)
+f_limit=46
+STAT: loads: sum=32787, av=11
+STAT: distr: av=1633, 2av=885, 4av=226, 8av=48, 16av=11, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=4686(+1883)
+f_limit=48
+STAT: loads: sum=146832, av=31
+STAT: distr: av=3195, 2av=966, 4av=390, 8av=116, 16av=19, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=7677(+2991)
+f_limit=50
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.100000 (  0.097392)
+prob016
+LOG(state): depth=0, h=31, f=31, 6,13,3,2,11,9,5,10,1,7,12,14,8,4,0,15
+LOG: init_distr, cnt=2048
+f_limit=37
+STAT: loads: sum=2459, av=1
+STAT: distr: av=1321, 2av=195, 4av=302, 8av=163, 16av=60, 32av=7, 64av=0, 128av=0, more=0
+STAT: n_roots=2433(+385)
+f_limit=39
+STAT: loads: sum=12001, av=4
+STAT: distr: av=1320, 2av=626, 4av=392, 8av=87, 16av=7, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=3399(+966)
+f_limit=41
+STAT: loads: sum=40218, av=11
+STAT: distr: av=2064, 2av=912, 4av=348, 8av=69, 16av=6, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=5644(+2245)
+f_limit=43
+STAT: loads: sum=156785, av=27
+STAT: distr: av=3604, 2av=1366, 4av=570, 8av=92, 16av=11, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=9329(+3685)
+f_limit=45
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.110000 (  0.096387)
+prob017
+LOG(state): depth=0, h=30, f=30, 5,7,0,11,12,1,9,10,15,6,2,3,8,4,13,14
+LOG: init_distr, cnt=2048
+f_limit=36
+STAT: loads: sum=4560, av=2
+STAT: distr: av=1076, 2av=504, 4av=342, 8av=123, 16av=3, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2245(+197)
+f_limit=38
+STAT: loads: sum=14278, av=6
+STAT: distr: av=1206, 2av=711, 4av=299, 8av=23, 16av=6, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3132(+887)
+f_limit=40
+STAT: loads: sum=45497, av=14
+STAT: distr: av=1884, 2av=875, 4av=328, 8av=41, 16av=3, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=5162(+2030)
+f_limit=42
+STAT: loads: sum=174935, av=33
+STAT: distr: av=3195, 2av=1351, 4av=520, 8av=88, 16av=8, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=8656(+3494)
+f_limit=44
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.110000 (  0.109554)
+prob018
+LOG(state): depth=0, h=37, f=37, 5,0,15,8,4,6,1,14,10,11,3,9,7,12,2,13
+LOG: init_distr, cnt=2048
+f_limit=43
+STAT: loads: sum=1062, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2304(+256)
+f_limit=45
+STAT: loads: sum=10232, av=4
+STAT: distr: av=1458, 2av=464, 4av=290, 8av=88, 16av=4, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3160(+856)
+f_limit=47
+STAT: loads: sum=37909, av=11
+STAT: distr: av=1812, 2av=976, 4av=298, 8av=60, 16av=13, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=5489(+2329)
+f_limit=49
+STAT: loads: sum=165652, av=30
+STAT: distr: av=3752, 2av=1103, 4av=477, 8av=137, 16av=20, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=8960(+3471)
+f_limit=51
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.090000 (  0.094518)
+prob019
+LOG(state): depth=0, h=41, f=41, 3,14,13,6,4,15,8,9,5,12,10,0,2,7,1,11
+LOG: init_distr, cnt=2049
+f_limit=47
+STAT: loads: sum=6998, av=3
+STAT: distr: av=1136, 2av=466, 4av=334, 8av=109, 16av=4, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2651(+602)
+f_limit=49
+STAT: loads: sum=30823, av=11
+STAT: distr: av=1559, 2av=751, 4av=269, 8av=62, 16av=10, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=4586(+1935)
+f_limit=51
+STAT: loads: sum=165445, av=36
+STAT: distr: av=3088, 2av=938, 4av=405, 8av=142, 16av=12, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=7694(+3108)
+f_limit=53
+*Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.110000 (  0.099181)
+prob020
+LOG(state): depth=0, h=34, f=34, 4,3,6,13,7,15,9,0,10,5,8,11,2,12,1,14
+LOG: init_distr, cnt=2048
+f_limit=42
+STAT: loads: sum=2759, av=1
+STAT: distr: av=1346, 2av=213, 4av=213, 8av=179, 16av=89, 32av=8, 64av=0, 128av=0, more=0
+STAT: n_roots=2512(+464)
+f_limit=44
+STAT: loads: sum=13241, av=5
+STAT: distr: av=1531, 2av=533, 4av=395, 8av=51, 16av=2, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3511(+999)
+f_limit=46
+STAT: loads: sum=47862, av=13
+STAT: distr: av=2136, 2av=929, 4av=381, 8av=61, 16av=4, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=5877(+2366)
+f_limit=48
+STAT: loads: sum=210483, av=35
+STAT: distr: av=3791, 2av=1370, 4av=602, 8av=100, 16av=14, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=9775(+3898)
+f_limit=50
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.110000 (  0.122189)
+prob021
+LOG(state): depth=0, h=36, f=36, 3,6,5,2,10,0,15,14,1,4,13,12,9,8,11,7
+LOG: init_distr, cnt=2049
+f_limit=38
+STAT: loads: sum=951, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2049
+STAT: n_roots=2731(+682)
+f_limit=40
+STAT: loads: sum=14060, av=5
+STAT: distr: av=1863, 2av=458, 4av=315, 8av=69, 16av=20, 32av=6, 64av=0, 128av=0, more=0
+STAT: n_roots=3988(+1257)
+f_limit=42
+STAT: loads: sum=55466, av=13
+STAT: distr: av=2574, 2av=965, 4av=337, 8av=83, 16av=23, 32av=4, 64av=1, 128av=1, more=0
+STAT: n_roots=6782(+2794)
+f_limit=44
+STAT: loads: sum=232555, av=34
+STAT: distr: av=4793, 2av=1205, 4av=584, 8av=159, 16av=31, 32av=8, 64av=2, 128av=0, more=0
+STAT: n_roots=11166(+4384)
+f_limit=46
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.140000 (  0.131118)
+prob022
+LOG(state): depth=0, h=41, f=41, 7,15,8,2,13,6,3,12,11,0,4,10,9,5,1,14
+LOG: init_distr, cnt=2048
+f_limit=45
+STAT: loads: sum=580, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2267(+219)
+f_limit=47
+STAT: loads: sum=10752, av=4
+STAT: distr: av=1171, 2av=714, 4av=310, 8av=56, 16av=13, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=3019(+752)
+f_limit=49
+STAT: loads: sum=43605, av=14
+STAT: distr: av=1977, 2av=741, 4av=227, 8av=62, 16av=10, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=4907(+1888)
+f_limit=51
+STAT: loads: sum=228532, av=46
+STAT: distr: av=3300, 2av=1052, 4av=415, 8av=122, 16av=16, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=8214(+3307)
+f_limit=53
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.130000 (  0.128164)
+prob023
+LOG(state): depth=0, h=39, f=39, 13,0,9,12,11,6,3,5,15,8,1,10,4,14,2,7
+LOG: init_distr, cnt=2048
+f_limit=45
+STAT: loads: sum=1673, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2334(+286)
+f_limit=47
+STAT: loads: sum=11756, av=5
+STAT: distr: av=1492, 2av=504, 4av=270, 8av=63, 16av=4, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=3229(+895)
+f_limit=49
+STAT: loads: sum=46235, av=14
+STAT: distr: av=2121, 2av=708, 4av=316, 8av=76, 16av=8, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=5316(+2087)
+f_limit=51
+STAT: loads: sum=219068, av=41
+STAT: distr: av=3507, 2av=1167, 4av=520, 8av=109, 16av=13, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=8854(+3538)
+f_limit=53
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.120000 (  0.118220)
+prob024
+LOG(state): depth=0, h=36, f=36, 5,4,7,1,11,12,14,15,10,13,8,6,2,0,9,3
+LOG: init_distr, cnt=2049
+f_limit=42
+STAT: loads: sum=2261, av=1
+STAT: distr: av=1453, 2av=87, 4av=293, 8av=165, 16av=43, 32av=8, 64av=0, 128av=0, more=0
+STAT: n_roots=2345(+296)
+f_limit=44
+STAT: loads: sum=13589, av=5
+STAT: distr: av=1315, 2av=628, 4av=327, 8av=64, 16av=10, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=3401(+1056)
+f_limit=46
+STAT: loads: sum=54725, av=16
+STAT: distr: av=2254, 2av=762, 4av=319, 8av=56, 16av=8, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=5456(+2055)
+f_limit=48
+STAT: loads: sum=266722, av=48
+STAT: distr: av=3550, 2av=1290, 4av=484, 8av=115, 16av=15, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=9110(+3654)
+f_limit=50
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.120000 (  0.113416)
+prob025
+LOG(state): depth=0, h=36, f=36, 13,14,6,12,4,5,1,0,9,3,10,2,15,11,8,7
+LOG: init_distr, cnt=2048
+f_limit=44
+STAT: loads: sum=2507, av=1
+STAT: distr: av=1386, 2av=188, 4av=208, 8av=187, 16av=71, 32av=8, 64av=0, 128av=0, more=0
+STAT: n_roots=2425(+377)
+f_limit=46
+STAT: loads: sum=14086, av=5
+STAT: distr: av=1430, 2av=529, 4av=367, 8av=87, 16av=11, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=3647(+1222)
+f_limit=48
+STAT: loads: sum=59642, av=16
+STAT: distr: av=2451, 2av=748, 4av=340, 8av=97, 16av=9, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=5984(+2337)
+f_limit=50
+STAT: loads: sum=288097, av=48
+STAT: distr: av=3952, 2av=1323, 4av=547, 8av=139, 16av=21, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=10026(+4042)
+f_limit=52
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.110000 (  0.111916)
+prob026
+LOG(state): depth=0, h=36, f=36, 14,7,1,9,12,3,6,15,8,11,2,5,10,0,4,13
+LOG: init_distr, cnt=2048
+f_limit=44
+STAT: loads: sum=2858, av=1
+STAT: distr: av=1397, 2av=115, 4av=237, 8av=187, 16av=106, 32av=6, 64av=0, 128av=0, more=0
+STAT: n_roots=2773(+725)
+f_limit=46
+STAT: loads: sum=15869, av=5
+STAT: distr: av=1667, 2av=555, 4av=464, 8av=81, 16av=6, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=4171(+1398)
+f_limit=48
+STAT: loads: sum=64718, av=15
+STAT: distr: av=2678, 2av=959, 4av=448, 8av=75, 16av=11, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=6869(+2698)
+f_limit=50
+STAT: loads: sum=310982, av=45
+STAT: distr: av=4492, 2av=1527, 4av=692, 8av=140, 16av=16, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=11476(+4607)
+f_limit=52
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.150000 (  0.138648)
+prob027
+LOG(state): depth=0, h=24, f=24, 1,3,2,5,10,9,15,6,8,14,13,11,12,4,7,0
+LOG: init_distr, cnt=2049
+f_limit=32
+STAT: loads: sum=1785, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2049
+STAT: n_roots=2192(+143)
+f_limit=34
+STAT: loads: sum=7758, av=3
+STAT: distr: av=1211, 2av=538, 4av=352, 8av=90, 16av=1, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2659(+467)
+f_limit=36
+STAT: loads: sum=20631, av=7
+STAT: distr: av=1429, 2av=859, 4av=343, 8av=28, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3906(+1247)
+f_limit=38
+STAT: loads: sum=60219, av=15
+STAT: distr: av=2350, 2av=1144, 4av=387, 8av=25, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=6244(+2338)
+f_limit=40
+STAT: loads: sum=202804, av=32
+STAT: distr: av=3755, 2av=1877, 4av=577, 8av=35, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=10197(+3953)
+f_limit=42
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.120000 (  0.123756)
+prob028
+LOG(state): depth=0, h=35, f=35, 9,0,4,10,1,14,15,3,12,6,5,7,11,13,8,2
+LOG: init_distr, cnt=2049
+f_limit=39
+STAT: loads: sum=334, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2049
+STAT: n_roots=2151(+102)
+f_limit=41
+STAT: loads: sum=7811, av=3
+STAT: distr: av=1136, 2av=636, 4av=285, 8av=79, 16av=13, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=2761(+610)
+f_limit=43
+STAT: loads: sum=26638, av=9
+STAT: distr: av=1519, 2av=985, 4av=203, 8av=39, 16av=15, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=4399(+1638)
+f_limit=45
+STAT: loads: sum=101158, av=22
+STAT: distr: av=2914, 2av=996, 4av=377, 8av=88, 16av=23, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=7244(+2845)
+f_limit=47
+STAT: loads: sum=450526, av=62
+STAT: distr: av=4654, 2av=1814, 4av=621, 8av=142, 16av=13, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=12008(+4764)
+f_limit=49
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.180000 (  0.174403)
+prob029
+LOG(state): depth=0, h=43, f=43, 6,0,14,12,1,15,9,10,11,4,7,2,8,3,5,13
+LOG: init_distr, cnt=2049
+f_limit=47
+STAT: loads: sum=253, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2049
+STAT: n_roots=2195(+146)
+f_limit=49
+STAT: loads: sum=10277, av=4
+STAT: distr: av=1221, 2av=615, 4av=281, 8av=60, 16av=12, 32av=6, 64av=0, 128av=0, more=0
+STAT: n_roots=3037(+842)
+f_limit=51
+STAT: loads: sum=50316, av=16
+STAT: distr: av=2136, 2av=574, 4av=219, 8av=75, 16av=27, 32av=6, 64av=0, 128av=0, more=0
+STAT: n_roots=5096(+2059)
+f_limit=53
+STAT: loads: sum=316667, av=62
+STAT: distr: av=3678, 2av=840, 4av=385, 8av=150, 16av=34, 32av=7, 64av=2, 128av=0, more=0
+STAT: n_roots=8654(+3558)
+f_limit=55
+*Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.170000 (  0.170248)
+prob030
+LOG(state): depth=0, h=35, f=35, 1,7,15,14,2,6,4,9,12,11,13,3,0,8,5,10
+LOG: init_distr, cnt=2049
+f_limit=41
+STAT: loads: sum=5427, av=2
+STAT: distr: av=1063, 2av=494, 4av=295, 8av=148, 16av=48, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=2916(+867)
+f_limit=43
+STAT: loads: sum=23107, av=7
+STAT: distr: av=1694, 2av=715, 4av=403, 8av=87, 16av=16, 32av=0, 64av=1, 128av=0, more=0
+STAT: n_roots=4780(+1864)
+f_limit=45
+STAT: loads: sum=98399, av=20
+STAT: distr: av=3203, 2av=1009, 4av=427, 8av=116, 16av=23, 32av=1, 64av=1, 128av=0, more=0
+STAT: n_roots=7985(+3205)
+f_limit=47
+STAT: loads: sum=468108, av=58
+STAT: distr: av=5356, 2av=1679, 4av=714, 8av=188, 16av=43, 32av=5, 64av=0, 128av=0, more=0
+STAT: n_roots=13492(+5507)
+f_limit=49
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.150000 (  0.140042)
+prob031
+LOG(state): depth=0, h=46, f=46, 14,13,4,11,15,8,6,9,0,7,3,1,2,10,12,5
+LOG: init_distr, cnt=2048
+f_limit=50
+STAT: loads: sum=647, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2349(+301)
+f_limit=52
+STAT: loads: sum=13757, av=5
+STAT: distr: av=1497, 2av=509, 4av=261, 8av=55, 16av=19, 32av=7, 64av=1, 128av=0, more=0
+STAT: n_roots=3505(+1156)
+f_limit=54
+STAT: loads: sum=74631, av=21
+STAT: distr: av=2605, 2av=545, 4av=231, 8av=91, 16av=25, 32av=6, 64av=2, 128av=0, more=0
+STAT: n_roots=5752(+2247)
+f_limit=56
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.100000 (  0.095195)
+prob032
+LOG(state): depth=0, h=33, f=33, 10,9,3,11,0,13,2,14,5,6,4,7,8,15,1,12
+LOG: init_distr, cnt=2048
+f_limit=39
+STAT: loads: sum=377, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2171(+123)
+f_limit=41
+STAT: loads: sum=8042, av=3
+STAT: distr: av=1097, 2av=666, 4av=309, 8av=86, 16av=11, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=2742(+571)
+f_limit=43
+STAT: loads: sum=27010, av=9
+STAT: distr: av=1524, 2av=921, 4av=237, 8av=51, 16av=9, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=4493(+1751)
+f_limit=45
+STAT: loads: sum=104196, av=23
+STAT: distr: av=2968, 2av=1041, 4av=376, 8av=99, 16av=9, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=7331(+2838)
+f_limit=47
+STAT: loads: sum=475687, av=64
+STAT: distr: av=4564, 2av=1943, 4av=674, 8av=148, 16av=2, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=12350(+5019)
+f_limit=49
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.160000 (  0.156060)
+prob033
+LOG(state): depth=0, h=35, f=35, 8,4,6,1,14,12,2,15,13,10,9,5,3,7,0,11
+LOG: init_distr, cnt=2048
+f_limit=41
+STAT: loads: sum=5022, av=2
+STAT: distr: av=1306, 2av=294, 4av=189, 8av=221, 16av=35, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=2929(+881)
+f_limit=43
+STAT: loads: sum=23407, av=7
+STAT: distr: av=1649, 2av=711, 4av=485, 8av=71, 16av=12, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=4892(+1963)
+f_limit=45
+STAT: loads: sum=99221, av=20
+STAT: distr: av=3213, 2av=1066, 4av=495, 8av=100, 16av=17, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=8145(+3253)
+f_limit=47
+STAT: loads: sum=478102, av=58
+STAT: distr: av=5089, 2av=2034, 4av=855, 8av=151, 16av=14, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=13907(+5762)
+f_limit=49
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.120000 (  0.120137)
+prob034
+LOG(state): depth=0, h=43, f=43, 4,6,12,0,14,2,9,13,11,8,3,15,7,10,1,5
+LOG: init_distr, cnt=2048
+f_limit=49
+STAT: loads: sum=1736, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2806(+758)
+f_limit=51
+STAT: loads: sum=17977, av=6
+STAT: distr: av=1805, 2av=588, 4av=323, 8av=70, 16av=13, 32av=7, 64av=0, 128av=0, more=0
+STAT: n_roots=4270(+1464)
+f_limit=53
+STAT: loads: sum=94563, av=22
+STAT: distr: av=3070, 2av=690, 4av=353, 8av=126, 16av=25, 32av=6, 64av=0, 128av=0, more=0
+STAT: n_roots=7047(+2777)
+f_limit=55
+STAT: loads: sum=598991, av=84
+STAT: distr: av=4810, 2av=1372, 4av=607, 8av=200, 16av=52, 32av=6, 64av=0, 128av=0, more=0
+STAT: n_roots=12052(+5005)
+f_limit=57
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.010000   0.200000 (  0.186133)
+prob035
+LOG(state): depth=0, h=31, f=31, 12,3,9,1,4,5,10,2,6,11,15,0,14,7,13,8
+LOG: init_distr, cnt=2048
+f_limit=37
+STAT: loads: sum=24, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2060(+12)
+f_limit=39
+STAT: loads: sum=5524, av=2
+STAT: distr: av=749, 2av=822, 4av=391, 8av=94, 16av=4, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2268(+208)
+f_limit=41
+STAT: loads: sum=15730, av=6
+STAT: distr: av=1044, 2av=907, 4av=301, 8av=16, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3125(+857)
+f_limit=43
+STAT: loads: sum=46744, av=14
+STAT: distr: av=1748, 2av=1042, 4av=307, 8av=28, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=5147(+2022)
+f_limit=45
+STAT: loads: sum=176351, av=34
+STAT: distr: av=3136, 2av=1519, 4av=435, 8av=56, 16av=1, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=8494(+3347)
+f_limit=47
+STAT: loads: sum=756278, av=89
+STAT: distr: av=5060, 2av=2640, 4av=727, 8av=66, 16av=1, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=14101(+5607)
+f_limit=49
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.170000 (  0.168903)
+prob036
+LOG(state): depth=0, h=36, f=36, 6,12,11,3,13,7,9,15,2,14,8,10,4,1,5,0
+LOG: init_distr, cnt=2048
+f_limit=44
+STAT: loads: sum=6631, av=3
+STAT: distr: av=1324, 2av=310, 4av=293, 8av=119, 16av=2, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2696(+648)
+f_limit=46
+STAT: loads: sum=25626, av=9
+STAT: distr: av=1524, 2av=798, 4av=304, 8av=67, 16av=3, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=4529(+1833)
+f_limit=48
+STAT: loads: sum=115973, av=25
+STAT: distr: av=3055, 2av=917, 4av=422, 8av=118, 16av=15, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=7493(+2964)
+f_limit=50
+STAT: loads: sum=602525, av=80
+STAT: distr: av=4875, 2av=1659, 4av=784, 8av=160, 16av=14, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=12580(+5087)
+f_limit=52
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.190000 (  0.189097)
+prob037
+LOG(state): depth=0, h=42, f=42, 4,7,14,13,10,3,9,12,11,5,6,15,1,2,8,0
+LOG: init_distr, cnt=2048
+f_limit=48
+STAT: loads: sum=3036, av=1
+STAT: distr: av=1320, 2av=226, 4av=186, 8av=207, 16av=98, 32av=11, 64av=0, 128av=0, more=0
+STAT: n_roots=2664(+616)
+f_limit=50
+STAT: loads: sum=18151, av=6
+STAT: distr: av=1591, 2av=609, 4av=356, 8av=96, 16av=12, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=4149(+1485)
+f_limit=52
+STAT: loads: sum=91128, av=21
+STAT: distr: av=2771, 2av=809, 4av=440, 8av=103, 16av=24, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=6988(+2839)
+f_limit=54
+STAT: loads: sum=555849, av=79
+STAT: distr: av=4633, 2av=1474, 4av=676, 8av=175, 16av=28, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=11890(+4902)
+f_limit=56
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.130000 (  0.126723)
+prob038
+LOG(state): depth=0, h=34, f=34, 0,13,2,4,12,14,6,9,15,1,10,3,11,5,8,7
+LOG: init_distr, cnt=2048
+f_limit=44
+STAT: loads: sum=1129, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2292(+244)
+f_limit=46
+STAT: loads: sum=10062, av=4
+STAT: distr: av=1321, 2av=581, 4av=322, 8av=66, 16av=1, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=2968(+676)
+f_limit=48
+STAT: loads: sum=34885, av=11
+STAT: distr: av=1721, 2av=905, 4av=272, 8av=65, 16av=5, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=5016(+2048)
+f_limit=50
+STAT: loads: sum=149830, av=29
+STAT: distr: av=3369, 2av=1039, 4av=474, 8av=115, 16av=19, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=8314(+3298)
+f_limit=52
+STAT: loads: sum=762646, av=91
+STAT: distr: av=5228, 2av=2074, 4av=847, 8av=157, 16av=8, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=14017(+5703)
+f_limit=54
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.170000 (  0.164561)
+prob039
+LOG(state): depth=0, h=35, f=35, 6,10,1,14,15,8,3,5,13,0,2,7,4,9,11,12
+LOG: init_distr, cnt=2048
+f_limit=41
+STAT: loads: sum=4633, av=2
+STAT: distr: av=1000, 2av=552, 4av=383, 8av=105, 16av=8, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2302(+254)
+f_limit=43
+STAT: loads: sum=15878, av=6
+STAT: distr: av=1166, 2av=718, 4av=379, 8av=38, 16av=1, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3433(+1131)
+f_limit=45
+STAT: loads: sum=56740, av=16
+STAT: distr: av=2069, 2av=959, 4av=354, 8av=48, 16av=3, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=5682(+2249)
+f_limit=47
+*Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.090000 (  0.082022)
+prob040
+LOG(state): depth=0, h=39, f=39, 3,14,9,7,12,15,0,4,1,8,5,6,11,10,2,13
+LOG: init_distr, cnt=2048
+f_limit=43
+STAT: loads: sum=344, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2147(+99)
+f_limit=45
+STAT: loads: sum=8714, av=4
+STAT: distr: av=1386, 2av=436, 4av=259, 8av=58, 16av=8, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2744(+597)
+f_limit=47
+STAT: loads: sum=32797, av=11
+STAT: distr: av=1644, 2av=773, 4av=254, 8av=64, 16av=9, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=4709(+1965)
+f_limit=49
+STAT: loads: sum=151761, av=32
+STAT: distr: av=3329, 2av=852, 4av=380, 8av=121, 16av=23, 32av=4, 64av=0, 128av=0, more=0
+STAT: n_roots=7767(+3058)
+f_limit=51
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.110000 (  0.111538)
+prob041
+LOG(state): depth=0, h=36, f=36, 12,6,0,4,7,3,15,1,13,9,8,11,2,14,5,10
+LOG: init_distr, cnt=2049
+f_limit=42
+STAT: loads: sum=2960, av=1
+STAT: distr: av=1320, 2av=178, 4av=259, 8av=171, 16av=113, 32av=8, 64av=0, 128av=0, more=0
+STAT: n_roots=2689(+640)
+f_limit=44
+STAT: loads: sum=13640, av=5
+STAT: distr: av=1684, 2av=547, 4av=416, 8av=39, 16av=3, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3682(+993)
+f_limit=46
+STAT: loads: sum=47302, av=12
+STAT: distr: av=2200, 2av=1013, 4av=381, 8av=84, 16av=4, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=6144(+2462)
+f_limit=48
+STAT: loads: sum=191034, av=31
+STAT: distr: av=4061, 2av=1364, 4av=596, 8av=115, 16av=8, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=10029(+3885)
+f_limit=50
+STAT: loads: sum=885717, av=88
+STAT: distr: av=6209, 2av=2712, 4av=964, 8av=138, 16av=6, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=16639(+6610)
+f_limit=52
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.270000 (  0.264061)
+prob042
+LOG(state): depth=0, h=36, f=36, 6,11,7,8,13,2,5,4,1,10,3,9,14,0,12,15
+LOG: init_distr, cnt=2049
+f_limit=44
+STAT: loads: sum=7194, av=3
+STAT: distr: av=1066, 2av=577, 4av=344, 8av=60, 16av=2, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2397(+348)
+f_limit=46
+STAT: loads: sum=25127, av=10
+STAT: distr: av=1357, 2av=786, 4av=221, 8av=27, 16av=5, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=4025(+1628)
+f_limit=48
+STAT: loads: sum=115596, av=28
+STAT: distr: av=2677, 2av=882, 4av=371, 8av=79, 16av=14, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=6701(+2676)
+f_limit=50
+STAT: loads: sum=636019, av=94
+STAT: distr: av=4329, 2av=1584, 4av=633, 8av=138, 16av=16, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=11261(+4560)
+f_limit=52
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.170000 (  0.161836)
+prob043
+LOG(state): depth=0, h=31, f=31, 7,8,3,2,10,12,4,6,11,13,5,15,0,1,9,14
+LOG: init_distr, cnt=2048
+f_limit=37
+STAT: loads: sum=340, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2188(+140)
+f_limit=39
+STAT: loads: sum=7679, av=3
+STAT: distr: av=1245, 2av=556, 4av=296, 8av=80, 16av=11, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2717(+529)
+f_limit=41
+STAT: loads: sum=24584, av=9
+STAT: distr: av=1645, 2av=831, 4av=195, 8av=43, 16av=3, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=4165(+1448)
+f_limit=43
+STAT: loads: sum=86322, av=20
+STAT: distr: av=2729, 2av=996, 4av=340, 8av=87, 16av=11, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=6832(+2667)
+f_limit=45
+STAT: loads: sum=361543, av=52
+STAT: distr: av=4375, 2av=1722, 4av=593, 8av=125, 16av=16, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=11372(+4540)
+f_limit=47
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.110000 (  0.113087)
+prob044
+LOG(state): depth=0, h=32, f=32, 12,9,0,6,8,3,5,14,2,4,11,7,10,1,15,13
+LOG: init_distr, cnt=2048
+f_limit=38
+STAT: loads: sum=155, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2101(+53)
+f_limit=40
+STAT: loads: sum=7045, av=3
+STAT: distr: av=1199, 2av=539, 4av=302, 8av=59, 16av=2, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2439(+338)
+f_limit=42
+STAT: loads: sum=20442, av=8
+STAT: distr: av=1306, 2av=899, 4av=213, 8av=19, 16av=2, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3605(+1166)
+f_limit=44
+STAT: loads: sum=66584, av=18
+STAT: distr: av=2319, 2av=934, 4av=297, 8av=50, 16av=5, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=5809(+2204)
+f_limit=46
+STAT: loads: sum=269619, av=46
+STAT: distr: av=3641, 2av=1584, 4av=502, 8av=78, 16av=4, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=9489(+3680)
+f_limit=48
+STAT: loads: sum=1197586, av=126
+STAT: distr: av=5676, 2av=2900, 4av=823, 8av=89, 16av=1, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=15770(+6281)
+f_limit=50
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.170000 (  0.172820)
+prob045
+LOG(state): depth=0, h=44, f=44, 10,2,8,4,15,0,1,14,11,13,3,6,9,7,5,12
+LOG: init_distr, cnt=2048
+f_limit=48
+STAT: loads: sum=6347, av=3
+STAT: distr: av=1382, 2av=294, 4av=249, 8av=107, 16av=12, 32av=3, 64av=1, 128av=0, more=0
+STAT: n_roots=2818(+770)
+f_limit=50
+STAT: loads: sum=32694, av=11
+STAT: distr: av=1781, 2av=670, 4av=270, 8av=72, 16av=20, 32av=4, 64av=1, 128av=0, more=0
+STAT: n_roots=4861(+2043)
+f_limit=52
+STAT: loads: sum=184580, av=37
+STAT: distr: av=3419, 2av=836, 4av=417, 8av=141, 16av=41, 32av=7, 64av=0, 128av=0, more=0
+STAT: n_roots=8304(+3443)
+f_limit=54
+STAT: loads: sum=1143330, av=137
+STAT: distr: av=5531, 2av=1713, 4av=795, 8av=225, 16av=37, 32av=2, 64av=1, 128av=0, more=0
+STAT: n_roots=14197(+5893)
+f_limit=56
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.180000 (  0.166052)
+prob046
+LOG(state): depth=0, h=30, f=30, 14,4,0,10,6,5,1,3,9,2,13,15,12,7,8,11
+LOG: init_distr, cnt=2049
+f_limit=36
+STAT: loads: sum=323, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2049
+STAT: n_roots=2134(+85)
+f_limit=38
+STAT: loads: sum=7218, av=3
+STAT: distr: av=1165, 2av=642, 4av=249, 8av=71, 16av=6, 32av=0, 64av=1, 128av=0, more=0
+STAT: n_roots=2591(+457)
+f_limit=40
+STAT: loads: sum=23216, av=8
+STAT: distr: av=1386, 2av=897, 4av=254, 8av=51, 16av=2, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=3959(+1368)
+f_limit=42
+STAT: loads: sum=83401, av=21
+STAT: distr: av=2601, 2av=967, 4av=316, 8av=70, 16av=5, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=6299(+2340)
+f_limit=44
+STAT: loads: sum=351795, av=55
+STAT: distr: av=3880, 2av=1747, 4av=575, 8av=90, 16av=7, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=10500(+4201)
+f_limit=46
+STAT: loads: sum=1620503, av=154
+STAT: distr: av=6298, 2av=3116, 4av=970, 8av=112, 16av=3, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=17520(+7020)
+f_limit=48
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.180000 (  0.188938)
+prob047
+LOG(state): depth=0, h=43, f=43, 11,0,15,8,13,12,3,5,10,1,4,6,14,9,7,2
+LOG: init_distr, cnt=2048
+f_limit=49
+STAT: loads: sum=4215, av=2
+STAT: distr: av=1494, 2av=197, 4av=176, 8av=108, 16av=70, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=3120(+1072)
+f_limit=51
+STAT: loads: sum=30202, av=9
+STAT: distr: av=2115, 2av=508, 4av=356, 8av=114, 16av=18, 32av=8, 64av=1, 128av=0, more=0
+STAT: n_roots=5458(+2338)
+f_limit=53
+STAT: loads: sum=185823, av=34
+STAT: distr: av=3982, 2av=795, 4av=441, 8av=187, 16av=45, 32av=8, 64av=0, 128av=0, more=0
+STAT: n_roots=9196(+3738)
+f_limit=55
+STAT: loads: sum=1248061, av=135
+STAT: distr: av=6280, 2av=1715, 4av=868, 8av=261, 16av=64, 32av=8, 64av=0, 128av=0, more=0
+STAT: n_roots=15808(+6612)
+f_limit=57
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.300000 (  0.297233)
+prob048
+LOG(state): depth=0, h=38, f=38, 11,1,7,4,10,13,3,8,9,14,0,15,6,5,2,12
+LOG: init_distr, cnt=2049
+f_limit=44
+STAT: loads: sum=5238, av=2
+STAT: distr: av=1072, 2av=455, 4av=356, 8av=145, 16av=21, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2508(+459)
+f_limit=46
+STAT: loads: sum=18941, av=7
+STAT: distr: av=1347, 2av=764, 4av=355, 8av=39, 16av=2, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=3848(+1340)
+f_limit=48
+STAT: loads: sum=72887, av=18
+STAT: distr: av=2336, 2av=1052, 4av=367, 8av=90, 16av=3, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=6461(+2613)
+f_limit=50
+STAT: loads: sum=337853, av=52
+STAT: distr: av=4011, 2av=1713, 4av=609, 8av=123, 16av=5, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=10869(+4408)
+f_limit=52
+STAT: loads: sum=1744146, av=160
+STAT: distr: av=6498, 2av=3117, 4av=1110, 8av=139, 16av=4, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=18371(+7502)
+f_limit=54
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.200000 (  0.199016)
+prob049
+LOG(state): depth=0, h=43, f=43, 13,5,4,10,9,12,8,14,2,3,7,1,0,15,11,6
+LOG: init_distr, cnt=2048
+f_limit=47
+STAT: loads: sum=542, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2528(+480)
+f_limit=49
+STAT: loads: sum=17546, av=6
+STAT: distr: av=1703, 2av=521, 4av=242, 8av=46, 16av=7, 32av=4, 64av=2, 128av=2, more=1
+STAT: n_roots=4006(+1478)
+f_limit=51
+STAT: loads: sum=96625, av=24
+STAT: distr: av=3250, 2av=474, 4av=169, 8av=74, 16av=22, 32av=10, 64av=1, 128av=4, more=2
+STAT: n_roots=6564(+2558)
+f_limit=53
+STAT: loads: sum=620402, av=94
+STAT: distr: av=5039, 2av=906, 4av=375, 8av=163, 16av=52, 32av=18, 64av=6, 128av=4, more=1
+STAT: n_roots=11173(+4609)
+f_limit=55
+*Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.180000 (  0.179538)
+prob050
+LOG(state): depth=0, h=39, f=39, 1,6,12,14,3,2,15,8,4,5,13,9,0,7,11,10
+LOG: init_distr, cnt=2048
+f_limit=45
+STAT: loads: sum=745, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2491(+443)
+f_limit=47
+STAT: loads: sum=12852, av=5
+STAT: distr: av=1628, 2av=556, 4av=230, 8av=56, 16av=16, 32av=3, 64av=2, 128av=0, more=0
+STAT: n_roots=3469(+978)
+f_limit=49
+STAT: loads: sum=56468, av=16
+STAT: distr: av=2530, 2av=612, 4av=212, 8av=97, 16av=10, 32av=6, 64av=2, 128av=0, more=0
+STAT: n_roots=5621(+2152)
+f_limit=51
+STAT: loads: sum=286398, av=50
+STAT: distr: av=3935, 2av=1067, 4av=419, 8av=158, 16av=35, 32av=5, 64av=2, 128av=0, more=0
+STAT: n_roots=9377(+3756)
+f_limit=53
+STAT: loads: sum=1628390, av=173
+STAT: distr: av=6214, 2av=2112, 4av=809, 8av=198, 16av=38, 32av=4, 64av=2, 128av=0, more=0
+STAT: n_roots=15740(+6363)
+f_limit=55
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.270000 (  0.266091)
+prob051
+LOG(state): depth=0, h=37, f=37, 6,0,5,15,1,14,4,9,2,13,8,10,11,12,7,3
+LOG: init_distr, cnt=2048
+f_limit=43
+STAT: loads: sum=6093, av=2
+STAT: distr: av=1041, 2av=359, 4av=444, 8av=178, 16av=26, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2733(+685)
+f_limit=45
+STAT: loads: sum=21503, av=7
+STAT: distr: av=1458, 2av=819, 4av=410, 8av=43, 16av=2, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=4333(+1600)
+f_limit=47
+STAT: loads: sum=84538, av=19
+STAT: distr: av=2729, 2av=1118, 4av=408, 8av=67, 16av=10, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=7238(+2905)
+f_limit=49
+STAT: loads: sum=396619, av=54
+STAT: distr: av=4581, 2av=1834, 4av=681, 8av=124, 16av=14, 32av=3, 64av=1, 128av=0, more=0
+STAT: n_roots=12147(+4909)
+f_limit=51
+STAT: loads: sum=2003699, av=164
+STAT: distr: av=7425, 2av=3369, 4av=1160, 8av=175, 16av=17, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=20520(+8373)
+f_limit=53
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.360000 (  0.351012)
+prob052
+LOG(state): depth=0, h=38, f=38, 9,8,0,2,15,1,4,14,3,10,7,5,11,13,6,12
+LOG: init_distr, cnt=2048
+f_limit=44
+STAT: loads: sum=3032, av=1
+STAT: distr: av=1362, 2av=184, 4av=229, 8av=145, 16av=112, 32av=14, 64av=1, 128av=1, more=0
+STAT: n_roots=2967(+919)
+f_limit=46
+STAT: loads: sum=17020, av=5
+STAT: distr: av=1791, 2av=645, 4av=433, 8av=76, 16av=18, 32av=3, 64av=1, 128av=0, more=0
+STAT: n_roots=4448(+1481)
+f_limit=48
+STAT: loads: sum=69186, av=15
+STAT: distr: av=2951, 2av=981, 4av=392, 8av=96, 16av=23, 32av=4, 64av=1, 128av=0, more=0
+STAT: n_roots=7384(+2936)
+f_limit=50
+STAT: loads: sum=330708, av=44
+STAT: distr: av=4969, 2av=1501, 4av=695, 8av=179, 16av=35, 32av=4, 64av=1, 128av=0, more=0
+STAT: n_roots=12362(+4978)
+f_limit=52
+STAT: loads: sum=1726604, av=139
+STAT: distr: av=7868, 2av=3045, 4av=1181, 8av=234, 16av=31, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=20797(+8435)
+f_limit=54
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.200000 (  0.207760)
+prob053
+LOG(state): depth=0, h=34, f=34, 7,3,14,13,4,1,10,8,5,12,9,11,2,15,6,0
+LOG: init_distr, cnt=2048
+f_limit=42
+STAT: loads: sum=609, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2109(+61)
+f_limit=44
+STAT: loads: sum=7635, av=3
+STAT: distr: av=1117, 2av=615, 4av=307, 8av=67, 16av=3, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2498(+389)
+f_limit=46
+STAT: loads: sum=23291, av=9
+STAT: distr: av=1407, 2av=896, 4av=167, 8av=27, 16av=1, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3834(+1336)
+f_limit=48
+STAT: loads: sum=81683, av=21
+STAT: distr: av=2504, 2av=946, 4av=318, 8av=64, 16av=2, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=6162(+2328)
+f_limit=50
+STAT: loads: sum=363314, av=58
+STAT: distr: av=3754, 2av=1791, 4av=533, 8av=82, 16av=2, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=10300(+4138)
+f_limit=52
+STAT: loads: sum=1826296, av=177
+STAT: distr: av=6092, 2av=3225, 4av=900, 8av=82, 16av=1, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=17175(+6875)
+f_limit=54
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.210000 (  0.194448)
+prob054
+LOG(state): depth=0, h=34, f=34, 9,5,11,10,13,0,2,1,8,6,14,12,4,7,3,15
+LOG: init_distr, cnt=2048
+f_limit=40
+STAT: loads: sum=41, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2072(+24)
+f_limit=42
+STAT: loads: sum=6563, av=3
+STAT: distr: av=995, 2av=808, 4av=224, 8av=43, 16av=2, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2324(+252)
+f_limit=44
+STAT: loads: sum=20499, av=8
+STAT: distr: av=1216, 2av=840, 4av=251, 8av=14, 16av=3, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3515(+1191)
+f_limit=46
+STAT: loads: sum=80812, av=22
+STAT: distr: av=2173, 2av=944, 4av=347, 8av=46, 16av=5, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=5784(+2269)
+f_limit=48
+STAT: loads: sum=392421, av=67
+STAT: distr: av=3530, 2av=1634, 4av=533, 8av=84, 16av=3, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=9639(+3855)
+f_limit=50
+STAT: loads: sum=2070295, av=214
+STAT: distr: av=5784, 2av=2905, 4av=858, 8av=87, 16av=5, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=15955(+6316)
+f_limit=52
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.010000   0.220000 (  0.205188)
+prob055
+LOG(state): depth=0, h=31, f=31, 5,2,14,0,7,8,6,3,11,12,13,15,4,10,9,1
+LOG: init_distr, cnt=2048
+f_limit=39
+STAT: loads: sum=1863, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2317(+269)
+f_limit=41
+STAT: loads: sum=10523, av=4
+STAT: distr: av=1304, 2av=560, 4av=374, 8av=69, 16av=10, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3087(+770)
+f_limit=43
+STAT: loads: sum=35425, av=11
+STAT: distr: av=1840, 2av=854, 4av=333, 8av=58, 16av=2, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=5143(+2056)
+f_limit=45
+STAT: loads: sum=136814, av=26
+STAT: distr: av=3344, 2av=1150, 4av=540, 8av=103, 16av=5, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=8501(+3358)
+f_limit=47
+STAT: loads: sum=595487, av=70
+STAT: distr: av=5267, 2av=2253, 4av=882, 8av=93, 16av=6, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=14150(+5649)
+f_limit=49
+STAT: loads: sum=2761172, av=195
+STAT: distr: av=8396, 2av=4219, 4av=1397, 8av=135, 16av=3, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=23673(+9523)
+f_limit=51
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.430000 (  0.428523)
+prob056
+LOG(state): depth=0, h=38, f=38, 11,4,0,8,6,10,5,13,12,7,14,3,1,2,9,15
+LOG: init_distr, cnt=2048
+f_limit=44
+STAT: loads: sum=1471, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2628(+580)
+f_limit=46
+STAT: loads: sum=14120, av=5
+STAT: distr: av=1701, 2av=505, 4av=318, 8av=88, 16av=15, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=3864(+1236)
+f_limit=48
+STAT: loads: sum=59711, av=15
+STAT: distr: av=2565, 2av=876, 4av=297, 8av=111, 16av=13, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=6459(+2595)
+f_limit=50
+STAT: loads: sum=297027, av=45
+STAT: distr: av=4366, 2av=1285, 4av=600, 8av=175, 16av=32, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=10865(+4406)
+f_limit=52
+STAT: loads: sum=1641074, av=151
+STAT: distr: av=6949, 2av=2632, 4av=1031, 8av=215, 16av=35, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=18437(+7572)
+f_limit=54
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.260000 (  0.264763)
+prob057
+LOG(state): depth=0, h=31, f=31, 7,3,1,13,12,10,5,2,8,0,6,11,14,15,4,9
+LOG: init_distr, cnt=2048
+f_limit=39
+STAT: loads: sum=2679, av=1
+STAT: distr: av=1203, 2av=207, 4av=367, 8av=224, 16av=46, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=2212(+164)
+f_limit=41
+STAT: loads: sum=10746, av=4
+STAT: distr: av=1099, 2av=626, 4av=446, 8av=39, 16av=2, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2856(+644)
+f_limit=43
+STAT: loads: sum=32071, av=11
+STAT: distr: av=1681, 2av=864, 4av=290, 8av=21, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=4641(+1785)
+f_limit=45
+STAT: loads: sum=116891, av=25
+STAT: distr: av=2953, 2av=1165, 4av=478, 8av=43, 16av=2, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=7443(+2802)
+f_limit=47
+STAT: loads: sum=504691, av=67
+STAT: distr: av=4360, 2av=2371, 4av=658, 8av=51, 16av=3, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=12426(+4983)
+f_limit=49
+STAT: loads: sum=2368530, av=190
+STAT: distr: av=7188, 2av=4153, 4av=1044, 8av=40, 16av=1, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=20649(+8223)
+f_limit=51
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.330000 (  0.322667)
+prob058
+LOG(state): depth=0, h=36, f=36, 8,13,10,9,11,3,15,6,0,1,2,14,12,5,4,7
+LOG: init_distr, cnt=2048
+f_limit=44
+STAT: loads: sum=4491, av=2
+STAT: distr: av=1230, 2av=362, 4av=314, 8av=119, 16av=23, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2551(+503)
+f_limit=46
+STAT: loads: sum=18483, av=7
+STAT: distr: av=1503, 2av=644, 4av=353, 8av=49, 16av=2, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3920(+1369)
+f_limit=48
+STAT: loads: sum=77479, av=19
+STAT: distr: av=2488, 2av=931, 4av=407, 8av=85, 16av=8, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=6627(+2707)
+f_limit=50
+STAT: loads: sum=393966, av=59
+STAT: distr: av=4228, 2av=1585, 4av=654, 8av=145, 16av=15, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=11267(+4640)
+f_limit=52
+STAT: loads: sum=2226427, av=197
+STAT: distr: av=6954, 2av=2990, 4av=1112, 8av=199, 16av=9, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=19126(+7859)
+f_limit=54
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.360000 (  0.361547)
+prob059
+LOG(state): depth=0, h=39, f=39, 7,15,4,0,10,9,2,5,12,11,13,6,1,3,14,8
+LOG: init_distr, cnt=2048
+f_limit=47
+STAT: loads: sum=2514, av=1
+STAT: distr: av=1478, 2av=112, 4av=192, 8av=180, 16av=79, 32av=7, 64av=0, 128av=0, more=0
+STAT: n_roots=2570(+522)
+f_limit=49
+STAT: loads: sum=15032, av=5
+STAT: distr: av=1424, 2av=665, 4av=391, 8av=83, 16av=7, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3782(+1212)
+f_limit=51
+STAT: loads: sum=61313, av=16
+STAT: distr: av=2557, 2av=806, 4av=324, 8av=86, 16av=7, 32av=1, 64av=1, 128av=0, more=0
+STAT: n_roots=6131(+2349)
+f_limit=53
+STAT: loads: sum=311953, av=50
+STAT: distr: av=4042, 2av=1362, 4av=575, 8av=133, 16av=15, 32av=3, 64av=1, 128av=0, more=0
+STAT: n_roots=10260(+4129)
+f_limit=55
+STAT: loads: sum=1820235, av=177
+STAT: distr: av=6484, 2av=2658, 4av=941, 8av=157, 16av=16, 32av=3, 64av=1, 128av=0, more=0
+STAT: n_roots=17261(+7001)
+f_limit=57
+*Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.370000 (  0.370044)
+prob060
+LOG(state): depth=0, h=36, f=36, 11,5,1,14,4,12,10,0,2,7,13,3,9,15,6,8
+LOG: init_distr, cnt=2048
+f_limit=42
+STAT: loads: sum=183, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2115(+67)
+f_limit=44
+STAT: loads: sum=8455, av=3
+STAT: distr: av=1014, 2av=639, 4av=340, 8av=117, 16av=4, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=2765(+650)
+f_limit=46
+STAT: loads: sum=27762, av=10
+STAT: distr: av=1579, 2av=984, 4av=173, 8av=25, 16av=4, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=4464(+1699)
+f_limit=48
+STAT: loads: sum=107615, av=24
+STAT: distr: av=3004, 2av=1026, 4av=343, 8av=78, 16av=9, 32av=4, 64av=0, 128av=0, more=0
+STAT: n_roots=7140(+2676)
+f_limit=50
+STAT: loads: sum=524324, av=73
+STAT: distr: av=4498, 2av=1879, 4av=641, 8av=108, 16av=13, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=11875(+4735)
+f_limit=52
+STAT: loads: sum=2792023, av=235
+STAT: distr: av=7220, 2av=3443, 4av=1076, 8av=129, 16av=4, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=19896(+8021)
+f_limit=54
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.470000 (  0.452126)
+prob061
+LOG(state): depth=0, h=32, f=32, 11,4,2,7,1,0,10,15,6,9,14,8,3,13,5,12
+LOG: init_distr, cnt=2048
+f_limit=40
+STAT: loads: sum=2984, av=1
+STAT: distr: av=1054, 2av=440, 4av=243, 8av=240, 16av=70, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=2258(+210)
+f_limit=42
+STAT: loads: sum=11781, av=5
+STAT: distr: av=1234, 2av=668, 4av=321, 8av=32, 16av=3, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2992(+734)
+f_limit=44
+STAT: loads: sum=37418, av=12
+STAT: distr: av=1747, 2av=875, 4av=332, 8av=37, 16av=1, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=4974(+1982)
+f_limit=46
+STAT: loads: sum=145459, av=29
+STAT: distr: av=3135, 2av=1249, 4av=516, 8av=74, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=8192(+3218)
+f_limit=48
+STAT: loads: sum=652675, av=79
+STAT: distr: av=4936, 2av=2358, 4av=797, 8av=97, 16av=4, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=13708(+5516)
+f_limit=50
+STAT: loads: sum=3153047, av=230
+STAT: distr: av=8024, 2av=4228, 4av=1357, 8av=97, 16av=2, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=23009(+9301)
+f_limit=52
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.280000 (  0.282763)
+prob062
+LOG(state): depth=0, h=34, f=34, 12,8,14,6,11,4,7,0,5,1,10,15,3,13,9,2
+LOG: init_distr, cnt=2048
+f_limit=42
+STAT: loads: sum=1380, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2298(+250)
+f_limit=44
+STAT: loads: sum=9285, av=4
+STAT: distr: av=1326, 2av=642, 4av=297, 8av=33, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2809(+511)
+f_limit=46
+STAT: loads: sum=28691, av=10
+STAT: distr: av=1621, 2av=916, 4av=241, 8av=31, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=4541(+1732)
+f_limit=48
+STAT: loads: sum=103950, av=22
+STAT: distr: av=2906, 2av=1097, 4av=457, 8av=80, 16av=1, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=7438(+2897)
+f_limit=50
+STAT: loads: sum=456753, av=61
+STAT: distr: av=4588, 2av=2059, 4av=714, 8av=76, 16av=1, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=12304(+4866)
+f_limit=52
+STAT: loads: sum=2220439, av=180
+STAT: distr: av=7198, 2av=3915, 4av=1097, 8av=93, 16av=1, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=20616(+8312)
+f_limit=54
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.500000 (  0.493197)
+prob063
+LOG(state): depth=0, h=48, f=48, 11,15,14,13,1,9,10,4,3,6,2,12,7,5,8,0
+LOG: init_distr, cnt=2048
+f_limit=56
+STAT: loads: sum=6793, av=3
+STAT: distr: av=1103, 2av=501, 4av=368, 8av=69, 16av=7, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2537(+489)
+f_limit=58
+STAT: loads: sum=34005, av=13
+STAT: distr: av=1648, 2av=585, 4av=231, 8av=59, 16av=11, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=4325(+1788)
+f_limit=60
+STAT: loads: sum=246680, av=57
+STAT: distr: av=3010, 2av=779, 4av=389, 8av=111, 16av=33, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=7304(+2979)
+f_limit=62
+STAT: loads: sum=2115010, av=289
+STAT: distr: av=4734, 2av=1612, 4av=763, 8av=170, 16av=23, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=12485(+5181)
+f_limit=64
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.180000 (  0.192755)
+prob064
+LOG(state): depth=0, h=30, f=30, 2,11,15,5,13,4,6,7,12,8,10,1,9,3,14,0
+LOG: init_distr, cnt=2048
+f_limit=40
+STAT: loads: sum=1952, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2320(+272)
+f_limit=42
+STAT: loads: sum=10273, av=4
+STAT: distr: av=1324, 2av=580, 4av=348, 8av=65, 16av=3, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3040(+720)
+f_limit=44
+STAT: loads: sum=34751, av=11
+STAT: distr: av=1837, 2av=828, 4av=322, 8av=50, 16av=3, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=4960(+1920)
+f_limit=46
+STAT: loads: sum=141655, av=28
+STAT: distr: av=3246, 2av=1142, 4av=474, 8av=87, 16av=10, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=8167(+3207)
+f_limit=48
+STAT: loads: sum=687062, av=84
+STAT: distr: av=5122, 2av=2094, 4av=818, 8av=123, 16av=9, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=13635(+5468)
+f_limit=50
+STAT: loads: sum=3532308, av=259
+STAT: distr: av=8344, 2av=3822, 4av=1284, 8av=176, 16av=9, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=22796(+9161)
+f_limit=52
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.840000 (  0.828913)
+prob065
+LOG(state): depth=0, h=41, f=41, 15,10,8,3,0,6,9,5,1,14,13,11,7,2,12,4
+LOG: init_distr, cnt=2048
+f_limit=47
+STAT: loads: sum=6075, av=2
+STAT: distr: av=1026, 2av=481, 4av=322, 8av=178, 16av=33, 32av=8, 64av=0, 128av=0, more=0
+STAT: n_roots=2949(+901)
+f_limit=49
+STAT: loads: sum=26438, av=8
+STAT: distr: av=1698, 2av=786, 4av=361, 8av=81, 16av=21, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=4975(+2026)
+f_limit=51
+STAT: loads: sum=125130, av=25
+STAT: distr: av=3419, 2av=923, 4av=471, 8av=135, 16av=27, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=8250(+3275)
+f_limit=53
+STAT: loads: sum=652964, av=79
+STAT: distr: av=5464, 2av=1702, 4av=832, 8av=225, 16av=27, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=13978(+5728)
+f_limit=55
+STAT: loads: sum=3654433, av=261
+STAT: distr: av=8859, 2av=3357, 4av=1436, 8av=302, 16av=22, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=23866(+9888)
+f_limit=57
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.490000 (  0.495560)
+prob066
+LOG(state): depth=0, h=40, f=40, 12,11,0,8,10,2,13,15,5,4,7,3,6,9,14,1
+LOG: init_distr, cnt=2048
+f_limit=44
+STAT: loads: sum=425, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2243(+195)
+f_limit=46
+STAT: loads: sum=8623, av=3
+STAT: distr: av=1187, 2av=651, 4av=305, 8av=77, 16av=21, 32av=0, 64av=1, 128av=1, more=0
+STAT: n_roots=2965(+722)
+f_limit=48
+STAT: loads: sum=31181, av=10
+STAT: distr: av=1817, 2av=874, 4av=200, 8av=58, 16av=12, 32av=4, 64av=0, 128av=0, more=0
+STAT: n_roots=4734(+1769)
+f_limit=50
+STAT: loads: sum=126909, av=26
+STAT: distr: av=3262, 2av=931, 4av=406, 8av=108, 16av=25, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=7787(+3053)
+f_limit=52
+STAT: loads: sum=635307, av=81
+STAT: distr: av=5081, 2av=1836, 4av=703, 8av=136, 16av=30, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=12926(+5139)
+f_limit=54
+STAT: loads: sum=3404201, av=263
+STAT: distr: av=8027, 2av=3527, 4av=1161, 8av=185, 16av=26, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=21617(+8691)
+f_limit=56
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.600000 (  0.599299)
+prob067
+LOG(state): depth=0, h=32, f=32, 12,11,15,3,8,0,4,2,6,13,9,5,14,1,10,7
+LOG: init_distr, cnt=2048
+f_limit=40
+STAT: loads: sum=3560, av=1
+STAT: distr: av=869, 2av=454, 4av=357, 8av=282, 16av=82, 32av=4, 64av=0, 128av=0, more=0
+STAT: n_roots=2398(+350)
+f_limit=42
+STAT: loads: sum=13160, av=5
+STAT: distr: av=1294, 2av=686, 4av=370, 8av=48, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3267(+869)
+f_limit=44
+STAT: loads: sum=43495, av=13
+STAT: distr: av=1928, 2av=951, 4av=349, 8av=38, 16av=1, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=5390(+2123)
+f_limit=46
+STAT: loads: sum=175933, av=32
+STAT: distr: av=3353, 2av=1391, 4av=565, 8av=77, 16av=3, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=8942(+3552)
+f_limit=48
+STAT: loads: sum=802765, av=89
+STAT: distr: av=5386, 2av=2566, 4av=883, 8av=105, 16av=2, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=14952(+6010)
+f_limit=50
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.190000 (  0.180271)
+prob068
+LOG(state): depth=0, h=30, f=30, 15,1,3,12,4,0,6,5,2,8,14,9,13,10,7,11
+LOG: init_distr, cnt=2048
+f_limit=40
+STAT: loads: sum=5454, av=2
+STAT: distr: av=775, 2av=734, 4av=430, 8av=106, 16av=3, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2284(+236)
+f_limit=42
+STAT: loads: sum=15721, av=6
+STAT: distr: av=1068, 2av=850, 4av=355, 8av=11, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3244(+960)
+f_limit=44
+STAT: loads: sum=50116, av=15
+STAT: distr: av=1879, 2av=1033, 4av=308, 8av=24, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=5341(+2097)
+f_limit=46
+STAT: loads: sum=204394, av=38
+STAT: distr: av=3267, 2av=1547, 4av=463, 8av=63, 16av=1, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=8775(+3434)
+f_limit=48
+STAT: loads: sum=948604, av=108
+STAT: distr: av=5234, 2av=2619, 4av=844, 8av=77, 16av=1, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=14630(+5855)
+f_limit=50
+STAT: loads: sum=4670537, av=319
+STAT: distr: av=8524, 2av=4663, 4av=1322, 8av=121, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=24447(+9817)
+f_limit=52
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.450000 (  0.445666)
+prob069
+LOG(state): depth=0, h=28, f=28, 7,1,2,4,8,3,6,11,10,15,0,5,14,12,13,9
+LOG: init_distr, cnt=2048
+f_limit=36
+STAT: loads: sum=1743, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2160(+112)
+f_limit=38
+STAT: loads: sum=8661, av=4
+STAT: distr: av=1322, 2av=512, 4av=303, 8av=23, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2558(+398)
+f_limit=40
+STAT: loads: sum=23313, av=9
+STAT: distr: av=1466, 2av=840, 4av=237, 8av=15, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3854(+1296)
+f_limit=42
+STAT: loads: sum=71872, av=18
+STAT: distr: av=2439, 2av=1008, 4av=369, 8av=36, 16av=2, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=6138(+2284)
+f_limit=44
+STAT: loads: sum=263680, av=42
+STAT: distr: av=3629, 2av=1916, 4av=546, 8av=47, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=10120(+3982)
+f_limit=46
+STAT: loads: sum=1077409, av=106
+STAT: distr: av=5837, 2av=3433, 4av=814, 8av=36, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=16778(+6658)
+f_limit=48
+STAT: loads: sum=4602846, av=274
+STAT: distr: av=9467, 2av=6088, 4av=1186, 8av=37, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=27817(+11039)
+f_limit=50
+*Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.480000 (  0.474228)
+prob070
+LOG(state): depth=0, h=43, f=43, 5,9,13,14,6,3,7,12,10,8,4,0,15,2,11,1
+LOG: init_distr, cnt=2049
+f_limit=47
+STAT: loads: sum=425, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2049
+STAT: n_roots=2245(+196)
+f_limit=49
+STAT: loads: sum=9631, av=4
+STAT: distr: av=1422, 2av=482, 4av=281, 8av=48, 16av=10, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=2926(+681)
+f_limit=51
+STAT: loads: sum=38776, av=13
+STAT: distr: av=1946, 2av=694, 4av=215, 8av=59, 16av=9, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=4691(+1765)
+f_limit=53
+STAT: loads: sum=192618, av=41
+STAT: distr: av=3229, 2av=937, 4av=404, 8av=95, 16av=23, 32av=2, 64av=1, 128av=0, more=0
+STAT: n_roots=7737(+3046)
+f_limit=55
+STAT: loads: sum=1147627, av=148
+STAT: distr: av=5043, 2av=1801, 4av=728, 8av=145, 16av=15, 32av=4, 64av=1, 128av=0, more=0
+STAT: n_roots=13003(+5266)
+f_limit=57
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.270000 (  0.272236)
+prob071
+LOG(state): depth=0, h=37, f=37, 15,8,10,7,0,12,14,1,5,9,6,3,13,11,4,2
+LOG: init_distr, cnt=2048
+f_limit=45
+STAT: loads: sum=8055, av=3
+STAT: distr: av=884, 2av=658, 4av=416, 8av=90, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2513(+465)
+f_limit=47
+STAT: loads: sum=28650, av=11
+STAT: distr: av=1428, 2av=831, 4av=221, 8av=33, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=4172(+1659)
+f_limit=49
+STAT: loads: sum=138966, av=33
+STAT: distr: av=2665, 2av=1036, 4av=392, 8av=73, 16av=6, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=6927(+2755)
+f_limit=51
+STAT: loads: sum=798321, av=115
+STAT: distr: av=4269, 2av=1851, 4av=705, 8av=99, 16av=3, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=11639(+4712)
+f_limit=53
+STAT: loads: sum=4733845, av=406
+STAT: distr: av=6925, 2av=3462, 4av=1127, 8av=122, 16av=3, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=19591(+7952)
+f_limit=55
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.920000 (  0.916094)
+prob072
+LOG(state): depth=0, h=33, f=33, 14,1,8,15,2,6,0,3,9,12,10,13,4,7,5,11
+LOG: init_distr, cnt=2048
+f_limit=41
+STAT: loads: sum=4844, av=2
+STAT: distr: av=940, 2av=653, 4av=320, 8av=125, 16av=10, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2364(+316)
+f_limit=43
+STAT: loads: sum=16245, av=6
+STAT: distr: av=1169, 2av=772, 4av=390, 8av=32, 16av=1, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3475(+1111)
+f_limit=45
+STAT: loads: sum=57905, av=16
+STAT: distr: av=2060, 2av=995, 4av=369, 8av=50, 16av=1, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=5727(+2252)
+f_limit=47
+STAT: loads: sum=254224, av=44
+STAT: distr: av=3522, 2av=1569, 4av=563, 8av=68, 16av=5, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=9465(+3738)
+f_limit=49
+STAT: loads: sum=1242084, av=131
+STAT: distr: av=5669, 2av=2778, 4av=925, 8av=91, 16av=2, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=15845(+6380)
+f_limit=51
+STAT: loads: sum=6340028, av=400
+STAT: distr: av=9173, 2av=5175, 4av=1379, 8av=113, 16av=5, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=26529(+10684)
+f_limit=53
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.400000 (  0.403679)
+prob073
+LOG(state): depth=0, h=34, f=34, 0,11,3,12,5,2,1,9,8,10,14,15,7,4,13,6
+LOG: init_distr, cnt=2048
+f_limit=42
+STAT: loads: sum=3836, av=1
+STAT: distr: av=1037, 2av=283, 4av=371, 8av=215, 16av=131, 32av=11, 64av=0, 128av=0, more=0
+STAT: n_roots=2773(+725)
+f_limit=44
+STAT: loads: sum=14660, av=5
+STAT: distr: av=1625, 2av=641, 4av=451, 8av=52, 16av=4, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3840(+1067)
+f_limit=46
+STAT: loads: sum=51060, av=13
+STAT: distr: av=2297, 2av=1088, 4av=391, 8av=61, 16av=3, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=6333(+2493)
+f_limit=48
+STAT: loads: sum=210830, av=33
+STAT: distr: av=4004, 2av=1601, 4av=621, 8av=96, 16av=11, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=10501(+4168)
+f_limit=50
+STAT: loads: sum=990436, av=94
+STAT: distr: av=6369, 2av=2977, 4av=1028, 8av=121, 16av=6, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=17680(+7179)
+f_limit=52
+STAT: loads: sum=4949236, av=279
+STAT: distr: av=10440, 2av=5414, 4av=1693, 8av=127, 16av=6, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=29585(+11905)
+f_limit=54
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.460000 (  0.449274)
+prob074
+LOG(state): depth=0, h=41, f=41, 14,3,9,1,15,8,4,5,11,7,10,13,0,2,12,6
+LOG: init_distr, cnt=2049
+f_limit=47
+STAT: loads: sum=393, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2049
+STAT: n_roots=2231(+182)
+f_limit=49
+STAT: loads: sum=9645, av=4
+STAT: distr: av=1383, 2av=489, 4av=291, 8av=56, 16av=11, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=2928(+697)
+f_limit=51
+STAT: loads: sum=38461, av=13
+STAT: distr: av=1855, 2av=771, 4av=233, 8av=61, 16av=6, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=4758(+1830)
+f_limit=53
+STAT: loads: sum=188089, av=39
+STAT: distr: av=3279, 2av=932, 4av=396, 8av=125, 16av=24, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=7923(+3165)
+f_limit=55
+STAT: loads: sum=1093721, av=138
+STAT: distr: av=5196, 2av=1803, 4av=722, 8av=176, 16av=25, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=13220(+5297)
+f_limit=57
+STAT: loads: sum=6603195, av=499
+STAT: distr: av=8332, 2av=3369, 4av=1277, 8av=228, 16av=14, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=22194(+8974)
+f_limit=59
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.450000 (  1.451799)
+prob075
+LOG(state): depth=0, h=39, f=39, 12,5,13,11,2,10,0,9,7,8,4,3,14,6,15,1
+LOG: init_distr, cnt=2048
+f_limit=43
+STAT: loads: sum=69, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2092(+44)
+f_limit=45
+STAT: loads: sum=7502, av=3
+STAT: distr: av=1135, 2av=537, 4av=345, 8av=68, 16av=5, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=2556(+464)
+f_limit=47
+STAT: loads: sum=25259, av=9
+STAT: distr: av=1407, 2av=859, 4av=240, 8av=45, 16av=2, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=4117(+1561)
+f_limit=49
+STAT: loads: sum=105636, av=25
+STAT: distr: av=2754, 2av=890, 4av=369, 8av=93, 16av=8, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=6746(+2629)
+f_limit=51
+STAT: loads: sum=540248, av=80
+STAT: distr: av=4362, 2av=1610, 4av=650, 8av=108, 16av=14, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=11222(+4476)
+f_limit=53
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.200000 (  0.204109)
+prob076
+LOG(state): depth=0, h=38, f=38, 10,8,0,12,3,7,6,2,1,14,4,11,15,13,9,5
+LOG: init_distr, cnt=2048
+f_limit=44
+STAT: loads: sum=1474, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2460(+412)
+f_limit=46
+STAT: loads: sum=12357, av=5
+STAT: distr: av=1668, 2av=420, 4av=301, 8av=58, 16av=13, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3466(+1006)
+f_limit=48
+STAT: loads: sum=48919, av=14
+STAT: distr: av=2393, 2av=695, 4av=280, 8av=79, 16av=14, 32av=5, 64av=0, 128av=0, more=0
+STAT: n_roots=5610(+2144)
+f_limit=50
+STAT: loads: sum=224417, av=40
+STAT: distr: av=3921, 2av=1022, 4av=486, 8av=153, 16av=23, 32av=5, 64av=0, 128av=0, more=0
+STAT: n_roots=9286(+3676)
+f_limit=52
+STAT: loads: sum=1178223, av=126
+STAT: distr: av=5998, 2av=2185, 4av=871, 8av=204, 16av=26, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=15711(+6425)
+f_limit=54
+STAT: loads: sum=6419026, av=408
+STAT: distr: av=9815, 2av=4149, 4av=1492, 8av=225, 16av=28, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=26463(+10752)
+f_limit=56
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.090000 (  1.089576)
+prob077
+LOG(state): depth=0, h=42, f=42, 5,12,10,7,15,11,14,0,8,2,1,13,3,4,9,6
+LOG: init_distr, cnt=2048
+f_limit=46
+STAT: loads: sum=75, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2089(+41)
+f_limit=48
+STAT: loads: sum=11390, av=5
+STAT: distr: av=1216, 2av=564, 4av=265, 8av=34, 16av=7, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=2947(+858)
+f_limit=50
+STAT: loads: sum=50262, av=17
+STAT: distr: av=2180, 2av=504, 4av=168, 8av=62, 16av=26, 32av=5, 64av=2, 128av=0, more=0
+STAT: n_roots=4756(+1809)
+f_limit=52
+STAT: loads: sum=306298, av=64
+STAT: distr: av=3459, 2av=776, 4av=345, 8av=127, 16av=36, 32av=10, 64av=3, 128av=0, more=0
+STAT: n_roots=8040(+3284)
+f_limit=54
+STAT: loads: sum=2029954, av=252
+STAT: distr: av=5521, 2av=1584, 4av=671, 8av=196, 16av=57, 32av=8, 64av=3, 128av=0, more=0
+STAT: n_roots=13717(+5677)
+f_limit=56
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.490000 (  0.487803)
+prob078
+LOG(state): depth=0, h=41, f=41, 9,7,5,2,14,15,12,10,11,3,6,1,8,13,0,4
+LOG: init_distr, cnt=2048
+f_limit=45
+STAT: loads: sum=157, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2177(+129)
+f_limit=47
+STAT: loads: sum=10280, av=4
+STAT: distr: av=1219, 2av=613, 4av=276, 8av=49, 16av=16, 32av=3, 64av=0, 128av=1, more=0
+STAT: n_roots=3059(+882)
+f_limit=49
+STAT: loads: sum=46581, av=15
+STAT: distr: av=2156, 2av=631, 4av=185, 8av=63, 16av=16, 32av=8, 64av=0, 128av=0, more=0
+STAT: n_roots=4873(+1814)
+f_limit=51
+STAT: loads: sum=245810, av=50
+STAT: distr: av=3401, 2av=910, 4av=408, 8av=121, 16av=26, 32av=6, 64av=1, 128av=0, more=0
+STAT: n_roots=8057(+3184)
+f_limit=53
+STAT: loads: sum=1476561, av=183
+STAT: distr: av=5281, 2av=1816, 4av=756, 8av=181, 16av=20, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=13597(+5540)
+f_limit=55
+STAT: loads: sum=8995300, av=661
+STAT: distr: av=8463, 2av=3599, 4av=1298, 8av=215, 16av=20, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=22887(+9290)
+f_limit=57
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.990000 (  1.987738)
+prob079
+LOG(state): depth=0, h=42, f=42, 14,3,5,15,11,6,13,9,0,10,2,12,4,1,7,8
+LOG: init_distr, cnt=2049
+f_limit=48
+STAT: loads: sum=634, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2049
+STAT: n_roots=2343(+294)
+f_limit=50
+STAT: loads: sum=10667, av=4
+STAT: distr: av=1376, 2av=582, 4av=305, 8av=67, 16av=9, 32av=4, 64av=0, 128av=0, more=0
+STAT: n_roots=3156(+813)
+f_limit=52
+STAT: loads: sum=43184, av=13
+STAT: distr: av=2062, 2av=757, 4av=242, 8av=81, 16av=12, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=5205(+2049)
+f_limit=54
+STAT: loads: sum=218422, av=41
+STAT: distr: av=3527, 2av=1083, 4av=440, 8av=129, 16av=23, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=8735(+3530)
+f_limit=56
+STAT: loads: sum=1303467, av=149
+STAT: distr: av=5545, 2av=2182, 4av=822, 8av=168, 16av=18, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=14700(+5965)
+f_limit=58
+STAT: loads: sum=8085513, av=550
+STAT: distr: av=8903, 2av=4181, 4av=1410, 8av=194, 16av=12, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=24815(+10115)
+f_limit=60
+*Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.100000 (  1.087108)
+prob080
+LOG(state): depth=0, h=40, f=40, 8,1,7,12,11,0,10,5,9,15,6,13,14,2,3,4
+LOG: init_distr, cnt=2048
+f_limit=46
+STAT: loads: sum=1561, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2503(+455)
+f_limit=48
+STAT: loads: sum=13575, av=5
+STAT: distr: av=1583, 2av=554, 4av=264, 8av=77, 16av=18, 32av=7, 64av=0, 128av=0, more=0
+STAT: n_roots=3665(+1162)
+f_limit=50
+STAT: loads: sum=61670, av=16
+STAT: distr: av=2599, 2av=618, 4av=317, 8av=95, 16av=31, 32av=5, 64av=0, 128av=0, more=0
+STAT: n_roots=6102(+2437)
+f_limit=52
+STAT: loads: sum=323535, av=53
+STAT: distr: av=4263, 2av=1097, 4av=524, 8av=179, 16av=35, 32av=3, 64av=1, 128av=0, more=0
+STAT: n_roots=10246(+4144)
+f_limit=54
+STAT: loads: sum=1895659, av=185
+STAT: distr: av=6695, 2av=2287, 4av=998, 8av=228, 16av=34, 32av=4, 64av=0, 128av=0, more=0
+STAT: n_roots=17413(+7167)
+f_limit=56
+STAT: loads: sum=11461242, av=658
+STAT: distr: av=10880, 2av=4433, 4av=1770, 8av=307, 16av=22, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=29434(+12021)
+f_limit=58
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.840000 (  0.856893)
+prob081
+LOG(state): depth=0, h=43, f=43, 13,11,8,9,0,15,7,10,4,3,6,14,5,12,2,1
+LOG: init_distr, cnt=2048
+f_limit=49
+STAT: loads: sum=3876, av=1
+STAT: distr: av=1307, 2av=132, 4av=233, 8av=209, 16av=139, 32av=24, 64av=4, 128av=0, more=0
+STAT: n_roots=3479(+1431)
+f_limit=51
+STAT: loads: sum=27957, av=8
+STAT: distr: av=2320, 2av=686, 4av=365, 8av=84, 16av=20, 32av=3, 64av=1, 128av=0, more=0
+STAT: n_roots=5486(+2007)
+f_limit=53
+STAT: loads: sum=163898, av=29
+STAT: distr: av=3915, 2av=826, 4av=507, 8av=190, 16av=41, 32av=7, 64av=0, 128av=0, more=0
+STAT: n_roots=9347(+3861)
+f_limit=55
+STAT: loads: sum=1133504, av=121
+STAT: distr: av=6287, 2av=1780, 4av=983, 8av=256, 16av=34, 32av=6, 64av=1, 128av=0, more=0
+STAT: n_roots=16114(+6767)
+f_limit=57
+STAT: loads: sum=7860691, av=487
+STAT: distr: av=10152, 2av=3897, 4av=1700, 8av=330, 16av=33, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=27658(+11544)
+f_limit=59
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.560000 (  0.543839)
+prob082
+LOG(state): depth=0, h=41, f=41, 14,13,15,7,11,12,9,5,6,0,2,1,4,8,10,3
+LOG: init_distr, cnt=2048
+f_limit=45
+STAT: loads: sum=1146, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2363(+315)
+f_limit=47
+STAT: loads: sum=10400, av=4
+STAT: distr: av=1486, 2av=465, 4av=314, 8av=84, 16av=14, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3298(+935)
+f_limit=49
+STAT: loads: sum=40682, av=12
+STAT: distr: av=2138, 2av=800, 4av=259, 8av=88, 16av=11, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=5382(+2084)
+f_limit=51
+STAT: loads: sum=182367, av=33
+STAT: distr: av=3623, 2av=1105, 4av=505, 8av=125, 16av=23, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=8976(+3594)
+f_limit=53
+STAT: loads: sum=949247, av=105
+STAT: distr: av=5739, 2av=2160, 4av=876, 8av=183, 16av=17, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=15023(+6047)
+f_limit=55
+STAT: loads: sum=5229867, av=348
+STAT: distr: av=9190, 2av=4160, 4av=1438, 8av=222, 16av=12, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=25201(+10178)
+f_limit=57
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.010000   1.310000 (  1.300006)
+prob083
+LOG(state): depth=0, h=40, f=40, 8,10,9,11,14,1,7,15,13,4,0,12,6,2,5,3
+LOG: init_distr, cnt=2048
+f_limit=42
+STAT: loads: sum=82, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2106(+58)
+f_limit=44
+STAT: loads: sum=7274, av=3
+STAT: distr: av=1408, 2av=362, 4av=233, 8av=89, 16av=10, 32av=3, 64av=1, 128av=0, more=0
+STAT: n_roots=2770(+664)
+f_limit=46
+STAT: loads: sum=27741, av=10
+STAT: distr: av=1829, 2av=660, 4av=219, 8av=43, 16av=14, 32av=4, 64av=1, 128av=0, more=0
+STAT: n_roots=4506(+1736)
+f_limit=48
+STAT: loads: sum=118823, av=26
+STAT: distr: av=3186, 2av=816, 4av=365, 8av=110, 16av=22, 32av=6, 64av=1, 128av=0, more=0
+STAT: n_roots=7442(+2936)
+f_limit=50
+STAT: loads: sum=576144, av=77
+STAT: distr: av=5070, 2av=1446, 4av=694, 8av=194, 16av=34, 32av=4, 64av=0, 128av=0, more=0
+STAT: n_roots=12500(+5058)
+f_limit=52
+STAT: loads: sum=2952705, av=236
+STAT: distr: av=7969, 2av=3000, 4av=1252, 8av=248, 16av=31, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=21240(+8740)
+f_limit=54
+STAT: loads: sum=15371724, av=723
+STAT: distr: av=13057, 2av=5737, 4av=2119, 8av=310, 16av=17, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=35881(+14641)
+f_limit=56
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.040000 (  1.035184)
+prob084
+LOG(state): depth=0, h=40, f=40, 5,7,3,12,15,13,14,8,0,10,9,6,1,4,2,11
+LOG: init_distr, cnt=2048
+f_limit=46
+STAT: loads: sum=662, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2178(+130)
+f_limit=48
+STAT: loads: sum=10000, av=4
+STAT: distr: av=1207, 2av=610, 4av=279, 8av=69, 16av=13, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2902(+724)
+f_limit=50
+STAT: loads: sum=43219, av=14
+STAT: distr: av=1937, 2av=600, 4av=277, 8av=73, 16av=13, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=4903(+2001)
+f_limit=52
+STAT: loads: sum=242052, av=49
+STAT: distr: av=3409, 2av=912, 4av=410, 8av=146, 16av=21, 32av=5, 64av=0, 128av=0, more=0
+STAT: n_roots=8248(+3345)
+f_limit=54
+STAT: loads: sum=1522549, av=184
+STAT: distr: av=5395, 2av=1878, 4av=767, 8av=180, 16av=27, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=13954(+5706)
+f_limit=56
+STAT: loads: sum=9697400, av=694
+STAT: distr: av=8736, 2av=3584, 4av=1361, 8av=255, 16av=18, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=23679(+9725)
+f_limit=58
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.710000 (  0.715236)
+prob085
+LOG(state): depth=0, h=43, f=43, 14,10,9,4,13,6,5,8,2,12,7,0,1,3,11,15
+LOG: init_distr, cnt=2048
+f_limit=49
+STAT: loads: sum=8488, av=4
+STAT: distr: av=1207, 2av=474, 4av=322, 8av=45, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2586(+538)
+f_limit=51
+STAT: loads: sum=33584, av=12
+STAT: distr: av=1482, 2av=775, 4av=270, 8av=54, 16av=5, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=4407(+1821)
+f_limit=53
+STAT: loads: sum=179115, av=40
+STAT: distr: av=2869, 2av=979, 4av=441, 8av=114, 16av=4, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=7383(+2976)
+f_limit=55
+STAT: loads: sum=1109403, av=150
+STAT: distr: av=4673, 2av=1796, 4av=776, 8av=130, 16av=8, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=12431(+5048)
+f_limit=57
+STAT: loads: sum=7043384, av=566
+STAT: distr: av=7534, 2av=3483, 4av=1243, 8av=160, 16av=11, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=21145(+8714)
+f_limit=59
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   0.540000 (  0.538352)
+prob086
+LOG(state): depth=0, h=38, f=38, 12,15,11,10,4,5,14,0,13,7,1,2,9,8,3,6
+LOG: init_distr, cnt=2048
+f_limit=42
+STAT: loads: sum=851, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2552(+504)
+f_limit=44
+STAT: loads: sum=13421, av=5
+STAT: distr: av=1845, 2av=357, 4av=258, 8av=63, 16av=19, 32av=8, 64av=2, 128av=0, more=0
+STAT: n_roots=3805(+1253)
+f_limit=46
+STAT: loads: sum=62037, av=16
+STAT: distr: av=2802, 2av=593, 4av=249, 8av=118, 16av=32, 32av=10, 64av=1, 128av=0, more=0
+STAT: n_roots=6271(+2466)
+f_limit=48
+STAT: loads: sum=299076, av=47
+STAT: distr: av=4510, 2av=1011, 4av=508, 8av=177, 16av=50, 32av=14, 64av=1, 128av=0, more=0
+STAT: n_roots=10591(+4320)
+f_limit=50
+STAT: loads: sum=1525702, av=144
+STAT: distr: av=7065, 2av=2250, 4av=980, 8av=229, 16av=57, 32av=9, 64av=1, 128av=0, more=0
+STAT: n_roots=17913(+7322)
+f_limit=52
+STAT: loads: sum=7860750, av=438
+STAT: distr: av=11308, 2av=4543, 4av=1662, 8av=345, 16av=48, 32av=6, 64av=1, 128av=0, more=0
+STAT: n_roots=30157(+12244)
+f_limit=54
+STAT: loads: sum=39606156, av=1313
+STAT: distr: av=18431, 2av=8510, 4av=2753, 8av=402, 16av=56, 32av=5, 64av=0, 128av=0, more=0
+STAT: n_roots=50422(+20265)
+f_limit=56
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   2.070000 (  2.060189)
+prob087
+LOG(state): depth=0, h=41, f=41, 7,6,8,1,11,5,14,10,3,4,9,13,15,2,0,12
+LOG: init_distr, cnt=2049
+f_limit=47
+STAT: loads: sum=2590, av=1
+STAT: distr: av=1354, 2av=296, 4av=150, 8av=162, 16av=70, 32av=15, 64av=2, 128av=0, more=0
+STAT: n_roots=2794(+745)
+f_limit=49
+STAT: loads: sum=17381, av=6
+STAT: distr: av=1789, 2av=609, 4av=302, 8av=74, 16av=17, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=4153(+1359)
+f_limit=51
+STAT: loads: sum=79319, av=19
+STAT: distr: av=2931, 2av=738, 4av=357, 8av=99, 16av=23, 32av=4, 64av=1, 128av=0, more=0
+STAT: n_roots=6773(+2620)
+f_limit=53
+STAT: loads: sum=413251, av=61
+STAT: distr: av=4633, 2av=1291, 4av=624, 8av=191, 16av=30, 32av=4, 64av=0, 128av=0, more=0
+STAT: n_roots=11382(+4609)
+f_limit=55
+STAT: loads: sum=2337585, av=205
+STAT: distr: av=7377, 2av=2582, 4av=1130, 8av=255, 16av=35, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=19317(+7935)
+f_limit=57
+STAT: loads: sum=13406525, av=694
+STAT: distr: av=12028, 2av=5000, 4av=1953, 8av=306, 16av=30, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=32629(+13312)
+f_limit=59
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   2.380000 (  2.382319)
+prob088
+LOG(state): depth=0, h=37, f=37, 3,2,7,9,0,15,12,4,6,11,5,14,8,13,10,1
+LOG: init_distr, cnt=2048
+f_limit=43
+STAT: loads: sum=2440, av=1
+STAT: distr: av=1467, 2av=165, 4av=160, 8av=153, 16av=96, 32av=7, 64av=0, 128av=0, more=0
+STAT: n_roots=2578(+530)
+f_limit=45
+STAT: loads: sum=14279, av=5
+STAT: distr: av=1594, 2av=497, 4av=406, 8av=73, 16av=7, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=3769(+1191)
+f_limit=47
+STAT: loads: sum=55392, av=14
+STAT: distr: av=2406, 2av=888, 4av=364, 8av=94, 16av=17, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=6282(+2513)
+f_limit=49
+STAT: loads: sum=251970, av=40
+STAT: distr: av=4185, 2av=1327, 4av=609, 8av=138, 16av=20, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=10346(+4064)
+f_limit=51
+STAT: loads: sum=1292958, av=124
+STAT: distr: av=6516, 2av=2622, 4av=999, 8av=186, 16av=19, 32av=4, 64av=0, 128av=0, more=0
+STAT: n_roots=17369(+7023)
+f_limit=53
+STAT: loads: sum=6854519, av=394
+STAT: distr: av=10618, 2av=4909, 4av=1573, 8av=251, 16av=17, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=29069(+11700)
+f_limit=55
+STAT: loads: sum=36086398, av=1241
+STAT: distr: av=17163, 2av=8996, 4av=2599, 8av=288, 16av=23, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=48746(+19677)
+f_limit=57
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.920000 (  1.913864)
+prob089
+LOG(state): depth=0, h=41, f=41, 14,7,8,2,13,11,10,4,9,12,5,0,3,6,1,15
+LOG: init_distr, cnt=2048
+f_limit=47
+STAT: loads: sum=1224, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2494(+446)
+f_limit=49
+STAT: loads: sum=14052, av=5
+STAT: distr: av=1571, 2av=473, 4av=357, 8av=71, 16av=20, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=3797(+1303)
+f_limit=51
+STAT: loads: sum=69166, av=18
+STAT: distr: av=2627, 2av=693, 4av=347, 8av=115, 16av=15, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=6267(+2470)
+f_limit=53
+STAT: loads: sum=405670, av=64
+STAT: distr: av=4325, 2av=1107, 4av=611, 8av=194, 16av=28, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=10542(+4275)
+f_limit=55
+STAT: loads: sum=2596140, av=246
+STAT: distr: av=6752, 2av=2428, 4av=1091, 8av=249, 16av=21, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=17980(+7438)
+f_limit=57
+STAT: loads: sum=16473342, av=916
+STAT: distr: av=11155, 2av=4632, 4av=1899, 8av=273, 16av=20, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=30424(+12444)
+f_limit=59
+*Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.010000   0.000000   1.270000 (  1.263560)
+prob090
+LOG(state): depth=0, h=29, f=29, 3,15,2,5,11,6,4,7,12,9,1,0,13,14,10,8
+LOG: init_distr, cnt=2048
+f_limit=39
+STAT: loads: sum=2507, av=1
+STAT: distr: av=1313, 2av=259, 4av=214, 8av=190, 16av=66, 32av=6, 64av=0, 128av=0, more=0
+STAT: n_roots=2361(+313)
+f_limit=41
+STAT: loads: sum=10374, av=4
+STAT: distr: av=1369, 2av=541, 4av=400, 8av=50, 16av=1, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3140(+779)
+f_limit=43
+STAT: loads: sum=31895, av=10
+STAT: distr: av=1801, 2av=1004, 4av=302, 8av=32, 16av=1, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=5188(+2048)
+f_limit=45
+STAT: loads: sum=111606, av=21
+STAT: distr: av=3361, 2av=1240, 4av=501, 8av=80, 16av=6, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=8363(+3175)
+f_limit=47
+STAT: loads: sum=445894, av=53
+STAT: distr: av=5154, 2av=2345, 4av=749, 8av=112, 16av=3, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=13783(+5420)
+f_limit=49
+STAT: loads: sum=1942356, av=140
+STAT: distr: av=8081, 2av=4405, 4av=1169, 8av=127, 16av=1, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=23124(+9341)
+f_limit=51
+STAT: loads: sum=8806792, av=380
+STAT: distr: av=13314, 2av=7772, 4av=1910, 8av=128, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=38705(+15581)
+f_limit=53
+STAT: loads: sum=40373503, av=1043
+STAT: distr: av=22079, 2av=13404, 4av=3043, 8av=179, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=64743(+26038)
+f_limit=55
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   2.360000 (  2.346967)
+prob091
+LOG(state): depth=0, h=35, f=35, 15,14,6,7,10,1,0,11,12,8,4,9,2,5,13,3
+LOG: init_distr, cnt=2048
+f_limit=41
+STAT: loads: sum=312, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2136(+88)
+f_limit=43
+STAT: loads: sum=6895, av=3
+STAT: distr: av=1294, 2av=527, 4av=250, 8av=56, 16av=8, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=2519(+383)
+f_limit=45
+STAT: loads: sum=22005, av=8
+STAT: distr: av=1415, 2av=822, 4av=232, 8av=46, 16av=3, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=3911(+1392)
+f_limit=47
+STAT: loads: sum=80819, av=20
+STAT: distr: av=2550, 2av=955, 4av=321, 8av=74, 16av=10, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=6324(+2413)
+f_limit=49
+STAT: loads: sum=356050, av=56
+STAT: distr: av=3994, 2av=1649, 4av=572, 8av=99, 16av=9, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=10523(+4199)
+f_limit=51
+STAT: loads: sum=1729468, av=164
+STAT: distr: av=6398, 2av=2990, 4av=994, 8av=131, 16av=9, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=17651(+7128)
+f_limit=53
+STAT: loads: sum=8628332, av=488
+STAT: distr: av=10474, 2av=5407, 4av=1606, 8av=155, 16av=9, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=29608(+11957)
+f_limit=55
+STAT: loads: sum=43078372, av=1454
+STAT: distr: av=17306, 2av=9396, 4av=2708, 8av=192, 16av=6, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=49641(+20033)
+f_limit=57
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   2.680000 (  2.680935)
+prob092
+LOG(state): depth=0, h=44, f=44, 13,11,4,12,1,8,9,15,6,5,14,2,7,3,10,0
+LOG: init_distr, cnt=2048
+f_limit=50
+STAT: loads: sum=454, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2314(+266)
+f_limit=52
+STAT: loads: sum=11120, av=4
+STAT: distr: av=1300, 2av=651, 4av=275, 8av=73, 16av=13, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=3132(+818)
+f_limit=54
+STAT: loads: sum=46032, av=14
+STAT: distr: av=2079, 2av=725, 4av=239, 8av=67, 16av=19, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=5137(+2005)
+f_limit=56
+STAT: loads: sum=254655, av=49
+STAT: distr: av=3517, 2av=1047, 4av=431, 8av=120, 16av=17, 32av=5, 64av=0, 128av=0, more=0
+STAT: n_roots=8544(+3407)
+f_limit=58
+STAT: loads: sum=1653270, av=193
+STAT: distr: av=5548, 2av=2020, 4av=805, 8av=149, 16av=18, 32av=3, 64av=1, 128av=0, more=0
+STAT: n_roots=14324(+5780)
+f_limit=60
+STAT: loads: sum=11050229, av=771
+STAT: distr: av=8866, 2av=4002, 4av=1213, 8av=213, 16av=28, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=24075(+9751)
+f_limit=62
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   1.150000 (  1.142245)
+prob093
+LOG(state): depth=0, h=33, f=33, 10,0,2,4,5,1,6,12,11,13,9,7,15,3,14,8
+LOG: init_distr, cnt=2048
+f_limit=43
+STAT: loads: sum=2889, av=1
+STAT: distr: av=1068, 2av=270, 4av=426, 8av=245, 16av=39, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2215(+167)
+f_limit=45
+STAT: loads: sum=10911, av=4
+STAT: distr: av=1101, 2av=613, 4av=455, 8av=46, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2876(+661)
+f_limit=47
+STAT: loads: sum=31870, av=11
+STAT: distr: av=1672, 2av=887, 4av=305, 8av=12, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=4592(+1716)
+f_limit=49
+STAT: loads: sum=115457, av=25
+STAT: distr: av=2839, 2av=1250, 4av=459, 8av=43, 16av=1, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=7534(+2942)
+f_limit=51
+STAT: loads: sum=495809, av=65
+STAT: distr: av=4580, 2av=2152, 4av=731, 8av=70, 16av=1, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=12483(+4949)
+f_limit=53
+STAT: loads: sum=2335380, av=187
+STAT: distr: av=7301, 2av=4040, 4av=1084, 8av=58, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=20823(+8340)
+f_limit=55
+STAT: loads: sum=11455164, av=550
+STAT: distr: av=11877, 2av=7179, 4av=1697, 8av=70, 16av=0, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=34770(+13947)
+f_limit=57
+STAT: loads: sum=56722927, av=1631
+STAT: distr: av=19639, 2av=12344, 4av=2683, 8av=103, 16av=1, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=58030(+23260)
+f_limit=59
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   5.370000 (  5.373679)
+prob094
+LOG(state): depth=0, h=50, f=50, 14,9,12,13,15,4,8,10,0,2,1,7,3,11,5,6
+LOG: init_distr, cnt=2048
+f_limit=54
+STAT: loads: sum=7331, av=3
+STAT: distr: av=1279, 2av=384, 4av=265, 8av=102, 16av=10, 32av=4, 64av=3, 128av=0, more=1
+STAT: n_roots=3224(+1176)
+f_limit=56
+STAT: loads: sum=52117, av=16
+STAT: distr: av=2565, 2av=459, 4av=136, 8av=37, 16av=12, 32av=7, 64av=3, 128av=3, more=2
+STAT: n_roots=5506(+2282)
+f_limit=58
+STAT: loads: sum=391113, av=71
+STAT: distr: av=4498, 2av=569, 4av=267, 8av=101, 16av=35, 32av=21, 64av=10, 128av=3, more=2
+STAT: n_roots=9568(+4062)
+f_limit=60
+STAT: loads: sum=3013114, av=314
+STAT: distr: av=7200, 2av=1461, 4av=542, 8av=241, 16av=84, 32av=23, 64av=11, 128av=4, more=2
+STAT: n_roots=16870(+7302)
+f_limit=62
+STAT: loads: sum=22002509, av=1304
+STAT: distr: av=11900, 2av=3081, 4av=1324, 8av=396, 16av=116, 32av=38, 64av=11, 128av=3, more=1
+STAT: n_roots=29320(+12450)
+f_limit=64
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   3.120000 (  3.113794)
+prob095
+LOG(state): depth=0, h=46, f=46, 15,14,0,4,11,1,6,13,7,5,8,9,3,2,10,12
+LOG: init_distr, cnt=2048
+f_limit=52
+STAT: loads: sum=124, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2081(+33)
+f_limit=54
+STAT: loads: sum=6969, av=3
+STAT: distr: av=1037, 2av=736, 4av=266, 8av=35, 16av=7, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2346(+265)
+f_limit=56
+STAT: loads: sum=22512, av=9
+STAT: distr: av=1350, 2av=754, 4av=207, 8av=31, 16av=4, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=3671(+1325)
+f_limit=58
+STAT: loads: sum=95330, av=25
+STAT: distr: av=2372, 2av=903, 4av=326, 8av=61, 16av=8, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=6042(+2371)
+f_limit=60
+STAT: loads: sum=509382, av=84
+STAT: distr: av=3772, 2av=1679, 4av=502, 8av=84, 16av=5, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=9956(+3914)
+f_limit=62
+STAT: loads: sum=3064239, av=307
+STAT: distr: av=6015, 2av=2982, 4av=854, 8av=100, 16av=5, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=16595(+6639)
+f_limit=64
+STAT: loads: sum=19292536, av=1162
+STAT: distr: av=9809, 2av=5293, 4av=1368, 8av=122, 16av=3, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=27671(+11076)
+f_limit=66
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   2.300000 (  2.293179)
+prob096
+LOG(state): depth=0, h=48, f=48, 11,14,13,1,2,3,12,4,15,7,9,5,10,6,8,0
+LOG: init_distr, cnt=2048
+f_limit=54
+STAT: loads: sum=2752, av=1
+STAT: distr: av=1626, 2av=75, 4av=145, 8av=85, 16av=71, 32av=40, 64av=5, 128av=1, more=0
+STAT: n_roots=3646(+1598)
+f_limit=56
+STAT: loads: sum=31951, av=8
+STAT: distr: av=2530, 2av=657, 4av=302, 8av=100, 16av=43, 32av=10, 64av=4, 128av=0, more=0
+STAT: n_roots=6102(+2456)
+f_limit=58
+STAT: loads: sum=221671, av=36
+STAT: distr: av=4632, 2av=773, 4av=431, 8av=170, 16av=72, 32av=22, 64av=2, 128av=0, more=0
+STAT: n_roots=10404(+4302)
+f_limit=60
+STAT: loads: sum=1733082, av=166
+STAT: distr: av=7476, 2av=1603, 4av=930, 8av=277, 16av=95, 32av=20, 64av=2, 128av=1, more=0
+STAT: n_roots=17788(+7384)
+f_limit=62
+STAT: loads: sum=13614678, av=765
+STAT: distr: av=11928, 2av=3643, 4av=1686, 8av=439, 16av=70, 32av=18, 64av=3, 128av=1, more=0
+STAT: n_roots=30317(+12529)
+f_limit=64
+STAT: loads: sum=102160405, av=3369
+STAT: distr: av=19551, 2av=7221, 4av=2867, 8av=570, 16av=91, 32av=15, 64av=1, 128av=1, more=0
+STAT: n_roots=51172(+20855)
+f_limit=66
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   7.960000 (  7.965909)
+prob097
+LOG(state): depth=0, h=41, f=41, 11,6,14,12,3,5,1,15,8,0,10,13,9,7,4,2
+LOG: init_distr, cnt=2048
+f_limit=47
+STAT: loads: sum=759, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2239(+191)
+f_limit=49
+STAT: loads: sum=10772, av=4
+STAT: distr: av=1155, 2av=713, 4av=292, 8av=74, 16av=5, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=2948(+709)
+f_limit=51
+STAT: loads: sum=40969, av=13
+STAT: distr: av=1785, 2av=831, 4av=257, 8av=70, 16av=5, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=4930(+1982)
+f_limit=53
+STAT: loads: sum=206856, av=41
+STAT: distr: av=3244, 2av=1137, 4av=434, 8av=99, 16av=16, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=8267(+3337)
+f_limit=55
+STAT: loads: sum=1257159, av=152
+STAT: distr: av=5180, 2av=2182, 4av=779, 8av=112, 16av=13, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=13778(+5511)
+f_limit=57
+STAT: loads: sum=7913396, av=574
+STAT: distr: av=8176, 2av=4221, 4av=1215, 8av=163, 16av=3, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=23061(+9283)
+f_limit=59
+STAT: loads: sum=49213650, av=2134
+STAT: distr: av=13430, 2av=7533, 4av=1918, 8av=172, 16av=8, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=38579(+15518)
+f_limit=61
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   2.280000 (  2.270347)
+prob098
+LOG(state): depth=0, h=40, f=40, 14,10,2,1,13,9,8,11,7,3,6,12,15,5,4,0
+LOG: init_distr, cnt=2048
+f_limit=46
+STAT: loads: sum=301, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2160(+112)
+f_limit=48
+STAT: loads: sum=8926, av=4
+STAT: distr: av=1344, 2av=458, 4av=300, 8av=51, 16av=6, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=2758(+598)
+f_limit=50
+STAT: loads: sum=33204, av=12
+STAT: distr: av=1782, 2av=721, 4av=200, 8av=47, 16av=5, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=4431(+1673)
+f_limit=52
+STAT: loads: sum=152244, av=34
+STAT: distr: av=3020, 2av=903, 4av=397, 8av=96, 16av=11, 32av=3, 64av=1, 128av=0, more=0
+STAT: n_roots=7242(+2811)
+f_limit=54
+STAT: loads: sum=821054, av=113
+STAT: distr: av=4621, 2av=1789, 4av=706, 8av=114, 16av=11, 32av=0, 64av=1, 128av=0, more=0
+STAT: n_roots=12054(+4812)
+f_limit=56
+STAT: loads: sum=4597905, av=381
+STAT: distr: av=7272, 2av=3544, 4av=1092, 8av=135, 16av=10, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=20108(+8054)
+f_limit=58
+STAT: loads: sum=25775267, av=1281
+STAT: distr: av=11829, 2av=6271, 4av=1848, 8av=157, 16av=3, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=33605(+13497)
+f_limit=60
+STAT: loads: sum=142549722, av=4241
+STAT: distr: av=19422, 2av=11148, 4av=2843, 8av=190, 16av=2, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=56203(+22598)
+f_limit=62
+.Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000   7.860000 (  7.862541)
+prob099
+LOG(state): depth=0, h=43, f=43, 15,2,12,11,14,13,9,5,1,3,8,7,0,10,6,4
+LOG: init_distr, cnt=2048
+f_limit=51
+STAT: loads: sum=6255, av=3
+STAT: distr: av=1287, 2av=337, 4av=302, 8av=118, 16av=3, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=2703(+655)
+f_limit=53
+STAT: loads: sum=29712, av=10
+STAT: distr: av=1618, 2av=672, 4av=318, 8av=86, 16av=8, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=4783(+2080)
+f_limit=55
+STAT: loads: sum=170366, av=35
+STAT: distr: av=3282, 2av=844, 4av=490, 8av=142, 16av=21, 32av=4, 64av=0, 128av=0, more=0
+STAT: n_roots=8132(+3349)
+f_limit=57
+STAT: loads: sum=1080734, av=132
+STAT: distr: av=5410, 2av=1642, 4av=824, 8av=224, 16av=27, 32av=5, 64av=0, 128av=0, more=0
+STAT: n_roots=13933(+5801)
+f_limit=59
+STAT: loads: sum=7004443, av=502
+STAT: distr: av=8905, 2av=3272, 4av=1428, 8av=293, 16av=30, 32av=5, 64av=0, 128av=0, more=0
+STAT: n_roots=23758(+9825)
+f_limit=61
+STAT: loads: sum=44501167, av=1873
+STAT: distr: av=14617, 2av=6381, 4av=2347, 8av=373, 16av=39, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=40297(+16539)
+f_limit=63
+STAT: loads: sum=274094009, av=6801
+STAT: distr: av=24287, 2av=11679, 4av=3825, 8av=469, 16av=36, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=67847(+27550)
+f_limit=65
+Error: src/idas_smem.cu:1413 code:4, reason: unspecified launch failure
+  0.000000   0.000000  25.460000 ( 25.450701)
+61.02user 34.50system 1:35.21elapsed 100%CPU (0avgtext+0avgdata 64844maxresident)k
+0inputs+208outputs (0major+828436minor)pagefaults 0swaps

@@ -15,6 +15,8 @@ cpu: cpumain cpu25
 
 cumain: idas_global.cu
 	nvcc -o $@ $(NVCC_FLAGS) $<
+cumem: idas_smem.cu
+	nvcc -o $@ $(NVCC_FLAGS) $<
 cudynamic: idas_dynamic.cu
 	nvcc -o $@ $(NVCC_FLAGS) $<
 cublack: idas_black.cu
