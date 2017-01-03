@@ -4,8 +4,7 @@
 typedef unsigned char uchar;
 
 #define N_THREADS 1
-#define N_BLOCKS 1
-#define TOTAL_IDX (blockIdx.x * blockDim.x + threadIdx.x)
+#define N_BLOCKS 48
 #define PLAN_LEN_MAX 255
 
 typedef uchar Direction;
@@ -257,13 +256,12 @@ __global__ void
 idas_kernel(uchar *input, uchar *plan)
 {
     long long nodes_expanded = 0;
-    int       id = threadIdx.x + blockIdx.x * blockDim.x;
 
     init_mdist();
     init_movable_table();
 
     stack_init();
-    state_tile_fill(input + id * STATE_N);
+    state_tile_fill(input); /* the same input for all */
     state_init_hvalue();
 
     for (int f_limit = STATE_HVALUE;; f_limit += 2)
