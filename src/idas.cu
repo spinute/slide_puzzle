@@ -4,7 +4,7 @@
 typedef unsigned char uchar;
 
 #define N_THREADS 1
-#define N_BLOCKS 48
+#define N_BLOCKS 96
 #define PLAN_LEN_MAX 255
 
 typedef uchar Direction;
@@ -87,7 +87,7 @@ __device__ static uchar inline distance(uchar i, uchar j)
 
 #define H_DIFF(opponent, empty, empty_dir)                                     \
     h_diff_table[opponent][empty][empty_dir]
-__device__ __shared__ static int h_diff_table[STATE_N][STATE_N][DIR_N];
+__device__ __shared__ static signed char h_diff_table[STATE_N][STATE_N][DIR_N];
 
 __device__ static void
 init_mdist(void)
