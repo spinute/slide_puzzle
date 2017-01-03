@@ -257,7 +257,6 @@ __global__ void
 idas_kernel(uchar *input, uchar *plan)
 {
     long long nodes_expanded = 0;
-    int       f_limit;
     int       id = threadIdx.x + blockIdx.x * blockDim.x;
 
     init_mdist();
@@ -267,7 +266,7 @@ idas_kernel(uchar *input, uchar *plan)
     state_tile_fill(input + id * STATE_N);
     state_init_hvalue();
 
-    for (;; f_limit += 2)
+    for (int f_limit = STATE_HVALUE;; f_limit += 2)
     {
         nodes_expanded = 0;
         if (idas_internal(f_limit, &nodes_expanded))
@@ -351,8 +350,7 @@ avoid_unused_static_assertions(void)
     (void) assert_state_width_is_four[0];
 }
 
-#include <chrono>
-using namespace std::chrono;
+#include <sys/time.h>
 
 int
 main(int argc, char *argv[])
@@ -361,9 +359,11 @@ main(int argc, char *argv[])
     uchar *s_list_device;
     uchar  plan[PLAN_LEN_MAX];
     uchar *plan_device;
-	auto start = system_clock::now();
     int    insize  = sizeof(uchar) * STATE_N;
     int    outsize = sizeof(uchar) * PLAN_LEN_MAX;
+    struct timeval s, e;
+    gettimeofday(&s, NULL);
+
 
     if (argc < 2)
     {
@@ -377,18 +377,14 @@ main(int argc, char *argv[])
     CUDA_CHECK(
         cudaMemcpy(s_list_device, s_list, insize, cudaMemcpyHostToDevice));
 	cudaDeviceSynchronize();
-	auto kernel_end = system_clock::now();
-	auto msec = duration_cast<milliseconds>(dur).count();
-	std::cout << "time(kernel): " << msec << "\n";
+	gettimeofday(&e, NULL);
+	printf("time(init) = %lf\n", (e.tv_sec - s.tv_sec) + (e.tv_usec - s.tv_usec)*1.0E-6);
 
-	{
-		auto kernel_begin = system_clock::now();
-		idas_kernel<<<N_BLOCKS, N_THREADS>>>(s_list_device, plan_device);
-		cudaDeviceSynchronize();
-		auto kernel_end = system_clock::now();
-		auto msec = duration_cast<milliseconds>(dur).count();
-		std::cout << "time(kernel): " << msec << "\n";
-	}
+	gettimeofday(&s, NULL);
+	idas_kernel<<<N_BLOCKS, N_THREADS>>>(s_list_device, plan_device);
+	cudaDeviceSynchronize();
+	gettimeofday(&e, NULL);
+	printf("time(kernel) = %lf\n", (e.tv_sec - s.tv_sec) + (e.tv_usec - s.tv_usec)*1.0E-6);
 
     CUDA_CHECK(cudaMemcpy(plan, plan_device, outsize, cudaMemcpyDeviceToHost));
 
