@@ -351,6 +351,9 @@ avoid_unused_static_assertions(void)
     (void) assert_state_width_is_four[0];
 }
 
+#include <chrono>
+using namespace std::chrono;
+
 int
 main(int argc, char *argv[])
 {
@@ -358,6 +361,7 @@ main(int argc, char *argv[])
     uchar *s_list_device;
     uchar  plan[PLAN_LEN_MAX];
     uchar *plan_device;
+	auto start = system_clock::now();
     int    insize  = sizeof(uchar) * STATE_N;
     int    outsize = sizeof(uchar) * PLAN_LEN_MAX;
 
@@ -372,8 +376,19 @@ main(int argc, char *argv[])
     CUDA_CHECK(cudaMalloc((void **) &plan_device, outsize));
     CUDA_CHECK(
         cudaMemcpy(s_list_device, s_list, insize, cudaMemcpyHostToDevice));
+	cudaDeviceSynchronize();
+	auto kernel_end = system_clock::now();
+	auto msec = duration_cast<milliseconds>(dur).count();
+	std::cout << "time(kernel): " << msec << "\n";
 
-    idas_kernel<<<N_BLOCKS, N_THREADS>>>(s_list_device, plan_device);
+	{
+		auto kernel_begin = system_clock::now();
+		idas_kernel<<<N_BLOCKS, N_THREADS>>>(s_list_device, plan_device);
+		cudaDeviceSynchronize();
+		auto kernel_end = system_clock::now();
+		auto msec = duration_cast<milliseconds>(dur).count();
+		std::cout << "time(kernel): " << msec << "\n";
+	}
 
     CUDA_CHECK(cudaMemcpy(plan, plan_device, outsize, cudaMemcpyDeviceToHost));
 
