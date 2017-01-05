@@ -1,0 +1,2503 @@
+nohup: ignoring input
+prob000
+state_dump: h_value=35, (x,y)=(3,2)
+14 1 9 6
+4 8 12 5
+7 2 3 0
+10 11 13 15
+-----------
+f_limit= 35, expanded nodes = 0
+f_limit= 36, expanded nodes = 45
+f_limit= 37, expanded nodes = 287
+f_limit= 39, expanded nodes = 1995
+f_limit= 41, expanded nodes = 13615
+f_limit= 43, expanded nodes = 89247
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 45, expanded nodes = 447843
+len=45: 2 2 2 0 1 1 3 2 0 2 3 1 3 2 0 0 0 1 1 3 1 3 2 2 0 2 3 1 0 0 1 1 3 3 2 2 3 1 0 2 0 1 0 2 2 
+  0.000000   0.000000   0.000000 (  0.008865)
+prob001
+state_dump: h_value=30, (x,y)=(0,2)
+4 5 7 2
+9 14 12 13
+0 3 6 11
+8 1 15 10
+-----------
+f_limit= 30, expanded nodes = 0
+f_limit= 31, expanded nodes = 7
+f_limit= 32, expanded nodes = 140
+f_limit= 34, expanded nodes = 729
+f_limit= 36, expanded nodes = 4829
+f_limit= 38, expanded nodes = 28560
+f_limit= 40, expanded nodes = 159460
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 42, expanded nodes = 635966
+len=42: 1 1 0 1 3 3 2 0 0 2 3 2 0 1 3 3 1 0 0 2 3 2 3 1 1 0 1 0 2 0 2 3 2 0 1 1 1 3 2 2 0 2 
+  0.000000   0.000000   0.020000 (  0.012599)
+prob002
+state_dump: h_value=28, (x,y)=(0,0)
+0 1 9 7
+11 13 5 3
+14 12 4 2
+8 6 10 15
+-----------
+f_limit= 28, expanded nodes = 0
+f_limit= 29, expanded nodes = 2
+f_limit= 30, expanded nodes = 8
+f_limit= 32, expanded nodes = 171
+f_limit= 34, expanded nodes = 1045
+f_limit= 36, expanded nodes = 6016
+f_limit= 38, expanded nodes = 33031
+f_limit= 40, expanded nodes = 176298
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 42, expanded nodes = 341064
+len=42: 1 1 3 3 3 2 0 2 3 1 0 0 2 3 1 0 1 3 2 2 0 1 1 1 3 2 3 2 0 0 0 1 3 1 0 2 3 3 2 0 0 2 
+  0.000000   0.000000   0.000000 (  0.008013)
+prob003
+state_dump: h_value=39, (x,y)=(0,3)
+8 11 4 6
+7 3 10 9
+2 12 15 13
+0 1 5 14
+-----------
+f_limit= 39, expanded nodes = 0
+f_limit= 40, expanded nodes = 2
+f_limit= 41, expanded nodes = 627
+f_limit= 43, expanded nodes = 5869
+f_limit= 45, expanded nodes = 53336
+f_limit= 47, expanded nodes = 409639
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 49, expanded nodes = 1692632
+len=49: 1 0 2 3 1 1 0 1 3 2 0 1 0 2 2 3 3 1 0 1 0 2 2 0 1 3 2 2 0 1 1 1 3 2 2 3 2 0 1 3 1 1 0 2 0 2 3 2 0 
+  0.000000   0.000000   0.030000 (  0.029537)
+prob004
+state_dump: h_value=29, (x,y)=(2,1)
+13 8 14 3
+9 1 0 7
+15 5 4 10
+12 2 6 11
+-----------
+f_limit= 29, expanded nodes = 0
+f_limit= 30, expanded nodes = 16
+f_limit= 31, expanded nodes = 247
+f_limit= 33, expanded nodes = 1357
+f_limit= 35, expanded nodes = 7421
+f_limit= 37, expanded nodes = 37497
+f_limit= 39, expanded nodes = 182869
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 41, expanded nodes = 696955
+len=41: 3 2 3 1 0 2 2 0 0 1 1 3 2 0 1 3 3 3 2 0 0 2 0 1 1 3 3 3 2 0 0 1 3 1 3 2 2 0 2 0 0 
+  0.000000   0.000000   0.010000 (  0.013141)
+prob005
+state_dump: h_value=36, (x,y)=(1,1)
+7 11 8 3
+14 0 6 15
+1 4 13 9
+5 12 2 10
+-----------
+f_limit= 36, expanded nodes = 0
+f_limit= 37, expanded nodes = 188
+f_limit= 38, expanded nodes = 2135
+f_limit= 40, expanded nodes = 17478
+f_limit= 42, expanded nodes = 115580
+f_limit= 44, expanded nodes = 719586
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 46, expanded nodes = 202631
+len=46: 0 1 3 2 2 3 1 0 0 2 3 3 3 1 0 1 3 1 0 0 2 3 3 1 0 2 3 2 0 0 0 1 3 2 0 2 3 3 1 1 1 0 2 2 2 0 
+  0.000000   0.000000   0.010000 (  0.014899)
+prob006
+state_dump: h_value=38, (x,y)=(1,1)
+12 8 15 13
+1 0 5 4
+6 3 2 11
+9 7 14 10
+-----------
+f_limit= 38, expanded nodes = 0
+f_limit= 39, expanded nodes = 87
+f_limit= 40, expanded nodes = 486
+f_limit= 42, expanded nodes = 2929
+f_limit= 44, expanded nodes = 17913
+f_limit= 46, expanded nodes = 113371
+f_limit= 48, expanded nodes = 718293
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 50, expanded nodes = 3037884
+len=50: 2 0 1 3 3 2 0 0 1 3 1 1 0 2 2 3 1 3 1 0 0 2 3 3 1 3 2 0 2 3 2 0 0 1 3 1 1 0 2 2 3 3 1 1 0 0 2 2 0 2 
+  0.000000   0.000000   0.050000 (  0.053870)
+prob007
+state_dump: h_value=35, (x,y)=(1,0)
+6 0 5 10
+11 12 9 2
+1 7 4 3
+14 8 13 15
+-----------
+f_limit= 35, expanded nodes = 0
+f_limit= 36, expanded nodes = 11
+f_limit= 37, expanded nodes = 1528
+f_limit= 39, expanded nodes = 18069
+f_limit= 41, expanded nodes = 143331
+f_limit= 43, expanded nodes = 941851
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 45, expanded nodes = 435770
+len=45: 1 1 3 2 3 2 0 2 3 3 1 0 0 0 2 3 1 1 1 3 2 2 2 0 1 1 0 1 3 3 2 2 0 0 2 3 3 3 1 1 0 0 2 2 0 
+  0.000000   0.000000   0.020000 (  0.020685)
+prob008
+state_dump: h_value=32, (x,y)=(1,3)
+4 7 13 10
+1 2 9 6
+12 8 14 5
+3 0 11 15
+-----------
+f_limit= 32, expanded nodes = 0
+f_limit= 33, expanded nodes = 11
+f_limit= 34, expanded nodes = 327
+f_limit= 36, expanded nodes = 2216
+f_limit= 38, expanded nodes = 16281
+f_limit= 40, expanded nodes = 99914
+f_limit= 42, expanded nodes = 575359
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 44, expanded nodes = 2519776
+len=44: 2 0 1 3 1 0 0 0 2 3 3 1 0 2 2 3 1 1 1 0 0 2 3 1 3 3 2 2 0 1 3 1 0 2 0 1 0 2 2 3 3 2 0 0 
+  0.000000   0.000000   0.040000 (  0.043814)
+prob009
+state_dump: h_value=37, (x,y)=(3,2)
+6 14 10 5
+15 8 7 1
+3 4 2 0
+12 9 11 13
+-----------
+f_limit= 37, expanded nodes = 0
+f_limit= 38, expanded nodes = 3
+f_limit= 39, expanded nodes = 32
+f_limit= 41, expanded nodes = 533
+f_limit= 43, expanded nodes = 6655
+f_limit= 45, expanded nodes = 76452
+f_limit= 47, expanded nodes = 705214
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 49, expanded nodes = 2108336
+len=49: 2 0 0 1 3 3 2 2 2 0 1 3 1 0 2 3 2 0 1 0 1 1 3 2 3 2 0 0 2 3 1 0 1 1 3 3 2 3 1 0 2 2 3 1 0 0 2 2 0 
+  0.000000   0.000000   0.040000 (  0.039015)
+prob010
+state_dump: h_value=32, (x,y)=(1,3)
+9 14 5 7
+8 15 1 2
+10 4 13 6
+12 0 11 3
+-----------
+f_limit= 32, expanded nodes = 0
+f_limit= 33, expanded nodes = 3
+f_limit= 34, expanded nodes = 178
+f_limit= 36, expanded nodes = 2397
+f_limit= 38, expanded nodes = 19440
+f_limit= 40, expanded nodes = 122499
+f_limit= 42, expanded nodes = 706187
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 44, expanded nodes = 100208
+len=44: 0 0 0 1 1 3 3 3 2 0 2 3 1 0 2 0 1 3 2 2 0 1 1 1 3 3 2 0 0 0 2 2 3 1 0 1 1 3 2 3 2 0 0 2 
+  0.000000   0.000000   0.010000 (  0.013698)
+prob011
+state_dump: h_value=45, (x,y)=(0,1)
+5 7 11 8
+0 14 9 13
+10 12 3 15
+6 1 4 2
+-----------
+f_limit= 45, expanded nodes = 0
+f_limit= 46, expanded nodes = 4
+f_limit= 47, expanded nodes = 553
+f_limit= 49, expanded nodes = 9726
+f_limit= 51, expanded nodes = 126441
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 53, expanded nodes = 1153118
+len=53: 3 3 1 0 0 1 3 1 0 0 2 2 3 2 3 3 1 1 0 1 3 2 0 1 0 0 2 3 3 2 3 1 0 1 0 0 2 3 2 2 3 1 1 0 2 0 2 3 3 1 0 0 2 
+  0.000000   0.000000   0.020000 (  0.018226)
+prob012
+state_dump: h_value=35, (x,y)=(3,2)
+12 15 2 6
+1 14 4 8
+5 3 7 0
+10 13 9 11
+-----------
+f_limit= 35, expanded nodes = 0
+f_limit= 36, expanded nodes = 63
+f_limit= 37, expanded nodes = 454
+f_limit= 39, expanded nodes = 3254
+f_limit= 41, expanded nodes = 21969
+f_limit= 43, expanded nodes = 141268
+f_limit= 45, expanded nodes = 843100
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 47, expanded nodes = 1647241
+len=47: 2 0 2 3 1 0 2 0 1 3 2 3 1 0 1 0 2 2 3 2 3 3 1 1 0 2 2 0 0 1 3 1 1 3 3 2 0 2 2 0 1 3 3 2 0 0 0 
+  0.000000   0.000000   0.030000 (  0.037497)
+prob013
+state_dump: h_value=32, (x,y)=(3,3)
+3 14 9 11
+5 4 8 2
+13 12 6 7
+10 1 15 0
+-----------
+f_limit= 32, expanded nodes = 0
+f_limit= 33, expanded nodes = 4
+f_limit= 34, expanded nodes = 52
+f_limit= 36, expanded nodes = 530
+f_limit= 38, expanded nodes = 4590
+f_limit= 40, expanded nodes = 31650
+f_limit= 42, expanded nodes = 194724
+f_limit= 44, expanded nodes = 1109310
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 46, expanded nodes = 452492
+len=46: 0 2 0 2 3 3 2 0 1 0 0 2 3 3 1 0 1 0 2 2 3 1 1 1 0 2 3 1 3 3 2 2 0 1 0 1 3 2 3 2 2 0 1 0 0 2 
+  0.000000   0.000000   0.030000 (  0.025713)
+prob014
+state_dump: h_value=34, (x,y)=(2,2)
+13 9 14 6
+12 8 1 2
+3 4 0 7
+5 10 11 15
+-----------
+f_limit= 34, expanded nodes = 0
+f_limit= 35, expanded nodes = 9
+f_limit= 36, expanded nodes = 417
+f_limit= 38, expanded nodes = 3695
+f_limit= 40, expanded nodes = 29954
+f_limit= 42, expanded nodes = 199881
+f_limit= 44, expanded nodes = 1235406
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 46, expanded nodes = 416029
+len=46: 0 0 2 3 2 3 1 0 1 3 3 2 0 0 0 2 3 3 3 1 0 0 0 2 3 3 1 0 1 0 2 3 1 1 0 2 3 1 3 2 3 2 0 0 2 0 
+  0.000000   0.000000   0.020000 (  0.025436)
+prob015
+state_dump: h_value=36, (x,y)=(3,1)
+5 11 6 9
+4 13 12 0
+8 2 15 10
+1 7 3 14
+-----------
+f_limit= 36, expanded nodes = 0
+f_limit= 37, expanded nodes = 4
+f_limit= 38, expanded nodes = 142
+f_limit= 40, expanded nodes = 1026
+f_limit= 42, expanded nodes = 7645
+f_limit= 44, expanded nodes = 53738
+f_limit= 46, expanded nodes = 358244
+f_limit= 48, expanded nodes = 2279917
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 50, expanded nodes = 6384560
+len=50: 3 2 0 2 3 3 1 0 0 1 0 2 2 3 3 3 1 0 2 2 3 1 1 1 0 0 2 3 1 0 2 0 1 3 2 2 2 3 1 1 1 0 2 0 2 2 3 1 0 2 
+  0.000000   0.000000   0.120000 (  0.122323)
+prob016
+state_dump: h_value=31, (x,y)=(2,3)
+6 13 3 2
+11 9 5 10
+1 7 12 14
+8 4 0 15
+-----------
+f_limit= 31, expanded nodes = 0
+f_limit= 32, expanded nodes = 58
+f_limit= 33, expanded nodes = 357
+f_limit= 35, expanded nodes = 2514
+f_limit= 37, expanded nodes = 15366
+f_limit= 39, expanded nodes = 86888
+f_limit= 41, expanded nodes = 471150
+f_limit= 43, expanded nodes = 2488958
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 45, expanded nodes = 2337107
+len=45: 0 1 0 0 2 3 2 2 3 1 3 1 0 0 2 0 1 1 3 2 0 2 2 3 3 1 0 2 3 3 1 0 1 1 0 2 2 0 1 1 3 2 2 0 2 
+  0.000000   0.000000   0.070000 (  0.072560)
+prob017
+state_dump: h_value=30, (x,y)=(2,0)
+5 7 0 11
+12 1 9 10
+15 6 2 3
+8 4 13 14
+-----------
+f_limit= 30, expanded nodes = 0
+f_limit= 31, expanded nodes = 74
+f_limit= 32, expanded nodes = 596
+f_limit= 34, expanded nodes = 3690
+f_limit= 36, expanded nodes = 21292
+f_limit= 38, expanded nodes = 113184
+f_limit= 40, expanded nodes = 579613
+f_limit= 42, expanded nodes = 2873786
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 44, expanded nodes = 7112563
+len=44: 2 3 3 2 0 0 1 3 1 3 2 0 1 1 3 2 0 1 0 2 3 3 2 3 2 0 1 3 1 1 0 0 0 2 2 3 2 3 1 1 0 0 2 2 
+  0.000000   0.000000   0.150000 (  0.148374)
+prob018
+state_dump: h_value=37, (x,y)=(1,0)
+5 0 15 8
+4 6 1 14
+10 11 3 9
+7 12 2 13
+-----------
+f_limit= 37, expanded nodes = 0
+f_limit= 38, expanded nodes = 4
+f_limit= 39, expanded nodes = 159
+f_limit= 41, expanded nodes = 1470
+f_limit= 43, expanded nodes = 9524
+f_limit= 45, expanded nodes = 64692
+f_limit= 47, expanded nodes = 421521
+f_limit= 49, expanded nodes = 2612351
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 51, expanded nodes = 8305856
+len=51: 3 1 3 1 0 0 2 3 1 0 2 2 3 3 2 3 1 0 1 3 2 0 1 0 2 3 2 0 0 1 3 3 1 3 1 0 0 2 2 2 3 1 3 1 1 0 0 2 0 2 2 
+  0.000000   0.000000   0.150000 (  0.158012)
+prob019
+state_dump: h_value=41, (x,y)=(3,2)
+3 14 13 6
+4 15 8 9
+5 12 10 0
+2 7 1 11
+-----------
+f_limit= 41, expanded nodes = 0
+f_limit= 42, expanded nodes = 7
+f_limit= 43, expanded nodes = 288
+f_limit= 45, expanded nodes = 4366
+f_limit= 47, expanded nodes = 40422
+f_limit= 49, expanded nodes = 339170
+f_limit= 51, expanded nodes = 2496659
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 53, expanded nodes = 8660585
+len=53: 2 3 2 0 0 0 2 3 3 3 1 0 2 0 1 1 3 2 0 1 0 2 3 2 3 1 0 1 1 3 2 3 2 0 0 1 1 3 2 0 1 0 2 3 1 3 3 2 2 0 0 2 0 
+  0.000000   0.000000   0.160000 (  0.155304)
+prob020
+state_dump: h_value=34, (x,y)=(3,1)
+4 3 6 13
+7 15 9 0
+10 5 8 11
+2 12 1 14
+-----------
+f_limit= 34, expanded nodes = 0
+f_limit= 35, expanded nodes = 4
+f_limit= 36, expanded nodes = 52
+f_limit= 38, expanded nodes = 387
+f_limit= 40, expanded nodes = 2351
+f_limit= 42, expanded nodes = 15200
+f_limit= 44, expanded nodes = 90917
+f_limit= 46, expanded nodes = 542613
+f_limit= 48, expanded nodes = 3219560
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 50, expanded nodes = 4471664
+len=50: 0 2 3 2 3 2 3 1 0 0 2 3 1 1 0 1 3 2 0 0 2 3 2 3 1 1 3 2 0 1 0 0 2 3 3 1 3 1 0 0 0 2 3 1 0 2 2 3 2 0 
+  0.000000   0.000000   0.110000 (  0.115491)
+prob021
+state_dump: h_value=36, (x,y)=(1,1)
+3 6 5 2
+10 0 15 14
+1 4 13 12
+9 8 11 7
+-----------
+f_limit= 36, expanded nodes = 0
+f_limit= 37, expanded nodes = 795
+f_limit= 38, expanded nodes = 11725
+f_limit= 40, expanded nodes = 96414
+f_limit= 42, expanded nodes = 626690
+f_limit= 44, expanded nodes = 3633889
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 46, expanded nodes = 9149371
+len=46: 2 3 1 1 1 3 2 0 2 3 1 0 0 0 2 2 3 3 1 0 1 1 0 2 2 2 3 3 3 1 1 0 0 1 0 2 3 1 3 3 2 0 2 2 0 0 
+  0.000000   0.000000   0.170000 (  0.179177)
+prob022
+state_dump: h_value=41, (x,y)=(1,2)
+7 15 8 2
+13 6 3 12
+11 0 4 10
+9 5 1 14
+-----------
+f_limit= 41, expanded nodes = 0
+f_limit= 42, expanded nodes = 79
+f_limit= 43, expanded nodes = 985
+f_limit= 45, expanded nodes = 8245
+f_limit= 47, expanded nodes = 66567
+f_limit= 49, expanded nodes = 496833
+f_limit= 51, expanded nodes = 3545920
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 53, expanded nodes = 14289816
+len=53: 1 3 1 0 0 2 2 3 2 0 1 1 3 1 3 2 0 2 0 0 1 3 2 0 2 3 1 0 1 1 3 2 3 1 0 2 2 3 3 1 1 0 0 2 2 3 2 3 1 0 2 0 0 
+  0.000000   0.000000   0.240000 (  0.243206)
+prob023
+state_dump: h_value=39, (x,y)=(1,0)
+13 0 9 12
+11 6 3 5
+15 8 1 10
+4 14 2 7
+-----------
+f_limit= 39, expanded nodes = 0
+f_limit= 40, expanded nodes = 34
+f_limit= 41, expanded nodes = 231
+f_limit= 43, expanded nodes = 1533
+f_limit= 45, expanded nodes = 12107
+f_limit= 47, expanded nodes = 85591
+f_limit= 49, expanded nodes = 551564
+f_limit= 51, expanded nodes = 3438262
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 53, expanded nodes = 5205693
+len=53: 1 1 3 2 3 3 2 0 2 0 0 1 1 3 2 0 1 1 3 2 3 2 2 3 1 1 0 1 3 2 0 2 0 2 0 1 1 3 1 3 2 3 2 0 0 2 3 3 1 0 0 0 2 
+  0.000000   0.000000   0.130000 (  0.124992)
+prob024
+state_dump: h_value=36, (x,y)=(1,3)
+5 4 7 1
+11 12 14 15
+10 13 8 6
+2 0 9 3
+-----------
+f_limit= 36, expanded nodes = 0
+f_limit= 37, expanded nodes = 50
+f_limit= 38, expanded nodes = 259
+f_limit= 40, expanded nodes = 1985
+f_limit= 42, expanded nodes = 14649
+f_limit= 44, expanded nodes = 104419
+f_limit= 46, expanded nodes = 697910
+f_limit= 48, expanded nodes = 4415745
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 50, expanded nodes = 2607788
+len=50: 0 0 2 3 1 1 0 1 3 2 3 2 2 0 1 1 0 2 2 3 1 3 1 0 1 3 2 0 0 1 3 2 2 0 1 0 1 3 2 3 2 2 0 0 1 1 3 2 2 0 
+  0.000000   0.000000   0.100000 (  0.103495)
+prob025
+state_dump: h_value=36, (x,y)=(3,1)
+13 14 6 12
+4 5 1 0
+9 3 10 2
+15 11 8 7
+-----------
+f_limit= 36, expanded nodes = 0
+f_limit= 37, expanded nodes = 7
+f_limit= 38, expanded nodes = 58
+f_limit= 40, expanded nodes = 369
+f_limit= 42, expanded nodes = 2166
+f_limit= 44, expanded nodes = 15635
+f_limit= 46, expanded nodes = 106609
+f_limit= 48, expanded nodes = 702196
+f_limit= 50, expanded nodes = 4432237
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 52, expanded nodes = 1875665
+len=52: 0 2 2 3 2 0 1 3 3 2 0 0 1 3 1 1 3 2 0 0 2 3 3 1 3 2 2 0 1 1 1 3 2 2 2 0 1 1 0 1 0 2 3 1 3 3 2 0 2 0 2 0 
+  0.000000   0.000000   0.090000 (  0.096625)
+prob026
+state_dump: h_value=36, (x,y)=(1,3)
+14 7 1 9
+12 3 6 15
+8 11 2 5
+10 0 4 13
+-----------
+f_limit= 36, expanded nodes = 0
+f_limit= 37, expanded nodes = 7
+f_limit= 38, expanded nodes = 34
+f_limit= 40, expanded nodes = 301
+f_limit= 42, expanded nodes = 2084
+f_limit= 44, expanded nodes = 15796
+f_limit= 46, expanded nodes = 113627
+f_limit= 48, expanded nodes = 764967
+f_limit= 50, expanded nodes = 4924170
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 52, expanded nodes = 20854281
+len=52: 1 1 0 0 2 2 0 1 1 3 2 3 2 2 0 0 1 1 3 2 3 3 1 1 0 2 3 2 2 0 0 1 3 2 0 1 0 1 1 3 2 3 2 3 1 0 2 0 1 0 2 2 
+  0.000000   0.000000   0.370000 (  0.367746)
+prob027
+state_dump: h_value=24, (x,y)=(3,3)
+1 3 2 5
+10 9 15 6
+8 14 13 11
+12 4 7 0
+-----------
+f_limit= 24, expanded nodes = 0
+f_limit= 25, expanded nodes = 34
+f_limit= 26, expanded nodes = 170
+f_limit= 28, expanded nodes = 670
+f_limit= 30, expanded nodes = 2875
+f_limit= 32, expanded nodes = 11938
+f_limit= 34, expanded nodes = 49691
+f_limit= 36, expanded nodes = 209727
+f_limit= 38, expanded nodes = 891268
+f_limit= 40, expanded nodes = 3786634
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 42, expanded nodes = 12992575
+len=42: 2 2 0 0 0 1 1 3 2 2 2 3 1 1 3 1 0 0 2 3 3 1 0 2 3 2 0 0 1 0 1 3 3 2 2 2 0 1 1 0 2 2 
+  0.000000   0.000000   0.250000 (  0.250493)
+prob028
+state_dump: h_value=35, (x,y)=(1,0)
+9 0 4 10
+1 14 15 3
+12 6 5 7
+11 13 8 2
+-----------
+f_limit= 35, expanded nodes = 0
+f_limit= 36, expanded nodes = 214
+f_limit= 37, expanded nodes = 1397
+f_limit= 39, expanded nodes = 8970
+f_limit= 41, expanded nodes = 52552
+f_limit= 43, expanded nodes = 295424
+f_limit= 45, expanded nodes = 1627530
+f_limit= 47, expanded nodes = 8712044
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 49, expanded nodes = 2858578
+len=49: 1 1 3 2 2 2 0 1 3 3 1 0 1 3 2 3 2 2 0 1 1 0 2 2 3 1 3 1 0 1 3 2 0 2 0 1 0 1 3 3 2 0 1 0 2 3 2 2 0 
+  0.000000   0.000000   0.180000 (  0.188142)
+prob029
+state_dump: h_value=43, (x,y)=(1,0)
+6 0 14 12
+1 15 9 10
+11 4 7 2
+8 3 5 13
+-----------
+f_limit= 43, expanded nodes = 0
+f_limit= 44, expanded nodes = 6
+f_limit= 45, expanded nodes = 697
+f_limit= 47, expanded nodes = 7165
+f_limit= 49, expanded nodes = 69078
+f_limit= 51, expanded nodes = 616148
+f_limit= 53, expanded nodes = 4924806
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 55, expanded nodes = 1569606
+len=55: 1 1 3 3 2 0 0 2 2 3 3 1 1 0 2 2 3 1 3 1 0 0 1 3 2 2 0 1 3 2 3 1 1 0 0 2 0 1 3 3 2 0 0 2 3 3 2 3 1 1 0 0 0 2 2 
+  0.000000   0.000000   0.090000 (  0.095093)
+prob030
+state_dump: h_value=35, (x,y)=(0,3)
+1 7 15 14
+2 6 4 9
+12 11 13 3
+0 8 5 10
+-----------
+f_limit= 35, expanded nodes = 0
+f_limit= 36, expanded nodes = 20
+f_limit= 37, expanded nodes = 321
+f_limit= 39, expanded nodes = 4088
+f_limit= 41, expanded nodes = 33361
+f_limit= 43, expanded nodes = 228687
+f_limit= 45, expanded nodes = 1425847
+f_limit= 47, expanded nodes = 8310902
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 49, expanded nodes = 5677032
+len=49: 0 1 0 2 3 1 1 1 0 0 2 2 3 1 3 2 0 2 3 1 3 1 0 1 0 0 2 3 2 2 3 1 3 1 1 0 0 2 2 3 1 3 1 0 0 0 2 2 2 
+  0.000000   0.000000   0.210000 (  0.208808)
+prob031
+state_dump: h_value=46, (x,y)=(0,2)
+14 13 4 11
+15 8 6 9
+0 7 3 1
+2 10 12 5
+-----------
+f_limit= 46, expanded nodes = 0
+f_limit= 47, expanded nodes = 35
+f_limit= 48, expanded nodes = 540
+f_limit= 50, expanded nodes = 9243
+f_limit= 52, expanded nodes = 100036
+f_limit= 54, expanded nodes = 948572
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 56, expanded nodes = 1107460
+len=56: 0 0 1 1 3 3 2 2 3 1 0 2 0 0 1 1 3 3 3 2 2 0 0 1 3 1 1 3 2 2 2 0 1 1 1 0 0 2 2 3 3 1 1 0 2 0 2 3 3 1 3 2 2 0 0 0 
+  0.000000   0.000000   0.030000 (  0.030006)
+prob032
+state_dump: h_value=33, (x,y)=(0,1)
+10 9 3 11
+0 13 2 14
+5 6 4 7
+8 15 1 12
+-----------
+f_limit= 33, expanded nodes = 0
+f_limit= 34, expanded nodes = 7
+f_limit= 35, expanded nodes = 60
+f_limit= 37, expanded nodes = 923
+f_limit= 39, expanded nodes = 6535
+f_limit= 41, expanded nodes = 41724
+f_limit= 43, expanded nodes = 248697
+f_limit= 45, expanded nodes = 1409495
+f_limit= 47, expanded nodes = 7745255
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 49, expanded nodes = 6575074
+len=49: 0 1 3 3 1 3 2 0 1 1 0 0 2 3 2 2 3 1 0 1 3 3 1 0 2 2 3 1 1 0 0 2 2 0 2 3 3 1 0 0 2 3 3 3 1 0 0 0 2 
+  0.010000   0.000000   0.220000 (  0.219742)
+prob033
+state_dump: h_value=35, (x,y)=(2,3)
+8 4 6 1
+14 12 2 15
+13 10 9 5
+3 7 0 11
+-----------
+f_limit= 35, expanded nodes = 0
+f_limit= 36, expanded nodes = 18
+f_limit= 37, expanded nodes = 268
+f_limit= 39, expanded nodes = 2745
+f_limit= 41, expanded nodes = 27653
+f_limit= 43, expanded nodes = 201444
+f_limit= 45, expanded nodes = 1310438
+f_limit= 47, expanded nodes = 7893309
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 49, expanded nodes = 3430503
+len=49: 0 1 0 2 3 2 3 2 0 0 1 3 2 0 0 1 3 1 3 3 2 0 1 3 1 0 2 3 2 2 0 0 1 0 1 1 3 3 2 0 2 0 1 1 3 2 2 2 0 
+  0.000000   0.000000   0.170000 (  0.170137)
+prob034
+state_dump: h_value=43, (x,y)=(3,0)
+4 6 12 0
+14 2 9 13
+11 8 3 15
+7 10 1 5
+-----------
+f_limit= 43, expanded nodes = 0
+f_limit= 44, expanded nodes = 2
+f_limit= 45, expanded nodes = 59
+f_limit= 47, expanded nodes = 1432
+f_limit= 49, expanded nodes = 15271
+f_limit= 51, expanded nodes = 150036
+f_limit= 53, expanded nodes = 1284627
+f_limit= 55, expanded nodes = 10004063
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 57, expanded nodes = 5056055
+len=57: 2 2 3 1 3 3 1 0 0 0 2 3 3 2 2 0 1 1 1 0 2 2 3 1 3 2 0 1 3 3 2 0 2 3 1 0 2 0 1 3 1 1 0 2 2 3 1 1 0 2 3 3 2 0 2 0 0 
+  0.000000   0.000000   0.220000 (  0.218761)
+prob035
+state_dump: h_value=31, (x,y)=(3,2)
+12 3 9 1
+4 5 10 2
+6 11 15 0
+14 7 13 8
+-----------
+f_limit= 31, expanded nodes = 0
+f_limit= 32, expanded nodes = 54
+f_limit= 33, expanded nodes = 193
+f_limit= 35, expanded nodes = 1000
+f_limit= 37, expanded nodes = 5159
+f_limit= 39, expanded nodes = 24659
+f_limit= 41, expanded nodes = 124691
+f_limit= 43, expanded nodes = 619213
+f_limit= 45, expanded nodes = 3046602
+f_limit= 47, expanded nodes = 14908703
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 49, expanded nodes = 46322338
+len=49: 2 2 3 1 1 0 2 0 0 2 2 3 1 3 2 3 1 1 0 0 0 1 3 2 2 0 1 1 3 2 3 2 2 3 1 0 0 1 3 3 2 0 2 3 1 0 0 2 0 
+  0.000000   0.000000   0.890000 (  0.894872)
+prob036
+state_dump: h_value=36, (x,y)=(3,3)
+6 12 11 3
+13 7 9 15
+2 14 8 10
+4 1 5 0
+-----------
+f_limit= 36, expanded nodes = 0
+f_limit= 37, expanded nodes = 2
+f_limit= 38, expanded nodes = 8
+f_limit= 40, expanded nodes = 408
+f_limit= 42, expanded nodes = 3977
+f_limit= 44, expanded nodes = 33934
+f_limit= 46, expanded nodes = 239600
+f_limit= 48, expanded nodes = 1602438
+f_limit= 50, expanded nodes = 10118748
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 52, expanded nodes = 6004913
+len=52: 0 0 2 2 2 3 3 1 0 0 0 2 3 3 1 1 3 2 2 0 1 0 1 0 2 2 3 3 1 3 1 1 0 0 2 2 3 1 1 0 2 0 2 3 3 1 3 2 2 0 0 0 
+  0.000000   0.000000   0.240000 (  0.243349)
+prob037
+state_dump: h_value=42, (x,y)=(3,3)
+4 7 14 13
+10 3 9 12
+11 5 6 15
+1 2 8 0
+-----------
+f_limit= 42, expanded nodes = 0
+f_limit= 43, expanded nodes = 7
+f_limit= 44, expanded nodes = 261
+f_limit= 46, expanded nodes = 2494
+f_limit= 48, expanded nodes = 20278
+f_limit= 50, expanded nodes = 158486
+f_limit= 52, expanded nodes = 1223663
+f_limit= 54, expanded nodes = 9076121
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 56, expanded nodes = 2143383
+len=56: 0 0 0 2 2 3 1 3 1 0 0 2 3 2 2 3 1 1 0 2 2 3 1 3 1 0 1 0 2 2 3 3 2 0 1 3 1 0 1 0 2 0 2 3 3 3 1 0 1 0 0 2 2 3 2 0 
+  0.000000   0.000000   0.160000 (  0.162763)
+prob038
+state_dump: h_value=34, (x,y)=(0,0)
+0 13 2 4
+12 14 6 9
+15 1 10 3
+11 5 8 7
+-----------
+f_limit= 34, expanded nodes = 0
+f_limit= 35, expanded nodes = 2
+f_limit= 36, expanded nodes = 6
+f_limit= 38, expanded nodes = 58
+f_limit= 40, expanded nodes = 307
+f_limit= 42, expanded nodes = 1509
+f_limit= 44, expanded nodes = 8811
+f_limit= 46, expanded nodes = 55905
+f_limit= 48, expanded nodes = 338835
+f_limit= 50, expanded nodes = 2067136
+f_limit= 52, expanded nodes = 12517040
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 54, expanded nodes = 3955191
+len=54: 1 1 1 3 3 2 2 0 0 1 1 3 2 3 2 3 2 0 0 0 1 1 3 3 3 2 2 0 1 1 0 2 2 3 1 1 1 3 2 2 0 0 0 1 3 1 3 3 2 2 0 0 2 0 
+  0.000000   0.000000   0.260000 (  0.260558)
+prob039
+state_dump: h_value=35, (x,y)=(1,2)
+6 10 1 14
+15 8 3 5
+13 0 2 7
+4 9 11 12
+-----------
+f_limit= 35, expanded nodes = 0
+f_limit= 36, expanded nodes = 74
+f_limit= 37, expanded nodes = 568
+f_limit= 39, expanded nodes = 3629
+f_limit= 41, expanded nodes = 22635
+f_limit= 43, expanded nodes = 135739
+f_limit= 45, expanded nodes = 768599
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 47, expanded nodes = 233020
+len=47: 0 0 1 3 1 0 2 3 3 2 0 2 0 1 1 3 2 3 1 0 1 3 2 3 1 0 2 0 2 3 3 1 0 2 2 3 1 0 0 2 3 1 1 0 2 0 2 
+  0.000000   0.000000   0.020000 (  0.017077)
+prob040
+state_dump: h_value=39, (x,y)=(2,1)
+3 14 9 7
+12 15 0 4
+1 8 5 6
+11 10 2 13
+-----------
+f_limit= 39, expanded nodes = 0
+f_limit= 40, expanded nodes = 33
+f_limit= 41, expanded nodes = 722
+f_limit= 43, expanded nodes = 6251
+f_limit= 45, expanded nodes = 49386
+f_limit= 47, expanded nodes = 340232
+f_limit= 49, expanded nodes = 2200221
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 51, expanded nodes = 5298573
+len=51: 2 2 3 1 0 0 2 3 3 1 3 2 0 1 1 0 1 3 2 3 2 0 0 1 3 3 1 0 2 2 2 0 1 1 0 2 3 3 3 1 0 0 2 3 1 0 1 0 2 2 2 
+  0.000000   0.000000   0.100000 (  0.108291)
+prob041
+state_dump: h_value=36, (x,y)=(2,0)
+12 6 0 4
+7 3 15 1
+13 9 8 11
+2 14 5 10
+-----------
+f_limit= 36, expanded nodes = 0
+f_limit= 37, expanded nodes = 60
+f_limit= 38, expanded nodes = 448
+f_limit= 40, expanded nodes = 2807
+f_limit= 42, expanded nodes = 17416
+f_limit= 44, expanded nodes = 97333
+f_limit= 46, expanded nodes = 539010
+f_limit= 48, expanded nodes = 2948039
+f_limit= 50, expanded nodes = 15916126
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 52, expanded nodes = 17388436
+len=52: 1 3 2 2 2 3 1 1 1 0 2 2 0 1 1 3 2 3 3 2 2 0 0 0 1 3 3 3 2 0 0 1 3 1 0 2 0 1 3 2 3 3 1 1 0 2 3 2 2 0 0 0 
+  0.000000   0.000000   0.510000 (  0.510608)
+prob042
+state_dump: h_value=36, (x,y)=(1,3)
+6 11 7 8
+13 2 5 4
+1 10 3 9
+14 0 12 15
+-----------
+f_limit= 36, expanded nodes = 0
+f_limit= 37, expanded nodes = 6
+f_limit= 38, expanded nodes = 33
+f_limit= 40, expanded nodes = 507
+f_limit= 42, expanded nodes = 4252
+f_limit= 44, expanded nodes = 33018
+f_limit= 46, expanded nodes = 236681
+f_limit= 48, expanded nodes = 1609173
+f_limit= 50, expanded nodes = 10479092
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 52, expanded nodes = 6884129
+len=52: 0 0 1 1 0 2 3 3 2 2 0 1 0 1 3 2 3 1 3 2 2 0 0 0 1 3 3 1 1 0 2 2 2 3 1 1 1 0 0 2 3 2 3 1 3 2 2 0 1 0 2 0 
+  0.000000   0.000000   0.260000 (  0.256208)
+prob043
+state_dump: h_value=31, (x,y)=(0,3)
+7 8 3 2
+10 12 4 6
+11 13 5 15
+0 1 9 14
+-----------
+f_limit= 31, expanded nodes = 0
+f_limit= 32, expanded nodes = 2
+f_limit= 33, expanded nodes = 119
+f_limit= 35, expanded nodes = 858
+f_limit= 37, expanded nodes = 6470
+f_limit= 39, expanded nodes = 39959
+f_limit= 41, expanded nodes = 226123
+f_limit= 43, expanded nodes = 1208049
+f_limit= 45, expanded nodes = 6260108
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 47, expanded nodes = 12188447
+len=47: 0 1 3 2 0 0 1 3 2 0 1 1 0 2 2 3 1 0 1 1 3 2 2 0 1 1 3 2 3 2 0 1 3 3 2 2 0 1 1 3 1 0 2 0 0 2 2 
+  0.000000   0.000000   0.260000 (  0.261570)
+prob044
+state_dump: h_value=32, (x,y)=(2,0)
+12 9 0 6
+8 3 5 14
+2 4 11 7
+10 1 15 13
+-----------
+f_limit= 32, expanded nodes = 0
+f_limit= 33, expanded nodes = 4
+f_limit= 34, expanded nodes = 225
+f_limit= 36, expanded nodes = 1444
+f_limit= 38, expanded nodes = 7790
+f_limit= 40, expanded nodes = 41311
+f_limit= 42, expanded nodes = 214511
+f_limit= 44, expanded nodes = 1082331
+f_limit= 46, expanded nodes = 5372348
+f_limit= 48, expanded nodes = 26377481
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 50, expanded nodes = 84350508
+len=50: 3 2 2 0 1 1 3 1 0 2 2 3 3 2 0 0 1 3 3 3 2 0 0 0 1 3 3 1 0 0 2 3 1 1 3 2 3 1 0 2 2 3 1 1 0 2 2 2 0 0 
+  0.000000   0.000000   1.630000 (  1.632049)
+prob045
+state_dump: h_value=44, (x,y)=(1,1)
+10 2 8 4
+15 0 1 14
+11 13 3 6
+9 7 5 12
+-----------
+f_limit= 44, expanded nodes = 0
+f_limit= 45, expanded nodes = 467
+f_limit= 46, expanded nodes = 5052
+f_limit= 48, expanded nodes = 48170
+f_limit= 50, expanded nodes = 402321
+f_limit= 52, expanded nodes = 3055170
+f_limit= 54, expanded nodes = 21540929
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 56, expanded nodes = 441908
+len=56: 0 1 1 3 2 2 2 0 1 1 3 1 0 2 3 3 1 0 2 2 2 0 1 1 1 3 2 3 3 1 0 0 2 3 2 3 1 0 2 2 3 1 1 1 0 2 2 0 1 1 3 2 2 2 0 0 
+  0.000000   0.000000   0.340000 (  0.341124)
+prob046
+state_dump: h_value=30, (x,y)=(2,0)
+14 4 0 10
+6 5 1 3
+9 2 13 15
+12 7 8 11
+-----------
+f_limit= 30, expanded nodes = 0
+f_limit= 31, expanded nodes = 9
+f_limit= 32, expanded nodes = 98
+f_limit= 34, expanded nodes = 973
+f_limit= 36, expanded nodes = 6857
+f_limit= 38, expanded nodes = 42054
+f_limit= 40, expanded nodes = 235696
+f_limit= 42, expanded nodes = 1268863
+f_limit= 44, expanded nodes = 6579173
+f_limit= 46, expanded nodes = 33333029
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 48, expanded nodes = 10247179
+len=48: 1 3 2 2 3 1 3 2 0 1 3 1 0 2 3 2 2 0 0 0 1 3 2 3 1 0 1 1 3 2 2 0 1 0 2 3 2 3 3 1 1 0 0 2 3 2 0 0 
+  0.000000   0.000000   0.690000 (  0.699725)
+prob047
+state_dump: h_value=43, (x,y)=(1,0)
+11 0 15 8
+13 12 3 5
+10 1 4 6
+14 9 7 2
+-----------
+f_limit= 43, expanded nodes = 0
+f_limit= 44, expanded nodes = 4
+f_limit= 45, expanded nodes = 102
+f_limit= 47, expanded nodes = 2283
+f_limit= 49, expanded nodes = 28984
+f_limit= 51, expanded nodes = 293157
+f_limit= 53, expanded nodes = 2581597
+f_limit= 55, expanded nodes = 20494715
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 57, expanded nodes = 102820307
+len=57: 3 1 0 1 3 3 2 0 2 3 2 0 0 1 3 2 0 1 1 1 3 3 3 2 0 2 0 0 1 3 1 3 3 2 0 2 3 2 0 0 1 1 1 0 2 3 1 3 2 3 2 2 0 0 1 0 2 
+  0.000000   0.000000   1.650000 (  1.655666)
+prob048
+state_dump: h_value=38, (x,y)=(2,2)
+11 1 7 4
+10 13 3 8
+9 14 0 15
+6 5 2 12
+-----------
+f_limit= 38, expanded nodes = 0
+f_limit= 39, expanded nodes = 143
+f_limit= 40, expanded nodes = 681
+f_limit= 42, expanded nodes = 4529
+f_limit= 44, expanded nodes = 28364
+f_limit= 46, expanded nodes = 179224
+f_limit= 48, expanded nodes = 1114415
+f_limit= 50, expanded nodes = 6590797
+f_limit= 52, expanded nodes = 37854726
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 54, expanded nodes = 98992172
+len=54: 3 1 0 0 2 0 1 3 2 3 1 0 2 3 2 3 1 0 2 0 2 0 1 3 2 3 3 1 0 0 1 3 2 2 0 1 0 1 3 1 3 2 2 0 0 1 3 3 2 2 0 1 0 2 
+  0.000000   0.000000   1.910000 (  1.910815)
+prob049
+state_dump: h_value=43, (x,y)=(0,3)
+13 5 4 10
+9 12 8 14
+2 3 7 1
+0 15 11 6
+-----------
+f_limit= 43, expanded nodes = 0
+f_limit= 44, expanded nodes = 2
+f_limit= 45, expanded nodes = 793
+f_limit= 47, expanded nodes = 12110
+f_limit= 49, expanded nodes = 133616
+f_limit= 51, expanded nodes = 1217371
+f_limit= 53, expanded nodes = 9705876
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 55, expanded nodes = 4697233
+len=55: 0 0 0 1 3 1 3 2 0 0 1 3 3 1 0 0 2 3 3 1 3 2 2 0 0 2 3 3 1 0 0 2 3 3 1 0 0 2 0 1 3 1 1 3 3 2 0 0 1 0 2 2 3 2 0 
+  0.000000   0.000000   0.210000 (  0.207559)
+prob050
+state_dump: h_value=39, (x,y)=(0,3)
+1 6 12 14
+3 2 15 8
+4 5 13 9
+0 7 11 10
+-----------
+f_limit= 39, expanded nodes = 0
+f_limit= 40, expanded nodes = 2
+f_limit= 41, expanded nodes = 6
+f_limit= 43, expanded nodes = 997
+f_limit= 45, expanded nodes = 10456
+f_limit= 47, expanded nodes = 87831
+f_limit= 49, expanded nodes = 651203
+f_limit= 51, expanded nodes = 4361372
+f_limit= 53, expanded nodes = 27608527
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 55, expanded nodes = 24977222
+len=55: 0 1 1 0 0 2 3 2 3 1 1 0 1 3 3 2 0 2 3 1 0 0 2 0 1 3 1 0 2 2 3 3 2 3 1 0 1 0 2 2 3 1 1 1 0 2 3 1 3 2 0 0 0 2 2 
+  0.000000   0.000000   0.740000 (  0.750277)
+prob051
+state_dump: h_value=37, (x,y)=(1,0)
+6 0 5 15
+1 14 4 9
+2 13 8 10
+11 12 7 3
+-----------
+f_limit= 37, expanded nodes = 0
+f_limit= 38, expanded nodes = 67
+f_limit= 39, expanded nodes = 514
+f_limit= 41, expanded nodes = 4100
+f_limit= 43, expanded nodes = 27957
+f_limit= 45, expanded nodes = 178573
+f_limit= 47, expanded nodes = 1090297
+f_limit= 49, expanded nodes = 6357606
+f_limit= 51, expanded nodes = 35662108
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 53, expanded nodes = 105223392
+len=53: 2 3 3 1 3 2 0 1 0 2 0 1 3 1 0 2 2 3 1 1 1 0 2 2 3 1 1 3 3 2 2 0 1 0 1 3 3 2 0 0 0 1 3 3 3 2 2 2 0 1 0 0 2 
+  0.000000   0.000000   1.980000 (  1.973285)
+prob052
+state_dump: h_value=38, (x,y)=(2,0)
+9 8 0 2
+15 1 4 14
+3 10 7 5
+11 13 6 12
+-----------
+f_limit= 38, expanded nodes = 0
+f_limit= 39, expanded nodes = 4
+f_limit= 40, expanded nodes = 314
+f_limit= 42, expanded nodes = 2670
+f_limit= 44, expanded nodes = 20817
+f_limit= 46, expanded nodes = 142859
+f_limit= 48, expanded nodes = 911014
+f_limit= 50, expanded nodes = 5609334
+f_limit= 52, expanded nodes = 33380789
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 54, expanded nodes = 101854677
+len=54: 3 2 2 0 1 1 3 2 3 2 0 1 3 1 1 0 2 2 3 1 3 1 0 0 2 2 3 3 2 0 0 0 1 1 1 3 2 3 2 3 1 0 2 2 3 1 1 1 0 2 2 2 0 0 
+  0.000000   0.000000   1.910000 (  1.914784)
+prob053
+state_dump: h_value=34, (x,y)=(3,3)
+7 3 14 13
+4 1 10 8
+5 12 9 11
+2 15 6 0
+-----------
+f_limit= 34, expanded nodes = 0
+f_limit= 35, expanded nodes = 2
+f_limit= 36, expanded nodes = 38
+f_limit= 38, expanded nodes = 235
+f_limit= 40, expanded nodes = 1274
+f_limit= 42, expanded nodes = 6482
+f_limit= 44, expanded nodes = 35458
+f_limit= 46, expanded nodes = 192052
+f_limit= 48, expanded nodes = 1060946
+f_limit= 50, expanded nodes = 5835898
+f_limit= 52, expanded nodes = 32148323
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 54, expanded nodes = 3425310
+len=54: 0 0 0 2 2 2 3 3 1 1 1 0 0 2 2 3 3 1 3 2 2 0 1 1 1 3 2 0 0 1 3 2 0 2 3 3 1 0 0 0 2 3 3 1 1 0 2 2 0 1 3 2 2 0 
+  0.000000   0.000000   0.580000 (  0.581765)
+prob054
+state_dump: h_value=34, (x,y)=(1,1)
+9 5 11 10
+13 0 2 1
+8 6 14 12
+4 7 3 15
+-----------
+f_limit= 34, expanded nodes = 0
+f_limit= 35, expanded nodes = 15
+f_limit= 36, expanded nodes = 125
+f_limit= 38, expanded nodes = 838
+f_limit= 40, expanded nodes = 5805
+f_limit= 42, expanded nodes = 36138
+f_limit= 44, expanded nodes = 217202
+f_limit= 46, expanded nodes = 1281028
+f_limit= 48, expanded nodes = 7438154
+f_limit= 50, expanded nodes = 42393041
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 52, expanded nodes = 3787599
+len=52: 0 1 3 1 0 2 2 3 3 1 3 2 0 0 1 3 1 0 2 0 2 3 3 1 3 2 0 2 0 0 1 1 1 3 2 3 1 0 2 2 3 2 3 1 0 0 2 3 1 0 0 2 
+  0.000000   0.000000   0.730000 (  0.737340)
+prob055
+state_dump: h_value=31, (x,y)=(3,0)
+5 2 14 0
+7 8 6 3
+11 12 13 15
+4 10 9 1
+-----------
+f_limit= 31, expanded nodes = 0
+f_limit= 32, expanded nodes = 4
+f_limit= 33, expanded nodes = 20
+f_limit= 35, expanded nodes = 192
+f_limit= 37, expanded nodes = 2032
+f_limit= 39, expanded nodes = 12050
+f_limit= 41, expanded nodes = 69491
+f_limit= 43, expanded nodes = 382841
+f_limit= 45, expanded nodes = 2046280
+f_limit= 47, expanded nodes = 10631254
+f_limit= 49, expanded nodes = 54205758
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 51, expanded nodes = 167519256
+len=51: 3 2 3 3 1 0 2 3 2 0 1 0 2 2 3 1 0 2 3 3 1 1 0 0 2 3 1 1 0 2 0 2 2 3 3 1 1 0 2 3 3 1 0 1 0 2 3 2 0 0 2 
+  0.000000   0.000000   3.160000 (  3.160891)
+prob056
+state_dump: h_value=38, (x,y)=(2,0)
+11 4 0 8
+6 10 5 13
+12 7 14 3
+1 2 9 15
+-----------
+f_limit= 38, expanded nodes = 0
+f_limit= 39, expanded nodes = 4
+f_limit= 40, expanded nodes = 93
+f_limit= 42, expanded nodes = 1305
+f_limit= 44, expanded nodes = 12452
+f_limit= 46, expanded nodes = 99237
+f_limit= 48, expanded nodes = 706297
+f_limit= 50, expanded nodes = 4700707
+f_limit= 52, expanded nodes = 29662470
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 54, expanded nodes = 16925813
+len=54: 1 3 3 2 0 2 0 2 3 1 0 1 3 2 0 1 1 3 2 0 2 2 3 1 3 1 0 2 3 3 2 0 0 1 3 3 1 0 1 0 2 0 2 3 3 3 1 0 0 0 2 3 2 0 
+  0.000000   0.000000   0.690000 (  0.692188)
+prob057
+state_dump: h_value=31, (x,y)=(1,2)
+7 3 1 13
+12 10 5 2
+8 0 6 11
+14 15 4 9
+-----------
+f_limit= 31, expanded nodes = 0
+f_limit= 32, expanded nodes = 25
+f_limit= 33, expanded nodes = 119
+f_limit= 35, expanded nodes = 545
+f_limit= 37, expanded nodes = 2726
+f_limit= 39, expanded nodes = 13130
+f_limit= 41, expanded nodes = 64860
+f_limit= 43, expanded nodes = 329294
+f_limit= 45, expanded nodes = 1684237
+f_limit= 47, expanded nodes = 8643310
+f_limit= 49, expanded nodes = 44194619
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 51, expanded nodes = 7132579
+len=51: 0 0 1 1 3 3 2 3 2 0 2 0 0 1 1 3 2 3 1 1 3 2 2 2 0 1 0 2 3 1 1 1 0 2 2 0 1 1 3 2 3 2 0 1 3 3 2 0 0 0 2 
+  0.000000   0.000000   0.870000 (  0.867984)
+prob058
+state_dump: h_value=36, (x,y)=(0,2)
+8 13 10 9
+11 3 15 6
+0 1 2 14
+12 5 4 7
+-----------
+f_limit= 36, expanded nodes = 0
+f_limit= 37, expanded nodes = 6
+f_limit= 38, expanded nodes = 45
+f_limit= 40, expanded nodes = 373
+f_limit= 42, expanded nodes = 2855
+f_limit= 44, expanded nodes = 20578
+f_limit= 46, expanded nodes = 144890
+f_limit= 48, expanded nodes = 964212
+f_limit= 50, expanded nodes = 6218231
+f_limit= 52, expanded nodes = 38781644
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 54, expanded nodes = 4322751
+len=54: 0 0 1 1 1 3 2 2 3 1 3 1 0 0 2 0 2 3 3 2 0 0 1 3 1 3 3 1 0 2 2 0 1 0 1 3 3 2 2 3 2 0 0 1 3 2 3 1 0 1 0 0 2 2 
+  0.000000   0.000000   0.670000 (  0.678343)
+prob059
+state_dump: h_value=39, (x,y)=(3,0)
+7 15 4 0
+10 9 2 5
+12 11 13 6
+1 3 14 8
+-----------
+f_limit= 39, expanded nodes = 0
+f_limit= 40, expanded nodes = 2
+f_limit= 41, expanded nodes = 21
+f_limit= 43, expanded nodes = 269
+f_limit= 45, expanded nodes = 2059
+f_limit= 47, expanded nodes = 14507
+f_limit= 49, expanded nodes = 101923
+f_limit= 51, expanded nodes = 700514
+f_limit= 53, expanded nodes = 4673915
+f_limit= 55, expanded nodes = 30382956
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 57, expanded nodes = 55039683
+len=57: 3 2 0 2 3 1 0 1 3 3 3 2 0 2 3 2 0 0 1 0 2 3 1 3 3 1 0 1 0 2 2 3 1 1 0 2 0 2 3 3 2 0 1 1 0 1 3 2 3 3 1 0 2 2 2 0 0 
+  0.000000   0.000000   1.210000 (  1.206359)
+prob060
+state_dump: h_value=36, (x,y)=(3,1)
+11 5 1 14
+4 12 10 0
+2 7 13 3
+9 15 6 8
+-----------
+f_limit= 36, expanded nodes = 0
+f_limit= 37, expanded nodes = 7
+f_limit= 38, expanded nodes = 74
+f_limit= 40, expanded nodes = 770
+f_limit= 42, expanded nodes = 5814
+f_limit= 44, expanded nodes = 38062
+f_limit= 46, expanded nodes = 241608
+f_limit= 48, expanded nodes = 1477194
+f_limit= 50, expanded nodes = 8801586
+f_limit= 52, expanded nodes = 51195292
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 54, expanded nodes = 590248
+len=54: 0 2 2 2 3 1 0 1 3 1 3 2 2 3 1 1 0 2 2 0 0 1 1 3 3 2 2 2 0 1 3 3 1 1 0 2 0 2 0 1 3 2 3 3 2 0 1 3 1 0 0 2 2 0 
+  0.000000   0.000000   0.870000 (  0.872381)
+prob061
+state_dump: h_value=32, (x,y)=(1,1)
+11 4 2 7
+1 0 10 15
+6 9 14 8
+3 13 5 12
+-----------
+f_limit= 32, expanded nodes = 0
+f_limit= 33, expanded nodes = 35
+f_limit= 34, expanded nodes = 149
+f_limit= 36, expanded nodes = 783
+f_limit= 38, expanded nodes = 3407
+f_limit= 40, expanded nodes = 17165
+f_limit= 42, expanded nodes = 88262
+f_limit= 44, expanded nodes = 448504
+f_limit= 46, expanded nodes = 2317951
+f_limit= 48, expanded nodes = 12082457
+f_limit= 50, expanded nodes = 62924032
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 52, expanded nodes = 35072006
+len=52: 0 2 3 1 3 2 3 1 0 2 0 1 3 3 1 1 0 0 2 2 0 1 3 2 3 3 1 1 0 0 2 2 3 3 1 0 1 0 0 2 2 3 2 3 1 3 2 0 1 0 0 2 
+  0.000000   0.000000   1.530000 (  1.529040)
+prob062
+state_dump: h_value=34, (x,y)=(3,1)
+12 8 14 6
+11 4 7 0
+5 1 10 15
+3 13 9 2
+-----------
+f_limit= 34, expanded nodes = 0
+f_limit= 35, expanded nodes = 10
+f_limit= 36, expanded nodes = 69
+f_limit= 38, expanded nodes = 343
+f_limit= 40, expanded nodes = 1819
+f_limit= 42, expanded nodes = 9600
+f_limit= 44, expanded nodes = 49359
+f_limit= 46, expanded nodes = 262917
+f_limit= 48, expanded nodes = 1398661
+f_limit= 50, expanded nodes = 7448900
+f_limit= 52, expanded nodes = 39731532
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 54, expanded nodes = 206667590
+len=54: 3 3 2 0 1 0 2 3 2 2 3 1 0 2 0 0 1 3 1 3 2 2 0 0 1 3 1 3 2 3 1 1 0 0 2 0 1 3 3 2 0 0 2 3 3 3 1 0 2 3 2 0 0 0 
+  0.000000   0.010000   3.480000 (  3.473178)
+prob063
+state_dump: h_value=48, (x,y)=(3,3)
+11 15 14 13
+1 9 10 4
+3 6 2 12
+7 5 8 0
+-----------
+f_limit= 48, expanded nodes = 0
+f_limit= 49, expanded nodes = 4
+f_limit= 50, expanded nodes = 63
+f_limit= 52, expanded nodes = 490
+f_limit= 54, expanded nodes = 3845
+f_limit= 56, expanded nodes = 36143
+f_limit= 58, expanded nodes = 370097
+f_limit= 60, expanded nodes = 3657904
+f_limit= 62, expanded nodes = 34551698
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 64, expanded nodes = 3154390
+len=64: 0 0 0 2 2 2 3 1 1 3 1 0 0 2 3 2 3 2 3 1 1 1 0 0 0 2 2 3 3 1 0 2 2 3 1 0 2 3 3 1 1 1 0 0 2 0 1 3 2 2 0 2 3 3 3 1 1 1 0 0 2 2 2 0 
+  0.000000   0.000000   0.530000 (  0.533228)
+prob064
+state_dump: h_value=30, (x,y)=(3,3)
+2 11 15 5
+13 4 6 7
+12 8 10 1
+9 3 14 0
+-----------
+f_limit= 30, expanded nodes = 0
+f_limit= 31, expanded nodes = 2
+f_limit= 32, expanded nodes = 24
+f_limit= 34, expanded nodes = 85
+f_limit= 36, expanded nodes = 440
+f_limit= 38, expanded nodes = 2090
+f_limit= 40, expanded nodes = 11432
+f_limit= 42, expanded nodes = 64138
+f_limit= 44, expanded nodes = 364951
+f_limit= 46, expanded nodes = 2097006
+f_limit= 48, expanded nodes = 11936243
+f_limit= 50, expanded nodes = 66505441
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 52, expanded nodes = 303520712
+len=52: 2 2 2 0 0 1 3 1 1 0 0 2 3 1 0 2 2 2 3 1 1 3 3 2 0 2 0 1 1 3 1 0 2 0 1 3 2 3 3 2 0 1 3 1 0 0 2 0 2 3 2 0 
+  0.000000   0.000000   5.170000 (  5.170309)
+prob065
+state_dump: h_value=41, (x,y)=(0,1)
+15 10 8 3
+0 6 9 5
+1 14 13 11
+7 2 12 4
+-----------
+f_limit= 41, expanded nodes = 0
+f_limit= 42, expanded nodes = 7
+f_limit= 43, expanded nodes = 348
+f_limit= 45, expanded nodes = 4339
+f_limit= 47, expanded nodes = 38228
+f_limit= 49, expanded nodes = 277797
+f_limit= 51, expanded nodes = 1846116
+f_limit= 53, expanded nodes = 11552555
+f_limit= 55, expanded nodes = 69838849
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 57, expanded nodes = 54786256
+len=57: 0 1 3 2 3 3 1 1 0 2 0 1 0 2 2 3 1 1 1 3 2 2 2 3 1 1 0 1 3 2 0 2 2 0 1 0 1 3 3 1 0 2 2 3 1 0 0 2 3 3 2 0 1 1 0 2 2 
+  0.000000   0.000000   1.810000 (  1.815237)
+prob066
+state_dump: h_value=40, (x,y)=(2,0)
+12 11 0 8
+10 2 13 15
+5 4 7 3
+6 9 14 1
+-----------
+f_limit= 40, expanded nodes = 0
+f_limit= 41, expanded nodes = 102
+f_limit= 42, expanded nodes = 1234
+f_limit= 44, expanded nodes = 8779
+f_limit= 46, expanded nodes = 56241
+f_limit= 48, expanded nodes = 341025
+f_limit= 50, expanded nodes = 2024318
+f_limit= 52, expanded nodes = 11726732
+f_limit= 54, expanded nodes = 67010082
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 56, expanded nodes = 157901128
+len=56: 2 3 1 3 1 3 2 2 2 0 0 1 1 3 1 0 0 2 3 2 3 1 0 1 0 2 2 3 3 2 0 0 1 3 1 3 2 3 2 0 0 1 3 3 1 1 0 0 2 2 3 3 2 0 0 0 
+  0.000000   0.000000   3.200000 (  3.205264)
+prob067
+state_dump: h_value=32, (x,y)=(1,1)
+12 11 15 3
+8 0 4 2
+6 13 9 5
+14 1 10 7
+-----------
+f_limit= 32, expanded nodes = 0
+f_limit= 33, expanded nodes = 18
+f_limit= 34, expanded nodes = 81
+f_limit= 36, expanded nodes = 511
+f_limit= 38, expanded nodes = 3135
+f_limit= 40, expanded nodes = 17168
+f_limit= 42, expanded nodes = 95363
+f_limit= 44, expanded nodes = 517329
+f_limit= 46, expanded nodes = 2771388
+f_limit= 48, expanded nodes = 14679469
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 50, expanded nodes = 20231578
+len=50: 1 0 2 3 2 3 1 1 0 0 2 3 3 3 1 0 0 1 3 3 2 2 2 0 0 0 1 1 3 2 3 2 0 0 1 3 1 1 3 2 2 0 1 3 3 2 2 0 0 0 
+  0.000000   0.000000   0.520000 (  0.521691)
+prob068
+state_dump: h_value=30, (x,y)=(1,1)
+15 1 3 12
+4 0 6 5
+2 8 14 9
+13 10 7 11
+-----------
+f_limit= 30, expanded nodes = 0
+f_limit= 31, expanded nodes = 4
+f_limit= 32, expanded nodes = 34
+f_limit= 34, expanded nodes = 217
+f_limit= 36, expanded nodes = 1000
+f_limit= 38, expanded nodes = 4781
+f_limit= 40, expanded nodes = 24086
+f_limit= 42, expanded nodes = 123437
+f_limit= 44, expanded nodes = 641061
+f_limit= 46, expanded nodes = 3373368
+f_limit= 48, expanded nodes = 17860203
+f_limit= 50, expanded nodes = 94422429
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 52, expanded nodes = 52913239
+len=52: 0 2 3 3 1 1 0 1 0 2 3 2 0 1 3 1 3 2 3 2 0 0 1 1 3 2 2 0 2 3 1 3 1 0 0 2 0 1 3 1 3 3 2 2 0 1 3 2 2 0 0 0 
+  0.000000   0.000000   2.320000 (  2.314626)
+prob069
+state_dump: h_value=28, (x,y)=(2,2)
+7 1 2 4
+8 3 6 11
+10 15 0 5
+14 12 13 9
+-----------
+f_limit= 28, expanded nodes = 0
+f_limit= 29, expanded nodes = 18
+f_limit= 30, expanded nodes = 103
+f_limit= 32, expanded nodes = 493
+f_limit= 34, expanded nodes = 2237
+f_limit= 36, expanded nodes = 10221
+f_limit= 38, expanded nodes = 47527
+f_limit= 40, expanded nodes = 218414
+f_limit= 42, expanded nodes = 996976
+f_limit= 44, expanded nodes = 4556717
+f_limit= 46, expanded nodes = 20834683
+f_limit= 48, expanded nodes = 95274111
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 50, expanded nodes = 242108204
+len=50: 2 2 0 0 1 1 3 1 3 2 3 1 0 0 2 2 2 3 3 1 1 0 1 0 2 2 0 1 1 3 2 0 2 3 1 3 2 2 0 1 1 3 2 3 1 0 0 0 2 2 
+  0.000000   0.000000   5.020000 (  5.028647)
+prob070
+state_dump: h_value=43, (x,y)=(3,2)
+5 9 13 14
+6 3 7 12
+10 8 4 0
+15 2 11 1
+-----------
+f_limit= 43, expanded nodes = 0
+f_limit= 44, expanded nodes = 101
+f_limit= 45, expanded nodes = 991
+f_limit= 47, expanded nodes = 7668
+f_limit= 49, expanded nodes = 58556
+f_limit= 51, expanded nodes = 429856
+f_limit= 53, expanded nodes = 2983083
+f_limit= 55, expanded nodes = 20034424
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 57, expanded nodes = 126798719
+len=57: 3 2 2 2 0 1 1 1 0 2 2 3 1 3 2 2 0 1 0 2 0 1 1 3 3 1 0 0 2 3 1 3 3 2 0 0 2 0 2 3 3 1 3 1 0 2 0 0 2 3 3 3 1 0 0 0 2 
+  0.000000   0.000000   2.040000 (  2.036895)
+prob071
+state_dump: h_value=37, (x,y)=(0,1)
+15 8 10 7
+0 12 14 1
+5 9 6 3
+13 11 4 2
+-----------
+f_limit= 37, expanded nodes = 0
+f_limit= 38, expanded nodes = 14
+f_limit= 39, expanded nodes = 94
+f_limit= 41, expanded nodes = 609
+f_limit= 43, expanded nodes = 4642
+f_limit= 45, expanded nodes = 36739
+f_limit= 47, expanded nodes = 277757
+f_limit= 49, expanded nodes = 2001477
+f_limit= 51, expanded nodes = 13504194
+f_limit= 53, expanded nodes = 85870997
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 55, expanded nodes = 4749545
+len=55: 0 1 1 1 3 2 3 3 2 0 0 2 3 1 0 1 3 2 0 0 1 3 1 3 3 2 0 0 1 3 3 2 0 2 0 0 1 1 3 2 2 2 0 1 1 1 3 2 3 2 3 2 0 0 0 
+  0.000000   0.000000   1.420000 (  1.422646)
+prob072
+state_dump: h_value=33, (x,y)=(2,1)
+14 1 8 15
+2 6 0 3
+9 12 10 13
+4 7 5 11
+-----------
+f_limit= 33, expanded nodes = 0
+f_limit= 34, expanded nodes = 12
+f_limit= 35, expanded nodes = 130
+f_limit= 37, expanded nodes = 702
+f_limit= 39, expanded nodes = 4201
+f_limit= 41, expanded nodes = 23992
+f_limit= 43, expanded nodes = 139130
+f_limit= 45, expanded nodes = 798783
+f_limit= 47, expanded nodes = 4483271
+f_limit= 49, expanded nodes = 24607554
+f_limit= 51, expanded nodes = 132670587
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 53, expanded nodes = 43910400
+len=53: 0 1 3 3 2 3 2 0 2 3 1 0 0 1 3 3 2 0 0 2 0 1 3 1 1 3 2 0 0 2 3 2 3 1 3 1 0 0 2 3 3 1 0 0 1 3 3 2 0 0 2 0 2 
+  0.000000   0.000000   2.820000 (  2.828149)
+prob073
+state_dump: h_value=34, (x,y)=(0,0)
+0 11 3 12
+5 2 1 9
+8 10 14 15
+7 4 13 6
+-----------
+f_limit= 34, expanded nodes = 0
+f_limit= 35, expanded nodes = 2
+f_limit= 36, expanded nodes = 34
+f_limit= 38, expanded nodes = 373
+f_limit= 40, expanded nodes = 2953
+f_limit= 42, expanded nodes = 17955
+f_limit= 44, expanded nodes = 103581
+f_limit= 46, expanded nodes = 583251
+f_limit= 48, expanded nodes = 3226335
+f_limit= 50, expanded nodes = 17528562
+f_limit= 52, expanded nodes = 94027391
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 54, expanded nodes = 39843452
+len=54: 1 3 1 1 0 2 2 2 3 1 0 1 3 1 3 2 0 2 3 3 2 0 1 1 3 2 0 1 3 1 0 0 2 0 2 2 3 3 3 1 0 0 1 3 3 1 0 0 2 3 2 0 0 2 
+  0.000000   0.000000   2.150000 (  2.146752)
+prob074
+state_dump: h_value=41, (x,y)=(0,3)
+14 3 9 1
+15 8 4 5
+11 7 10 13
+0 2 12 6
+-----------
+f_limit= 41, expanded nodes = 0
+f_limit= 42, expanded nodes = 2
+f_limit= 43, expanded nodes = 50
+f_limit= 45, expanded nodes = 678
+f_limit= 47, expanded nodes = 6733
+f_limit= 49, expanded nodes = 54928
+f_limit= 51, expanded nodes = 412512
+f_limit= 53, expanded nodes = 2897621
+f_limit= 55, expanded nodes = 19390376
+f_limit= 57, expanded nodes = 125058647
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 59, expanded nodes = 638195624
+len=59: 1 1 0 2 2 3 1 0 0 0 1 3 2 2 0 1 1 1 3 2 2 2 3 1 0 2 0 1 1 1 3 2 2 2 0 1 1 3 3 1 3 2 2 0 1 1 0 2 3 3 1 0 2 3 2 0 0 0 2 
+  0.000000   0.000000  10.620000 ( 10.622923)
+prob075
+state_dump: h_value=39, (x,y)=(2,1)
+12 5 13 11
+2 10 0 9
+7 8 4 3
+14 6 15 1
+-----------
+f_limit= 39, expanded nodes = 0
+f_limit= 40, expanded nodes = 87
+f_limit= 41, expanded nodes = 806
+f_limit= 43, expanded nodes = 5451
+f_limit= 45, expanded nodes = 36776
+f_limit= 47, expanded nodes = 236176
+f_limit= 49, expanded nodes = 1479580
+f_limit= 51, expanded nodes = 9074587
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 53, expanded nodes = 48829921
+len=53: 3 1 3 2 2 0 2 0 0 1 1 3 3 2 2 0 1 0 1 3 1 0 2 3 3 1 0 2 3 2 3 2 0 1 0 2 0 1 1 3 3 3 2 0 0 0 1 3 3 2 0 2 0 
+  0.000000   0.000000   0.820000 (  0.824527)
+prob076
+state_dump: h_value=38, (x,y)=(2,0)
+10 8 0 12
+3 7 6 2
+1 14 4 11
+15 13 9 5
+-----------
+f_limit= 38, expanded nodes = 0
+f_limit= 39, expanded nodes = 6
+f_limit= 40, expanded nodes = 121
+f_limit= 42, expanded nodes = 1484
+f_limit= 44, expanded nodes = 11637
+f_limit= 46, expanded nodes = 86271
+f_limit= 48, expanded nodes = 569082
+f_limit= 50, expanded nodes = 3551290
+f_limit= 52, expanded nodes = 21239629
+f_limit= 54, expanded nodes = 122919062
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 56, expanded nodes = 153301811
+len=56: 1 3 2 2 2 3 1 1 3 1 0 0 2 0 1 3 3 2 0 2 0 2 3 1 0 1 3 2 3 1 3 2 2 0 1 1 3 2 2 0 0 1 3 1 1 3 2 2 0 1 0 1 0 2 2 2 
+  0.000000   0.000000   4.100000 (  4.098421)
+prob077
+state_dump: h_value=42, (x,y)=(3,1)
+5 12 10 7
+15 11 14 0
+8 2 1 13
+3 4 9 6
+-----------
+f_limit= 42, expanded nodes = 0
+f_limit= 43, expanded nodes = 4
+f_limit= 44, expanded nodes = 330
+f_limit= 46, expanded nodes = 5616
+f_limit= 48, expanded nodes = 66234
+f_limit= 50, expanded nodes = 601587
+f_limit= 52, expanded nodes = 4791280
+f_limit= 54, expanded nodes = 34782319
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 56, expanded nodes = 19474341
+len=56: 2 2 0 1 3 3 2 0 2 3 1 0 1 3 2 3 2 0 0 1 1 0 2 3 3 3 1 0 1 3 2 0 0 1 3 2 0 0 2 2 3 1 3 3 1 0 0 2 0 1 3 1 0 2 2 2 
+  0.000000   0.000000   0.790000 (  0.799955)
+prob078
+state_dump: h_value=41, (x,y)=(2,3)
+9 7 5 2
+14 15 12 10
+11 3 6 1
+8 13 0 4
+-----------
+f_limit= 41, expanded nodes = 0
+f_limit= 42, expanded nodes = 4
+f_limit= 43, expanded nodes = 749
+f_limit= 45, expanded nodes = 8421
+f_limit= 47, expanded nodes = 73628
+f_limit= 49, expanded nodes = 562365
+f_limit= 51, expanded nodes = 3991072
+f_limit= 53, expanded nodes = 26733539
+f_limit= 55, expanded nodes = 170405848
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 57, expanded nodes = 325730121
+len=57: 0 1 0 2 3 2 0 1 1 3 2 2 2 0 1 1 1 3 2 2 2 3 1 1 1 0 2 3 2 0 0 0 2 3 3 1 1 0 2 3 1 3 2 2 0 0 1 0 1 1 3 2 3 2 0 0 2 
+  0.000000   0.000000   6.920000 (  6.913325)
+prob079
+state_dump: h_value=42, (x,y)=(0,2)
+14 3 5 15
+11 6 13 9
+0 10 2 12
+4 1 7 8
+-----------
+f_limit= 42, expanded nodes = 0
+f_limit= 43, expanded nodes = 7
+f_limit= 44, expanded nodes = 113
+f_limit= 46, expanded nodes = 1245
+f_limit= 48, expanded nodes = 9514
+f_limit= 50, expanded nodes = 69817
+f_limit= 52, expanded nodes = 491037
+f_limit= 54, expanded nodes = 3346362
+f_limit= 56, expanded nodes = 22294993
+f_limit= 58, expanded nodes = 145403298
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 60, expanded nodes = 293345906
+len=60: 0 1 3 1 3 1 0 0 2 0 2 3 3 3 1 1 0 0 0 2 2 3 2 0 1 3 3 2 0 1 1 3 2 2 3 1 1 1 0 0 2 0 2 2 3 3 3 1 1 1 0 2 2 3 1 0 0 0 2 2 
+  0.000000   0.000000   6.240000 (  6.251572)
+prob080
+state_dump: h_value=40, (x,y)=(1,1)
+8 1 7 12
+11 0 10 5
+9 15 6 13
+14 2 3 4
+-----------
+f_limit= 40, expanded nodes = 0
+f_limit= 41, expanded nodes = 7
+f_limit= 42, expanded nodes = 243
+f_limit= 44, expanded nodes = 1813
+f_limit= 46, expanded nodes = 15170
+f_limit= 48, expanded nodes = 118324
+f_limit= 50, expanded nodes = 818930
+f_limit= 52, expanded nodes = 5487584
+f_limit= 54, expanded nodes = 35615131
+f_limit= 56, expanded nodes = 225188195
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 58, expanded nodes = 5735633
+len=58: 0 1 1 3 2 0 2 3 1 3 3 1 0 2 2 0 2 3 1 0 1 1 3 2 2 3 2 0 0 0 1 3 3 3 1 1 0 2 2 3 1 0 0 0 1 3 2 0 2 3 3 2 0 1 1 0 2 2 
+  0.000000   0.000000   3.630000 (  3.626024)
+prob081
+state_dump: h_value=43, (x,y)=(0,1)
+13 11 8 9
+0 15 7 10
+4 3 6 14
+5 12 2 1
+-----------
+f_limit= 43, expanded nodes = 0
+f_limit= 44, expanded nodes = 9
+f_limit= 45, expanded nodes = 117
+f_limit= 47, expanded nodes = 2099
+f_limit= 49, expanded nodes = 25065
+f_limit= 51, expanded nodes = 248968
+f_limit= 53, expanded nodes = 2272696
+f_limit= 55, expanded nodes = 18415821
+f_limit= 57, expanded nodes = 136960269
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 59, expanded nodes = 48256093
+len=59: 0 1 1 3 2 2 3 1 0 0 2 3 3 3 1 0 0 2 3 1 1 3 1 0 0 0 2 2 3 3 1 0 1 3 2 0 0 2 3 3 1 3 1 0 0 2 3 1 0 0 2 2 3 1 0 2 3 2 0 
+  0.000000   0.000000   2.720000 (  2.721030)
+prob082
+state_dump: h_value=41, (x,y)=(1,2)
+14 13 15 7
+11 12 9 5
+6 0 2 1
+4 8 10 3
+-----------
+f_limit= 41, expanded nodes = 0
+f_limit= 42, expanded nodes = 212
+f_limit= 43, expanded nodes = 1494
+f_limit= 45, expanded nodes = 10832
+f_limit= 47, expanded nodes = 72600
+f_limit= 49, expanded nodes = 451935
+f_limit= 51, expanded nodes = 2757821
+f_limit= 53, expanded nodes = 16555422
+f_limit= 55, expanded nodes = 97657441
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 57, expanded nodes = 270428693
+len=57: 0 2 3 3 1 0 0 0 2 3 3 3 1 0 0 1 1 3 2 3 2 0 0 1 0 2 2 3 1 3 1 0 0 1 3 3 3 2 0 0 0 1 3 3 3 2 0 2 0 0 1 1 3 2 2 2 0 
+  0.000000   0.000000   5.060000 (  5.065305)
+prob083
+state_dump: h_value=40, (x,y)=(2,2)
+8 10 9 11
+14 1 7 15
+13 4 0 12
+6 2 5 3
+-----------
+f_limit= 40, expanded nodes = 0
+f_limit= 41, expanded nodes = 603
+f_limit= 42, expanded nodes = 6262
+f_limit= 44, expanded nodes = 47924
+f_limit= 46, expanded nodes = 313550
+f_limit= 48, expanded nodes = 1920231
+f_limit= 50, expanded nodes = 11094011
+f_limit= 52, expanded nodes = 61776507
+f_limit= 54, expanded nodes = 335244471
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 56, expanded nodes = 331025090
+len=56: 1 0 0 2 2 3 3 1 3 1 0 0 2 3 3 2 0 2 0 0 1 1 1 3 2 3 2 2 3 1 0 1 3 2 0 2 0 1 0 1 3 1 0 2 3 3 2 0 0 1 3 3 2 0 0 2 
+  0.000000   0.000000  10.070000 ( 10.071393)
+prob084
+state_dump: h_value=40, (x,y)=(0,2)
+5 7 3 12
+15 13 14 8
+0 10 9 6
+1 4 2 11
+-----------
+f_limit= 40, expanded nodes = 0
+f_limit= 41, expanded nodes = 9
+f_limit= 42, expanded nodes = 117
+f_limit= 44, expanded nodes = 1051
+f_limit= 46, expanded nodes = 7491
+f_limit= 48, expanded nodes = 59617
+f_limit= 50, expanded nodes = 476584
+f_limit= 52, expanded nodes = 3556427
+f_limit= 54, expanded nodes = 25182472
+f_limit= 56, expanded nodes = 170175660
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 58, expanded nodes = 26009923
+len=58: 0 1 1 0 1 3 2 0 2 3 1 0 1 3 2 3 2 2 3 1 0 0 0 1 3 3 3 2 0 0 2 3 3 1 0 0 1 3 1 3 2 2 0 0 0 1 3 3 2 0 0 2 3 3 1 0 0 2 
+  0.000000   0.000000   2.930000 (  2.933940)
+prob085
+state_dump: h_value=43, (x,y)=(3,2)
+14 10 9 4
+13 6 5 8
+2 12 7 0
+1 3 11 15
+-----------
+f_limit= 43, expanded nodes = 0
+f_limit= 44, expanded nodes = 25
+f_limit= 45, expanded nodes = 343
+f_limit= 47, expanded nodes = 4654
+f_limit= 49, expanded nodes = 44082
+f_limit= 51, expanded nodes = 364806
+f_limit= 53, expanded nodes = 2733781
+f_limit= 55, expanded nodes = 19165689
+f_limit= 57, expanded nodes = 127783336
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 59, expanded nodes = 508336008
+len=59: 2 3 2 0 0 0 1 3 1 3 2 2 0 2 0 1 3 2 3 3 1 0 0 1 3 3 2 0 0 0 2 3 3 1 0 0 1 1 3 2 3 3 2 0 0 0 1 3 2 0 2 3 1 1 1 0 2 2 2 
+  0.000000   0.000000   8.520000 (  8.517877)
+prob086
+state_dump: h_value=38, (x,y)=(3,1)
+12 15 11 10
+4 5 14 0
+13 7 1 2
+9 8 3 6
+-----------
+f_limit= 38, expanded nodes = 0
+f_limit= 39, expanded nodes = 13
+f_limit= 40, expanded nodes = 913
+f_limit= 42, expanded nodes = 11624
+f_limit= 44, expanded nodes = 105916
+f_limit= 46, expanded nodes = 752384
+f_limit= 48, expanded nodes = 4751355
+f_limit= 50, expanded nodes = 27618279
+f_limit= 52, expanded nodes = 152623348
+f_limit= 54, expanded nodes = 813364696
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 56, expanded nodes = 24659968
+len=56: 0 2 2 2 3 1 3 1 0 1 3 2 0 0 1 3 2 0 2 3 3 1 3 1 0 0 2 0 2 3 1 3 3 1 0 0 2 0 1 3 2 3 2 3 2 0 1 0 2 3 1 3 2 0 0 0 
+  0.000000   0.000000  13.140000 ( 13.143409)
+prob087
+state_dump: h_value=41, (x,y)=(2,3)
+7 6 8 1
+11 5 14 10
+3 4 9 13
+15 2 0 12
+-----------
+f_limit= 41, expanded nodes = 0
+f_limit= 42, expanded nodes = 11
+f_limit= 43, expanded nodes = 122
+f_limit= 45, expanded nodes = 2195
+f_limit= 47, expanded nodes = 18962
+f_limit= 49, expanded nodes = 148956
+f_limit= 51, expanded nodes = 1038423
+f_limit= 53, expanded nodes = 6766673
+f_limit= 55, expanded nodes = 42018287
+f_limit= 57, expanded nodes = 251568263
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 59, expanded nodes = 857356673
+len=59: 1 0 0 2 0 2 3 3 2 3 1 1 0 2 2 0 0 1 3 1 3 1 0 2 3 2 2 3 1 1 1 0 2 2 0 2 3 1 3 1 1 0 2 0 2 2 0 1 1 1 3 2 2 0 1 3 2 2 0 
+  0.000000   0.000000  15.230000 ( 15.232271)
+prob088
+state_dump: h_value=37, (x,y)=(0,1)
+3 2 7 9
+0 15 12 4
+6 11 5 14
+8 13 10 1
+-----------
+f_limit= 37, expanded nodes = 0
+f_limit= 38, expanded nodes = 6
+f_limit= 39, expanded nodes = 257
+f_limit= 41, expanded nodes = 2302
+f_limit= 43, expanded nodes = 16619
+f_limit= 45, expanded nodes = 112893
+f_limit= 47, expanded nodes = 717442
+f_limit= 49, expanded nodes = 4331251
+f_limit= 51, expanded nodes = 25093369
+f_limit= 53, expanded nodes = 141114760
+f_limit= 55, expanded nodes = 775486668
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 57, expanded nodes = 144315756
+len=57: 0 1 3 1 3 2 2 3 1 1 1 0 2 3 2 0 0 2 3 1 1 0 1 0 2 2 3 3 3 2 0 0 1 1 0 2 2 3 1 3 1 0 1 3 2 0 2 3 1 3 1 0 0 0 2 2 2 
+  0.000000   0.000000  14.720000 ( 14.725548)
+prob089
+state_dump: h_value=41, (x,y)=(3,2)
+14 7 8 2
+13 11 10 4
+9 12 5 0
+3 6 1 15
+-----------
+f_limit= 41, expanded nodes = 0
+f_limit= 42, expanded nodes = 3
+f_limit= 43, expanded nodes = 105
+f_limit= 45, expanded nodes = 1257
+f_limit= 47, expanded nodes = 12913
+f_limit= 49, expanded nodes = 115243
+f_limit= 51, expanded nodes = 928740
+f_limit= 53, expanded nodes = 6884950
+f_limit= 55, expanded nodes = 47787332
+f_limit= 57, expanded nodes = 315200343
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 59, expanded nodes = 194962835
+len=59: 0 2 2 2 3 1 1 1 0 2 2 3 1 0 0 2 3 3 3 2 0 0 0 1 3 2 3 1 3 1 0 2 0 1 3 2 2 0 1 3 3 1 0 1 0 2 0 1 3 2 2 3 2 0 0 1 3 2 0 
+  0.000000   0.000000   7.280000 (  7.286321)
+prob090
+state_dump: h_value=29, (x,y)=(3,2)
+3 15 2 5
+11 6 4 7
+12 9 1 0
+13 14 10 8
+-----------
+f_limit= 29, expanded nodes = 0
+f_limit= 30, expanded nodes = 4
+f_limit= 31, expanded nodes = 29
+f_limit= 33, expanded nodes = 130
+f_limit= 35, expanded nodes = 659
+f_limit= 37, expanded nodes = 2605
+f_limit= 39, expanded nodes = 12921
+f_limit= 41, expanded nodes = 62052
+f_limit= 43, expanded nodes = 303564
+f_limit= 45, expanded nodes = 1480621
+f_limit= 47, expanded nodes = 7220965
+f_limit= 49, expanded nodes = 34967391
+f_limit= 51, expanded nodes = 168700650
+f_limit= 53, expanded nodes = 810556150
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 55, expanded nodes = 130767944
+len=55: 0 0 2 2 3 1 0 2 3 3 1 0 1 3 2 3 1 0 2 3 2 2 0 1 1 0 2 2 3 1 1 0 2 0 1 1 3 2 0 2 2 3 1 1 0 2 3 3 1 1 0 0 2 2 2 
+  0.000000   0.000000  15.740000 ( 15.736338)
+prob091
+state_dump: h_value=35, (x,y)=(2,1)
+15 14 6 7
+10 1 0 11
+12 8 4 9
+2 5 13 3
+-----------
+f_limit= 35, expanded nodes = 0
+f_limit= 36, expanded nodes = 24
+f_limit= 37, expanded nodes = 172
+f_limit= 39, expanded nodes = 1060
+f_limit= 41, expanded nodes = 6259
+f_limit= 43, expanded nodes = 35953
+f_limit= 45, expanded nodes = 199538
+f_limit= 47, expanded nodes = 1097015
+f_limit= 49, expanded nodes = 5967654
+f_limit= 51, expanded nodes = 32036451
+f_limit= 53, expanded nodes = 169630586
+f_limit= 55, expanded nodes = 886017863
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 57, expanded nodes = 155943842
+len=57: 0 2 2 3 1 1 3 1 3 2 2 2 0 1 0 1 0 2 2 3 1 3 3 1 0 0 1 3 2 0 0 1 3 2 0 2 3 3 3 1 1 0 0 2 0 2 3 3 3 1 1 0 2 0 0 2 2 
+  0.000000   0.000000  16.920000 ( 16.932185)
+prob092
+state_dump: h_value=44, (x,y)=(3,3)
+13 11 4 12
+1 8 9 15
+6 5 14 2
+7 3 10 0
+-----------
+f_limit= 44, expanded nodes = 0
+f_limit= 45, expanded nodes = 2
+f_limit= 46, expanded nodes = 69
+f_limit= 48, expanded nodes = 975
+f_limit= 50, expanded nodes = 7988
+f_limit= 52, expanded nodes = 64812
+f_limit= 54, expanded nodes = 495119
+f_limit= 56, expanded nodes = 3660822
+f_limit= 58, expanded nodes = 26286726
+f_limit= 60, expanded nodes = 183139862
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 62, expanded nodes = 363381455
+len=62: 2 0 0 0 2 3 2 0 1 3 3 3 1 0 2 2 3 1 0 2 0 1 1 3 1 0 0 2 3 1 0 2 2 3 1 3 2 0 2 0 1 1 3 3 3 2 2 0 1 1 3 1 0 0 2 3 3 2 2 0 0 0 
+  0.000000   0.000000   7.620000 (  7.619852)
+prob093
+state_dump: h_value=33, (x,y)=(1,0)
+10 0 2 4
+5 1 6 12
+11 13 9 7
+15 3 14 8
+-----------
+f_limit= 33, expanded nodes = 0
+f_limit= 34, expanded nodes = 10
+f_limit= 35, expanded nodes = 39
+f_limit= 37, expanded nodes = 163
+f_limit= 39, expanded nodes = 715
+f_limit= 41, expanded nodes = 3186
+f_limit= 43, expanded nodes = 14272
+f_limit= 45, expanded nodes = 68444
+f_limit= 47, expanded nodes = 335272
+f_limit= 49, expanded nodes = 1664982
+f_limit= 51, expanded nodes = 8376876
+f_limit= 53, expanded nodes = 42573813
+f_limit= 55, expanded nodes = 217706106
+f_limit= 57, expanded nodes = 1119571438
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 59, expanded nodes = 293612314
+len=59: 1 3 1 0 2 2 2 3 1 1 1 0 2 2 2 3 1 1 3 3 2 2 0 0 1 1 3 3 1 0 2 3 2 0 1 0 1 3 3 2 2 2 0 1 3 1 0 2 0 1 0 1 3 3 2 0 2 0 2 
+  0.010000   0.000000  22.790000 ( 22.776559)
+prob094
+state_dump: h_value=50, (x,y)=(0,2)
+14 9 12 13
+15 4 8 10
+0 2 1 7
+3 11 5 6
+-----------
+f_limit= 50, expanded nodes = 0
+f_limit= 51, expanded nodes = 262
+f_limit= 52, expanded nodes = 3060
+f_limit= 54, expanded nodes = 54322
+f_limit= 56, expanded nodes = 617320
+f_limit= 58, expanded nodes = 5853180
+f_limit= 60, expanded nodes = 48501133
+f_limit= 62, expanded nodes = 369346314
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 64, expanded nodes = 40867050
+len=64: 0 0 1 1 1 3 3 3 2 2 2 0 0 0 1 3 3 3 2 0 0 0 1 3 1 3 2 2 0 1 1 3 1 0 2 0 1 3 3 3 2 2 2 0 1 1 0 0 2 3 3 1 1 3 2 2 0 1 0 2 3 2 0 0 
+  0.000000   0.000000   6.190000 (  6.193884)
+prob095
+state_dump: h_value=46, (x,y)=(2,0)
+15 14 0 4
+11 1 6 13
+7 5 8 9
+3 2 10 12
+-----------
+f_limit= 46, expanded nodes = 0
+f_limit= 47, expanded nodes = 42
+f_limit= 48, expanded nodes = 180
+f_limit= 50, expanded nodes = 1076
+f_limit= 52, expanded nodes = 5699
+f_limit= 54, expanded nodes = 33803
+f_limit= 56, expanded nodes = 201626
+f_limit= 58, expanded nodes = 1236510
+f_limit= 60, expanded nodes = 7746429
+f_limit= 62, expanded nodes = 49556088
+f_limit= 64, expanded nodes = 322267476
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 66, expanded nodes = 410353419
+len=66: 2 2 3 3 1 1 3 1 0 0 0 2 3 1 0 2 2 2 3 1 1 0 2 2 3 3 1 3 2 0 0 1 3 3 1 1 0 0 2 0 2 3 3 2 3 1 1 1 0 0 2 2 3 3 1 1 0 0 0 2 3 1 0 2 2 2 
+  0.000000   0.000000  10.290000 ( 10.290392)
+prob096
+state_dump: h_value=48, (x,y)=(3,3)
+11 14 13 1
+2 3 12 4
+15 7 9 5
+10 6 8 0
+-----------
+f_limit= 48, expanded nodes = 0
+f_limit= 49, expanded nodes = 2
+f_limit= 50, expanded nodes = 11
+f_limit= 52, expanded nodes = 1659
+f_limit= 54, expanded nodes = 25807
+f_limit= 56, expanded nodes = 307745
+f_limit= 58, expanded nodes = 3076664
+f_limit= 60, expanded nodes = 27610665
+f_limit= 62, expanded nodes = 229237508
+f_limit= 64, expanded nodes = 1784841518
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 66, expanded nodes = 1362928733
+len=66: 0 2 0 0 2 3 1 1 0 2 2 2 3 1 1 3 2 2 0 1 1 1 0 2 2 2 3 1 1 3 2 3 1 1 0 0 2 0 2 3 3 3 1 1 0 2 0 2 3 3 2 0 0 1 3 3 1 1 0 2 2 3 2 0 0 0 
+  0.000000   0.000000  44.700000 ( 44.704269)
+prob097
+state_dump: h_value=41, (x,y)=(1,2)
+11 6 14 12
+3 5 1 15
+8 0 10 13
+9 7 4 2
+-----------
+f_limit= 41, expanded nodes = 0
+f_limit= 42, expanded nodes = 15
+f_limit= 43, expanded nodes = 135
+f_limit= 45, expanded nodes = 1130
+f_limit= 47, expanded nodes = 8313
+f_limit= 49, expanded nodes = 62013
+f_limit= 51, expanded nodes = 444757
+f_limit= 53, expanded nodes = 3116459
+f_limit= 55, expanded nodes = 21398104
+f_limit= 57, expanded nodes = 142715578
+f_limit= 59, expanded nodes = 924074078
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 61, expanded nodes = 388062593
+len=61: 0 1 0 1 3 2 0 2 2 3 1 3 1 0 0 2 2 3 3 1 1 3 1 0 0 0 2 2 3 1 3 3 2 0 0 1 3 3 1 0 0 0 2 3 3 2 2 3 1 1 1 0 0 2 3 2 2 0 1 0 2 
+  0.000000   0.000000  20.070000 ( 20.080139)
+prob098
+state_dump: h_value=40, (x,y)=(3,3)
+14 10 2 1
+13 9 8 11
+7 3 6 12
+15 5 4 0
+-----------
+f_limit= 40, expanded nodes = 0
+f_limit= 41, expanded nodes = 6
+f_limit= 42, expanded nodes = 99
+f_limit= 44, expanded nodes = 880
+f_limit= 46, expanded nodes = 6941
+f_limit= 48, expanded nodes = 52635
+f_limit= 50, expanded nodes = 357127
+f_limit= 52, expanded nodes = 2293869
+f_limit= 54, expanded nodes = 14109683
+f_limit= 56, expanded nodes = 84027082
+f_limit= 58, expanded nodes = 488654300
+f_limit= 60, expanded nodes = 2790393006
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 62, expanded nodes = 2113682872
+len=62: 0 0 2 3 2 3 1 1 0 2 0 1 3 2 2 2 3 1 1 0 2 2 3 1 0 0 2 3 1 0 1 0 2 2 3 1 0 1 1 3 3 2 3 2 0 0 0 1 3 3 2 0 1 1 3 3 2 0 2 2 0 0 
+  0.000000   0.000000  73.020000 ( 73.017232)
+prob099
+state_dump: h_value=43, (x,y)=(0,3)
+15 2 12 11
+14 13 9 5
+1 3 8 7
+0 10 6 4
+-----------
+f_limit= 43, expanded nodes = 0
+f_limit= 44, expanded nodes = 2
+f_limit= 45, expanded nodes = 9
+f_limit= 47, expanded nodes = 212
+f_limit= 49, expanded nodes = 3261
+f_limit= 51, expanded nodes = 33461
+f_limit= 53, expanded nodes = 301997
+f_limit= 55, expanded nodes = 2413578
+f_limit= 57, expanded nodes = 17692401
+f_limit= 59, expanded nodes = 122245184
+f_limit= 61, expanded nodes = 807544527
+f_limit= 63, expanded nodes = 5156184394
+state_dump: h_value=0, (x,y)=(0,0)
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+-----------
+f_limit= 65, expanded nodes = 413909341
+len=65: 0 0 0 1 1 3 2 3 1 3 1 0 2 3 2 0 2 3 1 0 1 0 2 2 3 1 0 0 1 3 3 2 0 1 1 3 2 3 1 0 2 3 2 0 0 0 2 3 3 3 1 0 0 1 1 0 2 3 3 1 0 2 0 2 2 
+  0.000000   0.000000  87.000000 ( 87.006909)
+475.27user 0.02system 7:55.49elapsed 99%CPU (0avgtext+0avgdata 8944maxresident)k
+0inputs+208outputs (0major+19427minor)pagefaults 0swaps
