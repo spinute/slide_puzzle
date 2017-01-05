@@ -1,0 +1,3203 @@
+nohup: ignoring input
+prob000
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:03 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"35.000000"
+#pair  "initial distance"	"35.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	35	22	45
+#altrow  "iter"	1	37	168	332
+#altrow  "iter"	2	39	1173	2327
+#altrow  "iter"	3	41	7941	15942
+#altrow  "iter"	4	43	52207	105189
+#pair  "final sol cost"	"45.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"46"
+#pair  "total raw cpu time"	"0.009972"
+#pair  "total wall time"	"0.009979"
+#pair  "total nodes expanded"	"269708"
+#pair  "total nodes generated"	"546343"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:03 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.000000 (  0.012662)
+prob001
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:03 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"30.000000"
+#pair  "initial distance"	"30.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	30	4	7
+#altrow  "iter"	1	32	74	147
+#altrow  "iter"	2	34	445	876
+#altrow  "iter"	3	36	2895	5705
+#altrow  "iter"	4	38	17293	34265
+#altrow  "iter"	5	40	97565	193725
+#pair  "final sol cost"	"42.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"43"
+#pair  "total raw cpu time"	"0.015547"
+#pair  "total wall time"	"0.015548"
+#pair  "total nodes expanded"	"440711"
+#pair  "total nodes generated"	"877822"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:03 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.020000 (  0.018008)
+prob002
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:03 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"28.000000"
+#pair  "initial distance"	"28.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	28	1	2
+#altrow  "iter"	1	30	5	10
+#altrow  "iter"	2	32	83	181
+#altrow  "iter"	3	34	599	1226
+#altrow  "iter"	4	36	3518	7242
+#altrow  "iter"	5	38	19628	40273
+#altrow  "iter"	6	40	105471	216571
+#pair  "final sol cost"	"42.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"43"
+#pair  "total raw cpu time"	"0.009086"
+#pair  "total wall time"	"0.009089"
+#pair  "total nodes expanded"	"262910"
+#pair  "total nodes generated"	"540859"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:03 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.010000 (  0.011449)
+prob003
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:03 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"39.000000"
+#pair  "initial distance"	"39.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	39	1	2
+#altrow  "iter"	1	41	324	629
+#altrow  "iter"	2	43	3318	6498
+#altrow  "iter"	3	45	29936	59834
+#altrow  "iter"	4	47	233015	469473
+#pair  "final sol cost"	"49.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"50"
+#pair  "total raw cpu time"	"0.032269"
+#pair  "total wall time"	"0.032272"
+#pair  "total nodes expanded"	"941392"
+#pair  "total nodes generated"	"1905022"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:03 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.030000 (  0.034637)
+prob004
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:03 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"29.000000"
+#pair  "initial distance"	"29.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	29	7	16
+#altrow  "iter"	1	31	128	263
+#altrow  "iter"	2	33	797	1620
+#altrow  "iter"	3	35	4453	9041
+#altrow  "iter"	4	37	22963	46538
+#altrow  "iter"	5	39	113173	229407
+#pair  "final sol cost"	"41.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"42"
+#pair  "total raw cpu time"	"0.016399"
+#pair  "total wall time"	"0.016400"
+#pair  "total nodes expanded"	"456931"
+#pair  "total nodes generated"	"927211"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:03 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.020000 (  0.018761)
+prob005
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:03 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"36.000000"
+#pair  "initial distance"	"36.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	36	96	188
+#altrow  "iter"	1	38	1166	2323
+#altrow  "iter"	2	40	9828	19801
+#altrow  "iter"	3	42	66867	135381
+#altrow  "iter"	4	44	421001	854967
+#pair  "final sol cost"	"46.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"47"
+#pair  "total raw cpu time"	"0.022393"
+#pair  "total wall time"	"0.022394"
+#pair  "total nodes expanded"	"630900"
+#pair  "total nodes generated"	"1280494"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:03 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.020000 (  0.024753)
+prob006
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:03 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"38.000000"
+#pair  "initial distance"	"38.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	38	46	87
+#altrow  "iter"	1	40	305	573
+#altrow  "iter"	2	42	1848	3502
+#altrow  "iter"	3	44	11165	21415
+#altrow  "iter"	4	46	69756	134786
+#altrow  "iter"	5	48	438556	853079
+#pair  "final sol cost"	"50.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"51"
+#pair  "total raw cpu time"	"0.041862"
+#pair  "total wall time"	"0.041862"
+#pair  "total nodes expanded"	"1200815"
+#pair  "total nodes generated"	"2351810"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:03 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.040000 (  0.044207)
+prob007
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:03 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"35.000000"
+#pair  "initial distance"	"35.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	35	6	11
+#altrow  "iter"	1	37	759	1539
+#altrow  "iter"	2	39	9596	19608
+#altrow  "iter"	3	41	79701	162939
+#altrow  "iter"	4	43	539975	1104790
+#pair  "final sol cost"	"45.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"46"
+#pair  "total raw cpu time"	"0.039761"
+#pair  "total wall time"	"0.039762"
+#pair  "total nodes expanded"	"1127558"
+#pair  "total nodes generated"	"2304425"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:04 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.040000 (  0.042096)
+prob008
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:04 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"32.000000"
+#pair  "initial distance"	"32.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	32	5	11
+#altrow  "iter"	1	34	169	338
+#altrow  "iter"	2	36	1271	2554
+#altrow  "iter"	3	38	9309	18835
+#altrow  "iter"	4	40	58546	118749
+#altrow  "iter"	5	42	341285	694108
+#pair  "final sol cost"	"44.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"45"
+#pair  "total raw cpu time"	"0.046871"
+#pair  "total wall time"	"0.046872"
+#pair  "total nodes expanded"	"1338135"
+#pair  "total nodes generated"	"2725455"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:04 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.040000 (  0.049181)
+prob009
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:04 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"37.000000"
+#pair  "initial distance"	"37.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	37	1	3
+#altrow  "iter"	1	39	18	35
+#altrow  "iter"	2	41	286	568
+#altrow  "iter"	3	43	3670	7223
+#altrow  "iter"	4	45	42060	83675
+#altrow  "iter"	5	47	393532	788889
+#pair  "final sol cost"	"49.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"50"
+#pair  "total raw cpu time"	"0.056529"
+#pair  "total wall time"	"0.056529"
+#pair  "total nodes expanded"	"1602329"
+#pair  "total nodes generated"	"3222275"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:04 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.060000 (  0.058919)
+prob010
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:04 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"32.000000"
+#pair  "initial distance"	"32.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	32	1	3
+#altrow  "iter"	1	34	88	181
+#altrow  "iter"	2	36	1287	2578
+#altrow  "iter"	3	38	10952	22018
+#altrow  "iter"	4	40	71564	144517
+#altrow  "iter"	5	42	420303	850704
+#pair  "final sol cost"	"44.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"45"
+#pair  "total raw cpu time"	"0.017921"
+#pair  "total wall time"	"0.017922"
+#pair  "total nodes expanded"	"495186"
+#pair  "total nodes generated"	"1002926"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:04 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.010000 (  0.020343)
+prob011
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:04 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"45.000000"
+#pair  "initial distance"	"45.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	45	2	4
+#altrow  "iter"	1	47	298	557
+#altrow  "iter"	2	49	5378	10283
+#altrow  "iter"	3	51	69877	136724
+#pair  "final sol cost"	"53.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"54"
+#pair  "total raw cpu time"	"0.022483"
+#pair  "total wall time"	"0.022483"
+#pair  "total nodes expanded"	"672665"
+#pair  "total nodes generated"	"1337339"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:04 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.020000 (  0.024898)
+prob012
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:04 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"35.000000"
+#pair  "initial distance"	"35.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	35	31	63
+#altrow  "iter"	1	37	259	517
+#altrow  "iter"	2	39	1889	3771
+#altrow  "iter"	3	41	12931	25740
+#altrow  "iter"	4	43	83585	167008
+#altrow  "iter"	5	45	505247	1010108
+#pair  "final sol cost"	"47.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"48"
+#pair  "total raw cpu time"	"0.039659"
+#pair  "total wall time"	"0.039662"
+#pair  "total nodes expanded"	"1102713"
+#pair  "total nodes generated"	"2196592"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:04 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.040000 (  0.042062)
+prob013
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:04 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"32.000000"
+#pair  "initial distance"	"32.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	32	2	4
+#altrow  "iter"	1	34	28	56
+#altrow  "iter"	2	36	293	586
+#altrow  "iter"	3	38	2537	5176
+#altrow  "iter"	4	40	18044	36826
+#altrow  "iter"	5	42	113298	231550
+#altrow  "iter"	6	44	656059	1340860
+#pair  "final sol cost"	"46.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"47"
+#pair  "total raw cpu time"	"0.028561"
+#pair  "total wall time"	"0.028561"
+#pair  "total nodes expanded"	"810906"
+#pair  "total nodes generated"	"1650695"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:04 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.030000 (  0.031030)
+prob014
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:04 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"34.000000"
+#pair  "initial distance"	"34.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	34	4	9
+#altrow  "iter"	1	36	215	426
+#altrow  "iter"	2	38	2074	4121
+#altrow  "iter"	3	40	16971	34075
+#altrow  "iter"	4	42	116155	233956
+#altrow  "iter"	5	44	727519	1469362
+#pair  "final sol cost"	"46.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"47"
+#pair  "total raw cpu time"	"0.027860"
+#pair  "total wall time"	"0.027862"
+#pair  "total nodes expanded"	"792051"
+#pair  "total nodes generated"	"1599908"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:04 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.030000 (  0.030254)
+prob015
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:04 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"36.000000"
+#pair  "initial distance"	"36.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	36	2	4
+#altrow  "iter"	1	38	78	146
+#altrow  "iter"	2	40	611	1172
+#altrow  "iter"	3	42	4543	8817
+#altrow  "iter"	4	44	31964	62555
+#altrow  "iter"	5	46	213100	420799
+#altrow  "iter"	6	48	1360534	2700716
+#pair  "final sol cost"	"50.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"51"
+#pair  "total raw cpu time"	"0.152297"
+#pair  "total wall time"	"0.152335"
+#pair  "total nodes expanded"	"4448777"
+#pair  "total nodes generated"	"8841526"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:04 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.150000 (  0.154911)
+prob016
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:04 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"31.000000"
+#pair  "initial distance"	"31.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	31	28	58
+#altrow  "iter"	1	33	202	415
+#altrow  "iter"	2	35	1438	2929
+#altrow  "iter"	3	37	9028	18295
+#altrow  "iter"	4	39	51773	105183
+#altrow  "iter"	5	41	284009	576333
+#altrow  "iter"	6	43	1509457	3065291
+#pair  "final sol cost"	"45.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"46"
+#pair  "total raw cpu time"	"0.122282"
+#pair  "total wall time"	"0.122286"
+#pair  "total nodes expanded"	"3490584"
+#pair  "total nodes generated"	"7096849"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:04 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.120000 (  0.125097)
+prob017
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:04 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"30.000000"
+#pair  "initial distance"	"30.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	30	37	74
+#altrow  "iter"	1	32	331	670
+#altrow  "iter"	2	34	2167	4360
+#altrow  "iter"	3	36	12642	25652
+#altrow  "iter"	4	38	68595	138836
+#altrow  "iter"	5	40	354661	718449
+#altrow  "iter"	6	42	1771187	3592235
+#pair  "final sol cost"	"44.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"45"
+#pair  "total raw cpu time"	"0.157068"
+#pair  "total wall time"	"0.157072"
+#pair  "total nodes expanded"	"4378098"
+#pair  "total nodes generated"	"8885971"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:04 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.160000 (  0.159522)
+prob018
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:04 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"37.000000"
+#pair  "initial distance"	"37.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	37	2	4
+#altrow  "iter"	1	39	82	163
+#altrow  "iter"	2	41	818	1633
+#altrow  "iter"	3	43	5584	11157
+#altrow  "iter"	4	45	37746	75849
+#altrow  "iter"	5	47	246397	497370
+#altrow  "iter"	6	49	1537753	3109721
+#pair  "final sol cost"	"51.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"52"
+#pair  "total raw cpu time"	"0.228589"
+#pair  "total wall time"	"0.228592"
+#pair  "total nodes expanded"	"6409343"
+#pair  "total nodes generated"	"12955403"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:04 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.220000 (  0.230920)
+prob019
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:04 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"41.000000"
+#pair  "initial distance"	"41.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	41	4	7
+#altrow  "iter"	1	43	161	295
+#altrow  "iter"	2	45	2466	4661
+#altrow  "iter"	3	47	23527	45083
+#altrow  "iter"	4	49	198371	384253
+#altrow  "iter"	5	51	1475292	2880912
+#pair  "final sol cost"	"53.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"54"
+#pair  "total raw cpu time"	"0.188717"
+#pair  "total wall time"	"0.188718"
+#pair  "total nodes expanded"	"5574437"
+#pair  "total nodes generated"	"10907149"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:05 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.190000 (  0.191176)
+prob020
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:05 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"34.000000"
+#pair  "initial distance"	"34.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	34	2	4
+#altrow  "iter"	1	36	29	56
+#altrow  "iter"	2	38	234	443
+#altrow  "iter"	3	40	1464	2794
+#altrow  "iter"	4	42	9313	17994
+#altrow  "iter"	5	44	55964	108911
+#altrow  "iter"	6	46	332120	651524
+#altrow  "iter"	7	48	1959754	3871084
+#pair  "final sol cost"	"50.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"51"
+#pair  "total raw cpu time"	"0.124885"
+#pair  "total wall time"	"0.124886"
+#pair  "total nodes expanded"	"3578954"
+#pair  "total nodes generated"	"7115966"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:05 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.130000 (  0.127428)
+prob021
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:05 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"36.000000"
+#pair  "initial distance"	"36.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	36	409	795
+#altrow  "iter"	1	38	6354	12520
+#altrow  "iter"	2	40	55058	108934
+#altrow  "iter"	3	42	370720	735624
+#altrow  "iter"	4	44	2195901	4369513
+#pair  "final sol cost"	"46.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"47"
+#pair  "total raw cpu time"	"0.204176"
+#pair  "total wall time"	"0.204184"
+#pair  "total nodes expanded"	"5940101"
+#pair  "total nodes generated"	"11861704"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:05 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.200000 (  0.206617)
+prob022
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:05 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"41.000000"
+#pair  "initial distance"	"41.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	41	44	79
+#altrow  "iter"	1	43	577	1064
+#altrow  "iter"	2	45	4974	9309
+#altrow  "iter"	3	47	40131	75876
+#altrow  "iter"	4	49	300242	572709
+#altrow  "iter"	5	51	2143199	4118629
+#pair  "final sol cost"	"53.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"54"
+#pair  "total raw cpu time"	"0.428905"
+#pair  "total wall time"	"0.428905"
+#pair  "total nodes expanded"	"12648340"
+#pair  "total nodes generated"	"24492851"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:05 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.430000 (  0.431278)
+prob023
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:05 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"39.000000"
+#pair  "initial distance"	"39.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	39	18	34
+#altrow  "iter"	1	41	141	265
+#altrow  "iter"	2	43	946	1798
+#altrow  "iter"	3	45	7265	13905
+#altrow  "iter"	4	47	51595	99496
+#altrow  "iter"	5	49	335752	651060
+#altrow  "iter"	6	51	2097112	4089322
+#pair  "final sol cost"	"53.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"54"
+#pair  "total raw cpu time"	"0.173711"
+#pair  "total wall time"	"0.173712"
+#pair  "total nodes expanded"	"5079292"
+#pair  "total nodes generated"	"9982568"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:06 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.170000 (  0.176067)
+prob024
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:06 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"36.000000"
+#pair  "initial distance"	"36.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	36	26	50
+#altrow  "iter"	1	38	163	309
+#altrow  "iter"	2	40	1202	2294
+#altrow  "iter"	3	42	8807	16943
+#altrow  "iter"	4	44	62638	121362
+#altrow  "iter"	5	46	420236	819272
+#altrow  "iter"	6	48	2671016	5235017
+#pair  "final sol cost"	"50.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"51"
+#pair  "total raw cpu time"	"0.124213"
+#pair  "total wall time"	"0.124216"
+#pair  "total nodes expanded"	"3649912"
+#pair  "total nodes generated"	"7171136"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:06 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.120000 (  0.126593)
+prob025
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:06 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"36.000000"
+#pair  "initial distance"	"36.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	36	4	7
+#altrow  "iter"	1	38	36	65
+#altrow  "iter"	2	40	231	434
+#altrow  "iter"	3	42	1398	2600
+#altrow  "iter"	4	44	9665	18235
+#altrow  "iter"	5	46	65646	124844
+#altrow  "iter"	6	48	431285	827040
+#altrow  "iter"	7	50	2725688	5259277
+#pair  "final sol cost"	"52.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"53"
+#pair  "total raw cpu time"	"0.105774"
+#pair  "total wall time"	"0.105777"
+#pair  "total nodes expanded"	"3074175"
+#pair  "total nodes generated"	"5934441"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:06 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.010000   0.120000 (  0.108151)
+prob026
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:06 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"36.000000"
+#pair  "initial distance"	"36.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	36	4	7
+#altrow  "iter"	1	38	22	41
+#altrow  "iter"	2	40	177	342
+#altrow  "iter"	3	42	1254	2426
+#altrow  "iter"	4	44	9268	18222
+#altrow  "iter"	5	46	66288	131849
+#altrow  "iter"	6	48	447491	896816
+#altrow  "iter"	7	50	2886981	5820986
+#pair  "final sol cost"	"52.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"53"
+#pair  "total raw cpu time"	"0.572506"
+#pair  "total wall time"	"0.572515"
+#pair  "total nodes expanded"	"15925226"
+#pair  "total nodes generated"	"32201659"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:06 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.570000 (  0.574882)
+prob027
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:06 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"24.000000"
+#pair  "initial distance"	"24.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	24	15	34
+#altrow  "iter"	1	26	97	204
+#altrow  "iter"	2	28	420	874
+#altrow  "iter"	3	30	1800	3749
+#altrow  "iter"	4	32	7559	15687
+#altrow  "iter"	5	34	31542	65378
+#altrow  "iter"	6	36	132656	275105
+#altrow  "iter"	7	38	562540	1166373
+#altrow  "iter"	8	40	2389568	4953007
+#pair  "final sol cost"	"42.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"43"
+#pair  "total raw cpu time"	"0.314432"
+#pair  "total wall time"	"0.314432"
+#pair  "total nodes expanded"	"8674989"
+#pair  "total nodes generated"	"17984050"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:07 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.310000 (  0.316897)
+prob028
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:07 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"35.000000"
+#pair  "initial distance"	"35.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	35	100	214
+#altrow  "iter"	1	37	814	1611
+#altrow  "iter"	2	39	5294	10581
+#altrow  "iter"	3	41	31677	63133
+#altrow  "iter"	4	43	179285	358557
+#altrow  "iter"	5	45	990972	1986087
+#altrow  "iter"	6	47	5321669	10698131
+#pair  "final sol cost"	"49.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"50"
+#pair  "total raw cpu time"	"0.339156"
+#pair  "total wall time"	"0.339173"
+#pair  "total nodes expanded"	"9620772"
+#pair  "total nodes generated"	"19355805"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:07 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.340000 (  0.341747)
+prob029
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:07 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"43.000000"
+#pair  "initial distance"	"43.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	43	3	6
+#altrow  "iter"	1	45	371	703
+#altrow  "iter"	2	47	4192	7868
+#altrow  "iter"	3	49	40663	76946
+#altrow  "iter"	4	51	362042	693094
+#altrow  "iter"	5	53	2909269	5617900
+#pair  "final sol cost"	"55.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"56"
+#pair  "total raw cpu time"	"0.406935"
+#pair  "total wall time"	"0.406935"
+#pair  "total nodes expanded"	"12208396"
+#pair  "total nodes generated"	"23711066"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:07 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.410000 (  0.409321)
+prob030
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:07 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"35.000000"
+#pair  "initial distance"	"35.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	35	10	20
+#altrow  "iter"	1	37	170	341
+#altrow  "iter"	2	39	2151	4429
+#altrow  "iter"	3	41	18451	37790
+#altrow  "iter"	4	43	130568	266477
+#altrow  "iter"	5	45	830223	1692324
+#altrow  "iter"	6	47	4913351	10003226
+#pair  "final sol cost"	"49.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"50"
+#pair  "total raw cpu time"	"0.220526"
+#pair  "total wall time"	"0.220529"
+#pair  "total nodes expanded"	"6297113"
+#pair  "total nodes generated"	"12808563"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:08 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.220000 (  0.222941)
+prob031
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:08 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"46.000000"
+#pair  "initial distance"	"46.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	46	20	35
+#altrow  "iter"	1	48	316	575
+#altrow  "iter"	2	50	5163	9818
+#altrow  "iter"	3	52	56924	109854
+#altrow  "iter"	4	54	542378	1058426
+#pair  "final sol cost"	"56.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"57"
+#pair  "total raw cpu time"	"0.033219"
+#pair  "total wall time"	"0.033219"
+#pair  "total nodes expanded"	"962130"
+#pair  "total nodes generated"	"1897727"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:08 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.030000 (  0.035616)
+prob032
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:08 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"33.000000"
+#pair  "initial distance"	"33.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	33	4	7
+#altrow  "iter"	1	35	36	67
+#altrow  "iter"	2	37	510	990
+#altrow  "iter"	3	39	3847	7525
+#altrow  "iter"	4	41	25038	49249
+#altrow  "iter"	5	43	150379	297946
+#altrow  "iter"	6	45	858305	1707441
+#altrow  "iter"	7	47	4733839	9452696
+#pair  "final sol cost"	"49.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"50"
+#pair  "total raw cpu time"	"0.283041"
+#pair  "total wall time"	"0.283053"
+#pair  "total nodes expanded"	"8021592"
+#pair  "total nodes generated"	"15971318"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:08 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.290000 (  0.285444)
+prob033
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:08 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"35.000000"
+#pair  "initial distance"	"35.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	35	9	18
+#altrow  "iter"	1	37	150	286
+#altrow  "iter"	2	39	1514	3031
+#altrow  "iter"	3	41	15052	30684
+#altrow  "iter"	4	43	114759	232128
+#altrow  "iter"	5	45	762606	1542566
+#altrow  "iter"	6	47	4662642	9435875
+#pair  "final sol cost"	"49.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"50"
+#pair  "total raw cpu time"	"0.385719"
+#pair  "total wall time"	"0.385719"
+#pair  "total nodes expanded"	"10966754"
+#pair  "total nodes generated"	"22119319"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:08 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.380000 (  0.388170)
+prob034
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:08 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"43.000000"
+#pair  "initial distance"	"43.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	43	1	2
+#altrow  "iter"	1	45	32	61
+#altrow  "iter"	2	47	778	1493
+#altrow  "iter"	3	49	8674	16764
+#altrow  "iter"	4	51	85463	166800
+#altrow  "iter"	5	53	738593	1451427
+#altrow  "iter"	6	55	5796632	11455490
+#pair  "final sol cost"	"57.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"58"
+#pair  "total raw cpu time"	"0.407732"
+#pair  "total wall time"	"0.407732"
+#pair  "total nodes expanded"	"11931022"
+#pair  "total nodes generated"	"23540412"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:09 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.410000 (  0.410423)
+prob035
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:09 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"31.000000"
+#pair  "initial distance"	"31.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	31	26	54
+#altrow  "iter"	1	33	122	247
+#altrow  "iter"	2	35	618	1247
+#altrow  "iter"	3	37	3118	6406
+#altrow  "iter"	4	39	15183	31065
+#altrow  "iter"	5	41	75863	155756
+#altrow  "iter"	6	43	377523	774969
+#altrow  "iter"	7	45	1862481	3821571
+#altrow  "iter"	8	47	9131844	18730274
+#pair  "final sol cost"	"49.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"50"
+#pair  "total raw cpu time"	"1.149326"
+#pair  "total wall time"	"1.149340"
+#pair  "total nodes expanded"	"31962611"
+#pair  "total nodes generated"	"65533431"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:10 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   1.150000 (  1.152357)
+prob036
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:10 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"36.000000"
+#pair  "initial distance"	"36.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	36	1	2
+#altrow  "iter"	1	38	5	10
+#altrow  "iter"	2	40	214	418
+#altrow  "iter"	3	42	2254	4395
+#altrow  "iter"	4	44	19415	38329
+#altrow  "iter"	5	46	140060	277929
+#altrow  "iter"	6	48	942017	1880367
+#altrow  "iter"	7	50	5984649	11999115
+#pair  "final sol cost"	"52.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"53"
+#pair  "total raw cpu time"	"0.312907"
+#pair  "total wall time"	"0.312913"
+#pair  "total nodes expanded"	"8917079"
+#pair  "total nodes generated"	"17954869"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:10 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.310000 (  0.315938)
+prob037
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:10 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"42.000000"
+#pair  "initial distance"	"42.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	42	4	7
+#altrow  "iter"	1	44	144	268
+#altrow  "iter"	2	46	1480	2762
+#altrow  "iter"	3	48	12215	23040
+#altrow  "iter"	4	50	95290	181526
+#altrow  "iter"	5	52	730283	1405189
+#altrow  "iter"	6	54	5399569	10481310
+#pair  "final sol cost"	"56.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"57"
+#pair  "total raw cpu time"	"0.185901"
+#pair  "total wall time"	"0.185902"
+#pair  "total nodes expanded"	"5679874"
+#pair  "total nodes generated"	"11020324"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:10 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.180000 (  0.188645)
+prob038
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:10 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"34.000000"
+#pair  "initial distance"	"34.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	34	1	2
+#altrow  "iter"	1	36	4	8
+#altrow  "iter"	2	38	36	66
+#altrow  "iter"	3	40	197	373
+#altrow  "iter"	4	42	999	1882
+#altrow  "iter"	5	44	5684	10693
+#altrow  "iter"	6	46	34944	66598
+#altrow  "iter"	7	48	211152	405433
+#altrow  "iter"	8	50	1279540	2472569
+#altrow  "iter"	9	52	7709573	14989609
+#pair  "final sol cost"	"54.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"55"
+#pair  "total raw cpu time"	"0.339682"
+#pair  "total wall time"	"0.339683"
+#pair  "total nodes expanded"	"9699545"
+#pair  "total nodes generated"	"18918268"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:11 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.340000 (  0.342070)
+prob039
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:11 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"35.000000"
+#pair  "initial distance"	"35.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	35	38	74
+#altrow  "iter"	1	37	327	642
+#altrow  "iter"	2	39	2155	4271
+#altrow  "iter"	3	41	13427	26906
+#altrow  "iter"	4	43	80772	162645
+#altrow  "iter"	5	45	461542	931244
+#pair  "final sol cost"	"47.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"48"
+#pair  "total raw cpu time"	"0.025493"
+#pair  "total wall time"	"0.025496"
+#pair  "total nodes expanded"	"700936"
+#pair  "total nodes generated"	"1411293"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:11 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.030000 (  0.027907)
+prob040
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:11 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"39.000000"
+#pair  "initial distance"	"39.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	39	17	33
+#altrow  "iter"	1	41	396	755
+#altrow  "iter"	2	43	3637	7006
+#altrow  "iter"	3	45	29045	56392
+#altrow  "iter"	4	47	203062	396624
+#altrow  "iter"	5	49	1322972	2596845
+#pair  "final sol cost"	"51.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"52"
+#pair  "total raw cpu time"	"0.108370"
+#pair  "total wall time"	"0.108402"
+#pair  "total nodes expanded"	"3142992"
+#pair  "total nodes generated"	"6158732"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:11 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.100000 (  0.110800)
+prob041
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:11 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"36.000000"
+#pair  "initial distance"	"36.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	36	30	60
+#altrow  "iter"	1	38	261	508
+#altrow  "iter"	2	40	1705	3315
+#altrow  "iter"	3	42	10632	20731
+#altrow  "iter"	4	44	60471	118064
+#altrow  "iter"	5	46	335607	657074
+#altrow  "iter"	6	48	1836524	3605113
+#altrow  "iter"	7	50	9916734	19521239
+#pair  "final sol cost"	"52.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"53"
+#pair  "total raw cpu time"	"1.067792"
+#pair  "total wall time"	"1.067803"
+#pair  "total nodes expanded"	"30328909"
+#pair  "total nodes generated"	"59802601"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:12 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.010000   1.080000 (  1.070363)
+prob042
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:12 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"36.000000"
+#pair  "initial distance"	"36.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	36	3	6
+#altrow  "iter"	1	38	20	39
+#altrow  "iter"	2	40	290	546
+#altrow  "iter"	3	42	2488	4798
+#altrow  "iter"	4	44	19332	37816
+#altrow  "iter"	5	46	139122	274497
+#altrow  "iter"	6	48	948391	1883670
+#altrow  "iter"	7	50	6189133	12362762
+#pair  "final sol cost"	"52.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"53"
+#pair  "total raw cpu time"	"0.356690"
+#pair  "total wall time"	"0.356690"
+#pair  "total nodes expanded"	"10316663"
+#pair  "total nodes generated"	"20671551"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:12 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.360000 (  0.359448)
+prob043
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:12 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"31.000000"
+#pair  "initial distance"	"31.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	31	1	2
+#altrow  "iter"	1	33	61	121
+#altrow  "iter"	2	35	495	979
+#altrow  "iter"	3	37	3739	7449
+#altrow  "iter"	4	39	23601	47408
+#altrow  "iter"	5	41	135797	273531
+#altrow  "iter"	6	43	733852	1481580
+#altrow  "iter"	7	45	3825735	7741688
+#pair  "final sol cost"	"47.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"48"
+#pair  "total raw cpu time"	"0.327167"
+#pair  "total wall time"	"0.327169"
+#pair  "total nodes expanded"	"9386275"
+#pair  "total nodes generated"	"18997680"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:13 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.320000 (  0.329620)
+prob044
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:13 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"32.000000"
+#pair  "initial distance"	"32.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	32	2	4
+#altrow  "iter"	1	34	112	229
+#altrow  "iter"	2	36	832	1673
+#altrow  "iter"	3	38	4710	9463
+#altrow  "iter"	4	40	25170	50774
+#altrow  "iter"	5	42	131150	265285
+#altrow  "iter"	6	44	665073	1347616
+#altrow  "iter"	7	46	3310782	6719964
+#altrow  "iter"	8	48	16287720	33097445
+#pair  "final sol cost"	"50.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"51"
+#pair  "total raw cpu time"	"1.718517"
+#pair  "total wall time"	"1.718550"
+#pair  "total nodes expanded"	"47157847"
+#pair  "total nodes generated"	"95733124"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:14 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   1.720000 (  1.721048)
+prob045
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:14 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"44.000000"
+#pair  "initial distance"	"44.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	44	240	467
+#altrow  "iter"	1	46	2857	5519
+#altrow  "iter"	2	48	27741	53689
+#altrow  "iter"	3	50	234318	456010
+#altrow  "iter"	4	52	1794151	3511180
+#altrow  "iter"	5	54	12736502	25052109
+#pair  "final sol cost"	"56.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"57"
+#pair  "total raw cpu time"	"0.471082"
+#pair  "total wall time"	"0.471082"
+#pair  "total nodes expanded"	"13540271"
+#pair  "total nodes generated"	"26622862"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:15 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.470000 (  0.473558)
+prob046
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:15 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"30.000000"
+#pair  "initial distance"	"30.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	30	4	9
+#altrow  "iter"	1	32	51	107
+#altrow  "iter"	2	34	521	1080
+#altrow  "iter"	3	36	3830	7937
+#altrow  "iter"	4	38	24253	49991
+#altrow  "iter"	5	40	138657	285687
+#altrow  "iter"	6	42	753951	1554550
+#altrow  "iter"	7	44	3945813	8133723
+#altrow  "iter"	8	46	20106804	41466752
+#pair  "final sol cost"	"48.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"49"
+#pair  "total raw cpu time"	"0.745272"
+#pair  "total wall time"	"0.745272"
+#pair  "total nodes expanded"	"20744090"
+#pair  "total nodes generated"	"42772588"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:16 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.740000 (  0.747736)
+prob047
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:16 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"43.000000"
+#pair  "initial distance"	"43.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	43	2	4
+#altrow  "iter"	1	45	57	106
+#altrow  "iter"	2	47	1264	2389
+#altrow  "iter"	3	49	16348	31373
+#altrow  "iter"	4	51	167527	324530
+#altrow  "iter"	5	53	1491346	2906127
+#altrow  "iter"	6	55	11947538	23400842
+#pair  "final sol cost"	"57.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"58"
+#pair  "total raw cpu time"	"2.322638"
+#pair  "total wall time"	"2.322654"
+#pair  "total nodes expanded"	"67417331"
+#pair  "total nodes generated"	"132945855"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:18 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   2.320000 (  2.325309)
+prob048
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:18 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"38.000000"
+#pair  "initial distance"	"38.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	38	72	143
+#altrow  "iter"	1	40	421	824
+#altrow  "iter"	2	42	2740	5353
+#altrow  "iter"	3	44	17079	33717
+#altrow  "iter"	4	46	107078	212941
+#altrow  "iter"	5	48	663582	1327356
+#altrow  "iter"	6	50	3945078	7918153
+#altrow  "iter"	7	52	22747603	45772879
+#pair  "final sol cost"	"54.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"55"
+#pair  "total raw cpu time"	"2.876539"
+#pair  "total wall time"	"2.876563"
+#pair  "total nodes expanded"	"83006840"
+#pair  "total nodes generated"	"166571020"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:21 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.010000   0.000000   2.890000 (  2.879572)
+prob049
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:21 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"43.000000"
+#pair  "initial distance"	"43.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	43	1	2
+#altrow  "iter"	1	45	430	795
+#altrow  "iter"	2	47	6915	12905
+#altrow  "iter"	3	49	77212	146521
+#altrow  "iter"	4	51	709784	1363892
+#altrow  "iter"	5	53	5704745	11069768
+#pair  "final sol cost"	"55.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"56"
+#pair  "total raw cpu time"	"0.269872"
+#pair  "total wall time"	"0.269899"
+#pair  "total nodes expanded"	"7855093"
+#pair  "total nodes generated"	"15300441"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:21 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.270000 (  0.272734)
+prob050
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:21 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"39.000000"
+#pair  "initial distance"	"39.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	39	1	2
+#altrow  "iter"	1	41	4	8
+#altrow  "iter"	2	43	545	1005
+#altrow  "iter"	3	45	6123	11461
+#altrow  "iter"	4	47	52158	99292
+#altrow  "iter"	5	49	389857	750495
+#altrow  "iter"	6	51	2635764	5111867
+#altrow  "iter"	7	53	16768105	32720394
+#pair  "final sol cost"	"55.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"56"
+#pair  "total raw cpu time"	"0.825854"
+#pair  "total wall time"	"0.825859"
+#pair  "total nodes expanded"	"24383762"
+#pair  "total nodes generated"	"47506055"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:22 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.820000 (  0.828354)
+prob051
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:22 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"37.000000"
+#pair  "initial distance"	"37.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	37	34	67
+#altrow  "iter"	1	39	301	581
+#altrow  "iter"	2	41	2391	4681
+#altrow  "iter"	3	43	16573	32638
+#altrow  "iter"	4	45	106870	211211
+#altrow  "iter"	5	47	656594	1301508
+#altrow  "iter"	6	49	3852939	7659114
+#altrow  "iter"	7	51	21747861	43321222
+#pair  "final sol cost"	"53.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"54"
+#pair  "total raw cpu time"	"1.909943"
+#pair  "total wall time"	"1.909955"
+#pair  "total nodes expanded"	"54839059"
+#pair  "total nodes generated"	"109562358"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:24 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   1.910000 (  1.912634)
+prob052
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:24 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"38.000000"
+#pair  "initial distance"	"38.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	38	2	4
+#altrow  "iter"	1	40	165	318
+#altrow  "iter"	2	42	1588	2988
+#altrow  "iter"	3	44	12388	23805
+#altrow  "iter"	4	46	85897	166664
+#altrow  "iter"	5	48	552290	1077678
+#altrow  "iter"	6	50	3410281	6687012
+#altrow  "iter"	7	52	20347757	40067801
+#pair  "final sol cost"	"54.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"55"
+#pair  "total raw cpu time"	"2.101448"
+#pair  "total wall time"	"2.101472"
+#pair  "total nodes expanded"	"59289712"
+#pair  "total nodes generated"	"117076110"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:26 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   2.100000 (  2.104555)
+prob053
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:26 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"34.000000"
+#pair  "initial distance"	"34.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	34	1	2
+#altrow  "iter"	1	36	21	40
+#altrow  "iter"	2	38	143	275
+#altrow  "iter"	3	40	807	1549
+#altrow  "iter"	4	42	4146	8031
+#altrow  "iter"	5	44	22291	43489
+#altrow  "iter"	6	46	120141	235541
+#altrow  "iter"	7	48	656585	1296487
+#altrow  "iter"	8	50	3591703	7132385
+#altrow  "iter"	9	52	19682090	39280708
+#pair  "final sol cost"	"54.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"55"
+#pair  "total raw cpu time"	"0.744773"
+#pair  "total wall time"	"0.744776"
+#pair  "total nodes expanded"	"21373350"
+#pair  "total nodes generated"	"42693208"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:27 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.740000 (  0.747707)
+prob054
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:27 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"34.000000"
+#pair  "initial distance"	"34.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	34	7	15
+#altrow  "iter"	1	36	70	140
+#altrow  "iter"	2	38	488	978
+#altrow  "iter"	3	40	3385	6783
+#altrow  "iter"	4	42	21476	42921
+#altrow  "iter"	5	44	130142	260123
+#altrow  "iter"	6	46	769561	1541151
+#altrow  "iter"	7	48	4475364	8979305
+#altrow  "iter"	8	50	25549088	51372346
+#pair  "final sol cost"	"52.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"53"
+#pair  "total raw cpu time"	"1.124286"
+#pair  "total wall time"	"1.124308"
+#pair  "total nodes expanded"	"32313756"
+#pair  "total nodes generated"	"64926493"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:28 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   1.130000 (  1.126847)
+prob055
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:28 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"31.000000"
+#pair  "initial distance"	"31.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	31	2	4
+#altrow  "iter"	1	33	13	24
+#altrow  "iter"	2	35	111	216
+#altrow  "iter"	3	37	1142	2248
+#altrow  "iter"	4	39	7263	14298
+#altrow  "iter"	5	41	42289	83789
+#altrow  "iter"	6	43	233846	466630
+#altrow  "iter"	7	45	1252292	2512910
+#altrow  "iter"	8	47	6526505	13144164
+#altrow  "iter"	9	49	33337056	67349922
+#pair  "final sol cost"	"51.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"52"
+#pair  "total raw cpu time"	"4.498330"
+#pair  "total wall time"	"4.498358"
+#pair  "total nodes expanded"	"128674681"
+#pair  "total nodes generated"	"260054151"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:32 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   4.490000 (  4.500920)
+prob056
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:32 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"38.000000"
+#pair  "initial distance"	"38.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	38	2	4
+#altrow  "iter"	1	40	52	97
+#altrow  "iter"	2	42	737	1402
+#altrow  "iter"	3	44	7185	13854
+#altrow  "iter"	4	46	57807	113091
+#altrow  "iter"	5	48	414891	819388
+#altrow  "iter"	6	50	2773208	5520095
+#altrow  "iter"	7	52	17571691	35182565
+#pair  "final sol cost"	"54.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"55"
+#pair  "total raw cpu time"	"1.164631"
+#pair  "total wall time"	"1.164664"
+#pair  "total nodes expanded"	"33861969"
+#pair  "total nodes generated"	"67880055"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:34 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   1.170000 (  1.167691)
+prob057
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:34 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"31.000000"
+#pair  "initial distance"	"31.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	31	11	25
+#altrow  "iter"	1	33	75	144
+#altrow  "iter"	2	35	355	689
+#altrow  "iter"	3	37	1745	3415
+#altrow  "iter"	4	39	8458	16545
+#altrow  "iter"	5	41	41420	81405
+#altrow  "iter"	6	43	207448	410699
+#altrow  "iter"	7	45	1052857	2094936
+#altrow  "iter"	8	47	5374351	10738246
+#altrow  "iter"	9	49	27386481	54932865
+#pair  "final sol cost"	"51.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"52"
+#pair  "total raw cpu time"	"1.166440"
+#pair  "total wall time"	"1.166448"
+#pair  "total nodes expanded"	"32102319"
+#pair  "total nodes generated"	"64367798"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:35 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   1.160000 (  1.169589)
+prob058
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:35 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"36.000000"
+#pair  "initial distance"	"36.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	36	3	6
+#altrow  "iter"	1	38	24	51
+#altrow  "iter"	2	40	217	424
+#altrow  "iter"	3	42	1657	3279
+#altrow  "iter"	4	44	11996	23857
+#altrow  "iter"	5	46	84306	168747
+#altrow  "iter"	6	48	563395	1132959
+#altrow  "iter"	7	50	3639477	7351190
+#altrow  "iter"	8	52	22754168	46132834
+#pair  "final sol cost"	"54.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"55"
+#pair  "total raw cpu time"	"0.917892"
+#pair  "total wall time"	"0.917901"
+#pair  "total nodes expanded"	"25392109"
+#pair  "total nodes generated"	"51501543"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:36 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.920000 (  0.920834)
+prob059
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:36 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"39.000000"
+#pair  "initial distance"	"39.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	39	1	2
+#altrow  "iter"	1	41	13	23
+#altrow  "iter"	2	43	159	292
+#altrow  "iter"	3	45	1274	2351
+#altrow  "iter"	4	47	9053	16858
+#altrow  "iter"	5	49	63186	118781
+#altrow  "iter"	6	51	431699	819295
+#altrow  "iter"	7	53	2871173	5493210
+#altrow  "iter"	8	55	18624061	35876166
+#pair  "final sol cost"	"57.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"58"
+#pair  "total raw cpu time"	"1.458204"
+#pair  "total wall time"	"1.458216"
+#pair  "total nodes expanded"	"43530124"
+#pair  "total nodes generated"	"83477693"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:37 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   1.450000 (  1.460692)
+prob060
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:37 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"36.000000"
+#pair  "initial distance"	"36.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	36	4	7
+#altrow  "iter"	1	38	42	81
+#altrow  "iter"	2	40	442	851
+#altrow  "iter"	3	42	3425	6665
+#altrow  "iter"	4	44	22860	44727
+#altrow  "iter"	5	46	145577	286335
+#altrow  "iter"	6	48	892764	1763529
+#altrow  "iter"	7	50	5324815	10565115
+#altrow  "iter"	8	52	31022102	61760407
+#pair  "final sol cost"	"54.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"55"
+#pair  "total raw cpu time"	"1.141729"
+#pair  "total wall time"	"1.141755"
+#pair  "total nodes expanded"	"31784360"
+#pair  "total nodes generated"	"63276187"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:38 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   1.140000 (  1.144230)
+prob061
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:38 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"32.000000"
+#pair  "initial distance"	"32.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	32	19	35
+#altrow  "iter"	1	34	93	184
+#altrow  "iter"	2	36	494	967
+#altrow  "iter"	3	38	2267	4374
+#altrow  "iter"	4	40	11094	21539
+#altrow  "iter"	5	42	56546	109801
+#altrow  "iter"	6	44	286789	558305
+#altrow  "iter"	7	46	1472386	2876256
+#altrow  "iter"	8	48	7628038	14958713
+#altrow  "iter"	9	50	39571928	77882745
+#pair  "final sol cost"	"52.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"53"
+#pair  "total raw cpu time"	"1.773297"
+#pair  "total wall time"	"1.773309"
+#pair  "total nodes expanded"	"51116860"
+#pair  "total nodes generated"	"100734843"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:40 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   1.780000 (  1.775751)
+prob062
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:40 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"34.000000"
+#pair  "initial distance"	"34.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	34	5	10
+#altrow  "iter"	1	36	41	79
+#altrow  "iter"	2	38	223	422
+#altrow  "iter"	3	40	1176	2241
+#altrow  "iter"	4	42	6197	11841
+#altrow  "iter"	5	44	31864	61200
+#altrow  "iter"	6	46	167875	324117
+#altrow  "iter"	7	48	888338	1722778
+#altrow  "iter"	8	50	4709536	9171678
+#altrow  "iter"	9	52	25010464	48903210
+#pair  "final sol cost"	"54.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"55"
+#pair  "total raw cpu time"	"4.573569"
+#pair  "total wall time"	"4.573600"
+#pair  "total nodes expanded"	"130984183"
+#pair  "total nodes generated"	"257064809"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:45 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   4.570000 (  4.576238)
+prob063
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:45 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"48.000000"
+#pair  "initial distance"	"48.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	48	2	4
+#altrow  "iter"	1	50	38	67
+#altrow  "iter"	2	52	316	557
+#altrow  "iter"	3	54	2462	4402
+#altrow  "iter"	4	56	22383	40545
+#altrow  "iter"	5	58	223639	410642
+#altrow  "iter"	6	60	2190369	4068546
+#altrow  "iter"	7	62	20585131	38620244
+#pair  "final sol cost"	"64.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"65"
+#pair  "total raw cpu time"	"0.702565"
+#pair  "total wall time"	"0.702596"
+#pair  "total nodes expanded"	"21922115"
+#pair  "total nodes generated"	"41124766"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:45 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.700000 (  0.705571)
+prob064
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:45 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"30.000000"
+#pair  "initial distance"	"30.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	30	1	2
+#altrow  "iter"	1	32	13	26
+#altrow  "iter"	2	34	57	111
+#altrow  "iter"	3	36	283	551
+#altrow  "iter"	4	38	1363	2641
+#altrow  "iter"	5	40	7208	14073
+#altrow  "iter"	6	42	39922	78211
+#altrow  "iter"	7	44	224966	443162
+#altrow  "iter"	8	46	1281701	2540168
+#altrow  "iter"	9	48	7268436	14476411
+#altrow  "iter"	10	50	40499325	80981852
+#pair  "final sol cost"	"52.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"53"
+#pair  "total raw cpu time"	"6.733892"
+#pair  "total wall time"	"6.733946"
+#pair  "total nodes expanded"	"193237081"
+#pair  "total nodes generated"	"387138093"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:52 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   6.730000 (  6.737053)
+prob065
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:52 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"41.000000"
+#pair  "initial distance"	"41.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	41	4	7
+#altrow  "iter"	1	43	179	355
+#altrow  "iter"	2	45	2362	4694
+#altrow  "iter"	3	47	21527	42922
+#altrow  "iter"	4	49	160352	320719
+#altrow  "iter"	5	51	1080012	2166835
+#altrow  "iter"	6	53	6823854	13719390
+#altrow  "iter"	7	55	41486905	83558239
+#pair  "final sol cost"	"57.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"58"
+#pair  "total raw cpu time"	"2.156190"
+#pair  "total wall time"	"2.156225"
+#pair  "total nodes expanded"	"62619586"
+#pair  "total nodes generated"	"126638416"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:54 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   2.160000 (  2.159298)
+prob066
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:54 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"40.000000"
+#pair  "initial distance"	"40.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	40	52	102
+#altrow  "iter"	1	42	675	1336
+#altrow  "iter"	2	44	5177	10115
+#altrow  "iter"	3	46	33678	66356
+#altrow  "iter"	4	48	206424	407381
+#altrow  "iter"	5	50	1227329	2431699
+#altrow  "iter"	6	52	7124024	14158431
+#altrow  "iter"	7	54	40717390	81168513
+#pair  "final sol cost"	"56.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"57"
+#pair  "total raw cpu time"	"3.844061"
+#pair  "total wall time"	"3.844089"
+#pair  "total nodes expanded"	"110299077"
+#pair  "total nodes generated"	"220374384"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:58 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   3.840000 (  3.847004)
+prob067
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:58 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"32.000000"
+#pair  "initial distance"	"32.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	32	8	18
+#altrow  "iter"	1	34	49	99
+#altrow  "iter"	2	36	305	610
+#altrow  "iter"	3	38	1855	3745
+#altrow  "iter"	4	40	10387	20913
+#altrow  "iter"	5	42	57789	116276
+#altrow  "iter"	6	44	313974	633605
+#altrow  "iter"	7	46	1685847	3404993
+#altrow  "iter"	8	48	8942630	18084462
+#pair  "final sol cost"	"50.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"51"
+#pair  "total raw cpu time"	"0.683729"
+#pair  "total wall time"	"0.683729"
+#pair  "total nodes expanded"	"19393936"
+#pair  "total nodes generated"	"39118936"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:38:59 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   0.680000 (  0.686313)
+prob068
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:38:59 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"30.000000"
+#pair  "initial distance"	"30.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	30	1	4
+#altrow  "iter"	1	32	18	38
+#altrow  "iter"	2	34	128	255
+#altrow  "iter"	3	36	632	1255
+#altrow  "iter"	4	38	3049	6036
+#altrow  "iter"	5	40	15167	30122
+#altrow  "iter"	6	42	77072	153559
+#altrow  "iter"	7	44	397992	794620
+#altrow  "iter"	8	46	2081227	4167988
+#altrow  "iter"	9	48	10969945	22028191
+#altrow  "iter"	10	50	57843202	116450620
+#pair  "final sol cost"	"52.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"53"
+#pair  "total raw cpu time"	"2.674279"
+#pair  "total wall time"	"2.674322"
+#pair  "total nodes expanded"	"74952369"
+#pair  "total nodes generated"	"151042570"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:39:01 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.010000   2.690000 (  2.677025)
+prob069
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:39:01 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"28.000000"
+#pair  "initial distance"	"28.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	28	9	18
+#altrow  "iter"	1	30	60	121
+#altrow  "iter"	2	32	307	614
+#altrow  "iter"	3	34	1414	2851
+#altrow  "iter"	4	36	6523	13072
+#altrow  "iter"	5	38	30090	60599
+#altrow  "iter"	6	40	138410	279013
+#altrow  "iter"	7	42	632528	1275989
+#altrow  "iter"	8	44	2887780	5832706
+#altrow  "iter"	9	46	13186632	26667389
+#altrow  "iter"	10	48	60232259	121941500
+#pair  "final sol cost"	"50.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"51"
+#pair  "total raw cpu time"	"4.510670"
+#pair  "total wall time"	"4.510686"
+#pair  "total nodes expanded"	"124641603"
+#pair  "total nodes generated"	"252783877"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:39:06 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   4.510000 (  4.513811)
+prob070
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:39:06 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"43.000000"
+#pair  "initial distance"	"43.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	43	56	101
+#altrow  "iter"	1	45	575	1092
+#altrow  "iter"	2	47	4638	8760
+#altrow  "iter"	3	49	35230	67316
+#altrow  "iter"	4	51	258091	497172
+#altrow  "iter"	5	53	1796663	3480255
+#altrow  "iter"	6	55	12074497	23514679
+#pair  "final sol cost"	"57.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"58"
+#pair  "total raw cpu time"	"2.669918"
+#pair  "total wall time"	"2.669947"
+#pair  "total nodes expanded"	"76858577"
+#pair  "total nodes generated"	"150346071"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:39:09 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   2.670000 (  2.672869)
+prob071
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:39:09 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"37.000000"
+#pair  "initial distance"	"37.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	37	7	14
+#altrow  "iter"	1	39	57	108
+#altrow  "iter"	2	41	388	717
+#altrow  "iter"	3	43	2856	5359
+#altrow  "iter"	4	45	22121	42098
+#altrow  "iter"	5	47	166421	319855
+#altrow  "iter"	6	49	1195766	2321332
+#altrow  "iter"	7	51	8090300	15825526
+#altrow  "iter"	8	53	51697285	101696523
+#pair  "final sol cost"	"55.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"56"
+#pair  "total raw cpu time"	"1.872258"
+#pair  "total wall time"	"1.872279"
+#pair  "total nodes expanded"	"53909237"
+#pair  "total nodes generated"	"106074302"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:39:10 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   1.870000 (  1.874778)
+prob072
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:39:10 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"33.000000"
+#pair  "initial distance"	"33.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	33	5	12
+#altrow  "iter"	1	35	69	142
+#altrow  "iter"	2	37	420	844
+#altrow  "iter"	3	39	2508	5045
+#altrow  "iter"	4	41	14410	29037
+#altrow  "iter"	5	43	83202	168167
+#altrow  "iter"	6	45	477011	966950
+#altrow  "iter"	7	47	2682566	5450221
+#altrow  "iter"	8	49	14771830	30057775
+#altrow  "iter"	9	51	79876713	162728362
+#pair  "final sol cost"	"53.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"54"
+#pair  "total raw cpu time"	"5.366236"
+#pair  "total wall time"	"5.366263"
+#pair  "total nodes expanded"	"150045862"
+#pair  "total nodes generated"	"306123420"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:39:16 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   5.360000 (  5.368718)
+prob073
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:39:16 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"34.000000"
+#pair  "initial distance"	"34.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	34	1	2
+#altrow  "iter"	1	36	18	36
+#altrow  "iter"	2	38	207	409
+#altrow  "iter"	3	40	1684	3362
+#altrow  "iter"	4	42	10615	21317
+#altrow  "iter"	5	44	62018	124898
+#altrow  "iter"	6	46	350932	708149
+#altrow  "iter"	7	48	1944428	3934484
+#altrow  "iter"	8	50	10585009	21463046
+#altrow  "iter"	9	52	56845528	115490437
+#pair  "final sol cost"	"54.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"55"
+#pair  "total raw cpu time"	"3.247355"
+#pair  "total wall time"	"3.247406"
+#pair  "total nodes expanded"	"90593519"
+#pair  "total nodes generated"	"183526882"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:39:19 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   3.250000 (  3.250187)
+prob074
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:39:19 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"41.000000"
+#pair  "initial distance"	"41.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	41	1	2
+#altrow  "iter"	1	43	29	52
+#altrow  "iter"	2	45	383	730
+#altrow  "iter"	3	47	3833	7463
+#altrow  "iter"	4	49	31629	62391
+#altrow  "iter"	5	51	239110	474903
+#altrow  "iter"	6	53	1691616	3372524
+#altrow  "iter"	7	55	11383620	22762900
+#altrow  "iter"	8	57	73751412	147821547
+#pair  "final sol cost"	"59.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"60"
+#pair  "total raw cpu time"	"13.232265"
+#pair  "total wall time"	"13.232364"
+#pair  "total nodes expanded"	"374563071"
+#pair  "total nodes generated"	"750745754"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:39:32 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000  13.230000 ( 13.235501)
+prob075
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:39:32 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"39.000000"
+#pair  "initial distance"	"39.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	39	45	87
+#altrow  "iter"	1	41	443	893
+#altrow  "iter"	2	43	3196	6344
+#altrow  "iter"	3	45	21650	43120
+#altrow  "iter"	4	47	139292	279296
+#altrow  "iter"	5	49	874342	1758876
+#altrow  "iter"	6	51	5369082	10833463
+#pair  "final sol cost"	"53.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"54"
+#pair  "total raw cpu time"	"1.112390"
+#pair  "total wall time"	"1.112418"
+#pair  "total nodes expanded"	"31134487"
+#pair  "total nodes generated"	"63036421"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:39:33 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   1.110000 (  1.115324)
+prob076
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:39:33 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"38.000000"
+#pair  "initial distance"	"38.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	38	3	6
+#altrow  "iter"	1	40	66	127
+#altrow  "iter"	2	42	811	1611
+#altrow  "iter"	3	44	6655	13248
+#altrow  "iter"	4	46	49791	99519
+#altrow  "iter"	5	48	333829	668601
+#altrow  "iter"	6	50	2103042	4219891
+#altrow  "iter"	7	52	12678115	25459520
+#altrow  "iter"	8	54	73834182	148378582
+#pair  "final sol cost"	"56.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"57"
+#pair  "total raw cpu time"	"6.681508"
+#pair  "total wall time"	"6.681556"
+#pair  "total nodes expanded"	"187386023"
+#pair  "total nodes generated"	"377141880"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:39:40 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   6.680000 (  6.684190)
+prob077
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:39:40 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"42.000000"
+#pair  "initial distance"	"42.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	42	2	4
+#altrow  "iter"	1	44	183	334
+#altrow  "iter"	2	46	3148	5950
+#altrow  "iter"	3	48	37507	72184
+#altrow  "iter"	4	50	346129	673771
+#altrow  "iter"	5	52	2786000	5465051
+#altrow  "iter"	6	54	20402804	40247370
+#pair  "final sol cost"	"56.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"57"
+#pair  "total raw cpu time"	"1.104723"
+#pair  "total wall time"	"1.104733"
+#pair  "total nodes expanded"	"31801392"
+#pair  "total nodes generated"	"62643178"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:39:41 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   1.110000 (  1.107607)
+prob078
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:39:41 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"41.000000"
+#pair  "initial distance"	"41.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	41	2	4
+#altrow  "iter"	1	43	400	753
+#altrow  "iter"	2	45	4866	9174
+#altrow  "iter"	3	47	43580	82802
+#altrow  "iter"	4	49	336439	645167
+#altrow  "iter"	5	51	2399455	4636239
+#altrow  "iter"	6	53	16127950	31369778
+#altrow  "iter"	7	55	103158022	201775626
+#pair  "final sol cost"	"57.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"58"
+#pair  "total raw cpu time"	"10.545277"
+#pair  "total wall time"	"10.545343"
+#pair  "total nodes expanded"	"306699931"
+#pair  "total nodes generated"	"602886857"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:39:52 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000  10.540000 ( 10.548032)
+prob079
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:39:52 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"42.000000"
+#pair  "initial distance"	"42.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	42	4	7
+#altrow  "iter"	1	44	63	120
+#altrow  "iter"	2	46	728	1365
+#altrow  "iter"	3	48	5802	10879
+#altrow  "iter"	4	50	42786	80696
+#altrow  "iter"	5	52	301367	571733
+#altrow  "iter"	6	54	2053429	3918095
+#altrow  "iter"	7	56	13658639	26213088
+#altrow  "iter"	8	58	88940213	171616386
+#pair  "final sol cost"	"60.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"61"
+#pair  "total raw cpu time"	"8.377815"
+#pair  "total wall time"	"8.377838"
+#pair  "total nodes expanded"	"248230794"
+#pair  "total nodes generated"	"480637866"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:40:00 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   8.380000 (  8.380956)
+prob080
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:40:00 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"40.000000"
+#pair  "initial distance"	"40.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	40	3	7
+#altrow  "iter"	1	42	130	250
+#altrow  "iter"	2	44	1096	2063
+#altrow  "iter"	3	46	9044	17233
+#altrow  "iter"	4	48	70596	135557
+#altrow  "iter"	5	50	493854	954487
+#altrow  "iter"	6	52	3312182	6442071
+#altrow  "iter"	7	54	21496419	42057202
+#altrow  "iter"	8	56	135875684	267245397
+#pair  "final sol cost"	"58.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"59"
+#pair  "total raw cpu time"	"4.921453"
+#pair  "total wall time"	"4.921469"
+#pair  "total nodes expanded"	"142413454"
+#pair  "total nodes generated"	"280078790"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:40:05 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   4.920000 (  4.924580)
+prob081
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:40:05 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"43.000000"
+#pair  "initial distance"	"43.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	43	5	9
+#altrow  "iter"	1	45	67	126
+#altrow  "iter"	2	47	1156	2225
+#altrow  "iter"	3	49	13963	27290
+#altrow  "iter"	4	51	140235	276258
+#altrow  "iter"	5	53	1284405	2548954
+#altrow  "iter"	6	55	10514848	20964775
+#altrow  "iter"	7	57	78907235	157925044
+#pair  "final sol cost"	"59.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"60"
+#pair  "total raw cpu time"	"3.453281"
+#pair  "total wall time"	"3.453301"
+#pair  "total nodes expanded"	"99185529"
+#pair  "total nodes generated"	"198758702"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:40:09 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.010000   3.460000 (  3.456392)
+prob082
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:40:09 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"41.000000"
+#pair  "initial distance"	"41.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	41	111	212
+#altrow  "iter"	1	43	884	1706
+#altrow  "iter"	2	45	6482	12538
+#altrow  "iter"	3	47	43852	85138
+#altrow  "iter"	4	49	275680	537073
+#altrow  "iter"	5	51	1685668	3294894
+#altrow  "iter"	6	53	10121214	19850316
+#altrow  "iter"	7	55	59718846	117507757
+#pair  "final sol cost"	"57.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"58"
+#pair  "total raw cpu time"	"4.716184"
+#pair  "total wall time"	"4.716198"
+#pair  "total nodes expanded"	"140036828"
+#pair  "total nodes generated"	"276361932"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:40:13 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   4.720000 (  4.719240)
+prob083
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:40:13 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"40.000000"
+#pair  "initial distance"	"40.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	40	266	603
+#altrow  "iter"	1	42	3205	6865
+#altrow  "iter"	2	44	25963	54789
+#altrow  "iter"	3	46	175820	368339
+#altrow  "iter"	4	48	1095458	2288570
+#altrow  "iter"	5	50	6425258	13382581
+#altrow  "iter"	6	52	36153070	75159088
+#altrow  "iter"	7	54	197674113	410403559
+#pair  "final sol cost"	"56.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"57"
+#pair  "total raw cpu time"	"17.423570"
+#pair  "total wall time"	"17.423589"
+#pair  "total nodes expanded"	"480960627"
+#pair  "total nodes generated"	"995472711"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:40:31 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000  17.420000 ( 17.426595)
+prob084
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:40:31 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"40.000000"
+#pair  "initial distance"	"40.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	40	5	9
+#altrow  "iter"	1	42	70	126
+#altrow  "iter"	2	44	651	1177
+#altrow  "iter"	3	46	4734	8668
+#altrow  "iter"	4	48	36836	68285
+#altrow  "iter"	5	50	289348	544869
+#altrow  "iter"	6	52	2153662	4101296
+#altrow  "iter"	7	54	15232414	29283768
+#altrow  "iter"	8	56	102949591	199459428
+#pair  "final sol cost"	"58.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"59"
+#pair  "total raw cpu time"	"3.890116"
+#pair  "total wall time"	"3.890134"
+#pair  "total nodes expanded"	"117276312"
+#pair  "total nodes generated"	"226668644"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:40:35 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   3.890000 (  3.893261)
+prob085
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:40:35 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"43.000000"
+#pair  "initial distance"	"43.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	43	13	25
+#altrow  "iter"	1	45	200	368
+#altrow  "iter"	2	47	2666	5022
+#altrow  "iter"	3	49	25825	49104
+#altrow  "iter"	4	51	215878	413910
+#altrow  "iter"	5	53	1631381	3147691
+#altrow  "iter"	6	55	11502750	22313380
+#altrow  "iter"	7	57	77015983	150096716
+#pair  "final sol cost"	"59.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"60"
+#pair  "total raw cpu time"	"11.602246"
+#pair  "total wall time"	"11.602266"
+#pair  "total nodes expanded"	"338905602"
+#pair  "total nodes generated"	"661041935"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:40:46 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000  11.600000 ( 11.605386)
+prob086
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:40:46 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"38.000000"
+#pair  "initial distance"	"38.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	38	7	13
+#altrow  "iter"	1	40	481	926
+#altrow  "iter"	2	42	6430	12550
+#altrow  "iter"	3	44	60411	118466
+#altrow  "iter"	4	46	441494	870850
+#altrow  "iter"	5	48	2838684	5622205
+#altrow  "iter"	6	50	16739024	33240484
+#altrow  "iter"	7	52	93407456	185863832
+#altrow  "iter"	8	54	501376414	999228528
+#pair  "final sol cost"	"56.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"57"
+#pair  "total raw cpu time"	"17.669103"
+#pair  "total wall time"	"17.669121"
+#pair  "total nodes expanded"	"517762902"
+#pair  "total nodes generated"	"1031641139"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:41:04 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000  17.670000 ( 17.672246)
+prob087
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:41:04 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"41.000000"
+#pair  "initial distance"	"41.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	41	6	11
+#altrow  "iter"	1	43	70	133
+#altrow  "iter"	2	45	1204	2328
+#altrow  "iter"	3	47	11023	21290
+#altrow  "iter"	4	49	87479	170246
+#altrow  "iter"	5	51	619322	1208669
+#altrow  "iter"	6	53	4072959	7975342
+#altrow  "iter"	7	55	25468151	49993629
+#altrow  "iter"	8	57	153280272	301561892
+#pair  "final sol cost"	"59.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"60"
+#pair  "total raw cpu time"	"23.712865"
+#pair  "total wall time"	"23.712920"
+#pair  "total nodes expanded"	"697060338"
+#pair  "total nodes generated"	"1369596777"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:41:28 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000  23.710000 ( 23.716004)
+prob088
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:41:28 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"37.000000"
+#pair  "initial distance"	"37.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	37	3	6
+#altrow  "iter"	1	39	142	263
+#altrow  "iter"	2	41	1369	2565
+#altrow  "iter"	3	43	10149	19184
+#altrow  "iter"	4	45	68940	132077
+#altrow  "iter"	5	47	439225	849519
+#altrow  "iter"	6	49	2659216	5180770
+#altrow  "iter"	7	51	15449691	30274139
+#altrow  "iter"	8	53	87044838	171388899
+#altrow  "iter"	9	55	479024321	946875567
+#pair  "final sol cost"	"57.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"58"
+#pair  "total raw cpu time"	"19.329113"
+#pair  "total wall time"	"19.329131"
+#pair  "total nodes expanded"	"557396187"
+#pair  "total nodes generated"	"1101072540"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:41:47 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000  19.330000 ( 19.332216)
+prob089
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:41:47 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"41.000000"
+#pair  "initial distance"	"41.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	41	1	3
+#altrow  "iter"	1	43	58	108
+#altrow  "iter"	2	45	730	1365
+#altrow  "iter"	3	47	7497	14278
+#altrow  "iter"	4	49	67157	129521
+#altrow  "iter"	5	51	543049	1058261
+#altrow  "iter"	6	53	4043799	7943211
+#altrow  "iter"	7	55	28202088	55730543
+#altrow  "iter"	8	57	186817584	370930886
+#pair  "final sol cost"	"59.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"60"
+#pair  "total raw cpu time"	"9.648076"
+#pair  "total wall time"	"9.648113"
+#pair  "total nodes expanded"	"284774139"
+#pair  "total nodes generated"	"565994202"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:41:57 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   9.640000 (  9.651224)
+prob090
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:41:57 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"29.000000"
+#pair  "initial distance"	"29.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	29	2	4
+#altrow  "iter"	1	31	18	33
+#altrow  "iter"	2	33	82	163
+#altrow  "iter"	3	35	420	822
+#altrow  "iter"	4	37	1770	3427
+#altrow  "iter"	5	39	8390	16348
+#altrow  "iter"	6	41	40074	78400
+#altrow  "iter"	7	43	194949	381964
+#altrow  "iter"	8	45	947281	1862585
+#altrow  "iter"	9	47	4607360	9083550
+#altrow  "iter"	10	49	22290750	44050941
+#altrow  "iter"	11	51	107428776	212751591
+#altrow  "iter"	12	53	515707748	1023307741
+#pair  "final sol cost"	"55.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"56"
+#pair  "total raw cpu time"	"21.298857"
+#pair  "total wall time"	"21.298977"
+#pair  "total nodes expanded"	"604195859"
+#pair  "total nodes generated"	"1199487995"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:42:18 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000  21.300000 ( 21.302125)
+prob091
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:42:18 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"35.000000"
+#pair  "initial distance"	"35.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	35	12	24
+#altrow  "iter"	1	37	102	196
+#altrow  "iter"	2	39	646	1256
+#altrow  "iter"	3	41	3846	7515
+#altrow  "iter"	4	43	22154	43468
+#altrow  "iter"	5	45	123297	243006
+#altrow  "iter"	6	47	677684	1340021
+#altrow  "iter"	7	49	3682988	7307675
+#altrow  "iter"	8	51	19766357	39344126
+#altrow  "iter"	9	53	104713628	208974712
+#altrow  "iter"	10	55	547443094	1094992575
+#pair  "final sol cost"	"57.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"58"
+#pair  "total raw cpu time"	"21.875519"
+#pair  "total wall time"	"21.875686"
+#pair  "total nodes expanded"	"603096642"
+#pair  "total nodes generated"	"1207520463"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:42:40 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000  21.880000 ( 21.878905)
+prob092
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:42:40 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"44.000000"
+#pair  "initial distance"	"44.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	44	1	2
+#altrow  "iter"	1	46	39	71
+#altrow  "iter"	2	48	570	1046
+#altrow  "iter"	3	50	4907	9034
+#altrow  "iter"	4	52	39695	73846
+#altrow  "iter"	5	54	303455	568965
+#altrow  "iter"	6	56	2238235	4229787
+#altrow  "iter"	7	58	16039594	30516513
+#altrow  "iter"	8	60	111612970	213656375
+#pair  "final sol cost"	"62.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"63"
+#pair  "total raw cpu time"	"9.599587"
+#pair  "total wall time"	"9.599603"
+#pair  "total nodes expanded"	"284143709"
+#pair  "total nodes generated"	"543598066"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:42:49 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   9.600000 (  9.602733)
+prob093
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:42:49 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"33.000000"
+#pair  "initial distance"	"33.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	33	5	10
+#altrow  "iter"	1	35	25	49
+#altrow  "iter"	2	37	111	212
+#altrow  "iter"	3	39	483	927
+#altrow  "iter"	4	41	2133	4113
+#altrow  "iter"	5	43	9570	18385
+#altrow  "iter"	6	45	44984	86829
+#altrow  "iter"	7	47	218064	422101
+#altrow  "iter"	8	49	1075502	2087083
+#altrow  "iter"	9	51	5378430	10463959
+#altrow  "iter"	10	53	27197422	53037772
+#altrow  "iter"	11	55	138519553	270743878
+#altrow  "iter"	12	57	709720094	1390315316
+#pair  "final sol cost"	"59.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"60"
+#pair  "total raw cpu time"	"32.084642"
+#pair  "total wall time"	"32.084828"
+#pair  "total nodes expanded"	"924525500"
+#pair  "total nodes generated"	"1809933697"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:43:21 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000  32.080000 ( 32.087988)
+prob094
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:43:21 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"50.000000"
+#pair  "initial distance"	"50.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	50	146	262
+#altrow  "iter"	1	52	1823	3322
+#altrow  "iter"	2	54	30551	57644
+#altrow  "iter"	3	56	352295	674964
+#altrow  "iter"	4	58	3378678	6528144
+#altrow  "iter"	5	60	28334576	55029277
+#altrow  "iter"	6	62	217619005	424375591
+#pair  "final sol cost"	"64.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"65"
+#pair  "total raw cpu time"	"8.297465"
+#pair  "total wall time"	"8.297580"
+#pair  "total nodes expanded"	"238335426"
+#pair  "total nodes generated"	"465225697"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:43:30 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000   8.300000 (  8.300811)
+prob095
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:43:30 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"46.000000"
+#pair  "initial distance"	"46.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	46	24	42
+#altrow  "iter"	1	48	124	222
+#altrow  "iter"	2	50	717	1298
+#altrow  "iter"	3	52	3870	6997
+#altrow  "iter"	4	54	22464	40800
+#altrow  "iter"	5	56	133032	242426
+#altrow  "iter"	6	58	808038	1478936
+#altrow  "iter"	7	60	5017771	9225365
+#altrow  "iter"	8	62	31813082	58781453
+#altrow  "iter"	9	64	205113930	381048929
+#pair  "final sol cost"	"66.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"67"
+#pair  "total raw cpu time"	"10.442923"
+#pair  "total wall time"	"10.443044"
+#pair  "total nodes expanded"	"325709977"
+#pair  "total nodes generated"	"607399559"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:43:40 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000  10.440000 ( 10.446352)
+prob096
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:43:40 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"48.000000"
+#pair  "initial distance"	"48.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	48	1	2
+#altrow  "iter"	1	50	7	13
+#altrow  "iter"	2	52	898	1672
+#altrow  "iter"	3	54	14624	27479
+#altrow  "iter"	4	56	176596	335224
+#altrow  "iter"	5	58	1783980	3411888
+#altrow  "iter"	6	60	16105032	31022553
+#altrow  "iter"	7	62	134218572	260260061
+#altrow  "iter"	8	64	1048261434	2045101579
+#pair  "final sol cost"	"66.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"67"
+#pair  "total raw cpu time"	"58.689469"
+#pair  "total wall time"	"58.689890"
+#pair  "total nodes expanded"	"1707496297"
+#pair  "total nodes generated"	"3337690330"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:44:39 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000  58.690000 ( 58.693023)
+prob097
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:44:39 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"41.000000"
+#pair  "initial distance"	"41.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	41	8	15
+#altrow  "iter"	1	43	82	150
+#altrow  "iter"	2	45	697	1280
+#altrow  "iter"	3	47	5178	9593
+#altrow  "iter"	4	49	38312	71606
+#altrow  "iter"	5	51	273654	516363
+#altrow  "iter"	6	53	1908175	3632822
+#altrow  "iter"	7	55	13043585	25030926
+#altrow  "iter"	8	57	86797131	167746504
+#altrow  "iter"	9	59	561577054	1091820582
+#pair  "final sol cost"	"61.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"62"
+#pair  "total raw cpu time"	"34.707885"
+#pair  "total wall time"	"34.708178"
+#pair  "total nodes expanded"	"1002332934"
+#pair  "total nodes generated"	"1957191377"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:45:14 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000  34.710000 ( 34.711281)
+prob098
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:45:14 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"40.000000"
+#pair  "initial distance"	"40.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	40	3	6
+#altrow  "iter"	1	42	54	105
+#altrow  "iter"	2	44	520	985
+#altrow  "iter"	3	46	4137	7926
+#altrow  "iter"	4	48	31523	60561
+#altrow  "iter"	5	50	215771	417688
+#altrow  "iter"	6	52	1393722	2711557
+#altrow  "iter"	7	54	8606839	16821240
+#altrow  "iter"	8	56	51407915	100848322
+#altrow  "iter"	9	58	299478273	589502622
+#altrow  "iter"	10	60	1711786731	3379895628
+#pair  "final sol cost"	"62.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"63"
+#pair  "total raw cpu time"	"100.090601"
+#pair  "total wall time"	"100.090677"
+#pair  "total nodes expanded"	"2795752027"
+#pair  "total nodes generated"	"5506801122"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:46:54 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000 100.090000 (100.093786)
+prob099
+#start data file format 4
+#pair  "wall start date"	"Thu Jan  5 03:46:54 2017"
+#pair  "wall start time"	"1.48359e+09"
+#pair  "machine id"	"ip-10-173-157-252-Linux-4.4.16-27.56.amzn1.x86_64-x86_64"
+#pair  "initial heuristic"	"43.000000"
+#pair  "initial distance"	"43.000000"
+#pair  "algorithm"	"idastar"
+#altcols  "iter"	"iter iter no"	"iter iter bound"	"iter iter expd"	"iter iter gend"
+#altrow  "iter"	0	43	1	2
+#altrow  "iter"	1	45	6	11
+#altrow  "iter"	2	47	124	223
+#altrow  "iter"	3	49	1894	3484
+#altrow  "iter"	4	51	19725	36945
+#altrow  "iter"	5	53	178844	338942
+#altrow  "iter"	6	55	1440408	2752520
+#altrow  "iter"	7	57	10631705	20444921
+#altrow  "iter"	8	59	73811670	142690105
+#altrow  "iter"	9	61	489295195	950234632
+#altrow  "iter"	10	63	3131230855	6106419026
+#pair  "final sol cost"	"65.000000"
+#pair  "state size"	"72"
+#pair  "packed state size"	"8"
+#pair  "final sol length"	"66"
+#pair  "total raw cpu time"	"110.618929"
+#pair  "total wall time"	"110.619039"
+#pair  "total nodes expanded"	"3239494862"
+#pair  "total nodes generated"	"6320047979"
+#pair  "total nodes duplicated"	"0"
+#pair  "total nodes reopened"	"0"
+#pair  "wall finish time"	"1.48359e+09"
+#pair  "wall finish date"	"Thu Jan  5 03:48:44 2017"
+#pair  "max virtual kilobytes"	"17224"
+#end data file format 4
+  0.000000   0.000000 110.620000 (110.622179)
+640.61user 0.04system 10:40.98elapsed 99%CPU (0avgtext+0avgdata 8944maxresident)k
+0inputs+328outputs (0major+44282minor)pagefaults 0swaps
