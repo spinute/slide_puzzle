@@ -1,12 +1,11 @@
 #include <stdbool.h>
 
 #define BLOCK_DIM (32)
-#define N_BLOCKS (48*2)
-// bug?? #define N_BLOCKS (48 * 4)
+#define N_BLOCKS (48)
 #define N_WORKERS (N_BLOCKS * BLOCK_DIM)
 #define N_INIT_DISTRIBUTION (N_WORKERS * 4)
 #define N_INPUTS (N_WORKERS * 8)
-#define PLAN_LEN_MAX 255
+#define PLAN_LEN_MAX 64
 
 #define STATE_WIDTH 4
 #define STATE_N (STATE_WIDTH * STATE_WIDTH)
@@ -1515,6 +1514,15 @@ main(int argc, char *argv[])
             sum_of_expansion += stat[i].nodes_expanded;
 			nodes_expanded_by_threads[stat[i].thread] += stat[i].nodes_expanded;
 		}
+
+        printf("STAT: nodes_expanded\n");
+        for (int i = 0; i < cnt_inputs; ++i)
+            printf("%lld, ", stat[i].nodes_expanded);
+        putchar('\n');
+        printf("STAT: threads_loads\n");
+        for (int i = 0; i < N_WORKERS; ++i)
+            printf("%lld, ", nodes_expanded_by_threads[i]);
+        putchar('\n');
 
         int increased             = 0;
 		unsigned long long int avarage_expected_load = sum_of_expansion / N_WORKERS;
