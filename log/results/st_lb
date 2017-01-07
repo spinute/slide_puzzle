@@ -1,0 +1,947 @@
+nohup: ignoring input
+*prob000
+STAT: av=12286, 2av=2, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12284, 2av=0, 4av=0, 8av=3, 16av=1, 32av=0, more=0
+STAT: av=12285, 2av=2, 4av=6, 8av=7, 16av=10, 32av=1, more=0
+STAT: av=12355, 2av=22, 4av=45, 8av=33, 16av=27, 32av=13, more=1
+STAT: av=12824, 2av=210, 4av=195, 8av=107, 16av=40, 32av=7, more=4
+  0.000000   0.000000   0.180000 (  0.187933)
+prob001
+STAT: av=12286, 2av=0, 4av=0, 8av=2, 16av=0, 32av=0, more=0
+STAT: av=12289, 2av=1, 4av=4, 8av=2, 16av=2, 32av=1, more=0
+STAT: av=12303, 2av=6, 4av=19, 8av=17, 16av=14, 32av=6, more=1
+STAT: av=12570, 2av=60, 4av=80, 8av=78, 16av=35, 32av=9, more=6
+STAT: av=13549, 2av=370, 4av=247, 8av=88, 16av=33, 32av=12, more=0
+  0.000000   0.000000   0.230000 (  0.220142)
+prob002
+STAT: av=12285, 2av=1, 4av=2, 8av=1, 16av=0, 32av=0, more=0
+STAT: av=12273, 2av=3, 4av=6, 8av=9, 16av=5, 32av=1, more=0
+STAT: av=12307, 2av=18, 4av=38, 8av=31, 16av=16, 32av=4, more=0
+STAT: av=12509, 2av=126, 4av=162, 8av=93, 16av=44, 32av=5, more=0
+STAT: av=13601, 2av=516, 4av=305, 8av=96, 16av=11, 32av=0, more=0
+  0.000000   0.000000   0.160000 (  0.156656)
+prob003
+STAT: av=12283, 2av=0, 4av=2, 8av=0, 16av=1, 32av=2, more=0
+STAT: av=12304, 2av=2, 4av=5, 8av=6, 16av=13, 32av=2, more=4
+STAT: av=12609, 2av=41, 4av=56, 8av=43, 16av=26, 32av=18, more=13
+STAT: av=14122, 2av=270, 4av=162, 8av=83, 16av=43, 32av=18, more=9
+  0.000000   0.000000   0.500000 (  0.500381)
+prob004
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12282, 2av=1, 4av=3, 8av=1, 16av=1, 32av=0, more=0
+STAT: av=12280, 2av=0, 4av=10, 8av=13, 16av=5, 32av=2, more=0
+STAT: av=12361, 2av=23, 4av=34, 8av=39, 16av=20, 32av=9, more=1
+STAT: av=12688, 2av=164, 4av=181, 8av=101, 16av=33, 32av=7, more=0
+STAT: av=13881, 2av=569, 4av=293, 8av=67, 16av=15, 32av=2, more=0
+  0.000000   0.000000   0.170000 (  0.176253)
+prob005
+STAT: av=12286, 2av=0, 4av=0, 8av=1, 16av=1, 32av=0, more=0
+STAT: av=12283, 2av=6, 4av=2, 8av=4, 16av=5, 32av=0, more=2
+STAT: av=12392, 2av=13, 4av=22, 8av=22, 16av=12, 32av=9, more=8
+STAT: av=13196, 2av=88, 4av=99, 8av=61, 16av=52, 32av=19, more=10
+STAT: av=15041, 2av=391, 4av=230, 8av=72, 16av=35, 32av=9, more=5
+  0.000000   0.000000   1.210000 (  1.209771)
+prob006
+STAT: av=12286, 2av=0, 4av=1, 8av=1, 16av=0, 32av=0, more=0
+STAT: av=12283, 2av=1, 4av=1, 8av=6, 16av=2, 32av=0, more=0
+STAT: av=12299, 2av=6, 4av=12, 8av=16, 16av=9, 32av=3, more=1
+STAT: av=12436, 2av=44, 4av=55, 8av=60, 16av=33, 32av=8, more=3
+STAT: av=13082, 2av=269, 4av=255, 8av=107, 16av=38, 32av=4, more=2
+STAT: av=14908, 2av=618, 4av=247, 8av=55, 16av=9, 32av=2, more=0
+  0.000000   0.000000   0.610000 (  0.599962)
+prob007
+STAT: av=12278, 2av=3, 4av=1, 8av=0, 16av=1, 32av=5, more=0
+STAT: av=12346, 2av=3, 4av=9, 8av=16, 16av=6, 32av=14, more=10
+STAT: av=13252, 2av=91, 4av=83, 8av=55, 16av=39, 32av=24, more=17
+STAT: av=15241, 2av=338, 4av=186, 8av=94, 16av=34, 32av=14, more=8
+  0.000000   0.000000   0.760000 (  0.761235)
+prob008
+STAT: av=12284, 2av=0, 4av=1, 8av=2, 16av=1, 32av=0, more=0
+STAT: av=12296, 2av=0, 4av=3, 8av=5, 16av=5, 32av=1, more=2
+STAT: av=12409, 2av=17, 4av=20, 8av=28, 16av=13, 32av=12, more=11
+STAT: av=13300, 2av=109, 4av=129, 8av=68, 16av=44, 32av=24, more=9
+STAT: av=15114, 2av=456, 4av=223, 8av=76, 16av=24, 32av=11, more=4
+  0.000000   0.000000   0.460000 (  0.458514)
+prob009
+STAT: av=12287, 2av=1, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12284, 2av=1, 4av=1, 8av=1, 16av=0, 32av=0, more=1
+STAT: av=12306, 2av=1, 4av=1, 8av=7, 16av=5, 32av=2, more=6
+STAT: av=12697, 2av=22, 4av=32, 8av=27, 16av=23, 32av=13, more=17
+STAT: av=14528, 2av=170, 4av=91, 8av=60, 16av=47, 32av=26, more=13
+  0.000000   0.000000   0.810000 (  0.804147)
+prob010
+STAT: av=12285, 2av=2, 4av=0, 8av=0, 16av=1, 32av=0, more=0
+STAT: av=12283, 2av=2, 4av=2, 8av=5, 16av=4, 32av=1, more=3
+STAT: av=12412, 2av=11, 4av=27, 8av=30, 16av=19, 32av=17, more=5
+STAT: av=13283, 2av=170, 4av=138, 8av=79, 16av=38, 32av=7, more=9
+STAT: av=15263, 2av=434, 4av=212, 8av=53, 16av=26, 32av=10, more=4
+  0.000000   0.000000   0.710000 (  0.706422)
+prob011
+STAT: av=12286, 2av=0, 4av=0, 8av=0, 16av=1, 32av=0, more=1
+STAT: av=12317, 2av=0, 4av=1, 8av=3, 16av=3, 32av=3, more=6
+STAT: av=12925, 2av=17, 4av=26, 8av=26, 16av=19, 32av=12, more=13
+  0.000000   0.000000   0.480000 (  0.481126)
+prob012
+STAT: av=12288, 2av=0, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+STAT: av=12289, 2av=0, 4av=0, 8av=4, 16av=0, 32av=1, more=0
+STAT: av=12308, 2av=4, 4av=5, 8av=11, 16av=4, 32av=6, more=1
+STAT: av=12504, 2av=32, 4av=42, 8av=31, 16av=18, 32av=16, more=7
+STAT: av=13339, 2av=197, 4av=148, 8av=79, 16av=43, 32av=20, more=5
+STAT: av=15211, 2av=492, 4av=214, 8av=73, 16av=25, 32av=7, more=2
+  0.000000   0.000000   0.520000 (  0.513933)
+prob013
+STAT: av=12286, 2av=2, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12280, 2av=0, 4av=4, 8av=2, 16av=1, 32av=1, more=0
+STAT: av=12286, 2av=3, 4av=16, 8av=8, 16av=8, 32av=9, more=1
+STAT: av=12457, 2av=62, 4av=54, 8av=73, 16av=35, 32av=13, more=6
+STAT: av=13488, 2av=344, 4av=217, 8av=98, 16av=35, 32av=11, more=5
+STAT: av=15590, 2av=648, 4av=213, 8av=38, 16av=16, 32av=1, more=1
+  0.000000   0.000000   0.440000 (  0.442582)
+prob014
+STAT: av=12283, 2av=1, 4av=1, 8av=0, 16av=3, 32av=0, more=0
+STAT: av=12285, 2av=4, 4av=9, 8av=16, 16av=3, 32av=2, more=3
+STAT: av=12523, 2av=34, 4av=46, 8av=31, 16av=26, 32av=10, more=8
+STAT: av=13607, 2av=195, 4av=134, 8av=93, 16av=34, 32av=10, more=11
+STAT: av=15721, 2av=427, 4av=177, 8av=82, 16av=29, 32av=9, more=3
+  0.000000   0.000000   1.130000 (  1.129333)
+prob015
+STAT: av=12286, 2av=1, 4av=0, 8av=0, 16av=1, 32av=0, more=0
+STAT: av=12290, 2av=1, 4av=1, 8av=1, 16av=1, 32av=3, more=1
+STAT: av=12351, 2av=10, 4av=12, 8av=15, 16av=9, 32av=7, more=3
+STAT: av=12750, 2av=51, 4av=51, 8av=51, 16av=32, 32av=9, more=16
+STAT: av=14227, 2av=259, 4av=154, 8av=96, 16av=50, 32av=10, more=7
+STAT: av=16369, 2av=514, 4av=204, 8av=64, 16av=19, 32av=8, more=1
+  0.000000   0.000000   1.520000 (  1.518746)
+prob016
+STAT: av=12286, 2av=1, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12283, 2av=1, 4av=0, 8av=3, 16av=3, 32av=0, more=0
+STAT: av=12300, 2av=4, 4av=8, 8av=12, 16av=7, 32av=4, more=0
+STAT: av=12398, 2av=21, 4av=51, 8av=45, 16av=21, 32av=13, more=4
+STAT: av=13039, 2av=221, 4av=190, 8av=85, 16av=36, 32av=19, more=2
+STAT: av=14749, 2av=536, 4av=252, 8av=68, 16av=20, 32av=5, more=0
+STAT: av=16867, 2av=568, 4av=132, 8av=23, 16av=5, 32av=0, more=0
+  0.000000   0.000000   0.510000 (  0.500883)
+prob017
+STAT: av=12286, 2av=1, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+STAT: av=12281, 2av=0, 4av=3, 8av=5, 16av=3, 32av=0, more=0
+STAT: av=12305, 2av=7, 4av=24, 8av=16, 16av=10, 32av=2, more=1
+STAT: av=12433, 2av=70, 4av=85, 8av=64, 16av=30, 32av=11, more=1
+STAT: av=13185, 2av=317, 4av=262, 8av=108, 16av=30, 32av=7, more=0
+STAT: av=14951, 2av=718, 4av=215, 8av=45, 16av=8, 32av=0, more=0
+STAT: av=17037, 2av=601, 4av=80, 8av=9, 16av=1, 32av=0, more=0
+  0.000000   0.000000   0.540000 (  0.537036)
+prob018
+STAT: av=12285, 2av=1, 4av=0, 8av=2, 16av=0, 32av=0, more=0
+STAT: av=12279, 2av=0, 4av=1, 8av=8, 16av=7, 32av=3, more=0
+STAT: av=12352, 2av=14, 4av=26, 8av=34, 16av=20, 32av=7, more=5
+STAT: av=12846, 2av=115, 4av=127, 8av=84, 16av=37, 32av=19, more=6
+STAT: av=14296, 2av=504, 4av=234, 8av=91, 16av=28, 32av=10, more=0
+STAT: av=16488, 2av=646, 4av=171, 8av=26, 16av=8, 32av=2, more=0
+  0.000000   0.000000   0.630000 (  0.628649)
+prob019
+STAT: av=12285, 2av=0, 4av=2, 8av=0, 16av=0, 32av=1, more=0
+STAT: av=12296, 2av=3, 4av=3, 8av=4, 16av=4, 32av=2, more=2
+STAT: av=12558, 2av=11, 4av=35, 8av=19, 16av=16, 32av=9, more=14
+STAT: av=14054, 2av=109, 4av=100, 8av=70, 16av=33, 32av=21, more=16
+STAT: av=16288, 2av=392, 4av=184, 8av=74, 16av=39, 32av=20, more=3
+  0.000000   0.000000   2.390000 (  2.387669)
+prob020
+STAT: av=12287, 2av=0, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+STAT: av=12284, 2av=1, 4av=3, 8av=2, 16av=1, 32av=1, more=0
+STAT: av=12301, 2av=5, 4av=3, 8av=9, 16av=8, 32av=2, more=1
+STAT: av=12404, 2av=19, 4av=48, 8av=38, 16av=26, 32av=8, more=5
+STAT: av=13002, 2av=220, 4av=162, 8av=86, 16av=32, 32av=9, more=7
+STAT: av=14771, 2av=495, 4av=206, 8av=61, 16av=27, 32av=12, more=2
+STAT: av=16927, 2av=575, 4av=128, 8av=52, 16av=8, 32av=1, more=0
+  0.000000   0.000000   1.240000 (  1.243932)
+prob021
+STAT: av=12284, 2av=1, 4av=0, 8av=1, 16av=1, 32av=0, more=1
+STAT: av=12327, 2av=1, 4av=4, 8av=5, 16av=7, 32av=3, more=5
+STAT: av=12971, 2av=25, 4av=29, 8av=25, 16av=16, 32av=18, more=15
+STAT: av=14807, 2av=183, 4av=135, 8av=92, 16av=29, 32av=23, more=9
+STAT: av=17057, 2av=532, 4av=161, 8av=68, 16av=29, 32av=9, more=3
+  0.000000   0.000000   5.640000 (  5.641444)
+prob022
+STAT: av=12287, 2av=0, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+STAT: av=12287, 2av=0, 4av=0, 8av=2, 16av=1, 32av=2, more=1
+STAT: av=12333, 2av=3, 4av=3, 8av=14, 16av=14, 32av=6, more=7
+STAT: av=12817, 2av=70, 4av=65, 8av=53, 16av=23, 32av=21, more=14
+STAT: av=14546, 2av=246, 4av=155, 8av=75, 16av=50, 32av=17, more=6
+STAT: av=16748, 2av=504, 4av=187, 8av=72, 16av=21, 32av=6, more=1
+  0.000000   0.000000   1.450000 (  1.441693)
+prob023
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12281, 2av=3, 4av=2, 8av=2, 16av=0, 32av=0, more=0
+STAT: av=12279, 2av=3, 4av=8, 8av=8, 16av=7, 32av=1, more=0
+STAT: av=12342, 2av=28, 4av=28, 8av=23, 16av=20, 32av=12, more=4
+STAT: av=12813, 2av=131, 4av=157, 8av=86, 16av=44, 32av=14, more=6
+STAT: av=14432, 2av=497, 4av=248, 8av=81, 16av=27, 32av=11, more=0
+STAT: av=16640, 2av=637, 4av=167, 8av=31, 16av=6, 32av=0, more=0
+  0.000000   0.000000   0.940000 (  0.935566)
+prob024
+STAT: av=12286, 2av=3, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12284, 2av=2, 4av=0, 8av=2, 16av=1, 32av=0, more=0
+STAT: av=12280, 2av=2, 4av=8, 8av=8, 16av=8, 32av=2, more=0
+STAT: av=12341, 2av=36, 4av=37, 8av=41, 16av=22, 32av=8, more=4
+STAT: av=12893, 2av=213, 4av=163, 8av=93, 16av=36, 32av=12, more=4
+STAT: av=14713, 2av=498, 4av=189, 8av=52, 16av=27, 32av=15, more=2
+STAT: av=16846, 2av=521, 4av=139, 8av=38, 16av=10, 32av=3, more=0
+  0.000000   0.000000   1.250000 (  1.250198)
+prob025
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12286, 2av=2, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12279, 2av=4, 4av=2, 8av=1, 16av=2, 32av=0, more=0
+STAT: av=12278, 2av=8, 4av=4, 8av=12, 16av=5, 32av=4, more=0
+STAT: av=12349, 2av=38, 4av=39, 8av=42, 16av=21, 32av=9, more=6
+STAT: av=12997, 2av=197, 4av=139, 8av=91, 16av=37, 32av=15, more=8
+STAT: av=14769, 2av=483, 4av=215, 8av=73, 16av=26, 32av=9, more=1
+STAT: av=16915, 2av=528, 4av=154, 8av=41, 16av=8, 32av=1, more=0
+  0.000000   0.000000   1.000000 (  1.009384)
+prob026
+STAT: av=12287, 2av=1, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12282, 2av=2, 4av=3, 8av=0, 16av=1, 32av=0, more=0
+STAT: av=12280, 2av=3, 4av=8, 8av=8, 16av=3, 32av=3, more=1
+STAT: av=12368, 2av=18, 4av=47, 8av=27, 16av=17, 32av=14, more=5
+STAT: av=13065, 2av=164, 4av=152, 8av=71, 16av=44, 32av=21, more=6
+STAT: av=14962, 2av=459, 4av=186, 8av=82, 16av=34, 32av=9, more=2
+STAT: av=17117, 2av=547, 4av=145, 8av=42, 16av=3, 32av=4, more=0
+  0.000000   0.000000   1.590000 (  1.593786)
+prob027
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12280, 2av=4, 4av=3, 8av=1, 16av=0, 32av=0, more=0
+STAT: av=12278, 2av=6, 4av=9, 8av=4, 16av=4, 32av=0, more=0
+STAT: av=12304, 2av=16, 4av=17, 8av=31, 16av=7, 32av=0, more=0
+STAT: av=12380, 2av=53, 4av=117, 8av=69, 16av=17, 32av=3, more=0
+STAT: av=12831, 2av=301, 4av=247, 8av=95, 16av=19, 32av=6, more=0
+STAT: av=14248, 2av=675, 4av=250, 8av=39, 16av=8, 32av=0, more=1
+STAT: av=16138, 2av=666, 4av=82, 8av=7, 16av=4, 32av=0, more=1
+STAT: av=17514, 2av=411, 4av=29, 8av=4, 16av=4, 32av=0, more=1
+  0.000000   0.000000   0.590000 (  0.581977)
+prob028
+STAT: av=12287, 2av=0, 4av=0, 8av=0, 16av=0, 32av=1, more=0
+STAT: av=12296, 2av=0, 4av=0, 8av=5, 16av=0, 32av=1, more=2
+STAT: av=12395, 2av=4, 4av=9, 8av=14, 16av=7, 32av=9, more=8
+STAT: av=12929, 2av=74, 4av=72, 8av=52, 16av=42, 32av=23, more=9
+STAT: av=14415, 2av=345, 4av=202, 8av=95, 16av=38, 32av=16, more=2
+STAT: av=16481, 2av=631, 4av=180, 8av=56, 16av=16, 32av=1, more=0
+STAT: av=18409, 2av=578, 4av=87, 8av=12, 16av=2, 32av=0, more=0
+  0.000000   0.000000   1.630000 (  1.637733)
+prob029
+STAT: av=12286, 2av=0, 4av=0, 8av=0, 16av=1, 32av=1, more=1
+STAT: av=12324, 2av=2, 4av=1, 8av=7, 16av=4, 32av=2, more=5
+STAT: av=12742, 2av=21, 4av=32, 8av=22, 16av=21, 32av=14, more=15
+STAT: av=14438, 2av=168, 4av=133, 8av=67, 16av=41, 32av=12, more=12
+STAT: av=16881, 2av=375, 4av=168, 8av=66, 16av=31, 32av=10, more=7
+  0.000000   0.000000   4.420000 (  4.411219)
+prob030
+STAT: av=12287, 2av=1, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12285, 2av=2, 4av=0, 8av=0, 16av=0, 32av=1, more=0
+STAT: av=12298, 2av=1, 4av=2, 8av=1, 16av=2, 32av=2, more=4
+STAT: av=12545, 2av=10, 4av=15, 8av=14, 16av=10, 32av=16, more=11
+STAT: av=13887, 2av=92, 4av=93, 8av=35, 16av=33, 32av=27, more=13
+STAT: av=16091, 2av=323, 4av=156, 8av=86, 16av=34, 32av=13, more=8
+STAT: av=18353, 2av=527, 4av=165, 8av=45, 16av=21, 32av=10, more=0
+  0.000000   0.010000   4.640000 (  4.625315)
+prob031
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12281, 2av=1, 4av=1, 8av=3, 16av=1, 32av=1, more=0
+STAT: av=12295, 2av=3, 4av=6, 8av=7, 16av=16, 32av=1, more=8
+STAT: av=12762, 2av=63, 4av=47, 8av=49, 16av=42, 32av=23, more=16
+STAT: av=14595, 2av=290, 4av=170, 8av=105, 16av=38, 32av=18, more=6
+  0.000000   0.000000   0.900000 (  0.902240)
+prob032
+STAT: av=12289, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12288, 2av=0, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12280, 2av=2, 4av=3, 8av=2, 16av=3, 32av=0, more=1
+STAT: av=12310, 2av=6, 4av=9, 8av=18, 16av=14, 32av=5, more=3
+STAT: av=12606, 2av=86, 4av=67, 8av=70, 16av=39, 32av=10, more=10
+STAT: av=13893, 2av=390, 4av=226, 8av=97, 16av=32, 32av=10, more=3
+STAT: av=16092, 2av=629, 4av=204, 8av=40, 16av=12, 32av=2, more=0
+STAT: av=18091, 2av=564, 4av=81, 8av=2, 16av=2, 32av=0, more=0
+  0.000000   0.000000   1.200000 (  1.190626)
+prob033
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12281, 2av=3, 4av=1, 8av=3, 16av=0, 32av=0, more=0
+STAT: av=12281, 2av=1, 4av=2, 8av=6, 16av=7, 32av=7, more=0
+STAT: av=12395, 2av=34, 4av=33, 8av=34, 16av=35, 32av=18, more=7
+STAT: av=13323, 2av=248, 4av=183, 8av=101, 16av=49, 32av=14, more=5
+STAT: av=15349, 2av=592, 4av=207, 8av=68, 16av=19, 32av=2, more=1
+STAT: av=17411, 2av=633, 4av=100, 8av=15, 16av=3, 32av=0, more=0
+  0.000000   0.000000   1.330000 (  1.334234)
+prob034
+STAT: av=12287, 2av=0, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+STAT: av=12278, 2av=1, 4av=0, 8av=9, 16av=1, 32av=3, more=0
+STAT: av=12342, 2av=7, 4av=18, 8av=17, 16av=14, 32av=16, more=6
+STAT: av=13024, 2av=95, 4av=93, 8av=72, 16av=48, 32av=18, more=13
+STAT: av=14999, 2av=380, 4av=229, 8av=82, 16av=36, 32av=14, more=2
+STAT: av=17269, 2av=585, 4av=179, 8av=59, 16av=7, 32av=1, more=0
+  0.000000   0.000000   2.750000 (  2.740634)
+prob035
+STAT: av=12287, 2av=1, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12285, 2av=1, 4av=3, 8av=2, 16av=0, 32av=0, more=0
+STAT: av=12290, 2av=3, 4av=3, 8av=6, 16av=6, 32av=0, more=0
+STAT: av=12328, 2av=16, 4av=20, 8av=19, 16av=16, 32av=5, more=1
+STAT: av=12532, 2av=88, 4av=102, 8av=69, 16av=44, 32av=6, more=2
+STAT: av=13433, 2av=398, 4av=288, 8av=86, 16av=26, 32av=2, more=1
+STAT: av=15307, 2av=673, 4av=207, 8av=40, 16av=4, 32av=1, more=0
+STAT: av=17252, 2av=535, 4av=78, 8av=6, 16av=4, 32av=0, more=0
+STAT: av=18462, 2av=318, 4av=34, 8av=4, 16av=0, 32av=0, more=0
+  0.000000   0.000000   1.280000 (  1.280887)
+prob036
+STAT: av=12286, 2av=0, 4av=0, 8av=0, 16av=3, 32av=0, more=0
+STAT: av=12301, 2av=5, 4av=2, 8av=2, 16av=5, 32av=2, more=4
+STAT: av=12539, 2av=16, 4av=26, 8av=23, 16av=21, 32av=18, more=9
+STAT: av=13741, 2av=154, 4av=127, 8av=93, 16av=43, 32av=22, more=6
+STAT: av=15807, 2av=467, 4av=244, 8av=81, 16av=29, 32av=3, more=3
+STAT: av=17974, 2av=666, 4av=125, 8av=23, 16av=7, 32av=1, more=0
+  0.000000   0.000000   2.660000 (  2.667070)
+prob037
+STAT: av=12285, 2av=1, 4av=1, 8av=1, 16av=1, 32av=0, more=0
+STAT: av=12288, 2av=1, 4av=5, 8av=5, 16av=3, 32av=3, more=2
+STAT: av=12440, 2av=14, 4av=22, 8av=17, 16av=13, 32av=17, more=10
+STAT: av=13333, 2av=124, 4av=124, 8av=74, 16av=50, 32av=13, more=9
+STAT: av=15358, 2av=421, 4av=191, 8av=83, 16av=29, 32av=15, more=1
+STAT: av=17552, 2av=527, 4av=173, 8av=52, 16av=9, 32av=4, more=0
+  0.000000   0.000000   2.900000 (  2.880315)
+prob038
+STAT: av=12287, 2av=0, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12280, 2av=4, 4av=2, 8av=3, 16av=1, 32av=0, more=0
+STAT: av=12280, 2av=10, 4av=15, 8av=9, 16av=3, 32av=2, more=0
+STAT: av=12332, 2av=26, 4av=51, 8av=41, 16av=17, 32av=4, more=2
+STAT: av=12679, 2av=209, 4av=160, 8av=94, 16av=33, 32av=11, more=2
+STAT: av=14142, 2av=547, 4av=237, 8av=67, 16av=18, 32av=11, more=0
+STAT: av=16269, 2av=640, 4av=113, 8av=50, 16av=9, 32av=0, more=0
+STAT: av=18061, 2av=476, 4av=59, 8av=12, 16av=2, 32av=0, more=0
+  0.000000   0.000000   1.450000 (  1.450420)
+prob039
+STAT: av=12286, 2av=0, 4av=2, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12285, 2av=0, 4av=2, 8av=1, 16av=4, 32av=0, more=0
+STAT: av=12294, 2av=6, 4av=15, 8av=13, 16av=6, 32av=6, more=1
+STAT: av=12466, 2av=40, 4av=75, 8av=47, 16av=30, 32av=11, more=5
+STAT: av=13371, 2av=276, 4av=211, 8av=94, 16av=31, 32av=16, more=1
+STAT: av=15282, 2av=591, 4av=236, 8av=52, 16av=11, 32av=1, more=3
+  0.000000   0.000000   0.480000 (  0.484785)
+prob040
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12280, 2av=3, 4av=1, 8av=2, 16av=1, 32av=0, more=1
+STAT: av=12300, 2av=3, 4av=8, 8av=14, 16av=10, 32av=7, more=4
+STAT: av=12663, 2av=46, 4av=55, 8av=61, 16av=30, 32av=16, more=10
+STAT: av=14086, 2av=243, 4av=180, 8av=88, 16av=44, 32av=6, more=8
+STAT: av=16256, 2av=478, 4av=178, 8av=59, 16av=18, 32av=6, more=6
+  0.000000   0.000000   1.370000 (  1.369886)
+prob041
+STAT: av=12287, 2av=0, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+STAT: av=12284, 2av=1, 4av=1, 8av=4, 16av=3, 32av=0, more=0
+STAT: av=12303, 2av=7, 4av=6, 8av=9, 16av=9, 32av=5, more=1
+STAT: av=12481, 2av=32, 4av=36, 8av=34, 16av=24, 32av=20, more=3
+STAT: av=13234, 2av=180, 4av=177, 8av=108, 16av=41, 32av=11, more=4
+STAT: av=14908, 2av=557, 4av=250, 8av=80, 16av=15, 32av=5, more=0
+STAT: av=17039, 2av=610, 4av=129, 8av=23, 16av=2, 32av=0, more=0
+STAT: av=18575, 2av=442, 4av=29, 8av=5, 16av=0, 32av=0, more=0
+  0.000000   0.000000   1.460000 (  1.450325)
+prob042
+STAT: av=12288, 2av=1, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12283, 2av=1, 4av=1, 8av=3, 16av=0, 32av=1, more=0
+STAT: av=12293, 2av=4, 4av=6, 8av=7, 16av=8, 32av=4, more=3
+STAT: av=12513, 2av=38, 4av=40, 8av=45, 16av=27, 32av=13, more=8
+STAT: av=13668, 2av=231, 4av=152, 8av=69, 16av=35, 32av=18, more=9
+STAT: av=15793, 2av=488, 4av=200, 8av=65, 16av=22, 32av=9, more=3
+STAT: av=17946, 2av=572, 4av=117, 8av=31, 16av=10, 32av=1, more=0
+  0.000000   0.000000   2.220000 (  2.228439)
+prob043
+STAT: av=12287, 2av=0, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+STAT: av=12284, 2av=3, 4av=4, 8av=1, 16av=1, 32av=2, more=0
+STAT: av=12302, 2av=5, 4av=12, 8av=20, 16av=14, 32av=6, more=3
+STAT: av=12668, 2av=70, 4av=72, 8av=68, 16av=25, 32av=12, more=10
+STAT: av=13911, 2av=331, 4av=179, 8av=89, 16av=35, 32av=9, more=7
+STAT: av=15945, 2av=562, 4av=191, 8av=61, 16av=18, 32av=3, more=0
+STAT: av=17926, 2av=519, 4av=94, 8av=28, 16av=0, 32av=1, more=0
+  0.000000   0.000000   1.080000 (  1.076355)
+prob044
+STAT: av=12287, 2av=0, 4av=0, 8av=1, 16av=1, 32av=0, more=0
+STAT: av=12292, 2av=1, 4av=4, 8av=4, 16av=3, 32av=2, more=1
+STAT: av=12365, 2av=4, 4av=19, 8av=18, 16av=17, 32av=15, more=3
+STAT: av=12807, 2av=121, 4av=110, 8av=60, 16av=45, 32av=20, more=2
+STAT: av=14030, 2av=423, 4av=284, 8av=107, 16av=21, 32av=2, more=0
+STAT: av=15990, 2av=697, 4av=174, 8av=25, 16av=2, 32av=0, more=0
+STAT: av=17831, 2av=459, 4av=55, 8av=9, 16av=1, 32av=0, more=0
+STAT: av=18766, 2av=307, 4av=12, 8av=7, 16av=1, 32av=0, more=0
+  0.000000   0.000000   1.310000 (  1.314821)
+prob045
+STAT: av=12287, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=1
+STAT: av=12312, 2av=0, 4av=0, 8av=1, 16av=4, 32av=3, more=6
+STAT: av=12708, 2av=21, 4av=14, 8av=13, 16av=14, 32av=11, more=21
+STAT: av=14336, 2av=104, 4av=78, 8av=68, 16av=39, 32av=25, more=17
+STAT: av=16624, 2av=321, 4av=174, 8av=83, 16av=48, 32av=14, more=5
+STAT: av=18814, 2av=532, 4av=152, 8av=64, 16av=14, 32av=3, more=1
+  0.000000   0.000000   6.790000 (  6.793006)
+prob046
+STAT: av=12286, 2av=3, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12272, 2av=5, 4av=3, 8av=4, 16av=3, 32av=2, more=0
+STAT: av=12307, 2av=19, 4av=13, 8av=19, 16av=18, 32av=8, more=2
+STAT: av=12627, 2av=84, 4av=104, 8av=93, 16av=39, 32av=14, more=5
+STAT: av=13922, 2av=448, 4av=255, 8av=105, 16av=24, 32av=7, more=0
+STAT: av=15939, 2av=743, 4av=181, 8av=29, 16av=5, 32av=0, more=0
+STAT: av=17900, 2av=537, 4av=49, 8av=4, 16av=1, 32av=0, more=0
+STAT: av=19040, 2av=266, 4av=20, 8av=2, 16av=1, 32av=0, more=0
+  0.000000   0.000000   1.920000 (  1.914829)
+prob047
+STAT: av=12285, 2av=1, 4av=2, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12282, 2av=0, 4av=2, 8av=2, 16av=4, 32av=3, more=2
+STAT: av=12411, 2av=13, 4av=12, 8av=15, 16av=13, 32av=12, more=13
+STAT: av=13564, 2av=93, 4av=86, 8av=53, 16av=33, 32av=27, more=18
+STAT: av=15869, 2av=262, 4av=181, 8av=76, 16av=52, 32av=19, more=6
+STAT: av=18158, 2av=490, 4av=200, 8av=61, 16av=26, 32av=4, more=0
+  0.000000   0.000000   7.470000 (  7.474201)
+prob048
+STAT: av=12286, 2av=1, 4av=2, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12277, 2av=1, 4av=6, 8av=7, 16av=3, 32av=2, more=0
+STAT: av=12351, 2av=6, 4av=18, 8av=11, 16av=15, 32av=6, more=0
+STAT: av=12499, 2av=45, 4av=99, 8av=76, 16av=44, 32av=12, more=2
+STAT: av=13442, 2av=335, 4av=267, 8av=107, 16av=39, 32av=6, more=0
+STAT: av=15435, 2av=626, 4av=223, 8av=53, 16av=9, 32av=0, more=0
+STAT: av=17372, 2av=585, 4av=74, 8av=13, 16av=0, 32av=0, more=0
+STAT: av=18613, 2av=360, 4av=26, 8av=4, 16av=1, 32av=0, more=0
+  0.000000   0.000000   2.060000 (  2.050476)
+prob049
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=1
+STAT: av=12339, 2av=3, 4av=0, 8av=0, 16av=1, 32av=3, more=6
+STAT: av=13066, 2av=9, 4av=10, 8av=14, 16av=9, 32av=7, more=21
+STAT: av=15267, 2av=85, 4av=67, 8av=59, 16av=31, 32av=18, more=16
+STAT: av=17795, 2av=279, 4av=132, 8av=64, 16av=37, 32av=17, more=10
+  0.000000   0.000000   9.590000 (  9.600237)
+prob050
+STAT: av=12285, 2av=0, 4av=0, 8av=0, 16av=2, 32av=0, more=2
+STAT: av=12340, 2av=4, 4av=1, 8av=3, 16av=10, 32av=6, more=6
+STAT: av=12932, 2av=31, 4av=23, 8av=28, 16av=27, 32av=14, more=19
+STAT: av=14764, 2av=182, 4av=117, 8av=87, 16av=41, 32av=18, more=15
+STAT: av=17134, 2av=409, 4av=186, 8av=80, 16av=31, 32av=8, more=5
+STAT: av=19359, 2av=528, 4av=137, 8av=30, 16av=12, 32av=4, more=0
+  0.000000   0.000000  11.830000 ( 11.827580)
+prob051
+STAT: av=12286, 2av=1, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12282, 2av=1, 4av=2, 8av=2, 16av=4, 32av=0, more=0
+STAT: av=12304, 2av=6, 4av=15, 8av=10, 16av=11, 32av=6, more=1
+STAT: av=12489, 2av=65, 4av=71, 8av=49, 16av=30, 32av=15, more=5
+STAT: av=13468, 2av=307, 4av=202, 8av=95, 16av=38, 32av=10, more=5
+STAT: av=15486, 2av=593, 4av=205, 8av=51, 16av=25, 32av=2, more=1
+STAT: av=17609, 2av=577, 4av=91, 8av=20, 16av=4, 32av=1, more=0
+STAT: av=19045, 2av=413, 4av=27, 8av=4, 16av=1, 32av=0, more=0
+  0.000000   0.000000   5.190000 (  5.184681)
+prob052
+STAT: av=12285, 2av=0, 4av=1, 8av=0, 16av=2, 32av=0, more=0
+STAT: av=12295, 2av=1, 4av=4, 8av=3, 16av=3, 32av=4, more=3
+STAT: av=12491, 2av=13, 4av=16, 8av=18, 16av=17, 32av=10, more=12
+STAT: av=13504, 2av=93, 4av=80, 8av=32, 16av=45, 32av=21, more=17
+STAT: av=15528, 2av=305, 4av=166, 8av=80, 16av=46, 32av=27, more=2
+STAT: av=17808, 2av=513, 4av=177, 8av=71, 16av=18, 32av=3, more=0
+STAT: av=19693, 2av=526, 4av=109, 8av=14, 16av=1, 32av=0, more=0
+  0.000000   0.000000   5.240000 (  5.241891)
+prob053
+STAT: av=12288, 2av=0, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12286, 2av=2, 4av=0, 8av=2, 16av=1, 32av=0, more=0
+STAT: av=12282, 2av=1, 4av=8, 8av=8, 16av=5, 32av=2, more=0
+STAT: av=12325, 2av=34, 4av=24, 8av=36, 16av=19, 32av=6, more=0
+STAT: av=12569, 2av=171, 4av=149, 8av=96, 16av=32, 32av=10, more=1
+STAT: av=13736, 2av=533, 4av=283, 8av=61, 16av=17, 32av=6, more=0
+STAT: av=15834, 2av=633, 4av=149, 8av=25, 16av=8, 32av=1, more=0
+STAT: av=17597, 2av=463, 4av=58, 8av=7, 16av=1, 32av=0, more=0
+STAT: av=18638, 2av=285, 4av=13, 8av=3, 16av=1, 32av=0, more=0
+  0.000000   0.000000   2.510000 (  2.514016)
+prob054
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12284, 2av=3, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+STAT: av=12281, 2av=1, 4av=3, 8av=4, 16av=4, 32av=1, more=0
+STAT: av=12307, 2av=14, 4av=14, 8av=21, 16av=18, 32av=7, more=1
+STAT: av=12561, 2av=91, 4av=103, 8av=88, 16av=42, 32av=9, more=3
+STAT: av=13641, 2av=454, 4av=251, 8av=99, 16av=25, 32av=5, more=2
+STAT: av=15790, 2av=656, 4av=167, 8av=30, 16av=7, 32av=2, more=0
+STAT: av=17569, 2av=525, 4av=58, 8av=14, 16av=0, 32av=0, more=0
+STAT: av=18712, 2av=313, 4av=22, 8av=4, 16av=0, 32av=0, more=0
+  0.000000   0.000000   2.620000 (  2.615155)
+prob055
+STAT: av=12287, 2av=1, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12283, 2av=2, 4av=1, 8av=1, 16av=1, 32av=0, more=0
+STAT: av=12281, 2av=2, 4av=5, 8av=4, 16av=7, 32av=2, more=1
+STAT: av=12374, 2av=13, 4av=23, 8av=28, 16av=23, 32av=13, more=4
+STAT: av=12874, 2av=135, 4av=158, 8av=111, 16av=44, 32av=13, more=3
+STAT: av=14343, 2av=550, 4av=290, 8av=79, 16av=24, 32av=2, more=0
+STAT: av=16475, 2av=724, 4av=155, 8av=20, 16av=3, 32av=0, more=0
+STAT: av=18337, 2av=457, 4av=38, 8av=2, 16av=3, 32av=0, more=0
+STAT: av=19228, 2av=274, 4av=14, 8av=1, 16av=2, 32av=0, more=0
+  0.000000   0.010000   5.130000 (  5.118039)
+prob056
+STAT: av=12287, 2av=0, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+STAT: av=12277, 2av=2, 4av=2, 8av=7, 16av=2, 32av=2, more=1
+STAT: av=12355, 2av=7, 4av=25, 8av=18, 16av=15, 32av=8, more=4
+STAT: av=12908, 2av=112, 4av=85, 8av=68, 16av=33, 32av=18, more=9
+STAT: av=14779, 2av=338, 4av=200, 8av=73, 16av=31, 32av=10, more=8
+STAT: av=17025, 2av=542, 4av=147, 8av=64, 16av=15, 32av=7, more=2
+STAT: av=18956, 2av=515, 4av=92, 8av=18, 16av=6, 32av=0, more=0
+  0.000000   0.000000   5.770000 (  5.772226)
+prob057
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12283, 2av=1, 4av=3, 8av=1, 16av=0, 32av=0, more=0
+STAT: av=12278, 2av=4, 4av=9, 8av=7, 16av=0, 32av=0, more=0
+STAT: av=12301, 2av=5, 4av=23, 8av=17, 16av=9, 32av=1, more=0
+STAT: av=12345, 2av=59, 4av=94, 8av=75, 16av=21, 32av=5, more=0
+STAT: av=12839, 2av=360, 4av=250, 8av=87, 16av=24, 32av=3, more=0
+STAT: av=14327, 2av=721, 4av=243, 8av=42, 16av=5, 32av=0, more=0
+STAT: av=16439, 2av=637, 4av=61, 8av=8, 16av=1, 32av=0, more=0
+STAT: av=17876, 2av=298, 4av=18, 8av=3, 16av=1, 32av=0, more=0
+STAT: av=18462, 2av=165, 4av=11, 8av=3, 16av=1, 32av=0, more=0
+  0.000000   0.000000   2.710000 (  2.710878)
+prob058
+STAT: av=12286, 2av=2, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12280, 2av=1, 4av=3, 8av=1, 16av=3, 32av=0, more=0
+STAT: av=12290, 2av=1, 4av=11, 8av=16, 16av=5, 32av=4, more=1
+STAT: av=12408, 2av=42, 4av=50, 8av=48, 16av=28, 32av=17, more=6
+STAT: av=13247, 2av=251, 4av=218, 8av=85, 16av=49, 32av=18, more=0
+STAT: av=15215, 2av=571, 4av=221, 8av=86, 16av=14, 32av=1, more=0
+STAT: av=17279, 2av=643, 4av=104, 8av=13, 16av=1, 32av=0, more=0
+STAT: av=18786, 2av=416, 4av=34, 8av=5, 16av=0, 32av=0, more=0
+  0.000000   0.000000   2.610000 (  2.614226)
+prob059
+STAT: av=12288, 2av=1, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12286, 2av=0, 4av=0, 8av=2, 16av=1, 32av=0, more=0
+STAT: av=12281, 2av=3, 4av=7, 8av=9, 16av=5, 32av=4, more=0
+STAT: av=12367, 2av=31, 4av=38, 8av=23, 16av=24, 32av=9, more=8
+STAT: av=13020, 2av=146, 4av=117, 8av=84, 16av=45, 32av=20, more=8
+STAT: av=14786, 2av=443, 4av=221, 8av=97, 16av=27, 32av=9, more=0
+STAT: av=17007, 2av=576, 4av=164, 8av=42, 16av=6, 32av=0, more=0
+STAT: av=18771, 2av=466, 4av=65, 8av=4, 16av=2, 32av=0, more=0
+  0.000000   0.000000   3.310000 (  3.304770)
+prob060
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12286, 2av=0, 4av=2, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12282, 2av=1, 4av=4, 8av=2, 16av=2, 32av=1, more=0
+STAT: av=12312, 2av=9, 4av=9, 8av=7, 16av=9, 32av=5, more=3
+STAT: av=12591, 2av=43, 4av=54, 8av=40, 16av=34, 32av=12, more=10
+STAT: av=13831, 2av=258, 4av=183, 8av=84, 16av=35, 32av=14, more=8
+STAT: av=15840, 2av=594, 4av=189, 8av=58, 16av=19, 32av=6, more=2
+STAT: av=17977, 2av=573, 4av=85, 8av=23, 16av=7, 32av=0, more=0
+STAT: av=19437, 2av=364, 4av=28, 8av=8, 16av=1, 32av=0, more=0
+  0.000000   0.000000   4.700000 (  4.699389)
+prob061
+STAT: av=12287, 2av=1, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12282, 2av=3, 4av=2, 8av=1, 16av=0, 32av=0, more=0
+STAT: av=12282, 2av=1, 4av=1, 8av=10, 16av=5, 32av=0, more=0
+STAT: av=12323, 2av=18, 4av=24, 8av=21, 16av=10, 32av=1, more=0
+STAT: av=12415, 2av=61, 4av=93, 8av=72, 16av=32, 32av=5, more=0
+STAT: av=12983, 2av=347, 4av=263, 8av=131, 16av=13, 32av=3, more=0
+STAT: av=14622, 2av=749, 4av=237, 8av=30, 16av=7, 32av=0, more=0
+STAT: av=16699, 2av=642, 4av=69, 8av=6, 16av=2, 32av=0, more=0
+STAT: av=18079, 2av=365, 4av=17, 8av=4, 16av=2, 32av=0, more=0
+STAT: av=18758, 2av=207, 4av=9, 8av=3, 16av=3, 32av=0, more=0
+  0.000000   0.000000   2.820000 (  2.817503)
+prob062
+STAT: av=12289, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12286, 2av=2, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+STAT: av=12284, 2av=2, 4av=3, 8av=1, 16av=3, 32av=0, more=0
+STAT: av=12294, 2av=8, 4av=9, 8av=17, 16av=5, 32av=1, more=0
+STAT: av=12356, 2av=32, 4av=47, 8av=48, 16av=25, 32av=5, more=1
+STAT: av=12655, 2av=229, 4av=204, 8av=105, 16av=37, 32av=4, more=0
+STAT: av=14038, 2av=630, 4av=266, 8av=74, 16av=10, 32av=0, more=0
+STAT: av=16087, 2av=726, 4av=109, 8av=8, 16av=1, 32av=0, more=0
+STAT: av=17805, 2av=432, 4av=20, 8av=2, 16av=1, 32av=0, more=0
+STAT: av=18682, 2av=234, 4av=4, 8av=2, 16av=1, 32av=0, more=0
+  0.000000   0.000000   2.100000 (  2.096338)
+prob063
+STAT: av=12286, 2av=1, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12284, 2av=0, 4av=1, 8av=2, 16av=2, 32av=1, more=0
+STAT: av=12297, 2av=5, 4av=11, 8av=15, 16av=5, 32av=1, more=3
+STAT: av=12465, 2av=40, 4av=59, 8av=46, 16av=17, 32av=14, more=9
+STAT: av=13722, 2av=204, 4av=146, 8av=72, 16av=33, 32av=19, more=10
+STAT: av=15970, 2av=421, 4av=159, 8av=70, 16av=27, 32av=15, more=5
+STAT: av=18158, 2av=500, 4av=146, 8av=57, 16av=17, 32av=3, more=0
+  0.000000   0.000000   7.540000 (  7.549067)
+prob064
+STAT: av=12289, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12287, 2av=1, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12280, 2av=2, 4av=6, 8av=4, 16av=0, 32av=0, more=0
+STAT: av=12279, 2av=4, 4av=21, 8av=19, 16av=7, 32av=0, more=0
+STAT: av=12338, 2av=44, 4av=83, 8av=52, 16av=25, 32av=5, more=0
+STAT: av=12756, 2av=289, 4av=221, 8av=95, 16av=31, 32av=5, more=0
+STAT: av=14244, 2av=668, 4av=221, 8av=57, 16av=15, 32av=2, more=0
+STAT: av=16328, 2av=610, 4av=115, 8av=27, 16av=3, 32av=0, more=0
+STAT: av=17828, 2av=447, 4av=49, 8av=5, 16av=1, 32av=0, more=0
+STAT: av=18690, 2av=320, 4av=15, 8av=3, 16av=1, 32av=0, more=0
+  0.000000   0.000000   5.580000 (  5.584589)
+prob065
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12284, 2av=0, 4av=1, 8av=1, 16av=2, 32av=0, more=0
+STAT: av=12282, 2av=2, 4av=12, 8av=6, 16av=4, 32av=5, more=2
+STAT: av=12511, 2av=33, 4av=40, 8av=29, 16av=18, 32av=18, more=13
+STAT: av=13852, 2av=161, 4av=129, 8av=82, 16av=40, 32av=15, more=15
+STAT: av=15969, 2av=464, 4av=209, 8av=77, 16av=32, 32av=8, more=3
+STAT: av=18103, 2av=612, 4av=151, 8av=36, 16av=5, 32av=1, more=0
+STAT: av=19844, 2av=468, 4av=59, 8av=5, 16av=1, 32av=0, more=0
+  0.000000   0.000000  13.870000 ( 13.861887)
+prob066
+STAT: av=12286, 2av=1, 4av=1, 8av=1, 16av=0, 32av=0, more=0
+STAT: av=12285, 2av=1, 4av=0, 8av=2, 16av=3, 32av=4, more=0
+STAT: av=12346, 2av=10, 4av=14, 8av=20, 16av=9, 32av=8, more=7
+STAT: av=12838, 2av=81, 4av=89, 8av=55, 16av=35, 32av=20, more=9
+STAT: av=14273, 2av=379, 4av=204, 8av=101, 16av=33, 32av=12, more=4
+STAT: av=16490, 2av=606, 4av=166, 8av=46, 16av=16, 32av=3, more=0
+STAT: av=18371, 2av=534, 4av=94, 8av=10, 16av=2, 32av=0, more=0
+STAT: av=19576, 2av=385, 4av=38, 8av=3, 16av=0, 32av=0, more=0
+  0.000000   0.000000   6.330000 (  6.331654)
+prob067
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12285, 2av=2, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12278, 2av=2, 4av=5, 8av=5, 16av=1, 32av=0, more=0
+STAT: av=12281, 2av=12, 4av=13, 8av=18, 16av=10, 32av=1, more=1
+STAT: av=12389, 2av=44, 4av=62, 8av=66, 16av=37, 32av=7, more=1
+STAT: av=13042, 2av=284, 4av=258, 8av=94, 16av=32, 32av=9, more=1
+STAT: av=14778, 2av=668, 4av=213, 8av=50, 16av=14, 32av=3, more=0
+STAT: av=16871, 2av=603, 4av=101, 8av=13, 16av=1, 32av=0, more=0
+STAT: av=18323, 2av=369, 4av=27, 8av=2, 16av=1, 32av=0, more=0
+  0.000000   0.000000   1.280000 (  1.278762)
+prob068
+STAT: av=12287, 2av=1, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12281, 2av=3, 4av=2, 8av=2, 16av=0, 32av=0, more=0
+STAT: av=12281, 2av=5, 4av=8, 8av=6, 16av=3, 32av=0, more=0
+STAT: av=12313, 2av=9, 4av=23, 8av=28, 16av=14, 32av=4, more=0
+STAT: av=12491, 2av=107, 4av=97, 8av=79, 16av=31, 32av=9, more=0
+STAT: av=13287, 2av=410, 4av=262, 8av=121, 16av=21, 32av=2, more=0
+STAT: av=15092, 2av=734, 4av=226, 8av=32, 16av=0, 32av=0, more=0
+STAT: av=17108, 2av=597, 4av=62, 8av=5, 16av=0, 32av=0, more=0
+STAT: av=18383, 2av=330, 4av=20, 8av=4, 16av=0, 32av=0, more=0
+STAT: av=18959, 2av=234, 4av=8, 8av=3, 16av=0, 32av=0, more=0
+  0.000000   0.000000   4.370000 (  4.374209)
+prob069
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12284, 2av=1, 4av=3, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12283, 2av=2, 4av=6, 8av=4, 16av=1, 32av=0, more=0
+STAT: av=12288, 2av=10, 4av=19, 8av=13, 16av=6, 32av=2, more=0
+STAT: av=12360, 2av=42, 4av=70, 8av=50, 16av=20, 32av=4, more=1
+STAT: av=12725, 2av=255, 4av=220, 8av=91, 16av=24, 32av=4, more=2
+STAT: av=14033, 2av=682, 4av=209, 8av=61, 16av=17, 32av=1, more=0
+STAT: av=16038, 2av=665, 4av=104, 8av=19, 16av=3, 32av=1, more=0
+STAT: av=17571, 2av=398, 4av=29, 8av=6, 16av=2, 32av=1, more=0
+STAT: av=18350, 2av=223, 4av=7, 8av=4, 16av=3, 32av=1, more=0
+STAT: av=18684, 2av=166, 4av=10, 8av=5, 16av=2, 32av=1, more=0
+  0.000000   0.000000   4.820000 (  4.810707)
+prob070
+STAT: av=12287, 2av=0, 4av=0, 8av=0, 16av=1, 32av=0, more=0
+STAT: av=12287, 2av=0, 4av=2, 8av=3, 16av=2, 32av=0, more=1
+STAT: av=12323, 2av=8, 4av=11, 8av=21, 16av=7, 32av=6, more=3
+STAT: av=12702, 2av=69, 4av=63, 8av=59, 16av=31, 32av=11, more=14
+STAT: av=14227, 2av=290, 4av=198, 8av=86, 16av=49, 32av=19, more=3
+STAT: av=16382, 2av=576, 4av=195, 8av=67, 16av=24, 32av=1, more=0
+STAT: av=18433, 2av=556, 4av=96, 8av=18, 16av=2, 32av=0, more=0
+  0.000000   0.000000   3.490000 (  3.495064)
+prob071
+STAT: av=12289, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12287, 2av=0, 4av=1, 8av=1, 16av=0, 32av=0, more=0
+STAT: av=12287, 2av=1, 4av=3, 8av=2, 16av=3, 32av=0, more=0
+STAT: av=12292, 2av=7, 4av=20, 8av=13, 16av=13, 32av=1, more=3
+STAT: av=12442, 2av=70, 4av=70, 8av=66, 16av=40, 32av=19, more=5
+STAT: av=13610, 2av=348, 4av=198, 8av=96, 16av=42, 32av=14, more=1
+STAT: av=15734, 2av=570, 4av=197, 8av=66, 16av=15, 32av=2, more=0
+STAT: av=17747, 2av=554, 4av=89, 8av=16, 16av=1, 32av=0, more=0
+STAT: av=19121, 2av=358, 4av=13, 8av=2, 16av=0, 32av=0, more=0
+  0.000000   0.000000  11.680000 ( 11.678630)
+prob072
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12284, 2av=3, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+STAT: av=12280, 2av=2, 4av=2, 8av=4, 16av=5, 32av=1, more=0
+STAT: av=12322, 2av=14, 4av=14, 8av=20, 16av=17, 32av=0, more=1
+STAT: av=12463, 2av=86, 4av=96, 8av=81, 16av=23, 32av=13, more=2
+STAT: av=13361, 2av=370, 4av=262, 8av=86, 16av=31, 32av=9, more=0
+STAT: av=15187, 2av=720, 4av=206, 8av=42, 16av=9, 32av=0, more=0
+STAT: av=17254, 2av=563, 4av=82, 8av=5, 16av=1, 32av=0, more=0
+STAT: av=18539, 2av=304, 4av=24, 8av=1, 16av=1, 32av=0, more=0
+STAT: av=19103, 2av=227, 4av=7, 8av=1, 16av=2, 32av=0, more=0
+  0.000000   0.000000  11.360000 ( 11.352661)
+prob073
+STAT: av=12287, 2av=0, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12281, 2av=2, 4av=3, 8av=3, 16av=1, 32av=0, more=0
+STAT: av=12285, 2av=3, 4av=5, 8av=13, 16av=8, 32av=6, more=1
+STAT: av=12419, 2av=35, 4av=55, 8av=62, 16av=22, 32av=16, more=3
+STAT: av=13041, 2av=291, 4av=247, 8av=112, 16av=30, 32av=10, more=0
+STAT: av=14880, 2av=668, 4av=238, 8av=42, 16av=9, 32av=1, more=0
+STAT: av=16986, 2av=544, 4av=102, 8av=4, 16av=2, 32av=0, more=0
+STAT: av=18246, 2av=363, 4av=28, 8av=5, 16av=1, 32av=0, more=0
+STAT: av=18933, 2av=285, 4av=9, 8av=2, 16av=2, 32av=0, more=0
+  0.000000   0.000000   5.180000 (  5.178526)
+prob074
+STAT: av=12287, 2av=0, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12286, 2av=0, 4av=1, 8av=1, 16av=3, 32av=1, more=0
+STAT: av=12309, 2av=4, 4av=9, 8av=10, 16av=8, 32av=5, more=6
+STAT: av=12679, 2av=53, 4av=50, 8av=47, 16av=18, 32av=18, more=17
+STAT: av=14195, 2av=260, 4av=153, 8av=84, 16av=47, 32av=22, more=8
+STAT: av=16366, 2av=478, 4av=233, 8av=84, 16av=25, 32av=4, more=0
+STAT: av=18417, 2av=578, 4av=136, 8av=24, 16av=3, 32av=0, more=0
+STAT: av=19889, 2av=419, 4av=51, 8av=8, 16av=2, 32av=0, more=0
+  0.000000   0.000000  16.250000 ( 16.248188)
+prob075
+STAT: av=12287, 2av=0, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+STAT: av=12279, 2av=1, 4av=2, 8av=5, 16av=5, 32av=0, more=0
+STAT: av=12303, 2av=6, 4av=23, 8av=17, 16av=9, 32av=8, more=2
+STAT: av=12536, 2av=88, 4av=94, 8av=66, 16av=37, 32av=14, more=5
+STAT: av=13704, 2av=395, 4av=225, 8av=105, 16av=24, 32av=7, more=3
+STAT: av=15826, 2av=587, 4av=192, 8av=39, 16av=8, 32av=6, more=1
+STAT: av=17762, 2av=553, 4av=82, 8av=17, 16av=4, 32av=0, more=0
+  0.000000   0.000000   2.100000 (  2.099471)
+prob076
+STAT: av=12287, 2av=0, 4av=0, 8av=2, 16av=0, 32av=0, more=0
+STAT: av=12286, 2av=5, 4av=2, 8av=0, 16av=3, 32av=0, more=2
+STAT: av=12386, 2av=4, 4av=6, 8av=6, 16av=12, 32av=3, more=5
+STAT: av=13011, 2av=33, 4av=45, 8av=42, 16av=37, 32av=10, more=12
+STAT: av=14782, 2av=249, 4av=142, 8av=71, 16av=41, 32av=16, more=10
+STAT: av=17028, 2av=482, 4av=199, 8av=66, 16av=22, 32av=13, more=2
+STAT: av=19203, 2av=557, 4av=120, 8av=26, 16av=9, 32av=1, more=0
+STAT: av=20780, 2av=392, 4av=36, 8av=5, 16av=1, 32av=1, more=0
+  0.000000   0.000000  11.250000 ( 11.252871)
+prob077
+STAT: av=12287, 2av=0, 4av=0, 8av=0, 16av=0, 32av=1, more=0
+STAT: av=12306, 2av=0, 4av=2, 8av=3, 16av=1, 32av=1, more=2
+STAT: av=12654, 2av=10, 4av=17, 8av=18, 16av=7, 32av=6, more=11
+STAT: av=14458, 2av=104, 4av=65, 8av=49, 16av=40, 32av=17, more=17
+STAT: av=16891, 2av=290, 4av=159, 8av=77, 16av=35, 32av=15, more=10
+STAT: av=19084, 2av=530, 4av=183, 8av=50, 16av=25, 32av=2, more=1
+  0.000000   0.000000  11.820000 ( 11.824453)
+prob078
+STAT: av=12287, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=1
+STAT: av=12335, 2av=1, 4av=2, 8av=0, 16av=1, 32av=5, more=5
+STAT: av=12953, 2av=11, 4av=9, 8av=13, 16av=19, 32av=7, more=9
+STAT: av=14811, 2av=85, 4av=61, 8av=48, 16av=24, 32av=14, more=16
+STAT: av=17284, 2av=229, 4av=125, 8av=71, 16av=30, 32av=27, more=11
+STAT: av=19586, 2av=458, 4av=192, 8av=70, 16av=20, 32av=6, more=5
+STAT: av=21686, 2av=518, 4av=102, 8av=26, 16av=7, 32av=3, more=1
+  0.000000   0.000000  60.020000 ( 60.006432)
+prob079
+STAT: av=12287, 2av=1, 4av=0, 8av=0, 16av=1, 32av=0, more=0
+STAT: av=12284, 2av=2, 4av=1, 8av=2, 16av=6, 32av=1, more=1
+STAT: av=12368, 2av=5, 4av=12, 8av=14, 16av=18, 32av=6, more=7
+STAT: av=12878, 2av=83, 4av=76, 8av=63, 16av=28, 32av=21, more=8
+STAT: av=14600, 2av=294, 4av=146, 8av=73, 16av=27, 32av=16, more=10
+STAT: av=16839, 2av=435, 4av=163, 8av=62, 16av=28, 32av=7, more=3
+STAT: av=18795, 2av=480, 4av=125, 8av=33, 16av=7, 32av=3, more=0
+STAT: av=20270, 2av=405, 4av=46, 8av=13, 16av=0, 32av=1, more=0
+  0.000000   0.000000  23.110000 ( 23.103570)
+prob080
+STAT: av=12287, 2av=0, 4av=0, 8av=0, 16av=0, 32av=1, more=0
+STAT: av=12296, 2av=1, 4av=2, 8av=1, 16av=1, 32av=2, more=3
+STAT: av=12429, 2av=11, 4av=5, 8av=5, 16av=12, 32av=13, more=9
+STAT: av=13211, 2av=43, 4av=70, 8av=61, 16av=34, 32av=25, more=14
+STAT: av=15123, 2av=280, 4av=173, 8av=94, 16av=44, 32av=24, more=4
+STAT: av=17270, 2av=587, 4av=193, 8av=63, 16av=21, 32av=2, more=0
+STAT: av=19244, 2av=585, 4av=115, 8av=22, 16av=1, 32av=0, more=0
+STAT: av=20659, 2av=408, 4av=19, 8av=6, 16av=0, 32av=0, more=0
+  0.000000   0.000000  12.960000 ( 12.965260)
+prob081
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12284, 2av=3, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12274, 2av=0, 4av=4, 8av=5, 16av=5, 32av=4, more=0
+STAT: av=12357, 2av=18, 4av=23, 8av=17, 16av=17, 32av=17, more=12
+STAT: av=13385, 2av=121, 4av=113, 8av=94, 16av=39, 32av=21, more=12
+STAT: av=15549, 2av=413, 4av=189, 8av=82, 16av=42, 32av=10, more=4
+STAT: av=17836, 2av=550, 4av=169, 8av=45, 16av=13, 32av=1, more=0
+STAT: av=19621, 2av=533, 4av=54, 8av=8, 16av=1, 32av=0, more=0
+  0.000000   0.000000  11.230000 ( 11.222585)
+prob082
+STAT: av=12286, 2av=0, 4av=0, 8av=1, 16av=1, 32av=0, more=0
+STAT: av=12292, 2av=2, 4av=0, 8av=2, 16av=4, 32av=3, more=1
+STAT: av=12367, 2av=8, 4av=21, 8av=11, 16av=22, 32av=14, more=3
+STAT: av=12867, 2av=102, 4av=114, 8av=86, 16av=47, 32av=19, more=6
+STAT: av=14407, 2av=457, 4av=249, 8av=94, 16av=26, 32av=8, more=0
+STAT: av=16530, 2av=660, 4av=166, 8av=34, 16av=2, 32av=0, more=0
+STAT: av=18344, 2av=511, 4av=54, 8av=2, 16av=0, 32av=0, more=0
+STAT: av=19441, 2av=309, 4av=17, 8av=1, 16av=0, 32av=0, more=0
+  0.000000   0.000000   7.210000 (  7.208386)
+prob083
+STAT: av=12287, 2av=0, 4av=0, 8av=1, 16av=0, 32av=0, more=1
+STAT: av=12308, 2av=1, 4av=4, 8av=6, 16av=6, 32av=4, more=9
+STAT: av=12849, 2av=37, 4av=34, 8av=46, 16av=36, 32av=21, more=12
+STAT: av=14296, 2av=246, 4av=172, 8av=91, 16av=57, 32av=14, more=8
+STAT: av=16435, 2av=552, 4av=240, 8av=55, 16av=17, 32av=5, more=2
+STAT: av=18513, 2av=581, 4av=126, 8av=18, 16av=6, 32av=2, more=1
+STAT: av=19987, 2av=482, 4av=54, 8av=7, 16av=1, 32av=0, more=0
+STAT: av=21000, 2av=328, 4av=20, 8av=2, 16av=1, 32av=0, more=0
+  0.000000   0.000000  18.780000 ( 18.781877)
+prob084
+STAT: av=12286, 2av=0, 4av=0, 8av=2, 16av=0, 32av=0, more=0
+STAT: av=12286, 2av=0, 4av=2, 8av=4, 16av=4, 32av=2, more=0
+STAT: av=12311, 2av=10, 4av=20, 8av=18, 16av=21, 32av=7, more=3
+STAT: av=12637, 2av=111, 4av=90, 8av=78, 16av=49, 32av=12, more=8
+STAT: av=14031, 2av=412, 4av=245, 8av=97, 16av=31, 32av=10, more=3
+STAT: av=16329, 2av=563, 4av=215, 8av=43, 16av=14, 32av=0, more=0
+STAT: av=18226, 2av=534, 4av=107, 8av=8, 16av=1, 32av=0, more=0
+STAT: av=19516, 2av=396, 4av=19, 8av=0, 16av=1, 32av=0, more=0
+  0.000000   0.000000  10.940000 ( 10.934583)
+prob085
+STAT: av=12287, 2av=1, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12282, 2av=1, 4av=2, 8av=2, 16av=1, 32av=0, more=0
+STAT: av=12289, 2av=6, 4av=3, 8av=6, 16av=6, 32av=4, more=3
+STAT: av=12512, 2av=28, 4av=38, 8av=19, 16av=21, 32av=20, more=13
+STAT: av=13885, 2av=187, 4av=121, 8av=84, 16av=45, 32av=21, more=9
+STAT: av=16056, 2av=461, 4av=223, 8av=76, 16av=29, 32av=5, more=3
+STAT: av=18215, 2av=592, 4av=139, 8av=22, 16av=6, 32av=0, more=1
+STAT: av=19865, 2av=425, 4av=31, 8av=4, 16av=2, 32av=0, more=0
+  0.000000   0.000000  14.270000 ( 14.272117)
+prob086
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12283, 2av=0, 4av=1, 8av=1, 16av=0, 32av=2, more=1
+STAT: av=12329, 2av=2, 4av=7, 8av=6, 16av=5, 32av=5, more=9
+STAT: av=13007, 2av=44, 4av=44, 8av=42, 16av=29, 32av=15, more=18
+STAT: av=14956, 2av=206, 4av=150, 8av=77, 16av=54, 32av=12, more=13
+STAT: av=17269, 2av=452, 4av=206, 8av=66, 16av=34, 32av=10, more=1
+STAT: av=19365, 2av=516, 4av=138, 8av=36, 16av=12, 32av=0, more=0
+STAT: av=20871, 2av=428, 4av=50, 8av=6, 16av=1, 32av=0, more=0
+STAT: av=21785, 2av=266, 4av=19, 8av=2, 16av=0, 32av=1, more=0
+  0.000000   0.000000  47.350000 ( 47.337332)
+prob087
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12284, 2av=1, 4av=3, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12282, 2av=2, 4av=2, 8av=3, 16av=2, 32av=1, more=2
+STAT: av=12407, 2av=11, 4av=19, 8av=9, 16av=10, 32av=3, more=9
+STAT: av=13462, 2av=63, 4av=54, 8av=30, 16av=16, 32av=9, more=18
+STAT: av=15646, 2av=186, 4av=91, 8av=45, 16av=38, 32av=22, more=16
+STAT: av=17944, 2av=412, 4av=177, 8av=69, 16av=27, 32av=15, more=4
+STAT: av=20050, 2av=576, 4av=159, 8av=37, 16av=10, 32av=1, more=0
+STAT: av=21774, 2av=479, 4av=59, 8av=9, 16av=0, 32av=0, more=0
+  0.000000   0.000000  40.950000 ( 40.939169)
+prob088
+STAT: av=12286, 2av=0, 4av=0, 8av=1, 16av=1, 32av=0, more=0
+STAT: av=12291, 2av=0, 4av=0, 8av=3, 16av=6, 32av=5, more=1
+STAT: av=12416, 2av=25, 4av=21, 8av=18, 16av=15, 32av=12, more=9
+STAT: av=13166, 2av=114, 4av=103, 8av=85, 16av=40, 32av=23, more=11
+STAT: av=14995, 2av=397, 4av=216, 8av=82, 16av=39, 32av=14, more=2
+STAT: av=17176, 2av=537, 4av=197, 8av=45, 16av=10, 32av=1, more=0
+STAT: av=18910, 2av=504, 4av=89, 8av=7, 16av=2, 32av=0, more=0
+STAT: av=20133, 2av=301, 4av=23, 8av=0, 16av=1, 32av=0, more=0
+STAT: av=20687, 2av=215, 4av=11, 8av=0, 16av=1, 32av=0, more=0
+  0.000000   0.000000  33.920000 ( 33.915071)
+prob089
+STAT: av=12286, 2av=1, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+STAT: av=12279, 2av=2, 4av=1, 8av=7, 16av=2, 32av=3, more=0
+STAT: av=12358, 2av=4, 4av=6, 8av=12, 16av=13, 32av=15, more=5
+STAT: av=12950, 2av=70, 4av=69, 8av=55, 16av=37, 32av=27, more=12
+STAT: av=14761, 2av=284, 4av=183, 8av=109, 16av=39, 32av=21, more=5
+STAT: av=16945, 2av=569, 4av=201, 8av=59, 16av=17, 32av=4, more=0
+STAT: av=18962, 2av=576, 4av=91, 8av=13, 16av=4, 32av=1, more=0
+STAT: av=20443, 2av=330, 4av=21, 8av=2, 16av=2, 32av=1, more=0
+  0.000000   0.000000  22.450000 ( 22.436734)
+prob090
+STAT: av=12288, 2av=1, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12286, 2av=1, 4av=1, 8av=1, 16av=0, 32av=0, more=0
+STAT: av=12283, 2av=0, 4av=6, 8av=4, 16av=3, 32av=0, more=0
+STAT: av=12296, 2av=14, 4av=17, 8av=22, 16av=8, 32av=2, more=0
+STAT: av=12420, 2av=47, 4av=76, 8av=61, 16av=22, 32av=7, more=1
+STAT: av=12992, 2av=281, 4av=195, 8av=89, 16av=34, 32av=10, more=0
+STAT: av=14535, 2av=654, 4av=197, 8av=55, 16av=13, 32av=4, more=0
+STAT: av=16618, 2av=556, 4av=112, 8av=20, 16av=3, 32av=0, more=0
+STAT: av=18055, 2av=371, 4av=47, 8av=6, 16av=0, 32av=0, more=0
+STAT: av=18874, 2av=229, 4av=11, 8av=2, 16av=0, 32av=0, more=0
+STAT: av=19296, 2av=141, 4av=6, 8av=2, 16av=0, 32av=0, more=0
+STAT: av=19511, 2av=116, 4av=7, 8av=2, 16av=0, 32av=0, more=0
+  0.000000   0.000000  33.920000 ( 33.915665)
+prob091
+STAT: av=12288, 2av=1, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12284, 2av=1, 4av=3, 8av=0, 16av=1, 32av=0, more=0
+STAT: av=12285, 2av=1, 4av=4, 8av=3, 16av=10, 32av=0, more=0
+STAT: av=12333, 2av=21, 4av=26, 8av=21, 16av=19, 32av=9, more=0
+STAT: av=12613, 2av=112, 4av=98, 8av=88, 16av=42, 32av=7, more=3
+STAT: av=13603, 2av=501, 4av=275, 8av=89, 16av=28, 32av=3, more=1
+STAT: av=15727, 2av=690, 4av=169, 8av=32, 16av=4, 32av=1, more=0
+STAT: av=17534, 2av=545, 4av=64, 8av=10, 16av=1, 32av=0, more=0
+STAT: av=18634, 2av=396, 4av=29, 8av=5, 16av=0, 32av=0, more=0
+STAT: av=19362, 2av=252, 4av=13, 8av=4, 16av=0, 32av=0, more=0
+STAT: av=19746, 2av=189, 4av=11, 8av=4, 16av=0, 32av=0, more=0
+  0.000000   0.000000  36.770000 ( 36.765352)
+prob092
+STAT: av=12288, 2av=0, 4av=0, 8av=1, 16av=0, 32av=0, more=0
+STAT: av=12287, 2av=0, 4av=2, 8av=1, 16av=2, 32av=1, more=1
+STAT: av=12324, 2av=1, 4av=9, 8av=10, 16av=8, 32av=11, more=5
+STAT: av=12753, 2av=72, 4av=68, 8av=66, 16av=31, 32av=15, more=13
+STAT: av=14322, 2av=344, 4av=188, 8av=93, 16av=28, 32av=10, more=8
+STAT: av=16621, 2av=509, 4av=151, 8av=56, 16av=18, 32av=8, more=2
+STAT: av=18556, 2av=513, 4av=92, 8av=25, 16av=9, 32av=1, more=0
+STAT: av=20003, 2av=349, 4av=34, 8av=10, 16av=2, 32av=0, more=0
+  0.000000   0.000000  29.070000 ( 29.063123)
+prob093
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12285, 2av=3, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12283, 2av=1, 4av=1, 8av=3, 16av=0, 32av=0, more=0
+STAT: av=12282, 2av=9, 4av=10, 8av=2, 16av=3, 32av=0, more=0
+STAT: av=12298, 2av=11, 4av=25, 8av=25, 16av=10, 32av=1, more=0
+STAT: av=12407, 2av=88, 4av=84, 8av=67, 16av=21, 32av=6, more=0
+STAT: av=12908, 2av=331, 4av=286, 8av=89, 16av=16, 32av=6, more=0
+STAT: av=14349, 2av=800, 4av=240, 8av=37, 16av=4, 32av=0, more=0
+STAT: av=16499, 2av=672, 4av=83, 8av=7, 16av=0, 32av=0, more=0
+STAT: av=18035, 2av=357, 4av=22, 8av=2, 16av=0, 32av=0, more=0
+STAT: av=18748, 2av=194, 4av=11, 8av=2, 16av=0, 32av=0, more=0
+STAT: av=19052, 2av=154, 4av=6, 8av=2, 16av=0, 32av=0, more=0
+STAT: av=19254, 2av=148, 4av=7, 8av=1, 16av=0, 32av=0, more=0
+  0.000000   0.000000  60.790000 ( 60.771728)
+prob094
+STAT: av=12286, 2av=0, 4av=0, 8av=1, 16av=1, 32av=0, more=0
+STAT: av=12291, 2av=3, 4av=0, 8av=5, 16av=4, 32av=1, more=2
+STAT: av=12437, 2av=20, 4av=27, 8av=19, 16av=19, 32av=14, more=14
+STAT: av=14078, 2av=125, 4av=98, 8av=45, 16av=26, 32av=28, more=9
+STAT: av=16529, 2av=245, 4av=143, 8av=67, 16av=39, 32av=18, more=9
+STAT: av=18687, 2av=444, 4av=171, 8av=49, 16av=30, 32av=6, more=2
+STAT: av=20597, 2av=448, 4av=119, 8av=26, 16av=5, 32av=2, more=0
+  0.000000   0.000000  74.720000 ( 74.712067)
+prob095
+STAT: av=12287, 2av=1, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12281, 2av=0, 4av=0, 8av=7, 16av=0, 32av=0, more=0
+STAT: av=12292, 2av=2, 4av=10, 8av=12, 16av=2, 32av=0, more=0
+STAT: av=12317, 2av=9, 4av=35, 8av=32, 16av=22, 32av=3, more=0
+STAT: av=12543, 2av=99, 4av=151, 8av=83, 16av=33, 32av=9, more=0
+STAT: av=13509, 2av=475, 4av=265, 8av=106, 16av=15, 32av=7, more=0
+STAT: av=15614, 2av=652, 4av=190, 8av=39, 16av=2, 32av=0, more=0
+STAT: av=17507, 2av=537, 4av=59, 8av=6, 16av=0, 32av=0, more=0
+STAT: av=18744, 2av=310, 4av=20, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=19374, 2av=196, 4av=1, 8av=0, 16av=0, 32av=0, more=0
+  0.000000   0.000000  15.290000 ( 15.290427)
+prob096
+STAT: av=12288, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12284, 2av=0, 4av=0, 8av=1, 16av=1, 32av=0, more=2
+STAT: av=12394, 2av=3, 4av=0, 8av=8, 16av=4, 32av=7, more=9
+STAT: av=13601, 2av=42, 4av=43, 8av=31, 16av=21, 32av=17, more=19
+STAT: av=15964, 2av=200, 4av=134, 8av=77, 16av=38, 32av=20, more=14
+STAT: av=18386, 2av=430, 4av=200, 8av=91, 16av=29, 32av=10, more=1
+STAT: av=20546, 2av=565, 4av=137, 8av=35, 16av=6, 32av=1, more=0
+STAT: av=22207, 2av=463, 4av=35, 8av=8, 16av=1, 32av=0, more=0
+  0.000000   0.000000 161.950000 (161.927397)
+prob097
+STAT: av=12289, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=12286, 2av=1, 4av=1, 8av=1, 16av=0, 32av=0, more=0
+STAT: av=12282, 2av=4, 4av=4, 8av=2, 16av=4, 32av=2, more=0
+STAT: av=12305, 2av=11, 4av=27, 8av=19, 16av=19, 32av=8, more=3
+STAT: av=12652, 2av=123, 4av=133, 8av=89, 16av=43, 32av=14, more=5
+STAT: av=14147, 2av=463, 4av=241, 8av=73, 16av=33, 32av=6, more=3
+STAT: av=16311, 2av=590, 4av=146, 8av=47, 16av=8, 32av=1, more=0
+STAT: av=18013, 2av=504, 4av=71, 8av=12, 16av=0, 32av=0, more=0
+STAT: av=19196, 2av=277, 4av=28, 8av=0, 16av=0, 32av=0, more=0
+STAT: av=19748, 2av=172, 4av=15, 8av=0, 16av=0, 32av=0, more=0
+  0.000000   0.000000  41.310000 ( 41.304686)
+prob098
+STAT: av=12286, 2av=0, 4av=1, 8av=1, 16av=0, 32av=0, more=0
+STAT: av=12288, 2av=1, 4av=1, 8av=2, 16av=2, 32av=0, more=1
+STAT: av=12328, 2av=2, 4av=16, 8av=11, 16av=9, 32av=4, more=3
+STAT: av=12673, 2av=53, 4av=58, 8av=46, 16av=26, 32av=13, more=12
+STAT: av=14128, 2av=252, 4av=164, 8av=90, 16av=45, 32av=19, more=7
+STAT: av=16187, 2av=544, 4av=212, 8av=69, 16av=24, 32av=5, more=0
+STAT: av=18190, 2av=597, 4av=123, 8av=12, 16av=4, 32av=1, more=0
+STAT: av=19704, 2av=373, 4av=25, 8av=3, 16av=2, 32av=1, more=0
+STAT: av=20455, 2av=228, 4av=5, 8av=3, 16av=2, 32av=1, more=0
+STAT: av=20820, 2av=167, 4av=5, 8av=4, 16av=2, 32av=1, more=0
+  0.000000   0.000000 138.030000 (137.998979)
+prob099
+STAT: av=12285, 2av=0, 4av=0, 8av=2, 16av=1, 32av=0, more=0
+STAT: av=12287, 2av=3, 4av=2, 8av=3, 16av=1, 32av=6, more=3
+STAT: av=12451, 2av=13, 4av=33, 8av=24, 16av=26, 32av=12, more=15
+STAT: av=13693, 2av=145, 4av=115, 8av=87, 16av=41, 32av=17, more=13
+STAT: av=15876, 2av=440, 4av=185, 8av=85, 16av=25, 32av=15, more=4
+STAT: av=18123, 2av=559, 4av=176, 8av=35, 16av=6, 32av=3, more=1
+STAT: av=19843, 2av=517, 4av=71, 8av=7, 16av=1, 32av=0, more=0
+STAT: av=21039, 2av=308, 4av=14, 8av=5, 16av=0, 32av=0, more=0
+STAT: av=21624, 2av=199, 4av=9, 8av=4, 16av=0, 32av=0, more=0
+  0.000000   0.000000 258.510000 (258.479532)
+900.60user 515.04system 23:35.33elapsed 100%CPU (0avgtext+0avgdata 44292maxresident)k
+0inputs+544outputs (0major+491581minor)pagefaults 0swaps
