@@ -1,9 +1,9 @@
 #include <stdbool.h>
 
 #define BLOCK_DIM 32
-#define N_BLOCKS (48 * 2)
+#define N_BLOCKS 48
 #define N_WORKERS N_BLOCKS *BLOCK_DIM
-#define PLAN_LEN_MAX 255
+#define PLAN_LEN_MAX 64
 
 #define STATE_WIDTH 4
 #define STATE_N (STATE_WIDTH * STATE_WIDTH)
@@ -193,8 +193,11 @@ idas_internal(int f_limit, long long *ret_nodes_expanded, Input input)
     {
         if (state_is_goal())
         {
+		asm("trap;");
+/*
             *ret_nodes_expanded = nodes_expanded;
             return true;
+*/
         }
 
         if (((stack_is_empty() && dir_reverse(dir) != input.parent_dir) ||

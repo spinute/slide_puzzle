@@ -3,6 +3,7 @@ bin
 *.o
 *.swp
 *~
+.ipynb_checkpoints
 small_first_instances
 benchmarks/sample
 tags
