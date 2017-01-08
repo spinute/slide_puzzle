@@ -32,7 +32,6 @@ typedef struct search_stat_tag
     unsigned long long int loads;
 #ifdef COLLECT_LOG
 	unsigned long long int nodes_expanded;
-	int						bid;
 #endif
 	//bool assert_failed;
 } search_stat;
@@ -224,7 +223,6 @@ idas_internal(d_Stack *stack, int f_limit, search_stat *stat)
 			stat->loads = loop_cnt;
 #ifdef COLLECT_LOG
 			atomicAdd(&stat->nodes_expanded, nodes_expanded);
-			stat->bid = blockIdx.x;
 #endif
 			break;
 		}
@@ -260,7 +258,6 @@ idas_internal(d_Stack *stack, int f_limit, search_stat *stat)
 
 #ifdef COLLECT_LOG
 						atomicAdd(&stat->nodes_expanded, nodes_expanded);
-			stat->bid = blockIdx.x;
 #endif
 					}
                     else
@@ -1435,10 +1432,6 @@ main(int argc, char *argv[])
             loads_sum += stat[i].loads;
 
 #ifdef COLLECT_LOG
-        elog("STAT: assigned block\n");
-        for (int i = 0; i < n_roots; ++i)
-			elog("%d, ", stat[i].bid);
-        putchar('\n');
         elog("STAT: loop\n");
         for (int i = 0; i < n_roots; ++i)
             elog("%lld, ", stat[i].loads);
