@@ -2,6 +2,7 @@
 
 #undef SEARCH_ALL_THE_BEST
 #define PACKED
+#define COLLECT_LOG
 
 #define BLOCK_DIM (32) /* FIXME: unstable when more than 32 */
 #define N_INIT_DISTRIBUTION (BLOCK_DIM * 64)
@@ -29,6 +30,7 @@ typedef struct search_stat_tag
     bool                   solved;
     int                    len;
     unsigned long long int loads;
+	unsigned long long int nodes_expanded;
 	//bool assert_failed;
 } search_stat;
 typedef struct input_tag
@@ -206,14 +208,20 @@ idas_internal(d_Stack *stack, int f_limit, search_stat *stat)
 {
 	d_State state;
     unsigned long long int loop_cnt = 0;
+#ifdef COLLECT_LOG
+    unsigned long long int nodes_expanded = 0;
+#endif
+	if (threadIdx.x = 0);
+		stat->solved = false;
 
     for (;;)
     {
         if (stack_is_empty(stack))
 		{
 			stat->loads = loop_cnt;
-			if (!stat->solved)
-				stat->solved = false;
+#ifdef COLLECT_LOG
+			atomicAdd(&stat->expanded_nodes, nodes_expanded);
+#endif
 			break;
 		}
 
@@ -224,6 +232,7 @@ idas_internal(d_Stack *stack, int f_limit, search_stat *stat)
         if (found)
         {
             Direction dir = threadIdx.x & 3;
+			nodes_expanded++;
 
 			/* NOTE: candidate_dir_table may be effective to avoid divergence */
             if (state.parent_dir == dir_reverse(dir))
@@ -236,15 +245,19 @@ idas_internal(d_Stack *stack, int f_limit, search_stat *stat)
                 if (state_get_f(state) <= f_limit)
                 {
                     if (state_is_goal(state))
-                    {
+					{
 #ifndef SEARCH_ALL_THE_BEST
-                        asm("trap;");
+						asm("trap;");
 #else
-			stat->loads = loop_cnt;
-			stat->len = state.depth;
-			stat->solved = true;
+						stat->loads = loop_cnt;
+						stat->len = state.depth;
+						stat->solved = true;
 #endif
-                    }
+
+#ifdef COLLECT_LOG
+						atomicAdd(&stat->expanded_nodes, nodes_expanded);
+#endif
+					}
                     else
                         put = true;
                 }
@@ -1416,6 +1429,21 @@ main(int argc, char *argv[])
         for (int i = 0; i < n_roots; ++i)
             loads_sum += stat[i].loads;
 
+#ifdef COLLECT_LOG
+        elog("STAT: loop\n");
+        for (int i = 0; i < cnt_inputs; ++i)
+            elog("%lld, ", stat[i].loads);
+        putchar('\n');
+        elog("STAT: nodes_expanded\n");
+        for (int i = 0; i < cnt_inputs; ++i)
+            elog("%lld, ", stat[i].nodes_expanded);
+        putchar('\n');
+        elog("STAT: efficiency\n");
+        for (int i = 0; i < cnt_inputs; ++i)
+            elog("%lld, ", stat[i].nodes_expanded / stat[i].loads);
+        putchar('\n');
+#endif
+
         int                    increased = 0;
         unsigned long long int loads_av  = loads_sum / n_roots;
 
@@ -1478,7 +1506,6 @@ main(int argc, char *argv[])
                 goto solution_found;
             }
 #endif
-
 
         // shuffle_input(input, n_roots); /* it may not be needed in case of
         // idas_global */
