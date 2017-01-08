@@ -211,7 +211,7 @@ idas_internal(d_Stack *stack, int f_limit, search_stat *stat)
 #ifdef COLLECT_LOG
     unsigned long long int nodes_expanded = 0;
 #endif
-	if (threadIdx.x = 0);
+	if (threadIdx.x == 0)
 		stat->solved = false;
 
     for (;;)
@@ -220,7 +220,7 @@ idas_internal(d_Stack *stack, int f_limit, search_stat *stat)
 		{
 			stat->loads = loop_cnt;
 #ifdef COLLECT_LOG
-			atomicAdd(&stat->expanded_nodes, nodes_expanded);
+			atomicAdd(&stat->nodes_expanded, nodes_expanded);
 #endif
 			break;
 		}
@@ -255,7 +255,7 @@ idas_internal(d_Stack *stack, int f_limit, search_stat *stat)
 #endif
 
 #ifdef COLLECT_LOG
-						atomicAdd(&stat->expanded_nodes, nodes_expanded);
+						atomicAdd(&stat->nodes_expanded, nodes_expanded);
 #endif
 					}
                     else
@@ -1431,15 +1431,16 @@ main(int argc, char *argv[])
 
 #ifdef COLLECT_LOG
         elog("STAT: loop\n");
-        for (int i = 0; i < cnt_inputs; ++i)
+        for (int i = 0; i < n_roots; ++i)
             elog("%lld, ", stat[i].loads);
         putchar('\n');
         elog("STAT: nodes_expanded\n");
-        for (int i = 0; i < cnt_inputs; ++i)
+        for (int i = 0; i < n_roots; ++i)
             elog("%lld, ", stat[i].nodes_expanded);
         putchar('\n');
         elog("STAT: efficiency\n");
-        for (int i = 0; i < cnt_inputs; ++i)
+        for (int i = 0; i < n_roots; ++i)
+		if (stat[i].loads != 0)
             elog("%lld, ", stat[i].nodes_expanded / stat[i].loads);
         putchar('\n');
 #endif
