@@ -22,6 +22,16 @@ def korf2burns
 	end
 end
 
+def korf2burns25
+	w = h = 5
+	1.upto 50 do |i|
+		tiles = open("benchmarks/all25/%03d" % i).readline.strip.split(' ')
+		positions = tiles2positions w, h, tiles
+		content = fmt w, h, positions
+		File.write("benchmarks/burns_25/%03d" % i, content)
+	end
+end
+
 def rand25burns
 	w = h = 5
 	50.step(500, 50) do |n|
@@ -35,4 +45,4 @@ def rand25burns
 	end
 end
 
-rand25burns()
+korf2burns25()
