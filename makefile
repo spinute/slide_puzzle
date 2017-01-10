@@ -17,6 +17,8 @@ cumain: idas_global.cu
 	nvcc -o $@ $(NVCC_FLAGS) $<
 cumem: idas_smem.cu
 	nvcc -o $@ $(NVCC_FLAGS) $<
+cupdb: idas_pdb.cu
+	nvcc -o $@ $(NVCC_FLAGS) $<
 cu25: idas_smem_25.cu
 	nvcc -o $@ $(NVCC_FLAGS) $<
 cudynamic: idas_dynamic.cu
