@@ -154,9 +154,9 @@ typedef struct input_tag
 #define state_get_rh(s) ((s).rh[0] + (s).rh[1] + (s).rh[2] + (s).rh[3])
 #define state_calc_h(s) (max(state_get_h(s), state_get_rh(s)))
 #ifndef PACKED
-#define state_tile_get(i) (state->tile[i])
-#define state_tile_set(i, v) (state->tile[i] = (v))
-#define state_inv_set(i, v) (state.inv[(i)] = (v))
+#define state_tile_get(s, i) ((s)->tile[i])
+#define state_tile_set(s, i, v) ((s)->tile[i] = (v))
+#define state_inv_set(s, i, v) ((s)->inv[(i)] = (v))
 
 #else
 #define STATE_TILE_BITS 4
@@ -183,14 +183,14 @@ state_init(d_State *state, Input *input)
     {
         if (input->tiles[i] == 0)
             state->empty = i;
-        state_tile_set(i, input->tiles[i]);
-        state_inv_set(input->tiles[i], i);
+        state_tile_set(state, i, input->tiles[i]);
+        state_inv_set(state, input->tiles[i], i);
     }
 
 	for (int i = 0; i < 4; i++)
 	{
-		state.h[i] = hash[i](&state);
-		state.rh[i] = rhash[i](&state);
+		state->h[i] = hash[i](state);
+		state->rh[i] = rhash[i](state);
 	}
 }
 
@@ -221,13 +221,13 @@ __device__ static inline bool
 state_move(d_State *state, Direction dir, int f_limit)
 {
     int new_empty = state->empty + pos_diff_table[dir];
-    int opponent  = state_tile_get(new_empty);
+    int opponent  = state_tile_get(state, new_empty);
 
-    state_tile_set(state->empty, opponent);
-    state_inv_set(opponent, state->empty);
+    state_tile_set(state, state->empty, opponent);
+    state_inv_set(state, opponent, state->empty);
 
 	int pat = whichpat[opponent];
-	state.h[pat] = hash[pat](state);
+	state->h[pat] = hash[pat](state);
 	if (state->depth + 1 + state_get_h(state) <= f_limit)
 	{
 		int rpat = whichrefpat[opponent];
@@ -240,7 +240,7 @@ state_move(d_State *state, Direction dir, int f_limit)
 			rh = rpat == 0 ? rhash[0] : rhash[1];
 		else
 			rh = rpat == 1 ? rhash[1] : rhash[3];
-		state.rh[rpat] = rh(state);
+		state->rh[rpat] = rh(state);
 
 		if (state->depth + 1 + state_get_rh(state) <= f_limit)
 		{
