@@ -150,8 +150,8 @@ typedef struct input_tag
 
 /* state implementation */
 
-#define state_get_h(s) ((s).h[0] + (s).h[1] + (s).h[2] + (s).h[3])
-#define state_get_rh(s) ((s).rh[0] + (s).rh[1] + (s).rh[2] + (s).rh[3])
+#define state_get_h(s) ((s)->h[0] + (s)->h[1] + (s)->h[2] + (s)->h[3])
+#define state_get_rh(s) ((s)->rh[0] + (s)->rh[1] + (s)->rh[2] + (s)->rh[3])
 #define state_calc_h(s) (max(state_get_h(s), state_get_rh(s)))
 #ifndef PACKED
 #define state_tile_get(s, i) ((s)->tile[i])
@@ -197,13 +197,13 @@ state_init(d_State *state, Input *input)
 __device__ static inline bool
 state_is_goal(d_State state)
 {
-    return state_get_h(state) == 0;
+    return state_get_h(&state) == 0;
 }
 
 __device__ static inline int
 state_get_f(d_State state)
 {
-    return state.depth + state_calc_h(state);
+    return state.depth + state_calc_h(&state);
 }
 
 __device__ __shared__ static bool movable_table_shared[STATE_N][DIR_N];
