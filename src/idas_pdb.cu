@@ -1,7 +1,7 @@
 #include <stdbool.h>
 
 #undef SEARCH_ALL_THE_BEST
-#undef PACKED
+#undef PACKED /**/
 #undef COLLECT_LOG
 
 #define BLOCK_DIM (32) /* NOTE: broken when more than 32 */
@@ -18,12 +18,119 @@ typedef signed char   Direction;
 #define dir_reverse(dir) ((Direction)(3 - (dir)))
 #define DIR_N 4
 #define DIR_FIRST 0
++/* this order is not Burns', but Korf's*/
 #define DIR_UP 0
-#define DIR_RIGHT 1
-#define DIR_LEFT 2
+#define DIR_LEFT 1
+#define DIR_RIGHT 2
 #define DIR_DOWN 3
 #define POS_X(pos) ((pos) % STATE_WIDTH)
 #define POS_Y(pos) ((pos) / STATE_WIDTH)
+
+typedef struct state_tag
+{
+#ifndef PACKED
+    uchar tile[STATE_N];
+	uchar inv[STATE_N];
+#else
+    unsigned long long tile;
+#endif
+    uchar     empty;
+    uchar     depth;
+    Direction parent_dir;
+	uchar h[4], rh[4];
+} d_State;
+
+
+/* PDB */
+#define TABLESIZE 244140625   /* bytes in direct-access database array (25^6) */
+static __device__ unsigned char h0[TABLESIZE];        /* heuristic tables for pattern databases */
+static __device__ unsigned char h1[TABLESIZE];
+
+static __device__ __constant__ const int whichpat[25] = {0,0,0,1,1,0,0,0,1,1,2,2,0,1,1,2,2,3,3,3,2,2,3,3,3};
+static __device__ __constant__ const int whichrefpat[25] = {0,0,2,2,2,0,0,2,2,2,0,0,0,3,3,1,1,1,3,3,1,1,1,3,3};
+#define inv (state->inv)
+/* the position of each tile in order, reflected about the main diagonal */
+static __device__ __constant__ const int ref[] = {0,5,10,15,20,1,6,11,16,21,2,7,12,17,22,3,8,13,18,23,4,9,14,19,24};
+static __device__ __constant__ const int rot90[] = {20,15,10,5,0,21,16,11,6,1,22,17,12,7,2,23,18,13,8,3,24,19,14,9,4};
+static __device__ __constant__ const int rot90ref[] = {20,21,22,23,24,15,16,17,18,19,10,11,12,13,14,5,6,7,8,9,0,1,2,3,4};
+static __device__ __constant__ const int rot180[] = {24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0};
+static __device__ __constant__ const int rot180ref[] = {24,19,14,9,4,23,18,13,8,3,22,17,12,7,2,21,16,11,6,1,20,15,10,5,0};
+
+static __device__ unsigned int
+hash0(d_State *state)
+{
+	int hashval;                                   /* index into heuristic table */
+	hashval = ((((inv[1]*STATE_N+inv[2])*STATE_N+inv[5])*STATE_N+inv[6])*STATE_N+inv[7])*STATE_N+inv[12];
+	return (h0[hashval]);                       /* total moves for this pattern */
+}
+
+static __device__ unsigned int
+hashref0(d_State *state)
+{
+	int hashval;                                   /* index into heuristic table */
+	hashval = (((((ref[inv[5]] * STATE_N + ref[inv[10]]) * STATE_N + ref[inv[1]]) * STATE_N +
+					ref[inv[6]]) * STATE_N + ref[inv[11]]) * STATE_N + ref[inv[12]]);
+	return (h0[hashval]);                       /* total moves for this pattern */
+}
+
+static __device__ unsigned int
+hash1(d_State *state)
+{
+	int hashval;                                   /* index into heuristic table */
+	hashval = ((((inv[3]*STATE_N+inv[4])*STATE_N+inv[8])*STATE_N+inv[9])*STATE_N+inv[13])*STATE_N+inv[14];
+	return (h1[hashval]);                       /* total moves for this pattern */
+}
+
+static __device__ unsigned int
+hashref1(d_State *state)
+{
+	int hashval;                                   /* index into heuristic table */
+	hashval = (((((ref[inv[15]] * STATE_N + ref[inv[20]]) * STATE_N + ref[inv[16]]) * STATE_N +
+					ref[inv[21]]) * STATE_N + ref[inv[17]]) * STATE_N + ref[inv[22]]);
+	return (h1[hashval]);                       /* total moves for this pattern */
+}
+
+static __device__ unsigned int
+hash2(d_State *state)
+{
+	int hashval;                                   /* index into heuristic table */
+	hashval = ((((rot180[inv[21]] * STATE_N + rot180[inv[20]]) * STATE_N + rot180[inv[16]]) * STATE_N +
+				rot180[inv[15]]) * STATE_N + rot180[inv[11]]) * STATE_N + rot180[inv[10]];
+	return (h1[hashval]);                       /* total moves for this pattern */
+}
+
+static __device__ unsigned int
+hashref2(d_State *state)
+{
+	int hashval;                                   /* index into heuristic table */
+	hashval = (((((rot180ref[inv[9]] * STATE_N + rot180ref[inv[4]]) * STATE_N + rot180ref[inv[8]]) * STATE_N +
+					rot180ref[inv[3]]) * STATE_N + rot180ref[inv[7]]) * STATE_N + rot180ref[inv[2]]);
+	return (h1[hashval]);                       /* total moves for this pattern */
+}
+
+static __device__ unsigned int
+hash3(d_State *state)
+{
+	int hashval;                                   /* index into heuristic table */
+	hashval = ((((rot90[inv[19]] * STATE_N + rot90[inv[24]]) * STATE_N + rot90[inv[18]]) * STATE_N +
+				rot90[inv[23]]) * STATE_N + rot90[inv[17]]) * STATE_N + rot90[inv[22]];
+	return (h1[hashval]);                       /* total moves for this pattern */
+}
+
+static __device__ unsigned int
+hashref3(d_State *state)
+{
+	int hashval;                                   /* index into heuristic table */
+	hashval = (((((rot90ref[inv[23]] * STATE_N + rot90ref[inv[24]]) * STATE_N + rot90ref[inv[18]]) * STATE_N
+					+ rot90ref[inv[19]]) * STATE_N + rot90ref[inv[13]]) * STATE_N + rot90ref[inv[14]]);
+	return (h1[hashval]);                       /* total moves for this pattern */
+}
+#undef inv
+
+typedef unsigned int (*HashFunc)(d_State *state);
+__device__ HashFunc hash[] = {hash0, hash1, hash2, hash3},
+		   rhash[] = {hashref0, hashref1, hashref2, hashref3};
+
 
 typedef struct search_stat_tag
 {
@@ -33,7 +140,6 @@ typedef struct search_stat_tag
 #ifdef COLLECT_LOG
 	unsigned long long int nodes_expanded;
 #endif
-	//bool assert_failed;
 } search_stat;
 typedef struct input_tag
 {
@@ -44,28 +150,13 @@ typedef struct input_tag
 
 /* state implementation */
 
-/*
- * goal: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
- */
-
-//__device__ __shared__ static signed char h_diff_table_shared[STATE_N][STATE_N] [DIR_N];
-
-typedef struct state_tag
-{
-#ifndef PACKED
-    uchar tile[STATE_N];
-#else
-    unsigned long long tile;
-#endif
-    uchar     empty;
-    uchar     depth;
-    Direction parent_dir;
-    uchar     h_value; /* ub of h_value is STATE_WIDTH*2*(STATE_N-1), e.g. 90 */
-} d_State;
-
+#define state_get_h(s) ((s).h[0] + (s).h[1] + (s).h[2] + (s).h[3])
+#define state_get_rh(s) ((s).rh[0] + (s).rh[1] + (s).rh[2] + (s).rh[3])
+#define state_calc_h(s) (max(state_get_h(s), state_get_rh(s)))
 #ifndef PACKED
 #define state_tile_get(i) (state->tile[i])
 #define state_tile_set(i, v) (state->tile[i] = (v))
+#define state_inv_set(i, v) (state.inv[(i)] = (v))
 
 #else
 #define STATE_TILE_BITS 4
@@ -93,29 +184,26 @@ state_init(d_State *state, Input *input)
         if (input->tiles[i] == 0)
             state->empty = i;
         state_tile_set(i, input->tiles[i]);
+        state_tile_inv(input->tiles[i], i);
     }
 
-    state->h_value = 0;
-    for (int i = 0; i < STATE_N; ++i)
-    {
-	    uchar tile = state_tile_get(i);
-	    if (tile == 0)
-		    continue;
-	    state->h_value += distance(POS_X(i), POS_X(tile));
-	    state->h_value += distance(POS_Y(i), POS_Y(tile));
-    }
+	for (int i = 0; i < 4; i++)
+	{
+		state.h[i] = hash[i](state->tiles);
+		state.rh[i] = rhash[i](state->tiles);
+	}
 }
 
 __device__ static inline bool
 state_is_goal(d_State state)
 {
-    return state.h_value == 0;
+    return state_get_h(state->tiles) == 0;
 }
 
 __device__ static inline int
 state_get_f(d_State state)
 {
-    return state.depth + state.h_value;
+    return state.depth + state_calc_h;
 }
 
 __device__ __shared__ static bool movable_table_shared[STATE_N][DIR_N];
@@ -127,35 +215,43 @@ state_movable(d_State state, Direction dir)
 }
 
 __device__ __constant__ const static int pos_diff_table[DIR_N] = {
-    -STATE_WIDTH, 1, -1, +STATE_WIDTH};
+    -STATE_WIDTH, -1, 1, +STATE_WIDTH};
 
-__device__ static inline int
-calc_h_diff(int opponent, int from, int rev_dir)
-{
-	int goal_x = POS_X(opponent), goal_y = POS_Y(opponent);
-	int from_x = POS_X(from), from_y = POS_Y(from);
-	if (rev_dir == DIR_LEFT)
-		return goal_x > from_x ? -1 : 1;
-	else if (rev_dir == DIR_RIGHT)
-		return goal_x < from_x ? -1 : 1;
-	else if (rev_dir == DIR_UP)
-		return goal_y > from_y ? -1 : 1;
-	else
-		return goal_y < from_y ? -1 : 1;
-}
-
-__device__ static inline void
+__device__ static inline bool
 state_move(d_State *state, Direction dir)
 {
     int new_empty = state->empty + pos_diff_table[dir];
     int opponent  = state_tile_get(new_empty);
 
-    //state->h_value += h_diff_table_shared[opponent][new_empty][dir];
-    state->h_value += calc_h_diff(opponent, new_empty, dir);
     state_tile_set(state->empty, opponent);
-    state->empty      = new_empty;
-    state->parent_dir = dir;
-    ++state->depth;
+    state_inv_set(opponent, state->empty);
+
+	int pat = whichpat[opponent];
+	state.h[pat] = hash[pat]();
+	if (state->depth + 1 + state_get_h <= f_limit)
+	{
+		int rpat = whichrefpat[opponent];
+		HashFunc rh;
+		if (pat == 0)
+			rh = rpat == 0 ? rhash[0] : rhash[2];
+		else if (pat == 1)
+			rh = rpat == 2 ? rhash[2] : rhash[3];
+		else if (pat == 2)
+			rh = rpat == 0 ? rhash[0] : rhash[1];
+		else
+			rh = rpat == 1 ? rhash[1] : rhash[3];
+		state.rh[rpat] = rh();
+
+		if (state->depth + 1 + state_get_rh <= f_limit)
+		{
+			state->empty = new_empty;
+			state->parent_dir = dir;
+			++state->depth;
+			return true;
+		}
+	}
+
+	return false;
 }
 
 /* stack implementation */
@@ -243,9 +339,7 @@ idas_internal(d_Stack *stack, int f_limit, search_stat *stat)
 
             if (state_movable(state, dir))
             {
-                state_move(&state, dir);
-
-                if (state_get_f(state) <= f_limit)
+                if (state_move(&state, dir))
                 {
                     if (state_is_goal(state))
 					{
@@ -267,12 +361,10 @@ idas_internal(d_Stack *stack, int f_limit, search_stat *stat)
             }
         }
 
-        //__syncthreads(); // maybe useless
 		stack_put(stack, &state, put);
     }
 }
 
-/* XXX: movable table is effective in this case? */
 __global__ void
 idas_kernel(Input *input, search_stat *stat, int f_limit,
             signed char *h_diff_table, bool *movable_table)
@@ -1302,6 +1394,51 @@ init_movable_table(bool movable_table[])
 }
 #undef m_t
 
+static FILE *infile;                              /* pointer to heuristic table file */
+static unsigned char h0_h[TABLESIZE];
+static unsigned char h1_h[TABLESIZE];
+static __host__ void
+readfile(unsigned char table[])
+{
+	int pos[6];                                 /* positions of each pattern tile */
+	int index;                                           /* direct access index */
+
+	for (pos[0] = 0; pos[0] < STATE_N; pos[0]++) {
+		for (pos[1] = 0; pos[1] < STATE_N; pos[1]++) {
+			if (pos[1] == pos[0]) continue;
+			for (pos[2] = 0; pos[2] < STATE_N; pos[2]++) {
+				if (pos[2] == pos[0] || pos[2] == pos[1]) continue;
+				for (pos[3] = 0; pos[3] < STATE_N; pos[3]++) {
+					if (pos[3] == pos[0] || pos[3] == pos[1] || pos[3] == pos[2]) continue;
+					for (pos[4] = 0; pos[4] < STATE_N; pos[4]++) {
+						if (pos[4] == pos[0] || pos[4] == pos[1] || pos[4] == pos[2] || pos[4] == pos[3]) continue;
+						for (pos[5] = 0; pos[5] < STATE_N; pos[5]++) {
+							if (pos[5] == pos[0] || pos[5] == pos[1] || pos[5] == pos[2] || pos[5] == pos[3] || pos[5] == pos[4])
+							continue;
+							index = ((((pos[0]*25+pos[1])*25+pos[2])*25+pos[3])*25+pos[4])*25+pos[5];
+							table[index] = getc (infile);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+static __host__ void
+pdb_load(void)
+{
+	infile = fopen("pattern_1_2_5_6_7_12", "rb"); /* read 6-tile pattern database */
+	readfile (h0_h);         /* read database and expand into direct-access array */
+	fclose(infile);
+	printf ("pattern 1 2 5 6 7 12 read in\n");
+
+	infile = fopen("pattern_3_4_8_9_13_14", "rb"); /* read 6-tile pattern database */
+	readfile (h1_h);         /* read database and expand into direct-access array */
+	fclose(infile);
+	printf ("pattern 3 4 8 9 13 14 read in\n");
+}
+
 // static char dir_char[] = {'U', 'R', 'L', 'D'};
 
 #define INPUT_SIZE (sizeof(Input) * buf_len)
@@ -1330,6 +1467,10 @@ main(int argc, char *argv[])
         exit_failure("usage: bin/cumain <ifname>\n");
 
     load_state_from_file(argv[1], input[0].tiles);
+
+	pdb_load();
+    CUDA_CHECK(cudaMemcpy(h0, h0_h, TABLESIZE, cudaMemcpyHostToDevice));
+    CUDA_CHECK(cudaMemcpy(h1, h0_h, TABLESIZE, cudaMemcpyHostToDevice));
 
     {
         State init_state = state_init(input[0].tiles, 0);
