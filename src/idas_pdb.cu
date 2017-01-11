@@ -18,7 +18,7 @@ typedef signed char   Direction;
 #define dir_reverse(dir) ((Direction)(3 - (dir)))
 #define DIR_N 4
 #define DIR_FIRST 0
-+/* this order is not Burns', but Korf's*/
+/* this order is not Burns', but Korf's*/
 #define DIR_UP 0
 #define DIR_LEFT 1
 #define DIR_RIGHT 2
@@ -184,26 +184,26 @@ state_init(d_State *state, Input *input)
         if (input->tiles[i] == 0)
             state->empty = i;
         state_tile_set(i, input->tiles[i]);
-        state_tile_inv(input->tiles[i], i);
+        state_inv_set(input->tiles[i], i);
     }
 
 	for (int i = 0; i < 4; i++)
 	{
-		state.h[i] = hash[i](state->tiles);
-		state.rh[i] = rhash[i](state->tiles);
+		state.h[i] = hash[i](&state);
+		state.rh[i] = rhash[i](&state);
 	}
 }
 
 __device__ static inline bool
 state_is_goal(d_State state)
 {
-    return state_get_h(state->tiles) == 0;
+    return state_get_h(state) == 0;
 }
 
 __device__ static inline int
 state_get_f(d_State state)
 {
-    return state.depth + state_calc_h;
+    return state.depth + state_calc_h(state);
 }
 
 __device__ __shared__ static bool movable_table_shared[STATE_N][DIR_N];
@@ -218,7 +218,7 @@ __device__ __constant__ const static int pos_diff_table[DIR_N] = {
     -STATE_WIDTH, -1, 1, +STATE_WIDTH};
 
 __device__ static inline bool
-state_move(d_State *state, Direction dir)
+state_move(d_State *state, Direction dir, int f_limit)
 {
     int new_empty = state->empty + pos_diff_table[dir];
     int opponent  = state_tile_get(new_empty);
@@ -227,8 +227,8 @@ state_move(d_State *state, Direction dir)
     state_inv_set(opponent, state->empty);
 
 	int pat = whichpat[opponent];
-	state.h[pat] = hash[pat]();
-	if (state->depth + 1 + state_get_h <= f_limit)
+	state.h[pat] = hash[pat](state);
+	if (state->depth + 1 + state_get_h(state) <= f_limit)
 	{
 		int rpat = whichrefpat[opponent];
 		HashFunc rh;
@@ -240,9 +240,9 @@ state_move(d_State *state, Direction dir)
 			rh = rpat == 0 ? rhash[0] : rhash[1];
 		else
 			rh = rpat == 1 ? rhash[1] : rhash[3];
-		state.rh[rpat] = rh();
+		state.rh[rpat] = rh(state);
 
-		if (state->depth + 1 + state_get_rh <= f_limit)
+		if (state->depth + 1 + state_get_rh(state) <= f_limit)
 		{
 			state->empty = new_empty;
 			state->parent_dir = dir;
@@ -339,7 +339,7 @@ idas_internal(d_Stack *stack, int f_limit, search_stat *stat)
 
             if (state_movable(state, dir))
             {
-                if (state_move(&state, dir))
+                if (state_move(&state, dir, f_limit))
                 {
                     if (state_is_goal(state))
 					{
