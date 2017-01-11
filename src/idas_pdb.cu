@@ -1,8 +1,8 @@
 #include <stdbool.h>
 
-#undef SEARCH_ALL_THE_BEST
+#undef  SEARCH_ALL_THE_BEST
 #undef PACKED /**/
-#undef COLLECT_LOG
+#undef  COLLECT_LOG
 
 #define BLOCK_DIM (32) /* NOTE: broken when more than 32 */
 #define N_INIT_DISTRIBUTION (BLOCK_DIM * 64)
@@ -43,8 +43,8 @@ typedef struct state_tag
 
 /* PDB */
 #define TABLESIZE 244140625   /* bytes in direct-access database array (25^6) */
-static __device__ unsigned char h0[TABLESIZE];        /* heuristic tables for pattern databases */
-static __device__ unsigned char h1[TABLESIZE];
+static __device__ unsigned char *h0;        /* heuristic tables for pattern databases */
+static __device__ unsigned char *h1;
 
 static __device__ __constant__ const int whichpat[25] = {0,0,0,1,1,0,0,0,1,1,2,2,0,1,1,2,2,3,3,3,2,2,3,3,3};
 static __device__ __constant__ const int whichrefpat[25] = {0,0,2,2,2,0,0,2,2,2,0,0,0,3,3,1,1,1,3,3,1,1,1,3,3};
@@ -367,13 +367,18 @@ idas_internal(d_Stack *stack, int f_limit, search_stat *stat)
 
 __global__ void
 idas_kernel(Input *input, search_stat *stat, int f_limit,
-            signed char *h_diff_table, bool *movable_table)
+            signed char *h_diff_table, bool *movable_table,
+	unsigned char *h0_ptr, unsigned char *h1_ptr)
 {
     __shared__ d_Stack     stack;
     int tid = threadIdx.x;
 	int bid = blockIdx.x;
 	if (tid == 0)
+{
+		h0 = h0_ptr;
+		h1 = h1_ptr;
 		stat[bid].loads = 0;
+}
 
 	d_State state;
 	state_init(&state, &input[bid]);
@@ -1395,8 +1400,8 @@ init_movable_table(bool movable_table[])
 #undef m_t
 
 static FILE *infile;                              /* pointer to heuristic table file */
-static unsigned char h0_h[TABLESIZE];
-static unsigned char h1_h[TABLESIZE];
+static unsigned char h_h0[TABLESIZE];
+static unsigned char h_h1[TABLESIZE];
 static __host__ void
 readfile(unsigned char table[])
 {
@@ -1429,12 +1434,12 @@ static __host__ void
 pdb_load(void)
 {
 	infile = fopen("pattern_1_2_5_6_7_12", "rb"); /* read 6-tile pattern database */
-	readfile (h0_h);         /* read database and expand into direct-access array */
+	readfile (h_h0);         /* read database and expand into direct-access array */
 	fclose(infile);
 	printf ("pattern 1 2 5 6 7 12 read in\n");
 
 	infile = fopen("pattern_3_4_8_9_13_14", "rb"); /* read 6-tile pattern database */
-	readfile (h1_h);         /* read database and expand into direct-access array */
+	readfile (h_h1);         /* read database and expand into direct-access array */
 	fclose(infile);
 	printf ("pattern 3 4 8 9 13 14 read in\n");
 }
@@ -1460,6 +1465,8 @@ main(int argc, char *argv[])
          *d_movable_table       = (bool *) cudaPalloc(MOVABLE_TABLE_SIZE);
     signed char *h_diff_table   = (signed char *) palloc(H_DIFF_TABLE_SIZE),
                 *d_h_diff_table = (signed char *) cudaPalloc(H_DIFF_TABLE_SIZE);
+	unsigned char *d_h0 = (unsigned char *) cudaPalloc(TABLESIZE);
+	unsigned char *d_h1 = (unsigned char *) cudaPalloc(TABLESIZE);
 
     int min_fvalue = 0;
 
@@ -1469,8 +1476,8 @@ main(int argc, char *argv[])
     load_state_from_file(argv[1], input[0].tiles);
 
 	pdb_load();
-    CUDA_CHECK(cudaMemcpy(h0, h0_h, TABLESIZE, cudaMemcpyHostToDevice));
-    CUDA_CHECK(cudaMemcpy(h1, h0_h, TABLESIZE, cudaMemcpyHostToDevice));
+    CUDA_CHECK(cudaMemcpy(d_h0, h_h0, TABLESIZE, cudaMemcpyHostToDevice));
+    CUDA_CHECK(cudaMemcpy(d_h1, h_h1, TABLESIZE, cudaMemcpyHostToDevice));
 
     {
         State init_state = state_init(input[0].tiles, 0);
@@ -1502,7 +1509,8 @@ main(int argc, char *argv[])
 
         elog("f_limit=%d\n", (int) f_limit);
         idas_kernel<<<n_roots, BLOCK_DIM>>>(d_input, d_stat, f_limit,
-                                            d_h_diff_table, d_movable_table);
+                                            d_h_diff_table, d_movable_table,
+						d_h0, d_h1);
         CUDA_CHECK(
             cudaGetLastError()); /* asm trap is called when find solution */
 
@@ -1597,6 +1605,8 @@ solution_found:
     cudaPfree(d_stat);
     cudaPfree(d_movable_table);
     cudaPfree(d_h_diff_table);
+    cudaPfree(d_h0);
+    cudaPfree(d_h1);
 
     CUDA_CHECK(cudaDeviceReset());
 

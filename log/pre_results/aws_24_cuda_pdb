@@ -1,0 +1,349 @@
+nohup: ignoring input
+prob001
+LOG(state): depth=0, h=75, f=75, 14,5,9,2,18,8,23,19,12,17,15,0,10,20,4,6,11,21,1,7,24,3,16,22,13
+LOG: init_distr, cnt=2048
+f_limit=83
+STAT: loads: sum=351, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2098(+50)
+f_limit=85
+STAT: loads: sum=4159, av=1
+STAT: distr: av=1570, 2av=57, 4av=186, 8av=131, 16av=97, 32av=37, 64av=15, 128av=4, more=1
+STAT: n_roots=4643(+2545)
+f_limit=87
+STAT: loads: sum=47056, av=10
+STAT: distr: av=3373, 2av=680, 4av=309, 8av=184, 16av=79, 32av=17, 64av=1, 128av=0, more=0
+STAT: n_roots=8393(+3750)
+f_limit=89
+STAT: loads: sum=461682, av=55
+STAT: distr: av=6212, 2av=1046, 4av=679, 8av=345, 16av=101, 32av=9, 64av=1, 128av=0, more=0
+STAT: n_roots=14916(+6523)
+f_limit=91
+STAT: loads: sum=4793812, av=321
+STAT: distr: av=10452, 2av=2360, 4av=1405, 8av=573, 16av=109, 32av=16, 64av=1, 128av=0, more=0
+STAT: n_roots=26553(+11637)
+f_limit=93
+STAT: loads: sum=48769278, av=1836
+STAT: distr: av=17813, 2av=5096, 4av=2647, 8av=854, 16av=131, 32av=12, 64av=0, 128av=0, more=0
+STAT: n_roots=47107(+20554)
+f_limit=95
+pattern 1 2 5 6 7 12 read in
+pattern 3 4 8 9 13 14 read in
+Error: src/idas_pdb.cu:1517 code:4, reason: unspecified launch failure
+  0.000000   0.000000 445.800000 (445.673201)
+prob005
+LOG(state): depth=0, h=78, f=78, 17,1,20,9,16,2,22,19,14,5,15,21,0,3,24,23,18,13,12,7,10,8,6,4,11
+LOG: init_distr, cnt=2049
+f_limit=86
+STAT: loads: sum=497, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2049
+STAT: n_roots=2122(+73)
+f_limit=88
+STAT: loads: sum=3394, av=1
+STAT: distr: av=1511, 2av=140, 4av=156, 8av=145, 16av=144, 32av=22, 64av=4, 128av=0, more=0
+STAT: n_roots=3339(+1217)
+f_limit=90
+STAT: loads: sum=21781, av=6
+STAT: distr: av=2003, 2av=677, 4av=491, 8av=150, 16av=18, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=5504(+2165)
+f_limit=92
+STAT: loads: sum=134512, av=24
+STAT: distr: av=3670, 2av=1063, 4av=575, 8av=181, 16av=14, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=9463(+3959)
+f_limit=94
+STAT: loads: sum=1023727, av=108
+STAT: distr: av=6172, 2av=2098, 4av=925, 8av=245, 16av=21, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=16512(+7049)
+f_limit=96
+STAT: loads: sum=8917282, av=540
+STAT: distr: av=10393, 2av=4196, 4av=1601, 8av=289, 16av=30, 32av=2, 64av=1, 128av=0, more=0
+STAT: n_roots=28766(+12254)
+f_limit=98
+STAT: loads: sum=80457512, av=2796
+STAT: distr: av=17743, 2av=7861, 4av=2673, 8av=436, 16av=48, 32av=5, 64av=0, 128av=0, more=0
+STAT: n_roots=50412(+21646)
+f_limit=100
+pattern 1 2 5 6 7 12 read in
+pattern 3 4 8 9 13 14 read in
+Error: src/idas_pdb.cu:1517 code:4, reason: unspecified launch failure
+  0.000000   0.000000 511.680000 (511.520787)
+prob013
+LOG(state): depth=0, h=77, f=77, 21,24,8,1,19,22,12,9,7,18,4,0,23,14,10,6,3,11,16,5,15,2,20,13,17
+LOG: init_distr, cnt=2048
+f_limit=85
+STAT: loads: sum=35, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2048(+0)
+f_limit=87
+STAT: loads: sum=729, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2094(+46)
+f_limit=89
+STAT: loads: sum=4448, av=2
+STAT: distr: av=1464, 2av=221, 4av=210, 8av=150, 16av=44, 32av=5, 64av=0, 128av=0, more=0
+STAT: n_roots=3046(+952)
+f_limit=91
+STAT: loads: sum=27877, av=9
+STAT: distr: av=1965, 2av=631, 4av=308, 8av=123, 16av=19, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=5295(+2249)
+f_limit=93
+STAT: loads: sum=183105, av=34
+STAT: distr: av=3510, 2av=1046, 4av=567, 8av=144, 16av=26, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=9249(+3954)
+f_limit=95
+STAT: loads: sum=1340959, av=144
+STAT: distr: av=5899, 2av=2162, 4av=951, 8av=213, 16av=23, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=16240(+6991)
+f_limit=97
+STAT: loads: sum=10429655, av=642
+STAT: distr: av=9946, 2av=4370, 4av=1647, 8av=259, 16av=17, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=28518(+12278)
+f_limit=99
+STAT: loads: sum=81525823, av=2858
+STAT: distr: av=17214, 2av=8091, 4av=2821, 8av=373, 16av=19, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=49934(+21416)
+f_limit=101
+pattern 1 2 5 6 7 12 read in
+pattern 3 4 8 9 13 14 read in
+Error: src/idas_pdb.cu:1517 code:4, reason: unspecified launch failure
+  0.000000   0.000000 320.470000 (320.381112)
+prob025
+LOG(state): depth=0, h=55, f=55, 3,17,9,8,24,1,11,12,14,0,5,4,22,13,16,21,15,6,7,10,20,23,2,18,19
+LOG: init_distr, cnt=2048
+f_limit=63
+STAT: loads: sum=0, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2048(+0)
+f_limit=65
+STAT: loads: sum=6, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2048(+0)
+f_limit=67
+STAT: loads: sum=41, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2059(+11)
+f_limit=69
+STAT: loads: sum=366, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2059
+STAT: n_roots=2224(+165)
+f_limit=71
+STAT: loads: sum=3106, av=1
+STAT: distr: av=1714, 2av=116, 4av=128, 8av=111, 16av=116, 32av=37, 64av=2, 128av=0, more=0
+STAT: n_roots=3826(+1602)
+f_limit=73
+STAT: loads: sum=18700, av=4
+STAT: distr: av=2336, 2av=558, 4av=628, 8av=257, 16av=44, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=6593(+2767)
+f_limit=75
+STAT: loads: sum=98825, av=14
+STAT: distr: av=4039, 2av=1622, 4av=691, 8av=207, 16av=32, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=11937(+5344)
+f_limit=77
+STAT: loads: sum=591535, av=49
+STAT: distr: av=8091, 2av=2344, 4av=1084, 8av=356, 16av=61, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=20838(+8901)
+f_limit=79
+STAT: loads: sum=4161517, av=199
+STAT: distr: av=13523, 2av=4746, 4av=1973, 8av=532, 16av=62, 32av=2, 64av=0, 128av=0, more=0
+STAT: n_roots=36855(+16017)
+f_limit=81
+pattern 1 2 5 6 7 12 read in
+pattern 3 4 8 9 13 14 read in
+Error: src/idas_pdb.cu:1517 code:4, reason: unspecified launch failure
+  0.000000   0.000000  37.010000 ( 36.988418)
+prob030
+LOG(state): depth=0, h=70, f=70, 8,19,7,16,12,2,13,22,14,9,11,5,6,3,18,24,0,15,10,23,1,20,4,17,21
+LOG: init_distr, cnt=2049
+f_limit=78
+STAT: loads: sum=299, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2049
+STAT: n_roots=2154(+105)
+f_limit=80
+STAT: loads: sum=2313, av=1
+STAT: distr: av=1765, 2av=87, 4av=106, 8av=100, 16av=66, 32av=25, 64av=4, 128av=1, more=0
+STAT: n_roots=3214(+1060)
+f_limit=82
+STAT: loads: sum=16048, av=4
+STAT: distr: av=2046, 2av=456, 4av=446, 8av=185, 16av=71, 32av=9, 64av=1, 128av=0, more=0
+STAT: n_roots=5632(+2418)
+f_limit=84
+STAT: loads: sum=96200, av=17
+STAT: distr: av=3886, 2av=1010, 4av=502, 8av=184, 16av=46, 32av=4, 64av=0, 128av=0, more=0
+STAT: n_roots=9793(+4161)
+f_limit=86
+STAT: loads: sum=623214, av=63
+STAT: distr: av=6658, 2av=1816, 4av=927, 8av=329, 16av=59, 32av=4, 64av=0, 128av=0, more=0
+STAT: n_roots=17282(+7489)
+f_limit=88
+STAT: loads: sum=4527358, av=261
+STAT: distr: av=11106, 2av=3853, 4av=1806, 8av=477, 16av=37, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=30605(+13323)
+f_limit=90
+STAT: loads: sum=33820772, av=1105
+STAT: distr: av=19126, 2av=7656, 4av=3139, 8av=644, 16av=39, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=53959(+23354)
+f_limit=92
+pattern 1 2 5 6 7 12 read in
+pattern 3 4 8 9 13 14 read in
+Error: src/idas_pdb.cu:1517 code:4, reason: unspecified launch failure
+  0.000000   0.000000  58.140000 ( 58.122482)
+prob032
+LOG(state): depth=0, h=75, f=75, 1,12,18,13,17,15,3,7,20,0,19,24,6,5,21,11,2,8,9,16,22,10,4,23,14
+LOG: init_distr, cnt=2048
+f_limit=83
+STAT: loads: sum=2, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2048(+0)
+f_limit=85
+STAT: loads: sum=177, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2059(+11)
+f_limit=87
+STAT: loads: sum=2005, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2059
+STAT: n_roots=2625(+566)
+f_limit=89
+STAT: loads: sum=15647, av=5
+STAT: distr: av=1689, 2av=432, 4av=334, 8av=121, 16av=41, 32av=5, 64av=2, 128av=1, more=0
+STAT: n_roots=4598(+1973)
+f_limit=91
+STAT: loads: sum=134355, av=29
+STAT: distr: av=3403, 2av=641, 4av=361, 8av=126, 16av=52, 32av=12, 64av=2, 128av=1, more=0
+STAT: n_roots=8070(+3472)
+f_limit=93
+STAT: loads: sum=1326060, av=164
+STAT: distr: av=5682, 2av=1356, 4av=696, 8av=244, 16av=77, 32av=14, 64av=1, 128av=0, more=0
+STAT: n_roots=14404(+6334)
+f_limit=95
+STAT: loads: sum=13580359, av=942
+STAT: distr: av=9712, 2av=2864, 4av=1304, 8av=416, 16av=105, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=25534(+11130)
+f_limit=97
+pattern 1 2 5 6 7 12 read in
+pattern 3 4 8 9 13 14 read in
+Error: src/idas_pdb.cu:1517 code:4, reason: unspecified launch failure
+  0.000000   0.000000  66.740000 ( 66.731149)
+prob037
+LOG(state): depth=0, h=80, f=80, 23,22,5,3,9,6,18,15,10,2,21,13,19,12,20,7,0,1,16,24,17,4,14,8,11
+LOG: init_distr, cnt=2049
+f_limit=88
+STAT: loads: sum=1791, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2049
+STAT: n_roots=2649(+600)
+f_limit=90
+STAT: loads: sum=12496, av=4
+STAT: distr: av=1773, 2av=323, 4av=317, 8av=179, 16av=56, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=4643(+1994)
+f_limit=92
+STAT: loads: sum=93169, av=20
+STAT: distr: av=3244, 2av=699, 4av=505, 8av=153, 16av=39, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=8158(+3515)
+f_limit=94
+STAT: loads: sum=783281, av=96
+STAT: distr: av=5565, 2av=1476, 4av=787, 8av=284, 16av=39, 32av=7, 64av=0, 128av=0, more=0
+STAT: n_roots=14470(+6312)
+f_limit=96
+STAT: loads: sum=7224130, av=499
+STAT: distr: av=9440, 2av=3118, 4av=1472, 8av=374, 16av=62, 32av=4, 64av=0, 128av=0, more=0
+STAT: n_roots=25591(+11121)
+f_limit=98
+STAT: loads: sum=66923327, av=2615
+STAT: distr: av=16162, 2av=6280, 4av=2564, 8av=507, 16av=73, 32av=5, 64av=0, 128av=0, more=0
+STAT: n_roots=45170(+19579)
+f_limit=100
+pattern 1 2 5 6 7 12 read in
+pattern 3 4 8 9 13 14 read in
+Error: src/idas_pdb.cu:1517 code:4, reason: unspecified launch failure
+  0.000000   0.000000 213.540000 (213.503567)
+prob038
+LOG(state): depth=0, h=74, f=74, 10,3,24,12,0,7,8,11,14,21,22,23,2,1,9,17,18,6,20,4,13,15,5,19,16
+LOG: init_distr, cnt=2048
+f_limit=83
+STAT: loads: sum=1, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2048(+0)
+f_limit=85
+STAT: loads: sum=17, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2048(+0)
+f_limit=87
+STAT: loads: sum=478, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2111(+63)
+f_limit=89
+STAT: loads: sum=3573, av=1
+STAT: distr: av=1553, 2av=65, 4av=180, 8av=140, 16av=133, 32av=36, 64av=4, 128av=0, more=0
+STAT: n_roots=3853(+1742)
+f_limit=91
+STAT: loads: sum=27653, av=7
+STAT: distr: av=2405, 2av=809, 4av=467, 8av=149, 16av=22, 32av=1, 64av=0, 128av=0, more=0
+STAT: n_roots=6424(+2571)
+f_limit=93
+STAT: loads: sum=185039, av=28
+STAT: distr: av=4300, 2av=1206, 4av=673, 8av=212, 16av=32, 32av=0, 64av=1, 128av=0, more=0
+STAT: n_roots=11296(+4872)
+f_limit=95
+STAT: loads: sum=1475121, av=130
+STAT: distr: av=7292, 2av=2530, 4av=1176, 8av=263, 16av=30, 32av=3, 64av=2, 128av=0, more=0
+STAT: n_roots=19940(+8644)
+f_limit=97
+pattern 1 2 5 6 7 12 read in
+pattern 3 4 8 9 13 14 read in
+Error: src/idas_pdb.cu:1517 code:4, reason: unspecified launch failure
+  0.000000   0.000000  17.860000 ( 17.846201)
+prob040
+LOG(state): depth=0, h=64, f=64, 2,17,4,13,7,12,10,3,0,16,21,24,8,5,18,20,15,19,14,9,22,11,6,1,23
+LOG: init_distr, cnt=2048
+f_limit=72
+STAT: loads: sum=572, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2237(+189)
+f_limit=74
+STAT: loads: sum=3563, av=1
+STAT: distr: av=1727, 2av=78, 4av=120, 8av=130, 16av=135, 32av=45, 64av=2, 128av=0, more=0
+STAT: n_roots=4166(+1929)
+f_limit=76
+STAT: loads: sum=23671, av=5
+STAT: distr: av=2581, 2av=613, 4av=721, 8av=209, 16av=39, 32av=3, 64av=0, 128av=0, more=0
+STAT: n_roots=7215(+3049)
+f_limit=78
+STAT: loads: sum=135449, av=18
+STAT: distr: av=4888, 2av=1285, 4av=711, 8av=296, 16av=31, 32av=4, 64av=0, 128av=0, more=0
+STAT: n_roots=12710(+5495)
+f_limit=80
+STAT: loads: sum=913218, av=71
+STAT: distr: av=8626, 2av=2279, 4av=1300, 8av=446, 16av=59, 32av=0, 64av=0, 128av=0, more=0
+STAT: n_roots=22482(+9772)
+f_limit=82
+pattern 1 2 5 6 7 12 read in
+pattern 3 4 8 9 13 14 read in
+Error: src/idas_pdb.cu:1517 code:4, reason: unspecified launch failure
+  0.000000   0.000000   9.000000 (  8.990978)
+prob044
+LOG(state): depth=0, h=75, f=75, 8,12,18,3,2,11,10,22,24,17,1,13,23,4,20,16,6,15,9,21,19,5,14,0,7
+LOG: init_distr, cnt=2048
+f_limit=83
+STAT: loads: sum=1217, av=0
+STAT: distr: av=0, 2av=0, 4av=0, 8av=0, 16av=0, 32av=0, 64av=0, 128av=0, more=2048
+STAT: n_roots=2833(+785)
+f_limit=85
+STAT: loads: sum=11901, av=4
+STAT: distr: av=2292, 2av=191, 4av=171, 8av=112, 16av=40, 32av=16, 64av=7, 128av=3, more=1
+STAT: n_roots=5198(+2365)
+f_limit=87
+STAT: loads: sum=99037, av=19
+STAT: distr: av=4000, 2av=513, 4av=422, 8av=177, 16av=52, 32av=25, 64av=9, 128av=0, more=0
+STAT: n_roots=9395(+4197)
+f_limit=89
+STAT: loads: sum=824651, av=87
+STAT: distr: av=6862, 2av=1276, 4av=775, 8av=363, 16av=93, 32av=18, 64av=8, 128av=0, more=0
+STAT: n_roots=16857(+7462)
+f_limit=91
+STAT: loads: sum=7128014, av=422
+STAT: distr: av=11543, 2av=3028, 4av=1582, 8av=570, 16av=115, 32av=19, 64av=0, 128av=0, more=0
+STAT: n_roots=30015(+13158)
+f_limit=93
+pattern 1 2 5 6 7 12 read in
+pattern 3 4 8 9 13 14 read in
+Error: src/idas_pdb.cu:1517 code:4, reason: unspecified launch failure
+  0.000000   0.000000  35.980000 ( 35.960241)
