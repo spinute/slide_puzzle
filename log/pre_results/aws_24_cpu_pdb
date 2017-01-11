@@ -1,0 +1,377 @@
+nohup: ignoring input
+prob001
+pattern 1 2 5 6 7 12 read in
+pattern 3 4 8 9 13 14 read in
+state_dump: g=0, h=81, (x,y)=(1,2)
+14 5 9 2 18
+8 23 19 12 17
+15 0 10 20 4
+6 11 21 1 7
+24 3 16 22 13
+-----------
+search start.
+f=81
+f_limit= 81, expanded nodes = 185
+f=83
+f_limit= 83, expanded nodes = 1723
+f=85
+f_limit= 85, expanded nodes = 31835
+f=87
+f_limit= 87, expanded nodes = 413146
+f=89
+f_limit= 89, expanded nodes = 4927586
+f=91
+f_limit= 91, expanded nodes = 61887192
+f=93
+f_limit= 93, expanded nodes = 751954376
+f=95
+state_dump: g=95, h=0, (x,y)=(0,0)
+0 1 2 3 4
+5 6 7 8 9
+10 11 12 13 14
+15 16 17 18 19
+20 21 22 23 24
+-----------
+f_limit= 95, expanded nodes = 718210786
+len=95: 1 3 2 0 2 2 3 1 0 2 0 1 1 1 0 2 3 1 3 3 2 3 1 0 0 2 2 0 1 3 3 2 3 1 0 2 2 3 1 0 0 2 0 2 3 3 3 1 0 0 0 1 0 2 2 3 1 0 1 1 3 3 2 2 2 3 1 1 0 2 0 1 1 1 3 3 3 2 2 2 0 0 2 0 1 1 0 2 3 1 3 1 1 0 0 
+  0.000000   0.000000  65.100000 ( 65.118702)
+prob005
+pattern 1 2 5 6 7 12 read in
+pattern 3 4 8 9 13 14 read in
+state_dump: g=0, h=84, (x,y)=(2,2)
+17 1 20 9 16
+2 22 19 14 5
+15 21 0 3 24
+23 18 13 12 7
+10 8 6 4 11
+-----------
+search start.
+f=84
+f_limit= 84, expanded nodes = 267
+f=86
+f_limit= 86, expanded nodes = 2705
+f=88
+f_limit= 88, expanded nodes = 23658
+f=90
+f_limit= 90, expanded nodes = 169590
+f=92
+f_limit= 92, expanded nodes = 1637163
+f=94
+f_limit= 94, expanded nodes = 15076403
+f=96
+f_limit= 96, expanded nodes = 369950591
+f=98
+f_limit= 98, expanded nodes = 8137414248
+f=100
+state_dump: g=13, h=22, (x,y)=(1,2)
+17 1 9 16 5
+2 22 20 3 14
+15 0 13 19 24
+23 21 6 12 7
+10 18 8 4 11
+-----------
+f_limit=100, expanded nodes = 3483246095
+len=13: 0 0 2 2 3 1 3 1 3 3 1 0 0 
+  0.000000   0.000000 425.740000 (425.750362)
+prob013
+pattern 1 2 5 6 7 12 read in
+pattern 3 4 8 9 13 14 read in
+state_dump: g=0, h=83, (x,y)=(1,2)
+21 24 8 1 19
+22 12 9 7 18
+4 0 23 14 10
+6 3 11 16 5
+15 2 20 13 17
+-----------
+search start.
+f=83
+f_limit= 83, expanded nodes = 20
+f=85
+f_limit= 85, expanded nodes = 286
+f=87
+f_limit= 87, expanded nodes = 2850
+f=89
+f_limit= 89, expanded nodes = 27140
+f=91
+f_limit= 91, expanded nodes = 241610
+f=93
+f_limit= 93, expanded nodes = 2063478
+f=95
+f_limit= 95, expanded nodes = 17054503
+f=97
+f_limit= 97, expanded nodes = 150997267
+f=99
+f_limit= 99, expanded nodes = 1169386403
+f=101
+state_dump: g=101, h=0, (x,y)=(0,0)
+0 1 2 3 4
+5 6 7 8 9
+10 11 12 13 14
+15 16 17 18 19
+20 21 22 23 24
+-----------
+f_limit=101, expanded nodes = 202403460
+len=101: 0 0 2 2 3 1 1 1 3 2 3 2 0 0 1 0 2 2 3 3 1 0 1 1 0 2 3 3 1 3 2 3 2 0 2 0 2 3 1 0 2 0 0 1 1 1 3 3 3 2 0 2 3 3 2 0 0 0 1 1 1 3 2 2 0 0 1 1 3 3 1 0 2 3 2 0 2 3 3 3 1 0 1 1 0 2 3 1 3 2 0 2 2 2 0 0 0 1 1 1 1 
+  0.000000   0.000000  72.100000 ( 72.109657)
+prob025
+pattern 1 2 5 6 7 12 read in
+pattern 3 4 8 9 13 14 read in
+state_dump: g=0, h=65, (x,y)=(4,1)
+3 17 9 8 24
+1 11 12 14 0
+5 4 22 13 16
+21 15 6 7 10
+20 23 2 18 19
+-----------
+search start.
+f=65
+f_limit= 65, expanded nodes = 39
+f=67
+f_limit= 67, expanded nodes = 251
+f=69
+f_limit= 69, expanded nodes = 2359
+f=71
+f_limit= 71, expanded nodes = 16322
+f=73
+f_limit= 73, expanded nodes = 126925
+f=75
+f_limit= 75, expanded nodes = 949134
+f=77
+f_limit= 77, expanded nodes = 7302344
+f=79
+f_limit= 79, expanded nodes = 56428394
+f=81
+f_limit= 81, expanded nodes = 431205205
+f=83
+state_dump: g=83, h=0, (x,y)=(0,0)
+0 1 2 3 4
+5 6 7 8 9
+10 11 12 13 14
+15 16 17 18 19
+20 21 22 23 24
+-----------
+f_limit= 83, expanded nodes = 34262282
+len=83: 0 1 1 1 1 3 2 2 3 3 3 2 0 2 0 0 1 1 3 1 0 2 3 3 2 2 0 0 0 1 1 3 3 1 3 2 2 3 2 0 0 1 0 0 1 1 3 1 3 2 3 1 0 2 2 2 3 3 1 1 0 2 0 2 0 2 0 1 1 3 3 2 2 3 1 3 1 0 0 1 0 0 1 
+  0.000000   0.000000  23.620000 ( 23.616650)
+prob030
+pattern 1 2 5 6 7 12 read in
+pattern 3 4 8 9 13 14 read in
+state_dump: g=0, h=74, (x,y)=(1,3)
+8 19 7 16 12
+2 13 22 14 9
+11 5 6 3 18
+24 0 15 10 23
+1 20 4 17 21
+-----------
+search start.
+f=74
+f_limit= 74, expanded nodes = 30
+f=76
+f_limit= 76, expanded nodes = 229
+f=78
+f_limit= 78, expanded nodes = 1774
+f=80
+f_limit= 80, expanded nodes = 13849
+f=82
+f_limit= 82, expanded nodes = 118701
+f=84
+f_limit= 84, expanded nodes = 995788
+f=86
+f_limit= 86, expanded nodes = 7963827
+f=88
+f_limit= 88, expanded nodes = 62696378
+f=90
+state_dump: g=9, h=19, (x,y)=(1,2)
+8 19 7 16 12
+2 13 22 14 9
+11 0 6 3 18
+1 5 4 10 23
+20 15 24 17 21
+-----------
+f_limit= 90, expanded nodes = 361467804
+len=9: 1 3 2 0 2 3 1 0 0 
+  0.000000   0.000000  21.490000 ( 21.490504)
+prob032
+pattern 1 2 5 6 7 12 read in
+pattern 3 4 8 9 13 14 read in
+state_dump: g=0, h=81, (x,y)=(4,1)
+1 12 18 13 17
+15 3 7 20 0
+19 24 6 5 21
+11 2 8 9 16
+22 10 4 23 14
+-----------
+search start.
+f=81
+f_limit= 81, expanded nodes = 4
+f=83
+f_limit= 83, expanded nodes = 88
+f=85
+f_limit= 85, expanded nodes = 1137
+f=87
+f_limit= 87, expanded nodes = 11779
+f=89
+f_limit= 89, expanded nodes = 148199
+f=91
+f_limit= 91, expanded nodes = 1670235
+f=93
+f_limit= 93, expanded nodes = 17867586
+f=95
+f_limit= 95, expanded nodes = 268925261
+f=97
+state_dump: g=97, h=0, (x,y)=(0,0)
+0 1 2 3 4
+5 6 7 8 9
+10 11 12 13 14
+15 16 17 18 19
+20 21 22 23 24
+-----------
+f_limit= 97, expanded nodes = 247458633
+len=97: 0 1 1 1 3 2 3 1 3 2 0 1 3 1 0 0 2 2 3 2 0 1 0 1 3 3 2 2 2 3 1 1 3 2 0 1 1 1 0 2 2 3 1 3 1 0 2 0 2 2 2 3 1 1 0 2 2 3 3 1 1 1 0 2 0 0 2 2 3 1 0 0 2 3 3 3 1 0 0 0 1 3 1 1 3 3 3 2 0 2 2 0 0 1 1 0 1 
+  0.000000   0.000000  23.430000 ( 23.426185)
+prob037
+pattern 1 2 5 6 7 12 read in
+pattern 3 4 8 9 13 14 read in
+state_dump: g=0, h=84, (x,y)=(1,3)
+23 22 5 3 9
+6 18 15 10 2
+21 13 19 12 20
+7 0 1 16 24
+17 4 14 8 11
+-----------
+search start.
+f=84
+f_limit= 84, expanded nodes = 29
+f=86
+f_limit= 86, expanded nodes = 362
+f=88
+f_limit= 88, expanded nodes = 6778
+f=90
+f_limit= 90, expanded nodes = 76169
+f=92
+f_limit= 92, expanded nodes = 768008
+f=94
+f_limit= 94, expanded nodes = 7952903
+f=96
+f_limit= 96, expanded nodes = 79206458
+f=98
+f_limit= 98, expanded nodes = 772324823
+f=100
+state_dump: g=100, h=0, (x,y)=(0,0)
+0 1 2 3 4
+5 6 7 8 9
+10 11 12 13 14
+15 16 17 18 19
+20 21 22 23 24
+-----------
+f_limit=100, expanded nodes = 101763256
+len=100: 0 0 0 1 3 3 3 2 0 0 2 2 3 1 3 3 1 0 0 1 0 2 2 3 3 2 3 1 1 0 1 0 0 2 0 2 3 1 3 3 2 2 3 2 0 0 1 3 2 0 1 1 0 2 2 0 1 3 2 3 1 1 3 2 0 1 1 3 2 3 2 0 1 3 1 0 1 3 2 0 1 0 0 0 2 2 2 2 3 1 3 1 3 1 0 2 0 1 1 0 
+  0.000000   0.000000  43.080000 ( 43.090987)
+prob038
+pattern 1 2 5 6 7 12 read in
+pattern 3 4 8 9 13 14 read in
+state_dump: g=0, h=82, (x,y)=(4,0)
+10 3 24 12 0
+7 8 11 14 21
+22 23 2 1 9
+17 18 6 20 4
+13 15 5 19 16
+-----------
+search start.
+f=82
+f_limit= 82, expanded nodes = 2
+f=84
+f_limit= 84, expanded nodes = 78
+f=86
+f_limit= 86, expanded nodes = 1757
+f=88
+f_limit= 88, expanded nodes = 18854
+f=90
+f_limit= 90, expanded nodes = 197871
+f=92
+f_limit= 92, expanded nodes = 1882881
+f=94
+f_limit= 94, expanded nodes = 17392408
+f=96
+f_limit= 96, expanded nodes = 161041951
+f=98
+state_dump: g=98, h=0, (x,y)=(0,0)
+0 1 2 3 4
+5 6 7 8 9
+10 11 12 13 14
+15 16 17 18 19
+20 21 22 23 24
+-----------
+f_limit= 98, expanded nodes = 74787586
+len=98: 1 1 1 3 2 3 2 0 0 1 3 3 3 2 0 0 2 0 1 1 3 3 1 3 1 3 2 2 0 0 1 0 0 2 3 2 2 3 3 1 0 1 0 2 2 3 3 1 3 2 0 1 1 1 0 1 3 2 3 2 2 0 1 0 1 1 3 3 2 2 0 0 1 3 3 2 0 2 0 1 0 1 1 0 2 2 2 2 3 1 1 1 3 1 0 2 0 1 
+  0.000000   0.000000  14.190000 ( 14.193320)
+prob040
+pattern 1 2 5 6 7 12 read in
+pattern 3 4 8 9 13 14 read in
+state_dump: g=0, h=68, (x,y)=(3,1)
+2 17 4 13 7
+12 10 3 0 16
+21 24 8 5 18
+20 15 19 14 9
+22 11 6 1 23
+-----------
+search start.
+f=68
+f_limit= 68, expanded nodes = 10
+f=70
+f_limit= 70, expanded nodes = 330
+f=72
+f_limit= 72, expanded nodes = 2618
+f=74
+f_limit= 74, expanded nodes = 20151
+f=76
+f_limit= 76, expanded nodes = 173318
+f=78
+f_limit= 78, expanded nodes = 1423615
+f=80
+f_limit= 80, expanded nodes = 12169261
+f=82
+state_dump: g=82, h=0, (x,y)=(0,0)
+0 1 2 3 4
+5 6 7 8 9
+10 11 12 13 14
+15 16 17 18 19
+20 21 22 23 24
+-----------
+f_limit= 82, expanded nodes = 35022154
+len=82: 0 1 3 3 2 2 3 1 1 3 2 0 1 3 1 1 0 2 0 1 0 2 0 2 3 3 3 1 0 0 2 3 2 3 1 0 2 0 2 0 1 1 1 3 2 2 2 3 3 1 3 2 0 1 1 3 1 0 0 1 0 2 3 2 0 1 0 1 3 2 3 2 3 1 0 2 0 2 0 1 1 1 
+  0.000000   0.000000   5.270000 (  5.263041)
+prob044
+pattern 1 2 5 6 7 12 read in
+pattern 3 4 8 9 13 14 read in
+state_dump: g=0, h=81, (x,y)=(3,4)
+8 12 18 3 2
+11 10 22 24 17
+1 13 23 4 20
+16 6 15 9 21
+19 5 14 0 7
+-----------
+search start.
+f=81
+f_limit= 81, expanded nodes = 559
+f=83
+f_limit= 83, expanded nodes = 8258
+f=85
+f_limit= 85, expanded nodes = 96040
+f=87
+f_limit= 87, expanded nodes = 1021332
+f=89
+f_limit= 89, expanded nodes = 10205436
+f=91
+f_limit= 91, expanded nodes = 115014869
+f=93
+state_dump: g=6, h=17, (x,y)=(0,3)
+8 12 18 3 2
+11 10 22 24 17
+1 13 23 4 20
+0 5 6 9 21
+16 19 15 14 7
+-----------
+f_limit= 93, expanded nodes = 274881858
+len=6: 1 0 1 3 1 0 
+  0.000000   0.000000  19.250000 ( 19.253549)
