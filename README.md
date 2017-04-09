@@ -1,9 +1,8 @@
 # Sliding puzzle solver
 
-# Rake tasks
-* Build: `rake` (Default CC=clang)
-* Test: `rake test` (Using <https://github.com/ThrowTheSwitch/Unity>)
-* Benchmark: (not implemented yet)
+## NOTE
+Database should be put before execution to use cupdb.(pattern_1_2_5_6_7_12, pattern_3_4_8_9_13_14)
+The database used in this program is descripted in Korf's original paper.
 
 ## Strategy
 * [x] DFS
@@ -16,11 +15,4 @@
 
 ## Heuristic
 * [x] Manhattan distance
-* [x] Misplaced tiles
-* [x] Misplaced rows/cols
-* [ ] Pattern Database
-
-## TODO
-* Implement GPU search(At first, single thread DFS/IDA\* to evaluate max speedup)
-* Improve solver efficiency by following the work of Burns; 2012
-* Consider more sophisticated way of state space search on GPU
+* [x] Pattern Database

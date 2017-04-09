@@ -368,11 +368,12 @@ idas_internal(d_Stack *stack, int f_limit, search_stat *stat)
 __global__ void
 idas_kernel(Input *input, search_stat *stat, int f_limit,
             signed char *h_diff_table, bool *movable_table,
-	unsigned char *h0_ptr, unsigned char *h1_ptr)
+	unsigned char *h0_ptr, unsigned char *h1_ptr, d_Stack *stack_for_all)
 {
-    __shared__ d_Stack     stack;
+    //__shared__ d_Stack     stack;
     int tid = threadIdx.x;
 	int bid = blockIdx.x;
+    d_Stack *stack = &(stack_for_all[bid]);
 	if (tid == 0)
 {
 		h0 = h0_ptr;
@@ -387,8 +388,8 @@ idas_kernel(Input *input, search_stat *stat, int f_limit,
 
 	if (tid == 0)
 	{
-		stack.buf[0] = state;
-		stack.n      = 1;
+		stack->buf[0] = state;
+		stack->n      = 1;
 	}
 
     for (int i = tid; i < STATE_N * DIR_N; i += blockDim.x)
@@ -396,7 +397,7 @@ idas_kernel(Input *input, search_stat *stat, int f_limit,
             movable_table_shared[i / DIR_N][i % DIR_N] = movable_table[i];
 
 	__syncthreads();
-    idas_internal(&stack, f_limit, &stat[bid]);
+    idas_internal(stack, f_limit, &stat[bid]);
 }
 
 /* host library implementation */
@@ -1450,6 +1451,7 @@ pdb_load(void)
 #define STAT_SIZE (sizeof(search_stat) * buf_len)
 #define MOVABLE_TABLE_SIZE (sizeof(bool) * STATE_N * DIR_N)
 #define H_DIFF_TABLE_SIZE (STATE_N * STATE_N * DIR_N)
+#define INIT_STACK_SIZE (sizeof(d_Stack) * 100000)
 int
 main(int argc, char *argv[])
 {
@@ -1467,6 +1469,7 @@ main(int argc, char *argv[])
                 *d_h_diff_table = (signed char *) cudaPalloc(H_DIFF_TABLE_SIZE);
 	unsigned char *d_h0 = (unsigned char *) cudaPalloc(TABLESIZE);
 	unsigned char *d_h1 = (unsigned char *) cudaPalloc(TABLESIZE);
+    d_Stack *stack_for_all = (d_Stack *) cudaPalloc(INIT_STACK_SIZE);
 
     int min_fvalue = 0;
 
@@ -1510,7 +1513,7 @@ main(int argc, char *argv[])
         elog("f_limit=%d\n", (int) f_limit);
         idas_kernel<<<n_roots, BLOCK_DIM>>>(d_input, d_stat, f_limit,
                                             d_h_diff_table, d_movable_table,
-						d_h0, d_h1);
+						d_h0, d_h1, stack_for_all);
         CUDA_CHECK(
             cudaGetLastError()); /* asm trap is called when find solution */
 
