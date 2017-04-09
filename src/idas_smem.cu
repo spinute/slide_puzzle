@@ -1,13 +1,13 @@
 #include <stdbool.h>
 
-#undef SEARCH_ALL_THE_BEST
 #define PACKED
+#define SEARCH_ALL_THE_BEST
 #define COLLECT_LOG
+#undef USE_PRECOMPUTED_HDIFF
 
-#define BLOCK_DIM (32) /* FIXME: unstable when more than 32 */
+#define BLOCK_DIM (32)
 #define N_INIT_DISTRIBUTION (BLOCK_DIM * 64)
 #define MAX_GPU_PLAN (24)
-/* XXX: should be defined dynamically, but cudaMalloc after cudaFree fails */
 #define MAX_BUF_RATIO (256)
 
 #define STATE_WIDTH 4
@@ -48,7 +48,9 @@ typedef struct input_tag
  * goal: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
  */
 
-//__device__ __shared__ static signed char h_diff_table_shared[STATE_N][STATE_N] [DIR_N];
+#ifdef USE_PRECOMPUTED_HDIFF
+__device__ __shared__ static signed char h_diff_table_shared[STATE_N][STATE_N] [DIR_N];
+#endif
 
 typedef struct state_tag
 {
@@ -150,8 +152,11 @@ state_move(d_State *state, Direction dir)
     int new_empty = state->empty + pos_diff_table[dir];
     int opponent  = state_tile_get(new_empty);
 
-    //state->h_value += h_diff_table_shared[opponent][new_empty][dir];
+#ifdef USE_PRECOMPUTED_HDIFF
+    state->h_value += h_diff_table_shared[opponent][new_empty][dir];
+#else
     state->h_value += calc_h_diff(opponent, new_empty, dir);
+#endif
     state_tile_set(state->empty, opponent);
     state->empty      = new_empty;
     state->parent_dir = dir;
@@ -234,7 +239,9 @@ idas_internal(d_Stack *stack, int f_limit, search_stat *stat)
         if (found)
         {
             Direction dir = threadIdx.x & 3;
+#ifdef COLLECT_LOG
 			nodes_expanded++;
+#endif
 
 			/* NOTE: candidate_dir_table may be effective to avoid divergence */
             if (state.parent_dir == dir_reverse(dir))
@@ -266,7 +273,6 @@ idas_internal(d_Stack *stack, int f_limit, search_stat *stat)
             }
         }
 
-        //__syncthreads(); // maybe useless
 		stack_put(stack, &state, put);
     }
 }
@@ -296,13 +302,14 @@ idas_kernel(Input *input, search_stat *stat, int f_limit,
     for (int i = tid; i < STATE_N * DIR_N; i += blockDim.x)
         if (i < STATE_N * DIR_N)
             movable_table_shared[i / DIR_N][i % DIR_N] = movable_table[i];
-    /*
+
+#ifdef USE_PRECOMPUTED_HDIFF
     for (int dir = 0; dir < DIR_N; ++dir)
         for (int j = tid; j < STATE_N * STATE_N; j += blockDim.x)
             if (j < STATE_N * STATE_N)
                 h_diff_table_shared[j / STATE_N][j % STATE_N][dir] =
                     h_diff_table[j * DIR_N + dir];
-		    */
+#endif
 
 	__syncthreads();
     idas_internal(&stack, f_limit, &stat[bid]);
@@ -609,7 +616,6 @@ state_pos_equal(State s1, State s2)
 size_t
 state_hash(State state)
 {
-    /* FIXME: for A* */
     size_t hash_value = 0;
     for (idx_t i = 0; i < STATE_WIDTH; ++i)
         for (idx_t j = 0; j < STATE_WIDTH; ++j)
@@ -695,7 +701,7 @@ typedef struct ht_tag
 static bool
 ht_rehash_required(HT ht)
 {
-    return ht->n_bins <= ht->n_elems; /* TODO: local policy is also needed */
+    return ht->n_bins <= ht->n_elems;
 }
 
 static size_t
@@ -1510,8 +1516,7 @@ main(int argc, char *argv[])
             }
 #endif
 
-        // shuffle_input(input, n_roots); /* it may not be needed in case of
-        // idas_global */
+        // shuffle_input(input, n_roots); /* it may not be needed in case of idas_global */
     }
 
 solution_found:
